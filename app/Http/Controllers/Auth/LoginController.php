@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Log;
+use Session;
 class LoginController extends Controller
 {
     /*
@@ -35,5 +36,22 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    public function username()
+    {
+        return 'username';
+    }
+
+    public function logout () {
+        //logout user
+        auth()->logout();
+        // redirect to homepage
+        Log::info('Cyk');
+        if(Session::has('rol_id'))
+            Session::forget('rol_id');
+        if(Session::has('rol_name'))
+            Session::forget('rol_name');
+         Log::info('Olvidando a la session ');
+        return redirect('/');
     }
 }
