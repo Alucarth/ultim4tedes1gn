@@ -19,9 +19,9 @@ class CreateLumberInventoriesTable extends Migration
             $table->integer('maximum')->default(0);
             $table->integer('average')->default(0);
             $table->integer('lumber_id')->nullable();
-            $table->foreign('lumber_id')->references('id')->on('lumber');
+            $table->foreign('lumber_id')->references('id')->on('lumbers');
             $table->integer('quantity')->default(0);
-            $table->decimal('price',4,5)->deault(0.00000);            
+            $table->decimal('price',4,4)->deault(0.00000);            
             $table->timestamps();
         });
     }
