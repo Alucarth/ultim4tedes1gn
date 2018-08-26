@@ -18,7 +18,7 @@ class CreatePurchaseLumberTable extends Migration
             $table->integer('purchase_id')->nullable();
             $table->foreign('purchase_id')->references('id')->on('purchases');
             $table->integer('lumber_id')->nullable();
-            $table->foreign('lumber_id')->references('id')->on('lumber');
+            $table->foreign('lumber_id')->references('id')->on('lumbers');
             $table->timestamps();
         });
     }

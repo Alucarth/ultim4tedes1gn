@@ -9,16 +9,16 @@
 
    
     <link rel="stylesheet" href="{!! asset('css/app.css') !!}" />
- 
+  
     
 </head>
-<body class="md-skin fixed-nav no-skin-config mini-navbar">
+<body class="md-skin fixed-nav no-skin-config">
 
   <!-- Wrapper-->
     <div id="wrapper">
 
         <!-- Navigation -->
-        {{-- @include('layouts.navigation') --}}
+        @include('layouts.navigation')
 
         <!-- Page wraper -->
         <div id="page-wrapper" class="gray-bg">
@@ -30,7 +30,7 @@
             <div id="app">
 
             @yield('content')
-            <flash message="{{ session('flash') }}"></flash>
+            
             </div>
             <!-- Footer -->
             @include('layouts.footer')
@@ -41,7 +41,7 @@
     </div>
     <!-- End wrapper-->
 
-<script src="{!! asset('js/app.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('js/app.js') !!}" type="text/javascript"></script>
 
 @yield('jss')
 @section('scripts')

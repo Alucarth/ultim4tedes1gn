@@ -24,5 +24,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->bind('App\Helpers\Navigation', function ($app) {
+            return new Navigation();
+          });
     }
 }
