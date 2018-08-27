@@ -1529,3 +1529,19 @@ Did you mean one of these?
 #4 /var/www/ultim4tedes1gn/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #5 {main}
 "} 
+[2018-08-27 23:33:16] local.ERROR: There are no commands defined in the "meke" namespace.
+
+Did you mean this?
+    make {"exception":"[object] (Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException(code: 0): There are no commands defined in the \"meke\" namespace.
+
+Did you mean this?
+    make at /var/www/ultim4tedes1gn/vendor/symfony/console/Application.php:578)
+[stacktrace]
+#0 /var/www/ultim4tedes1gn/vendor/symfony/console/Application.php(618): Symfony\\Component\\Console\\Application->findNamespace('meke')
+#1 /var/www/ultim4tedes1gn/vendor/symfony/console/Application.php(226): Symfony\\Component\\Console\\Application->find('meke:controller')
+#2 /var/www/ultim4tedes1gn/vendor/symfony/console/Application.php(145): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 /var/www/ultim4tedes1gn/vendor/laravel/framework/src/Illuminate/Console/Application.php(89): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 /var/www/ultim4tedes1gn/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(122): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 /var/www/ultim4tedes1gn/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 {main}
+"} 
