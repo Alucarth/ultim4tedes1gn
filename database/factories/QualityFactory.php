@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(App\Quality::class, function (Faker $faker) {
 
     $faker->addProvider(new \Faker\Provider\Miscellaneous($faker));
     $faker->addProvider(new \Faker\Provider\Lorem($faker));

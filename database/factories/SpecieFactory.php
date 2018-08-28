@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(App\Specie::class, function (Faker $faker) {
 
     $faker->addProvider(new \Faker\Provider\Internet($faker));
 
