@@ -13,9 +13,9 @@ $factory->define(App\Lumber::class, function (Faker $faker) {
         'code'  =>  $faker->randomNumber(8, true),
         'quality_id'    =>  $qualities[array_rand($qualities)]->id,
         'specie_id'    =>  $species[array_rand($species)]->id,
-        'high'  =>  $faker->randomNumber($nbDigits = 3, $strict = false),
-        'wide'  =>  $faker->randomNumber($nbDigits = 3, $strict = false),
-        'length'  =>  $faker->randomNumber($nbDigits = 3, $strict = false),
+        'high'  =>  number_format((float)$faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 9999), 2, '.', ''),
+        'wide'  =>  number_format((float)$faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 9999), 2, '.', ''),
+        'length'  =>  number_format((float)$faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 9999), 2, '.', ''),
         'description'   =>  $faker->text($maxNbChars = 50)          
     ];
 });
