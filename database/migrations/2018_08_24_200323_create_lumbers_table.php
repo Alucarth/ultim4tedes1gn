@@ -20,9 +20,9 @@ class CreateLumbersTable extends Migration
             $table->foreign('quality_id')->references('id')->on('qualities');
             $table->integer('specie_id')->nullable();
             $table->foreign('specie_id')->references('id')->on('species');
-            $table->decimal('high',4,4);
-            $table->decimal('wide',4,4);
-            $table->decimal('length',4,4);
+            $table->decimal('high',13,2);
+            $table->decimal('wide',13,2);
+            $table->decimal('length',13,2);
             $table->string('description')->nullable();
             $table->timestamps();
         });
