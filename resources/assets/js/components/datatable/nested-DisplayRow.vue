@@ -5,24 +5,47 @@
       <i class="fa fa-times fa-lg"></i>
     </button>
     <dl class="dl-horizontal">
-      <template v-for="(val, key) in row">
-        <dt>{{ key }}</dt>
-        <dd>
-          {{ val }}
-          <button v-if="key === 'friends'" class="btn btn-xs btn-default"
-            @click="nested.$toggle('FriendsTable', true)"
-            title="Display friends table">
-            <i class="fa fa-users"></i>
-            {{ row.friends.length }}
-          </button>
-        </dd>        
-      </template>
+      <div class="row">
+        <div class="col-md-6">Identificador</div>
+        <div class="col-md-6">{{row.id}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">Alto</div>
+        <div class="col-md-6">{{row.high}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">Ancho</div>
+        <div class="col-md-6">{{row.wide}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">Largo</div>
+        <div class="col-md-6">{{row.length}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">Calidad</div>
+        <div class="col-md-6">{{row.quality}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">Especie</div>
+        <div class="col-md-6">{{row.specie}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">Descripci&oacute;n</div>
+        <div class="col-md-6">{{row.description}}</div>
+      </div>
     </dl>
   </div>
 </template>
 <script>
 export default {
-  props: ['row', 'nested']
+  props: ['row', 'nested'],
+  mounted () {    
+   
+    console.log("asdfasdf");
+    console.log(this.row.description);
+    //console.log(this.row);
+    // jQuery(this.$el).find('button[title]').tooltip();
+  }
 }
 </script>
 <style>

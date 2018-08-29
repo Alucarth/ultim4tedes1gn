@@ -86960,9 +86960,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['row', 'nested']
+  props: ['row', 'nested'],
+  mounted: function mounted() {
+
+    console.log("asdfasdf");
+    console.log(this.row.description);
+    //console.log(this.row);
+    // jQuery(this.$el).find('button[title]').tooltip();
+  }
 });
 
 /***/ }),
@@ -86987,44 +87010,53 @@ var render = function() {
       [_c("i", { staticClass: "fa fa-times fa-lg" })]
     ),
     _vm._v(" "),
-    _c(
-      "dl",
-      { staticClass: "dl-horizontal" },
-      [
-        _vm._l(_vm.row, function(val, key) {
-          return [
-            _c("dt", [_vm._v(_vm._s(key))]),
-            _vm._v(" "),
-            _c("dd", [
-              _vm._v("\n        " + _vm._s(val) + "\n        "),
-              key === "friends"
-                ? _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-xs btn-default",
-                      attrs: { title: "Display friends table" },
-                      on: {
-                        click: function($event) {
-                          _vm.nested.$toggle("FriendsTable", true)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", { staticClass: "fa fa-users" }),
-                      _vm._v(
-                        "\n          " +
-                          _vm._s(_vm.row.friends.length) +
-                          "\n        "
-                      )
-                    ]
-                  )
-                : _vm._e()
-            ])
-          ]
-        })
-      ],
-      2
-    )
+    _c("dl", { staticClass: "dl-horizontal" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Identificador")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.id))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Alto")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.high))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Ancho")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.wide))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Largo")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.length))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Calidad")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _vm._v(_vm._s(_vm.row.quality))
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Especie")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.specie))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Descripción")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _vm._v(_vm._s(_vm.row.description))
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
