@@ -19,3 +19,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/getLumberData', 'LumberController@getData')->name('lumber_index');
+Route::resource('lumber','LumberController');
