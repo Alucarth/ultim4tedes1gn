@@ -17,6 +17,9 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/getLumberData', 'LumberController@getData')->name('lumber_index');
+    Route::resource('lumber','LumberController');
+
 });
 
 
