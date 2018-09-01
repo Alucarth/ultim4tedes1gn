@@ -20,7 +20,9 @@ class CreateProvidersTable extends Migration
             $table->string('description')->nullable();
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
-            $table->string('city')->nullable();            
+            $table->string('city')->nullable();       
+            $table->decimal('balance',13,2)->default(0);  //total compras
+            $table->decimal('debit',13,2)->default(0);    // deuda del proveedor
             $table->timestamps();
             $table->softDeletes();
         });
