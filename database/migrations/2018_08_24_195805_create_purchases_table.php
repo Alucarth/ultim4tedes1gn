@@ -17,9 +17,12 @@ class CreatePurchasesTable extends Migration
             $table->increments('id');
             $table->string('cefo');
             $table->integer('provider_id')->nullable();
-			$table->foreign('provider_id')->references('id')->on('providers');
+            $table->foreign('provider_id')->references('id')->on('providers');
             $table->date('date');
-            $table->timestamps();            
+            $table->string('description');
+            $table->decimal('amount',13,2)->default(0);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
