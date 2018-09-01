@@ -15,7 +15,11 @@ class CreateTypesTable extends Migration
     {
         Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->boolean('is_predimensioned')->default(false);
+            $table->string('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
