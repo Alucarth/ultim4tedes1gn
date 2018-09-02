@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQualitiesTable extends Migration
+class CreateTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateQualitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('qualities', function (Blueprint $table) {
+        Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
             $table->string('name');
+            $table->boolean('is_predimensioned')->default(false);
             $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -30,6 +30,6 @@ class CreateQualitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qualities');
+        Schema::dropIfExists('types');
     }
 }
