@@ -13,17 +13,19 @@ class CreateContactsTable extends Migration
      */
     public function up()
     {
-        $table->increments('id');
-        $table->integer('provider_id')->nullable();
-        $table->foreign('provider_id')->references('id')->on('providers');
-        $table->boolean('is_primary')->default(0);
-        $table->string('first_name')->nullable();
-        $table->string('last_name')->nullable();
-        $table->string('email')->nullable();
-        $table->string('phone')->nullable();
-        $table->string('position')->nullable(); 
-        $table->timestamps();
-        $table->softDeletes();
+        Schema::create('contacts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('provider_id')->nullable();
+            $table->foreign('provider_id')->references('id')->on('providers');
+            $table->boolean('is_primary')->default(0);
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('position')->nullable(); 
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**

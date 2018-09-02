@@ -17,11 +17,11 @@ class CreatePackageTransactionsTable extends Migration
             $table->increments('id');
             $table->integer('number');//numero de secado
             $table->integer('package_id');
-            $table->integer('package-id')->references('id')->on('packages');
+            $table->foreign('package_id')->references('id')->on('packages');
             $table->integer('storage_origin_id');
-            $table->integer('storage_origin_id')->references('id')->on('storages');
+            $table->foreign('storage_origin_id')->references('id')->on('storages');
             $table->integer('storage_destination_id');
-            $table->integer('storage_destination_id')->references('id')->on('storages');        		
+            $table->foreign('storage_destination_id')->references('id')->on('storages');        		
             $table->date('date');
             $table->string('description');
             $table->timestamps();

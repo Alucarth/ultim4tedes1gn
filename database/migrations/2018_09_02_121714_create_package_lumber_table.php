@@ -13,7 +13,7 @@ class CreatePackageLumberTable extends Migration
      */
     public function up()
     {
-        Schema::create('package_lumber', function(){
+        Schema::create('package_lumber', function(Blueprint $table){
             $table->increments('id');
             $table->integer('package_id');
             $table->foreign('package_id')->references('id')->on('packages');
