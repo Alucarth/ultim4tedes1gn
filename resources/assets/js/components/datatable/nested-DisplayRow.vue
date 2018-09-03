@@ -15,15 +15,15 @@
       </div>
       <div class="row">
         <div class="col-md-6">Ancho</div>
-        <div class="col-md-6">{{row.wide}}</div>
+        <div class="col-md-6">{{row.width}}</div>
       </div>
       <div class="row">
-        <div class="col-md-6">Largo</div>
-        <div class="col-md-6">{{row.length}}</div>
+        <div class="col-md-6">Densidad</div>
+        <div class="col-md-6">{{row.density}}</div>
       </div>
       <div class="row">
-        <div class="col-md-6">Calidad</div>
-        <div class="col-md-6">{{row.quality}}</div>
+        <div class="col-md-6">Tipo</div>
+        <div class="col-md-6">{{row.type}}</div>
       </div>
       <div class="row">
         <div class="col-md-6">Especie</div>
