@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class QualitySeeder extends Seeder
+class TypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class QualitySeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Quality::class, 3)->create();
+        factory(App\Type::class, 10)->create();
     }
 }
