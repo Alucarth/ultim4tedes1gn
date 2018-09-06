@@ -6,8 +6,15 @@ $factory->define(App\Provider::class, function (Faker $faker) {
     $faker->addProvider(new \Faker\Provider\en_US\Company($faker));
     $faker->addProvider(new \Faker\Provider\en_US\Person($faker));
     return [
-        'code'  =>  $faker->randomNumber(8, true),
+       
         'name'  =>  $faker->lastname.' '.$faker->firstname('male'),
-        'origin'    =>  $faker->unique()->company
+        'offer'  =>  $faker->lastname.' '.$faker->firstname('male'),
+        'description'  =>  $faker->text,
+        'address1'    =>  $faker->address,
+        'address2'    =>  $faker->address,
+        'city'    =>  $faker->city,
+        'balance'    =>  $faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = NULL),
+        'debit'    =>  $faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = NULL)
     ];
+
 });
