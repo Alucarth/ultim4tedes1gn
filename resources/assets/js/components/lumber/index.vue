@@ -28,12 +28,11 @@ export default {
       tblStyle: 'color: #666',
       pageSizeOptions: [5, 10, 15, 20],
       columns: (() => {
-        const cols = [
-          { title: 'Código', field: 'code', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
+        const cols = [          
           { title: 'Alto', field: 'high', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
-          { title: 'Ancho', field: 'wide', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
-          { title: 'Largo', field: 'length', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
-          { title: 'Calidad', field: 'quality', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
+          { title: 'Ancho', field: 'width', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
+          { title: 'Espesor', field: 'density', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
+          { title: 'Tipo', field: 'type', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
           { title: 'Especie', field: 'specie', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
         //   { title: 'Descripción', field: 'description', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
           

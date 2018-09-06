@@ -6,8 +6,7 @@ $factory->define(App\Specie::class, function (Faker $faker) {
 
     $faker->addProvider(new \Faker\Provider\Internet($faker));
 
-    return [
-        'code'  =>  $faker->randomNumber(8, true),
+    return [        
         'name'  =>  $faker->userName,
         'description'   =>  $faker->text($maxNbChars = 50)  
     ];

@@ -96,41 +96,37 @@ class LumberController extends Controller
         $sort = $request->sort ?? 'id';
         $order = $request->order ?? 'asc';  
 
-        $code = $request->code ?? '';
         $high = $request->high ?? 0;
-        $wide = $request->wide ?? 0;
-        $lenght = $request->length ?? 0;        
+        $width = $request->width ?? 0;
+        $density = $request->density ?? 0;        
         $description = $request->description ?? '';
         $specie = $request->specie ?? '';
-        $quality = $request->quality ?? '';
+        $type = $request->type ?? '';
 
         
         $total = Lumber::
-            leftJoin('qualities','lumbers.quality_id','=','qualities.id')
-            ->leftJoin('species','lumbers.specie_id','=','species.id')
-            ->where('lumbers.code','like',$code.'%')            
-            ->where('lumbers.description','like',$description.'%')            
+            leftJoin('types','lumbers.type_id','=','types.id')
+            ->leftJoin('species','lumbers.specie_id','=','species.id')            
+            ->where('lumbers.description','like',$description.'%')        
             ->where('species.name', 'like', $specie.'%')
-            ->where('qualities.name','like', $quality.'%')
+            ->where('types.name','like', $type.'%')
             ->count();
 
         $lumbers = Lumber::              
             select(
-                'lumbers.id',
-                'lumbers.code',
-                'lumbers.wide',
+                'lumbers.id',                
+                'lumbers.width',
                 'lumbers.high',
-                'lumbers.length',
+                'lumbers.density',
                 'lumbers.description',
-                'qualities.name as quality',
+                'types.name as type',
                 'species.name as specie'
             )
-            ->leftJoin('qualities','lumbers.quality_id','=','qualities.id')
-            ->leftJoin('species','lumbers.specie_id','=','species.id')
-            ->where('lumbers.code','like',$code.'%')        
-            ->where('lumbers.description','like',$description.'%')            
+            ->leftJoin('types','lumbers.type_id','=','types.id')
+            ->leftJoin('species','lumbers.specie_id','=','species.id')            
+            ->where('lumbers.description','like',$description.'%')        
             ->where('species.name', 'like', $specie.'%')
-            ->where('qualities.name','like', $quality.'%')
+            ->where('types.name','like', $type.'%')
 			->skip($offset)
             ->take($limit)
             ->orderBy($sort,$order)            

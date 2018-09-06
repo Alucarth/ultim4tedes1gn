@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePurchaseLumberTable extends Migration
+class CreatePackageLumberTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreatePurchaseLumberTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchase_lumber', function (Blueprint $table) {
+        Schema::create('package_lumber', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('purchase_id')->nullable();
-            $table->foreign('purchase_id')->references('id')->on('purchases');
-            $table->integer('lumber_id')->nullable();
+            $table->integer('package_id');
+            $table->foreign('package_id')->references('id')->on('packages');
+            $table->integer('lumber_id');
             $table->foreign('lumber_id')->references('id')->on('lumbers');
+            $table->integer('quantity')->default(0);  
             $table->timestamps();
             $table->softDeletes();
-        });
+      });
     }
 
     /**
@@ -31,6 +32,6 @@ class CreatePurchaseLumberTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchase_lumber');
+        Schema::dropIfExists('package_lumber');
     }
 }
