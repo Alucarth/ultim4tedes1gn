@@ -10,16 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/logout', 'Auth\LoginController@logout');
+// Route::get('/logout', 'Auth\LoginController@logout');
 
+Route::get('/{any}', 'SinglePageController@index')->where('any', '.*');
+// Auth::routes();
+// Route::group(['middleware' => ['auth']], function () {
 
-Auth::routes();
-Route::group(['middleware' => ['auth']], function () {
+   
 
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/getLumberData', 'LumberController@getData')->name('lumber_index');
-    Route::resource('lumber','LumberController');
-
-});
+// });
 
 
