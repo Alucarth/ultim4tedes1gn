@@ -2,9 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Ultimate Design - @yield('title') </title>
 
    
@@ -12,40 +13,13 @@
   
     
 </head>
-<body class="md-skin fixed-nav no-skin-config">
+<body>
 
-  <!-- Wrapper-->
-    <div id="wrapper">
-
-        <!-- Navigation -->
-        @include('layouts.navigation')
-
-        <!-- Page wraper -->
-        <div id="page-wrapper" class="gray-bg">
-
-            <!-- Page wrapper -->
-            @include('layouts.topnavbar')
-
-            <!-- Main view  -->
-            <div id="app">
-
-            @yield('content')
-            
-            </div>
-            <!-- Footer -->
-            @include('layouts.footer')
-
-        </div>
-        <!-- End page wrapper-->
-
+    <div id="app">
+        <app></app>
     </div>
-    <!-- End wrapper-->
 
     <script src="{!! asset('js/app.js') !!}" type="text/javascript"></script>
-
-@yield('jss')
-@section('scripts')
-@show
 
 </body>
 </html>
