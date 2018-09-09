@@ -11,44 +11,18 @@ import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import StoreData from './store';
-
+import {routes} from './routes';
 window.Vue = require('vue');
 Vue.use(VueRouter)
 Vue.use(Vuetify);
 Vue.use(Vuex);
 
 const store = new Vuex.Store(StoreData);
-
-import App from './views/App';
-import Home from './views/Home';
-import Provider from './views/Provider';
-import Login from './components/auth/Login';
-
 const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: Home,
-            meta:{
-                requireAuth:true
-            }
-        },
-        {
-            path: '/provider',
-            name: 'provider',
-            component: Provider
-        },
-        {
-            path: '/login',
-            name: 'Login',
-            component: Login
-        }
-        
-        
-    ],
-  });
+        routes,
+        mode: 'history'
+});
+import App from './views/App';
   
 router.beforeEach((to,from,next)=>{
     const requireAuth = to.matched.some(record=>record.meta.requireAuth);
