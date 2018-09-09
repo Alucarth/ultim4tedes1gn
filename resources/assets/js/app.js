@@ -9,15 +9,20 @@
 require('./bootstrap');
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
+import Vuex from 'vuex';
+import StoreData from './store';
 
 window.Vue = require('vue');
 Vue.use(VueRouter)
 Vue.use(Vuetify);
+Vue.use(Vuex);
 
+const store = new Vuex.Store(StoreData);
 
 import App from './views/App';
 import Home from './views/Home';
 import Provider from './views/Provider';
+import Login from './components/auth/Login';
 
 const router = new VueRouter({
     mode: 'history',
@@ -25,18 +30,39 @@ const router = new VueRouter({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
+            meta:{
+                requireAuth:true
+            }
         },
         {
             path: '/provider',
             name: 'provider',
             component: Provider
         },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login
+        }
         
         
     ],
   });
   
+router.beforeEach((to,from,next)=>{
+    const requireAuth = to.matched.some(record=>record.meta.requireAuth);
+    const currenUser = store.state.currentUser;
+
+    if(requireAuth && !currenUser){
+        next('/login');
+    }else if(to.path == '/login' && currenUser)
+    {
+        next ('/');
+    }else{
+        next();
+    }
+})
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -51,5 +77,6 @@ const app = new Vue({
     el: '#app',
     components: { App },
     router,
+    store
   });
   
