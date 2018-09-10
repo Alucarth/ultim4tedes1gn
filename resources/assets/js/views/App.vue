@@ -78,30 +78,74 @@
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <span class="hidden-sm-and-down">Ultimate Design</span>
       </v-toolbar-title>
-      <v-text-field
-        flat
-        solo-inverted
-        prepend-icon="search"
-        label="Search"
-        class="hidden-sm-and-down"
-      ></v-text-field>
+
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>apps</v-icon>
+    
+
+     <v-menu
+        v-model="menu"
+        :close-on-content-click="false"
+        :nudge-width="100"
+        offset-x
+        v-if="currentUser"
+      >
+        <v-btn 
+          slot="activator"
+          icon
+          large
+          
+        >
+        <v-icon>person</v-icon>
       </v-btn>
-      <v-btn  icon>
-        <v-icon>notifications</v-icon>
-      </v-btn>
-      <v-btn  icon large >
-         
-           <v-avatar size="32px" tile>
-              <v-icon > 
-                  person
-              </v-icon>
-            </v-avatar>
-        
+
+      <v-card   light>
+        <v-list>
+          <v-list-tile avatar>
+            <v-list-tile-avatar>
+              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+            </v-list-tile-avatar>
+
+            <v-list-tile-content >
+              <v-list-tile-title>{{currentUser.name}}</v-list-tile-title>
+              <v-list-tile-sub-title>Administrador</v-list-tile-sub-title>
+              
+            </v-list-tile-content>
+
+          </v-list-tile>
+        </v-list>
+
        
-      </v-btn>
+
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-tooltip bottom>
+            <v-btn
+              slot="activator"
+              color="primary"
+              dark
+              flat @click="menu = false"
+            >
+             <v-icon>reply</v-icon> 
+            </v-btn>
+            <span>Regresar</span>
+          </v-tooltip>
+           <v-tooltip bottom>
+            <v-btn
+              slot="activator"
+              color="primary"
+              dark
+              flat @click="logout"
+            >
+             <v-icon>exit_to_app</v-icon> 
+            </v-btn>
+            <span>Cerrar Sesion</span>
+          </v-tooltip>
+        </v-card-actions>
+      </v-card>
+    </v-menu>
+    <v-btn v-else  flat color="white" to='/login' > Inicar Sesion </v-btn>
+
     </v-toolbar>
     <v-content>
        <v-container fluid fill-height>
@@ -127,10 +171,23 @@
         { icon: 'dashboard', text: 'Inicio' , link: '/' },
         { icon: 'group', text: 'Proveedores' , link: '/provider' },
        
-      ]
+      ],
+      menu: false, 
+      message: false,
     }),
     props: {
       source: String
+    },
+    methods:{
+      logout(){
+        this.$store.commit('logout');
+        this.$router.push('/login');
+      }
+    },
+    computed:{
+      currentUser(){
+        return this.$store.getters.currentUser;
+      }
     }
     }
 </script>

@@ -2,19 +2,19 @@
  
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Login form</v-toolbar-title>
+                <v-toolbar-title>Ultimate Design </v-toolbar-title>
               
               </v-toolbar>
               <v-form>
               <v-card-text>
                 
-                  <v-text-field prepend-icon="person" name="login" label="Login" type="text" v-model="form.email" ></v-text-field>
+                  <v-text-field prepend-icon="person" name="login" label="Correo Electronico" type="text" v-model="form.email" ></v-text-field>
                   <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password" v-model="form.password"></v-text-field>
               
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="authenticate">Login</v-btn>
+                <v-btn color="primary" @click="authenticate">Iniciar Sesion</v-btn>
               </v-card-actions>
 
                 </v-form>
