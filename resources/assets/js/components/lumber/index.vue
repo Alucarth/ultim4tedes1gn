@@ -79,9 +79,10 @@ export default {
      * @resolve {Record}
      */
     handleQueryChange () {
-      axios.get('/getLumberData',{
+      axios.get('/api/auth/getLumberData',{
         params: this.query
       }).then((response)=> {
+        console.log('before error :"V');
         this.data = response.data.lumbers, 
         this.total = response.data.total        
       }).catch(function (error) {

@@ -1,13 +1,13 @@
 <template>
   <div class="btn-group btn-group-sm">
-    <b-alert
+    <!-- <b-alert
         :value="alert"
         :type="alert_type"
         dismissible
         transition="scale-transition"
       >
         {{alert_msg}}
-    </b-alert>
+    </b-alert> -->
     <button class="btn btn-default" title="Display row"
       :class="{ '-nested-comp-open-btn': isDisplayRowVisible }"
       @click="toggleNestedComp('DisplayRow')">

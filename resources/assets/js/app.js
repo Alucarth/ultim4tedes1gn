@@ -12,6 +12,7 @@ import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import StoreData from './store';
 import {routes} from './routes';
+window.$ = window.jQuery = require('jquery')
 window.Vue = require('vue');
 Vue.use(VueRouter)
 Vue.use(Vuetify);

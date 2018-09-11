@@ -2,6 +2,7 @@
 import Home from './views/Home';
 import Provider from './views/Provider';
 import Login from './components/auth/Login';
+import Lumber from './components/lumber/index.vue';
 
 
    
@@ -26,6 +27,16 @@ import Login from './components/auth/Login';
             path: '/login',
             name: 'Login',
             component: Login
+        },
+        {
+            path: '/lumber',
+            name: 'Lumber',
+            component: Lumber
+        },
+        {
+            path: '/getLumberData',
+            name: 'GetLumberData',
+            component: Lumber
         }
         
         
