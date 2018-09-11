@@ -90690,8 +90690,8 @@ return /******/ (function(modules) { // webpackBootstrap
   Color: __webpack_require__(422),
   CreatetimeTd: __webpack_require__(427),
   CreatetimeTh: __webpack_require__(430),
-  Email: __webpack_require__(435),
-  IP: __webpack_require__(438),
+  //Email: require('./td-Email'),
+  //IP: require('./td-IP'),
   Opt: __webpack_require__(441),
   FilterTh: __webpack_require__(446),
   FilterFil: __webpack_require__(451)
@@ -91357,170 +91357,12 @@ if (false) {
 }
 
 /***/ }),
-/* 435 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(436)
-/* template */
-var __vue_template__ = __webpack_require__(437)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/datatable/td-Email.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6d5e6281", Component.options)
-  } else {
-    hotAPI.reload("data-v-6d5e6281", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 436 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value']
-});
-
-/***/ }),
-/* 437 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("a", { attrs: { href: "mailto:" + _vm.value } }, [
-    _vm._v(_vm._s(_vm.value))
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6d5e6281", module.exports)
-  }
-}
-
-/***/ }),
-/* 438 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(439)
-/* template */
-var __vue_template__ = __webpack_require__(440)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/datatable/td-IP.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-507f3cf2", Component.options)
-  } else {
-    hotAPI.reload("data-v-507f3cf2", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 439 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value']
-});
-
-/***/ }),
-/* 440 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("span", { staticClass: "badge" }, [_vm._v(_vm._s(_vm.value))])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-507f3cf2", module.exports)
-  }
-}
-
-/***/ }),
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
 /* 441 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -91689,6 +91531,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -91698,7 +91544,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       statuses: [],
       alert: false,
       alert_type: null,
-      alert_msg: null
+      alert_msg: null,
+      dialog: false,
+      actual_row: null
     };
   },
 
@@ -91709,6 +91557,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.fillStatuses();
     console.log("asdfasdf");
     console.log(this.statuses[1]);
+    this.actual_row = this.row;
     //console.log(this.row);
     // jQuery(this.$el).find('button[title]').tooltip();
   },
@@ -91776,40 +91625,239 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "btn-group btn-group-sm" }, [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-default",
-        class: { "-nested-comp-open-btn": _vm.isDisplayRowVisible },
-        attrs: { title: "Display row" },
-        on: {
-          click: function($event) {
-            _vm.toggleNestedComp("DisplayRow")
+  return _c(
+    "div",
+    { staticClass: "btn-group btn-group-sm" },
+    [
+      _c(
+        "v-btn",
+        {
+          class: { "-nested-comp-open-btn": _vm.isDisplayRowVisible },
+          attrs: { color: "info", title: "Display row" },
+          on: {
+            click: function($event) {
+              _vm.toggleNestedComp("DisplayRow")
+            }
           }
-        }
-      },
-      [_c("i", { staticClass: "fa fa-list-ul" })]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-default",
-        attrs: {
-          "data-toggle": "tooltip",
-          "data-placement": "top",
-          title: "Edit"
         },
-        on: {
-          click: function($event) {
-            _vm.makeAction(_vm.row)
-          }
-        }
-      },
-      [_c("i", { staticClass: "fa fa-eye" })]
-    )
-  ])
+        [_vm._v("\n    VER\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "" } },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "", "max-width": "500px" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { slot: "activator", color: "success", dark: "" },
+                  slot: "activator"
+                },
+                [_vm._v("\n    Editar\n  ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", [
+                    _c("span", { staticClass: "headline" }, [
+                      _vm._v("Edición de Madera")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-container",
+                        { attrs: { "grid-list-md": "" } },
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", md4: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      label: "Alto",
+                                      hint: "Ingrese el alto de la madera",
+                                      required: ""
+                                    },
+                                    model: {
+                                      value: _vm.actual_row.high,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.actual_row, "high", $$v)
+                                      },
+                                      expression: "actual_row.high"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", md4: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      label: "Ancho",
+                                      hint: "Ingrese el ancho de la madera"
+                                    },
+                                    model: {
+                                      value: _vm.actual_row.width,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.actual_row, "width", $$v)
+                                      },
+                                      expression: "actual_row.width"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", md4: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      label: "Densidad",
+                                      hint: "Ingrese la densidad de la madera",
+                                      required: ""
+                                    },
+                                    model: {
+                                      value: _vm.actual_row.density,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.actual_row, "density", $$v)
+                                      },
+                                      expression: "actual_row.density"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: ["0-17", "18-29", "30-54", "54+"],
+                                      label: "Tipo",
+                                      required: ""
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "" } },
+                                [
+                                  _c("v-autocomplete", {
+                                    attrs: {
+                                      items: [
+                                        "Skiing",
+                                        "Ice hockey",
+                                        "Soccer",
+                                        "Basketball",
+                                        "Hockey",
+                                        "Reading",
+                                        "Writing",
+                                        "Coding",
+                                        "Basejump"
+                                      ],
+                                      label: "Especie"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Descripción" }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "blue darken-1", flat: "" },
+                          nativeOn: {
+                            click: function($event) {
+                              _vm.dialog = false
+                            }
+                          }
+                        },
+                        [_vm._v("Cerrar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "blue darken-1", flat: "" },
+                          nativeOn: {
+                            click: function($event) {
+                              _vm.dialog = false
+                            }
+                          }
+                        },
+                        [_vm._v("Guardar")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -92234,7 +92282,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-container",
     [
       _c(
         "datatable",

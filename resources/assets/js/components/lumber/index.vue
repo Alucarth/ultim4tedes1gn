@@ -1,8 +1,8 @@
 <template>
-    <div>  
-        <datatable v-bind="$data" @editItem="editItem">      
-        </datatable>
-    </div>
+  <v-container>  
+    <datatable v-bind="$data" @editItem="editItem">      
+    </datatable>
+  </v-container>
 </template>
 
 <script>
