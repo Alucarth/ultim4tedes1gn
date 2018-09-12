@@ -14,7 +14,8 @@ class LumberController extends Controller
      */
     public function index()
     {
-        return view('lumber.index');
+        return 123;
+        //return view('lumber.index');
     }
 
     /**
