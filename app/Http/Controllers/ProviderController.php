@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Provider;
 
 class ProviderController extends Controller
 {
@@ -14,6 +15,8 @@ class ProviderController extends Controller
     public function index()
     {
         //
+        return response()->json(Provider::all()->toArray());
+    
     }
 
     /**

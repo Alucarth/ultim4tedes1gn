@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/provider','ProviderController@index');
 
 Route::group(['prefix' => 'auth'], function ($router) {
 
@@ -22,4 +23,5 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/getLumberData', 'LumberController@getData')->name('lumber_index');
     //Route::resource('lumber','LumberController');
+    
 });
