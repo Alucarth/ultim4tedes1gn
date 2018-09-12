@@ -70,7 +70,18 @@ class LumberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $lumber = Lumber::find($id);
+        $lumber->high = $request->high;
+        $lumber->width = $request->width;
+        $lumber->density = $request->density;
+        $lumber->description = $request->description;
+        $lumber->type_id = $request->type;
+        $lumber->specie_id = $request->specie;
+        $lumber->save();
+        $data = [
+            'lumber'    =>  $lumber
+        ];
+        return response()->json($data);
     }
 
     /**

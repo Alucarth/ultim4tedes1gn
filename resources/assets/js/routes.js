@@ -37,8 +37,17 @@ import Lumber from './components/lumber/index.vue';
             path: '/getLumberData',
             name: 'GetLumberData',
             component: Lumber
-        }
-        
+        },
+        {
+            path: '/specie',
+            name: 'Specie',
+            component: Lumber
+        },
+        {
+            path: '/type',
+            name: 'Type',
+            component: Lumber
+        },
         
     ];
   

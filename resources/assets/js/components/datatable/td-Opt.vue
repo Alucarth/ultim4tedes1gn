@@ -20,7 +20,7 @@
     <v-btn color="success" slot="activator" dark>
       Editar
     </v-btn>                
-      <v-card>
+      <v-card v-if="actual_row">
         <v-card-title>
           <span class="headline">Edición de Madera</span>
         </v-card-title>
@@ -42,17 +42,26 @@
                 ></v-text-field>
               </v-flex>                          
               <v-flex xs12 sm6>
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Tipo"
-                  required
-                ></v-select>
+                <v-select                  
+                  label="Tipo de madera"
+                  v-model="actual_row.type"
+                  :items="types"
+                  item-text="name"
+                  item-value="id"
+                  :hint="`Descripcion del tipo seleccionado`"
+                  persistent-hint>
+                </v-select>
               </v-flex>
               <v-flex xs12 sm6>
-                <v-autocomplete
-                  :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                  label="Especie"
-                ></v-autocomplete>
+                <v-select                  
+                  label="Especie"                
+                  v-model="actual_row.specie"  
+                  :items="species"
+                  item-text="name"
+                  item-value="id"
+                  :hint="`Descripcion de la madera seleccionada`"
+                  persistent-hint>                                
+                </v-select>
               </v-flex>
               <v-flex xs12>
                 <v-text-field label="Descripción"></v-text-field>
@@ -63,7 +72,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="dialog = false">Cerrar</v-btn>
-          <v-btn color="blue darken-1" flat @click.native="dialog = false">Guardar</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="updateData">Guardar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -86,19 +95,18 @@ export default {
       alert_msg: null,
       dialog: false,
       actual_row: null,
+      species: [],
+      types: [],
     }
     
   },
   // data: {
     
   // },
-  mounted () {    
-    this.fillStatuses();
-    console.log("asdfasdf");
-    console.log(this.statuses[1]);
+  mounted () {            
     this.actual_row = this.row;
-    //console.log(this.row);
-    // jQuery(this.$el).find('button[title]').tooltip();
+    this.getSpecies();        
+    this.getTypes();
   },
   computed: {
     isDisplayRowVisible () {
@@ -116,25 +124,14 @@ export default {
       if (nested.comp === comp) return nested.$toggle()
       nested.$toggle(comp, true)
     },
-    makeAction(comp) {
-      //console.log("first comp");
-      //this.$emit('editItem');
-      //const { nested } = this
-      console.log(comp.id);
-      this.$refs.myModalRef.show();
-      //this.$parent.editItem(comp);
-    },
     closeModal(){
        this.$refs.myModalRef.hide()
     },
-    save(comp){
-      console.log(comp.id);
-      axios.put('/record/'+comp.id, comp)
+    updateData(){
+      console.log(this.actual_row.specie);
+      axios.put('/api/auth/lumber/'+this.actual_row.id, this.actual_row)
       .then(function (response) {
-        console.log(response.data);        
-        this.alert = true;
-        this.alert_type = "success";
-        this.alert_msg = 'ok';
+        console.log(response.data.lumber);        
       })
       .catch(function (error) {
         console.log(error);
@@ -142,18 +139,26 @@ export default {
         this.alert_type = "error";
         this.alert_msg = 'error on saving';
       });
-      this.closeModal();
+      this.dialog =false;
     },
-    fillStatuses () {
-      axios
-        .get('status')
-        .then(response => {
-          this.statuses = response.data       
-        })
-        .catch(error => {
-          console.log(error)
-        })
+    getSpecies (){
+      axios.get('/api/auth/specie')
+      .then(response => {
+          this.species = response.data.species          
+      })
+      .catch(error => {
+        console.log(error);
+      });
     },
+    getTypes() {
+      axios.get('/api/auth/type')
+      .then(response => {
+          this.types = response.data.types          
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }    
   }
 }
 </script>
