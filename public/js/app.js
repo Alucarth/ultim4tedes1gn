@@ -17744,7 +17744,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(235)
 /* template */
-var __vue_template__ = __webpack_require__(456)
+var __vue_template__ = __webpack_require__(450)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -30641,7 +30641,7 @@ module.exports = hasUnicode;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(197);
-module.exports = __webpack_require__(461);
+module.exports = __webpack_require__(455);
 
 
 /***/ }),
@@ -30656,7 +30656,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(222);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(223);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__routes__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_App__ = __webpack_require__(458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_App__ = __webpack_require__(452);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__views_App__);
 
 /**
@@ -30672,7 +30672,7 @@ __webpack_require__(198);
 
 
 
-window.$ = window.jQuery = __webpack_require__(457);
+window.$ = window.jQuery = __webpack_require__(451);
 window.Vue = __webpack_require__(27);
 Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vuetify___default.a);
@@ -73887,6 +73887,14 @@ var routes = [{
     path: '/getLumberData',
     name: 'GetLumberData',
     component: __WEBPACK_IMPORTED_MODULE_3__components_lumber_index_vue___default.a
+}, {
+    path: '/specie',
+    name: 'Specie',
+    component: __WEBPACK_IMPORTED_MODULE_3__components_lumber_index_vue___default.a
+}, {
+    path: '/type',
+    name: 'Type',
+    component: __WEBPACK_IMPORTED_MODULE_3__components_lumber_index_vue___default.a
 }];
 
 /***/ }),
@@ -90692,9 +90700,9 @@ return /******/ (function(modules) { // webpackBootstrap
   CreatetimeTh: __webpack_require__(430),
   //Email: require('./td-Email'),
   //IP: require('./td-IP'),
-  Opt: __webpack_require__(441),
-  FilterTh: __webpack_require__(446),
-  FilterFil: __webpack_require__(451)
+  Opt: __webpack_require__(435),
+  FilterTh: __webpack_require__(440),
+  FilterFil: __webpack_require__(445)
   // [Vue warn]: Do not use built-in or reserved HTML elements as component id: Filter
   // Filter: require('./th-Filter')
 });
@@ -91357,25 +91365,19 @@ if (false) {
 }
 
 /***/ }),
-/* 435 */,
-/* 436 */,
-/* 437 */,
-/* 438 */,
-/* 439 */,
-/* 440 */,
-/* 441 */
+/* 435 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(442)
+  __webpack_require__(436)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(444)
+var __vue_script__ = __webpack_require__(438)
 /* template */
-var __vue_template__ = __webpack_require__(445)
+var __vue_template__ = __webpack_require__(439)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -91414,13 +91416,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 442 */
+/* 436 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(443);
+var content = __webpack_require__(437);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -91440,7 +91442,7 @@ if(false) {
 }
 
 /***/ }),
-/* 443 */
+/* 437 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -91454,11 +91456,20 @@ exports.push([module.i, "\n.-nested-comp-open-btn {\n  color: #fff !important;\n
 
 
 /***/ }),
-/* 444 */
+/* 438 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -91546,7 +91557,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       alert_type: null,
       alert_msg: null,
       dialog: false,
-      actual_row: null
+      actual_row: null,
+      species: [],
+      types: []
     };
   },
 
@@ -91554,12 +91567,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   // },
   mounted: function mounted() {
-    this.fillStatuses();
-    console.log("asdfasdf");
-    console.log(this.statuses[1]);
     this.actual_row = this.row;
-    //console.log(this.row);
-    // jQuery(this.$el).find('button[title]').tooltip();
+    this.getSpecies();
+    this.getTypes();
   },
 
   computed: {
@@ -91579,37 +91589,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (nested.comp === comp) return nested.$toggle();
       nested.$toggle(comp, true);
     },
-    makeAction: function makeAction(comp) {
-      //console.log("first comp");
-      //this.$emit('editItem');
-      //const { nested } = this
-      console.log(comp.id);
-      this.$refs.myModalRef.show();
-      //this.$parent.editItem(comp);
-    },
     closeModal: function closeModal() {
       this.$refs.myModalRef.hide();
     },
-    save: function save(comp) {
-      console.log(comp.id);
-      axios.put('/record/' + comp.id, comp).then(function (response) {
-        console.log(response.data);
-        this.alert = true;
-        this.alert_type = "success";
-        this.alert_msg = 'ok';
+    updateData: function updateData() {
+      console.log(this.actual_row.specie);
+      axios.put('/api/auth/lumber/' + this.actual_row.id, this.actual_row).then(function (response) {
+        console.log(response.data.lumber);
       }).catch(function (error) {
         console.log(error);
         this.alert = true;
         this.alert_type = "error";
         this.alert_msg = 'error on saving';
       });
-      this.closeModal();
+      this.dialog = false;
     },
-    fillStatuses: function fillStatuses() {
+    getSpecies: function getSpecies() {
       var _this = this;
 
-      axios.get('status').then(function (response) {
-        _this.statuses = response.data;
+      axios.get('/api/auth/specie').then(function (response) {
+        _this.species = response.data.species;
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    getTypes: function getTypes() {
+      var _this2 = this;
+
+      axios.get('/api/auth/type').then(function (response) {
+        _this2.types = response.data.types;
       }).catch(function (error) {
         console.log(error);
       });
@@ -91618,7 +91626,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 445 */
+/* 439 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -91669,137 +91677,175 @@ var render = function() {
                 [_vm._v("\n    Editar\n  ")]
               ),
               _vm._v(" "),
-              _c(
-                "v-card",
-                [
-                  _c("v-card-title", [
-                    _c("span", { staticClass: "headline" }, [
-                      _vm._v("Edición de Madera")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-text",
+              _vm.actual_row
+                ? _c(
+                    "v-card",
                     [
+                      _c("v-card-title", [
+                        _c("span", { staticClass: "headline" }, [
+                          _vm._v("Edición de Madera")
+                        ])
+                      ]),
+                      _vm._v(" "),
                       _c(
-                        "v-container",
-                        { attrs: { "grid-list-md": "" } },
+                        "v-card-text",
                         [
                           _c(
-                            "v-layout",
-                            { attrs: { wrap: "" } },
+                            "v-container",
+                            { attrs: { "grid-list-md": "" } },
                             [
                               _c(
-                                "v-flex",
-                                { attrs: { xs12: "", sm6: "", md4: "" } },
+                                "v-layout",
+                                { attrs: { wrap: "" } },
                                 [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      label: "Alto",
-                                      hint: "Ingrese el alto de la madera",
-                                      required: ""
-                                    },
-                                    model: {
-                                      value: _vm.actual_row.high,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.actual_row, "high", $$v)
-                                      },
-                                      expression: "actual_row.high"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { xs12: "", sm6: "", md4: "" } },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      label: "Ancho",
-                                      hint: "Ingrese el ancho de la madera"
-                                    },
-                                    model: {
-                                      value: _vm.actual_row.width,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.actual_row, "width", $$v)
-                                      },
-                                      expression: "actual_row.width"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { xs12: "", sm6: "", md4: "" } },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      label: "Densidad",
-                                      hint: "Ingrese la densidad de la madera",
-                                      required: ""
-                                    },
-                                    model: {
-                                      value: _vm.actual_row.density,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.actual_row, "density", $$v)
-                                      },
-                                      expression: "actual_row.density"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { xs12: "", sm6: "" } },
-                                [
-                                  _c("v-select", {
-                                    attrs: {
-                                      items: ["0-17", "18-29", "30-54", "54+"],
-                                      label: "Tipo",
-                                      required: ""
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { xs12: "", sm6: "" } },
-                                [
-                                  _c("v-autocomplete", {
-                                    attrs: {
-                                      items: [
-                                        "Skiing",
-                                        "Ice hockey",
-                                        "Soccer",
-                                        "Basketball",
-                                        "Hockey",
-                                        "Reading",
-                                        "Writing",
-                                        "Coding",
-                                        "Basejump"
-                                      ],
-                                      label: "Especie"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { xs12: "" } },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: { label: "Descripción" }
-                                  })
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", sm6: "", md4: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Alto",
+                                          hint: "Ingrese el alto de la madera",
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.actual_row.high,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.actual_row,
+                                              "high",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "actual_row.high"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", sm6: "", md4: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Ancho",
+                                          hint: "Ingrese el ancho de la madera"
+                                        },
+                                        model: {
+                                          value: _vm.actual_row.width,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.actual_row,
+                                              "width",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "actual_row.width"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", sm6: "", md4: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Densidad",
+                                          hint:
+                                            "Ingrese la densidad de la madera",
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.actual_row.density,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.actual_row,
+                                              "density",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "actual_row.density"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", sm6: "" } },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          label: "Tipo de madera",
+                                          items: _vm.types,
+                                          "item-text": "name",
+                                          "item-value": "id",
+                                          hint:
+                                            "Descripcion del tipo seleccionado",
+                                          "persistent-hint": ""
+                                        },
+                                        model: {
+                                          value: _vm.actual_row.type,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.actual_row,
+                                              "type",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "actual_row.type"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", sm6: "" } },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          label: "Especie",
+                                          items: _vm.species,
+                                          "item-text": "name",
+                                          "item-value": "id",
+                                          hint:
+                                            "Descripcion de la madera seleccionada",
+                                          "persistent-hint": ""
+                                        },
+                                        model: {
+                                          value: _vm.actual_row.specie,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.actual_row,
+                                              "specie",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "actual_row.specie"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Descripción" }
+                                      })
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
                               )
@@ -91808,47 +91854,45 @@ var render = function() {
                           )
                         ],
                         1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-actions",
-                    [
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "blue darken-1", flat: "" },
-                          nativeOn: {
-                            click: function($event) {
-                              _vm.dialog = false
-                            }
-                          }
-                        },
-                        [_vm._v("Cerrar")]
                       ),
                       _vm._v(" "),
                       _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "blue darken-1", flat: "" },
-                          nativeOn: {
-                            click: function($event) {
-                              _vm.dialog = false
-                            }
-                          }
-                        },
-                        [_vm._v("Guardar")]
+                        "v-card-actions",
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Cerrar")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  return _vm.updateData($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Guardar")]
+                          )
+                        ],
+                        1
                       )
                     ],
                     1
                   )
-                ],
-                1
-              )
+                : _vm._e()
             ],
             1
           )
@@ -91870,19 +91914,19 @@ if (false) {
 }
 
 /***/ }),
-/* 446 */
+/* 440 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(447)
+  __webpack_require__(441)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(449)
+var __vue_script__ = __webpack_require__(443)
 /* template */
-var __vue_template__ = __webpack_require__(450)
+var __vue_template__ = __webpack_require__(444)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -91921,13 +91965,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 447 */
+/* 441 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(448);
+var content = __webpack_require__(442);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -91947,7 +91991,7 @@ if(false) {
 }
 
 /***/ }),
-/* 448 */
+/* 442 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -91961,7 +92005,7 @@ exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\n 
 
 
 /***/ }),
-/* 449 */
+/* 443 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92015,7 +92059,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 450 */
+/* 444 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -92093,19 +92137,19 @@ if (false) {
 }
 
 /***/ }),
-/* 451 */
+/* 445 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(452)
+  __webpack_require__(446)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(454)
+var __vue_script__ = __webpack_require__(448)
 /* template */
-var __vue_template__ = __webpack_require__(455)
+var __vue_template__ = __webpack_require__(449)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -92144,13 +92188,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 452 */
+/* 446 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(453);
+var content = __webpack_require__(447);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -92170,7 +92214,7 @@ if(false) {
 }
 
 /***/ }),
-/* 453 */
+/* 447 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -92184,7 +92228,7 @@ exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\n 
 
 
 /***/ }),
-/* 454 */
+/* 448 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92233,7 +92277,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 455 */
+/* 449 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -92274,7 +92318,7 @@ if (false) {
 }
 
 /***/ }),
-/* 456 */
+/* 450 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -92308,7 +92352,7 @@ if (false) {
 }
 
 /***/ }),
-/* 457 */
+/* 451 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -102679,15 +102723,15 @@ return jQuery;
 
 
 /***/ }),
-/* 458 */
+/* 452 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(459)
+var __vue_script__ = __webpack_require__(453)
 /* template */
-var __vue_template__ = __webpack_require__(460)
+var __vue_template__ = __webpack_require__(454)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -102726,7 +102770,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 459 */
+/* 453 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -102923,7 +102967,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 460 */
+/* 454 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -103332,7 +103376,7 @@ if (false) {
 }
 
 /***/ }),
-/* 461 */
+/* 455 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
