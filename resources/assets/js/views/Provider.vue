@@ -1,53 +1,6 @@
 <template>
-  <div>
-    <!-- <v-toolbar flat color="white">
-      <v-toolbar-title>Proveedores</v-toolbar-title>
-      <v-divider
-        class="mx-2"
-        inset
-        vertical
-      ></v-divider>
-      <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" max-width="500px">
-        <v-btn slot="activator" color="primary" dark class="mb-2">Nevo Proveedor</v-btn>
-        <v-card>
-          <v-card-title>
-            <span class="headline">{{ formTitle }}</span>
-          </v-card-title>
-
-          <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-toolbar> -->
-
-
-
+  <v-card>
+ 
      <v-card-title>
       Provedores
       <v-spacer></v-spacer>
@@ -58,6 +11,46 @@
         single-line
         hide-details
       ></v-text-field>
+     
+      <v-dialog v-model="dialog" max-width="800px">
+        <v-btn slot="activator" color="primary" dark class="mb-2">Nuevo</v-btn>
+        <v-card>
+          <v-card-title>
+            <span class="headline">{{ formTitle }}</span>
+          </v-card-title>
+
+          <v-card-text>
+            <v-container grid-list-md>
+              <v-layout wrap>
+                <v-flex xs12 sm12 md12>
+                  <v-text-field v-model="editedItem.name" label="Nombre"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm12 md12>
+                  <v-text-field v-model="editedItem.offer" label="Oferta"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm12 md12>
+                  <v-text-field v-model="editedItem.address1" label="Direccion"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm12 md12>
+                  <v-text-field v-model="editedItem.city" label="Ciudad"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md6>
+                  <v-text-field v-model="editedItem.debit" label="Debit"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md6>
+                  <v-text-field v-model="editedItem.balance" label="Balance"></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" flat @click.native="close">Cancelar</v-btn>
+            <v-btn color="blue darken-1" flat @click.native="save">Guardar</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog> 
     </v-card-title>
     <v-data-table
       :headers="headers"
@@ -73,7 +66,7 @@
         <td class="text-xs-right">{{ props.item.balance }}</td>
       </template>
     </v-data-table>
-  </div>
+  </v-card>
 </template>
 <script>
 export default {
@@ -93,7 +86,25 @@ export default {
           { text: 'Debit', value: 'debit' },
           { text: 'Balance', value: 'balance' }
         ],
-        providers:[]
+        providers:[],
+        editedIndex: -1,
+        editedItem: {
+          name: '',
+          offer: '',
+          address1: '',
+          city: '',
+          debit: 0,
+          balance: 0
+        },
+        defaultItem: {
+          name: '',
+          offer: '',
+          address1: '',
+          city: '',
+          debit: 0,
+          balance: 0
+        },
+        dialog: false
       }
     },
     created()
@@ -104,15 +115,55 @@ export default {
            .get('/api/provider')
            .then(function(response) {
                 //this.data.loans = response.data;
-                console.log('obteniendo lista ')
+                //console.log('obteniendo lista ')
                 //self.loans = response.data;
-                console.log(response.data);
+                //console.log(response.data);
                 self.providers = response.data;
                 self.totalProviders = response.data.length;
                 self.loading = false;
             });
      
+    },
+    computed: {
+      formTitle () {
+        return this.editedIndex === -1 ? 'Nuevo Proveedor' : 'Editar Proveedor'
+      }
+    },
+    watch: {
+      dialog (val) {
+        val || this.close()
+      }
+    },
+    methods:{
+      editItem (item) {
+        this.editedIndex = this.desserts.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialog = true
+      },
+
+      deleteItem (item) {
+        const index = this.desserts.indexOf(item)
+        confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+      },
+
+      close () {
+        this.dialog = false
+        setTimeout(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        }, 300)
+      },
+
+      save () {
+        if (this.editedIndex > -1) {
+          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        } else {
+          this.desserts.push(this.editedItem)
+        }
+        this.close()
+      }
     }
+
    
     
 

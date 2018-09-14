@@ -74079,13 +74079,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -74097,7 +74090,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         sortable: true,
         value: 'name'
       }, { text: 'Oferta', value: 'offer' }, { text: 'Direccion', value: 'address1' }, { text: 'Ciudad', value: 'city' }, { text: 'Debit', value: 'debit' }, { text: 'Balance', value: 'balance' }],
-      providers: []
+      providers: [],
+      editedIndex: -1,
+      editedItem: {
+        name: '',
+        offer: '',
+        address1: '',
+        city: '',
+        debit: 0,
+        balance: 0
+      },
+      defaultItem: {
+        name: '',
+        offer: '',
+        address1: '',
+        city: '',
+        debit: 0,
+        balance: 0
+      },
+      dialog: false
     };
   },
   created: function created() {
@@ -74105,14 +74116,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     self = this;
     axios.get('/api/provider').then(function (response) {
       //this.data.loans = response.data;
-      console.log('obteniendo lista ');
+      //console.log('obteniendo lista ')
       //self.loans = response.data;
-      console.log(response.data);
+      //console.log(response.data);
       self.providers = response.data;
       self.totalProviders = response.data.length;
       self.loading = false;
     });
+  },
+
+  computed: {
+    formTitle: function formTitle() {
+      return this.editedIndex === -1 ? 'Nuevo Proveedor' : 'Editar Proveedor';
+    }
+  },
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
+  },
+  methods: {
+    editItem: function editItem(item) {
+      this.editedIndex = this.desserts.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    deleteItem: function deleteItem(item) {
+      var index = this.desserts.indexOf(item);
+      confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1);
+    },
+    close: function close() {
+      var _this = this;
+
+      this.dialog = false;
+      setTimeout(function () {
+        _this.editedItem = Object.assign({}, _this.defaultItem);
+        _this.editedIndex = -1;
+      }, 300);
+    },
+    save: function save() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+      } else {
+        this.desserts.push(this.editedItem);
+      }
+      this.close();
+    }
   }
+
 });
 
 /***/ }),
@@ -74124,7 +74175,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-card",
     [
       _c(
         "v-card-title",
@@ -74146,7 +74197,211 @@ var render = function() {
               },
               expression: "search"
             }
-          })
+          }),
+          _vm._v(" "),
+          _c(
+            "v-dialog",
+            {
+              attrs: { "max-width": "800px" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              _c(
+                "v-btn",
+                {
+                  staticClass: "mb-2",
+                  attrs: { slot: "activator", color: "primary", dark: "" },
+                  slot: "activator"
+                },
+                [_vm._v("Nuevo")]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", [
+                    _c("span", { staticClass: "headline" }, [
+                      _vm._v(_vm._s(_vm.formTitle))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-container",
+                        { attrs: { "grid-list-md": "" } },
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm12: "", md12: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Nombre" },
+                                    model: {
+                                      value: _vm.editedItem.name,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.editedItem, "name", $$v)
+                                      },
+                                      expression: "editedItem.name"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm12: "", md12: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Oferta" },
+                                    model: {
+                                      value: _vm.editedItem.offer,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.editedItem, "offer", $$v)
+                                      },
+                                      expression: "editedItem.offer"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm12: "", md12: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Direccion" },
+                                    model: {
+                                      value: _vm.editedItem.address1,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.editedItem,
+                                          "address1",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "editedItem.address1"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm12: "", md12: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Ciudad" },
+                                    model: {
+                                      value: _vm.editedItem.city,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.editedItem, "city", $$v)
+                                      },
+                                      expression: "editedItem.city"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", md6: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Debit" },
+                                    model: {
+                                      value: _vm.editedItem.debit,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.editedItem, "debit", $$v)
+                                      },
+                                      expression: "editedItem.debit"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", md6: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Balance" },
+                                    model: {
+                                      value: _vm.editedItem.balance,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.editedItem, "balance", $$v)
+                                      },
+                                      expression: "editedItem.balance"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "blue darken-1", flat: "" },
+                          nativeOn: {
+                            click: function($event) {
+                              return _vm.close($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Cancelar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "blue darken-1", flat: "" },
+                          nativeOn: {
+                            click: function($event) {
+                              return _vm.save($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Guardar")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
         ],
         1
       ),
