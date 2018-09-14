@@ -11,7 +11,8 @@
 |
 */
 // Route::get('/logout', 'Auth\LoginController@logout');
-
+Route::get('/getLumberData', 'LumberController@getData')->name('lumber_index');
+Route::resource('lumber','LumberController');
 Route::get('/{any}', 'SinglePageController@index')->where('any', '.*');
 // Auth::routes();
 // Route::group(['middleware' => ['auth']], function () {

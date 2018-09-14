@@ -14,8 +14,8 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/getLumberData', 'LumberController@getData')->name('lumber_index');
-Route::resource('lumber','LumberController');
+//Route::get('/getLumberData', 'LumberController@getData')->name('lumber_index');
+//Route::resource('lumber','LumberController');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

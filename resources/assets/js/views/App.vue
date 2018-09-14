@@ -104,11 +104,12 @@
       </v-btn>
     </v-toolbar>
     <v-content>
-       <v-container fluid fill-height>
+      <lumber-index></lumber-index>
+       <!-- <v-container fluid fill-height>
           <v-layout column fill-height>
-            <router-view></router-view>
+            <router-view></router-view>            
           </v-layout>
-        </v-container>
+        </v-container> -->
    
 
     </v-content>

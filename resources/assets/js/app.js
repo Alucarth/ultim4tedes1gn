@@ -19,6 +19,7 @@ import App from './views/App';
 import Home from './views/Home';
 import Provider from './views/Provider';
 
+import Lumber from './components/lumber/index.vue';
 const router = new VueRouter({
     mode: 'history',
     routes: [
@@ -32,8 +33,11 @@ const router = new VueRouter({
             name: 'provider',
             component: Provider
         },
-        
-        
+        {
+            path: '/lumber',
+            name: 'lumber',
+            component: Lumber
+        }        
     ],
   });
   
@@ -45,7 +49,7 @@ const router = new VueRouter({
  */
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('lumber-index', require('./components/lumber/index.vue'));
+Vue.component('lumber-index', Lumber);
 
 const app = new Vue({
     el: '#app',
