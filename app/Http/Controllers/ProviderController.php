@@ -15,7 +15,21 @@ class ProviderController extends Controller
     public function index()
     {
         //
-        return response()->json(Provider::all()->toArray());
+        $provider_list = Provider::leftJoin('contacts','contacts.provider_id','=','providers.id')
+                                //    ->where('contacts.is_primary',true)
+                                   ->select('providers.id',
+                                            'providers.name',
+                                            'providers.offer',
+                                            'providers.balance',
+                                            'providers.debit',
+                                            'contacts.first_name',
+                                            'contacts.last_name',
+                                            'contacts.email',
+                                            'contacts.phone',
+                                            'contacts.position'
+                                            )
+                                   ->get();
+        return response()->json($provider_list->toArray());
     
     }
 
