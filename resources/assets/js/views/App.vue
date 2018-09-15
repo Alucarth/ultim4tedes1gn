@@ -153,12 +153,8 @@
             <router-view></router-view>
           </v-layout>
         </v-container>
-   
 
     </v-content>
-
-    
-   
   </v-app>
 
 </template>
@@ -169,7 +165,8 @@
       drawer: null,
       items: [
         { icon: 'dashboard', text: 'Inicio' , link: '/' },
-        { icon: 'group', text: 'Proveedores' , link: '/provider' },
+        { icon: 'group', text: 'Madera' , link: '/lumber' },
+        { icon: 'group', text: 'Proveedores' , link: '/providers' },
        
       ],
       menu: false, 
