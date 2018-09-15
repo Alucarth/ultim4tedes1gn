@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Specie;
 class SpecieController extends Controller
 {
     /**
@@ -13,7 +13,11 @@ class SpecieController extends Controller
      */
     public function index()
     {
-        //
+        $species = Specie::get();
+        return response()->json(
+        [
+            'species' => $species,
+        ]);
     }
 
     /**

@@ -22,6 +22,7 @@ Route::group(['prefix' => 'auth'], function ($router) {
 
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/getLumberData', 'LumberController@getData')->name('lumber_index');
-    //Route::resource('lumber','LumberController');
-    
+    Route::resource('lumber','LumberController');
+    Route::resource('specie','SpecieController');
+    Route::resource('type','TypeController');
 });
