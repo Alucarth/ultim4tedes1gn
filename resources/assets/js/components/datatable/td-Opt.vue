@@ -1,72 +1,85 @@
 <template>
   <div class="btn-group btn-group-sm">
-    <b-alert
+    <!-- <b-alert
         :value="alert"
         :type="alert_type"
         dismissible
         transition="scale-transition"
       >
         {{alert_msg}}
-    </b-alert>
-    <button class="btn btn-default" title="Display row"
+    </b-alert> -->
+    <v-btn color="info" title="Display row"
       :class="{ '-nested-comp-open-btn': isDisplayRowVisible }"
       @click="toggleNestedComp('DisplayRow')">
-      <i class="fa fa-list-ul"></i>
+      VER
+      <!-- <i class="fa fa-list-ul"></i> -->
 
-    </button>
-    
+    </v-btn>    
+    <v-layout row justify-center>
+    <v-dialog v-model="dialog" persistent max-width="500px">
+    <v-btn color="success" slot="activator" dark>
+      Editar
+    </v-btn>                
+      <v-card v-if="actual_row">
+        <v-card-title>
+          <span class="headline">Edición de Madera</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container grid-list-md>
+            <v-layout wrap>
+              <v-flex xs12 sm6 md4>
+                <v-text-field label="Alto" hint="Ingrese el alto de la madera" required v-model="actual_row.high"></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field label="Ancho" hint="Ingrese el ancho de la madera" v-model="actual_row.width"></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field
+                  label="Densidad"
+                  hint="Ingrese la densidad de la madera"                  
+                  required
+                  v-model="actual_row.density"
+                ></v-text-field>
+              </v-flex>                          
+              <v-flex xs12 sm6>
+                <v-select                  
+                  label="Tipo de madera"
+                  v-model="actual_row.type"
+                  :items="types"
+                  item-text="name"
+                  item-value="id"
+                  :hint="`Descripcion del tipo seleccionado`"
+                  persistent-hint>
+                </v-select>
+              </v-flex>
+              <v-flex xs12 sm6>
+                <v-select                  
+                  label="Especie"                
+                  v-model="actual_row.specie"  
+                  :items="species"
+                  item-text="name"
+                  item-value="id"
+                  :hint="`Descripcion de la madera seleccionada`"
+                  persistent-hint>                                
+                </v-select>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field label="Descripción"></v-text-field>
+              </v-flex>  
+            </v-layout>
+          </v-container>          
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click.native="dialog = false">Cerrar</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="updateData">Guardar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-layout>
 
-    <button class="btn btn-default" data-toggle="tooltip"  data-placement="top" title="Edit"
-    @click="makeAction(row)"
-    >
-      <i class="fa fa-eye"></i>
-    </button>
-  <!-- <b-modal ref="myModalRef" hide-footer title="Edit">
-      <div class="d-block text-center">
-        <h3>RECORDS</h3>
-      </div>      
-      <b-form-group
-        id="uuid"        
-        label="UUID"
-        label-for="input1"        
-      >
-      <b-form-input type="text"
-        placeholder="UUID" v-model="row.uuid"></b-form-input>
-      </b-form-group>
 
-      <b-form-group
-        id="name"        
-        label="Name"
-        label-for="input2"                
-      >
-      <b-form-input type="text"
-         placeholder="name"
-         v-model="row.name"></b-form-input>
-      </b-form-group>
 
-      <b-form-group
-        id="description"        
-        label="Description"
-        label-for="input3"                
-      >
-      <b-form-input type="text"
-        placeholder="Description"
-        v-model="row.description"></b-form-input>
-      </b-form-group>
-
-      <b-form-group
-        id="code"        
-        label="Code"
-        label-for="input4"        
-      >
-      <b-form-input type="text"
-        placeholder="Code"
-        v-model="row.code"></b-form-input>
-      </b-form-group>
-
-      <b-button class="mt-3" variant="outline-success" block @click="save(row)">Save</b-button>
-      <b-button class="mt-3" variant="outline-danger" block @click="closeModal">Close</b-button>
-    </b-modal>   -->
   </div>
   
 </template>
@@ -80,18 +93,20 @@ export default {
       alert: false,
       alert_type: null,
       alert_msg: null,
+      dialog: false,
+      actual_row: null,
+      species: [],
+      types: [],
     }
     
   },
   // data: {
     
   // },
-  mounted () {    
-    this.fillStatuses();
-    console.log("asdfasdf");
-    console.log(this.statuses[1]);
-    //console.log(this.row);
-    // jQuery(this.$el).find('button[title]').tooltip();
+  mounted () {            
+    this.actual_row = this.row;
+    this.getSpecies();        
+    this.getTypes();
   },
   computed: {
     isDisplayRowVisible () {
@@ -109,25 +124,14 @@ export default {
       if (nested.comp === comp) return nested.$toggle()
       nested.$toggle(comp, true)
     },
-    makeAction(comp) {
-      //console.log("first comp");
-      //this.$emit('editItem');
-      //const { nested } = this
-      console.log(comp.id);
-      this.$refs.myModalRef.show();
-      //this.$parent.editItem(comp);
-    },
     closeModal(){
        this.$refs.myModalRef.hide()
     },
-    save(comp){
-      console.log(comp.id);
-      axios.put('/record/'+comp.id, comp)
+    updateData(){
+      console.log(this.actual_row.specie);
+      axios.put('/api/auth/lumber/'+this.actual_row.id, this.actual_row)
       .then(function (response) {
-        console.log(response.data);        
-        this.alert = true;
-        this.alert_type = "success";
-        this.alert_msg = 'ok';
+        console.log(response.data.lumber);        
       })
       .catch(function (error) {
         console.log(error);
@@ -135,18 +139,26 @@ export default {
         this.alert_type = "error";
         this.alert_msg = 'error on saving';
       });
-      this.closeModal();
+      this.dialog =false;
     },
-    fillStatuses () {
-      axios
-        .get('status')
-        .then(response => {
-          this.statuses = response.data       
-        })
-        .catch(error => {
-          console.log(error)
-        })
+    getSpecies (){
+      axios.get('/api/auth/specie')
+      .then(response => {
+          this.species = response.data.species          
+      })
+      .catch(error => {
+        console.log(error);
+      });
     },
+    getTypes() {
+      axios.get('/api/auth/type')
+      .then(response => {
+          this.types = response.data.types          
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }    
   }
 }
 </script>
