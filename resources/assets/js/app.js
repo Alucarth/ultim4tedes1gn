@@ -18,41 +18,12 @@ Vue.use(VueRouter)
 Vue.use(Vuetify);
 Vue.use(Vuex);
 
-<<<<<<< HEAD
-
-import App from './views/App';
-import Home from './views/Home';
-import Provider from './views/Provider';
-
-import Lumber from './components/lumber/index.vue';
-const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: Home
-        },
-        {
-            path: '/provider',
-            name: 'provider',
-            component: Provider
-        },
-        {
-            path: '/lumber',
-            name: 'lumber',
-            component: Lumber
-        }        
-    ],
-  });
-=======
 const store = new Vuex.Store(StoreData);
 const router = new VueRouter({
         routes,
         mode: 'history'
 });
 import App from './views/App';
->>>>>>> upstream/master
   
 router.beforeEach((to,from,next)=>{
     const requireAuth = to.matched.some(record=>record.meta.requireAuth);

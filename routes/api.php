@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/provider','ProviderController@index');
 
 <<<<<<< HEAD
 Route::get('/', 'HomeController@index')->name('home');
