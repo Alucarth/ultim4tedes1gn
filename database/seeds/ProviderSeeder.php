@@ -11,9 +11,7 @@ class ProviderSeeder extends Seeder
      */
     public function run()
     {
-<<<<<<< HEAD
-        factory(App\Provider::class, 500)->create();
-=======
+     //   factory(App\Provider::class, 500)->create();
          
          DB::statement('TRUNCATE TABLE providers RESTART IDENTITY CASCADE');
 
@@ -50,8 +48,5 @@ class ProviderSeeder extends Seeder
 			DB::table('providers')->insert(['name' => 'Romelio Hurtado Gutierrez', 
 				'offer'=>'Madera',
 				'description'=>'Diferentes especies de madera',]);
-
-
->>>>>>> upstream/master
     }
 }

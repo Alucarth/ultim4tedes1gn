@@ -17,7 +17,7 @@ window.Vue = require('vue');
 Vue.use(VueRouter)
 Vue.use(Vuetify);
 Vue.use(Vuex);
-
+import Lumber from './components/lumber/index.vue';
 const store = new Vuex.Store(StoreData);
 const router = new VueRouter({
         routes,

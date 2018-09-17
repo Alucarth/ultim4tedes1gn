@@ -3,7 +3,7 @@ import Home from './views/Home';
 import Provider from './views/Provider';
 import ProviderList from './components/provider/Index';
 import Login from './components/auth/Login';
-import Lumber from './components/lumber/index.vue';
+import Lumber from './components/lumber/index2.vue';
 
 
    
@@ -13,7 +13,7 @@ import Lumber from './components/lumber/index.vue';
             name: 'home',
             component: Home,
             meta:{
-                requireAuth:true
+               // requireAuth:true
             }
         },
         {
@@ -21,7 +21,7 @@ import Lumber from './components/lumber/index.vue';
             name: 'provider',
             component: Provider,
             meta:{
-                requireAuth:true
+          //      requireAuth:true
             }
         },
         {
@@ -29,7 +29,7 @@ import Lumber from './components/lumber/index.vue';
             name: 'providers',
             component: ProviderList,
             meta:{
-                requireAuth:true
+            //    requireAuth:true
             }
         },
         {
@@ -59,4 +59,4 @@ import Lumber from './components/lumber/index.vue';
         },
         
     ];
-  
+    
