@@ -87374,24 +87374,175 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      search: '',
-      headers: [{ text: 'Proveedor', value: 'name' },
-      //   { text: 'Oferta', value: 'offer' },
-      { text: 'Nombres', value: 'first_name' }, { text: 'Apellidos', value: 'last_name' }, { text: 'Email', value: 'email' }, { text: 'Telefono', value: 'phone' }, { text: 'Cargo', value: 'position' }, { text: 'Balance', value: 'balance' }, { text: 'Debito', value: 'debit' }],
-      providers: []
-    };
-  },
-  created: function created() {
-    var _this = this;
+    data: function data() {
+        return {
+            search: '',
+            pagination: {
+                sortBy: 'name'
+            },
+            headers: [{ text: 'Proveedor', value: 'name' },
+            //   { text: 'Oferta', value: 'offer' },
+            { text: 'Nombres', value: 'first_name' }, { text: 'Apellidos', value: 'last_name' }, { text: 'Email', value: 'email' }, { text: 'Telefono', value: 'phone' }, { text: 'Cargo', value: 'position' }, { text: 'Balance', value: 'balance' }, { text: 'Debito', value: 'debit' }],
+            providers: [],
+            totalProviders: 0,
+            desserts: [],
+            loading: true,
+            filterName: 'name',
+            filterValue: ''
+            // menu: false,
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
 
-    axios.get('/api/provider').then(function (response) {
-      _this.providers = response.data;
-    });
-  }
+        this.getProviders().then(this.getDataFromApi().then(function (data) {
+            _this.providers = data.items;
+            _this.totalProviders = data.total;
+        }));
+    },
+
+    methods: {
+        getDataFromApi: function getDataFromApi() {
+            var _this2 = this;
+
+            return new Promise(function (resolve, reject) {
+                var _pagination = _this2.pagination,
+                    sortBy = _pagination.sortBy,
+                    descending = _pagination.descending,
+                    page = _pagination.page,
+                    rowsPerPage = _pagination.rowsPerPage;
+
+
+                var items = _this2.providers;
+                var total = items.length;
+
+                if (_this2.pagination.sortBy) {
+                    items = items.sort(function (a, b) {
+                        var sortA = a[sortBy];
+                        var sortB = b[sortBy];
+
+                        if (descending) {
+                            if (sortA < sortB) return 1;
+                            if (sortA > sortB) return -1;
+                            return 0;
+                        } else {
+                            if (sortA < sortB) return -1;
+                            if (sortA > sortB) return 1;
+                            return 0;
+                        }
+                    });
+                }
+
+                if (rowsPerPage > 0) {
+                    items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+                }
+
+                resolve({
+                    items: items,
+                    total: total
+                });
+            });
+        },
+        getProviders: function getProviders(withFilter) {
+            var _this3 = this;
+
+            return new Promise(function (resolve, reject) {
+                _this3.loading = true;
+                var filterName = withFilter == true ? _this3.filterName : 'name';
+                console.log(withFilter);
+                axios.post('/api/providers/getdata', { name: filterName, value: _this3.filterValue }).then(function (response) {
+                    // let providers = response.data;
+                    console.log(response.data);
+                    _this3.providers = response.data;
+                    _this3.loading = false;
+                    resolve();
+                });
+            });
+        },
+        getResult: function getResult(withFilter) {
+            var _this4 = this;
+
+            console.log(this.filterName);
+            //axios.post('/api/providers/getdata',{name:this.filterName})
+            //   .then((response)=>{ console.log(response.data)});
+            this.getProviders(withFilter).then(this.getDataFromApi().then(function (data) {
+                _this4.providers = data.items;
+                _this4.totalProviders = data.total;
+            }));
+        },
+        toggleOrder: function toggleOrder(index) {
+            this.pagination.sortBy = this.headers[index].value;
+            this.pagination.descending = !this.pagination.descending;
+        },
+        setFilter: function setFilter(filterName) {
+            this.filterValue = '', this.filterName = filterName;
+        }
+    },
+    watch: {
+        pagination: {
+            handler: function handler() {
+                var _this5 = this;
+
+                this.getDataFromApi().then(function (data) {
+                    _this5.desserts = data.items;
+                    _this5.totalDesserts = data.total;
+                });
+            },
+
+            deep: true
+        },
+        filterValue: function filterValue(fv) {
+            if (fv == '') {
+                this.getResult(false);
+            }
+        }
+    }
 });
 
 /***/ }),
@@ -87436,9 +87587,142 @@ var render = function() {
           attrs: {
             headers: _vm.headers,
             items: _vm.providers,
-            search: _vm.search
+            search: _vm.search,
+            pagination: _vm.pagination
+          },
+          on: {
+            "update:pagination": function($event) {
+              _vm.pagination = $event
+            }
           },
           scopedSlots: _vm._u([
+            {
+              key: "headers",
+              fn: function(props) {
+                return [
+                  _c(
+                    "tr",
+                    _vm._l(props.headers, function(header, index) {
+                      return _c(
+                        "th",
+                        { key: index, staticClass: "text-xs-left" },
+                        [
+                          _c(
+                            "v-flex",
+                            [
+                              _c(
+                                "span",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.toggleOrder(index)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(header.text) +
+                                      "\n                            \n                        "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-menu",
+                                { attrs: { "close-on-content-click": false } },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { slot: "activator", icon: "" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.setFilter(header.value)
+                                        }
+                                      },
+                                      slot: "activator"
+                                    },
+                                    [
+                                      _c("v-icon", { attrs: { small: "" } }, [
+                                        _vm._v("fa-filter")
+                                      ])
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-card",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          "append-icon": "search",
+                                          label: "Buscar " + header.text + "..."
+                                        },
+                                        on: {
+                                          keydown: function($event) {
+                                            if (
+                                              !("button" in $event) &&
+                                              _vm._k(
+                                                $event.keyCode,
+                                                "enter",
+                                                13,
+                                                $event.key,
+                                                "Enter"
+                                              )
+                                            ) {
+                                              return null
+                                            }
+                                            _vm.getResult(true)
+                                          }
+                                        },
+                                        model: {
+                                          value: _vm.filterValue,
+                                          callback: function($$v) {
+                                            _vm.filterValue = $$v
+                                          },
+                                          expression: "filterValue"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              header.value == _vm.pagination.sortBy
+                                ? _c(
+                                    "v-icon",
+                                    {
+                                      attrs: { small: "" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.toggleOrder(index)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.pagination.descending == false
+                                            ? "arrow_upward"
+                                            : "arrow_downward"
+                                        )
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    })
+                  )
+                ]
+              }
+            },
             {
               key: "items",
               fn: function(props) {
@@ -87448,23 +87732,53 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-xs-left" }, [
-                    _vm._v(_vm._s(props.item.first_name))
+                    _vm._v(
+                      _vm._s(
+                        props.item.contacts.length > 0
+                          ? props.item.contacts[0].first_name
+                          : ""
+                      )
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-xs-left" }, [
-                    _vm._v(_vm._s(props.item.last_name))
+                    _vm._v(
+                      _vm._s(
+                        props.item.contacts.length > 0
+                          ? props.item.contacts[0].last_name
+                          : ""
+                      )
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-xs-left" }, [
-                    _vm._v(_vm._s(props.item.position))
+                    _vm._v(
+                      _vm._s(
+                        props.item.contacts.length > 0
+                          ? props.item.contacts[0].position
+                          : ""
+                      )
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-xs-left" }, [
-                    _vm._v(_vm._s(props.item.email))
+                    _vm._v(
+                      _vm._s(
+                        props.item.contacts.length > 0
+                          ? props.item.contacts[0].email
+                          : ""
+                      )
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-xs-left" }, [
-                    _vm._v(_vm._s(props.item.phone))
+                    _vm._v(
+                      _vm._s(
+                        props.item.contacts.length > 0
+                          ? props.item.contacts[0].phone
+                          : ""
+                      )
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-xs-left" }, [
@@ -87803,6 +88117,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_datatable_component__ = __webpack_require__(254);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mockData__ = __webpack_require__(389);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__datatable___ = __webpack_require__(434);
+//
 //
 //
 //
@@ -105512,12 +105827,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['field', 'title', 'query'],
   data: function data() {
     return {
-      keyword: ''
+      keyword: '',
+      menu: false,
+      hints: true
     };
   },
   mounted: function mounted() {
@@ -105551,65 +105898,75 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "btn-group" }, [
-    _vm._v("\n  " + _vm._s(_vm.title) + "\n  "),
-    _c("a", { attrs: { href: "javascript:;", "data-toggle": "dropdown" } }, [
-      _c("i", {
-        staticClass: "fa fa-filter",
-        class: { "text-muted": !_vm.keyword }
-      })
-    ]),
-    _vm._v(" "),
-    _c(
-      "ul",
-      { staticClass: "dropdown-menu", staticStyle: { padding: "3px" } },
-      [
-        _c("div", { staticClass: "input-group input-group-sm" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.keyword,
-                expression: "keyword"
-              }
-            ],
-            ref: "input",
-            staticClass: "form-control",
-            attrs: {
-              type: "search",
-              placeholder: "Search " + _vm.field + "..."
+  return _c(
+    "div",
+    { staticClass: "text-xs-center" },
+    [
+      _vm._v("\n  " + _vm._s(_vm.title) + "\n  "),
+      _c(
+        "v-menu",
+        {
+          attrs: {
+            "close-on-content-click": false,
+            "nudge-width": 80,
+            "offset-x": "",
+            small: ""
+          },
+          model: {
+            value: _vm.menu,
+            callback: function($$v) {
+              _vm.menu = $$v
             },
-            domProps: { value: _vm.keyword },
-            on: {
-              keydown: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                return _vm.search($event)
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.keyword = $event.target.value
-              }
-            }
-          }),
+            expression: "menu"
+          }
+        },
+        [
+          _c(
+            "v-btn",
+            {
+              attrs: { slot: "activator", icon: "", small: "" },
+              slot: "activator"
+            },
+            [_c("v-icon", [_vm._v("fa-filter")])],
+            1
+          ),
           _vm._v(" "),
-          _c("span", { staticClass: "input-group-btn" }, [
-            _c("button", {
-              staticClass: "btn btn-default fa fa-search",
-              on: { click: _vm.search }
-            })
-          ])
-        ])
-      ]
-    )
-  ])
+          _c(
+            "v-card",
+            [
+              _c("v-text-field", {
+                attrs: {
+                  "append-icon": "search",
+                  label: "Buscar " + _vm.field + "..."
+                },
+                on: {
+                  keydown: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.search($event)
+                  }
+                },
+                model: {
+                  value: _vm.keyword,
+                  callback: function($$v) {
+                    _vm.keyword = $$v
+                  },
+                  expression: "keyword"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -105811,19 +106168,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
-    [
-      _c(
-        "datatable",
-        _vm._b(
-          { on: { editItem: _vm.editItem } },
-          "datatable",
-          _vm.$data,
-          false
-        )
-      )
-    ],
-    1
+    "datatable",
+    _vm._b({ on: { editItem: _vm.editItem } }, "datatable", _vm.$data, false)
   )
 }
 var staticRenderFns = []
