@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 Route::get('/provider','ProviderController@index');
+Route::post('/providers/getdata','ProviderController@getData');
 
 <<<<<<< HEAD
 Route::get('/', 'HomeController@index')->name('home');
