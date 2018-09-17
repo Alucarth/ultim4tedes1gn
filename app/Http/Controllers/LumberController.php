@@ -13,9 +13,8 @@ class LumberController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return 123;
-        //return view('lumber.index');
+    {    
+        return view('lumber.index');
     }
 
     /**
@@ -46,8 +45,13 @@ class LumberController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {        
+        $lumber = Lumber::find($id);
+        $data = [
+            'lumber'    =>  $lumber
+        ];
+        return response()->json($data);
+        
     }
 
     /**
@@ -130,13 +134,13 @@ class LumberController extends Controller
                 'lumbers.width',
                 'lumbers.high',
                 'lumbers.density',
-                'lumbers.description',
+//                'lumbers.description',
                 'types.name as type',
                 'species.name as specie'
             )
             ->leftJoin('types','lumbers.type_id','=','types.id')
             ->leftJoin('species','lumbers.specie_id','=','species.id')            
-            ->where('lumbers.description','like',$description.'%')        
+            //->where('lumbers.description','like',$description.'%')        
             ->where('species.name', 'like', $specie.'%')
             ->where('types.name','like', $type.'%')
 			->skip($offset)

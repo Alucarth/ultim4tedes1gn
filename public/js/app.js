@@ -41027,8 +41027,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(236);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(237);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__routes__ = __webpack_require__(238);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_App__ = __webpack_require__(469);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__views_App__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_lumber_index_vue__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_lumber_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_lumber_index_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_App__ = __webpack_require__(469);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_App__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -41078,11 +41080,11 @@ router.beforeEach(function (to, from, next) {
  */
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('lumber-index', __webpack_require__(46));
+Vue.component('lumber-index', __WEBPACK_IMPORTED_MODULE_5__components_lumber_index_vue___default.a);
 
 var app = new Vue({
     el: '#app',
-    components: { App: __WEBPACK_IMPORTED_MODULE_5__views_App___default.a },
+    components: { App: __WEBPACK_IMPORTED_MODULE_6__views_App___default.a },
     router: router,
     store: store
 });
@@ -86666,8 +86668,8 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLocalUse
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_provider_Index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_provider_Index__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_auth_Login__ = __webpack_require__(247);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_auth_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_auth_Login__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_lumber_index_vue__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_lumber_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_lumber_index_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_lumber_index2_vue__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_lumber_index2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_lumber_index2_vue__);
 
 
 
@@ -86680,21 +86682,21 @@ var routes = [{
     name: 'home',
     component: __WEBPACK_IMPORTED_MODULE_0__views_Home___default.a,
     meta: {
-        requireAuth: true
+        // requireAuth:true
     }
 }, {
     path: '/provider',
     name: 'provider',
     component: __WEBPACK_IMPORTED_MODULE_1__views_Provider___default.a,
     meta: {
-        requireAuth: true
+        //      requireAuth:true
     }
 }, {
     path: '/providers',
     name: 'providers',
     component: __WEBPACK_IMPORTED_MODULE_2__components_provider_Index___default.a,
     meta: {
-        requireAuth: true
+        //    requireAuth:true
     }
 }, {
     path: '/login',
@@ -86703,19 +86705,19 @@ var routes = [{
 }, {
     path: '/lumber',
     name: 'Lumber',
-    component: __WEBPACK_IMPORTED_MODULE_4__components_lumber_index_vue___default.a
+    component: __WEBPACK_IMPORTED_MODULE_4__components_lumber_index2_vue___default.a
 }, {
     path: '/getLumberData',
     name: 'GetLumberData',
-    component: __WEBPACK_IMPORTED_MODULE_4__components_lumber_index_vue___default.a
+    component: __WEBPACK_IMPORTED_MODULE_4__components_lumber_index2_vue___default.a
 }, {
     path: '/specie',
     name: 'Specie',
-    component: __WEBPACK_IMPORTED_MODULE_4__components_lumber_index_vue___default.a
+    component: __WEBPACK_IMPORTED_MODULE_4__components_lumber_index2_vue___default.a
 }, {
     path: '/type',
     name: 'Type',
-    component: __WEBPACK_IMPORTED_MODULE_4__components_lumber_index_vue___default.a
+    component: __WEBPACK_IMPORTED_MODULE_4__components_lumber_index2_vue___default.a
 }];
 
 /***/ }),
@@ -88042,7 +88044,7 @@ var content = __webpack_require__(251);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("56ee7b34", content, false, {});
+var update = __webpack_require__(3)("ca15cbf2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -88066,7 +88068,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.w-240 {\n  width: 240px;\n}\n", ""]);
+exports.push([module.i, "\n.w-240 {\r\n  width: 240px;\n}\r\n", ""]);
 
 // exports
 
@@ -88313,7 +88315,7 @@ var content = __webpack_require__(257);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("52c48ab7", content, false, {});
+var update = __webpack_require__(3)("4cd5548a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -88534,7 +88536,7 @@ var content = __webpack_require__(261);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("62c3db20", content, false, {});
+var update = __webpack_require__(3)("54362aa0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -88774,7 +88776,7 @@ var content = __webpack_require__(265);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("7fc38c78", content, false, {});
+var update = __webpack_require__(3)("3671e204", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -91890,7 +91892,7 @@ var content = __webpack_require__(353);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("4a747008", content, false, {});
+var update = __webpack_require__(3)("58078a02", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -92935,7 +92937,7 @@ var content = __webpack_require__(371);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("3efaf8ad", content, false, {});
+var update = __webpack_require__(3)("846ec39a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -93837,7 +93839,7 @@ var content = __webpack_require__(385);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("df334be4", content, false, {});
+var update = __webpack_require__(3)("2aa024ca", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -104569,7 +104571,7 @@ var content = __webpack_require__(437);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("3d911797", content, false, {});
+var update = __webpack_require__(3)("07f8dd2a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -104593,7 +104595,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.-nested-dsp-row-comp {\n  position: relative;\n  padding: 10px;\n}\n.-nested-dsp-row-close-btn {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.-nested-dsp-row-comp {\r\n  position: relative;\r\n  padding: 10px;\n}\n.-nested-dsp-row-close-btn {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 5px;\n}\r\n", ""]);
 
 // exports
 
@@ -104797,7 +104799,7 @@ var content = __webpack_require__(442);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("3661c33a", content, false, {});
+var update = __webpack_require__(3)("f5e39120", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -104821,7 +104823,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.-td-color-comp {\n  width: 50px;\n  height: 20px;\n  font-size: 12px;\n  font-weight: bold;\n  text-align: center;\n  line-height: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.-td-color-comp {\r\n  width: 50px;\r\n  height: 20px;\r\n  font-size: 12px;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  line-height: 20px;\n}\r\n", ""]);
 
 // exports
 
@@ -105043,7 +105045,7 @@ var content = __webpack_require__(450);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("ce8c1154", content, false, {});
+var update = __webpack_require__(3)("07317e69", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -105067,7 +105069,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.-th-createtime-comp {\n  display: inline-block;\n  margin-bottom: -6px;\n}\n.-th-createtime-comp > select {\n  display: inline-block;\n  width: 80px;\n  height: 26px;\n}\n", ""]);
+exports.push([module.i, "\n.-th-createtime-comp {\r\n  display: inline-block;\r\n  margin-bottom: -6px;\n}\n.-th-createtime-comp > select {\r\n  display: inline-block;\r\n  width: 80px;\r\n  height: 26px;\n}\r\n", ""]);
 
 // exports
 
@@ -105226,7 +105228,7 @@ var content = __webpack_require__(455);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("7bfbe15e", content, false, {});
+var update = __webpack_require__(3)("f9504caa", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -105250,7 +105252,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.-nested-comp-open-btn {\n  color: #fff !important;\n  background-color: #337ab7 !important;\n}\n", ""]);
+exports.push([module.i, "\n.-nested-comp-open-btn {\r\n  color: #fff !important;\r\n  background-color: #337ab7 !important;\n}\r\n", ""]);
 
 // exports
 
@@ -105775,7 +105777,7 @@ var content = __webpack_require__(460);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("681764ab", content, false, {});
+var update = __webpack_require__(3)("60892584", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -105799,7 +105801,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\n  -webkit-appearance: searchfield-cancel-button;\n  cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\r\n  -webkit-appearance: searchfield-cancel-button;\r\n  cursor: pointer;\n}\r\n", ""]);
 
 // exports
 
@@ -106040,7 +106042,7 @@ var content = __webpack_require__(465);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("64a02024", content, false, {});
+var update = __webpack_require__(3)("6bfc1871", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -106064,7 +106066,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\n  -webkit-appearance: searchfield-cancel-button;\n  cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\r\n  -webkit-appearance: searchfield-cancel-button;\r\n  cursor: pointer;\n}\r\n", ""]);
 
 // exports
 
@@ -106235,6 +106237,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -106836,6 +106840,623 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(479)
+/* template */
+var __vue_template__ = __webpack_require__(480)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/lumber/index2.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a1f6c8c6", Component.options)
+  } else {
+    hotAPI.reload("data-v-a1f6c8c6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 479 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            search: '',
+            pagination: {
+                sortBy: 'name'
+            },
+            headers: [{ text: 'Alto', value: 'high' }, { text: 'Ancho', value: 'width' }, { text: 'Espesor', value: 'density' }, { text: 'Especie', value: 'specie' }, { text: 'Tipo', value: 'type' }],
+            lumbers: [],
+            lumber: null,
+            totalLumber: 0,
+            desserts: [],
+            loading: true,
+            filterName: 'high',
+            filterValue: ''
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.getLumber().then(this.getDataFromApi().then(function (data) {
+            _this.lumbers = data.lumbers;
+            _this.totalLumber = data.total;
+        }));
+    },
+
+    methods: {
+        getDataFromApi: function getDataFromApi() {
+            var _this2 = this;
+
+            return new Promise(function (resolve, reject) {
+                var _pagination = _this2.pagination,
+                    sortBy = _pagination.sortBy,
+                    descending = _pagination.descending,
+                    page = _pagination.page,
+                    rowsPerPage = _pagination.rowsPerPage;
+
+
+                var items = _this2.lumbers;
+                var total = items.length;
+
+                if (_this2.pagination.sortBy) {
+                    items = items.sort(function (a, b) {
+                        var sortA = a[sortBy];
+                        var sortB = b[sortBy];
+
+                        if (descending) {
+                            if (sortA < sortB) return 1;
+                            if (sortA > sortB) return -1;
+                            return 0;
+                        } else {
+                            if (sortA < sortB) return -1;
+                            if (sortA > sortB) return 1;
+                            return 0;
+                        }
+                    });
+                }
+
+                if (rowsPerPage > 0) {
+                    items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+                }
+
+                resolve({
+                    items: items,
+                    total: total
+                });
+            });
+        },
+        getLumber: function getLumber(withFilter) {
+            var _this3 = this;
+
+            console.log("starting receiving data");
+            return new Promise(function (resolve, reject) {
+                _this3.loading = true;
+                var filterName = withFilter == true ? _this3.filterName : 'high';
+                console.log(withFilter);
+                axios.get('/api/auth/getLumberData', { name: filterName, value: _this3.filterValue }).then(function (response) {
+                    // let providers = response.data;
+                    console.log(response.data);
+                    _this3.lumbers = response.data.lumbers;
+                    _this3.loading = false;
+                    resolve();
+                });
+            });
+        },
+        getResult: function getResult(withFilter) {
+            var _this4 = this;
+
+            console.log(this.filterName);
+            //axios.post('/api/providers/getdata',{name:this.filterName})
+            //   .then((response)=>{ console.log(response.data)});
+            this.getLumber(withFilter).then(this.getDataFromApi().then(function (data) {
+                _this4.lumbers = data.lumbers;
+                _this4.totalLumber = data.total;
+            }));
+        },
+        toggleOrder: function toggleOrder(index) {
+            this.pagination.sortBy = this.headers[index].value;
+            this.pagination.descending = !this.pagination.descending;
+        },
+        setFilter: function setFilter(filterName) {
+            this.filterValue = '', this.filterName = filterName;
+        },
+        show: function show(prop) {
+            var _this5 = this;
+
+            console.log(prop.id + '<<<<<');
+            //this.lumber = prop;
+            axios.get('/api/auth/lumber/' + prop.id)
+            //axios.put('/api/auth/lumber/1',null)
+            .then(function (response) {
+                console.log('before');
+                console.log(response.data.lumber);
+                _this5.lumber = response.data.lumber;
+            }).catch(function (error) {
+                console.log('error');
+                console.log(error);
+            });
+            //this.props.expanded = !this.props.expanded;
+        }
+    },
+    watch: {
+        pagination: {
+            handler: function handler() {
+                var _this6 = this;
+
+                this.getDataFromApi().then(function (data) {
+                    _this6.desserts = data.items;
+                    _this6.totalDesserts = data.total;
+                });
+            },
+
+            deep: true
+        },
+        filterValue: function filterValue(fv) {
+            if (fv == '') {
+                this.getResult(false);
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 480 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-card",
+    [
+      _c(
+        "v-card-title",
+        [
+          _vm._v("\n        Madera\n    "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: {
+              "append-icon": "search",
+              label: "Buscar",
+              "single-line": "",
+              "hide-details": ""
+            },
+            model: {
+              value: _vm.search,
+              callback: function($$v) {
+                _vm.search = $$v
+              },
+              expression: "search"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-data-table",
+        {
+          attrs: {
+            headers: _vm.headers,
+            items: _vm.lumbers,
+            search: _vm.search,
+            pagination: _vm.pagination
+          },
+          on: {
+            "update:pagination": function($event) {
+              _vm.pagination = $event
+            }
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "headers",
+              fn: function(props) {
+                return [
+                  _c(
+                    "tr",
+                    _vm._l(props.headers, function(header, index) {
+                      return _c(
+                        "th",
+                        { key: index, staticClass: "text-xs-left" },
+                        [
+                          _c(
+                            "v-flex",
+                            [
+                              _c(
+                                "span",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.toggleOrder(index)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(header.text) +
+                                      "                                \n                        "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-menu",
+                                { attrs: { "close-on-content-click": false } },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { slot: "activator", icon: "" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.setFilter(header.value)
+                                        }
+                                      },
+                                      slot: "activator"
+                                    },
+                                    [
+                                      _c("v-icon", { attrs: { small: "" } }, [
+                                        _vm._v("fa-filter")
+                                      ])
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-card",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          "append-icon": "search",
+                                          label: "Buscar " + header.text + "..."
+                                        },
+                                        on: {
+                                          keydown: function($event) {
+                                            if (
+                                              !("button" in $event) &&
+                                              _vm._k(
+                                                $event.keyCode,
+                                                "enter",
+                                                13,
+                                                $event.key,
+                                                "Enter"
+                                              )
+                                            ) {
+                                              return null
+                                            }
+                                            _vm.getResult(true)
+                                          }
+                                        },
+                                        model: {
+                                          value: _vm.filterValue,
+                                          callback: function($$v) {
+                                            _vm.filterValue = $$v
+                                          },
+                                          expression: "filterValue"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              header.value == _vm.pagination.sortBy
+                                ? _c(
+                                    "v-icon",
+                                    {
+                                      attrs: { small: "" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.toggleOrder(index)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.pagination.descending == false
+                                            ? "arrow_upward"
+                                            : "arrow_downward"
+                                        )
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    })
+                  )
+                ]
+              }
+            },
+            {
+              key: "items",
+              fn: function(props) {
+                return [
+                  _c("td", { staticClass: "text-xs-left" }, [
+                    _vm._v(_vm._s(props.item.high))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-left" }, [
+                    _vm._v(_vm._s(props.item.width))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-left" }, [
+                    _vm._v(_vm._s(props.item.density))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-left" }, [
+                    _vm._v(_vm._s(props.item.specie))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-left" }, [
+                    _vm._v(_vm._s(props.item.type))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "justify-center layout px-0" },
+                    [
+                      _c(
+                        "v-icon",
+                        {
+                          staticClass: "mr-2",
+                          attrs: { small: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.show(props.item)
+                              props.expanded = !props.expanded
+                            }
+                          }
+                        },
+                        [_vm._v("\n                    toc\n                ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-icon",
+                        {
+                          staticClass: "mr-2",
+                          attrs: { small: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.editItem(props.item)
+                            }
+                          }
+                        },
+                        [_vm._v("\n                    edit\n                ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-icon",
+                        {
+                          attrs: { small: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.deleteItem(props.item)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    delete\n                "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ]
+              }
+            },
+            {
+              key: "expand",
+              fn: function(props) {
+                return [
+                  _vm.lumber
+                    ? _c(
+                        "v-card",
+                        { attrs: { flat: "" } },
+                        [
+                          _c("v-card-text", [
+                            _vm._v(_vm._s(_vm.lumber.description))
+                          ]),
+                          _vm._v(" "),
+                          _c("v-card-text", [_vm._v(_vm._s(_vm.lumber.high))])
+                        ],
+                        1
+                      )
+                    : _vm._e()
+                ]
+              }
+            }
+          ])
+        },
+        [
+          _c(
+            "v-alert",
+            {
+              attrs: {
+                slot: "no-results",
+                value: true,
+                color: "error",
+                icon: "warning"
+              },
+              slot: "no-results"
+            },
+            [
+              _vm._v(
+                '\n        Your search for "' +
+                  _vm._s(_vm.search) +
+                  '" found no results.\n    '
+              )
+            ]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a1f6c8c6", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
