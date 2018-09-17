@@ -14,21 +14,8 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        //
-        $provider_list = Provider::leftJoin('contacts','contacts.provider_id','=','providers.id')
-                                //    ->where('contacts.is_primary',true)
-                                   ->select('providers.id',
-                                            'providers.name',
-                                            'providers.offer',
-                                            'providers.balance',
-                                            'providers.debit',
-                                            'contacts.first_name',
-                                            'contacts.last_name',
-                                            'contacts.email',
-                                            'contacts.phone',
-                                            'contacts.position'
-                                            )
-                                   ->get();
+       
+        $provider_list = Provider::with('contacts')->get();
         return response()->json($provider_list->toArray());
     
     }
@@ -97,5 +84,16 @@ class ProviderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getData(Request $request)
+    {
+        if($request->name== 'name')
+        {
+            return response()->json(Provider::where($request->name,'like',$request->value."%")->with('contacts')->get()->toArray()); 
+        }else{
+            return response()->json(Provider::with('contacts')->whereHas('contacts',function($q) use($request) { $q->where($request->name,'like',$request->value."%");})->get()->toArray()); 
+        }
+
     }
 }
