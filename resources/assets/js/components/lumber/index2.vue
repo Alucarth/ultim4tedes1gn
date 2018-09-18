@@ -3,15 +3,80 @@
         <v-card-title>
             Madera
         <v-spacer></v-spacer>
-        <v-text-field
+
+        <v-dialog v-model="dialog" max-width="500px">            
+            <v-card>
+            <v-card-title>
+                <span class="headline">{{ formTitle }}</span>
+            </v-card-title>
+
+            <v-card-text v-if="newLumber">
+                <v-container grid-list-md>
+                 <v-layout wrap>
+                    <v-flex xs12 sm6 md4>
+                        <v-text-field label="Alto" hint="Ingrese el alto de la madera" required v-model="newLumber.high"></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm6 md4>
+                        <v-text-field label="Ancho" hint="Ingrese el ancho de la madera" v-model="newLumber.width"></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm6 md4>
+                        <v-text-field
+                        label="Densidad"
+                        hint="Ingrese la densidad de la madera"                  
+                        required
+                        v-model="newLumber.density"
+                        ></v-text-field>
+                    </v-flex>                          
+                    <v-flex xs12 sm6>
+                        <v-select                  
+                        label="Tipo de madera"
+                        v-model="newLumber.type_id"
+                        :items="types"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion del tipo seleccionado`"
+                        persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12 sm6>
+                        <v-select                  
+                        label="Especie"                
+                        v-model="newLumber.specie_id"  
+                        :items="species"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion de la madera seleccionada`"
+                        persistent-hint>                                
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-text-field label="Descripción" v-model="newLumber.description" ></v-text-field>
+                    </v-flex>  
+                </v-layout>
+                </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
+                <v-btn color="blue darken-1" flat @click.native="store" v-if="editedIndex === -1">Save</v-btn>
+                
+            </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+
+<v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
+
+        <!-- <v-text-field
             v-model="search"
             append-icon="search"
             label="Buscar"
             single-line
             hide-details
-        >
+        > -->
         
-        </v-text-field>
+        <!-- </v-text-field> -->
         </v-card-title>
         <v-data-table
         :headers="headers"
@@ -70,13 +135,13 @@
                     <v-icon
                         small
                         class="mr-2"
-                        @click="editItem(props.item)"
+                        @click="edit(props.item)"
                     >
                         edit
                     </v-icon>
                     <v-icon
                         small
-                        @click="deleteItem(props.item)"
+                        @click="destroy(props.item)"
                     >
                         delete
                     </v-icon>
@@ -112,14 +177,24 @@ export default {
             { text: 'Especie', value: 'specie' },
             { text: 'Tipo', value: 'type' },            
         ],
+        species: null,
+        types: null,
         lumbers: [],
         lumber: null,
+        newLumber: null,
         totalLumber: 0,
         desserts: [],
         loading: true,
         filterName: 'high',
-        filterValue: '',        
+        filterValue: '',   
+        dialog: false,
+        editedIndex: -1,     
       }
+    },
+    computed: {
+        formTitle () {
+                return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
+            }
     },
     mounted()
     {
@@ -130,6 +205,8 @@ export default {
                 this.totalLumber = data.total
                 })
         );
+        this.getSpecies();
+        this.getTypes();
         
     },
     methods:{
@@ -206,22 +283,86 @@ export default {
         setFilter(filterName){
             this.filterValue='',
             this.filterName = filterName;
-        },            
-        show(prop) {
-            console.log(prop.id+'<<<<<');
-            //this.lumber = prop;
-            axios.get(`/api/auth/lumber/${prop.id}`)
-            //axios.put('/api/auth/lumber/1',null)
-            .then(response => {
-                console.log('before');
+        },
+        create() {                        
+            this.dialog = true;
+            axios.get('/api/auth/lumber/create')            
+            .then(response => {                
                 console.log(response.data.lumber);
+                this.newLumber = response.data.lumber
+            })
+            .catch(error => {                
+                console.log(error);
+            });
+        },
+        store(){
+
+        },
+        show(item) {                        
+            axios.get(`/api/auth/lumber/${item.id}`)            
+            .then(response => {                
                 this.lumber = response.data.lumber
             })
-            .catch(error => {
-                console.log('error');
-            console.log(error);
+            .catch(error => {                
+                console.log(error);
             });
-            //this.props.expanded = !this.props.expanded;
+        },
+        edit (item) {
+            this.editedIndex = this.desserts.indexOf(item)
+            //this.editedItem = Object.assign({}, item)
+            axios.get(`/api/auth/lumber/${item.id}/edit`)            
+            .then(response => {                
+                this.newLumber = response.data.lumber
+            })
+            .catch(error => {                
+                console.log(error);
+            });
+            
+            this.dialog = true
+        },
+        update (item) {            
+            axios.put(`/api/auth/lumber/${item.id}`, this.newLumber)
+            .then(function (response) {
+                console.log(response.data.lumber);        
+            })
+            .catch(function (error) {
+                console.log(error);                
+            });
+            this.dialog =false;
+        },
+        destroy (item) {
+            let success_delete = false;
+            axios.delete(`/api/auth/lumber/${item.id}`)
+            .then(function (response) {
+                console.log(response.data.lumber_id);                   
+                success_delete = true;
+            })
+            .catch(function (error) {
+                console.log(error);                
+            });                                    
+            this.getLumber();
+            
+        },
+        getSpecies (){
+            axios.get('/api/auth/specie')
+            .then(response => {
+                this.species = response.data.species          
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
+        getTypes() {
+            axios.get('/api/auth/type')
+            .then(response => {
+                this.types = response.data.types          
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
+        close() {
+            this.dialog = false;
         }
         
     },
