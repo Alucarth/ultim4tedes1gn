@@ -11,6 +11,6 @@ class LumberSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Lumber::class, 100)->create();
+        factory(App\Lumber::class, 1000)->create();
     }
 }

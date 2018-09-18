@@ -24,7 +24,11 @@ class LumberController extends Controller
      */
     public function create()
     {
-        //
+        $lumber = new Lumber();
+        $data = [
+            'lumber'    =>  $lumber
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -62,7 +66,11 @@ class LumberController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lumber = Lumber::find($id);
+        $data = [
+            'lumber'    =>  $lumber
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -96,7 +104,12 @@ class LumberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lumber = Lumber::find($id);
+        $data = [
+            'lumber_id'    =>  $lumber->id
+        ];
+        $lumber->delete();
+        return response()->json($data);
     }
 
     /**
