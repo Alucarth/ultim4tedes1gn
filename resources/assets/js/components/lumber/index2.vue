@@ -284,8 +284,7 @@ export default {
             this.filterValue='',
             this.filterName = filterName;
         },
-        create() {                        
-            this.dialog = true;
+        create() {                                    
             axios.get('/api/auth/lumber/create')            
             .then(response => {                
                 console.log(response.data.lumber);
@@ -294,6 +293,7 @@ export default {
             .catch(error => {                
                 console.log(error);
             });
+            this.dialog = true;
         },
         store(){
 

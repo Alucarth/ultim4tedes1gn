@@ -92370,13 +92370,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         create: function create() {
             var _this5 = this;
 
-            this.dialog = true;
             axios.get('/api/auth/lumber/create').then(function (response) {
                 console.log(response.data.lumber);
                 _this5.newLumber = response.data.lumber;
             }).catch(function (error) {
                 console.log(error);
             });
+            this.dialog = true;
         },
         store: function store() {},
         show: function show(item) {
