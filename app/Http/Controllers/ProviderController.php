@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Provider;
+use App\Contact;
 
 class ProviderController extends Controller
 {
@@ -15,8 +16,8 @@ class ProviderController extends Controller
     public function index()
     {
        
-        $provider_list = Provider::with('contacts')->get();
-        return response()->json($provider_list->toArray());
+        // $provider_list = Provider::with('contacts')->get();
+        // return response()->json($provider_list->toArray());
     
     }
 
@@ -27,7 +28,10 @@ class ProviderController extends Controller
      */
     public function create()
     {
-        //
+
+        $provider = new Provider;
+        $contact = new Contact;
+        return response()->json(array('provider'=>$provider,'contact'=>$contact));
     }
 
     /**
