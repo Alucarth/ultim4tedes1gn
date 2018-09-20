@@ -87,12 +87,14 @@ class LumberController extends Controller
         $lumber->width = $request->width;
         $lumber->density = $request->density;
         $lumber->description = $request->description;
-        $lumber->type_id = $request->type;
-        $lumber->specie_id = $request->specie;
+        $lumber->type_id = $request->type_id;
+        $lumber->specie_id = $request->specie_id;
         $lumber->save();
+        $lumber = Lumber::find($id);
+        //$lumber->with('species'); 
         $data = [
             'lumber'    =>  $lumber
-        ];
+        ];        
         return response()->json($data);
     }
 

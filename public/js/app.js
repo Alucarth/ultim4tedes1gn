@@ -92250,6 +92250,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -92265,7 +92267,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             lumber: null,
             newLumber: null,
             totalLumber: 0,
-            desserts: [],
             loading: true,
             filterName: 'high',
             filterValue: '',
@@ -92391,7 +92392,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         edit: function edit(item) {
             var _this7 = this;
 
-            this.editedIndex = this.desserts.indexOf(item);
+            this.editedIndex = this.lumbers.indexOf(item);
             //this.editedItem = Object.assign({}, item)
             axios.get('/api/auth/lumber/' + item.id + '/edit').then(function (response) {
                 _this7.newLumber = response.data.lumber;
@@ -92402,12 +92403,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.dialog = true;
         },
         update: function update(item) {
-            axios.put('/api/auth/lumber/' + item.id, this.newLumber).then(function (response) {
-                console.log(response.data.lumber);
+            var _this8 = this;
+
+            var index = this.editedIndex;
+            axios.put('/api/auth/lumber/' + this.newLumber.id, this.newLumber).then(function (response) {
+                _this8.lumbers[index].high = response.data.lumber.high;
+                _this8.lumbers[index].width = response.data.lumber.width;
+                _this8.lumbers[index].density = response.data.lumber.density;
+                _this8.lumbers[index].specie = response.data.lumber.specie.name;
+                _this8.lumbers[index].type_id = response.data.lumber.type_id;
             }).catch(function (error) {
                 console.log(error);
             });
             this.dialog = false;
+            this.getLumber();
         },
         destroy: function destroy(item) {
             var success_delete = false;
@@ -92420,19 +92429,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.getLumber();
         },
         getSpecies: function getSpecies() {
-            var _this8 = this;
+            var _this9 = this;
 
             axios.get('/api/auth/specie').then(function (response) {
-                _this8.species = response.data.species;
+                _this9.species = response.data.species;
             }).catch(function (error) {
                 console.log(error);
             });
         },
         getTypes: function getTypes() {
-            var _this9 = this;
+            var _this10 = this;
 
             axios.get('/api/auth/type').then(function (response) {
-                _this9.types = response.data.types;
+                _this10.types = response.data.types;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -92444,11 +92453,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         pagination: {
             handler: function handler() {
-                var _this10 = this;
+                var _this11 = this;
 
                 this.getDataFromApi().then(function (data) {
-                    _this10.desserts = data.items;
-                    _this10.totalDesserts = data.total;
+                    _this11.desserts = data.items;
+                    _this11.totalDesserts = data.total;
                 });
             },
 
@@ -92702,15 +92711,26 @@ var render = function() {
                             "v-btn",
                             {
                               attrs: { color: "blue darken-1", flat: "" },
-                              nativeOn: {
+                              on: {
                                 click: function($event) {
-                                  return _vm.store($event)
+                                  _vm.store(_vm.newLumber)
                                 }
                               }
                             },
-                            [_vm._v("Save")]
+                            [_vm._v("store")]
                           )
-                        : _vm._e()
+                        : _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              on: {
+                                click: function($event) {
+                                  _vm.update(_vm.newLumber)
+                                }
+                              }
+                            },
+                            [_vm._v("update")]
+                          )
                     ],
                     1
                   )

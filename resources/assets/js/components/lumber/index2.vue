@@ -59,7 +59,9 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click.native="store" v-if="editedIndex === -1">Save</v-btn>
+                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">store</v-btn>
+                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>update</v-btn>
+                
                 
             </v-card-actions>
             </v-card>
@@ -182,13 +184,12 @@ export default {
         lumbers: [],
         lumber: null,
         newLumber: null,
-        totalLumber: 0,
-        desserts: [],
+        totalLumber: 0,        
         loading: true,
         filterName: 'high',
         filterValue: '',   
         dialog: false,
-        editedIndex: -1,     
+        editedIndex: -1,          
       }
     },
     computed: {
@@ -308,7 +309,7 @@ export default {
             });
         },
         edit (item) {
-            this.editedIndex = this.desserts.indexOf(item)
+            this.editedIndex = this.lumbers.indexOf(item)
             //this.editedItem = Object.assign({}, item)
             axios.get(`/api/auth/lumber/${item.id}/edit`)            
             .then(response => {                
@@ -320,15 +321,21 @@ export default {
             
             this.dialog = true
         },
-        update (item) {            
-            axios.put(`/api/auth/lumber/${item.id}`, this.newLumber)
-            .then(function (response) {
-                console.log(response.data.lumber);        
+        update (item) {                        
+            let index = this.editedIndex;            
+            axios.put(`/api/auth/lumber/${this.newLumber.id}`, this.newLumber)            
+            .then(response => {                
+                this.lumbers[index].high = response.data.lumber.high;
+                this.lumbers[index].width = response.data.lumber.width;
+                this.lumbers[index].density = response.data.lumber.density;
+                this.lumbers[index].specie = response.data.lumber.specie.name;
+                this.lumbers[index].type_id = response.data.lumber.type_id;
             })
             .catch(function (error) {
-                console.log(error);                
-            });
+                console.log(error);
+            });            
             this.dialog =false;
+            this.getLumber();
         },
         destroy (item) {
             let success_delete = false;
