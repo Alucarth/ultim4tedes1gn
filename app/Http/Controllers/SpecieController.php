@@ -27,7 +27,11 @@ class SpecieController extends Controller
      */
     public function create()
     {
-        //
+        $specie = new Specie();
+        $data = [
+            'specie'    =>  $specie,
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -84,5 +88,41 @@ class SpecieController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Returns json data filtered from lumber
+     * 
+     * @param int $id
+     * @return \App\Specie[] $species 
+     */
+    public function getData(Request $request){
+
+        $offset = $request->offset ?? 0;
+        $limit = $request->limit ?? 10;
+        $sort = $request->sort ?? 'id';
+        $order = $request->order ?? 'asc';  
+        
+        $name = $request->name ?? '';
+        $description = $request->description ?? '';
+                
+        $total = Specie::
+            where('name','like',$name.'%')
+            //where('description','like',$description.'%')
+            ->count();
+
+        $species = Specie::
+            where('name','like',$name.'%')
+//            ->where('description','like',$description.'%')
+            ->skip($offset)
+            ->take($limit)
+            ->orderBy($sort,$order)
+            ->get();
+            
+        return response()->json(
+        [
+            'species' => $species->toArray(),
+            'total'=>$total,
+        ]);
     }
 }

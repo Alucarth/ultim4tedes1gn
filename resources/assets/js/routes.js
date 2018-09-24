@@ -3,7 +3,8 @@ import Home from './views/Home';
 import Provider from './views/Provider';
 import ProviderList from './components/provider/Index';
 import Login from './components/auth/Login';
-import Lumber from './components/lumber/index.vue';
+import Lumber from './components/lumber/index2.vue';
+import Specie from './components/specie/index.vue';
 
 
    
@@ -50,7 +51,7 @@ import Lumber from './components/lumber/index.vue';
         {
             path: '/specie',
             name: 'Specie',
-            component: Lumber
+            component: Specie
         },
         {
             path: '/type',
