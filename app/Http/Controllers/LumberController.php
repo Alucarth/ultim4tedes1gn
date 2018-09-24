@@ -90,8 +90,7 @@ class LumberController extends Controller
         $lumber->type_id = $request->type_id;
         $lumber->specie_id = $request->specie_id;
         $lumber->save();
-        $lumber = Lumber::find($id);
-        //$lumber->with('species'); 
+        $lumber = Lumber::find($id);        
         $data = [
             'lumber'    =>  $lumber
         ];        

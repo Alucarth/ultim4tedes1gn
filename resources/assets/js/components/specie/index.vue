@@ -4,54 +4,21 @@
             Especies de Madera
         <v-spacer></v-spacer>
 
-        <!-- <v-dialog v-model="dialog" max-width="500px">            
+        <v-dialog v-model="dialog" max-width="500px">            
             <v-card>
             <v-card-title>
                 <span class="headline">{{ formTitle }}</span>
             </v-card-title>
 
-            <v-card-text v-if="newLumber">
+            <v-card-text v-if="newSpecie">
                 <v-container grid-list-md>
-                 <v-layout wrap>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field label="Alto" hint="Ingrese el alto de la madera" required v-model="newLumber.high"></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field label="Ancho" hint="Ingrese el ancho de la madera" v-model="newLumber.width"></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field
-                        label="Densidad"
-                        hint="Ingrese la densidad de la madera"                  
-                        required
-                        v-model="newLumber.density"
-                        ></v-text-field>
-                    </v-flex>                          
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Tipo de madera"
-                        v-model="newLumber.type_id"
-                        :items="types"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion del tipo seleccionado`"
-                        persistent-hint>
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Especie"                
-                        v-model="newLumber.specie_id"  
-                        :items="species"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion de la madera seleccionada`"
-                        persistent-hint>                                
-                        </v-select>
+                 <v-layout wrap>                   
+                     <v-flex xs12>
+                        <v-text-field label="Nombre" v-model="newSpecie.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="Descripción" v-model="newLumber.description" ></v-text-field>
-                    </v-flex>  
+                        <v-text-field label="Descripción" v-model="newSpecie.description" ></v-text-field>
+                    </v-flex>
                 </v-layout>
                 </v-container>
             </v-card-text>
@@ -59,13 +26,11 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">store</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>update</v-btn>
-                
-                
+                <v-btn color="blue darken-1" flat @click="store(newSpecie)" v-if="editedIndex === -1">Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="update(newSpecie)" v-else>Actualizar</v-btn>
             </v-card-actions>
             </v-card>
-        </v-dialog> -->
+        </v-dialog>
 
 
 <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>    
@@ -178,7 +143,7 @@ export default {
     },
     computed: {
         formTitle () {
-                return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
+                return this.editedIndex === -1 ? 'Agregar Nueva Especie' : 'Editar Especie'
             }
     },
     mounted()
@@ -257,15 +222,14 @@ export default {
         },
         toggleOrder (index) {
             this.pagination.sortBy = this.headers[index].value
-            this.pagination.descending = !this.pagination.descending
-             
-            
+            this.pagination.descending = !this.pagination.descending                         
         },
         setFilter(filterName){
             this.filterValue='',
             this.filterName = filterName;
         },
         create() {                                    
+            this.editedIndex = -1;
             axios.get('/api/auth/specie/create')
             .then(response => {                                
                 this.newSpecie = response.data.specie
@@ -276,7 +240,15 @@ export default {
             this.dialog = true;
         },
         store(){
-
+            let index = -1;
+            axios.post('/api/auth/specie', this.newSpecie)
+            .then(response => {                
+                console.log(response.data.specie);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+            this.dialog =false;            
         },
         show(item) {                        
             axios.get(`/api/auth/specie/${item.id}`)            
@@ -288,46 +260,38 @@ export default {
             });
         },
         edit (item) {
-            this.editedIndex = this.lumbers.indexOf(item)
-            //this.editedItem = Object.assign({}, item)
-            axios.get(`/api/auth/lumber/${item.id}/edit`)            
+            this.editedIndex = this.species.indexOf(item);
+            axios.get(`/api/auth/specie/${item.id}/edit`)            
             .then(response => {                
-                this.newLumber = response.data.lumber
+                this.newSpecie = response.data.specie
             })
             .catch(error => {                
                 console.log(error);
-            });
-            
+            });            
             this.dialog = true
         },
         update (item) {                        
             let index = this.editedIndex;            
-            axios.put(`/api/auth/lumber/${this.newLumber.id}`, this.newLumber)            
-            .then(response => {                
-                this.lumbers[index].high = response.data.lumber.high;
-                this.lumbers[index].width = response.data.lumber.width;
-                this.lumbers[index].density = response.data.lumber.density;
-                this.lumbers[index].specie = response.data.lumber.specie.name;
-                this.lumbers[index].type_id = response.data.lumber.type_id;
+            axios.put(`/api/auth/specie/${this.newSpecie.id}`, this.newSpecie)
+            .then(response => {
+                this.species[index].name = response.data.specie.name
+                this.species[index].description = response.data.specie.description
             })
             .catch(function (error) {
                 console.log(error);
             });            
-            this.dialog =false;
-            this.getLumber();
+            this.dialog =false;            
         },
         destroy (item) {
             let success_delete = false;
-            axios.delete(`/api/auth/lumber/${item.id}`)
+            axios.delete(`/api/auth/specie/${item.id}`)
             .then(function (response) {
-                console.log(response.data.lumber_id);                   
+                console.log(response.data.specie_id);
                 success_delete = true;
             })
             .catch(function (error) {
                 console.log(error);                
-            });                                    
-            this.getLumber();
-            
+            });            
         },        
         close() {
             this.dialog = false;

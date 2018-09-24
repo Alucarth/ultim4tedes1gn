@@ -42,7 +42,15 @@ class SpecieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $specie = new Specie();
+        $specie->name = $request->name;
+        $specie->description = $request->description;
+        $specie->save();
+        
+        $data = [
+            'specie'    =>  $specie
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -53,7 +61,13 @@ class SpecieController extends Controller
      */
     public function show($id)
     {
-        //
+        $specie = Specie::find($id);
+        
+        $data = [
+            'specie'  =>  $specie
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -64,7 +78,13 @@ class SpecieController extends Controller
      */
     public function edit($id)
     {
-        //
+        $specie = Specie::find($id);
+        
+        $data = [
+            'specie'  =>  $specie
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -76,7 +96,15 @@ class SpecieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $specie = Specie::find($id);
+        $specie->name = $request->name;
+        $specie->description = $request->description;
+        $specie->save();
+        
+        $data = [
+            'specie'    =>  $specie
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -87,7 +115,12 @@ class SpecieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $specie = Specie::find($id);
+        $data = [
+            'specie_id'    =>  $specie->id
+        ];
+        $specie->delete();
+        return response()->json($data);
     }
 
     /**
