@@ -3,7 +3,7 @@
         <v-card-title>
         Provedores
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="800px">
+        <v-dialog v-model="dialog" max-width="800px" max-high="40px">
             <v-btn slot="activator" color="primary" dark class="mb-2">Nuevo</v-btn>
             <v-card>
             <v-card-title>
@@ -49,7 +49,7 @@
         <v-data-table
         :headers="headers"
         :items="providers"
-            :pagination.sync="pagination"
+        hide-actions
         >
         <template slot="headers" slot-scope="props" >
            <tr>
@@ -61,34 +61,30 @@
                             </span>
                             <v-menu
                                     :close-on-content-click="false"
-                                    
                                     >
                                     <v-btn
                                         slot="activator"
                                         icon
                                         @click="setFilter(header.value)"
+                                        v-if="header.sortable!=false"
                                     >
                                     <v-icon  small>fa-filter</v-icon>
                                     </v-btn>
-
-                                    <v-card>
+                                    <v-card  >
                                         <v-text-field
+                                         outline
+                                         hide-details
                                         v-model="filterValue"
                                         append-icon="search"
                                         :label="`Buscar ${header.text}...`"
-                                    
-                                        @keydown.enter="getResult(true)"
+                                       
+                                        @keydown.enter="search(header.value)"
                                     ></v-text-field>
                                     
                                     </v-card>
                             </v-menu>
-                            <v-icon small @click="toggleOrder(index)" v-if="header.value == pagination.sortBy">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon>
+                            <!-- <v-icon small @click="toggleOrder(index)" v-if="header.value == pagination.sortBy">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon> -->
                         </v-flex>
-                 
-                   
-                    <!-- <v-icon small>fa-filter</v-icon> -->
-                  
-                  
                 </th>
            </tr>
         </template>
@@ -118,18 +114,28 @@
                 </v-icon>
             </td>
         </template>
-        
+       
+
         </v-data-table>
+        
+        <div class="text-xs-center">
+            <v-pagination
+            v-model="page"
+            :length="last_page"
+            :total-visible="7"
+             @input="next"
+            
+            ></v-pagination>
+        </div>   
+        <br>
     </v-card>
+    
 </template>
 <script>
 export default {
     data () {
       return {
         dialog: false,
-        pagination: {
-          sortBy: 'name'
-        },
         headers: [
           
           { text: 'Proveedor', value: 'name' },
@@ -139,12 +145,11 @@ export default {
           { text: 'Cargo', value: 'position' },
           { text: 'Email', value: 'email' },
           { text: 'Telefono', value: 'phone' },
-          { text: 'Balance', value: 'balance' },
-          { text: 'Debito', value: 'debit' },
+          { text: 'Balance', value: 'balance', sortable: false},
+          { text: 'Debito', value: 'debit' , sortable: false},
           { text: 'Acciones',value:'actions',  sortable: false },
         ],
         providers: [],
-        totalProviders: 0,
         loading: true,
         filterName: 'name',
         filterValue: '',
@@ -152,21 +157,17 @@ export default {
         newContacts:[],
         newContact: null,
         editedItem: -1,
+        page:1,
+        last_page:1,
       }
     },
     mounted()
     {
-        this.getProviders().then(
-            this.getDataFromApi()
-                .then(data => {
-                this.providers = data.items
-                this.totalProviders = data.total
-                })
-                .catch(error => {                
-                    console.log(error);
-                })
-                    
-        );
+        this.getItems('api/provider')
+            .then((data)=>{
+                this.providers = data.data;
+                this.last_page = data.last_page;
+            });
         
     },
     created(){
@@ -174,82 +175,43 @@ export default {
                 .then((response) => {                                       
                     this.newProvider = response.data.provider; 
                     this.newContact = response.data.contact; 
-                });
-                    
+                });    
     },
     methods:{
-        getDataFromApi () {
-            
-            return new Promise((resolve, reject) => {
-            const { sortBy, descending, page, rowsPerPage } = this.pagination
-
-            let items= this.providers;            
-            const total = items.length;
-
-            if (this.pagination.sortBy) {
-                items = items.sort((a, b) => {
-                const sortA = a[sortBy]
-                const sortB = b[sortBy]
-
-                if (descending) {
-                    if (sortA < sortB) return 1
-                    if (sortA > sortB) return -1
-                    return 0
-                } else {
-                    if (sortA < sortB) return -1
-                    if (sortA > sortB) return 1
-                    return 0
-                }
-                })
-            }
-
-            if (rowsPerPage > 0) {
-                items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-            }
-
-                resolve({
-                items,
-                total
-                });
-         
-            })
-        },
-        getProviders(withFilter){
+        
+        getItems(url){
             return new Promise((resolve,reject)=>{
-               this.loading = true
-               let filterName = withFilter==true?this.filterName:'name';
-               console.log(withFilter);
-               axios.post('/api/getProviderData',{ name:filterName,value:this.filterValue})
+               this.loading = true;
+               axios.get(url)
                     .then((response) => {
-                                        console.log(response.data);
-                            this.providers = response.data;            
-                                        this.loading = false
-                                        resolve();
-                                    });
-                        });
+                        this.loading = false;
+                        resolve(response.data);
+                    });
+            });
         },
-        getResult(withFilter){
-            console.log(this.filterName);
-            //axios.post('/api/providers/getdata',{name:this.filterName})
-              //   .then((response)=>{ console.log(response.data)});
-              this.getProviders(withFilter).then(
-                        this.getDataFromApi()
-                            .then(data => {
-                            this.providers = data.items
-                            this.totalProviders = data.total
-                            })
-                    );
+        next(page){
+            // console.log(page);
+            this.getItems('/api/provider?page='+page+'&search='+this.filterValue+'&sorted='+this.filterName).then((data)=>{
+                this.providers = data.data;
+                this.last_page = data.last_page;
+            });
         },
+        search(filter){
+            
+            this.filterName = filter;
+            this.getItems('/api/provider?search='+this.filterValue+'&sorted='+this.filterName).then((data)=>{
+                this.providers = data.data;
+                this.last_page = data.last_page;
+            });
+        },
+      
         toggleOrder (index) {
             this.pagination.sortBy = this.headers[index].value
             this.pagination.descending = !this.pagination.descending
              
             
         },
-        setFilter(filterName){
-            this.filterValue='',
-            this.filterName = filterName;
-        },
+       
         editItem (item) {
             this.editedIndex = this.providers.indexOf(item)
             this.editedItem = Object.assign({}, item)
@@ -281,19 +243,9 @@ export default {
 
     },
     watch: {
-        pagination: {
-            handler () {
-            this.getDataFromApi()
-                .then(data => {
-                this.desserts = data.items
-                this.totalDesserts = data.total
-                })
-            },
-            deep: true
-        },
         filterValue (fv) {      
             if (fv =='') {
-                this.getResult(false)
+                this.search('name');
             }
         }
     },
