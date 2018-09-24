@@ -16,11 +16,11 @@ class Lumber extends Model
         'description'   =>  null
     );
 
-    public function type(){
-        return $this->belongsTo('App\Type');
+    public function type() {
+        return $this->hasOne('App\Type','id','type_id');
     }
 
     public function specie(){
-        return $this->belongsTo('App\Specie');
+        return $this->hasOne('App\Specie','id','specie_id');
     }            
 }

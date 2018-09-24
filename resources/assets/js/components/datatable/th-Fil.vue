@@ -1,6 +1,6 @@
 <template>
   <div class="btn-group">
-    {{ title }}
+    {{ title }}xdxd
     <a href="javascript:;" data-toggle="dropdown">
       <i class="fa fa-filter" :class="{ 'text-muted': !keyword }"></i>
     </a>

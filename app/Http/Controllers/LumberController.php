@@ -160,9 +160,23 @@ class LumberController extends Controller
             ->where('types.name','like', $type.'%')
 			->skip($offset)
             ->take($limit)
-            ->orderBy($sort,$order)            
+            ->orderBy($sort,$order)
             ->get();
         
+            $lumbers = Lumber::with(['type','specie'])
+            ->whereHas('type', function($query) use ($type) {
+                $query->where('name','like',$type.'%');
+            })
+            ->whereHas('specie', function($query) use ($specie){
+                $query->where('name','like',$specie.'%');
+            })
+            ->skip($offset)
+            ->take($limit)
+            ->orderBy($sort,$order)
+            ->get();
+            //return $lumbers->count();
+            //dd($lumbers);
+        //return $lumbers;
         return response()->json(
         [
             'lumbers' => $lumbers->toArray(),

@@ -14,7 +14,6 @@ import Datatable from 'vue2-datatable-component'
 
 
 Vue.use(Datatable)
-import mockData from '../_mockData'
 import components from '../datatable/'
 export default {
   components,
@@ -32,22 +31,22 @@ export default {
         const cols = [          
           { title: 'Alto', field: 'high', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
           { title: 'Ancho', field: 'width', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
-          { title: 'Espesor', field: 'density', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
-          { title: 'Tipo', field: 'type', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
-          { title: 'Especie', field: 'specie', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
-        //   { title: 'Descripción', field: 'description', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
-          
-                    
+          { title: 'Espesor', field: 'density', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },          
+          { title: 'Tipo', field: 'type', thComp: 'FilterTh',tdComp: 'Object', tdStyle: { fontStyle: 'italic' } },          
+          { title: 'Especie', field:'specie', thComp: 'FilterTh',tdComp: 'Object', tdStyle: { fontStyle: 'italic' } },            
            { title: 'Operation', tdComp: 'Opt', visible: 'true' }
         ]
         const groupsDef = {
-          Normal: ['Primer Nombre', 'Segundo Nombre', 'Apellido Paterno'],
-          Sortable: ['ID'],
+          Normal: ['Alto', 'Ancho', 'Espesor','Tipo','Especie'],
+          Sortable: ['Alto'],
           Extra: []
         }
+        //return cols;
         return cols.map(col => {
+        console.log(col);
           Object.keys(groupsDef).forEach(groupName => {
             if (groupsDef[groupName].includes(col.title)) {
+              
               col.group = groupName
             }            
           })
@@ -65,8 +64,9 @@ export default {
     }
   },
   watch: {
-    query: {
+    query: {      
       handler () {
+        console.log("handling");
         this.handleQueryChange()
       },
       deep: true
@@ -82,10 +82,9 @@ export default {
     handleQueryChange () {
       axios.get('/api/auth/getLumberData',{
         params: this.query
-      }).then((response)=> {
-        console.log('before error :"V');
-        this.data = response.data.lumbers, 
-        this.total = response.data.total        
+      }).then((response)=> {        
+        this.data = response.data.lumbers;    
+        this.total = response.data.total;      
       }).catch(function (error) {
         console.log(error)
       });

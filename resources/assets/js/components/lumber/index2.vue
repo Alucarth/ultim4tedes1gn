@@ -124,8 +124,8 @@
                 <td class="text-xs-left" >{{ props.item.high }}</td>            
                 <td class="text-xs-left">{{ props.item.width }}</td>
                 <td class="text-xs-left">{{ props.item.density }}</td>
-                <td class="text-xs-left">{{ props.item.specie }}</td>
-                <td class="text-xs-left">{{ props.item.type }}</td>      
+                <td class="text-xs-left">{{ props.item.specie.name }}</td>
+                <td class="text-xs-left">{{ props.item.type.name }}</td>      
                 <td class="justify-center layout px-0">
                     <v-icon
                         small
@@ -211,41 +211,40 @@ export default {
         
     },
     methods:{
-        getDataFromApi () {
-            
-            return new Promise((resolve, reject) => {
-            const { sortBy, descending, page, rowsPerPage } = this.pagination
+        getDataFromApi () {            
+            // return new Promise((resolve, reject) => {
+            // const { sortBy, descending, page, rowsPerPage } = this.pagination
 
-            let items= this.lumbers;
-            const total = items.length;
+            // let items= this.lumbers;
+            // const total = items.length;
 
-            if (this.pagination.sortBy) {
-                items = items.sort((a, b) => {
-                const sortA = a[sortBy]
-                const sortB = b[sortBy]
+            // if (this.pagination.sortBy) {
+            //     items = items.sort((a, b) => {
+            //     const sortA = a[sortBy]
+            //     const sortB = b[sortBy]
 
-                if (descending) {
-                    if (sortA < sortB) return 1
-                    if (sortA > sortB) return -1
-                    return 0
-                } else {
-                    if (sortA < sortB) return -1
-                    if (sortA > sortB) return 1
-                    return 0
-                }
-                })
-            }
+            //     if (descending) {
+            //         if (sortA < sortB) return 1
+            //         if (sortA > sortB) return -1
+            //         return 0
+            //     } else {
+            //         if (sortA < sortB) return -1
+            //         if (sortA > sortB) return 1
+            //         return 0
+            //     }
+            //     })
+            // }
 
-            if (rowsPerPage > 0) {
-                items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-            }
+            // if (rowsPerPage > 0) {
+            //     items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
+            // }
 
-                resolve({
-                items,
-                total
-                });
+            //     resolve({
+            //     items,
+            //     total
+            //     });
          
-            })
+            // })
         },
         getLumber(withFilter){
             console.log("starting receiving data");

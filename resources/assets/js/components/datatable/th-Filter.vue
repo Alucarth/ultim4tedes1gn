@@ -63,6 +63,7 @@ export default {
   },
   methods: {
     search () {
+      console.log("searching");
       const { query } = this      
       this.$set(query, this.field, this.keyword)
       query.offset = 0
