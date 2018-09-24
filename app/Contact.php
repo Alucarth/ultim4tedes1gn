@@ -13,7 +13,6 @@ class Contact extends Model
         'email' => null,
         'phone' => null,
         'position' => null,
-        'city'  => null,
     );
 
     public function provider()

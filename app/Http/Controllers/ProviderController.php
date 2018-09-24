@@ -15,25 +15,28 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        
+        $order = request('order');
         if(request('sorted')!="name")
         {
             //search in contacts
-            $provider_list = Provider::whereHas('contacts',function($query){
-                                            $query->where(request('sorted'),'like',"%{".request('search')."}%");
-                                        })
-                                    ->with('contacts')
-                                    ->orderBy('name')
+            $search = request('search');
+            $sorted = request('sorted');
+          
+            Log::info('buscando por '.$search);
+            $provider_list = Provider::with('contacts')
+                                    ->whereHas('contacts',function($query) use ($sorted,$search){
+                                        $query->where($sorted,'like',"%{$search}%")->where('is_primary',true);
+                                    })
+                                    ->orderBy('name',$order)
                                     ->paginate(10);
-                        return response()->json($provider_list->toArray());
+            return response()->json($provider_list->toArray());
         }
-
         $provider_list = Provider::query()
                         ->when(request('search'),function($query,$search){
                             $query->where(request('sorted'),'like',"%{$search}%");
                         })
                         ->with('contacts')
-                        ->orderBy('name')
+                        ->orderBy('name',$order)
                         ->paginate(10);
         return response()->json($provider_list->toArray());
     

@@ -86912,12 +86912,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             dialog: false,
+            pagination: {
+                sortBy: 'name'
+            },
             headers: [{ text: 'Proveedor', value: 'name' },
             //   { text: 'Oferta', value: 'offer' },
             { text: 'Nombres', value: 'first_name' }, { text: 'Apellidos', value: 'last_name' }, { text: 'Cargo', value: 'position' }, { text: 'Email', value: 'email' }, { text: 'Telefono', value: 'phone' }, { text: 'Balance', value: 'balance', sortable: false }, { text: 'Debito', value: 'debit', sortable: false }, { text: 'Acciones', value: 'actions', sortable: false }],
@@ -86930,83 +86932,68 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             newContact: null,
             editedItem: -1,
             page: 1,
-            last_page: 1
+            last_page: 1,
+            order: true
         };
     },
     mounted: function mounted() {
-        var _this = this;
-
-        this.getItems('api/provider').then(function (data) {
-            _this.providers = data.data;
-            _this.last_page = data.last_page;
-        });
+        this.search('name');
     },
     created: function created() {
-        var _this2 = this;
+        var _this = this;
 
         axios.get('/api/provider/create').then(function (response) {
-            _this2.newProvider = response.data.provider;
-            _this2.newContact = response.data.contact;
+            _this.newProvider = response.data.provider;
+            _this.newContact = response.data.contact;
         });
     },
 
     methods: {
         getItems: function getItems(url) {
-            var _this3 = this;
+            var _this2 = this;
 
             return new Promise(function (resolve, reject) {
-                _this3.loading = true;
+                _this2.loading = true;
                 axios.get(url).then(function (response) {
-                    _this3.loading = false;
+                    _this2.loading = false;
                     resolve(response.data);
                 });
             });
         },
         next: function next(page) {
-            var _this4 = this;
+            var _this3 = this;
 
             // console.log(page);
-            this.getItems('/api/provider?page=' + page + '&search=' + this.filterValue + '&sorted=' + this.filterName).then(function (data) {
+            this.getItems('/api/provider?page=' + page + '&search=' + this.filterValue + '&sorted=' + this.filterName + '&order=asc').then(function (data) {
+                _this3.providers = data.data;
+                _this3.last_page = data.last_page;
+            });
+        },
+        search: function search(filter) {
+            var _this4 = this;
+
+            this.filterName = filter;
+            var orderBy = this.order == true ? 'asc' : 'desc';
+            console.log(orderBy);
+            this.getItems('/api/provider?search=' + this.filterValue + '&sorted=' + this.filterName + '&order=' + orderBy).then(function (data) {
                 _this4.providers = data.data;
                 _this4.last_page = data.last_page;
             });
         },
-        search: function search(filter) {
-            var _this5 = this;
-
-            this.filterName = filter;
-            this.getItems('/api/provider?search=' + this.filterValue + '&sorted=' + this.filterName).then(function (data) {
-                _this5.providers = data.data;
-                _this5.last_page = data.last_page;
-            });
-        },
-        toggleOrder: function toggleOrder(index) {
-            this.pagination.sortBy = this.headers[index].value;
+        toggleOrder: function toggleOrder(filter) {
+            this.order = !this.order;
             this.pagination.descending = !this.pagination.descending;
+            this.search(filter);
         },
         editItem: function editItem(item) {
             this.editedIndex = this.providers.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialog = true;
         },
-        deleteItem: function deleteItem(item) {
-            var index = this.providers.indexOf(item);
-            confirm('Esta seguro de borrar a este proveedor?') && this.providers.splice(index, 1);
-        },
-        close: function close() {
-            var _this6 = this;
-
-            this.dialog = false;
-            setTimeout(function () {
-                _this6.editedItem = Object.assign({}, _this6.defaultItem);
-                _this6.editedIndex = -1;
-            }, 300);
-        },
         save: function save() {
             // if (this.editedIndex > -1) {
             // Object.assign(this.providers[this.editedIndex], this.editedItem)
             // } else {
-
             this.providers.push(this.editedItem);
             // }
             this.close();
@@ -87321,7 +87308,7 @@ var render = function() {
                                   {
                                     on: {
                                       click: function($event) {
-                                        _vm.toggleOrder(index)
+                                        _vm.toggleOrder(header.value)
                                       }
                                     }
                                   },
@@ -87349,7 +87336,7 @@ var render = function() {
                                             },
                                             on: {
                                               click: function($event) {
-                                                _vm.setFilter(header.value)
+                                                _vm.toggleOrder(header.value)
                                               }
                                             },
                                             slot: "activator"
@@ -87406,7 +87393,30 @@ var render = function() {
                                     )
                                   ],
                                   1
-                                )
+                                ),
+                                _vm._v(" "),
+                                header.value == _vm.filterName
+                                  ? _c(
+                                      "v-icon",
+                                      {
+                                        attrs: { small: "" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.toggleOrder(header.value)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.order == false
+                                              ? "arrow_upward"
+                                              : "arrow_downward"
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
                               ],
                               1
                             )

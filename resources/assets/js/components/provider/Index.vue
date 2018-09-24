@@ -56,16 +56,16 @@
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
                         <v-flex v-if="header.value!='actions'">
-                            <span @click="toggleOrder(index)">{{ header.text }}
+                            <span @click="toggleOrder(header.value)">{{ header.text }}
                                 
                             </span>
-                            <v-menu
+                            <v-menu 
                                     :close-on-content-click="false"
                                     >
                                     <v-btn
                                         slot="activator"
                                         icon
-                                        @click="setFilter(header.value)"
+                                        @click="toggleOrder(header.value)"
                                         v-if="header.sortable!=false"
                                     >
                                     <v-icon  small>fa-filter</v-icon>
@@ -83,7 +83,7 @@
                                     
                                     </v-card>
                             </v-menu>
-                            <!-- <v-icon small @click="toggleOrder(index)" v-if="header.value == pagination.sortBy">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon> -->
+                            <v-icon small @click="toggleOrder(header.value)" v-if="header.value == filterName ">{{order==false?'arrow_upward':'arrow_downward'}}</v-icon>
                         </v-flex>
                 </th>
            </tr>
@@ -124,7 +124,6 @@
             :length="last_page"
             :total-visible="7"
              @input="next"
-            
             ></v-pagination>
         </div>   
         <br>
@@ -136,6 +135,9 @@ export default {
     data () {
       return {
         dialog: false,
+        pagination: {
+          sortBy: 'name'
+        },
         headers: [
           
           { text: 'Proveedor', value: 'name' },
@@ -159,16 +161,12 @@ export default {
         editedItem: -1,
         page:1,
         last_page:1,
+        order: true
       }
     },
     mounted()
     {
-        this.getItems('api/provider')
-            .then((data)=>{
-                this.providers = data.data;
-                this.last_page = data.last_page;
-            });
-        
+        this.search('name');
     },
     created(){
           axios.get('/api/provider/create')
@@ -191,7 +189,7 @@ export default {
         },
         next(page){
             // console.log(page);
-            this.getItems('/api/provider?page='+page+'&search='+this.filterValue+'&sorted='+this.filterName).then((data)=>{
+            this.getItems('/api/provider?page='+page+'&search='+this.filterValue+'&sorted='+this.filterName+'&order=asc').then((data)=>{
                 this.providers = data.data;
                 this.last_page = data.last_page;
             });
@@ -199,17 +197,18 @@ export default {
         search(filter){
             
             this.filterName = filter;
-            this.getItems('/api/provider?search='+this.filterValue+'&sorted='+this.filterName).then((data)=>{
+            let orderBy = this.order==true?'asc':'desc';
+            console.log(orderBy);
+            this.getItems('/api/provider?search='+this.filterValue+'&sorted='+this.filterName+'&order='+orderBy).then((data)=>{
                 this.providers = data.data;
                 this.last_page = data.last_page;
             });
         },
       
-        toggleOrder (index) {
-            this.pagination.sortBy = this.headers[index].value
+        toggleOrder (filter) {
+            this.order = !this.order;
             this.pagination.descending = !this.pagination.descending
-             
-            
+            this.search(filter);
         },
        
         editItem (item) {
@@ -218,23 +217,10 @@ export default {
             this.dialog = true
         },
 
-        deleteItem (item) {
-            const index = this.providers.indexOf(item)
-            confirm('Esta seguro de borrar a este proveedor?') && this.providers.splice(index, 1)
-        },
-        close () {
-            this.dialog = false
-            setTimeout(() => {
-            this.editedItem = Object.assign({}, this.defaultItem)
-            this.editedIndex = -1
-            }, 300)
-        },
-
         save () {
             // if (this.editedIndex > -1) {
             // Object.assign(this.providers[this.editedIndex], this.editedItem)
             // } else {
-                
                 this.providers.push(this.editedItem)
             // }
             this.close()
