@@ -167,6 +167,7 @@
       drawer: null,
       items: [
         { icon: 'dashboard', text: 'Inicio' , link: '/' },
+        { icon: 'group', text: 'Almacenes' , link: '/storage' },
         { icon: 'group', text: 'Madera' , link: '/lumber' },
         { icon: 'group', text: 'Especies' , link: '/specie' },
         { icon: 'group', text: 'Proveedores' , link: '/providers' },

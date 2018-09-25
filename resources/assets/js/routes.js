@@ -5,7 +5,7 @@ import ProviderList from './components/provider/Index';
 import Login from './components/auth/Login';
 import Lumber from './components/lumber/index2.vue';
 import Specie from './components/specie/index.vue';
-
+import Storage from './components/storage/index.vue';
 
    
    export const routes= [
@@ -58,6 +58,11 @@ import Specie from './components/specie/index.vue';
             name: 'Type',
             component: Lumber
         },
+        {
+            path: '/storage',
+            name: 'Storage'    ,
+            component: Storage
+        }
         
     ];
     
