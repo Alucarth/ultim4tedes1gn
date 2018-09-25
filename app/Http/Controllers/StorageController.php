@@ -46,6 +46,7 @@ class StorageController extends Controller
         $storage = new Storage();
         $storage->name = $request->name;
         $storage->description = $request->description;
+        $storage->is_enabled = $request->is_enabled;
         $storage->save();
         
         $data = [
@@ -100,6 +101,7 @@ class StorageController extends Controller
         $storage = Storage::find($id);
         $storage->name = $request->name;
         $storage->description = $request->description;
+        $storage->is_enabled = $request->is_enabled;
         $storage->save();
         
         $data = [

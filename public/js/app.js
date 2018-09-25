@@ -77302,6 +77302,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -77595,7 +77599,22 @@ var render = function() {
                                       })
                                     ],
                                     1
-                                  )
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-switch", {
+                                    attrs: { label: "Activo" },
+                                    model: {
+                                      value: _vm.newStorage.is_enabled,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.newStorage,
+                                          "is_enabled",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "newStorage.is_enabled"
+                                    }
+                                  })
                                 ],
                                 1
                               )

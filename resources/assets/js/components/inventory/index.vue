@@ -19,10 +19,6 @@
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="newStorage.description" ></v-text-field>
                     </v-flex>
-                    <v-switch
-                        :label="'Activo'"
-                        v-model="newStorage.is_enabled"
-                    ></v-switch>
                 </v-layout>
                 </v-container>
             </v-card-text>
