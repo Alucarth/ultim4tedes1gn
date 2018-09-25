@@ -42,7 +42,7 @@ class StorageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {        
         $storage = new Storage();
         $storage->name = $request->name;
         $storage->description = $request->description;

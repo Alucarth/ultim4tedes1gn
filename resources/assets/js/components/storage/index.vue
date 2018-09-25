@@ -221,8 +221,8 @@ export default {
                     );
         },
         toggleOrder (index) {
-            this.pagination.sortBy = this.headers[index].value
-            this.pagination.descending = !this.pagination.descending                         
+            this.pagination.sortBy = this.headers[index].value;
+            this.pagination.descending = !this.pagination.descending;
         },
         setFilter(filterName){
             this.filterValue='',
@@ -240,11 +240,10 @@ export default {
             this.dialog = true;
         },
         store(){
-            let index = -1;
-            console.log(this.newStorage);
+            let index = -1;            
             axios.post('/api/auth/storage', this.newStorage)
-            .then(response => {                        
-                console.log(response.data.storage);
+            .then(response => {                    
+                this.getStorages();
             })
             .catch(function (error) {
                 console.log(error);

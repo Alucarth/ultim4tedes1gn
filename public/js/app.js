@@ -77426,42 +77426,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.dialog = true;
         },
         store: function store() {
+            var _this6 = this;
+
             var index = -1;
-            console.log(this.newStorage);
             axios.post('/api/auth/storage', this.newStorage).then(function (response) {
-                console.log(response.data.storage);
+                _this6.getStorages();
             }).catch(function (error) {
                 console.log(error);
             });
             this.dialog = false;
         },
         show: function show(item) {
-            var _this6 = this;
+            var _this7 = this;
 
             axios.get('/api/auth/storage/' + item.id).then(function (response) {
-                _this6.storage = response.data.storage;
+                _this7.storage = response.data.storage;
             }).catch(function (error) {
                 console.log(error);
             });
         },
         edit: function edit(item) {
-            var _this7 = this;
+            var _this8 = this;
 
             this.editedIndex = this.storages.indexOf(item);
             axios.get('/api/auth/storage/' + item.id + '/edit').then(function (response) {
-                _this7.newStorage = response.data.storage;
+                _this8.newStorage = response.data.storage;
             }).catch(function (error) {
                 console.log(error);
             });
             this.dialog = true;
         },
         update: function update(item) {
-            var _this8 = this;
+            var _this9 = this;
 
             var index = this.editedIndex;
             axios.put('/api/auth/storage/' + this.newStorage.id, this.newStorage).then(function (response) {
-                _this8.storages[index].name = response.data.storage.name;
-                _this8.storages[index].description = response.data.storage.description;
+                _this9.storages[index].name = response.data.storage.name;
+                _this9.storages[index].description = response.data.storage.description;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -77483,11 +77484,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         pagination: {
             handler: function handler() {
-                var _this9 = this;
+                var _this10 = this;
 
                 this.getDataFromApi().then(function (data) {
-                    _this9.desserts = data.items;
-                    _this9.totalDesserts = data.total;
+                    _this10.desserts = data.items;
+                    _this10.totalDesserts = data.total;
                 });
             },
 
