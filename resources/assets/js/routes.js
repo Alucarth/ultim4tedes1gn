@@ -1,6 +1,6 @@
 
 import Home from './views/Home';
-import Provider from './views/Provider';
+
 import ProviderList from './components/provider/Index';
 import Login from './components/auth/Login';
 import Lumber from './components/lumber/index2.vue';
@@ -19,15 +19,7 @@ import Storage from './components/storage/index.vue';
         },
         {
             path: '/provider',
-            name: 'provider',
-            component: Provider,
-            meta:{
-          //      requireAuth:true
-            }
-        },
-        {
-            path: '/providers',
-            name: 'providers',
+            name: 'Provider',
             component: ProviderList,
             meta:{
             //    requireAuth:true

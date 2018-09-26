@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Provider;
-
+use App\Contact;
+use Log;
 class ProviderController extends Controller
 {
     /**
@@ -14,8 +15,29 @@ class ProviderController extends Controller
      */
     public function index()
     {
-       
-        $provider_list = Provider::with('contacts')->get();
+        $order = request('order');
+        if(request('sorted')!="name")
+        {
+            //search in contacts
+            $search = request('search');
+            $sorted = request('sorted');
+          
+            Log::info('buscando por '.$search);
+            $provider_list = Provider::with('contacts')
+                                    ->whereHas('contacts',function($query) use ($sorted,$search){
+                                        $query->where($sorted,'like',"%{$search}%")->where('is_primary',true);
+                                    })
+                                    ->orderBy('name',$order)
+                                    ->paginate(10);
+            return response()->json($provider_list->toArray());
+        }
+        $provider_list = Provider::query()
+                        ->when(request('search'),function($query,$search){
+                            $query->where(request('sorted'),'like',"%{$search}%");
+                        })
+                        ->with('contacts')
+                        ->orderBy('name',$order)
+                        ->paginate(10);
         return response()->json($provider_list->toArray());
     
     }
@@ -27,7 +49,10 @@ class ProviderController extends Controller
      */
     public function create()
     {
-        //
+
+        $provider = new Provider;
+        $contact = new Contact;
+        return response()->json(array('provider'=>$provider,'contact'=>$contact));
     }
 
     /**
