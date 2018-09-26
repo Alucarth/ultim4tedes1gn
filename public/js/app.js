@@ -86912,6 +86912,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -86932,8 +86933,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             newContact: null,
             editedItem: -1,
             page: 1,
-            last_page: 1,
-            order: true
+            last_page: 1
         };
     },
     mounted: function mounted() {
@@ -86964,7 +86964,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             // console.log(page);
-            this.getItems('/api/provider?page=' + page + '&search=' + this.filterValue + '&sorted=' + this.filterName + '&order=asc').then(function (data) {
+            var orderBy = this.pagination.descending == true ? 'asc' : 'desc';
+            this.getItems('/api/provider?page=' + page + '&search=' + this.filterValue + '&sorted=' + this.filterName + '&order=' + orderBy).then(function (data) {
                 _this3.providers = data.data;
                 _this3.last_page = data.last_page;
             });
@@ -86973,17 +86974,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this4 = this;
 
             this.filterName = filter;
-            var orderBy = this.order == true ? 'asc' : 'desc';
-            console.log(orderBy);
-            this.getItems('/api/provider?search=' + this.filterValue + '&sorted=' + this.filterName + '&order=' + orderBy).then(function (data) {
-                _this4.providers = data.data;
-                _this4.last_page = data.last_page;
+
+            return new Promise(function (resolve, reject) {
+                var orderBy = _this4.pagination.descending == false ? 'desc' : 'asc';
+                // console.log(orderBy);
+                _this4.getItems('/api/provider?search=' + _this4.filterValue + '&sorted=' + _this4.filterName + '&order=' + orderBy).then(function (data) {
+                    _this4.providers = data.data;
+                    _this4.last_page = data.last_page;
+                    resolve();
+                });
             });
         },
         toggleOrder: function toggleOrder(filter) {
-            this.order = !this.order;
-            this.pagination.descending = !this.pagination.descending;
-            this.search(filter);
+            var _this5 = this;
+
+            this.pagination.sortBy = filter;
+            this.search(filter).then(function () {
+                _this5.pagination.descending = !_this5.pagination.descending;
+                // console.log('ordenando');
+            });
         },
         editItem: function editItem(item) {
             this.editedIndex = this.providers.indexOf(item);
@@ -87285,7 +87294,13 @@ var render = function() {
         attrs: {
           headers: _vm.headers,
           items: _vm.providers,
+          pagination: _vm.pagination,
           "hide-actions": ""
+        },
+        on: {
+          "update:pagination": function($event) {
+            _vm.pagination = $event
+          }
         },
         scopedSlots: _vm._u([
           {
@@ -87409,7 +87424,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           _vm._s(
-                                            _vm.order == false
+                                            _vm.pagination.descending == false
                                               ? "arrow_upward"
                                               : "arrow_downward"
                                           )

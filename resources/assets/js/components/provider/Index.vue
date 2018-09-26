@@ -49,6 +49,7 @@
         <v-data-table
         :headers="headers"
         :items="providers"
+        :pagination.sync="pagination"
         hide-actions
         >
         <template slot="headers" slot-scope="props" >
@@ -83,7 +84,7 @@
                                     
                                     </v-card>
                             </v-menu>
-                            <v-icon small @click="toggleOrder(header.value)" v-if="header.value == filterName ">{{order==false?'arrow_upward':'arrow_downward'}}</v-icon>
+                            <v-icon small @click="toggleOrder(header.value)" v-if="header.value == filterName ">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon>
                         </v-flex>
                 </th>
            </tr>
@@ -160,8 +161,7 @@ export default {
         newContact: null,
         editedItem: -1,
         page:1,
-        last_page:1,
-        order: true
+        last_page:1
       }
     },
     mounted()
@@ -189,7 +189,8 @@ export default {
         },
         next(page){
             // console.log(page);
-            this.getItems('/api/provider?page='+page+'&search='+this.filterValue+'&sorted='+this.filterName+'&order=asc').then((data)=>{
+            let orderBy = this.pagination.descending==true?'asc':'desc';
+            this.getItems('/api/provider?page='+page+'&search='+this.filterValue+'&sorted='+this.filterName+'&order='+orderBy).then((data)=>{
                 this.providers = data.data;
                 this.last_page = data.last_page;
             });
@@ -197,18 +198,24 @@ export default {
         search(filter){
             
             this.filterName = filter;
-            let orderBy = this.order==true?'asc':'desc';
-            console.log(orderBy);
-            this.getItems('/api/provider?search='+this.filterValue+'&sorted='+this.filterName+'&order='+orderBy).then((data)=>{
-                this.providers = data.data;
-                this.last_page = data.last_page;
+            
+            return new Promise((resolve,reject)=>{
+                let orderBy = this.pagination.descending==false?'desc':'asc';
+                // console.log(orderBy);
+                this.getItems('/api/provider?search='+this.filterValue+'&sorted='+this.filterName+'&order='+orderBy).then((data)=>{
+                    this.providers = data.data;
+                    this.last_page = data.last_page;
+                    resolve();
+                });
             });
         },
       
         toggleOrder (filter) {
-            this.order = !this.order;
-            this.pagination.descending = !this.pagination.descending
-            this.search(filter);
+            this.pagination.sortBy = filter;
+            this.search(filter).then(()=>{ 
+                this.pagination.descending = !this.pagination.descending;
+                // console.log('ordenando');
+            });
         },
        
         editItem (item) {
