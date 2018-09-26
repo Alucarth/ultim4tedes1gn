@@ -168,7 +168,7 @@
       items: [
         { icon: 'dashboard', text: 'Inicio' , link: '/' },
         { icon: 'group', text: 'Madera' , link: '/lumber' },
-        { icon: 'group', text: 'Proveedores' , link: '/providers' },
+        { icon: 'group', text: 'Proveedores' , link: '/provider' },
        
       ],
       menu: false, 
