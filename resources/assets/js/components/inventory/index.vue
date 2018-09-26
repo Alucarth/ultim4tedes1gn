@@ -1,10 +1,10 @@
 <template>
     <v-card>
         <v-card-title>
-            Almacenes
+            Inventario
         <v-spacer></v-spacer>
 
-        <v-dialog v-model="dialog" max-width="500px">            
+        <!-- <v-dialog v-model="dialog" max-width="500px">            
             <v-card>
             <v-card-title>
                 <span class="headline">{{ formTitle }}</span>
@@ -30,14 +30,14 @@
                 <v-btn color="blue darken-1" flat @click="update(newStorage)" v-else>Actualizar</v-btn>
             </v-card-actions>
             </v-card>
-        </v-dialog>
+        </v-dialog> -->
 
 
 <v-btn @click="create()" color="primary" dark class="mb-2">Nuevo</v-btn>    
         </v-card-title>
         <v-data-table
         :headers="headers"
-        :items="storages"
+        :items="inventories"
         :search="search"
             :pagination.sync="pagination"
         >
@@ -75,10 +75,18 @@
            </tr>
         </template>
         <template slot="items"  slot-scope="props">
-            <!-- <tr @click="props.expanded = !props.expanded"> -->
-                <td class="text-xs-left" >{{ props.item.id }}</td>            
-                <td class="text-xs-left">{{ props.item.name }}</td>
-                <td class="text-xs-left">{{ props.item.description }}</td>                    
+            <!-- <tr @click="props.expanded = !props.expanded"> -->                
+                <td class="text-xs-left" >{{ props.item.lumber.high }}</td>
+                <td class="text-xs-left">{{ props.item.lumber.width }}</td>
+                <td class="text-xs-left">{{ props.item.lumber.density }}</td>
+                <td class="text-xs-left">{{ props.item.lumber.specie.name }}</td>
+                <td class="text-xs-left">{{ props.item.lumber.type.name }}</td>
+                <td class="text-xs-left">{{ props.item.minimum }}</td>
+                <td class="text-xs-left">{{ props.item.average }}</td>
+                <td class="text-xs-left">{{ props.item.maximum }}</td>
+                <td class="text-xs-left">{{ props.item.price }}</td>
+                <td class="text-xs-left">{{ props.item.quantity }}</td>
+
                 <td class="justify-center layout px-0">
                     <v-icon
                         small
@@ -126,9 +134,11 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'ID', value: 'id' },        
-            { text: 'Nombre', value: 'name' },
-            { text: 'Descripcion', value: 'description' },            
+            { text: 'Alto', value: 'id' },        
+            { text: 'Ancho', value: 'name' },
+            { text: 'Densidad', value: 'density' },          
+            { text: 'Especie', value: 'specie' },
+            { text: 'Tipo', value: 'type' },
         ],                
         storages: [],        
         storage: null,

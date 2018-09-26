@@ -29,4 +29,5 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::resource('specie','SpecieController');
     Route::resource('storage','StorageController');
     Route::resource('type','TypeController');
+    Route::resource('purchase','PurchaseController');
 });
