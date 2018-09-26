@@ -27,7 +27,11 @@ class SpecieController extends Controller
      */
     public function create()
     {
-        //
+        $specie = new Specie();
+        $data = [
+            'specie'    =>  $specie,
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -38,7 +42,15 @@ class SpecieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $specie = new Specie();
+        $specie->name = $request->name;
+        $specie->description = $request->description;
+        $specie->save();
+        
+        $data = [
+            'specie'    =>  $specie
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -49,7 +61,13 @@ class SpecieController extends Controller
      */
     public function show($id)
     {
-        //
+        $specie = Specie::find($id);
+        
+        $data = [
+            'specie'  =>  $specie
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -60,7 +78,13 @@ class SpecieController extends Controller
      */
     public function edit($id)
     {
-        //
+        $specie = Specie::find($id);
+        
+        $data = [
+            'specie'  =>  $specie
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -72,7 +96,15 @@ class SpecieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $specie = Specie::find($id);
+        $specie->name = $request->name;
+        $specie->description = $request->description;
+        $specie->save();
+        
+        $data = [
+            'specie'    =>  $specie
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -83,6 +115,47 @@ class SpecieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $specie = Specie::find($id);
+        $data = [
+            'specie_id'    =>  $specie->id
+        ];
+        $specie->delete();
+        return response()->json($data);
+    }
+
+    /**
+     * Returns json data filtered from lumber
+     * 
+     * @param int $id
+     * @return \App\Specie[] $species 
+     */
+    public function getData(Request $request){
+
+        $offset = $request->offset ?? 0;
+        $limit = $request->limit ?? 10;
+        $sort = $request->sort ?? 'id';
+        $order = $request->order ?? 'asc';  
+        
+        $name = $request->name ?? '';
+        $description = $request->description ?? '';
+                
+        $total = Specie::
+            where('name','like',$name.'%')
+            //where('description','like',$description.'%')
+            ->count();
+
+        $species = Specie::
+            where('name','like',$name.'%')
+//            ->where('description','like',$description.'%')
+            ->skip($offset)
+            ->take($limit)
+            ->orderBy($sort,$order)
+            ->get();
+            
+        return response()->json(
+        [
+            'species' => $species->toArray(),
+            'total'=>$total,
+        ]);
     }
 }

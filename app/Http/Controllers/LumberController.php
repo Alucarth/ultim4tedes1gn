@@ -87,12 +87,13 @@ class LumberController extends Controller
         $lumber->width = $request->width;
         $lumber->density = $request->density;
         $lumber->description = $request->description;
-        $lumber->type_id = $request->type;
-        $lumber->specie_id = $request->specie;
+        $lumber->type_id = $request->type_id;
+        $lumber->specie_id = $request->specie_id;
         $lumber->save();
+        $lumber = Lumber::find($id);        
         $data = [
             'lumber'    =>  $lumber
-        ];
+        ];        
         return response()->json($data);
     }
 
@@ -158,9 +159,23 @@ class LumberController extends Controller
             ->where('types.name','like', $type.'%')
 			->skip($offset)
             ->take($limit)
-            ->orderBy($sort,$order)            
+            ->orderBy($sort,$order)
             ->get();
         
+            $lumbers = Lumber::with(['type','specie'])
+            ->whereHas('type', function($query) use ($type) {
+                $query->where('name','like',$type.'%');
+            })
+            ->whereHas('specie', function($query) use ($specie){
+                $query->where('name','like',$specie.'%');
+            })
+            ->skip($offset)
+            ->take($limit)
+            ->orderBy($sort,$order)
+            ->get();
+            //return $lumbers->count();
+            //dd($lumbers);
+        //return $lumbers;
         return response()->json(
         [
             'lumbers' => $lumbers->toArray(),

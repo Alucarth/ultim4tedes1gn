@@ -1,11 +1,11 @@
 // if some dynamic components are used frequently, a better way is to register them globally
 export default {
   DisplayRow: require('./nested-DisplayRow'),
-  Color: require('./td-Color'),
-  CreatetimeTd: require('./td-Createtime'),
-  CreatetimeTh: require('./th-Createtime'),
+  //Color: require('./td-Color'),
+  //CreatetimeTd: require('./td-Createtime'),
+  //CreatetimeTh: require('./th-Createtime'),
   //Email: require('./td-Email'),
-  //IP: require('./td-IP'),
+  Object: require('./td-Object'),
   Opt: require('./td-Opt'),
   FilterTh: require('./th-Filter'),
   FilterFil: require('./th-Fil')

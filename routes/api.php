@@ -23,7 +23,11 @@ Route::group(['prefix' => 'auth'], function ($router) {
 
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/getLumberData', 'LumberController@getData')->name('lumber_index');
+    Route::get('/getSpecieData', 'SpecieController@getData');
+    Route::get('/getStorageData', 'StorageController@getData');
     Route::resource('lumber','LumberController');
     Route::resource('specie','SpecieController');
+    Route::resource('storage','StorageController');
     Route::resource('type','TypeController');
+    Route::resource('purchase','PurchaseController');
 });

@@ -4,7 +4,8 @@ import Home from './views/Home';
 import ProviderList from './components/provider/Index';
 import Login from './components/auth/Login';
 import Lumber from './components/lumber/index2.vue';
-
+import Specie from './components/specie/index.vue';
+import Storage from './components/storage/index.vue';
 
    
    export const routes= [
@@ -42,13 +43,18 @@ import Lumber from './components/lumber/index2.vue';
         {
             path: '/specie',
             name: 'Specie',
-            component: Lumber
+            component: Specie
         },
         {
             path: '/type',
             name: 'Type',
             component: Lumber
         },
+        {
+            path: '/storage',
+            name: 'Storage'    ,
+            component: Storage
+        }
         
     ];
     

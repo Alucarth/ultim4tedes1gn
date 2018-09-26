@@ -59,7 +59,9 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click.native="store" v-if="editedIndex === -1">Save</v-btn>
+                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">store</v-btn>
+                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>update</v-btn>
+                
                 
             </v-card-actions>
             </v-card>
@@ -122,8 +124,8 @@
                 <td class="text-xs-left" >{{ props.item.high }}</td>            
                 <td class="text-xs-left">{{ props.item.width }}</td>
                 <td class="text-xs-left">{{ props.item.density }}</td>
-                <td class="text-xs-left">{{ props.item.specie }}</td>
-                <td class="text-xs-left">{{ props.item.type }}</td>      
+                <td class="text-xs-left">{{ props.item.specie.name }}</td>
+                <td class="text-xs-left">{{ props.item.type.name }}</td>      
                 <td class="justify-center layout px-0">
                     <v-icon
                         small
@@ -182,13 +184,12 @@ export default {
         lumbers: [],
         lumber: null,
         newLumber: null,
-        totalLumber: 0,
-        desserts: [],
+        totalLumber: 0,        
         loading: true,
         filterName: 'high',
         filterValue: '',   
         dialog: false,
-        editedIndex: -1,     
+        editedIndex: -1,          
       }
     },
     computed: {
@@ -210,41 +211,40 @@ export default {
         
     },
     methods:{
-        getDataFromApi () {
-            
-            return new Promise((resolve, reject) => {
-            const { sortBy, descending, page, rowsPerPage } = this.pagination
+        getDataFromApi () {            
+            // return new Promise((resolve, reject) => {
+            // const { sortBy, descending, page, rowsPerPage } = this.pagination
 
-            let items= this.lumbers;
-            const total = items.length;
+            // let items= this.lumbers;
+            // const total = items.length;
 
-            if (this.pagination.sortBy) {
-                items = items.sort((a, b) => {
-                const sortA = a[sortBy]
-                const sortB = b[sortBy]
+            // if (this.pagination.sortBy) {
+            //     items = items.sort((a, b) => {
+            //     const sortA = a[sortBy]
+            //     const sortB = b[sortBy]
 
-                if (descending) {
-                    if (sortA < sortB) return 1
-                    if (sortA > sortB) return -1
-                    return 0
-                } else {
-                    if (sortA < sortB) return -1
-                    if (sortA > sortB) return 1
-                    return 0
-                }
-                })
-            }
+            //     if (descending) {
+            //         if (sortA < sortB) return 1
+            //         if (sortA > sortB) return -1
+            //         return 0
+            //     } else {
+            //         if (sortA < sortB) return -1
+            //         if (sortA > sortB) return 1
+            //         return 0
+            //     }
+            //     })
+            // }
 
-            if (rowsPerPage > 0) {
-                items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-            }
+            // if (rowsPerPage > 0) {
+            //     items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
+            // }
 
-                resolve({
-                items,
-                total
-                });
+            //     resolve({
+            //     items,
+            //     total
+            //     });
          
-            })
+            // })
         },
         getLumber(withFilter){
             console.log("starting receiving data");
@@ -308,7 +308,7 @@ export default {
             });
         },
         edit (item) {
-            this.editedIndex = this.desserts.indexOf(item)
+            this.editedIndex = this.lumbers.indexOf(item)
             //this.editedItem = Object.assign({}, item)
             axios.get(`/api/auth/lumber/${item.id}/edit`)            
             .then(response => {                
@@ -320,15 +320,21 @@ export default {
             
             this.dialog = true
         },
-        update (item) {            
-            axios.put(`/api/auth/lumber/${item.id}`, this.newLumber)
-            .then(function (response) {
-                console.log(response.data.lumber);        
+        update (item) {                        
+            let index = this.editedIndex;            
+            axios.put(`/api/auth/lumber/${this.newLumber.id}`, this.newLumber)            
+            .then(response => {                
+                this.lumbers[index].high = response.data.lumber.high;
+                this.lumbers[index].width = response.data.lumber.width;
+                this.lumbers[index].density = response.data.lumber.density;
+                this.lumbers[index].specie = response.data.lumber.specie.name;
+                this.lumbers[index].type_id = response.data.lumber.type_id;
             })
             .catch(function (error) {
-                console.log(error);                
-            });
+                console.log(error);
+            });            
             this.dialog =false;
+            this.getLumber();
         },
         destroy (item) {
             let success_delete = false;
