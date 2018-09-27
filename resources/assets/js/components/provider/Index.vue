@@ -166,7 +166,9 @@ export default {
     },
     mounted()
     {
+        console.log('start');
         this.search('name');
+        
     },
     created(){
           axios.get('/api/provider/create')
@@ -180,6 +182,7 @@ export default {
         getItems(url){
             return new Promise((resolve,reject)=>{
                this.loading = true;
+               console.log('getin items');
                axios.get(url)
                     .then((response) => {
                         this.loading = false;
@@ -190,7 +193,7 @@ export default {
         next(page){
             // console.log(page);
             let orderBy = this.pagination.descending==true?'asc':'desc';
-            this.getItems('/api/provider?page='+page+'&search='+this.filterValue+'&sorted='+this.filterName+'&order='+orderBy).then((data)=>{
+            this.getItems('/api/auth/provider?page='+page+'&search='+this.filterValue+'&sorted='+this.filterName+'&order='+orderBy).then((data)=>{
                 this.providers = data.data;
                 this.last_page = data.last_page;
             });
