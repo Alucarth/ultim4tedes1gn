@@ -1,8 +1,8 @@
 <template>
-<v-container grid-list-md text-xs-center>
+<v-container grid-list-xs>
     <v-layout row wrap>
       <v-flex xs6>
-    <v-card>
+    <v-card class="px-0">
         <v-card-title>
             Madera
         <v-spacer></v-spacer>
@@ -75,7 +75,7 @@
 
         <v-layout row wrap>
 
-        <v-data-table
+        <v-data-table style="max-width: 100%"
         :headers="headers"
         :items="lumbers"
         :search="search"
@@ -152,143 +152,52 @@
         <v-card-title>
             Compra
         <v-spacer></v-spacer>
-
-        <v-dialog v-model="dialog" max-width="500px">            
-            <v-card>
-            <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
-
-            <v-card-text v-if="newLumber">
-                <v-container grid-list-md>
-                 <v-layout wrap>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field label="Alto" hint="Ingrese el alto de la madera" required v-model="newLumber.high"></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field label="Ancho" hint="Ingrese el ancho de la madera" v-model="newLumber.width"></v-text-field>
-                    </v-flex>   
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field
-                        label="Densidad"
-                        hint="Ingrese la densidad de la madera"                  
-                        required
-                        v-model="newLumber.density"
-                        ></v-text-field>
-                    </v-flex>                          
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Tipo de madera"
-                        v-model="newLumber.type_id"
+        <v-btn @click="create();" color="primary" dark class="mb-2">Guardar</v-btn>
+        </v-card-title>
+        <v-layout row wrap>
+            <v-flex xs12 sm4 md4>                
+                <v-select                  
+                        label="Proveedor"
+                        v-model="provider.id"
                         :items="types"
                         item-text="name"
                         item-value="id"
                         :hint="`Descripcion del tipo seleccionado`"
                         persistent-hint>
                         </v-select>
-                    </v-flex>
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Especie"                
-                        v-model="newLumber.specie_id"  
-                        :items="species"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion de la madera seleccionada`"
-                        persistent-hint>                                
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs12>
-                        <v-text-field label="Descripción" v-model="newLumber.description" ></v-text-field>
-                    </v-flex>  
-                </v-layout>
-                </v-container>
-            </v-card-text>
 
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">store</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>update</v-btn>                                
-            </v-card-actions>
-            </v-card>
-        </v-dialog>
-
-
-        <!-- <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn> -->
-        </v-card-title>
-
-
-        <v-layout row wrap>
-            <v-flex xs12 sm6 md4>
-                <v-text-field label="Proveedor" hint="Ingrese proveedor" required ></v-text-field>
             </v-flex>
-            <v-flex xs12 sm6 md4>
+            <v-flex xs12 sm4 md4>
                 <v-text-field label="CEFO" hint="Ingrese codigo CEFO" required ></v-text-field>
             </v-flex>
-            <v-flex xs12 sm6 md4>
+            <v-flex xs12 sm4 md4>
                  <v-menu
-        ref="menu2"
-        :close-on-content-click="false"
-        v-model="menu2"
-        :nudge-right="40"
-        :return-value.sync="date"
-        lazy
-        transition="scale-transition"
-        offset-y
-        full-width
-        min-width="290px"
-      >
-        <v-text-field
-          slot="activator"
-          v-model="date"
-          label="Fecha"          
-          readonly
-        ></v-text-field>
-        <v-date-picker v-model="date" @input="$refs.menu2.save(date)"></v-date-picker>
+                    ref="menu2"
+                    :close-on-content-click="false"                    
+                    :nudge-right="40"
+                    :return-value.sync="date"
+                    lazy
+                    transition="scale-transition"
+                    offset-y
+                    full-width
+                    min-width="290px"
+                >
+                    <v-text-field
+                    slot="activator"
+                    v-model="date"
+                    label="Fecha"          
+                    readonly
+                    ></v-text-field>
+                    <v-date-picker v-model="date" @input="$refs.menu2.save(date)"></v-date-picker>
 
-      </v-menu>
+                </v-menu>
             </v-flex>
-
         <v-data-table
+        style="max-width: 100%"
         :headers="purchase_headers"
         :items="purchase_lumbers"
-        :search="search"
-            :pagination.sync="pagination"        
+         hide-actions        
         >
-        <template slot="headers" slot-scope="props" >
-           <tr>
-                <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">                    
-                        <v-flex>
-                            <span @click="toggleOrder(index)">{{ header.text }}                                
-                            </span>
-                            <v-menu
-                                    :close-on-content-click="false"                                    
-                                    >
-                                    <v-btn
-                                        slot="activator"
-                                        icon
-                                        @click="setFilter(header.value)"
-                                    >
-                                    <v-icon  small>fa-filter</v-icon>
-                                    </v-btn>
-
-                                    <v-card>
-                                        <v-text-field
-                                        v-model="filterValue"
-                                        append-icon="search"
-                                        :label="`Buscar ${header.text}...`"
-                                    
-                                        @keydown.enter="getResult(true)"
-                                    ></v-text-field>
-                                    
-                                    </v-card>
-                            </v-menu>
-                            <v-icon small @click="toggleOrder(index)" v-if="header.value == pagination.sortBy">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon>
-                        </v-flex>                     
-                </th>
-           </tr>
-        </template>
         <template slot="items"  slot-scope="props">
             <!-- <tr @click="props.expanded = !props.expanded"> -->
                 <td class="text-xs-left">{{ props.item.specie.name+'-'+props.item.type.name }}</td>
@@ -299,23 +208,13 @@
                 <td class="justify-center layout px-0">                    
                     <v-icon
                         small
-                        @click="destroy(props.item)"
+                        @click="removeFromPurchase(props.index)"
                     >
                         delete
                     </v-icon>
                 </td>      
             <!-- </tr> -->
-        </template>
-        <template slot="expand" slot-scope="props">
-            <v-card flat v-if="lumber">
-                <v-card-text>{{ lumber.description }}</v-card-text>
-                <v-card-text>{{ lumber.high }}</v-card-text>
-            </v-card>
-        </template>
-
-        <v-alert slot="no-results" :value="true" color="error" icon="warning">
-            Your search for "{{ search }}" found no results.
-        </v-alert>
+        </template>               
         </v-data-table>        
         
         </v-layout>
@@ -356,6 +255,7 @@ export default {
         filterValue: '',   
         dialog: false,
         editedIndex: -1,          
+        date : null,
       }
     },
     computed: {
@@ -365,13 +265,14 @@ export default {
     },
     mounted()
     {
-        this.getLumber().then(
-            this.getDataFromApi()
-                .then(data => {
-                this.lumbers = data.lumbers
-                this.totalLumber = data.total
-                })
-        );
+        this.getLumber();
+        // .then(
+        //     this.getDataFromApi()
+        //         .then(data => {
+        //         this.lumbers = data.lumbers
+        //         this.totalLumber = data.total
+        //         })
+        // );
         this.getSpecies();
         this.getTypes();
         
@@ -496,6 +397,9 @@ export default {
         },
         addToPurchase(item) {
             this.purchase_lumbers.push(item);
+        },
+        removeFromPurchase(index) {
+            this.purchase_lumbers.splice(index, 1);
         }
         
     },
