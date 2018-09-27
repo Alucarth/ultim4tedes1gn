@@ -22,10 +22,10 @@
                     <v-flex xs12 sm6 md12>
                     <v-text-field v-model="newProvider.direccion1" label="Direccion 1"></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm6 md12>
+                    <v-flex xs12 sm6 md6>
                     <v-text-field v-model="newProvider.direccion2" label="Direccion 2"></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm6 md12>
+                    <v-flex xs12 sm6 md6>
                     <v-text-field v-model="newProvider.city" label="Ciudad"></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm6 md6>
@@ -34,7 +34,34 @@
                     <v-flex xs12 sm6 md6>
                     <v-text-field v-model="newProvider.debit" label="Debito"></v-text-field>
                     </v-flex>
+                    <v-btn
+                        absolute
+                        dark
+                        fab
+                        top
+                        right
+                        color="pink"
+                    >
+                    <v-icon>add</v-icon>
+                    </v-btn>
+                    <legend>Contactos</legend>
+                    <v-flex xs12 sm6 md6>
+                        <v-text-field  label="Nombres"></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm6 md6>
+                        <v-text-field  label="Apellidos"></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm6 md4>
+                        <v-text-field  label="Cargo"></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm6 md4>
+                        <v-text-field  label="Email"></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm6 md4>
+                        <v-text-field  label="Telefono"></v-text-field>
+                    </v-flex>
                 </v-layout>
+                
                 </v-container>
             </v-card-text>
 
