@@ -14,7 +14,7 @@ class ProviderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {        
         $order = request('order');
         if(request('sorted')!="name")
         {
