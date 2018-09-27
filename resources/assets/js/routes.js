@@ -6,6 +6,7 @@ import Login from './components/auth/Login';
 import Lumber from './components/lumber/index2.vue';
 import Specie from './components/specie/index.vue';
 import Storage from './components/storage/index.vue';
+import Purchase from './components/purchase/index.vue';
 
    
    export const routes= [
@@ -53,8 +54,13 @@ import Storage from './components/storage/index.vue';
         {
             path: '/storage',
             name: 'Storage'    ,
-            component: Storage
-        }
+            component: Storage,
+        },
+        {
+            path: '/purchase',
+            name: 'Purchase',
+            component: Purchase,
+        },
         
     ];
     
