@@ -69878,6 +69878,9 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLocalUse
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_specie_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_specie_index_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_storage_index_vue__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_storage_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_storage_index_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_purchase_index_vue__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_purchase_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_purchase_index_vue__);
+
 
 
 
@@ -69925,6 +69928,10 @@ var routes = [{
     path: '/storage',
     name: 'Storage',
     component: __WEBPACK_IMPORTED_MODULE_5__components_storage_index_vue___default.a
+}, {
+    path: '/purchase',
+    name: 'Purchase',
+    component: __WEBPACK_IMPORTED_MODULE_6__components_purchase_index_vue___default.a
 }];
 
 /***/ }),
@@ -82142,6 +82149,1386 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(302)
+/* template */
+var __vue_template__ = __webpack_require__(303)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/purchase/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3338b61b", Component.options)
+  } else {
+    hotAPI.reload("data-v-3338b61b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 302 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            search: '',
+            pagination: {
+                sortBy: 'name'
+            },
+            headers: [{ text: 'Alto', value: 'Madera' }, { text: 'Ancho', value: 'Medida' }, { text: 'Espesor', value: 'density' }, { text: 'Especie', value: 'specie' }, { text: 'Tipo', value: 'type' }],
+            purchase_headers: [{ text: 'Madera', value: 'Madera' }, { text: 'Medida', value: 'Madera' }, { text: 'Cantidad', value: 'Madera' }],
+            species: null,
+            types: null,
+            lumbers: [],
+            purchase_lumbers: [],
+            lumber: null,
+            newLumber: null,
+            totalLumber: 0,
+            loading: true,
+            filterName: 'high',
+            filterValue: '',
+            dialog: false,
+            editedIndex: -1,
+            date: null
+        };
+    },
+
+    computed: {
+        formTitle: function formTitle() {
+            return this.editedIndex === -1 ? 'Nuevo' : 'Editar';
+        }
+    },
+    mounted: function mounted() {
+        this.getLumber();
+        // .then(
+        //     this.getDataFromApi()
+        //         .then(data => {
+        //         this.lumbers = data.lumbers
+        //         this.totalLumber = data.total
+        //         })
+        // );
+        this.getSpecies();
+        this.getTypes();
+    },
+
+    methods: {
+        getDataFromApi: function getDataFromApi() {
+            // return new Promise((resolve, reject) => {
+            // const { sortBy, descending, page, rowsPerPage } = this.pagination
+
+            // let items= this.lumbers;
+            // const total = items.length;
+
+            // if (this.pagination.sortBy) {
+            //     items = items.sort((a, b) => {
+            //     const sortA = a[sortBy]
+            //     const sortB = b[sortBy]
+
+            //     if (descending) {
+            //         if (sortA < sortB) return 1
+            //         if (sortA > sortB) return -1
+            //         return 0
+            //     } else {
+            //         if (sortA < sortB) return -1
+            //         if (sortA > sortB) return 1
+            //         return 0
+            //     }
+            //     })
+            // }
+
+            // if (rowsPerPage > 0) {
+            //     items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
+            // }
+
+            //     resolve({
+            //     items,
+            //     total
+            //     });
+
+            // })
+        },
+        getLumber: function getLumber(withFilter) {
+            var _this = this;
+
+            console.log("starting receiving data");
+            return new Promise(function (resolve, reject) {
+                _this.loading = true;
+                var filterName = withFilter == true ? _this.filterName : 'high';
+                console.log(withFilter);
+                axios.get('/api/auth/getLumberData', { name: filterName, value: _this.filterValue }).then(function (response) {
+                    // let providers = response.data;
+                    console.log(response.data);
+                    _this.lumbers = response.data.lumbers;
+                    _this.loading = false;
+                    resolve();
+                });
+            });
+        },
+        getResult: function getResult(withFilter) {
+            var _this2 = this;
+
+            console.log(this.filterName);
+            //axios.post('/api/providers/getdata',{name:this.filterName})
+            //   .then((response)=>{ console.log(response.data)});
+            this.getLumber(withFilter).then(this.getDataFromApi().then(function (data) {
+                _this2.lumbers = data.lumbers;
+                _this2.totalLumber = data.total;
+            }));
+        },
+        toggleOrder: function toggleOrder(index) {
+            this.pagination.sortBy = this.headers[index].value;
+            this.pagination.descending = !this.pagination.descending;
+        },
+        setFilter: function setFilter(filterName) {
+            this.filterValue = '', this.filterName = filterName;
+        },
+        create: function create() {
+            var _this3 = this;
+
+            axios.get('/api/auth/lumber/create').then(function (response) {
+                console.log(response.data.lumber);
+                _this3.newLumber = response.data.lumber;
+            }).catch(function (error) {
+                console.log(error);
+            });
+            this.dialog = true;
+        },
+        store: function store() {},
+        show: function show(item) {
+            var _this4 = this;
+
+            axios.get('/api/auth/lumber/' + item.id).then(function (response) {
+                _this4.lumber = response.data.lumber;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getSpecies: function getSpecies() {
+            var _this5 = this;
+
+            axios.get('/api/auth/specie').then(function (response) {
+                _this5.species = response.data.species;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getTypes: function getTypes() {
+            var _this6 = this;
+
+            axios.get('/api/auth/type').then(function (response) {
+                _this6.types = response.data.types;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        close: function close() {
+            this.dialog = false;
+        },
+        addToPurchase: function addToPurchase(item) {
+            this.purchase_lumbers.push(item);
+        },
+        removeFromPurchase: function removeFromPurchase(index) {
+            this.purchase_lumbers.splice(index, 1);
+        }
+    },
+    watch: {
+        pagination: {
+            handler: function handler() {
+                var _this7 = this;
+
+                this.getDataFromApi().then(function (data) {
+                    _this7.desserts = data.items;
+                    _this7.totalDesserts = data.total;
+                });
+            },
+
+            deep: true
+        },
+        filterValue: function filterValue(fv) {
+            if (fv == '') {
+                this.getResult(false);
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { "grid-list-xs": "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs6: "" } },
+            [
+              _c(
+                "v-card",
+                { staticClass: "px-0" },
+                [
+                  _c(
+                    "v-card-title",
+                    [
+                      _vm._v("\n            Madera\n        "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-dialog",
+                        {
+                          attrs: { "max-width": "500px" },
+                          model: {
+                            value: _vm.dialog,
+                            callback: function($$v) {
+                              _vm.dialog = $$v
+                            },
+                            expression: "dialog"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-card",
+                            [
+                              _c("v-card-title", [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v(_vm._s(_vm.formTitle))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _vm.newLumber
+                                ? _c(
+                                    "v-card-text",
+                                    [
+                                      _c(
+                                        "v-container",
+                                        { attrs: { "grid-list-md": "" } },
+                                        [
+                                          _c(
+                                            "v-layout",
+                                            { attrs: { wrap: "" } },
+                                            [
+                                              _c(
+                                                "v-flex",
+                                                {
+                                                  attrs: {
+                                                    xs12: "",
+                                                    sm6: "",
+                                                    md4: ""
+                                                  }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      label: "Alto",
+                                                      hint:
+                                                        "Ingrese el alto de la madera",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.newLumber.high,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.newLumber,
+                                                          "high",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "newLumber.high"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                {
+                                                  attrs: {
+                                                    xs12: "",
+                                                    sm6: "",
+                                                    md4: ""
+                                                  }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      label: "Ancho",
+                                                      hint:
+                                                        "Ingrese el ancho de la madera"
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.newLumber.width,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.newLumber,
+                                                          "width",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "newLumber.width"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                {
+                                                  attrs: {
+                                                    xs12: "",
+                                                    sm6: "",
+                                                    md4: ""
+                                                  }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      label: "Densidad",
+                                                      hint:
+                                                        "Ingrese la densidad de la madera",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.newLumber.density,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.newLumber,
+                                                          "density",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "newLumber.density"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                {
+                                                  attrs: { xs12: "", sm6: "" }
+                                                },
+                                                [
+                                                  _c("v-select", {
+                                                    attrs: {
+                                                      label: "Tipo de madera",
+                                                      items: _vm.types,
+                                                      "item-text": "name",
+                                                      "item-value": "id",
+                                                      hint:
+                                                        "Descripcion del tipo seleccionado",
+                                                      "persistent-hint": ""
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.newLumber.type_id,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.newLumber,
+                                                          "type_id",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "newLumber.type_id"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                {
+                                                  attrs: { xs12: "", sm6: "" }
+                                                },
+                                                [
+                                                  _c("v-select", {
+                                                    attrs: {
+                                                      label: "Especie",
+                                                      items: _vm.species,
+                                                      "item-text": "name",
+                                                      "item-value": "id",
+                                                      hint:
+                                                        "Descripcion de la madera seleccionada",
+                                                      "persistent-hint": ""
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.newLumber.specie_id,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.newLumber,
+                                                          "specie_id",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "newLumber.specie_id"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs12: "" } },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      label: "Descripción"
+                                                    },
+                                                    model: {
+                                                      value:
+                                                        _vm.newLumber
+                                                          .description,
+                                                      callback: function($$v) {
+                                                        _vm.$set(
+                                                          _vm.newLumber,
+                                                          "description",
+                                                          $$v
+                                                        )
+                                                      },
+                                                      expression:
+                                                        "newLumber.description"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "v-card-actions",
+                                [
+                                  _c("v-spacer"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        color: "blue darken-1",
+                                        flat: ""
+                                      },
+                                      nativeOn: {
+                                        click: function($event) {
+                                          return _vm.close($event)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Cancel")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.editedIndex === -1
+                                    ? _c(
+                                        "v-btn",
+                                        {
+                                          attrs: {
+                                            color: "blue darken-1",
+                                            flat: ""
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.store(_vm.newLumber)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("store")]
+                                      )
+                                    : _c(
+                                        "v-btn",
+                                        {
+                                          attrs: {
+                                            color: "blue darken-1",
+                                            flat: ""
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.update(_vm.newLumber)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("update")]
+                                      )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "mb-2",
+                          attrs: { color: "primary", dark: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.create()
+                            }
+                          }
+                        },
+                        [_vm._v("Nuevo")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-layout",
+                    { attrs: { row: "", wrap: "" } },
+                    [
+                      _c(
+                        "v-data-table",
+                        {
+                          staticStyle: { "max-width": "100%" },
+                          attrs: {
+                            headers: _vm.headers,
+                            items: _vm.lumbers,
+                            search: _vm.search,
+                            pagination: _vm.pagination
+                          },
+                          on: {
+                            "update:pagination": function($event) {
+                              _vm.pagination = $event
+                            }
+                          },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "headers",
+                              fn: function(props) {
+                                return [
+                                  _c(
+                                    "tr",
+                                    _vm._l(props.headers, function(
+                                      header,
+                                      index
+                                    ) {
+                                      return _c(
+                                        "th",
+                                        {
+                                          key: index,
+                                          staticClass: "text-xs-left"
+                                        },
+                                        [
+                                          _c(
+                                            "v-flex",
+                                            [
+                                              _c(
+                                                "span",
+                                                {
+                                                  on: {
+                                                    click: function($event) {
+                                                      _vm.toggleOrder(index)
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(header.text) +
+                                                      "                                \n                            "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-menu",
+                                                {
+                                                  attrs: {
+                                                    "close-on-content-click": false
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "v-btn",
+                                                    {
+                                                      attrs: {
+                                                        slot: "activator",
+                                                        icon: ""
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          _vm.setFilter(
+                                                            header.value
+                                                          )
+                                                        }
+                                                      },
+                                                      slot: "activator"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "v-icon",
+                                                        {
+                                                          attrs: { small: "" }
+                                                        },
+                                                        [_vm._v("fa-filter")]
+                                                      )
+                                                    ],
+                                                    1
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-card",
+                                                    [
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          "append-icon":
+                                                            "search",
+                                                          label:
+                                                            "Buscar " +
+                                                            header.text +
+                                                            "..."
+                                                        },
+                                                        on: {
+                                                          keydown: function(
+                                                            $event
+                                                          ) {
+                                                            if (
+                                                              !(
+                                                                "button" in
+                                                                $event
+                                                              ) &&
+                                                              _vm._k(
+                                                                $event.keyCode,
+                                                                "enter",
+                                                                13,
+                                                                $event.key,
+                                                                "Enter"
+                                                              )
+                                                            ) {
+                                                              return null
+                                                            }
+                                                            _vm.getResult(true)
+                                                          }
+                                                        },
+                                                        model: {
+                                                          value:
+                                                            _vm.filterValue,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.filterValue = $$v
+                                                          },
+                                                          expression:
+                                                            "filterValue"
+                                                        }
+                                                      })
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              header.value ==
+                                              _vm.pagination.sortBy
+                                                ? _c(
+                                                    "v-icon",
+                                                    {
+                                                      attrs: { small: "" },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          _vm.toggleOrder(index)
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.pagination
+                                                            .descending == false
+                                                            ? "arrow_upward"
+                                                            : "arrow_downward"
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                : _vm._e()
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    })
+                                  )
+                                ]
+                              }
+                            },
+                            {
+                              key: "items",
+                              fn: function(props) {
+                                return [
+                                  _c(
+                                    "tr",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          _vm.addToPurchase(props.item)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "td",
+                                        { staticClass: "text-xs-left" },
+                                        [_vm._v(_vm._s(props.item.high))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        { staticClass: "text-xs-left" },
+                                        [_vm._v(_vm._s(props.item.width))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        { staticClass: "text-xs-left" },
+                                        [_vm._v(_vm._s(props.item.density))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        { staticClass: "text-xs-left" },
+                                        [_vm._v(_vm._s(props.item.specie.name))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        { staticClass: "text-xs-left" },
+                                        [_vm._v(_vm._s(props.item.type.name))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        {
+                                          staticClass:
+                                            "justify-center layout px-0"
+                                        },
+                                        [
+                                          _c(
+                                            "v-icon",
+                                            {
+                                              staticClass: "mr-2",
+                                              attrs: { small: "" },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.show(props.item)
+                                                  props.expanded = !props.expanded
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                        toc\n                    "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  )
+                                ]
+                              }
+                            },
+                            {
+                              key: "expand",
+                              fn: function(props) {
+                                return [
+                                  _vm.lumber
+                                    ? _c(
+                                        "v-card",
+                                        { attrs: { flat: "" } },
+                                        [
+                                          _c("v-card-text", [
+                                            _vm._v(
+                                              _vm._s(_vm.lumber.description)
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("v-card-text", [
+                                            _vm._v(_vm._s(_vm.lumber.high))
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e()
+                                ]
+                              }
+                            }
+                          ])
+                        },
+                        [
+                          _c(
+                            "v-alert",
+                            {
+                              attrs: {
+                                slot: "no-results",
+                                value: true,
+                                color: "error",
+                                icon: "warning"
+                              },
+                              slot: "no-results"
+                            },
+                            [
+                              _vm._v(
+                                '\n            Your search for "' +
+                                  _vm._s(_vm.search) +
+                                  '" found no results.\n        '
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs6: "" } },
+            [
+              _c(
+                "v-card",
+                [
+                  _c(
+                    "v-card-title",
+                    [
+                      _vm._v("\n            Compra\n        "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "mb-2",
+                          attrs: { color: "primary", dark: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.create()
+                            }
+                          }
+                        },
+                        [_vm._v("Guardar")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-layout",
+                    { attrs: { row: "", wrap: "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm4: "", md4: "" } },
+                        [
+                          _c("v-select", {
+                            attrs: {
+                              label: "Proveedor",
+                              items: _vm.types,
+                              "item-text": "name",
+                              "item-value": "id",
+                              hint: "Descripcion del tipo seleccionado",
+                              "persistent-hint": ""
+                            },
+                            model: {
+                              value: _vm.provider.id,
+                              callback: function($$v) {
+                                _vm.$set(_vm.provider, "id", $$v)
+                              },
+                              expression: "provider.id"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm4: "", md4: "" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              label: "CEFO",
+                              hint: "Ingrese codigo CEFO",
+                              required: ""
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", sm4: "", md4: "" } },
+                        [
+                          _c(
+                            "v-menu",
+                            {
+                              ref: "menu2",
+                              attrs: {
+                                "close-on-content-click": false,
+                                "nudge-right": 40,
+                                "return-value": _vm.date,
+                                lazy: "",
+                                transition: "scale-transition",
+                                "offset-y": "",
+                                "full-width": "",
+                                "min-width": "290px"
+                              },
+                              on: {
+                                "update:returnValue": function($event) {
+                                  _vm.date = $event
+                                }
+                              }
+                            },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  slot: "activator",
+                                  label: "Fecha",
+                                  readonly: ""
+                                },
+                                slot: "activator",
+                                model: {
+                                  value: _vm.date,
+                                  callback: function($$v) {
+                                    _vm.date = $$v
+                                  },
+                                  expression: "date"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-date-picker", {
+                                on: {
+                                  input: function($event) {
+                                    _vm.$refs.menu2.save(_vm.date)
+                                  }
+                                },
+                                model: {
+                                  value: _vm.date,
+                                  callback: function($$v) {
+                                    _vm.date = $$v
+                                  },
+                                  expression: "date"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-data-table", {
+                        staticStyle: { "max-width": "100%" },
+                        attrs: {
+                          headers: _vm.purchase_headers,
+                          items: _vm.purchase_lumbers,
+                          "hide-actions": ""
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "items",
+                            fn: function(props) {
+                              return [
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      props.item.specie.name +
+                                        "-" +
+                                        props.item.type.name
+                                    )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      props.item.high +
+                                        "X" +
+                                        props.item.width +
+                                        "X" +
+                                        props.item.density
+                                    )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "text-xs-left" },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        label: "Cantidad",
+                                        hint: "Ingrese cantidad",
+                                        required: ""
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "justify-center layout px-0" },
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        attrs: { small: "" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.removeFromPurchase(props.index)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                        delete\n                    "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ])
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3338b61b", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
