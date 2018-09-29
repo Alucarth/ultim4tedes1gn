@@ -84,8 +84,7 @@
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
                         <v-flex v-if="header.value!='actions'">
-                            <span @click="toggleOrder(header.value)">{{ header.text }}
-                                
+                            <span>{{ header.text }}
                             </span>
                             <v-menu 
                                     :close-on-content-click="false"
@@ -93,7 +92,7 @@
                                     <v-btn
                                         slot="activator"
                                         icon
-                                        @click="toggleOrder(header.value)"
+                                   
                                         v-if="header.sortable!=false"
                                     >
                                     <v-icon  small>fa-filter</v-icon>
@@ -102,16 +101,15 @@
                                         <v-text-field
                                          outline
                                          hide-details
-                                        v-model="filterValue"
+                                        v-model="header.input"
                                         append-icon="search"
-                                        :label="`Buscar ${header.text}...`"
-                                       
-                                        @keydown.enter="search(header.value)"
+                                        :label="`Buscar ${header.text}...`"                                       
+                                        @keydown.enter="search()"
                                     ></v-text-field>
                                     
                                     </v-card>
                             </v-menu>
-                            <v-icon small @click="toggleOrder(header.value)" v-if="header.value == filterName ">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon>
+                            <!-- <v-icon small @click="toggleOrder(header.value)" v-if="header.value == filterName ">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon> -->
                         </v-flex>
                 </th>
            </tr>
@@ -168,21 +166,19 @@ export default {
         },
         headers: [
           
-          { text: 'Proveedor', value: 'name' },
+          { text: 'Proveedor', value: 'name' ,input:''},
         //   { text: 'Oferta', value: 'offer' },
-          { text: 'Nombres', value: 'first_name' },
-          { text: 'Apellidos', value: 'last_name' },
-          { text: 'Cargo', value: 'position' },
-          { text: 'Email', value: 'email' },
-          { text: 'Telefono', value: 'phone' },
-          { text: 'Balance', value: 'balance', sortable: false},
-          { text: 'Debito', value: 'debit' , sortable: false},
-          { text: 'Acciones',value:'actions',  sortable: false },
+          { text: 'Nombres', value: 'first_name',input:''},
+          { text: 'Apellidos', value: 'last_name',input:''},
+          { text: 'Cargo', value: 'position',input:''},
+          { text: 'Email', value: 'email',input:''},
+          { text: 'Telefono', value: 'phone',input:''},
+          { text: 'Balance', value: 'balance',input:'', sortable: false},
+          { text: 'Debito', value: 'debit',input:'', sortable: false},
+          { text: 'Acciones',value:'actions',input:'',  sortable: false },
         ],
         providers: [],
         loading: true,
-        filterName: 'name',
-        filterValue: '',
         newProvider: null,
         newContacts:[],
         newContact: null,
@@ -193,7 +189,7 @@ export default {
     },
     mounted()
     {
-        this.search('name');
+        this.search();
     },
     created(){
           axios.get('/api/provider/create')
@@ -204,47 +200,41 @@ export default {
     },
     methods:{
         
-        getItems(url){
+        getData(url,parameters){
             return new Promise((resolve,reject)=>{
                this.loading = true;
-               axios.get(url)
+               axios.get(url,{
+                        params:parameters
+                    })
                     .then((response) => {
                         this.loading = false;
                         resolve(response.data);
                     });
             });
         },
-        next(page){
-            // console.log(page);
-            let orderBy = this.pagination.descending==true?'asc':'desc';
-            this.getItems('/api/provider?page='+page+'&search='+this.filterValue+'&sorted='+this.filterName+'&order='+orderBy).then((data)=>{
-                this.providers = data.data;
-                this.last_page = data.last_page;
+        getParams(){
+            let params={};
+            this.headers.forEach(element => {
+                params[element.value] = element.input;
             });
+            params['order']=this.pagination.descending==true?'asc':'desc';
+            params['page']=this.page;
+            params['pagination_rows']=this.paginationRows;
+            return params;
         },
-        search(filter){
-            
-            this.filterName = filter;
-            
-            return new Promise((resolve,reject)=>{
-                let orderBy = this.pagination.descending==false?'desc':'asc';
-                // console.log(orderBy);
-                this.getItems('/api/provider?search='+this.filterValue+'&sorted='+this.filterName+'&order='+orderBy).then((data)=>{
+        next(page){
+            this.page = page;
+            this.search();
+        },
+        search(){
+            return new Promise((resolve,reject)=>{   
+                this.getData('/api/provider',this.getParams()).then((data)=>{
                     this.providers = data.data;
                     this.last_page = data.last_page;
                     resolve();
                 });
             });
-        },
-      
-        toggleOrder (filter) {
-            this.pagination.sortBy = filter;
-            this.search(filter).then(()=>{ 
-                this.pagination.descending = !this.pagination.descending;
-                // console.log('ordenando');
-            });
-        },
-       
+        },    
         editItem (item) {
             this.editedIndex = this.providers.indexOf(item)
             this.editedItem = Object.assign({}, item)
@@ -263,11 +253,7 @@ export default {
 
     },
     watch: {
-        filterValue (fv) {      
-            if (fv =='') {
-                this.search('name');
-            }
-        }
+      
     },
     computed:{
         formTitle () {

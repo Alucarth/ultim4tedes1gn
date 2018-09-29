@@ -70205,8 +70205,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -70215,13 +70213,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pagination: {
                 sortBy: 'name'
             },
-            headers: [{ text: 'Proveedor', value: 'name' },
+            headers: [{ text: 'Proveedor', value: 'name', input: '' },
             //   { text: 'Oferta', value: 'offer' },
-            { text: 'Nombres', value: 'first_name' }, { text: 'Apellidos', value: 'last_name' }, { text: 'Cargo', value: 'position' }, { text: 'Email', value: 'email' }, { text: 'Telefono', value: 'phone' }, { text: 'Balance', value: 'balance', sortable: false }, { text: 'Debito', value: 'debit', sortable: false }, { text: 'Acciones', value: 'actions', sortable: false }],
+            { text: 'Nombres', value: 'first_name', input: '' }, { text: 'Apellidos', value: 'last_name', input: '' }, { text: 'Cargo', value: 'position', input: '' }, { text: 'Email', value: 'email', input: '' }, { text: 'Telefono', value: 'phone', input: '' }, { text: 'Balance', value: 'balance', input: '', sortable: false }, { text: 'Debito', value: 'debit', input: '', sortable: false }, { text: 'Acciones', value: 'actions', input: '', sortable: false }],
             providers: [],
             loading: true,
-            filterName: 'name',
-            filterValue: '',
             newProvider: null,
             newContacts: [],
             newContact: null,
@@ -70231,7 +70227,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        this.search('name');
+        this.search();
     },
     created: function created() {
         var _this = this;
@@ -70243,49 +70239,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        getItems: function getItems(url) {
+        getData: function getData(url, parameters) {
             var _this2 = this;
 
             return new Promise(function (resolve, reject) {
                 _this2.loading = true;
-                axios.get(url).then(function (response) {
+                axios.get(url, {
+                    params: parameters
+                }).then(function (response) {
                     _this2.loading = false;
                     resolve(response.data);
                 });
             });
         },
+        getParams: function getParams() {
+            var params = {};
+            this.headers.forEach(function (element) {
+                params[element.value] = element.input;
+            });
+            params['order'] = this.pagination.descending == true ? 'asc' : 'desc';
+            params['page'] = this.page;
+            params['pagination_rows'] = this.paginationRows;
+            return params;
+        },
         next: function next(page) {
+            this.page = page;
+            this.search();
+        },
+        search: function search() {
             var _this3 = this;
 
-            // console.log(page);
-            var orderBy = this.pagination.descending == true ? 'asc' : 'desc';
-            this.getItems('/api/provider?page=' + page + '&search=' + this.filterValue + '&sorted=' + this.filterName + '&order=' + orderBy).then(function (data) {
-                _this3.providers = data.data;
-                _this3.last_page = data.last_page;
-            });
-        },
-        search: function search(filter) {
-            var _this4 = this;
-
-            this.filterName = filter;
-
             return new Promise(function (resolve, reject) {
-                var orderBy = _this4.pagination.descending == false ? 'desc' : 'asc';
-                // console.log(orderBy);
-                _this4.getItems('/api/provider?search=' + _this4.filterValue + '&sorted=' + _this4.filterName + '&order=' + orderBy).then(function (data) {
-                    _this4.providers = data.data;
-                    _this4.last_page = data.last_page;
+                _this3.getData('/api/provider', _this3.getParams()).then(function (data) {
+                    _this3.providers = data.data;
+                    _this3.last_page = data.last_page;
                     resolve();
                 });
-            });
-        },
-        toggleOrder: function toggleOrder(filter) {
-            var _this5 = this;
-
-            this.pagination.sortBy = filter;
-            this.search(filter).then(function () {
-                _this5.pagination.descending = !_this5.pagination.descending;
-                // console.log('ordenando');
             });
         },
         editItem: function editItem(item) {
@@ -70302,13 +70291,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.close();
         }
     },
-    watch: {
-        filterValue: function filterValue(fv) {
-            if (fv == '') {
-                this.search('name');
-            }
-        }
-    },
+    watch: {},
     computed: {
         formTitle: function formTitle() {
             return this.editedIndex === -1 ? 'Nuevo Proveedor' : 'Editar Proveedor';
@@ -70685,22 +70668,12 @@ var render = function() {
                           ? _c(
                               "v-flex",
                               [
-                                _c(
-                                  "span",
-                                  {
-                                    on: {
-                                      click: function($event) {
-                                        _vm.toggleOrder(header.value)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(header.text) +
-                                        "\n                            \n                        "
-                                    )
-                                  ]
-                                ),
+                                _c("span", [
+                                  _vm._v(
+                                    _vm._s(header.text) +
+                                      "\n                        "
+                                  )
+                                ]),
                                 _vm._v(" "),
                                 _c(
                                   "v-menu",
@@ -70715,11 +70688,6 @@ var render = function() {
                                             attrs: {
                                               slot: "activator",
                                               icon: ""
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                _vm.toggleOrder(header.value)
-                                              }
                                             },
                                             slot: "activator"
                                           },
@@ -70759,15 +70727,15 @@ var render = function() {
                                               ) {
                                                 return null
                                               }
-                                              _vm.search(header.value)
+                                              _vm.search()
                                             }
                                           },
                                           model: {
-                                            value: _vm.filterValue,
+                                            value: header.input,
                                             callback: function($$v) {
-                                              _vm.filterValue = $$v
+                                              _vm.$set(header, "input", $$v)
                                             },
-                                            expression: "filterValue"
+                                            expression: "header.input"
                                           }
                                         })
                                       ],
@@ -70775,30 +70743,7 @@ var render = function() {
                                     )
                                   ],
                                   1
-                                ),
-                                _vm._v(" "),
-                                header.value == _vm.filterName
-                                  ? _c(
-                                      "v-icon",
-                                      {
-                                        attrs: { small: "" },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.toggleOrder(header.value)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.pagination.descending == false
-                                              ? "arrow_upward"
-                                              : "arrow_downward"
-                                          )
-                                        )
-                                      ]
-                                    )
-                                  : _vm._e()
+                                )
                               ],
                               1
                             )

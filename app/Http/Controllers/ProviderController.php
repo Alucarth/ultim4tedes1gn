@@ -15,31 +15,51 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $order = request('order');
-        if(request('sorted')!="name")
+        $order = request('order'??'');
+        $pagination_rows = request('pagination_rows'??10);
+        $name = request('name')??'';
+        $first_name = request('first_name')??'';
+        $last_name = request('last_name')??'';
+        $position = request('position')??'';
+        $email = request('email')??'';
+        $phone = request('phone')??'';
+        
+        $conditions_provider = [];
+        $conditions_contatcs = [];
+        if($name != '')
         {
-            //search in contacts
-            $search = request('search');
-            $sorted = request('sorted');
-          
-            Log::info('buscando por '.$search);
-            $provider_list = Provider::with('contacts')
-                                    ->whereHas('contacts',function($query) use ($sorted,$search){
-                                        $query->where($sorted,'like',"%{$search}%")->where('is_primary',true);
-                                    })
-                                    ->orderBy('name',$order)
-                                    ->paginate(10);
-            return response()->json($provider_list->toArray());
+            array_push($conditions_provider,array('name','like',"%{$name}%"));
         }
-        $provider_list = Provider::query()
-                        ->when(request('search'),function($query,$search){
-                            $query->where(request('sorted'),'like',"%{$search}%");
-                        })
-                        ->with('contacts')
-                        ->orderBy('name',$order)
-                        ->paginate(10);
+        if($first_name != '')
+        {
+            array_push($conditions_contatcs,array('first_name','like',"%{$first_name}%"));
+        }
+        if($last_name != '')
+        {
+            array_push($conditions_contatcs,array('last_name','like',"%{$last_name}%"));
+        }
+        if($position != '')
+        {
+            array_push($conditions_contatcs,array('position','like',"%{$position}%"));
+        }
+        if($email != '')
+        {
+            array_push($conditions_contatcs,array('email','like',"%{$email}%"));
+        }
+        if($phone != '')
+        {
+            array_push($conditions_contatcs,array('phone','like',"%{$phone}%"));
+        }
+
+            // Log::info('buscando por '.$conditions_contatcs);
+        $provider_list = Provider::with('contacts')
+                                ->where($conditions_provider)
+                                ->whereHas('contacts',function($query) use ($conditions_contatcs){
+                                    $query->where($conditions_contatcs)->where('is_primary',true);
+                                })
+                                // ->orderBy('name',$order)
+                                ->paginate($pagination_rows);
         return response()->json($provider_list->toArray());
-    
     }
 
     /**
