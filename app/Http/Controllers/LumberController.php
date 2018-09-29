@@ -84,7 +84,19 @@ class LumberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lumber = new Lumber();
+        $lumber->high = $request->high;
+        $lumber->width = $request->width;
+        $lumber->density = $request->density;
+        $lumber->description = $request->description;
+        $lumber->specie_id = $request->specie_id;
+        $lumber->type_id = $request->type_id;
+        $lumber->save();
+        
+        $data = [
+            'lumber' => $lumber
+        ];
+        return response()->json($data);
     }
 
     /**

@@ -210,17 +210,9 @@ export default {
     },
     mounted()
     {
-        // this.getLumber().then(
-        //     this.getDataFromApi()
-        //         .then(data => {
-        //         this.lumbers = data.lumbers
-        //         this.totalLumber = data.total
-        //         })
-        // );
         this.search();        
         this.getSpecies();
-        this.getTypes();
-        console.log(this.lumbers.length);
+        this.getTypes();        
     },
     methods:{
         search() {
@@ -228,8 +220,7 @@ export default {
                 this.getData('/api/auth/lumber',this.getParams()).then((data)=>{
                     this.lumbers = data.data;                    
                     this.last_page = data.last_page;
-                    resolve();
-                    console.log(this.lumbers.length);
+                    resolve();                    
                 });
             });            
         },
@@ -258,23 +249,7 @@ export default {
         next(page){
             this.page = page;
             this.search();
-        },
-        // getLumber(withFilter){
-        //     console.log("starting receiving data");
-        //     return new Promise((resolve,reject)=>{
-        //        this.loading = true
-        //        let filterName = withFilter==true?this.filterName:'high';
-        //        console.log(withFilter);
-        //        axios.get('/api/auth/getLumberData',{ name:filterName,value:this.filterValue})
-        //             .then((response) => {
-        //                                 // let providers = response.data;
-        //                                 console.log(response.data);
-        //                     this.lumbers = response.data.lumbers;
-        //                                 this.loading = false
-        //                                 resolve();
-        //                             });
-        //                 });
-        // },                
+        },        
         create() {                                    
             axios.get('/api/auth/lumber/create')            
             .then(response => {                
@@ -287,7 +262,14 @@ export default {
             this.dialog = true;
         },
         store(){
-
+            let index = -1;
+            axios.post('/api/auth/lumber/', this.newLumber)
+            .then(response => {
+                this.lumbers.push(response.data.lumber);
+            })
+            .catch(error => {                
+                console.log(error);
+            });
         },
         show(item) {                        
             axios.get(`/api/auth/lumber/${item.id}`)            

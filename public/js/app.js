@@ -71362,17 +71362,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        // this.getLumber().then(
-        //     this.getDataFromApi()
-        //         .then(data => {
-        //         this.lumbers = data.lumbers
-        //         this.totalLumber = data.total
-        //         })
-        // );
         this.search();
         this.getSpecies();
         this.getTypes();
-        console.log(this.lumbers.length);
     },
 
     methods: {
@@ -71384,7 +71376,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this.lumbers = data.data;
                     _this.last_page = data.last_page;
                     resolve();
-                    console.log(_this.lumbers.length);
                 });
             });
         },
@@ -71415,23 +71406,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.page = page;
             this.search();
         },
-
-        // getLumber(withFilter){
-        //     console.log("starting receiving data");
-        //     return new Promise((resolve,reject)=>{
-        //        this.loading = true
-        //        let filterName = withFilter==true?this.filterName:'high';
-        //        console.log(withFilter);
-        //        axios.get('/api/auth/getLumberData',{ name:filterName,value:this.filterValue})
-        //             .then((response) => {
-        //                                 // let providers = response.data;
-        //                                 console.log(response.data);
-        //                     this.lumbers = response.data.lumbers;
-        //                                 this.loading = false
-        //                                 resolve();
-        //                             });
-        //                 });
-        // },                
         create: function create() {
             var _this3 = this;
 
@@ -71443,23 +71417,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             this.dialog = true;
         },
-        store: function store() {},
-        show: function show(item) {
+        store: function store() {
             var _this4 = this;
 
+            var index = -1;
+            axios.post('/api/auth/lumber/', this.newLumber).then(function (response) {
+                _this4.lumbers.push(response.data.lumber);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        show: function show(item) {
+            var _this5 = this;
+
             axios.get('/api/auth/lumber/' + item.id).then(function (response) {
-                _this4.lumber = response.data.lumber;
+                _this5.lumber = response.data.lumber;
             }).catch(function (error) {
                 console.log(error);
             });
         },
         edit: function edit(item) {
-            var _this5 = this;
+            var _this6 = this;
 
             this.editedIndex = this.lumbers.indexOf(item);
             //this.editedItem = Object.assign({}, item)
             axios.get('/api/auth/lumber/' + item.id + '/edit').then(function (response) {
-                _this5.newLumber = response.data.lumber;
+                _this6.newLumber = response.data.lumber;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -71467,15 +71450,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.dialog = true;
         },
         update: function update(item) {
-            var _this6 = this;
+            var _this7 = this;
 
             var index = this.editedIndex;
             axios.put('/api/auth/lumber/' + this.newLumber.id, this.newLumber).then(function (response) {
-                _this6.lumbers[index].high = response.data.lumber.high;
-                _this6.lumbers[index].width = response.data.lumber.width;
-                _this6.lumbers[index].density = response.data.lumber.density;
-                _this6.lumbers[index].specie = response.data.lumber.specie.name;
-                _this6.lumbers[index].type_id = response.data.lumber.type_id;
+                _this7.lumbers[index].high = response.data.lumber.high;
+                _this7.lumbers[index].width = response.data.lumber.width;
+                _this7.lumbers[index].density = response.data.lumber.density;
+                _this7.lumbers[index].specie = response.data.lumber.specie.name;
+                _this7.lumbers[index].type_id = response.data.lumber.type_id;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -71493,19 +71476,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.getLumber();
         },
         getSpecies: function getSpecies() {
-            var _this7 = this;
+            var _this8 = this;
 
             axios.get('/api/auth/specie').then(function (response) {
-                _this7.species = response.data.species;
+                _this8.species = response.data.species;
             }).catch(function (error) {
                 console.log(error);
             });
         },
         getTypes: function getTypes() {
-            var _this8 = this;
+            var _this9 = this;
 
             axios.get('/api/auth/type').then(function (response) {
-                _this8.types = response.data.types;
+                _this9.types = response.data.types;
             }).catch(function (error) {
                 console.log(error);
             });
