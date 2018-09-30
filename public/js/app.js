@@ -71331,6 +71331,66 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -71410,7 +71470,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             axios.get('/api/auth/lumber/create').then(function (response) {
-                console.log(response.data.lumber);
                 _this3.newLumber = response.data.lumber;
             }).catch(function (error) {
                 console.log(error);
@@ -71418,31 +71477,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.dialog = true;
         },
         store: function store() {
-            var _this4 = this;
-
             var index = -1;
             axios.post('/api/auth/lumber/', this.newLumber).then(function (response) {
-                _this4.lumbers.push(response.data.lumber);
+                //this.lumbers.push(response.data.lumber);
+                alert('dato creado');
             }).catch(function (error) {
                 console.log(error);
             });
+            this.dialog = false;
         },
         show: function show(item) {
-            var _this5 = this;
+            var _this4 = this;
 
             axios.get('/api/auth/lumber/' + item.id).then(function (response) {
-                _this5.lumber = response.data.lumber;
+                _this4.lumber = response.data.lumber;
             }).catch(function (error) {
                 console.log(error);
             });
         },
         edit: function edit(item) {
-            var _this6 = this;
+            var _this5 = this;
 
             this.editedIndex = this.lumbers.indexOf(item);
             //this.editedItem = Object.assign({}, item)
             axios.get('/api/auth/lumber/' + item.id + '/edit').then(function (response) {
-                _this6.newLumber = response.data.lumber;
+                _this5.newLumber = response.data.lumber;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -71450,20 +71509,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.dialog = true;
         },
         update: function update(item) {
-            var _this7 = this;
+            var _this6 = this;
 
             var index = this.editedIndex;
             axios.put('/api/auth/lumber/' + this.newLumber.id, this.newLumber).then(function (response) {
-                _this7.lumbers[index].high = response.data.lumber.high;
-                _this7.lumbers[index].width = response.data.lumber.width;
-                _this7.lumbers[index].density = response.data.lumber.density;
-                _this7.lumbers[index].specie = response.data.lumber.specie.name;
-                _this7.lumbers[index].type_id = response.data.lumber.type_id;
+                _this6.lumbers[index].high = response.data.lumber.high;
+                _this6.lumbers[index].width = response.data.lumber.width;
+                _this6.lumbers[index].density = response.data.lumber.density;
+                _this6.lumbers[index].specie = response.data.lumber.specie;
+                _this6.lumbers[index].type = response.data.lumber.type;
             }).catch(function (error) {
                 console.log(error);
             });
             this.dialog = false;
-            this.getLumber();
+            //this.getLumber();
         },
         destroy: function destroy(item) {
             var success_delete = false;
@@ -71476,19 +71535,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.getLumber();
         },
         getSpecies: function getSpecies() {
-            var _this8 = this;
+            var _this7 = this;
 
             axios.get('/api/auth/specie').then(function (response) {
-                _this8.species = response.data.species;
+                _this7.species = response.data.species;
             }).catch(function (error) {
                 console.log(error);
             });
         },
         getTypes: function getTypes() {
-            var _this9 = this;
+            var _this8 = this;
 
             axios.get('/api/auth/type').then(function (response) {
-                _this9.types = response.data.types;
+                _this8.types = response.data.types;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -71745,7 +71804,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("store")]
+                            [_vm._v("Guardar")]
                           )
                         : _c(
                             "v-btn",
@@ -71757,7 +71816,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("update")]
+                            [_vm._v("Actualizar")]
                           )
                     ],
                     1
@@ -71984,18 +72043,141 @@ var render = function() {
             fn: function(props) {
               return [
                 _vm.lumber
-                  ? _c(
-                      "v-card",
-                      { attrs: { flat: "" } },
-                      [
-                        _c("v-card-text", [
-                          _vm._v(_vm._s(_vm.lumber.description))
+                  ? _c("v-card", { attrs: { flat: "" } }, [
+                      _c("table", [
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Especie\n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.specie.name) +
+                                    "\n                            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
                         ]),
                         _vm._v(" "),
-                        _c("v-card-text", [_vm._v(_vm._s(_vm.lumber.high))])
-                      ],
-                      1
-                    )
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Tipo\n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.type.name) +
+                                    "\n                            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Alto\n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.high) +
+                                    "\n                            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Ancho\n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.width) +
+                                    "\n                            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Espesor\n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.density) +
+                                    "\n                            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Descripción \n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.description) +
+                                    "\n                            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ])
+                      ])
+                    ])
                   : _vm._e()
               ]
             }

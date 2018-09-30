@@ -59,8 +59,8 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">store</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>update</v-btn>
+                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>Actualizar</v-btn>
                 
                 
             </v-card-actions>
@@ -153,8 +153,68 @@
         </template>
         <template slot="expand" slot-scope="props">
             <v-card flat v-if="lumber">
-                <v-card-text>{{ lumber.description }}</v-card-text>
-                <v-card-text>{{ lumber.high }}</v-card-text>
+                <table>
+                    <tr>
+                        <td> 
+                            Especie
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.specie.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Tipo
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.type.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Alto
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.high }}
+                            </v-card-text>
+                        </td>                 
+                    </tr>
+                    <tr>
+                        <td> 
+                            Ancho
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.width }}
+                            </v-card-text>
+                        </td>       
+                    </tr>
+                    <tr>
+                        <td> 
+                            Espesor
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.density }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Descripción 
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.description }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                </table>                                
             </v-card>
         </template>
 
@@ -199,7 +259,7 @@ export default {
         dialog: false,
         editedIndex: -1,          
         last_page: 1,
-        page: 1,
+        page: 1,    
         paginationRows: 10,
       }
     },
@@ -252,9 +312,8 @@ export default {
         },        
         create() {                                    
             axios.get('/api/auth/lumber/create')            
-            .then(response => {                
-                console.log(response.data.lumber);
-                this.newLumber = response.data.lumber
+            .then(response => {                                
+                this.newLumber = response.data.lumber                
             })
             .catch(error => {                
                 console.log(error);
@@ -264,12 +323,14 @@ export default {
         store(){
             let index = -1;
             axios.post('/api/auth/lumber/', this.newLumber)
-            .then(response => {
-                this.lumbers.push(response.data.lumber);
+            .then(response => {                
+                //this.lumbers.push(response.data.lumber);
+                alert('dato creado');
             })
             .catch(error => {                
                 console.log(error);
             });
+            this.dialog = false;
         },
         show(item) {                        
             axios.get(`/api/auth/lumber/${item.id}`)            
@@ -300,14 +361,14 @@ export default {
                 this.lumbers[index].high = response.data.lumber.high;
                 this.lumbers[index].width = response.data.lumber.width;
                 this.lumbers[index].density = response.data.lumber.density;
-                this.lumbers[index].specie = response.data.lumber.specie.name;
-                this.lumbers[index].type_id = response.data.lumber.type_id;
+                this.lumbers[index].specie = response.data.lumber.specie;
+                this.lumbers[index].type = response.data.lumber.type;
             })
             .catch(function (error) {
                 console.log(error);
             });            
             this.dialog =false;
-            this.getLumber();
+            //this.getLumber();
         },
         destroy (item) {
             let success_delete = false;
