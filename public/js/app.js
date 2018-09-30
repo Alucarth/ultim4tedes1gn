@@ -74154,15 +74154,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            search: '',
             pagination: {
                 sortBy: 'name'
             },
-            headers: [{ text: 'Alto', value: 'Madera' }, { text: 'Ancho', value: 'Medida' }, { text: 'Espesor', value: 'density' }, { text: 'Especie', value: 'specie' }, { text: 'Tipo', value: 'type' }],
+            headers: [{ text: 'Especie', value: 'specie' }, { text: 'Tipo', value: 'type' }, { text: 'Alto', value: 'high' }, { text: 'Ancho', value: 'width' }, { text: 'Espesor', value: 'density' }],
             purchase_headers: [{ text: 'Madera', value: 'Madera' }, { text: 'Medida', value: 'Madera' }, { text: 'Cantidad', value: 'Madera' }],
             species: null,
             types: null,
@@ -74176,7 +74242,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             filterValue: '',
             dialog: false,
             editedIndex: -1,
-            date: null
+            date: null,
+            last_page: 1,
+            page: 1,
+            paginationRows: 10,
+            providers: [],
+            purchase: null,
+            pivot: null,
+            pl: []
         };
     },
 
@@ -74186,81 +74259,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        this.getLumber();
-        // .then(
-        //     this.getDataFromApi()
-        //         .then(data => {
-        //         this.lumbers = data.lumbers
-        //         this.totalLumber = data.total
-        //         })
-        // );
+        this.search();
+        this.create();
         this.getSpecies();
         this.getTypes();
+        this.getProviders();
     },
 
     methods: {
-        getDataFromApi: function getDataFromApi() {
-            // return new Promise((resolve, reject) => {
-            // const { sortBy, descending, page, rowsPerPage } = this.pagination
-
-            // let items= this.lumbers;
-            // const total = items.length;
-
-            // if (this.pagination.sortBy) {
-            //     items = items.sort((a, b) => {
-            //     const sortA = a[sortBy]
-            //     const sortB = b[sortBy]
-
-            //     if (descending) {
-            //         if (sortA < sortB) return 1
-            //         if (sortA > sortB) return -1
-            //         return 0
-            //     } else {
-            //         if (sortA < sortB) return -1
-            //         if (sortA > sortB) return 1
-            //         return 0
-            //     }
-            //     })
-            // }
-
-            // if (rowsPerPage > 0) {
-            //     items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-            // }
-
-            //     resolve({
-            //     items,
-            //     total
-            //     });
-
-            // })
-        },
-        getLumber: function getLumber(withFilter) {
+        search: function search() {
             var _this = this;
 
-            console.log("starting receiving data");
             return new Promise(function (resolve, reject) {
-                _this.loading = true;
-                var filterName = withFilter == true ? _this.filterName : 'high';
-                console.log(withFilter);
-                axios.get('/api/auth/getLumberData', { name: filterName, value: _this.filterValue }).then(function (response) {
-                    // let providers = response.data;
-                    console.log(response.data);
-                    _this.lumbers = response.data.lumbers;
-                    _this.loading = false;
+                _this.getData('/api/auth/lumber', _this.getParams()).then(function (data) {
+                    _this.lumbers = data.data;
+                    _this.last_page = data.last_page;
                     resolve();
                 });
             });
         },
-        getResult: function getResult(withFilter) {
+        getParams: function getParams() {
+            var params = {};
+            this.headers.forEach(function (element) {
+                params[element.value] = element.input;
+            });
+            params['order'] = this.pagination.descending == true ? 'asc' : 'desc';
+            params['page'] = this.page;
+            params['pagination_rows'] = this.paginationRows;
+            return params;
+        },
+        getData: function getData(url, parameters) {
             var _this2 = this;
 
-            console.log(this.filterName);
-            //axios.post('/api/providers/getdata',{name:this.filterName})
-            //   .then((response)=>{ console.log(response.data)});
-            this.getLumber(withFilter).then(this.getDataFromApi().then(function (data) {
-                _this2.lumbers = data.lumbers;
-                _this2.totalLumber = data.total;
-            }));
+            return new Promise(function (resolve, reject) {
+                _this2.loading = true;
+                axios.get(url, {
+                    params: parameters
+                }).then(function (response) {
+                    _this2.loading = false;
+                    resolve(response.data);
+                });
+            });
+        },
+        next: function next(page) {
+            this.page = page;
+            this.search();
         },
         toggleOrder: function toggleOrder(index) {
             this.pagination.sortBy = this.headers[index].value;
@@ -74269,7 +74312,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setFilter: function setFilter(filterName) {
             this.filterValue = '', this.filterName = filterName;
         },
-        create: function create() {
+        createLumber: function createLumber() {
             var _this3 = this;
 
             axios.get('/api/auth/lumber/create').then(function (response) {
@@ -74280,30 +74323,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             this.dialog = true;
         },
-        store: function store() {},
-        show: function show(item) {
+        storeLumber: function storeLumber() {},
+        create: function create() {
             var _this4 = this;
 
+            axios.get('/api/auth/purchase/create').then(function (response) {
+                console.log(response.data.pivot);
+                _this4.purchase = response.data.purchase;
+                _this4.pivot = response.data.pivot;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        store: function store() {
+            axios.post('/api/auth/purchase/', { purchase: this.purchase, lumbers: this.purchase_lumbers }).then(function (response) {
+                //this.lumbers.push(response.data.lumber);
+                alert('Compra realizada');
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        show: function show(item) {
+            var _this5 = this;
+
             axios.get('/api/auth/lumber/' + item.id).then(function (response) {
-                _this4.lumber = response.data.lumber;
+                _this5.lumber = response.data.lumber;
             }).catch(function (error) {
                 console.log(error);
             });
         },
         getSpecies: function getSpecies() {
-            var _this5 = this;
+            var _this6 = this;
 
             axios.get('/api/auth/specie').then(function (response) {
-                _this5.species = response.data.species;
+                _this6.species = response.data.species;
             }).catch(function (error) {
                 console.log(error);
             });
         },
         getTypes: function getTypes() {
-            var _this6 = this;
+            var _this7 = this;
 
             axios.get('/api/auth/type').then(function (response) {
-                _this6.types = response.data.types;
+                _this7.types = response.data.types;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getProviders: function getProviders() {
+            var _this8 = this;
+
+            axios.get('/api/provider').then(function (response) {
+                console.log(response.data.data);
+                _this8.providers = response.data.data;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -74312,29 +74384,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.dialog = false;
         },
         addToPurchase: function addToPurchase(item) {
+            console.log(item.id);
+            //this.pl.push([{item.id: this.pivot}]);
+            this.pl[item.id] = this.pivot;
             this.purchase_lumbers.push(item);
         },
         removeFromPurchase: function removeFromPurchase(index) {
             this.purchase_lumbers.splice(index, 1);
-        }
-    },
-    watch: {
-        pagination: {
-            handler: function handler() {
-                var _this7 = this;
-
-                this.getDataFromApi().then(function (data) {
-                    _this7.desserts = data.items;
-                    _this7.totalDesserts = data.total;
-                });
-            },
-
-            deep: true
-        },
-        filterValue: function filterValue(fv) {
-            if (fv == '') {
-                this.getResult(false);
-            }
         }
     }
 });
@@ -74694,311 +74750,385 @@ var render = function() {
                     "v-layout",
                     { attrs: { row: "", wrap: "" } },
                     [
-                      _c(
-                        "v-data-table",
-                        {
-                          staticStyle: { "max-width": "100%" },
-                          attrs: {
-                            headers: _vm.headers,
-                            items: _vm.lumbers,
-                            search: _vm.search,
-                            pagination: _vm.pagination
-                          },
-                          on: {
-                            "update:pagination": function($event) {
-                              _vm.pagination = $event
-                            }
-                          },
-                          scopedSlots: _vm._u([
-                            {
-                              key: "headers",
-                              fn: function(props) {
-                                return [
-                                  _c(
-                                    "tr",
-                                    _vm._l(props.headers, function(
-                                      header,
-                                      index
-                                    ) {
-                                      return _c(
-                                        "th",
-                                        {
-                                          key: index,
-                                          staticClass: "text-xs-left"
-                                        },
-                                        [
-                                          _c(
-                                            "v-flex",
-                                            [
-                                              _c(
-                                                "span",
-                                                {
-                                                  on: {
-                                                    click: function($event) {
-                                                      _vm.toggleOrder(index)
-                                                    }
-                                                  }
-                                                },
-                                                [
+                      _c("v-data-table", {
+                        attrs: {
+                          headers: _vm.headers,
+                          items: _vm.lumbers,
+                          "hide-actions": ""
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "headers",
+                            fn: function(props) {
+                              return [
+                                _c(
+                                  "tr",
+                                  _vm._l(props.headers, function(
+                                    header,
+                                    index
+                                  ) {
+                                    return _c(
+                                      "th",
+                                      {
+                                        key: index,
+                                        staticClass: "text-xs-left"
+                                      },
+                                      [
+                                        header.value != "actions"
+                                          ? _c(
+                                              "v-flex",
+                                              [
+                                                _c("span", [
                                                   _vm._v(
                                                     _vm._s(header.text) +
-                                                      "                                \r\n                            "
+                                                      "\r\n                            "
                                                   )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-menu",
-                                                {
-                                                  attrs: {
-                                                    "close-on-content-click": false
-                                                  }
-                                                },
-                                                [
-                                                  _c(
-                                                    "v-btn",
-                                                    {
-                                                      attrs: {
-                                                        slot: "activator",
-                                                        icon: ""
-                                                      },
-                                                      on: {
-                                                        click: function(
-                                                          $event
-                                                        ) {
-                                                          _vm.setFilter(
-                                                            header.value
-                                                          )
-                                                        }
-                                                      },
-                                                      slot: "activator"
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "v-icon",
-                                                        {
-                                                          attrs: { small: "" }
-                                                        },
-                                                        [_vm._v("fa-filter")]
-                                                      )
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-card",
-                                                    [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          "append-icon":
-                                                            "search",
-                                                          label:
-                                                            "Buscar " +
-                                                            header.text +
-                                                            "..."
-                                                        },
-                                                        on: {
-                                                          keydown: function(
-                                                            $event
-                                                          ) {
-                                                            if (
-                                                              !(
-                                                                "button" in
-                                                                $event
-                                                              ) &&
-                                                              _vm._k(
-                                                                $event.keyCode,
-                                                                "enter",
-                                                                13,
-                                                                $event.key,
-                                                                "Enter"
-                                                              )
-                                                            ) {
-                                                              return null
-                                                            }
-                                                            _vm.getResult(true)
-                                                          }
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.filterValue,
-                                                          callback: function(
-                                                            $$v
-                                                          ) {
-                                                            _vm.filterValue = $$v
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-menu",
+                                                  {
+                                                    attrs: {
+                                                      "close-on-content-click": false
+                                                    }
+                                                  },
+                                                  [
+                                                    header.sortable != false
+                                                      ? _c(
+                                                          "v-btn",
+                                                          {
+                                                            attrs: {
+                                                              slot: "activator",
+                                                              icon: ""
+                                                            },
+                                                            slot: "activator"
                                                           },
-                                                          expression:
-                                                            "filterValue"
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  )
-                                                ],
-                                                1
-                                              ),
-                                              _vm._v(" "),
-                                              header.value ==
-                                              _vm.pagination.sortBy
-                                                ? _c(
-                                                    "v-icon",
-                                                    {
-                                                      attrs: { small: "" },
-                                                      on: {
-                                                        click: function(
-                                                          $event
-                                                        ) {
-                                                          _vm.toggleOrder(index)
-                                                        }
-                                                      }
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _vm.pagination
-                                                            .descending == false
-                                                            ? "arrow_upward"
-                                                            : "arrow_downward"
+                                                          [
+                                                            _c(
+                                                              "v-icon",
+                                                              {
+                                                                attrs: {
+                                                                  small: ""
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "fa-filter"
+                                                                )
+                                                              ]
+                                                            )
+                                                          ],
+                                                          1
                                                         )
-                                                      )
-                                                    ]
-                                                  )
-                                                : _vm._e()
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    })
-                                  )
-                                ]
-                              }
-                            },
-                            {
-                              key: "items",
-                              fn: function(props) {
-                                return [
-                                  _c(
-                                    "tr",
-                                    {
-                                      on: {
-                                        click: function($event) {
-                                          _vm.addToPurchase(props.item)
-                                        }
+                                                      : _vm._e(),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "v-card",
+                                                      [
+                                                        _c("v-text-field", {
+                                                          attrs: {
+                                                            outline: "",
+                                                            "hide-details": "",
+                                                            "append-icon":
+                                                              "search",
+                                                            label:
+                                                              "Buscar " +
+                                                              header.text +
+                                                              "..."
+                                                          },
+                                                          on: {
+                                                            keydown: function(
+                                                              $event
+                                                            ) {
+                                                              if (
+                                                                !(
+                                                                  "button" in
+                                                                  $event
+                                                                ) &&
+                                                                _vm._k(
+                                                                  $event.keyCode,
+                                                                  "enter",
+                                                                  13,
+                                                                  $event.key,
+                                                                  "Enter"
+                                                                )
+                                                              ) {
+                                                                return null
+                                                              }
+                                                              _vm.search()
+                                                            }
+                                                          },
+                                                          model: {
+                                                            value: header.input,
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                header,
+                                                                "input",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "header.input"
+                                                          }
+                                                        })
+                                                      ],
+                                                      1
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          : _vm._e()
+                                      ],
+                                      1
+                                    )
+                                  })
+                                )
+                              ]
+                            }
+                          },
+                          {
+                            key: "items",
+                            fn: function(props) {
+                              return [
+                                _c(
+                                  "tr",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        _vm.addToPurchase(props.item)
                                       }
-                                    },
-                                    [
-                                      _c(
-                                        "td",
-                                        { staticClass: "text-xs-left" },
-                                        [_vm._v(_vm._s(props.item.high))]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        { staticClass: "text-xs-left" },
-                                        [_vm._v(_vm._s(props.item.width))]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        { staticClass: "text-xs-left" },
-                                        [_vm._v(_vm._s(props.item.density))]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        { staticClass: "text-xs-left" },
-                                        [_vm._v(_vm._s(props.item.specie.name))]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        { staticClass: "text-xs-left" },
-                                        [_vm._v(_vm._s(props.item.type.name))]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        {
-                                          staticClass:
-                                            "justify-center layout px-0"
-                                        },
-                                        [
-                                          _c(
-                                            "v-icon",
-                                            {
-                                              staticClass: "mr-2",
-                                              attrs: { small: "" },
-                                              on: {
-                                                click: function($event) {
-                                                  _vm.show(props.item)
-                                                  props.expanded = !props.expanded
-                                                }
+                                    }
+                                  },
+                                  [
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.specie.name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.type.name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.high))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.width))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.density))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "td",
+                                      {
+                                        staticClass:
+                                          "justify-center layout px-0"
+                                      },
+                                      [
+                                        _c(
+                                          "v-icon",
+                                          {
+                                            staticClass: "mr-2",
+                                            attrs: { small: "" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.show(props.item)
+                                                props.expanded = !props.expanded
                                               }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\r\n                        toc\r\n                    "
-                                              )
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ]
-                                  )
-                                ]
-                              }
-                            },
-                            {
-                              key: "expand",
-                              fn: function(props) {
-                                return [
-                                  _vm.lumber
-                                    ? _c(
-                                        "v-card",
-                                        { attrs: { flat: "" } },
-                                        [
-                                          _c("v-card-text", [
+                                            }
+                                          },
+                                          [
                                             _vm._v(
-                                              _vm._s(_vm.lumber.description)
+                                              "\r\n                        toc\r\n                    "
+                                            )
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              ]
+                            }
+                          },
+                          {
+                            key: "expand",
+                            fn: function(props) {
+                              return [
+                                _vm.lumber
+                                  ? _c("v-card", { attrs: { flat: "" } }, [
+                                      _c("table", [
+                                        _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              " \r\n                            Especie\r\n                        "
                                             )
                                           ]),
                                           _vm._v(" "),
-                                          _c("v-card-text", [
-                                            _vm._v(_vm._s(_vm.lumber.high))
-                                          ])
-                                        ],
-                                        1
-                                      )
-                                    : _vm._e()
-                                ]
-                              }
+                                          _c(
+                                            "td",
+                                            [
+                                              _c("v-card-text", [
+                                                _vm._v(
+                                                  "\r\n                                " +
+                                                    _vm._s(
+                                                      _vm.lumber.specie.name
+                                                    ) +
+                                                    "\r\n                            "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              " \r\n                            Tipo\r\n                        "
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "td",
+                                            [
+                                              _c("v-card-text", [
+                                                _vm._v(
+                                                  "\r\n                                " +
+                                                    _vm._s(
+                                                      _vm.lumber.type.name
+                                                    ) +
+                                                    "\r\n                            "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              " \r\n                            Alto\r\n                        "
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "td",
+                                            [
+                                              _c("v-card-text", [
+                                                _vm._v(
+                                                  "\r\n                                " +
+                                                    _vm._s(_vm.lumber.high) +
+                                                    "\r\n                            "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              " \r\n                            Ancho\r\n                        "
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "td",
+                                            [
+                                              _c("v-card-text", [
+                                                _vm._v(
+                                                  "\r\n                                " +
+                                                    _vm._s(_vm.lumber.width) +
+                                                    "\r\n                            "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              " \r\n                            Espesor\r\n                        "
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "td",
+                                            [
+                                              _c("v-card-text", [
+                                                _vm._v(
+                                                  "\r\n                                " +
+                                                    _vm._s(_vm.lumber.density) +
+                                                    "\r\n                            "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("tr", [
+                                          _c("td", [
+                                            _vm._v(
+                                              " \r\n                            Descripción \r\n                        "
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "td",
+                                            [
+                                              _c("v-card-text", [
+                                                _vm._v(
+                                                  "\r\n                                " +
+                                                    _vm._s(
+                                                      _vm.lumber.description
+                                                    ) +
+                                                    "\r\n                            "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ])
+                                      ])
+                                    ])
+                                  : _vm._e()
+                              ]
                             }
-                          ])
-                        },
+                          }
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "text-xs-center" },
                         [
-                          _c(
-                            "v-alert",
-                            {
-                              attrs: {
-                                slot: "no-results",
-                                value: true,
-                                color: "error",
-                                icon: "warning"
-                              },
-                              slot: "no-results"
+                          _c("v-pagination", {
+                            attrs: {
+                              length: _vm.last_page,
+                              "total-visible": 10
                             },
-                            [
-                              _vm._v(
-                                '\r\n            Your search for "' +
-                                  _vm._s(_vm.search) +
-                                  '" found no results.\r\n        '
-                              )
-                            ]
-                          )
+                            on: { input: _vm.next },
+                            model: {
+                              value: _vm.page,
+                              callback: function($$v) {
+                                _vm.page = $$v
+                              },
+                              expression: "page"
+                            }
+                          })
                         ],
                         1
                       )
@@ -75032,7 +75162,7 @@ var render = function() {
                           attrs: { color: "primary", dark: "" },
                           on: {
                             click: function($event) {
-                              _vm.create()
+                              _vm.store()
                             }
                           }
                         },
@@ -75046,30 +75176,32 @@ var render = function() {
                     "v-layout",
                     { attrs: { row: "", wrap: "" } },
                     [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm4: "", md4: "" } },
-                        [
-                          _c("v-select", {
-                            attrs: {
-                              label: "Proveedor",
-                              items: _vm.types,
-                              "item-text": "name",
-                              "item-value": "id",
-                              hint: "Descripcion del tipo seleccionado",
-                              "persistent-hint": ""
-                            },
-                            model: {
-                              value: _vm.provider.id,
-                              callback: function($$v) {
-                                _vm.$set(_vm.provider, "id", $$v)
-                              },
-                              expression: "provider.id"
-                            }
-                          })
-                        ],
-                        1
-                      ),
+                      _vm.providers
+                        ? _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm4: "", md4: "" } },
+                            [
+                              _c("v-select", {
+                                attrs: {
+                                  label: "Proveedor",
+                                  items: _vm.providers,
+                                  "item-text": "name",
+                                  "item-value": "id",
+                                  hint: "Descripcion del tipo seleccionado",
+                                  "persistent-hint": ""
+                                },
+                                model: {
+                                  value: _vm.purchase.provider_id,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.purchase, "provider_id", $$v)
+                                  },
+                                  expression: "purchase.provider_id"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "v-flex",
@@ -75080,6 +75212,13 @@ var render = function() {
                               label: "CEFO",
                               hint: "Ingrese codigo CEFO",
                               required: ""
+                            },
+                            model: {
+                              value: _vm.purchase.cefo,
+                              callback: function($$v) {
+                                _vm.$set(_vm.purchase, "cefo", $$v)
+                              },
+                              expression: "purchase.cefo"
                             }
                           })
                         ],
@@ -75119,11 +75258,11 @@ var render = function() {
                                 },
                                 slot: "activator",
                                 model: {
-                                  value: _vm.date,
+                                  value: _vm.purchase.date,
                                   callback: function($$v) {
-                                    _vm.date = $$v
+                                    _vm.$set(_vm.purchase, "date", $$v)
                                   },
-                                  expression: "date"
+                                  expression: "purchase.date"
                                 }
                               }),
                               _vm._v(" "),
@@ -75134,11 +75273,11 @@ var render = function() {
                                   }
                                 },
                                 model: {
-                                  value: _vm.date,
+                                  value: _vm.purchase.date,
                                   callback: function($$v) {
-                                    _vm.date = $$v
+                                    _vm.$set(_vm.purchase, "date", $$v)
                                   },
-                                  expression: "date"
+                                  expression: "purchase.date"
                                 }
                               })
                             ],
@@ -75149,7 +75288,6 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("v-data-table", {
-                        staticStyle: { "max-width": "100%" },
                         attrs: {
                           headers: _vm.purchase_headers,
                           items: _vm.purchase_lumbers,
@@ -75191,6 +75329,17 @@ var render = function() {
                                         label: "Cantidad",
                                         hint: "Ingrese cantidad",
                                         required: ""
+                                      },
+                                      model: {
+                                        value: _vm.pl[props.item.id].quantity,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.pl[props.item.id],
+                                            "quantity",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "pl[props.item.id].quantity"
                                       }
                                     })
                                   ],
@@ -83185,7 +83334,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       dialog: false,
       drawer: null,
-      items: [{ icon: 'dashboard', text: 'Inicio', link: '/' }, { icon: 'group', text: 'Almacenes', link: '/storage' }, { icon: 'group', text: 'Madera', link: '/lumber' }, { icon: 'group', text: 'Especies', link: '/specie' }, { icon: 'group', text: 'Proveedores', link: '/providers' }],
+      items: [{ icon: 'dashboard', text: 'Inicio', link: '/' }, { icon: 'group', text: 'Almacenes', link: '/storage' }, { icon: 'group', text: 'Madera', link: '/lumber' }, { icon: 'group', text: 'Especies', link: '/specie' }, { icon: 'group', text: 'Proveedores', link: '/provider' }, { icon: 'money', text: 'Compra de madera', link: '/purchase' }],
       menu: false,
       message: false
     };
