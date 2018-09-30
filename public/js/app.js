@@ -584,7 +584,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(119)
+var listToStyles = __webpack_require__(122)
 
 /*
 type StyleObject = {
@@ -843,8 +843,8 @@ module.exports = isArray;
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsNative = __webpack_require__(138),
-    getValue = __webpack_require__(143);
+var baseIsNative = __webpack_require__(141),
+    getValue = __webpack_require__(146);
 
 /**
  * Gets the native function at `key` of `object`.
@@ -975,8 +975,8 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(12),
-    getRawTag = __webpack_require__(139),
-    objectToString = __webpack_require__(140);
+    getRawTag = __webpack_require__(142),
+    objectToString = __webpack_require__(143);
 
 /** `Object#toString` result references. */
 var nullTag = '[object Null]',
@@ -1055,11 +1055,11 @@ module.exports = Symbol;
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var listCacheClear = __webpack_require__(166),
-    listCacheDelete = __webpack_require__(167),
-    listCacheGet = __webpack_require__(168),
-    listCacheHas = __webpack_require__(169),
-    listCacheSet = __webpack_require__(170);
+var listCacheClear = __webpack_require__(169),
+    listCacheDelete = __webpack_require__(170),
+    listCacheGet = __webpack_require__(171),
+    listCacheHas = __webpack_require__(172),
+    listCacheSet = __webpack_require__(173);
 
 /**
  * Creates an list cache object.
@@ -1132,7 +1132,7 @@ module.exports = nativeCreate;
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isKeyable = __webpack_require__(184);
+var isKeyable = __webpack_require__(187);
 
 /**
  * Gets the data for `map`.
@@ -12340,8 +12340,8 @@ module.exports = Vue;
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayLikeKeys = __webpack_require__(151),
-    baseKeys = __webpack_require__(158),
+var arrayLikeKeys = __webpack_require__(154),
+    baseKeys = __webpack_require__(161),
     isArrayLike = __webpack_require__(45);
 
 /**
@@ -12437,11 +12437,11 @@ module.exports = Map;
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var mapCacheClear = __webpack_require__(176),
-    mapCacheDelete = __webpack_require__(183),
-    mapCacheGet = __webpack_require__(185),
-    mapCacheHas = __webpack_require__(186),
-    mapCacheSet = __webpack_require__(187);
+var mapCacheClear = __webpack_require__(179),
+    mapCacheDelete = __webpack_require__(186),
+    mapCacheGet = __webpack_require__(188),
+    mapCacheHas = __webpack_require__(189),
+    mapCacheSet = __webpack_require__(190);
 
 /**
  * Creates a map cache object to store key-value pairs.
@@ -23466,7 +23466,7 @@ module.exports = toSource;
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsArguments = __webpack_require__(153),
+var baseIsArguments = __webpack_require__(156),
     isObjectLike = __webpack_require__(11);
 
 /** Used for built-in method references. */
@@ -23509,7 +23509,7 @@ module.exports = isArguments;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(4),
-    stubFalse = __webpack_require__(154);
+    stubFalse = __webpack_require__(157);
 
 /** Detect free variable `exports`. */
 var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
@@ -23584,9 +23584,9 @@ module.exports = isIndex;
 /* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsTypedArray = __webpack_require__(155),
-    baseUnary = __webpack_require__(156),
-    nodeUtil = __webpack_require__(157);
+var baseIsTypedArray = __webpack_require__(158),
+    baseUnary = __webpack_require__(159),
+    nodeUtil = __webpack_require__(160);
 
 /* Node.js helper references. */
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
@@ -23657,11 +23657,11 @@ module.exports = isArrayLike;
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(13),
-    stackClear = __webpack_require__(171),
-    stackDelete = __webpack_require__(172),
-    stackGet = __webpack_require__(173),
-    stackHas = __webpack_require__(174),
-    stackSet = __webpack_require__(175);
+    stackClear = __webpack_require__(174),
+    stackDelete = __webpack_require__(175),
+    stackGet = __webpack_require__(176),
+    stackHas = __webpack_require__(177),
+    stackSet = __webpack_require__(178);
 
 /**
  * Creates a stack cache object to store key-value pairs.
@@ -23732,7 +23732,7 @@ module.exports = eq;
 /* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsEqualDeep = __webpack_require__(188),
+var baseIsEqualDeep = __webpack_require__(191),
     isObjectLike = __webpack_require__(11);
 
 /**
@@ -23766,9 +23766,9 @@ module.exports = baseIsEqual;
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var SetCache = __webpack_require__(189),
-    arraySome = __webpack_require__(192),
-    cacheHas = __webpack_require__(193);
+var SetCache = __webpack_require__(192),
+    arraySome = __webpack_require__(195),
+    cacheHas = __webpack_require__(196);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -23934,8 +23934,8 @@ module.exports = baseGet;
 
 var isArray = __webpack_require__(5),
     isKey = __webpack_require__(28),
-    stringToPath = __webpack_require__(213),
-    toString = __webpack_require__(216);
+    stringToPath = __webpack_require__(216),
+    toString = __webpack_require__(219);
 
 /**
  * Casts `value` to a path array if it's not one.
@@ -23977,9 +23977,9 @@ module.exports = castPath;
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(241)
+var __vue_script__ = __webpack_require__(244)
 /* template */
-var __vue_template__ = __webpack_require__(242)
+var __vue_template__ = __webpack_require__(245)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -24022,8 +24022,8 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(7),
-    now = __webpack_require__(255),
-    toNumber = __webpack_require__(256);
+    now = __webpack_require__(258),
+    toNumber = __webpack_require__(259);
 
 /** Error message constants. */
 var FUNC_ERROR_TEXT = 'Expected a function';
@@ -24218,7 +24218,7 @@ module.exports = debounce;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(58);
-module.exports = __webpack_require__(295);
+module.exports = __webpack_require__(298);
 
 
 /***/ }),
@@ -24233,9 +24233,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__routes__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_lumber_index_vue__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_lumber_index_vue__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_lumber_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_lumber_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_App__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_App__ = __webpack_require__(295);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_App__);
 
 /**
@@ -69878,7 +69878,7 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLocalUse
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_specie_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_specie_index_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_storage_index_vue__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_storage_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_storage_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_purchase_index_vue__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_purchase_index_vue__ = __webpack_require__(116);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_purchase_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_purchase_index_vue__);
 
 
@@ -71322,15 +71322,73 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            search: '',
             pagination: {
                 sortBy: 'name'
             },
-            headers: [{ text: 'Alto', value: 'high' }, { text: 'Ancho', value: 'width' }, { text: 'Espesor', value: 'density' }, { text: 'Especie', value: 'specie' }, { text: 'Tipo', value: 'type' }],
+            headers: [{ text: 'Especie', value: 'specie' }, { text: 'Tipo', value: 'type' }, { text: 'Alto', value: 'high' }, { text: 'Ancho', value: 'width' }, { text: 'Espesor', value: 'density' }],
             species: null,
             types: null,
             lumbers: [],
@@ -71341,7 +71399,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             filterName: 'high',
             filterValue: '',
             dialog: false,
-            editedIndex: -1
+            editedIndex: -1,
+            last_page: 1,
+            page: 1,
+            paginationRows: 10
         };
     },
 
@@ -71351,115 +71412,86 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        var _this = this;
-
-        this.getLumber().then(this.getDataFromApi().then(function (data) {
-            _this.lumbers = data.lumbers;
-            _this.totalLumber = data.total;
-        }));
+        this.search();
         this.getSpecies();
         this.getTypes();
     },
 
     methods: {
-        getDataFromApi: function getDataFromApi() {
-            // return new Promise((resolve, reject) => {
-            // const { sortBy, descending, page, rowsPerPage } = this.pagination
+        search: function search() {
+            var _this = this;
 
-            // let items= this.lumbers;
-            // const total = items.length;
-
-            // if (this.pagination.sortBy) {
-            //     items = items.sort((a, b) => {
-            //     const sortA = a[sortBy]
-            //     const sortB = b[sortBy]
-
-            //     if (descending) {
-            //         if (sortA < sortB) return 1
-            //         if (sortA > sortB) return -1
-            //         return 0
-            //     } else {
-            //         if (sortA < sortB) return -1
-            //         if (sortA > sortB) return 1
-            //         return 0
-            //     }
-            //     })
-            // }
-
-            // if (rowsPerPage > 0) {
-            //     items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-            // }
-
-            //     resolve({
-            //     items,
-            //     total
-            //     });
-
-            // })
-        },
-        getLumber: function getLumber(withFilter) {
-            var _this2 = this;
-
-            console.log("starting receiving data");
             return new Promise(function (resolve, reject) {
-                _this2.loading = true;
-                var filterName = withFilter == true ? _this2.filterName : 'high';
-                console.log(withFilter);
-                axios.get('/api/auth/getLumberData', { name: filterName, value: _this2.filterValue }).then(function (response) {
-                    // let providers = response.data;
-                    console.log(response.data);
-                    _this2.lumbers = response.data.lumbers;
-                    _this2.loading = false;
+                _this.getData('/api/auth/lumber', _this.getParams()).then(function (data) {
+                    _this.lumbers = data.data;
+                    _this.last_page = data.last_page;
                     resolve();
                 });
             });
         },
-        getResult: function getResult(withFilter) {
-            var _this3 = this;
+        getParams: function getParams() {
+            var params = {};
+            this.headers.forEach(function (element) {
+                params[element.value] = element.input;
+            });
+            params['order'] = this.pagination.descending == true ? 'asc' : 'desc';
+            params['page'] = this.page;
+            params['pagination_rows'] = this.paginationRows;
+            return params;
+        },
+        getData: function getData(url, parameters) {
+            var _this2 = this;
 
-            console.log(this.filterName);
-            //axios.post('/api/providers/getdata',{name:this.filterName})
-            //   .then((response)=>{ console.log(response.data)});
-            this.getLumber(withFilter).then(this.getDataFromApi().then(function (data) {
-                _this3.lumbers = data.lumbers;
-                _this3.totalLumber = data.total;
-            }));
+            return new Promise(function (resolve, reject) {
+                _this2.loading = true;
+                axios.get(url, {
+                    params: parameters
+                }).then(function (response) {
+                    _this2.loading = false;
+                    resolve(response.data);
+                });
+            });
         },
-        toggleOrder: function toggleOrder(index) {
-            this.pagination.sortBy = this.headers[index].value;
-            this.pagination.descending = !this.pagination.descending;
-        },
-        setFilter: function setFilter(filterName) {
-            this.filterValue = '', this.filterName = filterName;
+        next: function next(page) {
+            this.page = page;
+            this.search();
         },
         create: function create() {
-            var _this4 = this;
+            var _this3 = this;
 
             axios.get('/api/auth/lumber/create').then(function (response) {
-                console.log(response.data.lumber);
-                _this4.newLumber = response.data.lumber;
+                _this3.newLumber = response.data.lumber;
             }).catch(function (error) {
                 console.log(error);
             });
             this.dialog = true;
         },
-        store: function store() {},
+        store: function store() {
+            var index = -1;
+            axios.post('/api/auth/lumber/', this.newLumber).then(function (response) {
+                //this.lumbers.push(response.data.lumber);
+                alert('dato creado');
+            }).catch(function (error) {
+                console.log(error);
+            });
+            this.dialog = false;
+        },
         show: function show(item) {
-            var _this5 = this;
+            var _this4 = this;
 
             axios.get('/api/auth/lumber/' + item.id).then(function (response) {
-                _this5.lumber = response.data.lumber;
+                _this4.lumber = response.data.lumber;
             }).catch(function (error) {
                 console.log(error);
             });
         },
         edit: function edit(item) {
-            var _this6 = this;
+            var _this5 = this;
 
             this.editedIndex = this.lumbers.indexOf(item);
             //this.editedItem = Object.assign({}, item)
             axios.get('/api/auth/lumber/' + item.id + '/edit').then(function (response) {
-                _this6.newLumber = response.data.lumber;
+                _this5.newLumber = response.data.lumber;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -71467,20 +71499,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.dialog = true;
         },
         update: function update(item) {
-            var _this7 = this;
+            var _this6 = this;
 
             var index = this.editedIndex;
             axios.put('/api/auth/lumber/' + this.newLumber.id, this.newLumber).then(function (response) {
-                _this7.lumbers[index].high = response.data.lumber.high;
-                _this7.lumbers[index].width = response.data.lumber.width;
-                _this7.lumbers[index].density = response.data.lumber.density;
-                _this7.lumbers[index].specie = response.data.lumber.specie.name;
-                _this7.lumbers[index].type_id = response.data.lumber.type_id;
+                _this6.lumbers[index].high = response.data.lumber.high;
+                _this6.lumbers[index].width = response.data.lumber.width;
+                _this6.lumbers[index].density = response.data.lumber.density;
+                _this6.lumbers[index].specie = response.data.lumber.specie;
+                _this6.lumbers[index].type = response.data.lumber.type;
             }).catch(function (error) {
                 console.log(error);
             });
             this.dialog = false;
-            this.getLumber();
+            //this.getLumber();
         },
         destroy: function destroy(item) {
             var success_delete = false;
@@ -71493,44 +71525,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.getLumber();
         },
         getSpecies: function getSpecies() {
-            var _this8 = this;
+            var _this7 = this;
 
             axios.get('/api/auth/specie').then(function (response) {
-                _this8.species = response.data.species;
+                _this7.species = response.data.species;
             }).catch(function (error) {
                 console.log(error);
             });
         },
         getTypes: function getTypes() {
-            var _this9 = this;
+            var _this8 = this;
 
             axios.get('/api/auth/type').then(function (response) {
-                _this9.types = response.data.types;
+                _this8.types = response.data.types;
             }).catch(function (error) {
                 console.log(error);
             });
         },
         close: function close() {
             this.dialog = false;
-        }
-    },
-    watch: {
-        pagination: {
-            handler: function handler() {
-                var _this10 = this;
-
-                this.getDataFromApi().then(function (data) {
-                    _this10.desserts = data.items;
-                    _this10.totalDesserts = data.total;
-                });
-            },
-
-            deep: true
-        },
-        filterValue: function filterValue(fv) {
-            if (fv == '') {
-                this.getResult(false);
-            }
         }
     }
 });
@@ -71781,7 +71794,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("store")]
+                            [_vm._v("Guardar")]
                           )
                         : _c(
                             "v-btn",
@@ -71793,7 +71806,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("update")]
+                            [_vm._v("Actualizar")]
                           )
                     ],
                     1
@@ -71822,278 +71835,361 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-data-table",
-        {
-          attrs: {
-            headers: _vm.headers,
-            items: _vm.lumbers,
-            search: _vm.search,
-            pagination: _vm.pagination
-          },
-          on: {
-            "update:pagination": function($event) {
-              _vm.pagination = $event
-            }
-          },
-          scopedSlots: _vm._u([
-            {
-              key: "headers",
-              fn: function(props) {
-                return [
-                  _c(
-                    "tr",
-                    _vm._l(props.headers, function(header, index) {
-                      return _c(
-                        "th",
-                        { key: index, staticClass: "text-xs-left" },
-                        [
-                          _c(
-                            "v-flex",
-                            [
-                              _c(
-                                "span",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      _vm.toggleOrder(index)
-                                    }
-                                  }
-                                },
-                                [
+      _c("v-data-table", {
+        attrs: { headers: _vm.headers, items: _vm.lumbers, "hide-actions": "" },
+        scopedSlots: _vm._u([
+          {
+            key: "headers",
+            fn: function(props) {
+              return [
+                _c(
+                  "tr",
+                  _vm._l(props.headers, function(header, index) {
+                    return _c(
+                      "th",
+                      { key: index, staticClass: "text-xs-left" },
+                      [
+                        header.value != "actions"
+                          ? _c(
+                              "v-flex",
+                              [
+                                _c("span", [
                                   _vm._v(
                                     _vm._s(header.text) +
-                                      "                                \n                            "
+                                      "\n                            "
                                   )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-menu",
-                                { attrs: { "close-on-content-click": false } },
-                                [
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      attrs: { slot: "activator", icon: "" },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.setFilter(header.value)
-                                        }
-                                      },
-                                      slot: "activator"
-                                    },
-                                    [
-                                      _c("v-icon", { attrs: { small: "" } }, [
-                                        _vm._v("fa-filter")
-                                      ])
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-card",
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          "append-icon": "search",
-                                          label: "Buscar " + header.text + "..."
-                                        },
-                                        on: {
-                                          keydown: function($event) {
-                                            if (
-                                              !("button" in $event) &&
-                                              _vm._k(
-                                                $event.keyCode,
-                                                "enter",
-                                                13,
-                                                $event.key,
-                                                "Enter"
-                                              )
-                                            ) {
-                                              return null
-                                            }
-                                            _vm.getResult(true)
-                                          }
-                                        },
-                                        model: {
-                                          value: _vm.filterValue,
-                                          callback: function($$v) {
-                                            _vm.filterValue = $$v
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "v-menu",
+                                  {
+                                    attrs: { "close-on-content-click": false }
+                                  },
+                                  [
+                                    header.sortable != false
+                                      ? _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              slot: "activator",
+                                              icon: ""
+                                            },
+                                            slot: "activator"
                                           },
-                                          expression: "filterValue"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              header.value == _vm.pagination.sortBy
-                                ? _c(
-                                    "v-icon",
-                                    {
-                                      attrs: { small: "" },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.toggleOrder(index)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.pagination.descending == false
-                                            ? "arrow_upward"
-                                            : "arrow_downward"
+                                          [
+                                            _c(
+                                              "v-icon",
+                                              { attrs: { small: "" } },
+                                              [_vm._v("fa-filter")]
+                                            )
+                                          ],
+                                          1
                                         )
-                                      )
-                                    ]
-                                  )
-                                : _vm._e()
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-card",
+                                      [
+                                        _c("v-text-field", {
+                                          attrs: {
+                                            outline: "",
+                                            "hide-details": "",
+                                            "append-icon": "search",
+                                            label:
+                                              "Buscar " + header.text + "..."
+                                          },
+                                          on: {
+                                            keydown: function($event) {
+                                              if (
+                                                !("button" in $event) &&
+                                                _vm._k(
+                                                  $event.keyCode,
+                                                  "enter",
+                                                  13,
+                                                  $event.key,
+                                                  "Enter"
+                                                )
+                                              ) {
+                                                return null
+                                              }
+                                              _vm.search()
+                                            }
+                                          },
+                                          model: {
+                                            value: header.input,
+                                            callback: function($$v) {
+                                              _vm.$set(header, "input", $$v)
+                                            },
+                                            expression: "header.input"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  })
+                )
+              ]
+            }
+          },
+          {
+            key: "items",
+            fn: function(props) {
+              return [
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.specie.name))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.type.name))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.high))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.width))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-left" }, [
+                  _vm._v(_vm._s(props.item.density))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "justify-center layout px-0" },
+                  [
+                    _c(
+                      "v-icon",
+                      {
+                        staticClass: "mr-2",
+                        attrs: { small: "" },
+                        on: {
+                          click: function($event) {
+                            _vm.show(props.item)
+                            props.expanded = !props.expanded
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        toc\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-icon",
+                      {
+                        staticClass: "mr-2",
+                        attrs: { small: "" },
+                        on: {
+                          click: function($event) {
+                            _vm.edit(props.item)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        edit\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-icon",
+                      {
+                        attrs: { small: "" },
+                        on: {
+                          click: function($event) {
+                            _vm.destroy(props.item)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        delete\n                    "
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ]
+            }
+          },
+          {
+            key: "expand",
+            fn: function(props) {
+              return [
+                _vm.lumber
+                  ? _c("v-card", { attrs: { flat: "" } }, [
+                      _c("table", [
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Especie\n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.specie.name) +
+                                    "\n                            "
+                                )
+                              ])
                             ],
                             1
                           )
-                        ],
-                        1
-                      )
-                    })
-                  )
-                ]
-              }
-            },
-            {
-              key: "items",
-              fn: function(props) {
-                return [
-                  _c("td", { staticClass: "text-xs-left" }, [
-                    _vm._v(_vm._s(props.item.high))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-xs-left" }, [
-                    _vm._v(_vm._s(props.item.width))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-xs-left" }, [
-                    _vm._v(_vm._s(props.item.density))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-xs-left" }, [
-                    _vm._v(_vm._s(props.item.specie.name))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-xs-left" }, [
-                    _vm._v(_vm._s(props.item.type.name))
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "justify-center layout px-0" },
-                    [
-                      _c(
-                        "v-icon",
-                        {
-                          staticClass: "mr-2",
-                          attrs: { small: "" },
-                          on: {
-                            click: function($event) {
-                              _vm.show(props.item)
-                              props.expanded = !props.expanded
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        toc\n                    "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-icon",
-                        {
-                          staticClass: "mr-2",
-                          attrs: { small: "" },
-                          on: {
-                            click: function($event) {
-                              _vm.edit(props.item)
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        edit\n                    "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-icon",
-                        {
-                          attrs: { small: "" },
-                          on: {
-                            click: function($event) {
-                              _vm.destroy(props.item)
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        delete\n                    "
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ]
-              }
-            },
-            {
-              key: "expand",
-              fn: function(props) {
-                return [
-                  _vm.lumber
-                    ? _c(
-                        "v-card",
-                        { attrs: { flat: "" } },
-                        [
-                          _c("v-card-text", [
-                            _vm._v(_vm._s(_vm.lumber.description))
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Tipo\n                        "
+                            )
                           ]),
                           _vm._v(" "),
-                          _c("v-card-text", [_vm._v(_vm._s(_vm.lumber.high))])
-                        ],
-                        1
-                      )
-                    : _vm._e()
-                ]
-              }
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.type.name) +
+                                    "\n                            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Alto\n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.high) +
+                                    "\n                            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Ancho\n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.width) +
+                                    "\n                            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Espesor\n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.density) +
+                                    "\n                            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                            Descripción \n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(_vm.lumber.description) +
+                                    "\n                            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ])
+                      ])
+                    ])
+                  : _vm._e()
+              ]
             }
-          ])
-        },
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "text-xs-center" },
         [
-          _c(
-            "v-alert",
-            {
-              attrs: {
-                slot: "no-results",
-                value: true,
-                color: "error",
-                icon: "warning"
+          _c("v-pagination", {
+            attrs: { length: _vm.last_page, "total-visible": 10 },
+            on: { input: _vm.next },
+            model: {
+              value: _vm.page,
+              callback: function($$v) {
+                _vm.page = $$v
               },
-              slot: "no-results"
-            },
-            [
-              _vm._v(
-                '\n            Your search for "' +
-                  _vm._s(_vm.search) +
-                  '" found no results.\n        '
-              )
-            ]
-          )
+              expression: "page"
+            }
+          })
         ],
         1
       )
@@ -73785,8386 +73881,11 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(117)
-}
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(120)
+var __vue_script__ = __webpack_require__(117)
 /* template */
-var __vue_template__ = __webpack_require__(291)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/lumber/index.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-26434b36", Component.options)
-  } else {
-    hotAPI.reload("data-v-26434b36", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 117 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(118);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("56ee7b34", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-26434b36\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-26434b36\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 118 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.w-240 {\n  width: 240px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 119 */
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
-/* 120 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_datatable_component__ = __webpack_require__(121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__datatable___ = __webpack_require__(267);
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2_datatable_component__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: __WEBPACK_IMPORTED_MODULE_3__datatable___["a" /* default */],
-  name: 'LumberTable',
-  props: ['row'],
-  data: function data() {
-    var amINestedComp = !!this.row;
-    return {
-      supportBackup: true,
-      supportNested: true,
-      tblClass: 'table-bordered',
-      tblStyle: 'color: #666',
-      pageSizeOptions: [5, 10, 15, 20],
-      columns: function () {
-        var cols = [{ title: 'Alto', field: 'high', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } }, { title: 'Ancho', field: 'width', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } }, { title: 'Espesor', field: 'density', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } }, { title: 'Tipo', field: 'type', thComp: 'FilterTh', tdComp: 'Object', tdStyle: { fontStyle: 'italic' } }, { title: 'Especie', field: 'specie', thComp: 'FilterTh', tdComp: 'Object', tdStyle: { fontStyle: 'italic' } }, { title: 'Operation', tdComp: 'Opt', visible: 'true' }];
-        var groupsDef = {
-          Normal: ['Alto', 'Ancho', 'Espesor', 'Tipo', 'Especie'],
-          Sortable: ['Alto'],
-          Extra: []
-          //return cols;
-        };return cols.map(function (col) {
-          console.log(col);
-          Object.keys(groupsDef).forEach(function (groupName) {
-            if (groupsDef[groupName].includes(col.title)) {
-
-              col.group = groupName;
-            }
-          });
-          return col;
-        });
-      }(),
-      data: [],
-      total: 0,
-      selection: [],
-      summary: {},
-      query: amINestedComp ? { uid: this.row.friends } : {},
-      xprops: {
-        eventbus: new __WEBPACK_IMPORTED_MODULE_0_vue___default.a()
-      }
-    };
-  },
-
-  watch: {
-    query: {
-      handler: function handler() {
-        console.log("handling");
-        this.handleQueryChange();
-      },
-
-      deep: true
-    }
-  },
-  methods: {
-
-    /**
-     * Get filtered Record
-     * @param   {Record} form
-     * @resolve {Record}
-     */
-    handleQueryChange: function handleQueryChange() {
-      var _this = this;
-
-      __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/auth/getLumberData', {
-        params: this.query
-      }).then(function (response) {
-        _this.data = response.data.lumbers;
-        _this.total = response.data.total;
-      }).catch(function (error) {
-        console.log(error);
-      });
-    },
-    alertSelectedUids: function alertSelectedUids() {
-      console.log(this.selection);
-      alert(this.selection.map(function (_ref) {
-        var id = _ref.id;
-        return id;
-      }));
-    },
-    editItem: function editItem(item) {
-      console.log("here");
-      this.editedIndex = this.desserts.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      console.log(item);
-      //this.date = item.birth_date
-      //this.dialog = true
-    },
-    showModal: function showModal() {
-      this.$refs.myModalRef.show();
-    }
-  }
-});
-
-/***/ }),
-/* 121 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__index_vue__ = __webpack_require__(122);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__index_vue__);
-
-
-__WEBPACK_IMPORTED_MODULE_0__index_vue___default.a.install = (Vue, options) => {
-  const locale = options ? options.locale : {}
-  
-  // this might be the simplest i18n solution
-  Vue.prototype.$i18nForDatatable = srcTxt => locale[srcTxt] || srcTxt
-
-  Vue.component('Datatable', __WEBPACK_IMPORTED_MODULE_0__index_vue___default.a)
-}
-
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(__WEBPACK_IMPORTED_MODULE_0__index_vue___default.a)
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__index_vue___default.a);
-
-
-/***/ }),
-/* 122 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(123)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(125)
-/* template */
-var __vue_template__ = __webpack_require__(266)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules/vue2-datatable-component/src/index.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0608cf92", Component.options)
-  } else {
-    hotAPI.reload("data-v-0608cf92", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 123 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(124);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("52c48ab7", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0608cf92\",\"scoped\":false,\"hasInlineConfig\":true}!../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0608cf92\",\"scoped\":false,\"hasInlineConfig\":true}!../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 124 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* transition effect: fade */\n.fade-enter-active, .fade-leave-active {\n  -webkit-transition: opacity .2s;\n  transition: opacity .2s;\n}\n.fade-enter, .fade-leave-active {\n  opacity: 0;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 125 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeaderSettings_index_vue__ = __webpack_require__(126);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeaderSettings_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__HeaderSettings_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Table_index_vue__ = __webpack_require__(229);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Table_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Table_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Pagination_vue__ = __webpack_require__(258);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Pagination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Pagination_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PageSizeSelect_vue__ = __webpack_require__(261);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PageSizeSelect_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__PageSizeSelect_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_props__ = __webpack_require__(8);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Datatable',
-  mixins: [__WEBPACK_IMPORTED_MODULE_4__mixins_props__["a" /* default */]],
-  components: { HeaderSettings: __WEBPACK_IMPORTED_MODULE_0__HeaderSettings_index_vue___default.a, Tbl: __WEBPACK_IMPORTED_MODULE_1__Table_index_vue___default.a, Pagination: __WEBPACK_IMPORTED_MODULE_2__Pagination_vue___default.a, PageSizeSelect: __WEBPACK_IMPORTED_MODULE_3__PageSizeSelect_vue___default.a },
-  created: function created() {
-    var _this = this;
-
-    // init query (make all the properties observable by using `$set`)
-    var q = _extends({ limit: 10, offset: 0, sort: '', order: '' }, this.query);
-    Object.keys(q).forEach(function (key) {
-      _this.$set(_this.query, key, q[key]);
-    });
-  },
-
-  watch: {
-    data: {
-      handler: function handler(data) {
-        var _this2 = this;
-
-        var supportNested = this.supportNested;
-        // support nested components feature with extra magic
-
-        if (supportNested) {
-          var MAGIC_FIELD = '__nested__';
-          data.forEach(function (item) {
-            if (!item[MAGIC_FIELD]) {
-              _this2.$set(item, MAGIC_FIELD, {
-                comp: undefined, // current nested component
-                visible: false,
-                $toggle: function $toggle(comp, visible) {
-                  switch (arguments.length) {
-                    case 0:
-                      this.visible = !this.visible;
-                      break;
-                    case 1:
-                      switch (typeof comp === 'undefined' ? 'undefined' : _typeof(comp)) {
-                        case 'boolean':
-                          this.visible = comp;
-                          break;
-                        case 'string':
-                        case 'object':
-                          this.comp = comp;
-                          this.visible = !this.visible;
-                          break;
-                      }
-                      break;
-                    case 2:
-                      this.comp = comp;
-                      this.visible = visible;
-                      break;
-                  }
-                }
-              });
-              if (supportNested === 'accordion') {
-                _this2.$watch(function () {
-                  return item[MAGIC_FIELD];
-                }, function (nested) {
-                  // only one nested component can be expanded at the same time
-                  if (data.filter(function (item) {
-                    return item[MAGIC_FIELD].visible;
-                  }).length < 2) return;
-
-                  data.forEach(function (item) {
-                    if (item[MAGIC_FIELD].visible && item[MAGIC_FIELD] !== nested) {
-                      item[MAGIC_FIELD].visible = false;
-                    }
-                  });
-                }, { deep: true });
-              }
-              Object.defineProperty(item, MAGIC_FIELD, { enumerable: false });
-            }
-          });
-        }
-      },
-
-      immediate: true
-    }
-  }
-});
-
-/***/ }),
-/* 126 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(127)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(129)
-/* template */
-var __vue_template__ = __webpack_require__(228)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules/vue2-datatable-component/src/HeaderSettings/index.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-41de8ae3", Component.options)
-  } else {
-    hotAPI.reload("data-v-41de8ae3", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 127 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(128);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("62c3db20", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41de8ae3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41de8ae3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 128 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.-col-group-container {\n  border-bottom: 1px solid #ddd;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 129 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ColumnGroup_vue__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ColumnGroup_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ColumnGroup_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_groupBy__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_groupBy___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_groupBy__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_keyGen__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_replaceWith__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_localstorage__ = __webpack_require__(227);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'HeaderSettings',
-  components: { ColumnGroup: __WEBPACK_IMPORTED_MODULE_0__ColumnGroup_vue___default.a },
-  props: {
-    columns: { type: Array, required: true },
-    supportBackup: { type: Boolean, required: true }
-  },
-  data: function data() {
-    var origSettings = Object(__WEBPACK_IMPORTED_MODULE_4__utils_localstorage__["e" /* stringify */])(this.columns);
-    return {
-      origSettings: origSettings,
-      usingBak: false, // is using backup
-      processingCls: '',
-      storageKey: this.supportBackup && Object(__WEBPACK_IMPORTED_MODULE_2__utils_keyGen__["a" /* default */])(origSettings)
-    };
-  },
-  created: function created() {
-    if (!this.supportBackup) return;
-
-    var backup = Object(__WEBPACK_IMPORTED_MODULE_4__utils_localstorage__["a" /* getFromLS */])(this.storageKey);
-    if (!backup) return; // no backup found
-
-    Object(__WEBPACK_IMPORTED_MODULE_3__utils_replaceWith__["a" /* default */])(this.columns, backup);
-    this.usingBak = true;
-  },
-  mounted: function mounted() {
-    // control dropdown manually (refers to http://jsfiddle.net/rj3k550m/3)
-    var $el = $(this.$el);
-    $(this.$refs.dropdownBtn).on('click', this.toggle);
-    $(document).on('click', function (e) {
-      $(e.target).closest($el).length || $el.removeClass('open');
-    });
-  },
-
-  computed: {
-    colGroups: function colGroups() {
-      return __WEBPACK_IMPORTED_MODULE_1_lodash_groupBy___default()(this.columns.filter(function (col) {
-        return col.label || col.title;
-      }), 'group');
-    },
-    drpMenuStyle: function drpMenuStyle() {
-      var w = Object.keys(this.colGroups).length * 150;
-      return {
-        padding: '10px 10px 0',
-        width: w + 25 + 'px',
-        left: '-' + (w - 25) + 'px'
-      };
-    }
-  },
-  methods: {
-    apply: function apply(alsoBackup) {
-      this.toggle();
-      this.$refs.colGroups.forEach(function (colGroup) {
-        colGroup.apply();
-      });
-      alsoBackup && this.$nextTick(this.backup);
-    },
-    backup: function backup() {
-      Object(__WEBPACK_IMPORTED_MODULE_4__utils_localstorage__["d" /* saveToLS */])(this.storageKey, this.columns);
-      this.showProcessing();
-      this.usingBak = true;
-    },
-    rmBackup: function rmBackup() {
-      Object(__WEBPACK_IMPORTED_MODULE_4__utils_localstorage__["c" /* rmFromLS */])(this.storageKey);
-      this.showProcessing();
-      this.usingBak = false;
-
-      Object(__WEBPACK_IMPORTED_MODULE_3__utils_replaceWith__["a" /* default */])(this.columns, Object(__WEBPACK_IMPORTED_MODULE_4__utils_localstorage__["b" /* parseStr */])(this.origSettings)); // restore
-    },
-    toggle: function toggle() {
-      $(this.$el).toggleClass('open');
-    },
-    showProcessing: function showProcessing() {
-      var _this = this;
-
-      ['fa-spinner fa-pulse', 'fa-check', ''].forEach(function (cls, idx) {
-        setTimeout(function () {
-          _this.processingCls = cls;
-        }, idx * 1000);
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 130 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(131)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(133)
-/* template */
-var __vue_template__ = __webpack_require__(134)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules/vue2-datatable-component/src/HeaderSettings/ColumnGroup.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7d2f207a", Component.options)
-  } else {
-    hotAPI.reload("data-v-7d2f207a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 131 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(132);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("7fc38c78", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7d2f207a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./ColumnGroup.vue", function() {
-     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7d2f207a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./ColumnGroup.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 132 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.-col-group {\n  display: inline-block;\n  margin-bottom: 5px;\n  padding: 0;\n  width: 150px;\n  vertical-align: top;\n}\n.-col-group-title {\n  display: block;\n  margin: 5px;\n  padding: 5px;\n  border-bottom: 1px solid #ddd;\n  font-size: 18px;\n}\n.-col-group > li {\n  margin-bottom: 5px;\n  padding-left: 10px;\n  list-style: none;\n  line-height: 20px;\n  font-size: 12px;\n}\n.-col-group > li > * {\n  margin: 0;\n  vertical-align: middle;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 133 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_isColVisible__ = __webpack_require__(37);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ColumnGroup',
-  props: {
-    groupName: { type: String, required: true },
-    columns: { type: Array, required: true }
-  },
-  data: function data() {
-    return {
-      changes: [] // record the changes with a stack
-    };
-  },
-  methods: {
-    handleChange: function handleChange(col, isChecked) {
-      this.changes.push({ col: col, isChecked: isChecked });
-    },
-    uuidGen: function uuidGen(key) {
-      // $vm._uid is a private property of a Vue instance
-      return '-col-' + this._uid + '-' + key;
-    },
-    apply: function apply() {
-      var _this = this;
-
-      this.changes.forEach(function (_ref) {
-        var col = _ref.col,
-            isChecked = _ref.isChecked;
-
-        _this.$set(col, 'visible', isChecked);
-      });
-      this.changes = []; // don't forget to clear the stack
-    },
-
-    isColVisible: __WEBPACK_IMPORTED_MODULE_0__utils_isColVisible__["a" /* default */]
-  }
-});
-
-/***/ }),
-/* 134 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "ul",
-    { staticClass: "-col-group", attrs: { name: "ColumnGroup" } },
-    [
-      _c("label", { staticClass: "-col-group-title" }, [
-        _vm._v(
-          "\n    " +
-            _vm._s(_vm.groupName === "undefined" ? "Columns" : _vm.groupName) +
-            "\n  "
-        )
-      ]),
-      _vm._v(" "),
-      _vm._l(_vm.columns, function(col, idx) {
-        return _c("li", [
-          _c("input", {
-            attrs: {
-              type: "checkbox",
-              id: _vm.uuidGen(col.field || idx),
-              name: _vm.groupName,
-              disabled: typeof col.visible === "string"
-            },
-            domProps: { checked: _vm.isColVisible(col) },
-            on: {
-              change: function($event) {
-                _vm.handleChange(col, $event.target.checked)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: _vm.uuidGen(col.field || idx) } }, [
-            _vm._v("\n      " + _vm._s(col.label || col.title) + "\n      "),
-            col.explain
-              ? _c("i", {
-                  staticClass: "fa fa-info-circle",
-                  staticStyle: { cursor: "help" },
-                  attrs: { title: col.explain }
-                })
-              : _vm._e()
-          ])
-        ])
-      })
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7d2f207a", module.exports)
-  }
-}
-
-/***/ }),
-/* 135 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseAssignValue = __webpack_require__(136),
-    createAggregator = __webpack_require__(144);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Creates an object composed of keys generated from the results of running
- * each element of `collection` thru `iteratee`. The order of grouped values
- * is determined by the order they occur in `collection`. The corresponding
- * value of each key is an array of elements responsible for generating the
- * key. The iteratee is invoked with one argument: (value).
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Collection
- * @param {Array|Object} collection The collection to iterate over.
- * @param {Function} [iteratee=_.identity] The iteratee to transform keys.
- * @returns {Object} Returns the composed aggregate object.
- * @example
- *
- * _.groupBy([6.1, 4.2, 6.3], Math.floor);
- * // => { '4': [4.2], '6': [6.1, 6.3] }
- *
- * // The `_.property` iteratee shorthand.
- * _.groupBy(['one', 'two', 'three'], 'length');
- * // => { '3': ['one', 'two'], '5': ['three'] }
- */
-var groupBy = createAggregator(function(result, value, key) {
-  if (hasOwnProperty.call(result, key)) {
-    result[key].push(value);
-  } else {
-    baseAssignValue(result, key, [value]);
-  }
-});
-
-module.exports = groupBy;
-
-
-/***/ }),
-/* 136 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var defineProperty = __webpack_require__(137);
-
-/**
- * The base implementation of `assignValue` and `assignMergeValue` without
- * value checks.
- *
- * @private
- * @param {Object} object The object to modify.
- * @param {string} key The key of the property to assign.
- * @param {*} value The value to assign.
- */
-function baseAssignValue(object, key, value) {
-  if (key == '__proto__' && defineProperty) {
-    defineProperty(object, key, {
-      'configurable': true,
-      'enumerable': true,
-      'value': value,
-      'writable': true
-    });
-  } else {
-    object[key] = value;
-  }
-}
-
-module.exports = baseAssignValue;
-
-
-/***/ }),
-/* 137 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(6);
-
-var defineProperty = (function() {
-  try {
-    var func = getNative(Object, 'defineProperty');
-    func({}, '', {});
-    return func;
-  } catch (e) {}
-}());
-
-module.exports = defineProperty;
-
-
-/***/ }),
-/* 138 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isFunction = __webpack_require__(38),
-    isMasked = __webpack_require__(141),
-    isObject = __webpack_require__(7),
-    toSource = __webpack_require__(40);
-
-/**
- * Used to match `RegExp`
- * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
- */
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-
-/** Used to detect host constructors (Safari). */
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-
-/** Used for built-in method references. */
-var funcProto = Function.prototype,
-    objectProto = Object.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Used to detect if a method is native. */
-var reIsNative = RegExp('^' +
-  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
-  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-);
-
-/**
- * The base implementation of `_.isNative` without bad shim checks.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a native function,
- *  else `false`.
- */
-function baseIsNative(value) {
-  if (!isObject(value) || isMasked(value)) {
-    return false;
-  }
-  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
-  return pattern.test(toSource(value));
-}
-
-module.exports = baseIsNative;
-
-
-/***/ }),
-/* 139 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Symbol = __webpack_require__(12);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var nativeObjectToString = objectProto.toString;
-
-/** Built-in value references. */
-var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
-
-/**
- * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the raw `toStringTag`.
- */
-function getRawTag(value) {
-  var isOwn = hasOwnProperty.call(value, symToStringTag),
-      tag = value[symToStringTag];
-
-  try {
-    value[symToStringTag] = undefined;
-    var unmasked = true;
-  } catch (e) {}
-
-  var result = nativeObjectToString.call(value);
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag] = tag;
-    } else {
-      delete value[symToStringTag];
-    }
-  }
-  return result;
-}
-
-module.exports = getRawTag;
-
-
-/***/ }),
-/* 140 */
-/***/ (function(module, exports) {
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var nativeObjectToString = objectProto.toString;
-
-/**
- * Converts `value` to a string using `Object.prototype.toString`.
- *
- * @private
- * @param {*} value The value to convert.
- * @returns {string} Returns the converted string.
- */
-function objectToString(value) {
-  return nativeObjectToString.call(value);
-}
-
-module.exports = objectToString;
-
-
-/***/ }),
-/* 141 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var coreJsData = __webpack_require__(142);
-
-/** Used to detect methods masquerading as native. */
-var maskSrcKey = (function() {
-  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
-  return uid ? ('Symbol(src)_1.' + uid) : '';
-}());
-
-/**
- * Checks if `func` has its source masked.
- *
- * @private
- * @param {Function} func The function to check.
- * @returns {boolean} Returns `true` if `func` is masked, else `false`.
- */
-function isMasked(func) {
-  return !!maskSrcKey && (maskSrcKey in func);
-}
-
-module.exports = isMasked;
-
-
-/***/ }),
-/* 142 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var root = __webpack_require__(4);
-
-/** Used to detect overreaching core-js shims. */
-var coreJsData = root['__core-js_shared__'];
-
-module.exports = coreJsData;
-
-
-/***/ }),
-/* 143 */
-/***/ (function(module, exports) {
-
-/**
- * Gets the value at `key` of `object`.
- *
- * @private
- * @param {Object} [object] The object to query.
- * @param {string} key The key of the property to get.
- * @returns {*} Returns the property value.
- */
-function getValue(object, key) {
-  return object == null ? undefined : object[key];
-}
-
-module.exports = getValue;
-
-
-/***/ }),
-/* 144 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayAggregator = __webpack_require__(145),
-    baseAggregator = __webpack_require__(146),
-    baseIteratee = __webpack_require__(163),
-    isArray = __webpack_require__(5);
-
-/**
- * Creates a function like `_.groupBy`.
- *
- * @private
- * @param {Function} setter The function to set accumulator values.
- * @param {Function} [initializer] The accumulator object initializer.
- * @returns {Function} Returns the new aggregator function.
- */
-function createAggregator(setter, initializer) {
-  return function(collection, iteratee) {
-    var func = isArray(collection) ? arrayAggregator : baseAggregator,
-        accumulator = initializer ? initializer() : {};
-
-    return func(collection, setter, baseIteratee(iteratee, 2), accumulator);
-  };
-}
-
-module.exports = createAggregator;
-
-
-/***/ }),
-/* 145 */
-/***/ (function(module, exports) {
-
-/**
- * A specialized version of `baseAggregator` for arrays.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} setter The function to set `accumulator` values.
- * @param {Function} iteratee The iteratee to transform keys.
- * @param {Object} accumulator The initial aggregated object.
- * @returns {Function} Returns `accumulator`.
- */
-function arrayAggregator(array, setter, iteratee, accumulator) {
-  var index = -1,
-      length = array == null ? 0 : array.length;
-
-  while (++index < length) {
-    var value = array[index];
-    setter(accumulator, value, iteratee(value), array);
-  }
-  return accumulator;
-}
-
-module.exports = arrayAggregator;
-
-
-/***/ }),
-/* 146 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseEach = __webpack_require__(147);
-
-/**
- * Aggregates elements of `collection` on `accumulator` with keys transformed
- * by `iteratee` and values set by `setter`.
- *
- * @private
- * @param {Array|Object} collection The collection to iterate over.
- * @param {Function} setter The function to set `accumulator` values.
- * @param {Function} iteratee The iteratee to transform keys.
- * @param {Object} accumulator The initial aggregated object.
- * @returns {Function} Returns `accumulator`.
- */
-function baseAggregator(collection, setter, iteratee, accumulator) {
-  baseEach(collection, function(value, key, collection) {
-    setter(accumulator, value, iteratee(value), collection);
-  });
-  return accumulator;
-}
-
-module.exports = baseAggregator;
-
-
-/***/ }),
-/* 147 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseForOwn = __webpack_require__(148),
-    createBaseEach = __webpack_require__(162);
-
-/**
- * The base implementation of `_.forEach` without support for iteratee shorthands.
- *
- * @private
- * @param {Array|Object} collection The collection to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array|Object} Returns `collection`.
- */
-var baseEach = createBaseEach(baseForOwn);
-
-module.exports = baseEach;
-
-
-/***/ }),
-/* 148 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseFor = __webpack_require__(149),
-    keys = __webpack_require__(24);
-
-/**
- * The base implementation of `_.forOwn` without support for iteratee shorthands.
- *
- * @private
- * @param {Object} object The object to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Object} Returns `object`.
- */
-function baseForOwn(object, iteratee) {
-  return object && baseFor(object, iteratee, keys);
-}
-
-module.exports = baseForOwn;
-
-
-/***/ }),
-/* 149 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var createBaseFor = __webpack_require__(150);
-
-/**
- * The base implementation of `baseForOwn` which iterates over `object`
- * properties returned by `keysFunc` and invokes `iteratee` for each property.
- * Iteratee functions may exit iteration early by explicitly returning `false`.
- *
- * @private
- * @param {Object} object The object to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @param {Function} keysFunc The function to get the keys of `object`.
- * @returns {Object} Returns `object`.
- */
-var baseFor = createBaseFor();
-
-module.exports = baseFor;
-
-
-/***/ }),
-/* 150 */
-/***/ (function(module, exports) {
-
-/**
- * Creates a base function for methods like `_.forIn` and `_.forOwn`.
- *
- * @private
- * @param {boolean} [fromRight] Specify iterating from right to left.
- * @returns {Function} Returns the new base function.
- */
-function createBaseFor(fromRight) {
-  return function(object, iteratee, keysFunc) {
-    var index = -1,
-        iterable = Object(object),
-        props = keysFunc(object),
-        length = props.length;
-
-    while (length--) {
-      var key = props[fromRight ? length : ++index];
-      if (iteratee(iterable[key], key, iterable) === false) {
-        break;
-      }
-    }
-    return object;
-  };
-}
-
-module.exports = createBaseFor;
-
-
-/***/ }),
-/* 151 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseTimes = __webpack_require__(152),
-    isArguments = __webpack_require__(41),
-    isArray = __webpack_require__(5),
-    isBuffer = __webpack_require__(42),
-    isIndex = __webpack_require__(43),
-    isTypedArray = __webpack_require__(44);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Creates an array of the enumerable property names of the array-like `value`.
- *
- * @private
- * @param {*} value The value to query.
- * @param {boolean} inherited Specify returning inherited property names.
- * @returns {Array} Returns the array of property names.
- */
-function arrayLikeKeys(value, inherited) {
-  var isArr = isArray(value),
-      isArg = !isArr && isArguments(value),
-      isBuff = !isArr && !isArg && isBuffer(value),
-      isType = !isArr && !isArg && !isBuff && isTypedArray(value),
-      skipIndexes = isArr || isArg || isBuff || isType,
-      result = skipIndexes ? baseTimes(value.length, String) : [],
-      length = result.length;
-
-  for (var key in value) {
-    if ((inherited || hasOwnProperty.call(value, key)) &&
-        !(skipIndexes && (
-           // Safari 9 has enumerable `arguments.length` in strict mode.
-           key == 'length' ||
-           // Node.js 0.10 has enumerable non-index properties on buffers.
-           (isBuff && (key == 'offset' || key == 'parent')) ||
-           // PhantomJS 2 has enumerable non-index properties on typed arrays.
-           (isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) ||
-           // Skip index properties.
-           isIndex(key, length)
-        ))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = arrayLikeKeys;
-
-
-/***/ }),
-/* 152 */
-/***/ (function(module, exports) {
-
-/**
- * The base implementation of `_.times` without support for iteratee shorthands
- * or max array length checks.
- *
- * @private
- * @param {number} n The number of times to invoke `iteratee`.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array} Returns the array of results.
- */
-function baseTimes(n, iteratee) {
-  var index = -1,
-      result = Array(n);
-
-  while (++index < n) {
-    result[index] = iteratee(index);
-  }
-  return result;
-}
-
-module.exports = baseTimes;
-
-
-/***/ }),
-/* 153 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseGetTag = __webpack_require__(10),
-    isObjectLike = __webpack_require__(11);
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]';
-
-/**
- * The base implementation of `_.isArguments`.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an `arguments` object,
- */
-function baseIsArguments(value) {
-  return isObjectLike(value) && baseGetTag(value) == argsTag;
-}
-
-module.exports = baseIsArguments;
-
-
-/***/ }),
-/* 154 */
-/***/ (function(module, exports) {
-
-/**
- * This method returns `false`.
- *
- * @static
- * @memberOf _
- * @since 4.13.0
- * @category Util
- * @returns {boolean} Returns `false`.
- * @example
- *
- * _.times(2, _.stubFalse);
- * // => [false, false]
- */
-function stubFalse() {
-  return false;
-}
-
-module.exports = stubFalse;
-
-
-/***/ }),
-/* 155 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseGetTag = __webpack_require__(10),
-    isLength = __webpack_require__(25),
-    isObjectLike = __webpack_require__(11);
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]',
-    arrayTag = '[object Array]',
-    boolTag = '[object Boolean]',
-    dateTag = '[object Date]',
-    errorTag = '[object Error]',
-    funcTag = '[object Function]',
-    mapTag = '[object Map]',
-    numberTag = '[object Number]',
-    objectTag = '[object Object]',
-    regexpTag = '[object RegExp]',
-    setTag = '[object Set]',
-    stringTag = '[object String]',
-    weakMapTag = '[object WeakMap]';
-
-var arrayBufferTag = '[object ArrayBuffer]',
-    dataViewTag = '[object DataView]',
-    float32Tag = '[object Float32Array]',
-    float64Tag = '[object Float64Array]',
-    int8Tag = '[object Int8Array]',
-    int16Tag = '[object Int16Array]',
-    int32Tag = '[object Int32Array]',
-    uint8Tag = '[object Uint8Array]',
-    uint8ClampedTag = '[object Uint8ClampedArray]',
-    uint16Tag = '[object Uint16Array]',
-    uint32Tag = '[object Uint32Array]';
-
-/** Used to identify `toStringTag` values of typed arrays. */
-var typedArrayTags = {};
-typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
-typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
-typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
-typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
-typedArrayTags[uint32Tag] = true;
-typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
-typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
-typedArrayTags[dataViewTag] = typedArrayTags[dateTag] =
-typedArrayTags[errorTag] = typedArrayTags[funcTag] =
-typedArrayTags[mapTag] = typedArrayTags[numberTag] =
-typedArrayTags[objectTag] = typedArrayTags[regexpTag] =
-typedArrayTags[setTag] = typedArrayTags[stringTag] =
-typedArrayTags[weakMapTag] = false;
-
-/**
- * The base implementation of `_.isTypedArray` without Node.js optimizations.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
- */
-function baseIsTypedArray(value) {
-  return isObjectLike(value) &&
-    isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
-}
-
-module.exports = baseIsTypedArray;
-
-
-/***/ }),
-/* 156 */
-/***/ (function(module, exports) {
-
-/**
- * The base implementation of `_.unary` without support for storing metadata.
- *
- * @private
- * @param {Function} func The function to cap arguments for.
- * @returns {Function} Returns the new capped function.
- */
-function baseUnary(func) {
-  return function(value) {
-    return func(value);
-  };
-}
-
-module.exports = baseUnary;
-
-
-/***/ }),
-/* 157 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(39);
-
-/** Detect free variable `exports`. */
-var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
-
-/** Detect free variable `module`. */
-var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
-
-/** Detect the popular CommonJS extension `module.exports`. */
-var moduleExports = freeModule && freeModule.exports === freeExports;
-
-/** Detect free variable `process` from Node.js. */
-var freeProcess = moduleExports && freeGlobal.process;
-
-/** Used to access faster Node.js helpers. */
-var nodeUtil = (function() {
-  try {
-    // Use `util.types` for Node.js 10+.
-    var types = freeModule && freeModule.require && freeModule.require('util').types;
-
-    if (types) {
-      return types;
-    }
-
-    // Legacy `process.binding('util')` for Node.js < 10.
-    return freeProcess && freeProcess.binding && freeProcess.binding('util');
-  } catch (e) {}
-}());
-
-module.exports = nodeUtil;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)(module)))
-
-/***/ }),
-/* 158 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isPrototype = __webpack_require__(159),
-    nativeKeys = __webpack_require__(160);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */
-function baseKeys(object) {
-  if (!isPrototype(object)) {
-    return nativeKeys(object);
-  }
-  var result = [];
-  for (var key in Object(object)) {
-    if (hasOwnProperty.call(object, key) && key != 'constructor') {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = baseKeys;
-
-
-/***/ }),
-/* 159 */
-/***/ (function(module, exports) {
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/**
- * Checks if `value` is likely a prototype object.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
- */
-function isPrototype(value) {
-  var Ctor = value && value.constructor,
-      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
-
-  return value === proto;
-}
-
-module.exports = isPrototype;
-
-
-/***/ }),
-/* 160 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var overArg = __webpack_require__(161);
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeKeys = overArg(Object.keys, Object);
-
-module.exports = nativeKeys;
-
-
-/***/ }),
-/* 161 */
-/***/ (function(module, exports) {
-
-/**
- * Creates a unary function that invokes `func` with its argument transformed.
- *
- * @private
- * @param {Function} func The function to wrap.
- * @param {Function} transform The argument transform.
- * @returns {Function} Returns the new function.
- */
-function overArg(func, transform) {
-  return function(arg) {
-    return func(transform(arg));
-  };
-}
-
-module.exports = overArg;
-
-
-/***/ }),
-/* 162 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isArrayLike = __webpack_require__(45);
-
-/**
- * Creates a `baseEach` or `baseEachRight` function.
- *
- * @private
- * @param {Function} eachFunc The function to iterate over a collection.
- * @param {boolean} [fromRight] Specify iterating from right to left.
- * @returns {Function} Returns the new base function.
- */
-function createBaseEach(eachFunc, fromRight) {
-  return function(collection, iteratee) {
-    if (collection == null) {
-      return collection;
-    }
-    if (!isArrayLike(collection)) {
-      return eachFunc(collection, iteratee);
-    }
-    var length = collection.length,
-        index = fromRight ? length : -1,
-        iterable = Object(collection);
-
-    while ((fromRight ? index-- : ++index < length)) {
-      if (iteratee(iterable[index], index, iterable) === false) {
-        break;
-      }
-    }
-    return collection;
-  };
-}
-
-module.exports = createBaseEach;
-
-
-/***/ }),
-/* 163 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseMatches = __webpack_require__(164),
-    baseMatchesProperty = __webpack_require__(211),
-    identity = __webpack_require__(222),
-    isArray = __webpack_require__(5),
-    property = __webpack_require__(223);
-
-/**
- * The base implementation of `_.iteratee`.
- *
- * @private
- * @param {*} [value=_.identity] The value to convert to an iteratee.
- * @returns {Function} Returns the iteratee.
- */
-function baseIteratee(value) {
-  // Don't store the `typeof` result in a variable to avoid a JIT bug in Safari 9.
-  // See https://bugs.webkit.org/show_bug.cgi?id=156034 for more details.
-  if (typeof value == 'function') {
-    return value;
-  }
-  if (value == null) {
-    return identity;
-  }
-  if (typeof value == 'object') {
-    return isArray(value)
-      ? baseMatchesProperty(value[0], value[1])
-      : baseMatches(value);
-  }
-  return property(value);
-}
-
-module.exports = baseIteratee;
-
-
-/***/ }),
-/* 164 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseIsMatch = __webpack_require__(165),
-    getMatchData = __webpack_require__(210),
-    matchesStrictComparable = __webpack_require__(51);
-
-/**
- * The base implementation of `_.matches` which doesn't clone `source`.
- *
- * @private
- * @param {Object} source The object of property values to match.
- * @returns {Function} Returns the new spec function.
- */
-function baseMatches(source) {
-  var matchData = getMatchData(source);
-  if (matchData.length == 1 && matchData[0][2]) {
-    return matchesStrictComparable(matchData[0][0], matchData[0][1]);
-  }
-  return function(object) {
-    return object === source || baseIsMatch(object, source, matchData);
-  };
-}
-
-module.exports = baseMatches;
-
-
-/***/ }),
-/* 165 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Stack = __webpack_require__(46),
-    baseIsEqual = __webpack_require__(48);
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1,
-    COMPARE_UNORDERED_FLAG = 2;
-
-/**
- * The base implementation of `_.isMatch` without support for iteratee shorthands.
- *
- * @private
- * @param {Object} object The object to inspect.
- * @param {Object} source The object of property values to match.
- * @param {Array} matchData The property names, values, and compare flags to match.
- * @param {Function} [customizer] The function to customize comparisons.
- * @returns {boolean} Returns `true` if `object` is a match, else `false`.
- */
-function baseIsMatch(object, source, matchData, customizer) {
-  var index = matchData.length,
-      length = index,
-      noCustomizer = !customizer;
-
-  if (object == null) {
-    return !length;
-  }
-  object = Object(object);
-  while (index--) {
-    var data = matchData[index];
-    if ((noCustomizer && data[2])
-          ? data[1] !== object[data[0]]
-          : !(data[0] in object)
-        ) {
-      return false;
-    }
-  }
-  while (++index < length) {
-    data = matchData[index];
-    var key = data[0],
-        objValue = object[key],
-        srcValue = data[1];
-
-    if (noCustomizer && data[2]) {
-      if (objValue === undefined && !(key in object)) {
-        return false;
-      }
-    } else {
-      var stack = new Stack;
-      if (customizer) {
-        var result = customizer(objValue, srcValue, key, object, source, stack);
-      }
-      if (!(result === undefined
-            ? baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG, customizer, stack)
-            : result
-          )) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-module.exports = baseIsMatch;
-
-
-/***/ }),
-/* 166 */
-/***/ (function(module, exports) {
-
-/**
- * Removes all key-value entries from the list cache.
- *
- * @private
- * @name clear
- * @memberOf ListCache
- */
-function listCacheClear() {
-  this.__data__ = [];
-  this.size = 0;
-}
-
-module.exports = listCacheClear;
-
-
-/***/ }),
-/* 167 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var assocIndexOf = __webpack_require__(14);
-
-/** Used for built-in method references. */
-var arrayProto = Array.prototype;
-
-/** Built-in value references. */
-var splice = arrayProto.splice;
-
-/**
- * Removes `key` and its value from the list cache.
- *
- * @private
- * @name delete
- * @memberOf ListCache
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed, else `false`.
- */
-function listCacheDelete(key) {
-  var data = this.__data__,
-      index = assocIndexOf(data, key);
-
-  if (index < 0) {
-    return false;
-  }
-  var lastIndex = data.length - 1;
-  if (index == lastIndex) {
-    data.pop();
-  } else {
-    splice.call(data, index, 1);
-  }
-  --this.size;
-  return true;
-}
-
-module.exports = listCacheDelete;
-
-
-/***/ }),
-/* 168 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var assocIndexOf = __webpack_require__(14);
-
-/**
- * Gets the list cache value for `key`.
- *
- * @private
- * @name get
- * @memberOf ListCache
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the entry value.
- */
-function listCacheGet(key) {
-  var data = this.__data__,
-      index = assocIndexOf(data, key);
-
-  return index < 0 ? undefined : data[index][1];
-}
-
-module.exports = listCacheGet;
-
-
-/***/ }),
-/* 169 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var assocIndexOf = __webpack_require__(14);
-
-/**
- * Checks if a list cache value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf ListCache
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function listCacheHas(key) {
-  return assocIndexOf(this.__data__, key) > -1;
-}
-
-module.exports = listCacheHas;
-
-
-/***/ }),
-/* 170 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var assocIndexOf = __webpack_require__(14);
-
-/**
- * Sets the list cache `key` to `value`.
- *
- * @private
- * @name set
- * @memberOf ListCache
- * @param {string} key The key of the value to set.
- * @param {*} value The value to set.
- * @returns {Object} Returns the list cache instance.
- */
-function listCacheSet(key, value) {
-  var data = this.__data__,
-      index = assocIndexOf(data, key);
-
-  if (index < 0) {
-    ++this.size;
-    data.push([key, value]);
-  } else {
-    data[index][1] = value;
-  }
-  return this;
-}
-
-module.exports = listCacheSet;
-
-
-/***/ }),
-/* 171 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var ListCache = __webpack_require__(13);
-
-/**
- * Removes all key-value entries from the stack.
- *
- * @private
- * @name clear
- * @memberOf Stack
- */
-function stackClear() {
-  this.__data__ = new ListCache;
-  this.size = 0;
-}
-
-module.exports = stackClear;
-
-
-/***/ }),
-/* 172 */
-/***/ (function(module, exports) {
-
-/**
- * Removes `key` and its value from the stack.
- *
- * @private
- * @name delete
- * @memberOf Stack
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed, else `false`.
- */
-function stackDelete(key) {
-  var data = this.__data__,
-      result = data['delete'](key);
-
-  this.size = data.size;
-  return result;
-}
-
-module.exports = stackDelete;
-
-
-/***/ }),
-/* 173 */
-/***/ (function(module, exports) {
-
-/**
- * Gets the stack value for `key`.
- *
- * @private
- * @name get
- * @memberOf Stack
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the entry value.
- */
-function stackGet(key) {
-  return this.__data__.get(key);
-}
-
-module.exports = stackGet;
-
-
-/***/ }),
-/* 174 */
-/***/ (function(module, exports) {
-
-/**
- * Checks if a stack value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf Stack
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function stackHas(key) {
-  return this.__data__.has(key);
-}
-
-module.exports = stackHas;
-
-
-/***/ }),
-/* 175 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var ListCache = __webpack_require__(13),
-    Map = __webpack_require__(26),
-    MapCache = __webpack_require__(27);
-
-/** Used as the size to enable large array optimizations. */
-var LARGE_ARRAY_SIZE = 200;
-
-/**
- * Sets the stack `key` to `value`.
- *
- * @private
- * @name set
- * @memberOf Stack
- * @param {string} key The key of the value to set.
- * @param {*} value The value to set.
- * @returns {Object} Returns the stack cache instance.
- */
-function stackSet(key, value) {
-  var data = this.__data__;
-  if (data instanceof ListCache) {
-    var pairs = data.__data__;
-    if (!Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
-      pairs.push([key, value]);
-      this.size = ++data.size;
-      return this;
-    }
-    data = this.__data__ = new MapCache(pairs);
-  }
-  data.set(key, value);
-  this.size = data.size;
-  return this;
-}
-
-module.exports = stackSet;
-
-
-/***/ }),
-/* 176 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Hash = __webpack_require__(177),
-    ListCache = __webpack_require__(13),
-    Map = __webpack_require__(26);
-
-/**
- * Removes all key-value entries from the map.
- *
- * @private
- * @name clear
- * @memberOf MapCache
- */
-function mapCacheClear() {
-  this.size = 0;
-  this.__data__ = {
-    'hash': new Hash,
-    'map': new (Map || ListCache),
-    'string': new Hash
-  };
-}
-
-module.exports = mapCacheClear;
-
-
-/***/ }),
-/* 177 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var hashClear = __webpack_require__(178),
-    hashDelete = __webpack_require__(179),
-    hashGet = __webpack_require__(180),
-    hashHas = __webpack_require__(181),
-    hashSet = __webpack_require__(182);
-
-/**
- * Creates a hash object.
- *
- * @private
- * @constructor
- * @param {Array} [entries] The key-value pairs to cache.
- */
-function Hash(entries) {
-  var index = -1,
-      length = entries == null ? 0 : entries.length;
-
-  this.clear();
-  while (++index < length) {
-    var entry = entries[index];
-    this.set(entry[0], entry[1]);
-  }
-}
-
-// Add methods to `Hash`.
-Hash.prototype.clear = hashClear;
-Hash.prototype['delete'] = hashDelete;
-Hash.prototype.get = hashGet;
-Hash.prototype.has = hashHas;
-Hash.prototype.set = hashSet;
-
-module.exports = Hash;
-
-
-/***/ }),
-/* 178 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var nativeCreate = __webpack_require__(15);
-
-/**
- * Removes all key-value entries from the hash.
- *
- * @private
- * @name clear
- * @memberOf Hash
- */
-function hashClear() {
-  this.__data__ = nativeCreate ? nativeCreate(null) : {};
-  this.size = 0;
-}
-
-module.exports = hashClear;
-
-
-/***/ }),
-/* 179 */
-/***/ (function(module, exports) {
-
-/**
- * Removes `key` and its value from the hash.
- *
- * @private
- * @name delete
- * @memberOf Hash
- * @param {Object} hash The hash to modify.
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed, else `false`.
- */
-function hashDelete(key) {
-  var result = this.has(key) && delete this.__data__[key];
-  this.size -= result ? 1 : 0;
-  return result;
-}
-
-module.exports = hashDelete;
-
-
-/***/ }),
-/* 180 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var nativeCreate = __webpack_require__(15);
-
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED = '__lodash_hash_undefined__';
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Gets the hash value for `key`.
- *
- * @private
- * @name get
- * @memberOf Hash
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the entry value.
- */
-function hashGet(key) {
-  var data = this.__data__;
-  if (nativeCreate) {
-    var result = data[key];
-    return result === HASH_UNDEFINED ? undefined : result;
-  }
-  return hasOwnProperty.call(data, key) ? data[key] : undefined;
-}
-
-module.exports = hashGet;
-
-
-/***/ }),
-/* 181 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var nativeCreate = __webpack_require__(15);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Checks if a hash value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf Hash
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function hashHas(key) {
-  var data = this.__data__;
-  return nativeCreate ? (data[key] !== undefined) : hasOwnProperty.call(data, key);
-}
-
-module.exports = hashHas;
-
-
-/***/ }),
-/* 182 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var nativeCreate = __webpack_require__(15);
-
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED = '__lodash_hash_undefined__';
-
-/**
- * Sets the hash `key` to `value`.
- *
- * @private
- * @name set
- * @memberOf Hash
- * @param {string} key The key of the value to set.
- * @param {*} value The value to set.
- * @returns {Object} Returns the hash instance.
- */
-function hashSet(key, value) {
-  var data = this.__data__;
-  this.size += this.has(key) ? 0 : 1;
-  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
-  return this;
-}
-
-module.exports = hashSet;
-
-
-/***/ }),
-/* 183 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getMapData = __webpack_require__(16);
-
-/**
- * Removes `key` and its value from the map.
- *
- * @private
- * @name delete
- * @memberOf MapCache
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed, else `false`.
- */
-function mapCacheDelete(key) {
-  var result = getMapData(this, key)['delete'](key);
-  this.size -= result ? 1 : 0;
-  return result;
-}
-
-module.exports = mapCacheDelete;
-
-
-/***/ }),
-/* 184 */
-/***/ (function(module, exports) {
-
-/**
- * Checks if `value` is suitable for use as unique object key.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
- */
-function isKeyable(value) {
-  var type = typeof value;
-  return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
-    ? (value !== '__proto__')
-    : (value === null);
-}
-
-module.exports = isKeyable;
-
-
-/***/ }),
-/* 185 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getMapData = __webpack_require__(16);
-
-/**
- * Gets the map value for `key`.
- *
- * @private
- * @name get
- * @memberOf MapCache
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the entry value.
- */
-function mapCacheGet(key) {
-  return getMapData(this, key).get(key);
-}
-
-module.exports = mapCacheGet;
-
-
-/***/ }),
-/* 186 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getMapData = __webpack_require__(16);
-
-/**
- * Checks if a map value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf MapCache
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function mapCacheHas(key) {
-  return getMapData(this, key).has(key);
-}
-
-module.exports = mapCacheHas;
-
-
-/***/ }),
-/* 187 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getMapData = __webpack_require__(16);
-
-/**
- * Sets the map `key` to `value`.
- *
- * @private
- * @name set
- * @memberOf MapCache
- * @param {string} key The key of the value to set.
- * @param {*} value The value to set.
- * @returns {Object} Returns the map cache instance.
- */
-function mapCacheSet(key, value) {
-  var data = getMapData(this, key),
-      size = data.size;
-
-  data.set(key, value);
-  this.size += data.size == size ? 0 : 1;
-  return this;
-}
-
-module.exports = mapCacheSet;
-
-
-/***/ }),
-/* 188 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Stack = __webpack_require__(46),
-    equalArrays = __webpack_require__(49),
-    equalByTag = __webpack_require__(194),
-    equalObjects = __webpack_require__(198),
-    getTag = __webpack_require__(205),
-    isArray = __webpack_require__(5),
-    isBuffer = __webpack_require__(42),
-    isTypedArray = __webpack_require__(44);
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1;
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]',
-    arrayTag = '[object Array]',
-    objectTag = '[object Object]';
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * A specialized version of `baseIsEqual` for arrays and objects which performs
- * deep comparisons and tracks traversed objects enabling objects with circular
- * references to be compared.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
- * @param {Function} customizer The function to customize comparisons.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Object} [stack] Tracks traversed `object` and `other` objects.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
-  var objIsArr = isArray(object),
-      othIsArr = isArray(other),
-      objTag = objIsArr ? arrayTag : getTag(object),
-      othTag = othIsArr ? arrayTag : getTag(other);
-
-  objTag = objTag == argsTag ? objectTag : objTag;
-  othTag = othTag == argsTag ? objectTag : othTag;
-
-  var objIsObj = objTag == objectTag,
-      othIsObj = othTag == objectTag,
-      isSameTag = objTag == othTag;
-
-  if (isSameTag && isBuffer(object)) {
-    if (!isBuffer(other)) {
-      return false;
-    }
-    objIsArr = true;
-    objIsObj = false;
-  }
-  if (isSameTag && !objIsObj) {
-    stack || (stack = new Stack);
-    return (objIsArr || isTypedArray(object))
-      ? equalArrays(object, other, bitmask, customizer, equalFunc, stack)
-      : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
-  }
-  if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
-    var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
-        othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
-
-    if (objIsWrapped || othIsWrapped) {
-      var objUnwrapped = objIsWrapped ? object.value() : object,
-          othUnwrapped = othIsWrapped ? other.value() : other;
-
-      stack || (stack = new Stack);
-      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
-    }
-  }
-  if (!isSameTag) {
-    return false;
-  }
-  stack || (stack = new Stack);
-  return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
-}
-
-module.exports = baseIsEqualDeep;
-
-
-/***/ }),
-/* 189 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var MapCache = __webpack_require__(27),
-    setCacheAdd = __webpack_require__(190),
-    setCacheHas = __webpack_require__(191);
-
-/**
- *
- * Creates an array cache object to store unique values.
- *
- * @private
- * @constructor
- * @param {Array} [values] The values to cache.
- */
-function SetCache(values) {
-  var index = -1,
-      length = values == null ? 0 : values.length;
-
-  this.__data__ = new MapCache;
-  while (++index < length) {
-    this.add(values[index]);
-  }
-}
-
-// Add methods to `SetCache`.
-SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
-SetCache.prototype.has = setCacheHas;
-
-module.exports = SetCache;
-
-
-/***/ }),
-/* 190 */
-/***/ (function(module, exports) {
-
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED = '__lodash_hash_undefined__';
-
-/**
- * Adds `value` to the array cache.
- *
- * @private
- * @name add
- * @memberOf SetCache
- * @alias push
- * @param {*} value The value to cache.
- * @returns {Object} Returns the cache instance.
- */
-function setCacheAdd(value) {
-  this.__data__.set(value, HASH_UNDEFINED);
-  return this;
-}
-
-module.exports = setCacheAdd;
-
-
-/***/ }),
-/* 191 */
-/***/ (function(module, exports) {
-
-/**
- * Checks if `value` is in the array cache.
- *
- * @private
- * @name has
- * @memberOf SetCache
- * @param {*} value The value to search for.
- * @returns {number} Returns `true` if `value` is found, else `false`.
- */
-function setCacheHas(value) {
-  return this.__data__.has(value);
-}
-
-module.exports = setCacheHas;
-
-
-/***/ }),
-/* 192 */
-/***/ (function(module, exports) {
-
-/**
- * A specialized version of `_.some` for arrays without support for iteratee
- * shorthands.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} predicate The function invoked per iteration.
- * @returns {boolean} Returns `true` if any element passes the predicate check,
- *  else `false`.
- */
-function arraySome(array, predicate) {
-  var index = -1,
-      length = array == null ? 0 : array.length;
-
-  while (++index < length) {
-    if (predicate(array[index], index, array)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-module.exports = arraySome;
-
-
-/***/ }),
-/* 193 */
-/***/ (function(module, exports) {
-
-/**
- * Checks if a `cache` value for `key` exists.
- *
- * @private
- * @param {Object} cache The cache to query.
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function cacheHas(cache, key) {
-  return cache.has(key);
-}
-
-module.exports = cacheHas;
-
-
-/***/ }),
-/* 194 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Symbol = __webpack_require__(12),
-    Uint8Array = __webpack_require__(195),
-    eq = __webpack_require__(47),
-    equalArrays = __webpack_require__(49),
-    mapToArray = __webpack_require__(196),
-    setToArray = __webpack_require__(197);
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1,
-    COMPARE_UNORDERED_FLAG = 2;
-
-/** `Object#toString` result references. */
-var boolTag = '[object Boolean]',
-    dateTag = '[object Date]',
-    errorTag = '[object Error]',
-    mapTag = '[object Map]',
-    numberTag = '[object Number]',
-    regexpTag = '[object RegExp]',
-    setTag = '[object Set]',
-    stringTag = '[object String]',
-    symbolTag = '[object Symbol]';
-
-var arrayBufferTag = '[object ArrayBuffer]',
-    dataViewTag = '[object DataView]';
-
-/** Used to convert symbols to primitives and strings. */
-var symbolProto = Symbol ? Symbol.prototype : undefined,
-    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
-
-/**
- * A specialized version of `baseIsEqualDeep` for comparing objects of
- * the same `toStringTag`.
- *
- * **Note:** This function only supports comparing values with tags of
- * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {string} tag The `toStringTag` of the objects to compare.
- * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
- * @param {Function} customizer The function to customize comparisons.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Object} stack Tracks traversed `object` and `other` objects.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
-  switch (tag) {
-    case dataViewTag:
-      if ((object.byteLength != other.byteLength) ||
-          (object.byteOffset != other.byteOffset)) {
-        return false;
-      }
-      object = object.buffer;
-      other = other.buffer;
-
-    case arrayBufferTag:
-      if ((object.byteLength != other.byteLength) ||
-          !equalFunc(new Uint8Array(object), new Uint8Array(other))) {
-        return false;
-      }
-      return true;
-
-    case boolTag:
-    case dateTag:
-    case numberTag:
-      // Coerce booleans to `1` or `0` and dates to milliseconds.
-      // Invalid dates are coerced to `NaN`.
-      return eq(+object, +other);
-
-    case errorTag:
-      return object.name == other.name && object.message == other.message;
-
-    case regexpTag:
-    case stringTag:
-      // Coerce regexes to strings and treat strings, primitives and objects,
-      // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
-      // for more details.
-      return object == (other + '');
-
-    case mapTag:
-      var convert = mapToArray;
-
-    case setTag:
-      var isPartial = bitmask & COMPARE_PARTIAL_FLAG;
-      convert || (convert = setToArray);
-
-      if (object.size != other.size && !isPartial) {
-        return false;
-      }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(object);
-      if (stacked) {
-        return stacked == other;
-      }
-      bitmask |= COMPARE_UNORDERED_FLAG;
-
-      // Recursively compare objects (susceptible to call stack limits).
-      stack.set(object, other);
-      var result = equalArrays(convert(object), convert(other), bitmask, customizer, equalFunc, stack);
-      stack['delete'](object);
-      return result;
-
-    case symbolTag:
-      if (symbolValueOf) {
-        return symbolValueOf.call(object) == symbolValueOf.call(other);
-      }
-  }
-  return false;
-}
-
-module.exports = equalByTag;
-
-
-/***/ }),
-/* 195 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var root = __webpack_require__(4);
-
-/** Built-in value references. */
-var Uint8Array = root.Uint8Array;
-
-module.exports = Uint8Array;
-
-
-/***/ }),
-/* 196 */
-/***/ (function(module, exports) {
-
-/**
- * Converts `map` to its key-value pairs.
- *
- * @private
- * @param {Object} map The map to convert.
- * @returns {Array} Returns the key-value pairs.
- */
-function mapToArray(map) {
-  var index = -1,
-      result = Array(map.size);
-
-  map.forEach(function(value, key) {
-    result[++index] = [key, value];
-  });
-  return result;
-}
-
-module.exports = mapToArray;
-
-
-/***/ }),
-/* 197 */
-/***/ (function(module, exports) {
-
-/**
- * Converts `set` to an array of its values.
- *
- * @private
- * @param {Object} set The set to convert.
- * @returns {Array} Returns the values.
- */
-function setToArray(set) {
-  var index = -1,
-      result = Array(set.size);
-
-  set.forEach(function(value) {
-    result[++index] = value;
-  });
-  return result;
-}
-
-module.exports = setToArray;
-
-
-/***/ }),
-/* 198 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getAllKeys = __webpack_require__(199);
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1;
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * A specialized version of `baseIsEqualDeep` for objects with support for
- * partial deep comparisons.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
- * @param {Function} customizer The function to customize comparisons.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Object} stack Tracks traversed `object` and `other` objects.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
-  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
-      objProps = getAllKeys(object),
-      objLength = objProps.length,
-      othProps = getAllKeys(other),
-      othLength = othProps.length;
-
-  if (objLength != othLength && !isPartial) {
-    return false;
-  }
-  var index = objLength;
-  while (index--) {
-    var key = objProps[index];
-    if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
-      return false;
-    }
-  }
-  // Assume cyclic values are equal.
-  var stacked = stack.get(object);
-  if (stacked && stack.get(other)) {
-    return stacked == other;
-  }
-  var result = true;
-  stack.set(object, other);
-  stack.set(other, object);
-
-  var skipCtor = isPartial;
-  while (++index < objLength) {
-    key = objProps[index];
-    var objValue = object[key],
-        othValue = other[key];
-
-    if (customizer) {
-      var compared = isPartial
-        ? customizer(othValue, objValue, key, other, object, stack)
-        : customizer(objValue, othValue, key, object, other, stack);
-    }
-    // Recursively compare objects (susceptible to call stack limits).
-    if (!(compared === undefined
-          ? (objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack))
-          : compared
-        )) {
-      result = false;
-      break;
-    }
-    skipCtor || (skipCtor = key == 'constructor');
-  }
-  if (result && !skipCtor) {
-    var objCtor = object.constructor,
-        othCtor = other.constructor;
-
-    // Non `Object` object instances with different constructors are not equal.
-    if (objCtor != othCtor &&
-        ('constructor' in object && 'constructor' in other) &&
-        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
-          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
-      result = false;
-    }
-  }
-  stack['delete'](object);
-  stack['delete'](other);
-  return result;
-}
-
-module.exports = equalObjects;
-
-
-/***/ }),
-/* 199 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseGetAllKeys = __webpack_require__(200),
-    getSymbols = __webpack_require__(202),
-    keys = __webpack_require__(24);
-
-/**
- * Creates an array of own enumerable property names and symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names and symbols.
- */
-function getAllKeys(object) {
-  return baseGetAllKeys(object, keys, getSymbols);
-}
-
-module.exports = getAllKeys;
-
-
-/***/ }),
-/* 200 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayPush = __webpack_require__(201),
-    isArray = __webpack_require__(5);
-
-/**
- * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
- * `keysFunc` and `symbolsFunc` to get the enumerable property names and
- * symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {Function} keysFunc The function to get the keys of `object`.
- * @param {Function} symbolsFunc The function to get the symbols of `object`.
- * @returns {Array} Returns the array of property names and symbols.
- */
-function baseGetAllKeys(object, keysFunc, symbolsFunc) {
-  var result = keysFunc(object);
-  return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
-}
-
-module.exports = baseGetAllKeys;
-
-
-/***/ }),
-/* 201 */
-/***/ (function(module, exports) {
-
-/**
- * Appends the elements of `values` to `array`.
- *
- * @private
- * @param {Array} array The array to modify.
- * @param {Array} values The values to append.
- * @returns {Array} Returns `array`.
- */
-function arrayPush(array, values) {
-  var index = -1,
-      length = values.length,
-      offset = array.length;
-
-  while (++index < length) {
-    array[offset + index] = values[index];
-  }
-  return array;
-}
-
-module.exports = arrayPush;
-
-
-/***/ }),
-/* 202 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayFilter = __webpack_require__(203),
-    stubArray = __webpack_require__(204);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Built-in value references. */
-var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeGetSymbols = Object.getOwnPropertySymbols;
-
-/**
- * Creates an array of the own enumerable symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of symbols.
- */
-var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
-  if (object == null) {
-    return [];
-  }
-  object = Object(object);
-  return arrayFilter(nativeGetSymbols(object), function(symbol) {
-    return propertyIsEnumerable.call(object, symbol);
-  });
-};
-
-module.exports = getSymbols;
-
-
-/***/ }),
-/* 203 */
-/***/ (function(module, exports) {
-
-/**
- * A specialized version of `_.filter` for arrays without support for
- * iteratee shorthands.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} predicate The function invoked per iteration.
- * @returns {Array} Returns the new filtered array.
- */
-function arrayFilter(array, predicate) {
-  var index = -1,
-      length = array == null ? 0 : array.length,
-      resIndex = 0,
-      result = [];
-
-  while (++index < length) {
-    var value = array[index];
-    if (predicate(value, index, array)) {
-      result[resIndex++] = value;
-    }
-  }
-  return result;
-}
-
-module.exports = arrayFilter;
-
-
-/***/ }),
-/* 204 */
-/***/ (function(module, exports) {
-
-/**
- * This method returns a new empty array.
- *
- * @static
- * @memberOf _
- * @since 4.13.0
- * @category Util
- * @returns {Array} Returns the new empty array.
- * @example
- *
- * var arrays = _.times(2, _.stubArray);
- *
- * console.log(arrays);
- * // => [[], []]
- *
- * console.log(arrays[0] === arrays[1]);
- * // => false
- */
-function stubArray() {
-  return [];
-}
-
-module.exports = stubArray;
-
-
-/***/ }),
-/* 205 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var DataView = __webpack_require__(206),
-    Map = __webpack_require__(26),
-    Promise = __webpack_require__(207),
-    Set = __webpack_require__(208),
-    WeakMap = __webpack_require__(209),
-    baseGetTag = __webpack_require__(10),
-    toSource = __webpack_require__(40);
-
-/** `Object#toString` result references. */
-var mapTag = '[object Map]',
-    objectTag = '[object Object]',
-    promiseTag = '[object Promise]',
-    setTag = '[object Set]',
-    weakMapTag = '[object WeakMap]';
-
-var dataViewTag = '[object DataView]';
-
-/** Used to detect maps, sets, and weakmaps. */
-var dataViewCtorString = toSource(DataView),
-    mapCtorString = toSource(Map),
-    promiseCtorString = toSource(Promise),
-    setCtorString = toSource(Set),
-    weakMapCtorString = toSource(WeakMap);
-
-/**
- * Gets the `toStringTag` of `value`.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the `toStringTag`.
- */
-var getTag = baseGetTag;
-
-// Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
-if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
-    (Map && getTag(new Map) != mapTag) ||
-    (Promise && getTag(Promise.resolve()) != promiseTag) ||
-    (Set && getTag(new Set) != setTag) ||
-    (WeakMap && getTag(new WeakMap) != weakMapTag)) {
-  getTag = function(value) {
-    var result = baseGetTag(value),
-        Ctor = result == objectTag ? value.constructor : undefined,
-        ctorString = Ctor ? toSource(Ctor) : '';
-
-    if (ctorString) {
-      switch (ctorString) {
-        case dataViewCtorString: return dataViewTag;
-        case mapCtorString: return mapTag;
-        case promiseCtorString: return promiseTag;
-        case setCtorString: return setTag;
-        case weakMapCtorString: return weakMapTag;
-      }
-    }
-    return result;
-  };
-}
-
-module.exports = getTag;
-
-
-/***/ }),
-/* 206 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(6),
-    root = __webpack_require__(4);
-
-/* Built-in method references that are verified to be native. */
-var DataView = getNative(root, 'DataView');
-
-module.exports = DataView;
-
-
-/***/ }),
-/* 207 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(6),
-    root = __webpack_require__(4);
-
-/* Built-in method references that are verified to be native. */
-var Promise = getNative(root, 'Promise');
-
-module.exports = Promise;
-
-
-/***/ }),
-/* 208 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(6),
-    root = __webpack_require__(4);
-
-/* Built-in method references that are verified to be native. */
-var Set = getNative(root, 'Set');
-
-module.exports = Set;
-
-
-/***/ }),
-/* 209 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(6),
-    root = __webpack_require__(4);
-
-/* Built-in method references that are verified to be native. */
-var WeakMap = getNative(root, 'WeakMap');
-
-module.exports = WeakMap;
-
-
-/***/ }),
-/* 210 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isStrictComparable = __webpack_require__(50),
-    keys = __webpack_require__(24);
-
-/**
- * Gets the property names, values, and compare flags of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the match data of `object`.
- */
-function getMatchData(object) {
-  var result = keys(object),
-      length = result.length;
-
-  while (length--) {
-    var key = result[length],
-        value = object[key];
-
-    result[length] = [key, value, isStrictComparable(value)];
-  }
-  return result;
-}
-
-module.exports = getMatchData;
-
-
-/***/ }),
-/* 211 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseIsEqual = __webpack_require__(48),
-    get = __webpack_require__(212),
-    hasIn = __webpack_require__(219),
-    isKey = __webpack_require__(28),
-    isStrictComparable = __webpack_require__(50),
-    matchesStrictComparable = __webpack_require__(51),
-    toKey = __webpack_require__(18);
-
-/** Used to compose bitmasks for value comparisons. */
-var COMPARE_PARTIAL_FLAG = 1,
-    COMPARE_UNORDERED_FLAG = 2;
-
-/**
- * The base implementation of `_.matchesProperty` which doesn't clone `srcValue`.
- *
- * @private
- * @param {string} path The path of the property to get.
- * @param {*} srcValue The value to match.
- * @returns {Function} Returns the new spec function.
- */
-function baseMatchesProperty(path, srcValue) {
-  if (isKey(path) && isStrictComparable(srcValue)) {
-    return matchesStrictComparable(toKey(path), srcValue);
-  }
-  return function(object) {
-    var objValue = get(object, path);
-    return (objValue === undefined && objValue === srcValue)
-      ? hasIn(object, path)
-      : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
-  };
-}
-
-module.exports = baseMatchesProperty;
-
-
-/***/ }),
-/* 212 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseGet = __webpack_require__(52);
-
-/**
- * Gets the value at `path` of `object`. If the resolved value is
- * `undefined`, the `defaultValue` is returned in its place.
- *
- * @static
- * @memberOf _
- * @since 3.7.0
- * @category Object
- * @param {Object} object The object to query.
- * @param {Array|string} path The path of the property to get.
- * @param {*} [defaultValue] The value returned for `undefined` resolved values.
- * @returns {*} Returns the resolved value.
- * @example
- *
- * var object = { 'a': [{ 'b': { 'c': 3 } }] };
- *
- * _.get(object, 'a[0].b.c');
- * // => 3
- *
- * _.get(object, ['a', '0', 'b', 'c']);
- * // => 3
- *
- * _.get(object, 'a.b.c', 'default');
- * // => 'default'
- */
-function get(object, path, defaultValue) {
-  var result = object == null ? undefined : baseGet(object, path);
-  return result === undefined ? defaultValue : result;
-}
-
-module.exports = get;
-
-
-/***/ }),
-/* 213 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var memoizeCapped = __webpack_require__(214);
-
-/** Used to match property names within property paths. */
-var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
-
-/** Used to match backslashes in property paths. */
-var reEscapeChar = /\\(\\)?/g;
-
-/**
- * Converts `string` to a property path array.
- *
- * @private
- * @param {string} string The string to convert.
- * @returns {Array} Returns the property path array.
- */
-var stringToPath = memoizeCapped(function(string) {
-  var result = [];
-  if (string.charCodeAt(0) === 46 /* . */) {
-    result.push('');
-  }
-  string.replace(rePropName, function(match, number, quote, subString) {
-    result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
-  });
-  return result;
-});
-
-module.exports = stringToPath;
-
-
-/***/ }),
-/* 214 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var memoize = __webpack_require__(215);
-
-/** Used as the maximum memoize cache size. */
-var MAX_MEMOIZE_SIZE = 500;
-
-/**
- * A specialized version of `_.memoize` which clears the memoized function's
- * cache when it exceeds `MAX_MEMOIZE_SIZE`.
- *
- * @private
- * @param {Function} func The function to have its output memoized.
- * @returns {Function} Returns the new memoized function.
- */
-function memoizeCapped(func) {
-  var result = memoize(func, function(key) {
-    if (cache.size === MAX_MEMOIZE_SIZE) {
-      cache.clear();
-    }
-    return key;
-  });
-
-  var cache = result.cache;
-  return result;
-}
-
-module.exports = memoizeCapped;
-
-
-/***/ }),
-/* 215 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var MapCache = __webpack_require__(27);
-
-/** Error message constants. */
-var FUNC_ERROR_TEXT = 'Expected a function';
-
-/**
- * Creates a function that memoizes the result of `func`. If `resolver` is
- * provided, it determines the cache key for storing the result based on the
- * arguments provided to the memoized function. By default, the first argument
- * provided to the memoized function is used as the map cache key. The `func`
- * is invoked with the `this` binding of the memoized function.
- *
- * **Note:** The cache is exposed as the `cache` property on the memoized
- * function. Its creation may be customized by replacing the `_.memoize.Cache`
- * constructor with one whose instances implement the
- * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
- * method interface of `clear`, `delete`, `get`, `has`, and `set`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Function
- * @param {Function} func The function to have its output memoized.
- * @param {Function} [resolver] The function to resolve the cache key.
- * @returns {Function} Returns the new memoized function.
- * @example
- *
- * var object = { 'a': 1, 'b': 2 };
- * var other = { 'c': 3, 'd': 4 };
- *
- * var values = _.memoize(_.values);
- * values(object);
- * // => [1, 2]
- *
- * values(other);
- * // => [3, 4]
- *
- * object.a = 2;
- * values(object);
- * // => [1, 2]
- *
- * // Modify the result cache.
- * values.cache.set(object, ['a', 'b']);
- * values(object);
- * // => ['a', 'b']
- *
- * // Replace `_.memoize.Cache`.
- * _.memoize.Cache = WeakMap;
- */
-function memoize(func, resolver) {
-  if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
-    throw new TypeError(FUNC_ERROR_TEXT);
-  }
-  var memoized = function() {
-    var args = arguments,
-        key = resolver ? resolver.apply(this, args) : args[0],
-        cache = memoized.cache;
-
-    if (cache.has(key)) {
-      return cache.get(key);
-    }
-    var result = func.apply(this, args);
-    memoized.cache = cache.set(key, result) || cache;
-    return result;
-  };
-  memoized.cache = new (memoize.Cache || MapCache);
-  return memoized;
-}
-
-// Expose `MapCache`.
-memoize.Cache = MapCache;
-
-module.exports = memoize;
-
-
-/***/ }),
-/* 216 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseToString = __webpack_require__(217);
-
-/**
- * Converts `value` to a string. An empty string is returned for `null`
- * and `undefined` values. The sign of `-0` is preserved.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to convert.
- * @returns {string} Returns the converted string.
- * @example
- *
- * _.toString(null);
- * // => ''
- *
- * _.toString(-0);
- * // => '-0'
- *
- * _.toString([1, 2, 3]);
- * // => '1,2,3'
- */
-function toString(value) {
-  return value == null ? '' : baseToString(value);
-}
-
-module.exports = toString;
-
-
-/***/ }),
-/* 217 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Symbol = __webpack_require__(12),
-    arrayMap = __webpack_require__(218),
-    isArray = __webpack_require__(5),
-    isSymbol = __webpack_require__(17);
-
-/** Used as references for various `Number` constants. */
-var INFINITY = 1 / 0;
-
-/** Used to convert symbols to primitives and strings. */
-var symbolProto = Symbol ? Symbol.prototype : undefined,
-    symbolToString = symbolProto ? symbolProto.toString : undefined;
-
-/**
- * The base implementation of `_.toString` which doesn't convert nullish
- * values to empty strings.
- *
- * @private
- * @param {*} value The value to process.
- * @returns {string} Returns the string.
- */
-function baseToString(value) {
-  // Exit early for strings to avoid a performance hit in some environments.
-  if (typeof value == 'string') {
-    return value;
-  }
-  if (isArray(value)) {
-    // Recursively convert values (susceptible to call stack limits).
-    return arrayMap(value, baseToString) + '';
-  }
-  if (isSymbol(value)) {
-    return symbolToString ? symbolToString.call(value) : '';
-  }
-  var result = (value + '');
-  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
-}
-
-module.exports = baseToString;
-
-
-/***/ }),
-/* 218 */
-/***/ (function(module, exports) {
-
-/**
- * A specialized version of `_.map` for arrays without support for iteratee
- * shorthands.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array} Returns the new mapped array.
- */
-function arrayMap(array, iteratee) {
-  var index = -1,
-      length = array == null ? 0 : array.length,
-      result = Array(length);
-
-  while (++index < length) {
-    result[index] = iteratee(array[index], index, array);
-  }
-  return result;
-}
-
-module.exports = arrayMap;
-
-
-/***/ }),
-/* 219 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseHasIn = __webpack_require__(220),
-    hasPath = __webpack_require__(221);
-
-/**
- * Checks if `path` is a direct or inherited property of `object`.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Object
- * @param {Object} object The object to query.
- * @param {Array|string} path The path to check.
- * @returns {boolean} Returns `true` if `path` exists, else `false`.
- * @example
- *
- * var object = _.create({ 'a': _.create({ 'b': 2 }) });
- *
- * _.hasIn(object, 'a');
- * // => true
- *
- * _.hasIn(object, 'a.b');
- * // => true
- *
- * _.hasIn(object, ['a', 'b']);
- * // => true
- *
- * _.hasIn(object, 'b');
- * // => false
- */
-function hasIn(object, path) {
-  return object != null && hasPath(object, path, baseHasIn);
-}
-
-module.exports = hasIn;
-
-
-/***/ }),
-/* 220 */
-/***/ (function(module, exports) {
-
-/**
- * The base implementation of `_.hasIn` without support for deep paths.
- *
- * @private
- * @param {Object} [object] The object to query.
- * @param {Array|string} key The key to check.
- * @returns {boolean} Returns `true` if `key` exists, else `false`.
- */
-function baseHasIn(object, key) {
-  return object != null && key in Object(object);
-}
-
-module.exports = baseHasIn;
-
-
-/***/ }),
-/* 221 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var castPath = __webpack_require__(53),
-    isArguments = __webpack_require__(41),
-    isArray = __webpack_require__(5),
-    isIndex = __webpack_require__(43),
-    isLength = __webpack_require__(25),
-    toKey = __webpack_require__(18);
-
-/**
- * Checks if `path` exists on `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {Array|string} path The path to check.
- * @param {Function} hasFunc The function to check properties.
- * @returns {boolean} Returns `true` if `path` exists, else `false`.
- */
-function hasPath(object, path, hasFunc) {
-  path = castPath(path, object);
-
-  var index = -1,
-      length = path.length,
-      result = false;
-
-  while (++index < length) {
-    var key = toKey(path[index]);
-    if (!(result = object != null && hasFunc(object, key))) {
-      break;
-    }
-    object = object[key];
-  }
-  if (result || ++index != length) {
-    return result;
-  }
-  length = object == null ? 0 : object.length;
-  return !!length && isLength(length) && isIndex(key, length) &&
-    (isArray(object) || isArguments(object));
-}
-
-module.exports = hasPath;
-
-
-/***/ }),
-/* 222 */
-/***/ (function(module, exports) {
-
-/**
- * This method returns the first argument it receives.
- *
- * @static
- * @since 0.1.0
- * @memberOf _
- * @category Util
- * @param {*} value Any value.
- * @returns {*} Returns `value`.
- * @example
- *
- * var object = { 'a': 1 };
- *
- * console.log(_.identity(object) === object);
- * // => true
- */
-function identity(value) {
-  return value;
-}
-
-module.exports = identity;
-
-
-/***/ }),
-/* 223 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseProperty = __webpack_require__(224),
-    basePropertyDeep = __webpack_require__(225),
-    isKey = __webpack_require__(28),
-    toKey = __webpack_require__(18);
-
-/**
- * Creates a function that returns the value at `path` of a given object.
- *
- * @static
- * @memberOf _
- * @since 2.4.0
- * @category Util
- * @param {Array|string} path The path of the property to get.
- * @returns {Function} Returns the new accessor function.
- * @example
- *
- * var objects = [
- *   { 'a': { 'b': 2 } },
- *   { 'a': { 'b': 1 } }
- * ];
- *
- * _.map(objects, _.property('a.b'));
- * // => [2, 1]
- *
- * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');
- * // => [1, 2]
- */
-function property(path) {
-  return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
-}
-
-module.exports = property;
-
-
-/***/ }),
-/* 224 */
-/***/ (function(module, exports) {
-
-/**
- * The base implementation of `_.property` without support for deep paths.
- *
- * @private
- * @param {string} key The key of the property to get.
- * @returns {Function} Returns the new accessor function.
- */
-function baseProperty(key) {
-  return function(object) {
-    return object == null ? undefined : object[key];
-  };
-}
-
-module.exports = baseProperty;
-
-
-/***/ }),
-/* 225 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseGet = __webpack_require__(52);
-
-/**
- * A specialized version of `baseProperty` which supports deep paths.
- *
- * @private
- * @param {Array|string} path The path of the property to get.
- * @returns {Function} Returns the new accessor function.
- */
-function basePropertyDeep(path) {
-  return function(object) {
-    return baseGet(object, path);
-  };
-}
-
-module.exports = basePropertyDeep;
-
-
-/***/ }),
-/* 226 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// https://stackoverflow.com/a/7616484/5172890
-/* harmony default export */ __webpack_exports__["a"] = (function (s) {
-  let hash = 0
-  for (let i = 0; i < s.length; i++) {
-    hash = ((hash << 5) - hash) + s.charCodeAt(i)
-    hash |= 0
-  }
-  return '' + hash
-});
-
-
-/***/ }),
-/* 227 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-const LS = localStorage
-
-const parseStr = JSON.parse
-/* harmony export (immutable) */ __webpack_exports__["b"] = parseStr;
-
-
-const stringify = JSON.stringify
-/* harmony export (immutable) */ __webpack_exports__["e"] = stringify;
-
-
-const saveToLS = (k, v) => {
-  LS.setItem(k, stringify(v))
-}
-/* harmony export (immutable) */ __webpack_exports__["d"] = saveToLS;
-
-
-const rmFromLS = k => {
-  LS.removeItem(k)
-}
-/* harmony export (immutable) */ __webpack_exports__["c"] = rmFromLS;
-
-
-const getFromLS = k => {
-  try {
-    return parseStr(LS.getItem(k))
-  } catch (e) {
-    rmFromLS(k)
-  }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = getFromLS;
-
-
-
-/***/ }),
-/* 228 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "btn-group", attrs: { name: "HeaderSettings" } },
-    [
-      _c(
-        "button",
-        {
-          ref: "dropdownBtn",
-          staticClass: "btn btn-default dropdown-toggle",
-          attrs: { type: "button" }
-        },
-        [
-          _c("i", {
-            staticClass: "fa",
-            class: [_vm.usingBak && "text-info", _vm.processingCls || "fa-cog"]
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "caret" })
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "dropdown-menu clearfix", style: _vm.drpMenuStyle },
-        [
-          _c(
-            "div",
-            { staticClass: "-col-group-container" },
-            _vm._l(_vm.colGroups, function(columns, groupName) {
-              return _c("column-group", {
-                key: groupName,
-                ref: "colGroups",
-                refInFor: true,
-                attrs: { "group-name": groupName, columns: columns }
-              })
-            })
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "clearfix", staticStyle: { margin: "10px 0" } },
-            [
-              _c(
-                "div",
-                { staticClass: "btn-group btn-group-sm pull-right" },
-                [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-default",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          _vm.apply()
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n          " +
-                          _vm._s(_vm.$i18nForDatatable("Apply")) +
-                          "\n        "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.supportBackup
-                    ? [
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _c("ul", { staticClass: "dropdown-menu" }, [
-                          _c(
-                            "li",
-                            {
-                              on: {
-                                click: function($event) {
-                                  _vm.apply(true)
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", { staticClass: "fa fa-floppy-o" }),
-                                  _vm._v(
-                                    " \n                " +
-                                      _vm._s(
-                                        _vm.$i18nForDatatable(
-                                          "Apply and backup settings to local"
-                                        )
-                                      ) +
-                                      "\n              "
-                                  )
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm.usingBak
-                            ? _c(
-                                "li",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      _vm.rmBackup()
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fa fa-trash-o text-danger"
-                                      }),
-                                      _vm._v(
-                                        " \n                " +
-                                          _vm._s(
-                                            _vm.$i18nForDatatable(
-                                              "Clear local settings backup and restore"
-                                            )
-                                          ) +
-                                          "\n              "
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            : _vm._e()
-                        ])
-                      ]
-                    : _vm._e()
-                ],
-                2
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _vm.usingBak
-            ? _c(
-                "small",
-                {
-                  staticClass: "pull-left text-muted",
-                  staticStyle: { "margin-top": "-8px" }
-                },
-                [
-                  _vm._v(
-                    "\n      ( " +
-                      _vm._s(_vm.$i18nForDatatable("Using local settings")) +
-                      " )\n    "
-                  )
-                ]
-              )
-            : _vm._e()
-        ]
-      )
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-default dropdown-toggle",
-        staticStyle: { "box-shadow": "none" },
-        attrs: { "data-toggle": "dropdown", type: "button" }
-      },
-      [_c("span", { staticClass: "caret" })]
-    )
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-41de8ae3", module.exports)
-  }
-}
-
-/***/ }),
-/* 229 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(230)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(232)
-/* template */
-var __vue_template__ = __webpack_require__(257)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules/vue2-datatable-component/src/Table/index.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3da52071", Component.options)
-  } else {
-    hotAPI.reload("data-v-3da52071", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 230 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(231);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("4a747008", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3da52071\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3da52071\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 231 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.-complex-table {\r\n  position: relative;\n}\n.-complex-table table {\r\n  background: #fff;\n}\n.-table-header, .-table-body, .-table-footer {\r\n  position: relative;\r\n  overflow: scroll;\n}\n.-fixed-table {\r\n  position: absolute;\r\n  top: 0;\n}\n.-fixed-table table {\r\n  width: auto;\n}\n.-left-fixed {\r\n  -webkit-box-shadow: 1px 0 5px #ddd;\r\n          box-shadow: 1px 0 5px #ddd;\n}\n.-right-fixed {\r\n  -webkit-box-shadow: 1px 0 5px #ddd;\r\n          box-shadow: 1px 0 5px #ddd;\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 232 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TableFrame_vue__ = __webpack_require__(233);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TableFrame_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__TableFrame_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TableHeader_vue__ = __webpack_require__(236);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TableHeader_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__TableHeader_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TableBody_vue__ = __webpack_require__(244);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TableBody_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__TableBody_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TableFooter_vue__ = __webpack_require__(247);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TableFooter_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__TableFooter_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_props__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_getScrollWidth__ = __webpack_require__(252);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_isColVisible__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_syncScroll__ = __webpack_require__(253);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Tbl',
-  mixins: [__WEBPACK_IMPORTED_MODULE_4__mixins_props__["a" /* default */]],
-  components: { TableFrame: __WEBPACK_IMPORTED_MODULE_0__TableFrame_vue___default.a, TableHeader: __WEBPACK_IMPORTED_MODULE_1__TableHeader_vue___default.a, TableBody: __WEBPACK_IMPORTED_MODULE_2__TableBody_vue___default.a, TableFooter: __WEBPACK_IMPORTED_MODULE_3__TableFooter_vue___default.a },
-  data: function data() {
-    return {
-      offsetLeft: 0,
-      scrollWidth: Object(__WEBPACK_IMPORTED_MODULE_5__utils_getScrollWidth__["a" /* default */])()
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    // this allows you to fix columns or `fixHeaderAndSetBodyMaxHeight` dynamically
-    var unsync = void 0;
-    this.$watch('useComplexMode', function (v) {
-      if (v) {
-        unsync = Object(__WEBPACK_IMPORTED_MODULE_7__utils_syncScroll__["a" /* default */])(_this.$refs.wrappers, function (offsetLeft) {
-          _this.offsetLeft = offsetLeft;
-        });
-      } else {
-        unsync && unsync();
-      }
-    }, { immediate: true });
-  },
-
-  computed: {
-    visibleColumns: function visibleColumns() {
-      return this.columns.filter(__WEBPACK_IMPORTED_MODULE_6__utils_isColVisible__["a" /* default */]);
-    },
-    leftFixedColumns: function leftFixedColumns() {
-      return this.visibleColumns.filter(function (col) {
-        return col.fixed && col.fixed !== 'right';
-      });
-    },
-    rightFixedColumns: function rightFixedColumns() {
-      return this.visibleColumns.filter(function (col) {
-        return col.fixed === 'right';
-      });
-    },
-    hasFixedColumns: function hasFixedColumns() {
-      return !!(this.leftFixedColumns.length + this.rightFixedColumns.length);
-    },
-    useComplexMode: function useComplexMode() {
-      return !!(this.fixHeaderAndSetBodyMaxHeight || this.hasFixedColumns);
-    },
-    propsToNormalTable: function propsToNormalTable() {
-      return _extends({}, this.$props, { columns: this.visibleColumns });
-    },
-    propsToLeftFixedTable: function propsToLeftFixedTable() {
-      return _extends({}, this.$props, { columns: this.leftFixedColumns });
-    },
-    propsToRightFixedTable: function propsToRightFixedTable() {
-      return _extends({}, this.$props, { columns: this.rightFixedColumns });
-    }
-  }
-});
-
-/***/ }),
-/* 233 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(234)
-/* template */
-var __vue_template__ = __webpack_require__(235)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules/vue2-datatable-component/src/Table/TableFrame.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5329a3d0", Component.options)
-  } else {
-    hotAPI.reload("data-v-5329a3d0", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 234 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_props__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_shouldRenderSelection__ = __webpack_require__(19);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'TableFrame',
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_props__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_shouldRenderSelection__["a" /* default */]]
-});
-
-/***/ }),
-/* 235 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "table",
-    {
-      staticClass: "table table-striped table-hover",
-      class: _vm.tblClass,
-      staticStyle: { "margin-bottom": "0" },
-      style: _vm.tblStyle
-    },
-    [
-      _c(
-        "colgroup",
-        [
-          _vm.shouldRenderSelection
-            ? _c("col", { staticStyle: { width: "30px" } })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm._l(_vm.columns, function(col) {
-            return _c("col", { class: col.colClass, style: col.colStyle })
-          })
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _vm._t("default")
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5329a3d0", module.exports)
-  }
-}
-
-/***/ }),
-/* 236 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(237)
-/* template */
-var __vue_template__ = __webpack_require__(243)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules/vue2-datatable-component/src/Table/TableHeader.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-caacec8c", Component.options)
-  } else {
-    hotAPI.reload("data-v-caacec8c", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 237 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeadSort_vue__ = __webpack_require__(238);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeadSort_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__HeadSort_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MultiSelect_vue__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MultiSelect_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__MultiSelect_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_props__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_shouldRenderSelection__ = __webpack_require__(19);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'TableHeader',
-  components: { HeadSort: __WEBPACK_IMPORTED_MODULE_0__HeadSort_vue___default.a, MultiSelect: __WEBPACK_IMPORTED_MODULE_1__MultiSelect_vue___default.a },
-  mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_props__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__mixins_shouldRenderSelection__["a" /* default */]]
-});
-
-/***/ }),
-/* 238 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(239)
-/* template */
-var __vue_template__ = __webpack_require__(240)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules/vue2-datatable-component/src/Table/HeadSort.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6bd9bfef", Component.options)
-  } else {
-    hotAPI.reload("data-v-6bd9bfef", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 239 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-
-/**
- * Sorting arrows within <th>
- */
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'HeadSort',
-  props: {
-    field: { type: String, required: true },
-    query: { type: Object, required: true }
-  },
-  data: function data() {
-    return {
-      order: ''
-    };
-  },
-  computed: {
-    cls: function cls() {
-      var order = this.order;
-
-      return ['fa', { 'fa-sort text-muted': !order,
-        'fa-sort-up': order === 'asc',
-        'fa-sort-down': order === 'desc'
-      }];
-    }
-  },
-  watch: {
-    query: {
-      handler: function handler(_ref) {
-        var field = _ref.sort,
-            order = _ref.order;
-
-        this.order = field === this.field ? order : '';
-      },
-
-      deep: true,
-      immediate: true
-    }
-  },
-  methods: {
-    handleClick: function handleClick() {
-      var query = this.query,
-          order = this.order;
-
-      query.sort = this.field;
-      query.order = this.order = order === 'desc' ? 'asc' : 'desc';
-    }
-  }
-});
-
-/***/ }),
-/* 240 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "a",
-    {
-      attrs: { href: "#", name: "HeadSort" },
-      on: {
-        click: function($event) {
-          $event.preventDefault()
-          return _vm.handleClick($event)
-        }
-      }
-    },
-    [_c("i", { class: _vm.cls })]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6bd9bfef", module.exports)
-  }
-}
-
-/***/ }),
-/* 241 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_replaceWith__ = __webpack_require__(54);
-//
-//
-//
-
-
-/**
- * checkbox for multiple select within the leading <th>/<td>
- */
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'MultiSelect',
-  props: {
-    selection: { type: Array, required: true },
-    row: Object, // available for tbody checkbox
-    rows: Array // available for thead checkbox
-  },
-  data: function data() {
-    return {
-      status: false
-    };
-  },
-  computed: {
-    pos: function pos() {
-      var selection = this.selection,
-          row = this.row;
-
-      if (!selection || !row) return;
-      return selection.indexOf(row);
-    }
-  },
-  methods: {
-    toggle: function toggle() {
-      var selection = this.selection,
-          row = this.row,
-          rows = this.rows,
-          status = this.status,
-          pos = this.pos;
-
-      if (rows) {
-        Object(__WEBPACK_IMPORTED_MODULE_0__utils_replaceWith__["a" /* default */])(selection, status ? rows : []);
-        return;
-      }
-      if (row) {
-        if (status && pos === -1) selection.push(row);
-        if (!status && pos >= 0) selection.splice(pos, 1);
-      }
-    }
-  },
-  watch: {
-    rows: function rows() {
-      Object(__WEBPACK_IMPORTED_MODULE_0__utils_replaceWith__["a" /* default */])(this.selection, []);
-    },
-    selection: function selection(_selection) {
-      if (this.row) {
-        this.status = this.pos >= 0;
-        return;
-      }
-      if (this.rows) {
-        // not only have same length but also non-zero
-        this.status = this.rows.length === _selection.length && _selection.length;
-      }
-    }
-  }
-});
-
-/***/ }),
-/* 242 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("input", {
-    directives: [
-      {
-        name: "model",
-        rawName: "v-model",
-        value: _vm.status,
-        expression: "status"
-      }
-    ],
-    staticStyle: { margin: "0", "vertical-align": "middle" },
-    attrs: { type: "checkbox", name: "MultiSelect" },
-    domProps: {
-      checked: Array.isArray(_vm.status)
-        ? _vm._i(_vm.status, null) > -1
-        : _vm.status
-    },
-    on: {
-      change: [
-        function($event) {
-          var $$a = _vm.status,
-            $$el = $event.target,
-            $$c = $$el.checked ? true : false
-          if (Array.isArray($$a)) {
-            var $$v = null,
-              $$i = _vm._i($$a, $$v)
-            if ($$el.checked) {
-              $$i < 0 && (_vm.status = $$a.concat([$$v]))
-            } else {
-              $$i > -1 &&
-                (_vm.status = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-            }
-          } else {
-            _vm.status = $$c
-          }
-        },
-        _vm.toggle
-      ]
-    }
-  })
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-56adc758", module.exports)
-  }
-}
-
-/***/ }),
-/* 243 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "thead",
-    [
-      _c(
-        "transition-group",
-        { attrs: { name: "fade", tag: "tr" } },
-        [
-          _vm.shouldRenderSelection
-            ? _c(
-                "th",
-                { key: "--th-multi" },
-                [
-                  _c("multi-select", {
-                    attrs: { selection: _vm.selection, rows: _vm.data }
-                  })
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm._l(_vm.columns, function(col, idx) {
-            return _c(
-              "th",
-              {
-                key: col.title || col.field || idx,
-                class: col.thClass,
-                style: col.thStyle
-              },
-              [
-                col.thComp
-                  ? _c(
-                      _vm.forDynCompIs(col.thComp),
-                      _vm._b(
-                        {
-                          tag: "component",
-                          attrs: {
-                            column: col,
-                            field: col.field,
-                            title: col.title
-                          }
-                        },
-                        "component",
-                        _vm.$props,
-                        false
-                      )
-                    )
-                  : [_vm._v("\n        " + _vm._s(col.title) + "\n      ")],
-                _vm._v(" "),
-                col.explain
-                  ? _c("i", {
-                      staticClass: "fa fa-info-circle",
-                      staticStyle: { cursor: "help" },
-                      attrs: { title: col.explain }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                col.sortable
-                  ? _c("head-sort", {
-                      attrs: { field: col.field, query: _vm.query }
-                    })
-                  : _vm._e()
-              ],
-              2
-            )
-          })
-        ],
-        2
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-caacec8c", module.exports)
-  }
-}
-
-/***/ }),
-/* 244 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(245)
-/* template */
-var __vue_template__ = __webpack_require__(246)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules/vue2-datatable-component/src/Table/TableBody.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6bb1e0e2", Component.options)
-  } else {
-    hotAPI.reload("data-v-6bb1e0e2", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 245 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MultiSelect_vue__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MultiSelect_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__MultiSelect_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_props__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_shouldRenderSelection__ = __webpack_require__(19);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'TableBody',
-  components: { MultiSelect: __WEBPACK_IMPORTED_MODULE_0__MultiSelect_vue___default.a },
-  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_props__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_shouldRenderSelection__["a" /* default */]],
-  computed: {
-    colLen: function colLen() {
-      return this.columns.length + !!this.selection;
-    }
-  }
-});
-
-/***/ }),
-/* 246 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "tbody",
-    [
-      _vm.data.length
-        ? [
-            _vm._l(_vm.data, function(item) {
-              return [
-                _c(
-                  "tr",
-                  [
-                    _vm.shouldRenderSelection
-                      ? _c(
-                          "td",
-                          [
-                            _c("multi-select", {
-                              attrs: { selection: _vm.selection, row: item }
-                            })
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm._l(_vm.columns, function(col) {
-                      return _c(
-                        "td",
-                        { class: col.tdClass, style: col.tdStyle },
-                        [
-                          col.tdComp
-                            ? _c(
-                                _vm.forDynCompIs(col.tdComp),
-                                _vm._b(
-                                  {
-                                    tag: "component",
-                                    attrs: {
-                                      row: item,
-                                      field: col.field,
-                                      value: item[col.field],
-                                      nested: item.__nested__
-                                    }
-                                  },
-                                  "component",
-                                  _vm.$props,
-                                  false
-                                )
-                              )
-                            : [
-                                _vm._v(
-                                  "\n            " +
-                                    _vm._s(item[col.field]) +
-                                    "\n          "
-                                )
-                              ]
-                        ],
-                        2
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c("transition", { attrs: { name: "fade" } }, [
-                  item.__nested__ && item.__nested__.visible
-                    ? _c("tr", [
-                        _c(
-                          "td",
-                          { attrs: { colspan: _vm.colLen } },
-                          [
-                            _c(
-                              _vm.forDynCompIs(item.__nested__.comp),
-                              _vm._b(
-                                {
-                                  tag: "component",
-                                  attrs: { row: item, nested: item.__nested__ }
-                                },
-                                "component",
-                                _vm.$props,
-                                false
-                              )
-                            )
-                          ],
-                          1
-                        )
-                      ])
-                    : _vm._e()
-                ])
-              ]
-            })
-          ]
-        : !_vm.leftFixed && !_vm.rightFixed
-          ? _c("tr", [
-              _c(
-                "td",
-                {
-                  staticClass: "text-center text-muted",
-                  attrs: { colspan: _vm.colLen }
-                },
-                [
-                  _vm._v(
-                    "\n      ( " +
-                      _vm._s(_vm.$i18nForDatatable("No Data")) +
-                      " )\n    "
-                  )
-                ]
-              )
-            ])
-          : _vm._e()
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6bb1e0e2", module.exports)
-  }
-}
-
-/***/ }),
-/* 247 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(248)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(250)
-/* template */
-var __vue_template__ = __webpack_require__(251)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules/vue2-datatable-component/src/Table/TableFooter.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-797725c8", Component.options)
-  } else {
-    hotAPI.reload("data-v-797725c8", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 248 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(249);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("3efaf8ad", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-797725c8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./TableFooter.vue", function() {
-     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-797725c8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./TableFooter.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 249 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.-summary-row {\r\n  font-weight: bold;\r\n  background-color: #eee !important;\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 250 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_props__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_shouldRenderSelection__ = __webpack_require__(19);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'TableFooter',
-  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_props__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_shouldRenderSelection__["a" /* default */]]
-});
-
-/***/ }),
-/* 251 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "tfoot",
-    {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: _vm.data.length,
-          expression: "data.length"
-        }
-      ]
-    },
-    [
-      _c(
-        "tr",
-        { staticClass: "-summary-row" },
-        [
-          _vm.shouldRenderSelection ? _c("td") : _vm._e(),
-          _vm._v(" "),
-          _vm._l(_vm.columns, function(col, idx) {
-            return [
-              typeof _vm.summary[col.field] !== "undefined"
-                ? _c(
-                    "td",
-                    { class: col.tdClass, style: col.tdStyle },
-                    [
-                      col.tdComp
-                        ? _c(
-                            _vm.forDynCompIs(col.tdComp),
-                            _vm._b(
-                              {
-                                tag: "component",
-                                attrs: {
-                                  row: _vm.summary,
-                                  field: col.field,
-                                  value: _vm.summary[col.field]
-                                }
-                              },
-                              "component",
-                              _vm.$props,
-                              false
-                            )
-                          )
-                        : [
-                            _vm._v(
-                              "\n          " +
-                                _vm._s(_vm.summary[col.field]) +
-                                "\n        "
-                            )
-                          ]
-                    ],
-                    2
-                  )
-                : _c("td")
-            ]
-          })
-        ],
-        2
-      )
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-797725c8", module.exports)
-  }
-}
-
-/***/ }),
-/* 252 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// Refers to https://davidwalsh.name/detect-scrollbar-width
-let scrollWidth
-
-/* harmony default export */ __webpack_exports__["a"] = (function () {
-  if (scrollWidth) {
-    return scrollWidth
-  }
-
-  const div = document.createElement('div')
-
-  div.style.width = '100px'
-  div.style.height = '100px'
-  div.style.overflow = 'scroll'
-  div.style.position = 'absolute'
-  div.style.top = '-9999px'
-
-  document.body.appendChild(div)
-
-  scrollWidth = div.offsetWidth - div.clientWidth
-
-  document.body.removeChild(div)
-
-  return scrollWidth
-});
-
-
-/***/ }),
-/* 253 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_throttle__ = __webpack_require__(254);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_throttle___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_throttle__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_debounce__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_debounce___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_debounce__);
-
-
-
-/**
- * synchronize the scroll position among `els`
- * @param  {DOM[]} els
- * @param  {Func}  callback(offsetLeft)
- * @return {Func}  unsync
- */
-/* harmony default export */ __webpack_exports__["a"] = (function (els, callback) {
-  let currentDriver
-  
-  function syncScroll(me, others) {
-    me
-      .on('scroll', __WEBPACK_IMPORTED_MODULE_0_lodash_throttle___default()(() => {
-        if (currentDriver && currentDriver !== me) return
-        currentDriver = me
-
-        let offsetLeft = me.scrollLeft()
-        others.scrollLeft(offsetLeft)
-        
-        callback(offsetLeft)
-      }))
-      // scroll stops
-      .on('scroll', __WEBPACK_IMPORTED_MODULE_1_lodash_debounce___default()(() => {
-        currentDriver = null
-      }, 150))
-
-    // unlistener
-    return () => {
-      me.off('scroll')
-    }
-  }
-  
-  const unlisteners = els.map((me, idx) => {
-    let others = els.slice()
-    others.splice(idx, 1) // exclude me
-    return syncScroll($(me), $(others))
-  })
-
-  // unsync
-  return () => {
-    unlisteners.forEach(unlistener => {
-      unlistener()
-    })
-  }
-});
-
-
-/***/ }),
-/* 254 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var debounce = __webpack_require__(56),
-    isObject = __webpack_require__(7);
-
-/** Error message constants. */
-var FUNC_ERROR_TEXT = 'Expected a function';
-
-/**
- * Creates a throttled function that only invokes `func` at most once per
- * every `wait` milliseconds. The throttled function comes with a `cancel`
- * method to cancel delayed `func` invocations and a `flush` method to
- * immediately invoke them. Provide `options` to indicate whether `func`
- * should be invoked on the leading and/or trailing edge of the `wait`
- * timeout. The `func` is invoked with the last arguments provided to the
- * throttled function. Subsequent calls to the throttled function return the
- * result of the last `func` invocation.
- *
- * **Note:** If `leading` and `trailing` options are `true`, `func` is
- * invoked on the trailing edge of the timeout only if the throttled function
- * is invoked more than once during the `wait` timeout.
- *
- * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
- * until to the next tick, similar to `setTimeout` with a timeout of `0`.
- *
- * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
- * for details over the differences between `_.throttle` and `_.debounce`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Function
- * @param {Function} func The function to throttle.
- * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
- * @param {Object} [options={}] The options object.
- * @param {boolean} [options.leading=true]
- *  Specify invoking on the leading edge of the timeout.
- * @param {boolean} [options.trailing=true]
- *  Specify invoking on the trailing edge of the timeout.
- * @returns {Function} Returns the new throttled function.
- * @example
- *
- * // Avoid excessively updating the position while scrolling.
- * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
- *
- * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
- * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
- * jQuery(element).on('click', throttled);
- *
- * // Cancel the trailing throttled invocation.
- * jQuery(window).on('popstate', throttled.cancel);
- */
-function throttle(func, wait, options) {
-  var leading = true,
-      trailing = true;
-
-  if (typeof func != 'function') {
-    throw new TypeError(FUNC_ERROR_TEXT);
-  }
-  if (isObject(options)) {
-    leading = 'leading' in options ? !!options.leading : leading;
-    trailing = 'trailing' in options ? !!options.trailing : trailing;
-  }
-  return debounce(func, wait, {
-    'leading': leading,
-    'maxWait': wait,
-    'trailing': trailing
-  });
-}
-
-module.exports = throttle;
-
-
-/***/ }),
-/* 255 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var root = __webpack_require__(4);
-
-/**
- * Gets the timestamp of the number of milliseconds that have elapsed since
- * the Unix epoch (1 January 1970 00:00:00 UTC).
- *
- * @static
- * @memberOf _
- * @since 2.4.0
- * @category Date
- * @returns {number} Returns the timestamp.
- * @example
- *
- * _.defer(function(stamp) {
- *   console.log(_.now() - stamp);
- * }, _.now());
- * // => Logs the number of milliseconds it took for the deferred invocation.
- */
-var now = function() {
-  return root.Date.now();
-};
-
-module.exports = now;
-
-
-/***/ }),
-/* 256 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__(7),
-    isSymbol = __webpack_require__(17);
-
-/** Used as references for various `Number` constants. */
-var NAN = 0 / 0;
-
-/** Used to match leading and trailing whitespace. */
-var reTrim = /^\s+|\s+$/g;
-
-/** Used to detect bad signed hexadecimal string values. */
-var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-
-/** Used to detect binary string values. */
-var reIsBinary = /^0b[01]+$/i;
-
-/** Used to detect octal string values. */
-var reIsOctal = /^0o[0-7]+$/i;
-
-/** Built-in method references without a dependency on `root`. */
-var freeParseInt = parseInt;
-
-/**
- * Converts `value` to a number.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to process.
- * @returns {number} Returns the number.
- * @example
- *
- * _.toNumber(3.2);
- * // => 3.2
- *
- * _.toNumber(Number.MIN_VALUE);
- * // => 5e-324
- *
- * _.toNumber(Infinity);
- * // => Infinity
- *
- * _.toNumber('3.2');
- * // => 3.2
- */
-function toNumber(value) {
-  if (typeof value == 'number') {
-    return value;
-  }
-  if (isSymbol(value)) {
-    return NAN;
-  }
-  if (isObject(value)) {
-    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
-    value = isObject(other) ? (other + '') : other;
-  }
-  if (typeof value != 'string') {
-    return value === 0 ? value : +value;
-  }
-  value = value.replace(reTrim, '');
-  var isBinary = reIsBinary.test(value);
-  return (isBinary || reIsOctal.test(value))
-    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
-    : (reIsBadHex.test(value) ? NAN : +value);
-}
-
-module.exports = toNumber;
-
-
-/***/ }),
-/* 257 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.useComplexMode
-    ? _c(
-        "div",
-        { staticClass: "-complex-table", attrs: { name: "ComplexTable" } },
-        [
-          _vm._l(["Header", "Body", "Footer"], function(x) {
-            return [
-              x !== "Footer" || (x === "Footer" && _vm.summary)
-                ? _c(
-                    "div",
-                    {
-                      ref: "wrappers",
-                      refInFor: true,
-                      class: "-table-" + x.toLowerCase(),
-                      style: [
-                        x !== "Header" && {
-                          marginTop: "-" + _vm.scrollWidth + "px"
-                        },
-                        x === "Body" && {
-                          maxHeight: _vm.fixHeaderAndSetBodyMaxHeight + "px"
-                        }
-                      ],
-                      attrs: { name: "Table" + x + "Wrapper" }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { attrs: { name: "NormalTable" + x } },
-                        [
-                          _c(
-                            "table-frame",
-                            _vm._b(
-                              {},
-                              "table-frame",
-                              _vm.propsToNormalTable,
-                              false
-                            ),
-                            [
-                              _c(
-                                "Table" + x,
-                                _vm._b(
-                                  { tag: "component" },
-                                  "component",
-                                  _vm.propsToNormalTable,
-                                  false
-                                )
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm.leftFixedColumns.length
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "-left-fixed -fixed-table",
-                              style: { left: _vm.offsetLeft + "px" },
-                              attrs: { name: "LeftFixedTable" + x }
-                            },
-                            [
-                              _c(
-                                "table-frame",
-                                _vm._b(
-                                  { attrs: { "left-fixed": "" } },
-                                  "table-frame",
-                                  _vm.propsToLeftFixedTable,
-                                  false
-                                ),
-                                [
-                                  _c(
-                                    "Table" + x,
-                                    _vm._b(
-                                      {
-                                        tag: "component",
-                                        attrs: { "left-fixed": "" }
-                                      },
-                                      "component",
-                                      _vm.propsToLeftFixedTable,
-                                      false
-                                    )
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.rightFixedColumns.length
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "-right-fixed -fixed-table",
-                              style: { right: "-" + _vm.offsetLeft + "px" },
-                              attrs: { name: "RightFixedTable" + x }
-                            },
-                            [
-                              _c(
-                                "table-frame",
-                                _vm._b(
-                                  { attrs: { "right-fixed": "" } },
-                                  "table-frame",
-                                  _vm.propsToRightFixedTable,
-                                  false
-                                ),
-                                [
-                                  _c(
-                                    "Table" + x,
-                                    _vm._b(
-                                      {
-                                        tag: "component",
-                                        attrs: { "right-fixed": "" }
-                                      },
-                                      "component",
-                                      _vm.propsToRightFixedTable,
-                                      false
-                                    )
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e()
-                    ]
-                  )
-                : _vm._e()
-            ]
-          })
-        ],
-        2
-      )
-    : _c(
-        "div",
-        { attrs: { name: "SimpleTable" } },
-        [
-          _c(
-            "table-frame",
-            _vm._b({}, "table-frame", _vm.propsToNormalTable, false),
-            [
-              _c(
-                "table-header",
-                _vm._b({}, "table-header", _vm.propsToNormalTable, false)
-              ),
-              _vm._v(" "),
-              _c(
-                "table-body",
-                _vm._b({}, "table-body", _vm.propsToNormalTable, false)
-              ),
-              _vm._v(" "),
-              _vm.summary
-                ? _c(
-                    "table-footer",
-                    _vm._b({}, "table-footer", _vm.propsToNormalTable, false)
-                  )
-                : _vm._e()
-            ],
-            1
-          )
-        ],
-        1
-      )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3da52071", module.exports)
-  }
-}
-
-/***/ }),
-/* 258 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(259)
-/* template */
-var __vue_template__ = __webpack_require__(260)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules/vue2-datatable-component/src/Pagination.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-83f0b5ac", Component.options)
-  } else {
-    hotAPI.reload("data-v-83f0b5ac", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 259 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Pagination',
-  props: {
-    total: { type: Number, required: true },
-    query: { type: Object, required: true }
-  },
-  computed: {
-    isFirstPage: function isFirstPage() {
-      return +this.query.offset === 0 || +this.query.limit >= this.total;
-    },
-    isLastPage: function isLastPage() {
-      return +this.query.offset + +this.query.limit >= this.total;
-    },
-    totalPage: function totalPage() {
-      return Math.ceil(this.total / +this.query.limit);
-    },
-    curPage: function curPage() {
-      return Math.ceil(+this.query.offset / +this.query.limit) + 1;
-    },
-    dspBtns: function dspBtns() {
-      var n = this.totalPage;
-      var i = this.curPage;
-
-      /* eslint-disable */
-      if (n <= 9) return function (n) {
-        var arr = Array(n);
-        while (n) {
-          arr[n - 1] = n--;
-        }
-        return arr;
-      }(n);
-      if (i <= 5) return [1, 2, 3, 4, 5, 6, 7, 0, n]; // 0 represents `···`
-      if (i >= n - 4) return [1, 0, n - 6, n - 5, n - 4, n - 3, n - 2, n - 1, n];
-      return [1, 0, i - 2, i - 1, i, i + 1, i + 2, 0, n];
-      /* eslint-enable */
-    }
-  },
-  methods: {
-    handleClick: function handleClick(n) {
-      this.query.offset = (n - 1) * +this.query.limit;
-    },
-    turnPage: function turnPage(i) {
-      if (i < 0 && this.isFirstPage || i > 0 && this.isLastPage) return;
-      this.query.offset = +this.query.offset + i * +this.query.limit;
-    }
-  }
-});
-
-/***/ }),
-/* 260 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "ul",
-    {
-      staticClass: "pagination",
-      staticStyle: { margin: "0" },
-      attrs: { name: "Pagination" }
-    },
-    [
-      !_vm.isFirstPage
-        ? _c(
-            "li",
-            {
-              staticClass: "page-item",
-              on: {
-                click: function($event) {
-                  _vm.turnPage(-1)
-                }
-              }
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fa fa-arrow-left" })]
-              )
-            ]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm._l(_vm.dspBtns, function(i) {
-        return _c(
-          "li",
-          { class: ["page-item", { active: i === _vm.curPage }] },
-          [
-            i
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "page-link",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.handleClick(i)
-                      }
-                    }
-                  },
-                  [_vm._v("\n      " + _vm._s(i) + "\n    ")]
-                )
-              : _c("a", { staticClass: "page-link" }, [
-                  _c("i", { staticClass: "fa fa-ellipsis-h" })
-                ])
-          ]
-        )
-      }),
-      _vm._v(" "),
-      !_vm.isLastPage
-        ? _c(
-            "li",
-            {
-              staticClass: "page-item",
-              on: {
-                click: function($event) {
-                  _vm.turnPage(1)
-                }
-              }
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fa fa-arrow-right" })]
-              )
-            ]
-          )
-        : _vm._e()
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-83f0b5ac", module.exports)
-  }
-}
-
-/***/ }),
-/* 261 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(262)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(264)
-/* template */
-var __vue_template__ = __webpack_require__(265)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "node_modules/vue2-datatable-component/src/PageSizeSelect.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-27dbdcdc", Component.options)
-  } else {
-    hotAPI.reload("data-v-27dbdcdc", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 262 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(263);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("df334be4", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-27dbdcdc\",\"scoped\":false,\"hasInlineConfig\":true}!../../vue-loader/lib/selector.js?type=styles&index=0!./PageSizeSelect.vue", function() {
-     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-27dbdcdc\",\"scoped\":false,\"hasInlineConfig\":true}!../../vue-loader/lib/selector.js?type=styles&index=0!./PageSizeSelect.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 263 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.-page-size-select {\n  display: inline-block;\n  width: 65px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 264 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'PageSizeSelect',
-  props: {
-    query: { type: Object, required: true },
-    pageSizeOptions: { type: Array, required: true }
-  }
-});
-
-/***/ }),
-/* 265 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("label", { attrs: { name: "PageSizeSelect" } }, [
-    _c(
-      "select",
-      {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.query.limit,
-            expression: "query.limit"
-          }
-        ],
-        staticClass: "form-control input-sm -page-size-select",
-        on: {
-          change: [
-            function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.$set(
-                _vm.query,
-                "limit",
-                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-              )
-            },
-            function($event) {
-              _vm.query.offset = 0 /* reset to the first page */
-            }
-          ]
-        }
-      },
-      _vm._l(_vm.pageSizeOptions, function(i) {
-        return _c("option", { domProps: { value: i } }, [_vm._v(_vm._s(i))])
-      })
-    ),
-    _vm._v("\n  " + _vm._s(_vm.$i18nForDatatable("items / page")) + "\n")
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-27dbdcdc", module.exports)
-  }
-}
-
-/***/ }),
-/* 266 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { name: "Datatable" } },
-    [
-      _vm.$slots.default || _vm.HeaderSettings
-        ? _c(
-            "div",
-            {
-              staticClass: "clearfix",
-              staticStyle: { "margin-bottom": "10px" }
-            },
-            [
-              _vm.HeaderSettings
-                ? _c("header-settings", {
-                    staticClass: "pull-right",
-                    attrs: {
-                      columns: _vm.columns,
-                      "support-backup": _vm.supportBackup
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._t("default")
-            ],
-            2
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("tbl", _vm._b({}, "tbl", _vm.$props, false)),
-      _vm._v(" "),
-      _vm.Pagination
-        ? _c(
-            "div",
-            { staticClass: "row", staticStyle: { "margin-top": "10px" } },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "col-sm-6",
-                  staticStyle: { "white-space": "nowrap" }
-                },
-                [
-                  _c("strong", [
-                    _vm._v(
-                      "\n        " +
-                        _vm._s(_vm.$i18nForDatatable("Total")) +
-                        " " +
-                        _vm._s(_vm.total) +
-                        " " +
-                        _vm._s(_vm.$i18nForDatatable(",")) +
-                        "\n      "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("page-size-select", {
-                    attrs: {
-                      query: _vm.query,
-                      "page-size-options": _vm.pageSizeOptions
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-sm-6" },
-                [
-                  _c("pagination", {
-                    staticClass: "pull-right",
-                    attrs: { total: _vm.total, query: _vm.query }
-                  })
-                ],
-                1
-              )
-            ]
-          )
-        : _vm._e()
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0608cf92", module.exports)
-  }
-}
-
-/***/ }),
-/* 267 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// if some dynamic components are used frequently, a better way is to register them globally
-/* harmony default export */ __webpack_exports__["a"] = ({
-  DisplayRow: __webpack_require__(268),
-  //Color: require('./td-Color'),
-  //CreatetimeTd: require('./td-Createtime'),
-  //CreatetimeTh: require('./th-Createtime'),
-  //Email: require('./td-Email'),
-  Object: __webpack_require__(273),
-  Opt: __webpack_require__(276),
-  FilterTh: __webpack_require__(281),
-  FilterFil: __webpack_require__(286)
-  // [Vue warn]: Do not use built-in or reserved HTML elements as component id: Filter
-  // Filter: require('./th-Filter')
-});
-
-/***/ }),
-/* 268 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(269)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(271)
-/* template */
-var __vue_template__ = __webpack_require__(272)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/datatable/nested-DisplayRow.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4b4069bc", Component.options)
-  } else {
-    hotAPI.reload("data-v-4b4069bc", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 269 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(270);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("3d911797", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4b4069bc\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./nested-DisplayRow.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4b4069bc\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./nested-DisplayRow.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 270 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.-nested-dsp-row-comp {\n  position: relative;\n  padding: 10px;\n}\n.-nested-dsp-row-close-btn {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 271 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['row', 'nested'],
-  mounted: function mounted() {
-
-    console.log("asdfasdf");
-    console.log(this.row.description);
-    //console.log(this.row);
-    // jQuery(this.$el).find('button[title]').tooltip();
-  }
-});
-
-/***/ }),
-/* 272 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "-nested-dsp-row-comp" }, [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-xs btn-link -nested-dsp-row-close-btn",
-        on: {
-          click: function($event) {
-            _vm.nested.$toggle(false)
-          }
-        }
-      },
-      [_c("i", { staticClass: "fa fa-times fa-lg" })]
-    ),
-    _vm._v(" "),
-    _c("dl", { staticClass: "dl-horizontal" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [_vm._v("Identificador")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.id))])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [_vm._v("Alto")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.high))])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [_vm._v("Ancho")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.width))])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [_vm._v("Densidad")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _vm._v(_vm._s(_vm.row.density))
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [_vm._v("Tipo")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.type))])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [_vm._v("Especie")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.specie))])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [_vm._v("Descripción")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _vm._v(_vm._s(_vm.row.description))
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4b4069bc", module.exports)
-  }
-}
-
-/***/ }),
-/* 273 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(274)
-/* template */
-var __vue_template__ = __webpack_require__(275)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/datatable/td-Object.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-320b55aa", Component.options)
-  } else {
-    hotAPI.reload("data-v-320b55aa", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 274 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['value']
-});
-
-/***/ }),
-/* 275 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("span", [_vm._v(" " + _vm._s(_vm.value.name))])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-320b55aa", module.exports)
-  }
-}
-
-/***/ }),
-/* 276 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(277)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(279)
-/* template */
-var __vue_template__ = __webpack_require__(280)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/datatable/td-Opt.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-37229158", Component.options)
-  } else {
-    hotAPI.reload("data-v-37229158", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 277 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(278);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("7bfbe15e", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-37229158\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./td-Opt.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-37229158\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./td-Opt.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 278 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.-nested-comp-open-btn {\n  color: #fff !important;\n  background-color: #337ab7 !important;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 279 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['row', 'nested'],
-  data: function data() {
-    return {
-      statuses: [],
-      alert: false,
-      alert_type: null,
-      alert_msg: null,
-      dialog: false,
-      actual_row: null,
-      species: [],
-      types: [],
-      editedLumber: null
-    };
-  },
-
-  // data: {
-
-  // },
-  mounted: function mounted() {
-    this.actual_row = this.row;
-    //this.getSpecies();        
-    //this.getTypes();
-  },
-
-  computed: {
-    isDisplayRowVisible: function isDisplayRowVisible() {
-      if (this.nested.comp !== 'DisplayRow') return;
-      return this.nested.visible;
-    },
-    isFriendsTableVisible: function isFriendsTableVisible() {
-      if (this.nested.comp !== 'FriendsTable') return;
-      return this.nested.visible;
-    }
-  },
-  methods: {
-    toggleNestedComp: function toggleNestedComp(comp) {
-      var nested = this.nested;
-
-      if (nested.comp === comp) return nested.$toggle();
-      nested.$toggle(comp, true);
-    },
-    closeModal: function closeModal() {
-      this.$refs.myModalRef.hide();
-    },
-    updateData: function updateData() {
-      console.log(this.actual_row.specie);
-      axios.put('/api/auth/lumber/' + this.actual_row.id, this.actual_row).then(function (response) {
-        console.log(response.data.lumber);
-        //row.  
-      }).catch(function (error) {
-        console.log(error);
-        this.alert = true;
-        this.alert_type = "error";
-        this.alert_msg = 'error on saving';
-      });
-      this.dialog = false;
-    },
-    getSpecies: function getSpecies() {
-      var _this = this;
-
-      axios.get('/api/auth/specie').then(function (response) {
-        _this.species = response.data.species;
-      }).catch(function (error) {
-        console.log(error);
-      });
-    },
-    getTypes: function getTypes() {
-      var _this2 = this;
-
-      axios.get('/api/auth/type').then(function (response) {
-        _this2.types = response.data.types;
-      }).catch(function (error) {
-        console.log(error);
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 280 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "btn-group btn-group-sm" },
-    [
-      _c(
-        "v-btn",
-        {
-          class: { "-nested-comp-open-btn": _vm.isDisplayRowVisible },
-          attrs: { color: "info", title: "Display row" },
-          on: {
-            click: function($event) {
-              _vm.toggleNestedComp("DisplayRow")
-            }
-          }
-        },
-        [_vm._v("\n    VER\n    ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "", "justify-center": "" } },
-        [
-          _c(
-            "v-dialog",
-            {
-              attrs: { persistent: "", "max-width": "500px" },
-              model: {
-                value: _vm.dialog,
-                callback: function($$v) {
-                  _vm.dialog = $$v
-                },
-                expression: "dialog"
-              }
-            },
-            [
-              _c(
-                "v-btn",
-                {
-                  attrs: { slot: "activator", color: "success", dark: "" },
-                  slot: "activator"
-                },
-                [_vm._v("\n    Editar\n  ")]
-              ),
-              _vm._v(" "),
-              _vm.actual_row
-                ? _c(
-                    "v-card",
-                    { staticClass: "col-md-12" },
-                    [
-                      _c("v-card-title", { staticClass: "col-md-12" }, [
-                        _c("span", { staticClass: "headline" }, [
-                          _vm._v("Edición de Madera")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "v-card-text",
-                        { staticClass: "col-md-12" },
-                        [
-                          _c(
-                            "v-container",
-                            {
-                              staticClass: "col-md-12",
-                              attrs: { "grid-list-md": "" }
-                            },
-                            [
-                              _c(
-                                "v-layout",
-                                { attrs: { wrap: "" } },
-                                [
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "col-md-4",
-                                      attrs: { xs12: "", sm6: "", md4: "" }
-                                    },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Alto",
-                                          hint: "Ingrese el alto de la madera",
-                                          required: ""
-                                        },
-                                        model: {
-                                          value: _vm.actual_row.high,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.actual_row,
-                                              "high",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "actual_row.high"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "col-md-4",
-                                      attrs: { xs12: "", sm6: "", md4: "" }
-                                    },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Ancho",
-                                          hint: "Ingrese el ancho de la madera"
-                                        },
-                                        model: {
-                                          value: _vm.actual_row.width,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.actual_row,
-                                              "width",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "actual_row.width"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "col-md-4",
-                                      attrs: { xs12: "", sm6: "", md4: "" }
-                                    },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Densidad",
-                                          hint:
-                                            "Ingrese la densidad de la madera",
-                                          required: ""
-                                        },
-                                        model: {
-                                          value: _vm.actual_row.density,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.actual_row,
-                                              "density",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "actual_row.density"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "col-md-6",
-                                      attrs: { xs12: "", sm6: "" }
-                                    },
-                                    [
-                                      _c("v-select", {
-                                        attrs: {
-                                          label: "Tipo de madera",
-                                          items: _vm.types,
-                                          "item-text": "name",
-                                          "item-value": "id",
-                                          hint:
-                                            "Descripcion del tipo seleccionado",
-                                          "persistent-hint": ""
-                                        },
-                                        model: {
-                                          value: _vm.actual_row.type,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.actual_row,
-                                              "type",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "actual_row.type"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "col-md-6",
-                                      attrs: { xs12: "", sm6: "" }
-                                    },
-                                    [
-                                      _c("v-select", {
-                                        attrs: {
-                                          label: "Especie",
-                                          items: _vm.species,
-                                          "item-text": "name",
-                                          "item-value": "id",
-                                          hint:
-                                            "Descripcion de la madera seleccionada",
-                                          "persistent-hint": ""
-                                        },
-                                        model: {
-                                          value: _vm.actual_row.specie,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.actual_row,
-                                              "specie",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "actual_row.specie"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "col-md-12",
-                                      attrs: { xs12: "" }
-                                    },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: { label: "Descripción" }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-card-actions",
-                        [
-                          _c("v-spacer"),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "blue darken-1", flat: "" },
-                              nativeOn: {
-                                click: function($event) {
-                                  _vm.dialog = false
-                                }
-                              }
-                            },
-                            [_vm._v("Cerrar")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "blue darken-1", flat: "" },
-                              nativeOn: {
-                                click: function($event) {
-                                  return _vm.updateData($event)
-                                }
-                              }
-                            },
-                            [_vm._v("Guardar")]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e()
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-37229158", module.exports)
-  }
-}
-
-/***/ }),
-/* 281 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(282)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(284)
-/* template */
-var __vue_template__ = __webpack_require__(285)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/datatable/th-Filter.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-96ad6242", Component.options)
-  } else {
-    hotAPI.reload("data-v-96ad6242", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 282 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(283);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("681764ab", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-96ad6242\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./th-Filter.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-96ad6242\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./th-Filter.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 283 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\n  -webkit-appearance: searchfield-cancel-button;\n  cursor: pointer;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 284 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['field', 'title', 'query'],
-  data: function data() {
-    return {
-      keyword: '',
-      menu: false,
-      hints: true
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    jQuery(this.$el).on('shown.bs.dropdown', function (e) {
-      return _this.$refs.input.focus();
-    });
-  },
-
-  watch: {
-    keyword: function keyword(kw) {
-      if (kw === '') this.search();
-    }
-  },
-  methods: {
-    search: function search() {
-      console.log("searching");
-      var query = this.query;
-
-      this.$set(query, this.field, this.keyword);
-      query.offset = 0;
-    }
-  }
-});
-
-/***/ }),
-/* 285 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "text-xs-center" },
-    [
-      _vm._v("\n  " + _vm._s(_vm.title) + "\n  "),
-      _c(
-        "v-menu",
-        {
-          attrs: {
-            "close-on-content-click": false,
-            "nudge-width": 80,
-            "offset-x": "",
-            small: ""
-          },
-          model: {
-            value: _vm.menu,
-            callback: function($$v) {
-              _vm.menu = $$v
-            },
-            expression: "menu"
-          }
-        },
-        [
-          _c(
-            "v-btn",
-            {
-              attrs: { slot: "activator", icon: "", small: "" },
-              slot: "activator"
-            },
-            [_c("v-icon", [_vm._v("fa-filter")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-card",
-            [
-              _c("v-text-field", {
-                attrs: {
-                  "append-icon": "search",
-                  label: "Buscar " + _vm.field + "..."
-                },
-                on: {
-                  keydown: function($event) {
-                    if (
-                      !("button" in $event) &&
-                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                    ) {
-                      return null
-                    }
-                    return _vm.search($event)
-                  }
-                },
-                model: {
-                  value: _vm.keyword,
-                  callback: function($$v) {
-                    _vm.keyword = $$v
-                  },
-                  expression: "keyword"
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-96ad6242", module.exports)
-  }
-}
-
-/***/ }),
-/* 286 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(287)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(289)
-/* template */
-var __vue_template__ = __webpack_require__(290)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/datatable/th-Fil.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c08ce09c", Component.options)
-  } else {
-    hotAPI.reload("data-v-c08ce09c", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 287 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(288);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("64a02024", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c08ce09c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./th-Fil.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c08ce09c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./th-Fil.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 288 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\n  -webkit-appearance: searchfield-cancel-button;\n  cursor: pointer;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 289 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['field', 'title', 'query'],
-  data: function data() {
-    return {
-      keyword: ''
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    jQuery(this.$el).on('shown.bs.dropdown', function (e) {
-      return _this.$refs.input.focus();
-    });
-  },
-
-  watch: {
-    keyword: function keyword(kw) {
-      if (kw === '') this.search();
-    }
-  },
-  methods: {
-    search: function search() {
-      var query = this.query;
-
-      this.$set(query, this.field, this.keyword);
-      query.offset = 0;
-    }
-  }
-});
-
-/***/ }),
-/* 290 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "btn-group" }, [
-    _vm._v("\n  " + _vm._s(_vm.title) + "xdxd\n  "),
-    _c("a", { attrs: { href: "javascript:;", "data-toggle": "dropdown" } }, [
-      _c("i", {
-        staticClass: "fa fa-filter",
-        class: { "text-muted": !_vm.keyword }
-      })
-    ]),
-    _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "ul",
-      { staticClass: "dropdown-menu", staticStyle: { padding: "3px" } },
-      [_c("div", { staticClass: "input-group input-group-sm" })]
-    )
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c08ce09c", module.exports)
-  }
-}
-
-/***/ }),
-/* 291 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "datatable",
-    _vm._b({ on: { editItem: _vm.editItem } }, "datatable", _vm.$data, false)
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-26434b36", module.exports)
-  }
-}
-
-/***/ }),
-/* 292 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(293)
-/* template */
-var __vue_template__ = __webpack_require__(294)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/views/App.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-50e73d1e", Component.options)
-  } else {
-    hotAPI.reload("data-v-50e73d1e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 293 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      dialog: false,
-      drawer: null,
-      items: [{ icon: 'dashboard', text: 'Inicio', link: '/' }, { icon: 'group', text: 'Almacenes', link: '/storage' }, { icon: 'group', text: 'Madera', link: '/lumber' }, { icon: 'group', text: 'Especies', link: '/specie' }, { icon: 'group', text: 'Proveedores', link: '/providers' }],
-      menu: false,
-      message: false
-    };
-  },
-  props: {
-    source: String
-  },
-  methods: {
-    logout: function logout() {
-      this.$store.commit('logout');
-      this.$router.push('/login');
-    }
-  },
-  computed: {
-    currentUser: function currentUser() {
-      return this.$store.getters.currentUser;
-    }
-  }
-});
-
-/***/ }),
-/* 294 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-app",
-    { attrs: { id: "inspire" } },
-    [
-      _c(
-        "v-navigation-drawer",
-        {
-          attrs: {
-            fixed: "",
-            clipped: _vm.$vuetify.breakpoint.mdAndUp,
-            app: ""
-          },
-          model: {
-            value: _vm.drawer,
-            callback: function($$v) {
-              _vm.drawer = $$v
-            },
-            expression: "drawer"
-          }
-        },
-        [
-          _c(
-            "v-list",
-            { attrs: { dense: "" } },
-            [
-              _vm._l(_vm.items, function(item) {
-                return [
-                  item.heading
-                    ? _c(
-                        "v-layout",
-                        {
-                          key: item.heading,
-                          attrs: { row: "", "align-center": "" }
-                        },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs6: "" } },
-                            [
-                              item.heading
-                                ? _c("v-subheader", [
-                                    _vm._v(
-                                      "\n               " +
-                                        _vm._s(item.heading) +
-                                        "\n             "
-                                    )
-                                  ])
-                                : _vm._e()
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            {
-                              staticClass: "text-xs-center",
-                              attrs: { xs6: "" }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "body-2 black--text",
-                                  attrs: { href: "#!" }
-                                },
-                                [_vm._v("EDIT")]
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    : item.children
-                      ? _c(
-                          "v-list-group",
-                          {
-                            key: item.text,
-                            attrs: {
-                              to: item.link,
-                              "prepend-icon": item.model
-                                ? item.icon
-                                : item["icon-alt"],
-                              "append-icon": ""
-                            },
-                            model: {
-                              value: item.model,
-                              callback: function($$v) {
-                                _vm.$set(item, "model", $$v)
-                              },
-                              expression: "item.model"
-                            }
-                          },
-                          [
-                            _c(
-                              "v-list-tile",
-                              {
-                                attrs: { slot: "activator" },
-                                slot: "activator"
-                              },
-                              [
-                                _c(
-                                  "v-list-tile-content",
-                                  [
-                                    _c("v-list-tile-title", [
-                                      _vm._v(
-                                        "\n                 " +
-                                          _vm._s(item.text) +
-                                          "\n               "
-                                      )
-                                    ])
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _vm._l(item.children, function(child, i) {
-                              return _c(
-                                "v-list-tile",
-                                { key: i },
-                                [
-                                  child.icon
-                                    ? _c(
-                                        "v-list-tile-action",
-                                        [
-                                          _c("v-icon", [
-                                            _vm._v(_vm._s(child.icon))
-                                          ])
-                                        ],
-                                        1
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-list-tile-content",
-                                    [
-                                      _c("v-list-tile-title", [
-                                        _vm._v(
-                                          "\n                 " +
-                                            _vm._s(child.text) +
-                                            "\n               "
-                                        )
-                                      ])
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      : _c(
-                          "v-list-tile",
-                          { key: item.text, attrs: { to: item.link } },
-                          [
-                            _c(
-                              "v-list-tile-action",
-                              [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-list-tile-content",
-                              [
-                                _c("v-list-tile-title", [
-                                  _vm._v(
-                                    "\n               " +
-                                      _vm._s(item.text) +
-                                      "\n             "
-                                  )
-                                ])
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                ]
-              })
-            ],
-            2
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-toolbar",
-        {
-          attrs: {
-            color: "blue darken-2",
-            dark: "",
-            app: "",
-            "clipped-left": _vm.$vuetify.breakpoint.mdAndUp,
-            fixed: ""
-          }
-        },
-        [
-          _c(
-            "v-toolbar-title",
-            { staticClass: "ml-0 pl-3", staticStyle: { width: "300px" } },
-            [
-              _c("v-toolbar-side-icon", {
-                on: {
-                  click: function($event) {
-                    $event.stopPropagation()
-                    _vm.drawer = !_vm.drawer
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "hidden-sm-and-down" }, [
-                _vm._v("Ultimate Design")
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _vm.currentUser
-            ? _c(
-                "v-menu",
-                {
-                  attrs: {
-                    "close-on-content-click": false,
-                    "nudge-width": 100,
-                    "offset-x": ""
-                  },
-                  model: {
-                    value: _vm.menu,
-                    callback: function($$v) {
-                      _vm.menu = $$v
-                    },
-                    expression: "menu"
-                  }
-                },
-                [
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: { slot: "activator", icon: "", large: "" },
-                      slot: "activator"
-                    },
-                    [_c("v-icon", [_vm._v("person")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-card",
-                    { attrs: { light: "" } },
-                    [
-                      _c(
-                        "v-list",
-                        [
-                          _c(
-                            "v-list-tile",
-                            { attrs: { avatar: "" } },
-                            [
-                              _c("v-list-tile-avatar", [
-                                _c("img", {
-                                  attrs: {
-                                    src:
-                                      "https://cdn.vuetifyjs.com/images/john.jpg",
-                                    alt: "John"
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-tile-content",
-                                [
-                                  _c("v-list-tile-title", [
-                                    _vm._v(_vm._s(_vm.currentUser.name))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("v-list-tile-sub-title", [
-                                    _vm._v("Administrador")
-                                  ])
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-card-actions",
-                        [
-                          _c("v-spacer"),
-                          _vm._v(" "),
-                          _c(
-                            "v-tooltip",
-                            { attrs: { bottom: "" } },
-                            [
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: {
-                                    slot: "activator",
-                                    color: "primary",
-                                    dark: "",
-                                    flat: ""
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.menu = false
-                                    }
-                                  },
-                                  slot: "activator"
-                                },
-                                [_c("v-icon", [_vm._v("reply")])],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("span", [_vm._v("Regresar")])
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-tooltip",
-                            { attrs: { bottom: "" } },
-                            [
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: {
-                                    slot: "activator",
-                                    color: "primary",
-                                    dark: "",
-                                    flat: ""
-                                  },
-                                  on: { click: _vm.logout },
-                                  slot: "activator"
-                                },
-                                [_c("v-icon", [_vm._v("exit_to_app")])],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("span", [_vm._v("Cerrar Sesion")])
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            : _c(
-                "v-btn",
-                { attrs: { flat: "", color: "white", to: "/login" } },
-                [_vm._v(" Inicar Sesion ")]
-              )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-content",
-        [
-          _c(
-            "v-container",
-            { attrs: { fluid: "", "fill-height": "" } },
-            [
-              _c(
-                "v-layout",
-                { attrs: { column: "", "fill-height": "" } },
-                [_c("router-view")],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-50e73d1e", module.exports)
-  }
-}
-
-/***/ }),
-/* 295 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 296 */,
-/* 297 */,
-/* 298 */,
-/* 299 */,
-/* 300 */,
-/* 301 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(302)
-/* template */
-var __vue_template__ = __webpack_require__(303)
+var __vue_template__ = __webpack_require__(118)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -82203,7 +73924,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 302 */
+/* 117 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82619,7 +74340,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 303 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -82645,7 +74366,7 @@ var render = function() {
                   _c(
                     "v-card-title",
                     [
-                      _vm._v("\n            Madera\n        "),
+                      _vm._v("\r\n            Madera\r\n        "),
                       _c("v-spacer"),
                       _vm._v(" "),
                       _c(
@@ -83021,7 +74742,7 @@ var render = function() {
                                                 [
                                                   _vm._v(
                                                     _vm._s(header.text) +
-                                                      "                                \n                            "
+                                                      "                                \r\n                            "
                                                   )
                                                 ]
                                               ),
@@ -83219,7 +74940,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\n                        toc\n                    "
+                                                "\r\n                        toc\r\n                    "
                                               )
                                             ]
                                           )
@@ -83272,9 +74993,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                '\n            Your search for "' +
+                                '\r\n            Your search for "' +
                                   _vm._s(_vm.search) +
-                                  '" found no results.\n        '
+                                  '" found no results.\r\n        '
                               )
                             ]
                           )
@@ -83301,7 +75022,7 @@ var render = function() {
                   _c(
                     "v-card-title",
                     [
-                      _vm._v("\n            Compra\n        "),
+                      _vm._v("\r\n            Compra\r\n        "),
                       _c("v-spacer"),
                       _vm._v(" "),
                       _c(
@@ -83492,7 +75213,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                        delete\n                    "
+                                          "\r\n                        delete\r\n                    "
                                         )
                                       ]
                                     )
@@ -83529,6 +75250,8376 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-3338b61b", module.exports)
   }
 }
+
+/***/ }),
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(120)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(123)
+/* template */
+var __vue_template__ = __webpack_require__(294)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/lumber/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-26434b36", Component.options)
+  } else {
+    hotAPI.reload("data-v-26434b36", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(121);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("ca15cbf2", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-26434b36\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-26434b36\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.w-240 {\r\n  width: 240px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 122 */
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+/* 123 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_datatable_component__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__datatable___ = __webpack_require__(270);
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2_datatable_component__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: __WEBPACK_IMPORTED_MODULE_3__datatable___["a" /* default */],
+  name: 'LumberTable',
+  props: ['row'],
+  data: function data() {
+    var amINestedComp = !!this.row;
+    return {
+      supportBackup: true,
+      supportNested: true,
+      tblClass: 'table-bordered',
+      tblStyle: 'color: #666',
+      pageSizeOptions: [5, 10, 15, 20],
+      columns: function () {
+        var cols = [{ title: 'Alto', field: 'high', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } }, { title: 'Ancho', field: 'width', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } }, { title: 'Espesor', field: 'density', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } }, { title: 'Tipo', field: 'type', thComp: 'FilterTh', tdComp: 'Object', tdStyle: { fontStyle: 'italic' } }, { title: 'Especie', field: 'specie', thComp: 'FilterTh', tdComp: 'Object', tdStyle: { fontStyle: 'italic' } }, { title: 'Operation', tdComp: 'Opt', visible: 'true' }];
+        var groupsDef = {
+          Normal: ['Alto', 'Ancho', 'Espesor', 'Tipo', 'Especie'],
+          Sortable: ['Alto'],
+          Extra: []
+          //return cols;
+        };return cols.map(function (col) {
+          console.log(col);
+          Object.keys(groupsDef).forEach(function (groupName) {
+            if (groupsDef[groupName].includes(col.title)) {
+
+              col.group = groupName;
+            }
+          });
+          return col;
+        });
+      }(),
+      data: [],
+      total: 0,
+      selection: [],
+      summary: {},
+      query: amINestedComp ? { uid: this.row.friends } : {},
+      xprops: {
+        eventbus: new __WEBPACK_IMPORTED_MODULE_0_vue___default.a()
+      }
+    };
+  },
+
+  watch: {
+    query: {
+      handler: function handler() {
+        console.log("handling");
+        this.handleQueryChange();
+      },
+
+      deep: true
+    }
+  },
+  methods: {
+
+    /**
+     * Get filtered Record
+     * @param   {Record} form
+     * @resolve {Record}
+     */
+    handleQueryChange: function handleQueryChange() {
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/auth/getLumberData', {
+        params: this.query
+      }).then(function (response) {
+        _this.data = response.data.lumbers;
+        _this.total = response.data.total;
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    alertSelectedUids: function alertSelectedUids() {
+      console.log(this.selection);
+      alert(this.selection.map(function (_ref) {
+        var id = _ref.id;
+        return id;
+      }));
+    },
+    editItem: function editItem(item) {
+      console.log("here");
+      this.editedIndex = this.desserts.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      console.log(item);
+      //this.date = item.birth_date
+      //this.dialog = true
+    },
+    showModal: function showModal() {
+      this.$refs.myModalRef.show();
+    }
+  }
+});
+
+/***/ }),
+/* 124 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__index_vue__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__index_vue__);
+
+
+__WEBPACK_IMPORTED_MODULE_0__index_vue___default.a.install = (Vue, options) => {
+  const locale = options ? options.locale : {}
+  
+  // this might be the simplest i18n solution
+  Vue.prototype.$i18nForDatatable = srcTxt => locale[srcTxt] || srcTxt
+
+  Vue.component('Datatable', __WEBPACK_IMPORTED_MODULE_0__index_vue___default.a)
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(__WEBPACK_IMPORTED_MODULE_0__index_vue___default.a)
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__index_vue___default.a);
+
+
+/***/ }),
+/* 125 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(126)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(128)
+/* template */
+var __vue_template__ = __webpack_require__(269)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue2-datatable-component/src/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0608cf92", Component.options)
+  } else {
+    hotAPI.reload("data-v-0608cf92", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(127);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("4cd5548a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0608cf92\",\"scoped\":false,\"hasInlineConfig\":true}!../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0608cf92\",\"scoped\":false,\"hasInlineConfig\":true}!../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* transition effect: fade */\n.fade-enter-active, .fade-leave-active {\n  -webkit-transition: opacity .2s;\n  transition: opacity .2s;\n}\n.fade-enter, .fade-leave-active {\n  opacity: 0;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 128 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeaderSettings_index_vue__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeaderSettings_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__HeaderSettings_index_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Table_index_vue__ = __webpack_require__(232);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Table_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Table_index_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Pagination_vue__ = __webpack_require__(261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Pagination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Pagination_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PageSizeSelect_vue__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PageSizeSelect_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__PageSizeSelect_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_props__ = __webpack_require__(8);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Datatable',
+  mixins: [__WEBPACK_IMPORTED_MODULE_4__mixins_props__["a" /* default */]],
+  components: { HeaderSettings: __WEBPACK_IMPORTED_MODULE_0__HeaderSettings_index_vue___default.a, Tbl: __WEBPACK_IMPORTED_MODULE_1__Table_index_vue___default.a, Pagination: __WEBPACK_IMPORTED_MODULE_2__Pagination_vue___default.a, PageSizeSelect: __WEBPACK_IMPORTED_MODULE_3__PageSizeSelect_vue___default.a },
+  created: function created() {
+    var _this = this;
+
+    // init query (make all the properties observable by using `$set`)
+    var q = _extends({ limit: 10, offset: 0, sort: '', order: '' }, this.query);
+    Object.keys(q).forEach(function (key) {
+      _this.$set(_this.query, key, q[key]);
+    });
+  },
+
+  watch: {
+    data: {
+      handler: function handler(data) {
+        var _this2 = this;
+
+        var supportNested = this.supportNested;
+        // support nested components feature with extra magic
+
+        if (supportNested) {
+          var MAGIC_FIELD = '__nested__';
+          data.forEach(function (item) {
+            if (!item[MAGIC_FIELD]) {
+              _this2.$set(item, MAGIC_FIELD, {
+                comp: undefined, // current nested component
+                visible: false,
+                $toggle: function $toggle(comp, visible) {
+                  switch (arguments.length) {
+                    case 0:
+                      this.visible = !this.visible;
+                      break;
+                    case 1:
+                      switch (typeof comp === 'undefined' ? 'undefined' : _typeof(comp)) {
+                        case 'boolean':
+                          this.visible = comp;
+                          break;
+                        case 'string':
+                        case 'object':
+                          this.comp = comp;
+                          this.visible = !this.visible;
+                          break;
+                      }
+                      break;
+                    case 2:
+                      this.comp = comp;
+                      this.visible = visible;
+                      break;
+                  }
+                }
+              });
+              if (supportNested === 'accordion') {
+                _this2.$watch(function () {
+                  return item[MAGIC_FIELD];
+                }, function (nested) {
+                  // only one nested component can be expanded at the same time
+                  if (data.filter(function (item) {
+                    return item[MAGIC_FIELD].visible;
+                  }).length < 2) return;
+
+                  data.forEach(function (item) {
+                    if (item[MAGIC_FIELD].visible && item[MAGIC_FIELD] !== nested) {
+                      item[MAGIC_FIELD].visible = false;
+                    }
+                  });
+                }, { deep: true });
+              }
+              Object.defineProperty(item, MAGIC_FIELD, { enumerable: false });
+            }
+          });
+        }
+      },
+
+      immediate: true
+    }
+  }
+});
+
+/***/ }),
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(130)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(132)
+/* template */
+var __vue_template__ = __webpack_require__(231)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue2-datatable-component/src/HeaderSettings/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-41de8ae3", Component.options)
+  } else {
+    hotAPI.reload("data-v-41de8ae3", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 130 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(131);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("54362aa0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41de8ae3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41de8ae3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.-col-group-container {\n  border-bottom: 1px solid #ddd;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 132 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ColumnGroup_vue__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ColumnGroup_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ColumnGroup_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_groupBy__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_groupBy___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_groupBy__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_keyGen__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_replaceWith__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_localstorage__ = __webpack_require__(230);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'HeaderSettings',
+  components: { ColumnGroup: __WEBPACK_IMPORTED_MODULE_0__ColumnGroup_vue___default.a },
+  props: {
+    columns: { type: Array, required: true },
+    supportBackup: { type: Boolean, required: true }
+  },
+  data: function data() {
+    var origSettings = Object(__WEBPACK_IMPORTED_MODULE_4__utils_localstorage__["e" /* stringify */])(this.columns);
+    return {
+      origSettings: origSettings,
+      usingBak: false, // is using backup
+      processingCls: '',
+      storageKey: this.supportBackup && Object(__WEBPACK_IMPORTED_MODULE_2__utils_keyGen__["a" /* default */])(origSettings)
+    };
+  },
+  created: function created() {
+    if (!this.supportBackup) return;
+
+    var backup = Object(__WEBPACK_IMPORTED_MODULE_4__utils_localstorage__["a" /* getFromLS */])(this.storageKey);
+    if (!backup) return; // no backup found
+
+    Object(__WEBPACK_IMPORTED_MODULE_3__utils_replaceWith__["a" /* default */])(this.columns, backup);
+    this.usingBak = true;
+  },
+  mounted: function mounted() {
+    // control dropdown manually (refers to http://jsfiddle.net/rj3k550m/3)
+    var $el = $(this.$el);
+    $(this.$refs.dropdownBtn).on('click', this.toggle);
+    $(document).on('click', function (e) {
+      $(e.target).closest($el).length || $el.removeClass('open');
+    });
+  },
+
+  computed: {
+    colGroups: function colGroups() {
+      return __WEBPACK_IMPORTED_MODULE_1_lodash_groupBy___default()(this.columns.filter(function (col) {
+        return col.label || col.title;
+      }), 'group');
+    },
+    drpMenuStyle: function drpMenuStyle() {
+      var w = Object.keys(this.colGroups).length * 150;
+      return {
+        padding: '10px 10px 0',
+        width: w + 25 + 'px',
+        left: '-' + (w - 25) + 'px'
+      };
+    }
+  },
+  methods: {
+    apply: function apply(alsoBackup) {
+      this.toggle();
+      this.$refs.colGroups.forEach(function (colGroup) {
+        colGroup.apply();
+      });
+      alsoBackup && this.$nextTick(this.backup);
+    },
+    backup: function backup() {
+      Object(__WEBPACK_IMPORTED_MODULE_4__utils_localstorage__["d" /* saveToLS */])(this.storageKey, this.columns);
+      this.showProcessing();
+      this.usingBak = true;
+    },
+    rmBackup: function rmBackup() {
+      Object(__WEBPACK_IMPORTED_MODULE_4__utils_localstorage__["c" /* rmFromLS */])(this.storageKey);
+      this.showProcessing();
+      this.usingBak = false;
+
+      Object(__WEBPACK_IMPORTED_MODULE_3__utils_replaceWith__["a" /* default */])(this.columns, Object(__WEBPACK_IMPORTED_MODULE_4__utils_localstorage__["b" /* parseStr */])(this.origSettings)); // restore
+    },
+    toggle: function toggle() {
+      $(this.$el).toggleClass('open');
+    },
+    showProcessing: function showProcessing() {
+      var _this = this;
+
+      ['fa-spinner fa-pulse', 'fa-check', ''].forEach(function (cls, idx) {
+        setTimeout(function () {
+          _this.processingCls = cls;
+        }, idx * 1000);
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(134)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(136)
+/* template */
+var __vue_template__ = __webpack_require__(137)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue2-datatable-component/src/HeaderSettings/ColumnGroup.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7d2f207a", Component.options)
+  } else {
+    hotAPI.reload("data-v-7d2f207a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(135);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("3671e204", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7d2f207a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./ColumnGroup.vue", function() {
+     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7d2f207a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./ColumnGroup.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 135 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.-col-group {\n  display: inline-block;\n  margin-bottom: 5px;\n  padding: 0;\n  width: 150px;\n  vertical-align: top;\n}\n.-col-group-title {\n  display: block;\n  margin: 5px;\n  padding: 5px;\n  border-bottom: 1px solid #ddd;\n  font-size: 18px;\n}\n.-col-group > li {\n  margin-bottom: 5px;\n  padding-left: 10px;\n  list-style: none;\n  line-height: 20px;\n  font-size: 12px;\n}\n.-col-group > li > * {\n  margin: 0;\n  vertical-align: middle;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 136 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_isColVisible__ = __webpack_require__(37);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ColumnGroup',
+  props: {
+    groupName: { type: String, required: true },
+    columns: { type: Array, required: true }
+  },
+  data: function data() {
+    return {
+      changes: [] // record the changes with a stack
+    };
+  },
+  methods: {
+    handleChange: function handleChange(col, isChecked) {
+      this.changes.push({ col: col, isChecked: isChecked });
+    },
+    uuidGen: function uuidGen(key) {
+      // $vm._uid is a private property of a Vue instance
+      return '-col-' + this._uid + '-' + key;
+    },
+    apply: function apply() {
+      var _this = this;
+
+      this.changes.forEach(function (_ref) {
+        var col = _ref.col,
+            isChecked = _ref.isChecked;
+
+        _this.$set(col, 'visible', isChecked);
+      });
+      this.changes = []; // don't forget to clear the stack
+    },
+
+    isColVisible: __WEBPACK_IMPORTED_MODULE_0__utils_isColVisible__["a" /* default */]
+  }
+});
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "ul",
+    { staticClass: "-col-group", attrs: { name: "ColumnGroup" } },
+    [
+      _c("label", { staticClass: "-col-group-title" }, [
+        _vm._v(
+          "\n    " +
+            _vm._s(_vm.groupName === "undefined" ? "Columns" : _vm.groupName) +
+            "\n  "
+        )
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.columns, function(col, idx) {
+        return _c("li", [
+          _c("input", {
+            attrs: {
+              type: "checkbox",
+              id: _vm.uuidGen(col.field || idx),
+              name: _vm.groupName,
+              disabled: typeof col.visible === "string"
+            },
+            domProps: { checked: _vm.isColVisible(col) },
+            on: {
+              change: function($event) {
+                _vm.handleChange(col, $event.target.checked)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: _vm.uuidGen(col.field || idx) } }, [
+            _vm._v("\n      " + _vm._s(col.label || col.title) + "\n      "),
+            col.explain
+              ? _c("i", {
+                  staticClass: "fa fa-info-circle",
+                  staticStyle: { cursor: "help" },
+                  attrs: { title: col.explain }
+                })
+              : _vm._e()
+          ])
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7d2f207a", module.exports)
+  }
+}
+
+/***/ }),
+/* 138 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseAssignValue = __webpack_require__(139),
+    createAggregator = __webpack_require__(147);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Creates an object composed of keys generated from the results of running
+ * each element of `collection` thru `iteratee`. The order of grouped values
+ * is determined by the order they occur in `collection`. The corresponding
+ * value of each key is an array of elements responsible for generating the
+ * key. The iteratee is invoked with one argument: (value).
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Collection
+ * @param {Array|Object} collection The collection to iterate over.
+ * @param {Function} [iteratee=_.identity] The iteratee to transform keys.
+ * @returns {Object} Returns the composed aggregate object.
+ * @example
+ *
+ * _.groupBy([6.1, 4.2, 6.3], Math.floor);
+ * // => { '4': [4.2], '6': [6.1, 6.3] }
+ *
+ * // The `_.property` iteratee shorthand.
+ * _.groupBy(['one', 'two', 'three'], 'length');
+ * // => { '3': ['one', 'two'], '5': ['three'] }
+ */
+var groupBy = createAggregator(function(result, value, key) {
+  if (hasOwnProperty.call(result, key)) {
+    result[key].push(value);
+  } else {
+    baseAssignValue(result, key, [value]);
+  }
+});
+
+module.exports = groupBy;
+
+
+/***/ }),
+/* 139 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var defineProperty = __webpack_require__(140);
+
+/**
+ * The base implementation of `assignValue` and `assignMergeValue` without
+ * value checks.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {string} key The key of the property to assign.
+ * @param {*} value The value to assign.
+ */
+function baseAssignValue(object, key, value) {
+  if (key == '__proto__' && defineProperty) {
+    defineProperty(object, key, {
+      'configurable': true,
+      'enumerable': true,
+      'value': value,
+      'writable': true
+    });
+  } else {
+    object[key] = value;
+  }
+}
+
+module.exports = baseAssignValue;
+
+
+/***/ }),
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(6);
+
+var defineProperty = (function() {
+  try {
+    var func = getNative(Object, 'defineProperty');
+    func({}, '', {});
+    return func;
+  } catch (e) {}
+}());
+
+module.exports = defineProperty;
+
+
+/***/ }),
+/* 141 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isFunction = __webpack_require__(38),
+    isMasked = __webpack_require__(144),
+    isObject = __webpack_require__(7),
+    toSource = __webpack_require__(40);
+
+/**
+ * Used to match `RegExp`
+ * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+ */
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+
+/** Used to detect host constructors (Safari). */
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+/** Used for built-in method references. */
+var funcProto = Function.prototype,
+    objectProto = Object.prototype;
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Used to detect if a method is native. */
+var reIsNative = RegExp('^' +
+  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
+  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+);
+
+/**
+ * The base implementation of `_.isNative` without bad shim checks.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a native function,
+ *  else `false`.
+ */
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+
+module.exports = baseIsNative;
+
+
+/***/ }),
+/* 142 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(12);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+
+module.exports = getRawTag;
+
+
+/***/ }),
+/* 143 */
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+module.exports = objectToString;
+
+
+/***/ }),
+/* 144 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var coreJsData = __webpack_require__(145);
+
+/** Used to detect methods masquerading as native. */
+var maskSrcKey = (function() {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+  return uid ? ('Symbol(src)_1.' + uid) : '';
+}());
+
+/**
+ * Checks if `func` has its source masked.
+ *
+ * @private
+ * @param {Function} func The function to check.
+ * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+ */
+function isMasked(func) {
+  return !!maskSrcKey && (maskSrcKey in func);
+}
+
+module.exports = isMasked;
+
+
+/***/ }),
+/* 145 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(4);
+
+/** Used to detect overreaching core-js shims. */
+var coreJsData = root['__core-js_shared__'];
+
+module.exports = coreJsData;
+
+
+/***/ }),
+/* 146 */
+/***/ (function(module, exports) {
+
+/**
+ * Gets the value at `key` of `object`.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {string} key The key of the property to get.
+ * @returns {*} Returns the property value.
+ */
+function getValue(object, key) {
+  return object == null ? undefined : object[key];
+}
+
+module.exports = getValue;
+
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayAggregator = __webpack_require__(148),
+    baseAggregator = __webpack_require__(149),
+    baseIteratee = __webpack_require__(166),
+    isArray = __webpack_require__(5);
+
+/**
+ * Creates a function like `_.groupBy`.
+ *
+ * @private
+ * @param {Function} setter The function to set accumulator values.
+ * @param {Function} [initializer] The accumulator object initializer.
+ * @returns {Function} Returns the new aggregator function.
+ */
+function createAggregator(setter, initializer) {
+  return function(collection, iteratee) {
+    var func = isArray(collection) ? arrayAggregator : baseAggregator,
+        accumulator = initializer ? initializer() : {};
+
+    return func(collection, setter, baseIteratee(iteratee, 2), accumulator);
+  };
+}
+
+module.exports = createAggregator;
+
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `baseAggregator` for arrays.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} setter The function to set `accumulator` values.
+ * @param {Function} iteratee The iteratee to transform keys.
+ * @param {Object} accumulator The initial aggregated object.
+ * @returns {Function} Returns `accumulator`.
+ */
+function arrayAggregator(array, setter, iteratee, accumulator) {
+  var index = -1,
+      length = array == null ? 0 : array.length;
+
+  while (++index < length) {
+    var value = array[index];
+    setter(accumulator, value, iteratee(value), array);
+  }
+  return accumulator;
+}
+
+module.exports = arrayAggregator;
+
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseEach = __webpack_require__(150);
+
+/**
+ * Aggregates elements of `collection` on `accumulator` with keys transformed
+ * by `iteratee` and values set by `setter`.
+ *
+ * @private
+ * @param {Array|Object} collection The collection to iterate over.
+ * @param {Function} setter The function to set `accumulator` values.
+ * @param {Function} iteratee The iteratee to transform keys.
+ * @param {Object} accumulator The initial aggregated object.
+ * @returns {Function} Returns `accumulator`.
+ */
+function baseAggregator(collection, setter, iteratee, accumulator) {
+  baseEach(collection, function(value, key, collection) {
+    setter(accumulator, value, iteratee(value), collection);
+  });
+  return accumulator;
+}
+
+module.exports = baseAggregator;
+
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseForOwn = __webpack_require__(151),
+    createBaseEach = __webpack_require__(165);
+
+/**
+ * The base implementation of `_.forEach` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Array|Object} collection The collection to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array|Object} Returns `collection`.
+ */
+var baseEach = createBaseEach(baseForOwn);
+
+module.exports = baseEach;
+
+
+/***/ }),
+/* 151 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseFor = __webpack_require__(152),
+    keys = __webpack_require__(24);
+
+/**
+ * The base implementation of `_.forOwn` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Object} object The object to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Object} Returns `object`.
+ */
+function baseForOwn(object, iteratee) {
+  return object && baseFor(object, iteratee, keys);
+}
+
+module.exports = baseForOwn;
+
+
+/***/ }),
+/* 152 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var createBaseFor = __webpack_require__(153);
+
+/**
+ * The base implementation of `baseForOwn` which iterates over `object`
+ * properties returned by `keysFunc` and invokes `iteratee` for each property.
+ * Iteratee functions may exit iteration early by explicitly returning `false`.
+ *
+ * @private
+ * @param {Object} object The object to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @param {Function} keysFunc The function to get the keys of `object`.
+ * @returns {Object} Returns `object`.
+ */
+var baseFor = createBaseFor();
+
+module.exports = baseFor;
+
+
+/***/ }),
+/* 153 */
+/***/ (function(module, exports) {
+
+/**
+ * Creates a base function for methods like `_.forIn` and `_.forOwn`.
+ *
+ * @private
+ * @param {boolean} [fromRight] Specify iterating from right to left.
+ * @returns {Function} Returns the new base function.
+ */
+function createBaseFor(fromRight) {
+  return function(object, iteratee, keysFunc) {
+    var index = -1,
+        iterable = Object(object),
+        props = keysFunc(object),
+        length = props.length;
+
+    while (length--) {
+      var key = props[fromRight ? length : ++index];
+      if (iteratee(iterable[key], key, iterable) === false) {
+        break;
+      }
+    }
+    return object;
+  };
+}
+
+module.exports = createBaseFor;
+
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseTimes = __webpack_require__(155),
+    isArguments = __webpack_require__(41),
+    isArray = __webpack_require__(5),
+    isBuffer = __webpack_require__(42),
+    isIndex = __webpack_require__(43),
+    isTypedArray = __webpack_require__(44);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Creates an array of the enumerable property names of the array-like `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @param {boolean} inherited Specify returning inherited property names.
+ * @returns {Array} Returns the array of property names.
+ */
+function arrayLikeKeys(value, inherited) {
+  var isArr = isArray(value),
+      isArg = !isArr && isArguments(value),
+      isBuff = !isArr && !isArg && isBuffer(value),
+      isType = !isArr && !isArg && !isBuff && isTypedArray(value),
+      skipIndexes = isArr || isArg || isBuff || isType,
+      result = skipIndexes ? baseTimes(value.length, String) : [],
+      length = result.length;
+
+  for (var key in value) {
+    if ((inherited || hasOwnProperty.call(value, key)) &&
+        !(skipIndexes && (
+           // Safari 9 has enumerable `arguments.length` in strict mode.
+           key == 'length' ||
+           // Node.js 0.10 has enumerable non-index properties on buffers.
+           (isBuff && (key == 'offset' || key == 'parent')) ||
+           // PhantomJS 2 has enumerable non-index properties on typed arrays.
+           (isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) ||
+           // Skip index properties.
+           isIndex(key, length)
+        ))) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = arrayLikeKeys;
+
+
+/***/ }),
+/* 155 */
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.times` without support for iteratee shorthands
+ * or max array length checks.
+ *
+ * @private
+ * @param {number} n The number of times to invoke `iteratee`.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the array of results.
+ */
+function baseTimes(n, iteratee) {
+  var index = -1,
+      result = Array(n);
+
+  while (++index < n) {
+    result[index] = iteratee(index);
+  }
+  return result;
+}
+
+module.exports = baseTimes;
+
+
+/***/ }),
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(10),
+    isObjectLike = __webpack_require__(11);
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]';
+
+/**
+ * The base implementation of `_.isArguments`.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ */
+function baseIsArguments(value) {
+  return isObjectLike(value) && baseGetTag(value) == argsTag;
+}
+
+module.exports = baseIsArguments;
+
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns `false`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {boolean} Returns `false`.
+ * @example
+ *
+ * _.times(2, _.stubFalse);
+ * // => [false, false]
+ */
+function stubFalse() {
+  return false;
+}
+
+module.exports = stubFalse;
+
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(10),
+    isLength = __webpack_require__(25),
+    isObjectLike = __webpack_require__(11);
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    funcTag = '[object Function]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    objectTag = '[object Object]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    weakMapTag = '[object WeakMap]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]',
+    float32Tag = '[object Float32Array]',
+    float64Tag = '[object Float64Array]',
+    int8Tag = '[object Int8Array]',
+    int16Tag = '[object Int16Array]',
+    int32Tag = '[object Int32Array]',
+    uint8Tag = '[object Uint8Array]',
+    uint8ClampedTag = '[object Uint8ClampedArray]',
+    uint16Tag = '[object Uint16Array]',
+    uint32Tag = '[object Uint32Array]';
+
+/** Used to identify `toStringTag` values of typed arrays. */
+var typedArrayTags = {};
+typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
+typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
+typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
+typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
+typedArrayTags[uint32Tag] = true;
+typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
+typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
+typedArrayTags[dataViewTag] = typedArrayTags[dateTag] =
+typedArrayTags[errorTag] = typedArrayTags[funcTag] =
+typedArrayTags[mapTag] = typedArrayTags[numberTag] =
+typedArrayTags[objectTag] = typedArrayTags[regexpTag] =
+typedArrayTags[setTag] = typedArrayTags[stringTag] =
+typedArrayTags[weakMapTag] = false;
+
+/**
+ * The base implementation of `_.isTypedArray` without Node.js optimizations.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ */
+function baseIsTypedArray(value) {
+  return isObjectLike(value) &&
+    isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
+}
+
+module.exports = baseIsTypedArray;
+
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.unary` without support for storing metadata.
+ *
+ * @private
+ * @param {Function} func The function to cap arguments for.
+ * @returns {Function} Returns the new capped function.
+ */
+function baseUnary(func) {
+  return function(value) {
+    return func(value);
+  };
+}
+
+module.exports = baseUnary;
+
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(39);
+
+/** Detect free variable `exports`. */
+var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+
+/** Detect free variable `module`. */
+var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+/** Detect the popular CommonJS extension `module.exports`. */
+var moduleExports = freeModule && freeModule.exports === freeExports;
+
+/** Detect free variable `process` from Node.js. */
+var freeProcess = moduleExports && freeGlobal.process;
+
+/** Used to access faster Node.js helpers. */
+var nodeUtil = (function() {
+  try {
+    // Use `util.types` for Node.js 10+.
+    var types = freeModule && freeModule.require && freeModule.require('util').types;
+
+    if (types) {
+      return types;
+    }
+
+    // Legacy `process.binding('util')` for Node.js < 10.
+    return freeProcess && freeProcess.binding && freeProcess.binding('util');
+  } catch (e) {}
+}());
+
+module.exports = nodeUtil;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)(module)))
+
+/***/ }),
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isPrototype = __webpack_require__(162),
+    nativeKeys = __webpack_require__(163);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = baseKeys;
+
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Checks if `value` is likely a prototype object.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+ */
+function isPrototype(value) {
+  var Ctor = value && value.constructor,
+      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
+
+  return value === proto;
+}
+
+module.exports = isPrototype;
+
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var overArg = __webpack_require__(164);
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeKeys = overArg(Object.keys, Object);
+
+module.exports = nativeKeys;
+
+
+/***/ }),
+/* 164 */
+/***/ (function(module, exports) {
+
+/**
+ * Creates a unary function that invokes `func` with its argument transformed.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {Function} transform The argument transform.
+ * @returns {Function} Returns the new function.
+ */
+function overArg(func, transform) {
+  return function(arg) {
+    return func(transform(arg));
+  };
+}
+
+module.exports = overArg;
+
+
+/***/ }),
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isArrayLike = __webpack_require__(45);
+
+/**
+ * Creates a `baseEach` or `baseEachRight` function.
+ *
+ * @private
+ * @param {Function} eachFunc The function to iterate over a collection.
+ * @param {boolean} [fromRight] Specify iterating from right to left.
+ * @returns {Function} Returns the new base function.
+ */
+function createBaseEach(eachFunc, fromRight) {
+  return function(collection, iteratee) {
+    if (collection == null) {
+      return collection;
+    }
+    if (!isArrayLike(collection)) {
+      return eachFunc(collection, iteratee);
+    }
+    var length = collection.length,
+        index = fromRight ? length : -1,
+        iterable = Object(collection);
+
+    while ((fromRight ? index-- : ++index < length)) {
+      if (iteratee(iterable[index], index, iterable) === false) {
+        break;
+      }
+    }
+    return collection;
+  };
+}
+
+module.exports = createBaseEach;
+
+
+/***/ }),
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseMatches = __webpack_require__(167),
+    baseMatchesProperty = __webpack_require__(214),
+    identity = __webpack_require__(225),
+    isArray = __webpack_require__(5),
+    property = __webpack_require__(226);
+
+/**
+ * The base implementation of `_.iteratee`.
+ *
+ * @private
+ * @param {*} [value=_.identity] The value to convert to an iteratee.
+ * @returns {Function} Returns the iteratee.
+ */
+function baseIteratee(value) {
+  // Don't store the `typeof` result in a variable to avoid a JIT bug in Safari 9.
+  // See https://bugs.webkit.org/show_bug.cgi?id=156034 for more details.
+  if (typeof value == 'function') {
+    return value;
+  }
+  if (value == null) {
+    return identity;
+  }
+  if (typeof value == 'object') {
+    return isArray(value)
+      ? baseMatchesProperty(value[0], value[1])
+      : baseMatches(value);
+  }
+  return property(value);
+}
+
+module.exports = baseIteratee;
+
+
+/***/ }),
+/* 167 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsMatch = __webpack_require__(168),
+    getMatchData = __webpack_require__(213),
+    matchesStrictComparable = __webpack_require__(51);
+
+/**
+ * The base implementation of `_.matches` which doesn't clone `source`.
+ *
+ * @private
+ * @param {Object} source The object of property values to match.
+ * @returns {Function} Returns the new spec function.
+ */
+function baseMatches(source) {
+  var matchData = getMatchData(source);
+  if (matchData.length == 1 && matchData[0][2]) {
+    return matchesStrictComparable(matchData[0][0], matchData[0][1]);
+  }
+  return function(object) {
+    return object === source || baseIsMatch(object, source, matchData);
+  };
+}
+
+module.exports = baseMatches;
+
+
+/***/ }),
+/* 168 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Stack = __webpack_require__(46),
+    baseIsEqual = __webpack_require__(48);
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/**
+ * The base implementation of `_.isMatch` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Object} object The object to inspect.
+ * @param {Object} source The object of property values to match.
+ * @param {Array} matchData The property names, values, and compare flags to match.
+ * @param {Function} [customizer] The function to customize comparisons.
+ * @returns {boolean} Returns `true` if `object` is a match, else `false`.
+ */
+function baseIsMatch(object, source, matchData, customizer) {
+  var index = matchData.length,
+      length = index,
+      noCustomizer = !customizer;
+
+  if (object == null) {
+    return !length;
+  }
+  object = Object(object);
+  while (index--) {
+    var data = matchData[index];
+    if ((noCustomizer && data[2])
+          ? data[1] !== object[data[0]]
+          : !(data[0] in object)
+        ) {
+      return false;
+    }
+  }
+  while (++index < length) {
+    data = matchData[index];
+    var key = data[0],
+        objValue = object[key],
+        srcValue = data[1];
+
+    if (noCustomizer && data[2]) {
+      if (objValue === undefined && !(key in object)) {
+        return false;
+      }
+    } else {
+      var stack = new Stack;
+      if (customizer) {
+        var result = customizer(objValue, srcValue, key, object, source, stack);
+      }
+      if (!(result === undefined
+            ? baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG, customizer, stack)
+            : result
+          )) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+module.exports = baseIsMatch;
+
+
+/***/ }),
+/* 169 */
+/***/ (function(module, exports) {
+
+/**
+ * Removes all key-value entries from the list cache.
+ *
+ * @private
+ * @name clear
+ * @memberOf ListCache
+ */
+function listCacheClear() {
+  this.__data__ = [];
+  this.size = 0;
+}
+
+module.exports = listCacheClear;
+
+
+/***/ }),
+/* 170 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(14);
+
+/** Used for built-in method references. */
+var arrayProto = Array.prototype;
+
+/** Built-in value references. */
+var splice = arrayProto.splice;
+
+/**
+ * Removes `key` and its value from the list cache.
+ *
+ * @private
+ * @name delete
+ * @memberOf ListCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function listCacheDelete(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    return false;
+  }
+  var lastIndex = data.length - 1;
+  if (index == lastIndex) {
+    data.pop();
+  } else {
+    splice.call(data, index, 1);
+  }
+  --this.size;
+  return true;
+}
+
+module.exports = listCacheDelete;
+
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(14);
+
+/**
+ * Gets the list cache value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf ListCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function listCacheGet(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  return index < 0 ? undefined : data[index][1];
+}
+
+module.exports = listCacheGet;
+
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(14);
+
+/**
+ * Checks if a list cache value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf ListCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function listCacheHas(key) {
+  return assocIndexOf(this.__data__, key) > -1;
+}
+
+module.exports = listCacheHas;
+
+
+/***/ }),
+/* 173 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(14);
+
+/**
+ * Sets the list cache `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf ListCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the list cache instance.
+ */
+function listCacheSet(key, value) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    ++this.size;
+    data.push([key, value]);
+  } else {
+    data[index][1] = value;
+  }
+  return this;
+}
+
+module.exports = listCacheSet;
+
+
+/***/ }),
+/* 174 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var ListCache = __webpack_require__(13);
+
+/**
+ * Removes all key-value entries from the stack.
+ *
+ * @private
+ * @name clear
+ * @memberOf Stack
+ */
+function stackClear() {
+  this.__data__ = new ListCache;
+  this.size = 0;
+}
+
+module.exports = stackClear;
+
+
+/***/ }),
+/* 175 */
+/***/ (function(module, exports) {
+
+/**
+ * Removes `key` and its value from the stack.
+ *
+ * @private
+ * @name delete
+ * @memberOf Stack
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function stackDelete(key) {
+  var data = this.__data__,
+      result = data['delete'](key);
+
+  this.size = data.size;
+  return result;
+}
+
+module.exports = stackDelete;
+
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports) {
+
+/**
+ * Gets the stack value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Stack
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function stackGet(key) {
+  return this.__data__.get(key);
+}
+
+module.exports = stackGet;
+
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if a stack value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Stack
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function stackHas(key) {
+  return this.__data__.has(key);
+}
+
+module.exports = stackHas;
+
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var ListCache = __webpack_require__(13),
+    Map = __webpack_require__(26),
+    MapCache = __webpack_require__(27);
+
+/** Used as the size to enable large array optimizations. */
+var LARGE_ARRAY_SIZE = 200;
+
+/**
+ * Sets the stack `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Stack
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the stack cache instance.
+ */
+function stackSet(key, value) {
+  var data = this.__data__;
+  if (data instanceof ListCache) {
+    var pairs = data.__data__;
+    if (!Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
+      pairs.push([key, value]);
+      this.size = ++data.size;
+      return this;
+    }
+    data = this.__data__ = new MapCache(pairs);
+  }
+  data.set(key, value);
+  this.size = data.size;
+  return this;
+}
+
+module.exports = stackSet;
+
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Hash = __webpack_require__(180),
+    ListCache = __webpack_require__(13),
+    Map = __webpack_require__(26);
+
+/**
+ * Removes all key-value entries from the map.
+ *
+ * @private
+ * @name clear
+ * @memberOf MapCache
+ */
+function mapCacheClear() {
+  this.size = 0;
+  this.__data__ = {
+    'hash': new Hash,
+    'map': new (Map || ListCache),
+    'string': new Hash
+  };
+}
+
+module.exports = mapCacheClear;
+
+
+/***/ }),
+/* 180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var hashClear = __webpack_require__(181),
+    hashDelete = __webpack_require__(182),
+    hashGet = __webpack_require__(183),
+    hashHas = __webpack_require__(184),
+    hashSet = __webpack_require__(185);
+
+/**
+ * Creates a hash object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function Hash(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `Hash`.
+Hash.prototype.clear = hashClear;
+Hash.prototype['delete'] = hashDelete;
+Hash.prototype.get = hashGet;
+Hash.prototype.has = hashHas;
+Hash.prototype.set = hashSet;
+
+module.exports = Hash;
+
+
+/***/ }),
+/* 181 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(15);
+
+/**
+ * Removes all key-value entries from the hash.
+ *
+ * @private
+ * @name clear
+ * @memberOf Hash
+ */
+function hashClear() {
+  this.__data__ = nativeCreate ? nativeCreate(null) : {};
+  this.size = 0;
+}
+
+module.exports = hashClear;
+
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports) {
+
+/**
+ * Removes `key` and its value from the hash.
+ *
+ * @private
+ * @name delete
+ * @memberOf Hash
+ * @param {Object} hash The hash to modify.
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function hashDelete(key) {
+  var result = this.has(key) && delete this.__data__[key];
+  this.size -= result ? 1 : 0;
+  return result;
+}
+
+module.exports = hashDelete;
+
+
+/***/ }),
+/* 183 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(15);
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Gets the hash value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Hash
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function hashGet(key) {
+  var data = this.__data__;
+  if (nativeCreate) {
+    var result = data[key];
+    return result === HASH_UNDEFINED ? undefined : result;
+  }
+  return hasOwnProperty.call(data, key) ? data[key] : undefined;
+}
+
+module.exports = hashGet;
+
+
+/***/ }),
+/* 184 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(15);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Checks if a hash value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Hash
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function hashHas(key) {
+  var data = this.__data__;
+  return nativeCreate ? (data[key] !== undefined) : hasOwnProperty.call(data, key);
+}
+
+module.exports = hashHas;
+
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(15);
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/**
+ * Sets the hash `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Hash
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the hash instance.
+ */
+function hashSet(key, value) {
+  var data = this.__data__;
+  this.size += this.has(key) ? 0 : 1;
+  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
+  return this;
+}
+
+module.exports = hashSet;
+
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(16);
+
+/**
+ * Removes `key` and its value from the map.
+ *
+ * @private
+ * @name delete
+ * @memberOf MapCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function mapCacheDelete(key) {
+  var result = getMapData(this, key)['delete'](key);
+  this.size -= result ? 1 : 0;
+  return result;
+}
+
+module.exports = mapCacheDelete;
+
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is suitable for use as unique object key.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
+ */
+function isKeyable(value) {
+  var type = typeof value;
+  return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
+    ? (value !== '__proto__')
+    : (value === null);
+}
+
+module.exports = isKeyable;
+
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(16);
+
+/**
+ * Gets the map value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf MapCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function mapCacheGet(key) {
+  return getMapData(this, key).get(key);
+}
+
+module.exports = mapCacheGet;
+
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(16);
+
+/**
+ * Checks if a map value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf MapCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function mapCacheHas(key) {
+  return getMapData(this, key).has(key);
+}
+
+module.exports = mapCacheHas;
+
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(16);
+
+/**
+ * Sets the map `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf MapCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the map cache instance.
+ */
+function mapCacheSet(key, value) {
+  var data = getMapData(this, key),
+      size = data.size;
+
+  data.set(key, value);
+  this.size += data.size == size ? 0 : 1;
+  return this;
+}
+
+module.exports = mapCacheSet;
+
+
+/***/ }),
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Stack = __webpack_require__(46),
+    equalArrays = __webpack_require__(49),
+    equalByTag = __webpack_require__(197),
+    equalObjects = __webpack_require__(201),
+    getTag = __webpack_require__(208),
+    isArray = __webpack_require__(5),
+    isBuffer = __webpack_require__(42),
+    isTypedArray = __webpack_require__(44);
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1;
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    objectTag = '[object Object]';
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * A specialized version of `baseIsEqual` for arrays and objects which performs
+ * deep comparisons and tracks traversed objects enabling objects with circular
+ * references to be compared.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} [stack] Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
+  var objIsArr = isArray(object),
+      othIsArr = isArray(other),
+      objTag = objIsArr ? arrayTag : getTag(object),
+      othTag = othIsArr ? arrayTag : getTag(other);
+
+  objTag = objTag == argsTag ? objectTag : objTag;
+  othTag = othTag == argsTag ? objectTag : othTag;
+
+  var objIsObj = objTag == objectTag,
+      othIsObj = othTag == objectTag,
+      isSameTag = objTag == othTag;
+
+  if (isSameTag && isBuffer(object)) {
+    if (!isBuffer(other)) {
+      return false;
+    }
+    objIsArr = true;
+    objIsObj = false;
+  }
+  if (isSameTag && !objIsObj) {
+    stack || (stack = new Stack);
+    return (objIsArr || isTypedArray(object))
+      ? equalArrays(object, other, bitmask, customizer, equalFunc, stack)
+      : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
+  }
+  if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
+    var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
+        othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+
+    if (objIsWrapped || othIsWrapped) {
+      var objUnwrapped = objIsWrapped ? object.value() : object,
+          othUnwrapped = othIsWrapped ? other.value() : other;
+
+      stack || (stack = new Stack);
+      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
+    }
+  }
+  if (!isSameTag) {
+    return false;
+  }
+  stack || (stack = new Stack);
+  return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
+}
+
+module.exports = baseIsEqualDeep;
+
+
+/***/ }),
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var MapCache = __webpack_require__(27),
+    setCacheAdd = __webpack_require__(193),
+    setCacheHas = __webpack_require__(194);
+
+/**
+ *
+ * Creates an array cache object to store unique values.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [values] The values to cache.
+ */
+function SetCache(values) {
+  var index = -1,
+      length = values == null ? 0 : values.length;
+
+  this.__data__ = new MapCache;
+  while (++index < length) {
+    this.add(values[index]);
+  }
+}
+
+// Add methods to `SetCache`.
+SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
+SetCache.prototype.has = setCacheHas;
+
+module.exports = SetCache;
+
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports) {
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/**
+ * Adds `value` to the array cache.
+ *
+ * @private
+ * @name add
+ * @memberOf SetCache
+ * @alias push
+ * @param {*} value The value to cache.
+ * @returns {Object} Returns the cache instance.
+ */
+function setCacheAdd(value) {
+  this.__data__.set(value, HASH_UNDEFINED);
+  return this;
+}
+
+module.exports = setCacheAdd;
+
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is in the array cache.
+ *
+ * @private
+ * @name has
+ * @memberOf SetCache
+ * @param {*} value The value to search for.
+ * @returns {number} Returns `true` if `value` is found, else `false`.
+ */
+function setCacheHas(value) {
+  return this.__data__.has(value);
+}
+
+module.exports = setCacheHas;
+
+
+/***/ }),
+/* 195 */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.some` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {boolean} Returns `true` if any element passes the predicate check,
+ *  else `false`.
+ */
+function arraySome(array, predicate) {
+  var index = -1,
+      length = array == null ? 0 : array.length;
+
+  while (++index < length) {
+    if (predicate(array[index], index, array)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+module.exports = arraySome;
+
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if a `cache` value for `key` exists.
+ *
+ * @private
+ * @param {Object} cache The cache to query.
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function cacheHas(cache, key) {
+  return cache.has(key);
+}
+
+module.exports = cacheHas;
+
+
+/***/ }),
+/* 197 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(12),
+    Uint8Array = __webpack_require__(198),
+    eq = __webpack_require__(47),
+    equalArrays = __webpack_require__(49),
+    mapToArray = __webpack_require__(199),
+    setToArray = __webpack_require__(200);
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/** `Object#toString` result references. */
+var boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    symbolTag = '[object Symbol]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]';
+
+/** Used to convert symbols to primitives and strings. */
+var symbolProto = Symbol ? Symbol.prototype : undefined,
+    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
+
+/**
+ * A specialized version of `baseIsEqualDeep` for comparing objects of
+ * the same `toStringTag`.
+ *
+ * **Note:** This function only supports comparing values with tags of
+ * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {string} tag The `toStringTag` of the objects to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
+  switch (tag) {
+    case dataViewTag:
+      if ((object.byteLength != other.byteLength) ||
+          (object.byteOffset != other.byteOffset)) {
+        return false;
+      }
+      object = object.buffer;
+      other = other.buffer;
+
+    case arrayBufferTag:
+      if ((object.byteLength != other.byteLength) ||
+          !equalFunc(new Uint8Array(object), new Uint8Array(other))) {
+        return false;
+      }
+      return true;
+
+    case boolTag:
+    case dateTag:
+    case numberTag:
+      // Coerce booleans to `1` or `0` and dates to milliseconds.
+      // Invalid dates are coerced to `NaN`.
+      return eq(+object, +other);
+
+    case errorTag:
+      return object.name == other.name && object.message == other.message;
+
+    case regexpTag:
+    case stringTag:
+      // Coerce regexes to strings and treat strings, primitives and objects,
+      // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
+      // for more details.
+      return object == (other + '');
+
+    case mapTag:
+      var convert = mapToArray;
+
+    case setTag:
+      var isPartial = bitmask & COMPARE_PARTIAL_FLAG;
+      convert || (convert = setToArray);
+
+      if (object.size != other.size && !isPartial) {
+        return false;
+      }
+      // Assume cyclic values are equal.
+      var stacked = stack.get(object);
+      if (stacked) {
+        return stacked == other;
+      }
+      bitmask |= COMPARE_UNORDERED_FLAG;
+
+      // Recursively compare objects (susceptible to call stack limits).
+      stack.set(object, other);
+      var result = equalArrays(convert(object), convert(other), bitmask, customizer, equalFunc, stack);
+      stack['delete'](object);
+      return result;
+
+    case symbolTag:
+      if (symbolValueOf) {
+        return symbolValueOf.call(object) == symbolValueOf.call(other);
+      }
+  }
+  return false;
+}
+
+module.exports = equalByTag;
+
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(4);
+
+/** Built-in value references. */
+var Uint8Array = root.Uint8Array;
+
+module.exports = Uint8Array;
+
+
+/***/ }),
+/* 199 */
+/***/ (function(module, exports) {
+
+/**
+ * Converts `map` to its key-value pairs.
+ *
+ * @private
+ * @param {Object} map The map to convert.
+ * @returns {Array} Returns the key-value pairs.
+ */
+function mapToArray(map) {
+  var index = -1,
+      result = Array(map.size);
+
+  map.forEach(function(value, key) {
+    result[++index] = [key, value];
+  });
+  return result;
+}
+
+module.exports = mapToArray;
+
+
+/***/ }),
+/* 200 */
+/***/ (function(module, exports) {
+
+/**
+ * Converts `set` to an array of its values.
+ *
+ * @private
+ * @param {Object} set The set to convert.
+ * @returns {Array} Returns the values.
+ */
+function setToArray(set) {
+  var index = -1,
+      result = Array(set.size);
+
+  set.forEach(function(value) {
+    result[++index] = value;
+  });
+  return result;
+}
+
+module.exports = setToArray;
+
+
+/***/ }),
+/* 201 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getAllKeys = __webpack_require__(202);
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1;
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * A specialized version of `baseIsEqualDeep` for objects with support for
+ * partial deep comparisons.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
+  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
+      objProps = getAllKeys(object),
+      objLength = objProps.length,
+      othProps = getAllKeys(other),
+      othLength = othProps.length;
+
+  if (objLength != othLength && !isPartial) {
+    return false;
+  }
+  var index = objLength;
+  while (index--) {
+    var key = objProps[index];
+    if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
+      return false;
+    }
+  }
+  // Assume cyclic values are equal.
+  var stacked = stack.get(object);
+  if (stacked && stack.get(other)) {
+    return stacked == other;
+  }
+  var result = true;
+  stack.set(object, other);
+  stack.set(other, object);
+
+  var skipCtor = isPartial;
+  while (++index < objLength) {
+    key = objProps[index];
+    var objValue = object[key],
+        othValue = other[key];
+
+    if (customizer) {
+      var compared = isPartial
+        ? customizer(othValue, objValue, key, other, object, stack)
+        : customizer(objValue, othValue, key, object, other, stack);
+    }
+    // Recursively compare objects (susceptible to call stack limits).
+    if (!(compared === undefined
+          ? (objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack))
+          : compared
+        )) {
+      result = false;
+      break;
+    }
+    skipCtor || (skipCtor = key == 'constructor');
+  }
+  if (result && !skipCtor) {
+    var objCtor = object.constructor,
+        othCtor = other.constructor;
+
+    // Non `Object` object instances with different constructors are not equal.
+    if (objCtor != othCtor &&
+        ('constructor' in object && 'constructor' in other) &&
+        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
+          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
+      result = false;
+    }
+  }
+  stack['delete'](object);
+  stack['delete'](other);
+  return result;
+}
+
+module.exports = equalObjects;
+
+
+/***/ }),
+/* 202 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetAllKeys = __webpack_require__(203),
+    getSymbols = __webpack_require__(205),
+    keys = __webpack_require__(24);
+
+/**
+ * Creates an array of own enumerable property names and symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+function getAllKeys(object) {
+  return baseGetAllKeys(object, keys, getSymbols);
+}
+
+module.exports = getAllKeys;
+
+
+/***/ }),
+/* 203 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayPush = __webpack_require__(204),
+    isArray = __webpack_require__(5);
+
+/**
+ * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
+ * `keysFunc` and `symbolsFunc` to get the enumerable property names and
+ * symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Function} keysFunc The function to get the keys of `object`.
+ * @param {Function} symbolsFunc The function to get the symbols of `object`.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+  var result = keysFunc(object);
+  return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
+}
+
+module.exports = baseGetAllKeys;
+
+
+/***/ }),
+/* 204 */
+/***/ (function(module, exports) {
+
+/**
+ * Appends the elements of `values` to `array`.
+ *
+ * @private
+ * @param {Array} array The array to modify.
+ * @param {Array} values The values to append.
+ * @returns {Array} Returns `array`.
+ */
+function arrayPush(array, values) {
+  var index = -1,
+      length = values.length,
+      offset = array.length;
+
+  while (++index < length) {
+    array[offset + index] = values[index];
+  }
+  return array;
+}
+
+module.exports = arrayPush;
+
+
+/***/ }),
+/* 205 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayFilter = __webpack_require__(206),
+    stubArray = __webpack_require__(207);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Built-in value references. */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeGetSymbols = Object.getOwnPropertySymbols;
+
+/**
+ * Creates an array of the own enumerable symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of symbols.
+ */
+var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
+  if (object == null) {
+    return [];
+  }
+  object = Object(object);
+  return arrayFilter(nativeGetSymbols(object), function(symbol) {
+    return propertyIsEnumerable.call(object, symbol);
+  });
+};
+
+module.exports = getSymbols;
+
+
+/***/ }),
+/* 206 */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.filter` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {Array} Returns the new filtered array.
+ */
+function arrayFilter(array, predicate) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      resIndex = 0,
+      result = [];
+
+  while (++index < length) {
+    var value = array[index];
+    if (predicate(value, index, array)) {
+      result[resIndex++] = value;
+    }
+  }
+  return result;
+}
+
+module.exports = arrayFilter;
+
+
+/***/ }),
+/* 207 */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns a new empty array.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {Array} Returns the new empty array.
+ * @example
+ *
+ * var arrays = _.times(2, _.stubArray);
+ *
+ * console.log(arrays);
+ * // => [[], []]
+ *
+ * console.log(arrays[0] === arrays[1]);
+ * // => false
+ */
+function stubArray() {
+  return [];
+}
+
+module.exports = stubArray;
+
+
+/***/ }),
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var DataView = __webpack_require__(209),
+    Map = __webpack_require__(26),
+    Promise = __webpack_require__(210),
+    Set = __webpack_require__(211),
+    WeakMap = __webpack_require__(212),
+    baseGetTag = __webpack_require__(10),
+    toSource = __webpack_require__(40);
+
+/** `Object#toString` result references. */
+var mapTag = '[object Map]',
+    objectTag = '[object Object]',
+    promiseTag = '[object Promise]',
+    setTag = '[object Set]',
+    weakMapTag = '[object WeakMap]';
+
+var dataViewTag = '[object DataView]';
+
+/** Used to detect maps, sets, and weakmaps. */
+var dataViewCtorString = toSource(DataView),
+    mapCtorString = toSource(Map),
+    promiseCtorString = toSource(Promise),
+    setCtorString = toSource(Set),
+    weakMapCtorString = toSource(WeakMap);
+
+/**
+ * Gets the `toStringTag` of `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+var getTag = baseGetTag;
+
+// Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
+if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
+    (Map && getTag(new Map) != mapTag) ||
+    (Promise && getTag(Promise.resolve()) != promiseTag) ||
+    (Set && getTag(new Set) != setTag) ||
+    (WeakMap && getTag(new WeakMap) != weakMapTag)) {
+  getTag = function(value) {
+    var result = baseGetTag(value),
+        Ctor = result == objectTag ? value.constructor : undefined,
+        ctorString = Ctor ? toSource(Ctor) : '';
+
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString: return dataViewTag;
+        case mapCtorString: return mapTag;
+        case promiseCtorString: return promiseTag;
+        case setCtorString: return setTag;
+        case weakMapCtorString: return weakMapTag;
+      }
+    }
+    return result;
+  };
+}
+
+module.exports = getTag;
+
+
+/***/ }),
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(6),
+    root = __webpack_require__(4);
+
+/* Built-in method references that are verified to be native. */
+var DataView = getNative(root, 'DataView');
+
+module.exports = DataView;
+
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(6),
+    root = __webpack_require__(4);
+
+/* Built-in method references that are verified to be native. */
+var Promise = getNative(root, 'Promise');
+
+module.exports = Promise;
+
+
+/***/ }),
+/* 211 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(6),
+    root = __webpack_require__(4);
+
+/* Built-in method references that are verified to be native. */
+var Set = getNative(root, 'Set');
+
+module.exports = Set;
+
+
+/***/ }),
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(6),
+    root = __webpack_require__(4);
+
+/* Built-in method references that are verified to be native. */
+var WeakMap = getNative(root, 'WeakMap');
+
+module.exports = WeakMap;
+
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isStrictComparable = __webpack_require__(50),
+    keys = __webpack_require__(24);
+
+/**
+ * Gets the property names, values, and compare flags of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the match data of `object`.
+ */
+function getMatchData(object) {
+  var result = keys(object),
+      length = result.length;
+
+  while (length--) {
+    var key = result[length],
+        value = object[key];
+
+    result[length] = [key, value, isStrictComparable(value)];
+  }
+  return result;
+}
+
+module.exports = getMatchData;
+
+
+/***/ }),
+/* 214 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsEqual = __webpack_require__(48),
+    get = __webpack_require__(215),
+    hasIn = __webpack_require__(222),
+    isKey = __webpack_require__(28),
+    isStrictComparable = __webpack_require__(50),
+    matchesStrictComparable = __webpack_require__(51),
+    toKey = __webpack_require__(18);
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/**
+ * The base implementation of `_.matchesProperty` which doesn't clone `srcValue`.
+ *
+ * @private
+ * @param {string} path The path of the property to get.
+ * @param {*} srcValue The value to match.
+ * @returns {Function} Returns the new spec function.
+ */
+function baseMatchesProperty(path, srcValue) {
+  if (isKey(path) && isStrictComparable(srcValue)) {
+    return matchesStrictComparable(toKey(path), srcValue);
+  }
+  return function(object) {
+    var objValue = get(object, path);
+    return (objValue === undefined && objValue === srcValue)
+      ? hasIn(object, path)
+      : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
+  };
+}
+
+module.exports = baseMatchesProperty;
+
+
+/***/ }),
+/* 215 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGet = __webpack_require__(52);
+
+/**
+ * Gets the value at `path` of `object`. If the resolved value is
+ * `undefined`, the `defaultValue` is returned in its place.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.7.0
+ * @category Object
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path of the property to get.
+ * @param {*} [defaultValue] The value returned for `undefined` resolved values.
+ * @returns {*} Returns the resolved value.
+ * @example
+ *
+ * var object = { 'a': [{ 'b': { 'c': 3 } }] };
+ *
+ * _.get(object, 'a[0].b.c');
+ * // => 3
+ *
+ * _.get(object, ['a', '0', 'b', 'c']);
+ * // => 3
+ *
+ * _.get(object, 'a.b.c', 'default');
+ * // => 'default'
+ */
+function get(object, path, defaultValue) {
+  var result = object == null ? undefined : baseGet(object, path);
+  return result === undefined ? defaultValue : result;
+}
+
+module.exports = get;
+
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var memoizeCapped = __webpack_require__(217);
+
+/** Used to match property names within property paths. */
+var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+
+/** Used to match backslashes in property paths. */
+var reEscapeChar = /\\(\\)?/g;
+
+/**
+ * Converts `string` to a property path array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the property path array.
+ */
+var stringToPath = memoizeCapped(function(string) {
+  var result = [];
+  if (string.charCodeAt(0) === 46 /* . */) {
+    result.push('');
+  }
+  string.replace(rePropName, function(match, number, quote, subString) {
+    result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
+  });
+  return result;
+});
+
+module.exports = stringToPath;
+
+
+/***/ }),
+/* 217 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var memoize = __webpack_require__(218);
+
+/** Used as the maximum memoize cache size. */
+var MAX_MEMOIZE_SIZE = 500;
+
+/**
+ * A specialized version of `_.memoize` which clears the memoized function's
+ * cache when it exceeds `MAX_MEMOIZE_SIZE`.
+ *
+ * @private
+ * @param {Function} func The function to have its output memoized.
+ * @returns {Function} Returns the new memoized function.
+ */
+function memoizeCapped(func) {
+  var result = memoize(func, function(key) {
+    if (cache.size === MAX_MEMOIZE_SIZE) {
+      cache.clear();
+    }
+    return key;
+  });
+
+  var cache = result.cache;
+  return result;
+}
+
+module.exports = memoizeCapped;
+
+
+/***/ }),
+/* 218 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var MapCache = __webpack_require__(27);
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that memoizes the result of `func`. If `resolver` is
+ * provided, it determines the cache key for storing the result based on the
+ * arguments provided to the memoized function. By default, the first argument
+ * provided to the memoized function is used as the map cache key. The `func`
+ * is invoked with the `this` binding of the memoized function.
+ *
+ * **Note:** The cache is exposed as the `cache` property on the memoized
+ * function. Its creation may be customized by replacing the `_.memoize.Cache`
+ * constructor with one whose instances implement the
+ * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
+ * method interface of `clear`, `delete`, `get`, `has`, and `set`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to have its output memoized.
+ * @param {Function} [resolver] The function to resolve the cache key.
+ * @returns {Function} Returns the new memoized function.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': 2 };
+ * var other = { 'c': 3, 'd': 4 };
+ *
+ * var values = _.memoize(_.values);
+ * values(object);
+ * // => [1, 2]
+ *
+ * values(other);
+ * // => [3, 4]
+ *
+ * object.a = 2;
+ * values(object);
+ * // => [1, 2]
+ *
+ * // Modify the result cache.
+ * values.cache.set(object, ['a', 'b']);
+ * values(object);
+ * // => ['a', 'b']
+ *
+ * // Replace `_.memoize.Cache`.
+ * _.memoize.Cache = WeakMap;
+ */
+function memoize(func, resolver) {
+  if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  var memoized = function() {
+    var args = arguments,
+        key = resolver ? resolver.apply(this, args) : args[0],
+        cache = memoized.cache;
+
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    var result = func.apply(this, args);
+    memoized.cache = cache.set(key, result) || cache;
+    return result;
+  };
+  memoized.cache = new (memoize.Cache || MapCache);
+  return memoized;
+}
+
+// Expose `MapCache`.
+memoize.Cache = MapCache;
+
+module.exports = memoize;
+
+
+/***/ }),
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseToString = __webpack_require__(220);
+
+/**
+ * Converts `value` to a string. An empty string is returned for `null`
+ * and `undefined` values. The sign of `-0` is preserved.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ * @example
+ *
+ * _.toString(null);
+ * // => ''
+ *
+ * _.toString(-0);
+ * // => '-0'
+ *
+ * _.toString([1, 2, 3]);
+ * // => '1,2,3'
+ */
+function toString(value) {
+  return value == null ? '' : baseToString(value);
+}
+
+module.exports = toString;
+
+
+/***/ }),
+/* 220 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(12),
+    arrayMap = __webpack_require__(221),
+    isArray = __webpack_require__(5),
+    isSymbol = __webpack_require__(17);
+
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0;
+
+/** Used to convert symbols to primitives and strings. */
+var symbolProto = Symbol ? Symbol.prototype : undefined,
+    symbolToString = symbolProto ? symbolProto.toString : undefined;
+
+/**
+ * The base implementation of `_.toString` which doesn't convert nullish
+ * values to empty strings.
+ *
+ * @private
+ * @param {*} value The value to process.
+ * @returns {string} Returns the string.
+ */
+function baseToString(value) {
+  // Exit early for strings to avoid a performance hit in some environments.
+  if (typeof value == 'string') {
+    return value;
+  }
+  if (isArray(value)) {
+    // Recursively convert values (susceptible to call stack limits).
+    return arrayMap(value, baseToString) + '';
+  }
+  if (isSymbol(value)) {
+    return symbolToString ? symbolToString.call(value) : '';
+  }
+  var result = (value + '');
+  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+}
+
+module.exports = baseToString;
+
+
+/***/ }),
+/* 221 */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.map` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ */
+function arrayMap(array, iteratee) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      result = Array(length);
+
+  while (++index < length) {
+    result[index] = iteratee(array[index], index, array);
+  }
+  return result;
+}
+
+module.exports = arrayMap;
+
+
+/***/ }),
+/* 222 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseHasIn = __webpack_require__(223),
+    hasPath = __webpack_require__(224);
+
+/**
+ * Checks if `path` is a direct or inherited property of `object`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Object
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path to check.
+ * @returns {boolean} Returns `true` if `path` exists, else `false`.
+ * @example
+ *
+ * var object = _.create({ 'a': _.create({ 'b': 2 }) });
+ *
+ * _.hasIn(object, 'a');
+ * // => true
+ *
+ * _.hasIn(object, 'a.b');
+ * // => true
+ *
+ * _.hasIn(object, ['a', 'b']);
+ * // => true
+ *
+ * _.hasIn(object, 'b');
+ * // => false
+ */
+function hasIn(object, path) {
+  return object != null && hasPath(object, path, baseHasIn);
+}
+
+module.exports = hasIn;
+
+
+/***/ }),
+/* 223 */
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.hasIn` without support for deep paths.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {Array|string} key The key to check.
+ * @returns {boolean} Returns `true` if `key` exists, else `false`.
+ */
+function baseHasIn(object, key) {
+  return object != null && key in Object(object);
+}
+
+module.exports = baseHasIn;
+
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var castPath = __webpack_require__(53),
+    isArguments = __webpack_require__(41),
+    isArray = __webpack_require__(5),
+    isIndex = __webpack_require__(43),
+    isLength = __webpack_require__(25),
+    toKey = __webpack_require__(18);
+
+/**
+ * Checks if `path` exists on `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path to check.
+ * @param {Function} hasFunc The function to check properties.
+ * @returns {boolean} Returns `true` if `path` exists, else `false`.
+ */
+function hasPath(object, path, hasFunc) {
+  path = castPath(path, object);
+
+  var index = -1,
+      length = path.length,
+      result = false;
+
+  while (++index < length) {
+    var key = toKey(path[index]);
+    if (!(result = object != null && hasFunc(object, key))) {
+      break;
+    }
+    object = object[key];
+  }
+  if (result || ++index != length) {
+    return result;
+  }
+  length = object == null ? 0 : object.length;
+  return !!length && isLength(length) && isIndex(key, length) &&
+    (isArray(object) || isArguments(object));
+}
+
+module.exports = hasPath;
+
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns the first argument it receives.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Util
+ * @param {*} value Any value.
+ * @returns {*} Returns `value`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ *
+ * console.log(_.identity(object) === object);
+ * // => true
+ */
+function identity(value) {
+  return value;
+}
+
+module.exports = identity;
+
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseProperty = __webpack_require__(227),
+    basePropertyDeep = __webpack_require__(228),
+    isKey = __webpack_require__(28),
+    toKey = __webpack_require__(18);
+
+/**
+ * Creates a function that returns the value at `path` of a given object.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Util
+ * @param {Array|string} path The path of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ * @example
+ *
+ * var objects = [
+ *   { 'a': { 'b': 2 } },
+ *   { 'a': { 'b': 1 } }
+ * ];
+ *
+ * _.map(objects, _.property('a.b'));
+ * // => [2, 1]
+ *
+ * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');
+ * // => [1, 2]
+ */
+function property(path) {
+  return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
+}
+
+module.exports = property;
+
+
+/***/ }),
+/* 227 */
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.property` without support for deep paths.
+ *
+ * @private
+ * @param {string} key The key of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ */
+function baseProperty(key) {
+  return function(object) {
+    return object == null ? undefined : object[key];
+  };
+}
+
+module.exports = baseProperty;
+
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGet = __webpack_require__(52);
+
+/**
+ * A specialized version of `baseProperty` which supports deep paths.
+ *
+ * @private
+ * @param {Array|string} path The path of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ */
+function basePropertyDeep(path) {
+  return function(object) {
+    return baseGet(object, path);
+  };
+}
+
+module.exports = basePropertyDeep;
+
+
+/***/ }),
+/* 229 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// https://stackoverflow.com/a/7616484/5172890
+/* harmony default export */ __webpack_exports__["a"] = (function (s) {
+  let hash = 0
+  for (let i = 0; i < s.length; i++) {
+    hash = ((hash << 5) - hash) + s.charCodeAt(i)
+    hash |= 0
+  }
+  return '' + hash
+});
+
+
+/***/ }),
+/* 230 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const LS = localStorage
+
+const parseStr = JSON.parse
+/* harmony export (immutable) */ __webpack_exports__["b"] = parseStr;
+
+
+const stringify = JSON.stringify
+/* harmony export (immutable) */ __webpack_exports__["e"] = stringify;
+
+
+const saveToLS = (k, v) => {
+  LS.setItem(k, stringify(v))
+}
+/* harmony export (immutable) */ __webpack_exports__["d"] = saveToLS;
+
+
+const rmFromLS = k => {
+  LS.removeItem(k)
+}
+/* harmony export (immutable) */ __webpack_exports__["c"] = rmFromLS;
+
+
+const getFromLS = k => {
+  try {
+    return parseStr(LS.getItem(k))
+  } catch (e) {
+    rmFromLS(k)
+  }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = getFromLS;
+
+
+
+/***/ }),
+/* 231 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "btn-group", attrs: { name: "HeaderSettings" } },
+    [
+      _c(
+        "button",
+        {
+          ref: "dropdownBtn",
+          staticClass: "btn btn-default dropdown-toggle",
+          attrs: { type: "button" }
+        },
+        [
+          _c("i", {
+            staticClass: "fa",
+            class: [_vm.usingBak && "text-info", _vm.processingCls || "fa-cog"]
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "caret" })
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "dropdown-menu clearfix", style: _vm.drpMenuStyle },
+        [
+          _c(
+            "div",
+            { staticClass: "-col-group-container" },
+            _vm._l(_vm.colGroups, function(columns, groupName) {
+              return _c("column-group", {
+                key: groupName,
+                ref: "colGroups",
+                refInFor: true,
+                attrs: { "group-name": groupName, columns: columns }
+              })
+            })
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "clearfix", staticStyle: { margin: "10px 0" } },
+            [
+              _c(
+                "div",
+                { staticClass: "btn-group btn-group-sm pull-right" },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.apply()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(_vm.$i18nForDatatable("Apply")) +
+                          "\n        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.supportBackup
+                    ? [
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _c("ul", { staticClass: "dropdown-menu" }, [
+                          _c(
+                            "li",
+                            {
+                              on: {
+                                click: function($event) {
+                                  _vm.apply(true)
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fa fa-floppy-o" }),
+                                  _vm._v(
+                                    " \n                " +
+                                      _vm._s(
+                                        _vm.$i18nForDatatable(
+                                          "Apply and backup settings to local"
+                                        )
+                                      ) +
+                                      "\n              "
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.usingBak
+                            ? _c(
+                                "li",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.rmBackup()
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fa fa-trash-o text-danger"
+                                      }),
+                                      _vm._v(
+                                        " \n                " +
+                                          _vm._s(
+                                            _vm.$i18nForDatatable(
+                                              "Clear local settings backup and restore"
+                                            )
+                                          ) +
+                                          "\n              "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ])
+                      ]
+                    : _vm._e()
+                ],
+                2
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _vm.usingBak
+            ? _c(
+                "small",
+                {
+                  staticClass: "pull-left text-muted",
+                  staticStyle: { "margin-top": "-8px" }
+                },
+                [
+                  _vm._v(
+                    "\n      ( " +
+                      _vm._s(_vm.$i18nForDatatable("Using local settings")) +
+                      " )\n    "
+                  )
+                ]
+              )
+            : _vm._e()
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-default dropdown-toggle",
+        staticStyle: { "box-shadow": "none" },
+        attrs: { "data-toggle": "dropdown", type: "button" }
+      },
+      [_c("span", { staticClass: "caret" })]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-41de8ae3", module.exports)
+  }
+}
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(233)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(235)
+/* template */
+var __vue_template__ = __webpack_require__(260)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue2-datatable-component/src/Table/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3da52071", Component.options)
+  } else {
+    hotAPI.reload("data-v-3da52071", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(234);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("58078a02", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3da52071\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3da52071\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 234 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.-complex-table {\r\n  position: relative;\n}\n.-complex-table table {\r\n  background: #fff;\n}\n.-table-header, .-table-body, .-table-footer {\r\n  position: relative;\r\n  overflow: scroll;\n}\n.-fixed-table {\r\n  position: absolute;\r\n  top: 0;\n}\n.-fixed-table table {\r\n  width: auto;\n}\n.-left-fixed {\r\n  -webkit-box-shadow: 1px 0 5px #ddd;\r\n          box-shadow: 1px 0 5px #ddd;\n}\n.-right-fixed {\r\n  -webkit-box-shadow: 1px 0 5px #ddd;\r\n          box-shadow: 1px 0 5px #ddd;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 235 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TableFrame_vue__ = __webpack_require__(236);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TableFrame_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__TableFrame_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TableHeader_vue__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TableHeader_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__TableHeader_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TableBody_vue__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__TableBody_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__TableBody_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TableFooter_vue__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TableFooter_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__TableFooter_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_props__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_getScrollWidth__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_isColVisible__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_syncScroll__ = __webpack_require__(256);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Tbl',
+  mixins: [__WEBPACK_IMPORTED_MODULE_4__mixins_props__["a" /* default */]],
+  components: { TableFrame: __WEBPACK_IMPORTED_MODULE_0__TableFrame_vue___default.a, TableHeader: __WEBPACK_IMPORTED_MODULE_1__TableHeader_vue___default.a, TableBody: __WEBPACK_IMPORTED_MODULE_2__TableBody_vue___default.a, TableFooter: __WEBPACK_IMPORTED_MODULE_3__TableFooter_vue___default.a },
+  data: function data() {
+    return {
+      offsetLeft: 0,
+      scrollWidth: Object(__WEBPACK_IMPORTED_MODULE_5__utils_getScrollWidth__["a" /* default */])()
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    // this allows you to fix columns or `fixHeaderAndSetBodyMaxHeight` dynamically
+    var unsync = void 0;
+    this.$watch('useComplexMode', function (v) {
+      if (v) {
+        unsync = Object(__WEBPACK_IMPORTED_MODULE_7__utils_syncScroll__["a" /* default */])(_this.$refs.wrappers, function (offsetLeft) {
+          _this.offsetLeft = offsetLeft;
+        });
+      } else {
+        unsync && unsync();
+      }
+    }, { immediate: true });
+  },
+
+  computed: {
+    visibleColumns: function visibleColumns() {
+      return this.columns.filter(__WEBPACK_IMPORTED_MODULE_6__utils_isColVisible__["a" /* default */]);
+    },
+    leftFixedColumns: function leftFixedColumns() {
+      return this.visibleColumns.filter(function (col) {
+        return col.fixed && col.fixed !== 'right';
+      });
+    },
+    rightFixedColumns: function rightFixedColumns() {
+      return this.visibleColumns.filter(function (col) {
+        return col.fixed === 'right';
+      });
+    },
+    hasFixedColumns: function hasFixedColumns() {
+      return !!(this.leftFixedColumns.length + this.rightFixedColumns.length);
+    },
+    useComplexMode: function useComplexMode() {
+      return !!(this.fixHeaderAndSetBodyMaxHeight || this.hasFixedColumns);
+    },
+    propsToNormalTable: function propsToNormalTable() {
+      return _extends({}, this.$props, { columns: this.visibleColumns });
+    },
+    propsToLeftFixedTable: function propsToLeftFixedTable() {
+      return _extends({}, this.$props, { columns: this.leftFixedColumns });
+    },
+    propsToRightFixedTable: function propsToRightFixedTable() {
+      return _extends({}, this.$props, { columns: this.rightFixedColumns });
+    }
+  }
+});
+
+/***/ }),
+/* 236 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(237)
+/* template */
+var __vue_template__ = __webpack_require__(238)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue2-datatable-component/src/Table/TableFrame.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5329a3d0", Component.options)
+  } else {
+    hotAPI.reload("data-v-5329a3d0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 237 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_props__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_shouldRenderSelection__ = __webpack_require__(19);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'TableFrame',
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_props__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_shouldRenderSelection__["a" /* default */]]
+});
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "table",
+    {
+      staticClass: "table table-striped table-hover",
+      class: _vm.tblClass,
+      staticStyle: { "margin-bottom": "0" },
+      style: _vm.tblStyle
+    },
+    [
+      _c(
+        "colgroup",
+        [
+          _vm.shouldRenderSelection
+            ? _c("col", { staticStyle: { width: "30px" } })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.columns, function(col) {
+            return _c("col", { class: col.colClass, style: col.colStyle })
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _vm._t("default")
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5329a3d0", module.exports)
+  }
+}
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(240)
+/* template */
+var __vue_template__ = __webpack_require__(246)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue2-datatable-component/src/Table/TableHeader.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-caacec8c", Component.options)
+  } else {
+    hotAPI.reload("data-v-caacec8c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 240 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeadSort_vue__ = __webpack_require__(241);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HeadSort_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__HeadSort_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MultiSelect_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MultiSelect_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__MultiSelect_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_props__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_shouldRenderSelection__ = __webpack_require__(19);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'TableHeader',
+  components: { HeadSort: __WEBPACK_IMPORTED_MODULE_0__HeadSort_vue___default.a, MultiSelect: __WEBPACK_IMPORTED_MODULE_1__MultiSelect_vue___default.a },
+  mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_props__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__mixins_shouldRenderSelection__["a" /* default */]]
+});
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(242)
+/* template */
+var __vue_template__ = __webpack_require__(243)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue2-datatable-component/src/Table/HeadSort.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6bd9bfef", Component.options)
+  } else {
+    hotAPI.reload("data-v-6bd9bfef", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 242 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+/**
+ * Sorting arrows within <th>
+ */
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'HeadSort',
+  props: {
+    field: { type: String, required: true },
+    query: { type: Object, required: true }
+  },
+  data: function data() {
+    return {
+      order: ''
+    };
+  },
+  computed: {
+    cls: function cls() {
+      var order = this.order;
+
+      return ['fa', { 'fa-sort text-muted': !order,
+        'fa-sort-up': order === 'asc',
+        'fa-sort-down': order === 'desc'
+      }];
+    }
+  },
+  watch: {
+    query: {
+      handler: function handler(_ref) {
+        var field = _ref.sort,
+            order = _ref.order;
+
+        this.order = field === this.field ? order : '';
+      },
+
+      deep: true,
+      immediate: true
+    }
+  },
+  methods: {
+    handleClick: function handleClick() {
+      var query = this.query,
+          order = this.order;
+
+      query.sort = this.field;
+      query.order = this.order = order === 'desc' ? 'asc' : 'desc';
+    }
+  }
+});
+
+/***/ }),
+/* 243 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "a",
+    {
+      attrs: { href: "#", name: "HeadSort" },
+      on: {
+        click: function($event) {
+          $event.preventDefault()
+          return _vm.handleClick($event)
+        }
+      }
+    },
+    [_c("i", { class: _vm.cls })]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6bd9bfef", module.exports)
+  }
+}
+
+/***/ }),
+/* 244 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_replaceWith__ = __webpack_require__(54);
+//
+//
+//
+
+
+/**
+ * checkbox for multiple select within the leading <th>/<td>
+ */
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'MultiSelect',
+  props: {
+    selection: { type: Array, required: true },
+    row: Object, // available for tbody checkbox
+    rows: Array // available for thead checkbox
+  },
+  data: function data() {
+    return {
+      status: false
+    };
+  },
+  computed: {
+    pos: function pos() {
+      var selection = this.selection,
+          row = this.row;
+
+      if (!selection || !row) return;
+      return selection.indexOf(row);
+    }
+  },
+  methods: {
+    toggle: function toggle() {
+      var selection = this.selection,
+          row = this.row,
+          rows = this.rows,
+          status = this.status,
+          pos = this.pos;
+
+      if (rows) {
+        Object(__WEBPACK_IMPORTED_MODULE_0__utils_replaceWith__["a" /* default */])(selection, status ? rows : []);
+        return;
+      }
+      if (row) {
+        if (status && pos === -1) selection.push(row);
+        if (!status && pos >= 0) selection.splice(pos, 1);
+      }
+    }
+  },
+  watch: {
+    rows: function rows() {
+      Object(__WEBPACK_IMPORTED_MODULE_0__utils_replaceWith__["a" /* default */])(this.selection, []);
+    },
+    selection: function selection(_selection) {
+      if (this.row) {
+        this.status = this.pos >= 0;
+        return;
+      }
+      if (this.rows) {
+        // not only have same length but also non-zero
+        this.status = this.rows.length === _selection.length && _selection.length;
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 245 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("input", {
+    directives: [
+      {
+        name: "model",
+        rawName: "v-model",
+        value: _vm.status,
+        expression: "status"
+      }
+    ],
+    staticStyle: { margin: "0", "vertical-align": "middle" },
+    attrs: { type: "checkbox", name: "MultiSelect" },
+    domProps: {
+      checked: Array.isArray(_vm.status)
+        ? _vm._i(_vm.status, null) > -1
+        : _vm.status
+    },
+    on: {
+      change: [
+        function($event) {
+          var $$a = _vm.status,
+            $$el = $event.target,
+            $$c = $$el.checked ? true : false
+          if (Array.isArray($$a)) {
+            var $$v = null,
+              $$i = _vm._i($$a, $$v)
+            if ($$el.checked) {
+              $$i < 0 && (_vm.status = $$a.concat([$$v]))
+            } else {
+              $$i > -1 &&
+                (_vm.status = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            }
+          } else {
+            _vm.status = $$c
+          }
+        },
+        _vm.toggle
+      ]
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-56adc758", module.exports)
+  }
+}
+
+/***/ }),
+/* 246 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "thead",
+    [
+      _c(
+        "transition-group",
+        { attrs: { name: "fade", tag: "tr" } },
+        [
+          _vm.shouldRenderSelection
+            ? _c(
+                "th",
+                { key: "--th-multi" },
+                [
+                  _c("multi-select", {
+                    attrs: { selection: _vm.selection, rows: _vm.data }
+                  })
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.columns, function(col, idx) {
+            return _c(
+              "th",
+              {
+                key: col.title || col.field || idx,
+                class: col.thClass,
+                style: col.thStyle
+              },
+              [
+                col.thComp
+                  ? _c(
+                      _vm.forDynCompIs(col.thComp),
+                      _vm._b(
+                        {
+                          tag: "component",
+                          attrs: {
+                            column: col,
+                            field: col.field,
+                            title: col.title
+                          }
+                        },
+                        "component",
+                        _vm.$props,
+                        false
+                      )
+                    )
+                  : [_vm._v("\n        " + _vm._s(col.title) + "\n      ")],
+                _vm._v(" "),
+                col.explain
+                  ? _c("i", {
+                      staticClass: "fa fa-info-circle",
+                      staticStyle: { cursor: "help" },
+                      attrs: { title: col.explain }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                col.sortable
+                  ? _c("head-sort", {
+                      attrs: { field: col.field, query: _vm.query }
+                    })
+                  : _vm._e()
+              ],
+              2
+            )
+          })
+        ],
+        2
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-caacec8c", module.exports)
+  }
+}
+
+/***/ }),
+/* 247 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(248)
+/* template */
+var __vue_template__ = __webpack_require__(249)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue2-datatable-component/src/Table/TableBody.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6bb1e0e2", Component.options)
+  } else {
+    hotAPI.reload("data-v-6bb1e0e2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 248 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MultiSelect_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MultiSelect_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__MultiSelect_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_props__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_shouldRenderSelection__ = __webpack_require__(19);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'TableBody',
+  components: { MultiSelect: __WEBPACK_IMPORTED_MODULE_0__MultiSelect_vue___default.a },
+  mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_props__["a" /* default */], __WEBPACK_IMPORTED_MODULE_2__mixins_shouldRenderSelection__["a" /* default */]],
+  computed: {
+    colLen: function colLen() {
+      return this.columns.length + !!this.selection;
+    }
+  }
+});
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "tbody",
+    [
+      _vm.data.length
+        ? [
+            _vm._l(_vm.data, function(item) {
+              return [
+                _c(
+                  "tr",
+                  [
+                    _vm.shouldRenderSelection
+                      ? _c(
+                          "td",
+                          [
+                            _c("multi-select", {
+                              attrs: { selection: _vm.selection, row: item }
+                            })
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm._l(_vm.columns, function(col) {
+                      return _c(
+                        "td",
+                        { class: col.tdClass, style: col.tdStyle },
+                        [
+                          col.tdComp
+                            ? _c(
+                                _vm.forDynCompIs(col.tdComp),
+                                _vm._b(
+                                  {
+                                    tag: "component",
+                                    attrs: {
+                                      row: item,
+                                      field: col.field,
+                                      value: item[col.field],
+                                      nested: item.__nested__
+                                    }
+                                  },
+                                  "component",
+                                  _vm.$props,
+                                  false
+                                )
+                              )
+                            : [
+                                _vm._v(
+                                  "\n            " +
+                                    _vm._s(item[col.field]) +
+                                    "\n          "
+                                )
+                              ]
+                        ],
+                        2
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("transition", { attrs: { name: "fade" } }, [
+                  item.__nested__ && item.__nested__.visible
+                    ? _c("tr", [
+                        _c(
+                          "td",
+                          { attrs: { colspan: _vm.colLen } },
+                          [
+                            _c(
+                              _vm.forDynCompIs(item.__nested__.comp),
+                              _vm._b(
+                                {
+                                  tag: "component",
+                                  attrs: { row: item, nested: item.__nested__ }
+                                },
+                                "component",
+                                _vm.$props,
+                                false
+                              )
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              ]
+            })
+          ]
+        : !_vm.leftFixed && !_vm.rightFixed
+          ? _c("tr", [
+              _c(
+                "td",
+                {
+                  staticClass: "text-center text-muted",
+                  attrs: { colspan: _vm.colLen }
+                },
+                [
+                  _vm._v(
+                    "\n      ( " +
+                      _vm._s(_vm.$i18nForDatatable("No Data")) +
+                      " )\n    "
+                  )
+                ]
+              )
+            ])
+          : _vm._e()
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6bb1e0e2", module.exports)
+  }
+}
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(251)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(253)
+/* template */
+var __vue_template__ = __webpack_require__(254)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue2-datatable-component/src/Table/TableFooter.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-797725c8", Component.options)
+  } else {
+    hotAPI.reload("data-v-797725c8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(252);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("846ec39a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-797725c8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./TableFooter.vue", function() {
+     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-797725c8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./TableFooter.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.-summary-row {\r\n  font-weight: bold;\r\n  background-color: #eee !important;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 253 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_props__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_shouldRenderSelection__ = __webpack_require__(19);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'TableFooter',
+  mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_props__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_shouldRenderSelection__["a" /* default */]]
+});
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "tfoot",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.data.length,
+          expression: "data.length"
+        }
+      ]
+    },
+    [
+      _c(
+        "tr",
+        { staticClass: "-summary-row" },
+        [
+          _vm.shouldRenderSelection ? _c("td") : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.columns, function(col, idx) {
+            return [
+              typeof _vm.summary[col.field] !== "undefined"
+                ? _c(
+                    "td",
+                    { class: col.tdClass, style: col.tdStyle },
+                    [
+                      col.tdComp
+                        ? _c(
+                            _vm.forDynCompIs(col.tdComp),
+                            _vm._b(
+                              {
+                                tag: "component",
+                                attrs: {
+                                  row: _vm.summary,
+                                  field: col.field,
+                                  value: _vm.summary[col.field]
+                                }
+                              },
+                              "component",
+                              _vm.$props,
+                              false
+                            )
+                          )
+                        : [
+                            _vm._v(
+                              "\n          " +
+                                _vm._s(_vm.summary[col.field]) +
+                                "\n        "
+                            )
+                          ]
+                    ],
+                    2
+                  )
+                : _c("td")
+            ]
+          })
+        ],
+        2
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-797725c8", module.exports)
+  }
+}
+
+/***/ }),
+/* 255 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// Refers to https://davidwalsh.name/detect-scrollbar-width
+let scrollWidth
+
+/* harmony default export */ __webpack_exports__["a"] = (function () {
+  if (scrollWidth) {
+    return scrollWidth
+  }
+
+  const div = document.createElement('div')
+
+  div.style.width = '100px'
+  div.style.height = '100px'
+  div.style.overflow = 'scroll'
+  div.style.position = 'absolute'
+  div.style.top = '-9999px'
+
+  document.body.appendChild(div)
+
+  scrollWidth = div.offsetWidth - div.clientWidth
+
+  document.body.removeChild(div)
+
+  return scrollWidth
+});
+
+
+/***/ }),
+/* 256 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_throttle__ = __webpack_require__(257);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_throttle___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_throttle__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_debounce__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_debounce___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_debounce__);
+
+
+
+/**
+ * synchronize the scroll position among `els`
+ * @param  {DOM[]} els
+ * @param  {Func}  callback(offsetLeft)
+ * @return {Func}  unsync
+ */
+/* harmony default export */ __webpack_exports__["a"] = (function (els, callback) {
+  let currentDriver
+  
+  function syncScroll(me, others) {
+    me
+      .on('scroll', __WEBPACK_IMPORTED_MODULE_0_lodash_throttle___default()(() => {
+        if (currentDriver && currentDriver !== me) return
+        currentDriver = me
+
+        let offsetLeft = me.scrollLeft()
+        others.scrollLeft(offsetLeft)
+        
+        callback(offsetLeft)
+      }))
+      // scroll stops
+      .on('scroll', __WEBPACK_IMPORTED_MODULE_1_lodash_debounce___default()(() => {
+        currentDriver = null
+      }, 150))
+
+    // unlistener
+    return () => {
+      me.off('scroll')
+    }
+  }
+  
+  const unlisteners = els.map((me, idx) => {
+    let others = els.slice()
+    others.splice(idx, 1) // exclude me
+    return syncScroll($(me), $(others))
+  })
+
+  // unsync
+  return () => {
+    unlisteners.forEach(unlistener => {
+      unlistener()
+    })
+  }
+});
+
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var debounce = __webpack_require__(56),
+    isObject = __webpack_require__(7);
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a throttled function that only invokes `func` at most once per
+ * every `wait` milliseconds. The throttled function comes with a `cancel`
+ * method to cancel delayed `func` invocations and a `flush` method to
+ * immediately invoke them. Provide `options` to indicate whether `func`
+ * should be invoked on the leading and/or trailing edge of the `wait`
+ * timeout. The `func` is invoked with the last arguments provided to the
+ * throttled function. Subsequent calls to the throttled function return the
+ * result of the last `func` invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the throttled function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.throttle` and `_.debounce`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to throttle.
+ * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=true]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new throttled function.
+ * @example
+ *
+ * // Avoid excessively updating the position while scrolling.
+ * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+ *
+ * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
+ * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
+ * jQuery(element).on('click', throttled);
+ *
+ * // Cancel the trailing throttled invocation.
+ * jQuery(window).on('popstate', throttled.cancel);
+ */
+function throttle(func, wait, options) {
+  var leading = true,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  if (isObject(options)) {
+    leading = 'leading' in options ? !!options.leading : leading;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+  return debounce(func, wait, {
+    'leading': leading,
+    'maxWait': wait,
+    'trailing': trailing
+  });
+}
+
+module.exports = throttle;
+
+
+/***/ }),
+/* 258 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(4);
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+  return root.Date.now();
+};
+
+module.exports = now;
+
+
+/***/ }),
+/* 259 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(7),
+    isSymbol = __webpack_require__(17);
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+module.exports = toNumber;
+
+
+/***/ }),
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.useComplexMode
+    ? _c(
+        "div",
+        { staticClass: "-complex-table", attrs: { name: "ComplexTable" } },
+        [
+          _vm._l(["Header", "Body", "Footer"], function(x) {
+            return [
+              x !== "Footer" || (x === "Footer" && _vm.summary)
+                ? _c(
+                    "div",
+                    {
+                      ref: "wrappers",
+                      refInFor: true,
+                      class: "-table-" + x.toLowerCase(),
+                      style: [
+                        x !== "Header" && {
+                          marginTop: "-" + _vm.scrollWidth + "px"
+                        },
+                        x === "Body" && {
+                          maxHeight: _vm.fixHeaderAndSetBodyMaxHeight + "px"
+                        }
+                      ],
+                      attrs: { name: "Table" + x + "Wrapper" }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { attrs: { name: "NormalTable" + x } },
+                        [
+                          _c(
+                            "table-frame",
+                            _vm._b(
+                              {},
+                              "table-frame",
+                              _vm.propsToNormalTable,
+                              false
+                            ),
+                            [
+                              _c(
+                                "Table" + x,
+                                _vm._b(
+                                  { tag: "component" },
+                                  "component",
+                                  _vm.propsToNormalTable,
+                                  false
+                                )
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm.leftFixedColumns.length
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "-left-fixed -fixed-table",
+                              style: { left: _vm.offsetLeft + "px" },
+                              attrs: { name: "LeftFixedTable" + x }
+                            },
+                            [
+                              _c(
+                                "table-frame",
+                                _vm._b(
+                                  { attrs: { "left-fixed": "" } },
+                                  "table-frame",
+                                  _vm.propsToLeftFixedTable,
+                                  false
+                                ),
+                                [
+                                  _c(
+                                    "Table" + x,
+                                    _vm._b(
+                                      {
+                                        tag: "component",
+                                        attrs: { "left-fixed": "" }
+                                      },
+                                      "component",
+                                      _vm.propsToLeftFixedTable,
+                                      false
+                                    )
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.rightFixedColumns.length
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "-right-fixed -fixed-table",
+                              style: { right: "-" + _vm.offsetLeft + "px" },
+                              attrs: { name: "RightFixedTable" + x }
+                            },
+                            [
+                              _c(
+                                "table-frame",
+                                _vm._b(
+                                  { attrs: { "right-fixed": "" } },
+                                  "table-frame",
+                                  _vm.propsToRightFixedTable,
+                                  false
+                                ),
+                                [
+                                  _c(
+                                    "Table" + x,
+                                    _vm._b(
+                                      {
+                                        tag: "component",
+                                        attrs: { "right-fixed": "" }
+                                      },
+                                      "component",
+                                      _vm.propsToRightFixedTable,
+                                      false
+                                    )
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                : _vm._e()
+            ]
+          })
+        ],
+        2
+      )
+    : _c(
+        "div",
+        { attrs: { name: "SimpleTable" } },
+        [
+          _c(
+            "table-frame",
+            _vm._b({}, "table-frame", _vm.propsToNormalTable, false),
+            [
+              _c(
+                "table-header",
+                _vm._b({}, "table-header", _vm.propsToNormalTable, false)
+              ),
+              _vm._v(" "),
+              _c(
+                "table-body",
+                _vm._b({}, "table-body", _vm.propsToNormalTable, false)
+              ),
+              _vm._v(" "),
+              _vm.summary
+                ? _c(
+                    "table-footer",
+                    _vm._b({}, "table-footer", _vm.propsToNormalTable, false)
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3da52071", module.exports)
+  }
+}
+
+/***/ }),
+/* 261 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(262)
+/* template */
+var __vue_template__ = __webpack_require__(263)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue2-datatable-component/src/Pagination.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-83f0b5ac", Component.options)
+  } else {
+    hotAPI.reload("data-v-83f0b5ac", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 262 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Pagination',
+  props: {
+    total: { type: Number, required: true },
+    query: { type: Object, required: true }
+  },
+  computed: {
+    isFirstPage: function isFirstPage() {
+      return +this.query.offset === 0 || +this.query.limit >= this.total;
+    },
+    isLastPage: function isLastPage() {
+      return +this.query.offset + +this.query.limit >= this.total;
+    },
+    totalPage: function totalPage() {
+      return Math.ceil(this.total / +this.query.limit);
+    },
+    curPage: function curPage() {
+      return Math.ceil(+this.query.offset / +this.query.limit) + 1;
+    },
+    dspBtns: function dspBtns() {
+      var n = this.totalPage;
+      var i = this.curPage;
+
+      /* eslint-disable */
+      if (n <= 9) return function (n) {
+        var arr = Array(n);
+        while (n) {
+          arr[n - 1] = n--;
+        }
+        return arr;
+      }(n);
+      if (i <= 5) return [1, 2, 3, 4, 5, 6, 7, 0, n]; // 0 represents `···`
+      if (i >= n - 4) return [1, 0, n - 6, n - 5, n - 4, n - 3, n - 2, n - 1, n];
+      return [1, 0, i - 2, i - 1, i, i + 1, i + 2, 0, n];
+      /* eslint-enable */
+    }
+  },
+  methods: {
+    handleClick: function handleClick(n) {
+      this.query.offset = (n - 1) * +this.query.limit;
+    },
+    turnPage: function turnPage(i) {
+      if (i < 0 && this.isFirstPage || i > 0 && this.isLastPage) return;
+      this.query.offset = +this.query.offset + i * +this.query.limit;
+    }
+  }
+});
+
+/***/ }),
+/* 263 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "ul",
+    {
+      staticClass: "pagination",
+      staticStyle: { margin: "0" },
+      attrs: { name: "Pagination" }
+    },
+    [
+      !_vm.isFirstPage
+        ? _c(
+            "li",
+            {
+              staticClass: "page-item",
+              on: {
+                click: function($event) {
+                  _vm.turnPage(-1)
+                }
+              }
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-arrow-left" })]
+              )
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.dspBtns, function(i) {
+        return _c(
+          "li",
+          { class: ["page-item", { active: i === _vm.curPage }] },
+          [
+            i
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.handleClick(i)
+                      }
+                    }
+                  },
+                  [_vm._v("\n      " + _vm._s(i) + "\n    ")]
+                )
+              : _c("a", { staticClass: "page-link" }, [
+                  _c("i", { staticClass: "fa fa-ellipsis-h" })
+                ])
+          ]
+        )
+      }),
+      _vm._v(" "),
+      !_vm.isLastPage
+        ? _c(
+            "li",
+            {
+              staticClass: "page-item",
+              on: {
+                click: function($event) {
+                  _vm.turnPage(1)
+                }
+              }
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-arrow-right" })]
+              )
+            ]
+          )
+        : _vm._e()
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-83f0b5ac", module.exports)
+  }
+}
+
+/***/ }),
+/* 264 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(265)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(267)
+/* template */
+var __vue_template__ = __webpack_require__(268)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue2-datatable-component/src/PageSizeSelect.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-27dbdcdc", Component.options)
+  } else {
+    hotAPI.reload("data-v-27dbdcdc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(266);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("2aa024ca", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-27dbdcdc\",\"scoped\":false,\"hasInlineConfig\":true}!../../vue-loader/lib/selector.js?type=styles&index=0!./PageSizeSelect.vue", function() {
+     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-27dbdcdc\",\"scoped\":false,\"hasInlineConfig\":true}!../../vue-loader/lib/selector.js?type=styles&index=0!./PageSizeSelect.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 266 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.-page-size-select {\n  display: inline-block;\n  width: 65px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 267 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'PageSizeSelect',
+  props: {
+    query: { type: Object, required: true },
+    pageSizeOptions: { type: Array, required: true }
+  }
+});
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("label", { attrs: { name: "PageSizeSelect" } }, [
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.query.limit,
+            expression: "query.limit"
+          }
+        ],
+        staticClass: "form-control input-sm -page-size-select",
+        on: {
+          change: [
+            function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.query,
+                "limit",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            },
+            function($event) {
+              _vm.query.offset = 0 /* reset to the first page */
+            }
+          ]
+        }
+      },
+      _vm._l(_vm.pageSizeOptions, function(i) {
+        return _c("option", { domProps: { value: i } }, [_vm._v(_vm._s(i))])
+      })
+    ),
+    _vm._v("\n  " + _vm._s(_vm.$i18nForDatatable("items / page")) + "\n")
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-27dbdcdc", module.exports)
+  }
+}
+
+/***/ }),
+/* 269 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { name: "Datatable" } },
+    [
+      _vm.$slots.default || _vm.HeaderSettings
+        ? _c(
+            "div",
+            {
+              staticClass: "clearfix",
+              staticStyle: { "margin-bottom": "10px" }
+            },
+            [
+              _vm.HeaderSettings
+                ? _c("header-settings", {
+                    staticClass: "pull-right",
+                    attrs: {
+                      columns: _vm.columns,
+                      "support-backup": _vm.supportBackup
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._t("default")
+            ],
+            2
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("tbl", _vm._b({}, "tbl", _vm.$props, false)),
+      _vm._v(" "),
+      _vm.Pagination
+        ? _c(
+            "div",
+            { staticClass: "row", staticStyle: { "margin-top": "10px" } },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "col-sm-6",
+                  staticStyle: { "white-space": "nowrap" }
+                },
+                [
+                  _c("strong", [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(_vm.$i18nForDatatable("Total")) +
+                        " " +
+                        _vm._s(_vm.total) +
+                        " " +
+                        _vm._s(_vm.$i18nForDatatable(",")) +
+                        "\n      "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("page-size-select", {
+                    attrs: {
+                      query: _vm.query,
+                      "page-size-options": _vm.pageSizeOptions
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-sm-6" },
+                [
+                  _c("pagination", {
+                    staticClass: "pull-right",
+                    attrs: { total: _vm.total, query: _vm.query }
+                  })
+                ],
+                1
+              )
+            ]
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0608cf92", module.exports)
+  }
+}
+
+/***/ }),
+/* 270 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// if some dynamic components are used frequently, a better way is to register them globally
+/* harmony default export */ __webpack_exports__["a"] = ({
+  DisplayRow: __webpack_require__(271),
+  //Color: require('./td-Color'),
+  //CreatetimeTd: require('./td-Createtime'),
+  //CreatetimeTh: require('./th-Createtime'),
+  //Email: require('./td-Email'),
+  Object: __webpack_require__(276),
+  Opt: __webpack_require__(279),
+  FilterTh: __webpack_require__(284),
+  FilterFil: __webpack_require__(289)
+  // [Vue warn]: Do not use built-in or reserved HTML elements as component id: Filter
+  // Filter: require('./th-Filter')
+});
+
+/***/ }),
+/* 271 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(272)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(274)
+/* template */
+var __vue_template__ = __webpack_require__(275)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/datatable/nested-DisplayRow.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4b4069bc", Component.options)
+  } else {
+    hotAPI.reload("data-v-4b4069bc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 272 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(273);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("07f8dd2a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4b4069bc\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./nested-DisplayRow.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4b4069bc\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./nested-DisplayRow.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 273 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.-nested-dsp-row-comp {\r\n  position: relative;\r\n  padding: 10px;\n}\n.-nested-dsp-row-close-btn {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 5px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 274 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['row', 'nested'],
+  mounted: function mounted() {
+
+    console.log("asdfasdf");
+    console.log(this.row.description);
+    //console.log(this.row);
+    // jQuery(this.$el).find('button[title]').tooltip();
+  }
+});
+
+/***/ }),
+/* 275 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "-nested-dsp-row-comp" }, [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-xs btn-link -nested-dsp-row-close-btn",
+        on: {
+          click: function($event) {
+            _vm.nested.$toggle(false)
+          }
+        }
+      },
+      [_c("i", { staticClass: "fa fa-times fa-lg" })]
+    ),
+    _vm._v(" "),
+    _c("dl", { staticClass: "dl-horizontal" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Identificador")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.id))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Alto")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.high))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Ancho")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.width))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Densidad")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _vm._v(_vm._s(_vm.row.density))
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Tipo")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.type))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Especie")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [_vm._v(_vm._s(_vm.row.specie))])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [_vm._v("Descripción")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _vm._v(_vm._s(_vm.row.description))
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4b4069bc", module.exports)
+  }
+}
+
+/***/ }),
+/* 276 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(277)
+/* template */
+var __vue_template__ = __webpack_require__(278)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/datatable/td-Object.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-320b55aa", Component.options)
+  } else {
+    hotAPI.reload("data-v-320b55aa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 277 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['value']
+});
+
+/***/ }),
+/* 278 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("span", [_vm._v(" " + _vm._s(_vm.value.name))])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-320b55aa", module.exports)
+  }
+}
+
+/***/ }),
+/* 279 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(280)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(282)
+/* template */
+var __vue_template__ = __webpack_require__(283)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/datatable/td-Opt.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-37229158", Component.options)
+  } else {
+    hotAPI.reload("data-v-37229158", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 280 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(281);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("f9504caa", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-37229158\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./td-Opt.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-37229158\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./td-Opt.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 281 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.-nested-comp-open-btn {\r\n  color: #fff !important;\r\n  background-color: #337ab7 !important;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 282 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['row', 'nested'],
+  data: function data() {
+    return {
+      statuses: [],
+      alert: false,
+      alert_type: null,
+      alert_msg: null,
+      dialog: false,
+      actual_row: null,
+      species: [],
+      types: [],
+      editedLumber: null
+    };
+  },
+
+  // data: {
+
+  // },
+  mounted: function mounted() {
+    this.actual_row = this.row;
+    //this.getSpecies();        
+    //this.getTypes();
+  },
+
+  computed: {
+    isDisplayRowVisible: function isDisplayRowVisible() {
+      if (this.nested.comp !== 'DisplayRow') return;
+      return this.nested.visible;
+    },
+    isFriendsTableVisible: function isFriendsTableVisible() {
+      if (this.nested.comp !== 'FriendsTable') return;
+      return this.nested.visible;
+    }
+  },
+  methods: {
+    toggleNestedComp: function toggleNestedComp(comp) {
+      var nested = this.nested;
+
+      if (nested.comp === comp) return nested.$toggle();
+      nested.$toggle(comp, true);
+    },
+    closeModal: function closeModal() {
+      this.$refs.myModalRef.hide();
+    },
+    updateData: function updateData() {
+      console.log(this.actual_row.specie);
+      axios.put('/api/auth/lumber/' + this.actual_row.id, this.actual_row).then(function (response) {
+        console.log(response.data.lumber);
+        //row.  
+      }).catch(function (error) {
+        console.log(error);
+        this.alert = true;
+        this.alert_type = "error";
+        this.alert_msg = 'error on saving';
+      });
+      this.dialog = false;
+    },
+    getSpecies: function getSpecies() {
+      var _this = this;
+
+      axios.get('/api/auth/specie').then(function (response) {
+        _this.species = response.data.species;
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    getTypes: function getTypes() {
+      var _this2 = this;
+
+      axios.get('/api/auth/type').then(function (response) {
+        _this2.types = response.data.types;
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 283 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "btn-group btn-group-sm" },
+    [
+      _c(
+        "v-btn",
+        {
+          class: { "-nested-comp-open-btn": _vm.isDisplayRowVisible },
+          attrs: { color: "info", title: "Display row" },
+          on: {
+            click: function($event) {
+              _vm.toggleNestedComp("DisplayRow")
+            }
+          }
+        },
+        [_vm._v("\n    VER\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "" } },
+        [
+          _c(
+            "v-dialog",
+            {
+              attrs: { persistent: "", "max-width": "500px" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { slot: "activator", color: "success", dark: "" },
+                  slot: "activator"
+                },
+                [_vm._v("\n    Editar\n  ")]
+              ),
+              _vm._v(" "),
+              _vm.actual_row
+                ? _c(
+                    "v-card",
+                    { staticClass: "col-md-12" },
+                    [
+                      _c("v-card-title", { staticClass: "col-md-12" }, [
+                        _c("span", { staticClass: "headline" }, [
+                          _vm._v("Edición de Madera")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-text",
+                        { staticClass: "col-md-12" },
+                        [
+                          _c(
+                            "v-container",
+                            {
+                              staticClass: "col-md-12",
+                              attrs: { "grid-list-md": "" }
+                            },
+                            [
+                              _c(
+                                "v-layout",
+                                { attrs: { wrap: "" } },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "col-md-4",
+                                      attrs: { xs12: "", sm6: "", md4: "" }
+                                    },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Alto",
+                                          hint: "Ingrese el alto de la madera",
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.actual_row.high,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.actual_row,
+                                              "high",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "actual_row.high"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "col-md-4",
+                                      attrs: { xs12: "", sm6: "", md4: "" }
+                                    },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Ancho",
+                                          hint: "Ingrese el ancho de la madera"
+                                        },
+                                        model: {
+                                          value: _vm.actual_row.width,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.actual_row,
+                                              "width",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "actual_row.width"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "col-md-4",
+                                      attrs: { xs12: "", sm6: "", md4: "" }
+                                    },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Densidad",
+                                          hint:
+                                            "Ingrese la densidad de la madera",
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.actual_row.density,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.actual_row,
+                                              "density",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "actual_row.density"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "col-md-6",
+                                      attrs: { xs12: "", sm6: "" }
+                                    },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          label: "Tipo de madera",
+                                          items: _vm.types,
+                                          "item-text": "name",
+                                          "item-value": "id",
+                                          hint:
+                                            "Descripcion del tipo seleccionado",
+                                          "persistent-hint": ""
+                                        },
+                                        model: {
+                                          value: _vm.actual_row.type,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.actual_row,
+                                              "type",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "actual_row.type"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "col-md-6",
+                                      attrs: { xs12: "", sm6: "" }
+                                    },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          label: "Especie",
+                                          items: _vm.species,
+                                          "item-text": "name",
+                                          "item-value": "id",
+                                          hint:
+                                            "Descripcion de la madera seleccionada",
+                                          "persistent-hint": ""
+                                        },
+                                        model: {
+                                          value: _vm.actual_row.specie,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.actual_row,
+                                              "specie",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "actual_row.specie"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "col-md-12",
+                                      attrs: { xs12: "" }
+                                    },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Descripción" }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Cerrar")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  return _vm.updateData($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Guardar")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-37229158", module.exports)
+  }
+}
+
+/***/ }),
+/* 284 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(285)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(287)
+/* template */
+var __vue_template__ = __webpack_require__(288)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/datatable/th-Filter.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-96ad6242", Component.options)
+  } else {
+    hotAPI.reload("data-v-96ad6242", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 285 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(286);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("60892584", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-96ad6242\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./th-Filter.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-96ad6242\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./th-Filter.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 286 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\r\n  -webkit-appearance: searchfield-cancel-button;\r\n  cursor: pointer;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 287 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['field', 'title', 'query'],
+  data: function data() {
+    return {
+      keyword: '',
+      menu: false,
+      hints: true
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    jQuery(this.$el).on('shown.bs.dropdown', function (e) {
+      return _this.$refs.input.focus();
+    });
+  },
+
+  watch: {
+    keyword: function keyword(kw) {
+      if (kw === '') this.search();
+    }
+  },
+  methods: {
+    search: function search() {
+      console.log("searching");
+      var query = this.query;
+
+      this.$set(query, this.field, this.keyword);
+      query.offset = 0;
+    }
+  }
+});
+
+/***/ }),
+/* 288 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "text-xs-center" },
+    [
+      _vm._v("\n  " + _vm._s(_vm.title) + "\n  "),
+      _c(
+        "v-menu",
+        {
+          attrs: {
+            "close-on-content-click": false,
+            "nudge-width": 80,
+            "offset-x": "",
+            small: ""
+          },
+          model: {
+            value: _vm.menu,
+            callback: function($$v) {
+              _vm.menu = $$v
+            },
+            expression: "menu"
+          }
+        },
+        [
+          _c(
+            "v-btn",
+            {
+              attrs: { slot: "activator", icon: "", small: "" },
+              slot: "activator"
+            },
+            [_c("v-icon", [_vm._v("fa-filter")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c("v-text-field", {
+                attrs: {
+                  "append-icon": "search",
+                  label: "Buscar " + _vm.field + "..."
+                },
+                on: {
+                  keydown: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.search($event)
+                  }
+                },
+                model: {
+                  value: _vm.keyword,
+                  callback: function($$v) {
+                    _vm.keyword = $$v
+                  },
+                  expression: "keyword"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-96ad6242", module.exports)
+  }
+}
+
+/***/ }),
+/* 289 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(290)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(292)
+/* template */
+var __vue_template__ = __webpack_require__(293)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/datatable/th-Fil.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c08ce09c", Component.options)
+  } else {
+    hotAPI.reload("data-v-c08ce09c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 290 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(291);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("6bfc1871", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c08ce09c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./th-Fil.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c08ce09c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./th-Fil.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 291 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\r\n  -webkit-appearance: searchfield-cancel-button;\r\n  cursor: pointer;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 292 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['field', 'title', 'query'],
+  data: function data() {
+    return {
+      keyword: ''
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    jQuery(this.$el).on('shown.bs.dropdown', function (e) {
+      return _this.$refs.input.focus();
+    });
+  },
+
+  watch: {
+    keyword: function keyword(kw) {
+      if (kw === '') this.search();
+    }
+  },
+  methods: {
+    search: function search() {
+      var query = this.query;
+
+      this.$set(query, this.field, this.keyword);
+      query.offset = 0;
+    }
+  }
+});
+
+/***/ }),
+/* 293 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "btn-group" }, [
+    _vm._v("\n  " + _vm._s(_vm.title) + "xdxd\n  "),
+    _c("a", { attrs: { href: "javascript:;", "data-toggle": "dropdown" } }, [
+      _c("i", {
+        staticClass: "fa fa-filter",
+        class: { "text-muted": !_vm.keyword }
+      })
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      { staticClass: "dropdown-menu", staticStyle: { padding: "3px" } },
+      [_c("div", { staticClass: "input-group input-group-sm" })]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c08ce09c", module.exports)
+  }
+}
+
+/***/ }),
+/* 294 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "datatable",
+    _vm._b({ on: { editItem: _vm.editItem } }, "datatable", _vm.$data, false)
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-26434b36", module.exports)
+  }
+}
+
+/***/ }),
+/* 295 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(296)
+/* template */
+var __vue_template__ = __webpack_require__(297)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/views/App.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-50e73d1e", Component.options)
+  } else {
+    hotAPI.reload("data-v-50e73d1e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 296 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dialog: false,
+      drawer: null,
+      items: [{ icon: 'dashboard', text: 'Inicio', link: '/' }, { icon: 'group', text: 'Almacenes', link: '/storage' }, { icon: 'group', text: 'Madera', link: '/lumber' }, { icon: 'group', text: 'Especies', link: '/specie' }, { icon: 'group', text: 'Proveedores', link: '/providers' }],
+      menu: false,
+      message: false
+    };
+  },
+  props: {
+    source: String
+  },
+  methods: {
+    logout: function logout() {
+      this.$store.commit('logout');
+      this.$router.push('/login');
+    }
+  },
+  computed: {
+    currentUser: function currentUser() {
+      return this.$store.getters.currentUser;
+    }
+  }
+});
+
+/***/ }),
+/* 297 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-app",
+    { attrs: { id: "inspire" } },
+    [
+      _c(
+        "v-navigation-drawer",
+        {
+          attrs: {
+            fixed: "",
+            clipped: _vm.$vuetify.breakpoint.mdAndUp,
+            app: ""
+          },
+          model: {
+            value: _vm.drawer,
+            callback: function($$v) {
+              _vm.drawer = $$v
+            },
+            expression: "drawer"
+          }
+        },
+        [
+          _c(
+            "v-list",
+            { attrs: { dense: "" } },
+            [
+              _vm._l(_vm.items, function(item) {
+                return [
+                  item.heading
+                    ? _c(
+                        "v-layout",
+                        {
+                          key: item.heading,
+                          attrs: { row: "", "align-center": "" }
+                        },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs6: "" } },
+                            [
+                              item.heading
+                                ? _c("v-subheader", [
+                                    _vm._v(
+                                      "\n               " +
+                                        _vm._s(item.heading) +
+                                        "\n             "
+                                    )
+                                  ])
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            {
+                              staticClass: "text-xs-center",
+                              attrs: { xs6: "" }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "body-2 black--text",
+                                  attrs: { href: "#!" }
+                                },
+                                [_vm._v("EDIT")]
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    : item.children
+                      ? _c(
+                          "v-list-group",
+                          {
+                            key: item.text,
+                            attrs: {
+                              to: item.link,
+                              "prepend-icon": item.model
+                                ? item.icon
+                                : item["icon-alt"],
+                              "append-icon": ""
+                            },
+                            model: {
+                              value: item.model,
+                              callback: function($$v) {
+                                _vm.$set(item, "model", $$v)
+                              },
+                              expression: "item.model"
+                            }
+                          },
+                          [
+                            _c(
+                              "v-list-tile",
+                              {
+                                attrs: { slot: "activator" },
+                                slot: "activator"
+                              },
+                              [
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _vm._v(
+                                        "\n                 " +
+                                          _vm._s(item.text) +
+                                          "\n               "
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _vm._l(item.children, function(child, i) {
+                              return _c(
+                                "v-list-tile",
+                                { key: i },
+                                [
+                                  child.icon
+                                    ? _c(
+                                        "v-list-tile-action",
+                                        [
+                                          _c("v-icon", [
+                                            _vm._v(_vm._s(child.icon))
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-list-tile-content",
+                                    [
+                                      _c("v-list-tile-title", [
+                                        _vm._v(
+                                          "\n                 " +
+                                            _vm._s(child.text) +
+                                            "\n               "
+                                        )
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            })
+                          ],
+                          2
+                        )
+                      : _c(
+                          "v-list-tile",
+                          { key: item.text, attrs: { to: item.link } },
+                          [
+                            _c(
+                              "v-list-tile-action",
+                              [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-list-tile-content",
+                              [
+                                _c("v-list-tile-title", [
+                                  _vm._v(
+                                    "\n               " +
+                                      _vm._s(item.text) +
+                                      "\n             "
+                                  )
+                                ])
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                ]
+              })
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-toolbar",
+        {
+          attrs: {
+            color: "blue darken-2",
+            dark: "",
+            app: "",
+            "clipped-left": _vm.$vuetify.breakpoint.mdAndUp,
+            fixed: ""
+          }
+        },
+        [
+          _c(
+            "v-toolbar-title",
+            { staticClass: "ml-0 pl-3", staticStyle: { width: "300px" } },
+            [
+              _c("v-toolbar-side-icon", {
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    _vm.drawer = !_vm.drawer
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "hidden-sm-and-down" }, [
+                _vm._v("Ultimate Design")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _vm.currentUser
+            ? _c(
+                "v-menu",
+                {
+                  attrs: {
+                    "close-on-content-click": false,
+                    "nudge-width": 100,
+                    "offset-x": ""
+                  },
+                  model: {
+                    value: _vm.menu,
+                    callback: function($$v) {
+                      _vm.menu = $$v
+                    },
+                    expression: "menu"
+                  }
+                },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { slot: "activator", icon: "", large: "" },
+                      slot: "activator"
+                    },
+                    [_c("v-icon", [_vm._v("person")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card",
+                    { attrs: { light: "" } },
+                    [
+                      _c(
+                        "v-list",
+                        [
+                          _c(
+                            "v-list-tile",
+                            { attrs: { avatar: "" } },
+                            [
+                              _c("v-list-tile-avatar", [
+                                _c("img", {
+                                  attrs: {
+                                    src:
+                                      "https://cdn.vuetifyjs.com/images/john.jpg",
+                                    alt: "John"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-tile-content",
+                                [
+                                  _c("v-list-tile-title", [
+                                    _vm._v(_vm._s(_vm.currentUser.name))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("v-list-tile-sub-title", [
+                                    _vm._v("Administrador")
+                                  ])
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-tooltip",
+                            { attrs: { bottom: "" } },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    slot: "activator",
+                                    color: "primary",
+                                    dark: "",
+                                    flat: ""
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.menu = false
+                                    }
+                                  },
+                                  slot: "activator"
+                                },
+                                [_c("v-icon", [_vm._v("reply")])],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("Regresar")])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-tooltip",
+                            { attrs: { bottom: "" } },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    slot: "activator",
+                                    color: "primary",
+                                    dark: "",
+                                    flat: ""
+                                  },
+                                  on: { click: _vm.logout },
+                                  slot: "activator"
+                                },
+                                [_c("v-icon", [_vm._v("exit_to_app")])],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("Cerrar Sesion")])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            : _c(
+                "v-btn",
+                { attrs: { flat: "", color: "white", to: "/login" } },
+                [_vm._v(" Inicar Sesion ")]
+              )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-content",
+        [
+          _c(
+            "v-container",
+            { attrs: { fluid: "", "fill-height": "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { column: "", "fill-height": "" } },
+                [_c("router-view")],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-50e73d1e", module.exports)
+  }
+}
+
+/***/ }),
+/* 298 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

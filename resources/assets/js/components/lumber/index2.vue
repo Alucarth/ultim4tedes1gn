@@ -59,8 +59,8 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">store</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>update</v-btn>
+                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>Actualizar</v-btn>
                 
                 
             </v-card-actions>
@@ -69,63 +69,54 @@
 
 
 <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
-
-        <!-- <v-text-field
-            v-model="search"
-            append-icon="search"
-            label="Buscar"
-            single-line
-            hide-details
-        > -->
-        
-        <!-- </v-text-field> -->
         </v-card-title>
         <v-data-table
         :headers="headers"
-        :items="lumbers"
-        :search="search"
-            :pagination.sync="pagination"
+        :items="lumbers"        
+        hide-actions
         >
         <template slot="headers" slot-scope="props" >
            <tr>
-                <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">                    
-                        <v-flex>
-                            <span @click="toggleOrder(index)">{{ header.text }}                                
+                <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
+                    
+                        <v-flex v-if="header.value!='actions'">
+                            <span>{{ header.text }}
                             </span>
-                            <v-menu
-                                    :close-on-content-click="false"                                    
+                            <v-menu 
+                                    :close-on-content-click="false"
                                     >
                                     <v-btn
                                         slot="activator"
                                         icon
-                                        @click="setFilter(header.value)"
+                                   
+                                        v-if="header.sortable!=false"
                                     >
                                     <v-icon  small>fa-filter</v-icon>
                                     </v-btn>
-
-                                    <v-card>
+                                    <v-card  >
                                         <v-text-field
-                                        v-model="filterValue"
+                                         outline
+                                         hide-details
+                                        v-model="header.input"
                                         append-icon="search"
-                                        :label="`Buscar ${header.text}...`"
-                                    
-                                        @keydown.enter="getResult(true)"
+                                        :label="`Buscar ${header.text}...`"                                       
+                                        @keydown.enter="search()"
                                     ></v-text-field>
                                     
                                     </v-card>
                             </v-menu>
-                            <v-icon small @click="toggleOrder(index)" v-if="header.value == pagination.sortBy">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon>
-                        </v-flex>                     
+                            <!-- <v-icon small @click="toggleOrder(header.value)" v-if="header.value == filterName ">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon> -->
+                        </v-flex>
                 </th>
            </tr>
         </template>
         <template slot="items"  slot-scope="props">
             <!-- <tr @click="props.expanded = !props.expanded"> -->
-                <td class="text-xs-left" >{{ props.item.high }}</td>            
-                <td class="text-xs-left">{{ props.item.width }}</td>
-                <td class="text-xs-left">{{ props.item.density }}</td>
                 <td class="text-xs-left">{{ props.item.specie.name }}</td>
                 <td class="text-xs-left">{{ props.item.type.name }}</td>      
+                <td class="text-xs-left" >{{ props.item.high }}</td>            
+                <td class="text-xs-left">{{ props.item.width }}</td>
+                <td class="text-xs-left">{{ props.item.density }}</td>                
                 <td class="justify-center layout px-0">
                     <v-icon
                         small
@@ -152,32 +143,99 @@
         </template>
         <template slot="expand" slot-scope="props">
             <v-card flat v-if="lumber">
-                <v-card-text>{{ lumber.description }}</v-card-text>
-                <v-card-text>{{ lumber.high }}</v-card-text>
+                <table>
+                    <tr>
+                        <td> 
+                            Especie
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.specie.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Tipo
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.type.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Alto
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.high }}
+                            </v-card-text>
+                        </td>                 
+                    </tr>
+                    <tr>
+                        <td> 
+                            Ancho
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.width }}
+                            </v-card-text>
+                        </td>       
+                    </tr>
+                    <tr>
+                        <td> 
+                            Espesor
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.density }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Descripción 
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.description }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                </table>                                
             </v-card>
         </template>
 
-        <v-alert slot="no-results" :value="true" color="error" icon="warning">
+        <!-- <v-alert slot="no-results" :value="true" color="error" icon="warning">
             Your search for "{{ search }}" found no results.
-        </v-alert>
+        </v-alert> -->
         </v-data-table>
+        <div class="text-xs-center">
+            <v-pagination
+            v-model="page"
+            :length="last_page"
+            :total-visible="10"
+             @input="next"
+            ></v-pagination>
+        </div> 
         
     </v-card>
 </template>
 <script>
 export default {
     data () {
-      return {
-        search: '',
+      return {        
         pagination: {
           sortBy: 'name'
         },
         headers: [          
+            { text: 'Especie', value: 'specie' },
+            { text: 'Tipo', value: 'type' },
             { text: 'Alto', value: 'high' },        
             { text: 'Ancho', value: 'width' },
-            { text: 'Espesor', value: 'density' },
-            { text: 'Especie', value: 'specie' },
-            { text: 'Tipo', value: 'type' },            
+            { text: 'Espesor', value: 'density' },            
         ],
         species: null,
         types: null,
@@ -190,6 +248,9 @@ export default {
         filterValue: '',   
         dialog: false,
         editedIndex: -1,          
+        last_page: 1,
+        page: 1,    
+        paginationRows: 10,
       }
     },
     computed: {
@@ -199,96 +260,50 @@ export default {
     },
     mounted()
     {
-        this.getLumber().then(
-            this.getDataFromApi()
-                .then(data => {
-                this.lumbers = data.lumbers
-                this.totalLumber = data.total
-                })
-        );
+        this.search();        
         this.getSpecies();
-        this.getTypes();
-        
+        this.getTypes();        
     },
     methods:{
-        getDataFromApi () {            
-            // return new Promise((resolve, reject) => {
-            // const { sortBy, descending, page, rowsPerPage } = this.pagination
-
-            // let items= this.lumbers;
-            // const total = items.length;
-
-            // if (this.pagination.sortBy) {
-            //     items = items.sort((a, b) => {
-            //     const sortA = a[sortBy]
-            //     const sortB = b[sortBy]
-
-            //     if (descending) {
-            //         if (sortA < sortB) return 1
-            //         if (sortA > sortB) return -1
-            //         return 0
-            //     } else {
-            //         if (sortA < sortB) return -1
-            //         if (sortA > sortB) return 1
-            //         return 0
-            //     }
-            //     })
-            // }
-
-            // if (rowsPerPage > 0) {
-            //     items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-            // }
-
-            //     resolve({
-            //     items,
-            //     total
-            //     });
-         
-            // })
+        search() {
+            return new Promise((resolve,reject)=>{   
+                this.getData('/api/auth/lumber',this.getParams()).then((data)=>{
+                    this.lumbers = data.data;                    
+                    this.last_page = data.last_page;
+                    resolve();                    
+                });
+            });            
         },
-        getLumber(withFilter){
-            console.log("starting receiving data");
+        getParams () {
+            let params={};
+            this.headers.forEach(element => {
+                params[element.value] = element.input;
+            });
+            params['order']=this.pagination.descending==true?'asc':'desc';
+            params['page']=this.page;
+            params['pagination_rows']=this.paginationRows;
+            return params;
+        },
+        getData(url,parameters){
             return new Promise((resolve,reject)=>{
-               this.loading = true
-               let filterName = withFilter==true?this.filterName:'high';
-               console.log(withFilter);
-               axios.get('/api/auth/getLumberData',{ name:filterName,value:this.filterValue})
+               this.loading = true;
+               axios.get(url,{
+                        params:parameters
+                    })
                     .then((response) => {
-                                        // let providers = response.data;
-                                        console.log(response.data);
-                            this.lumbers = response.data.lumbers;
-                                        this.loading = false
-                                        resolve();
-                                    });
-                        });
+                        this.loading = false;
+                        resolve(response.data);                        
+                    });
+            });
         },
-        getResult(withFilter){
-            console.log(this.filterName);
-            //axios.post('/api/providers/getdata',{name:this.filterName})
-              //   .then((response)=>{ console.log(response.data)});
-              this.getLumber(withFilter).then(
-                        this.getDataFromApi()
-                            .then(data => {
-                            this.lumbers = data.lumbers
-                            this.totalLumber = data.total
-                            })
-                    );
-        },
-        toggleOrder (index) {
-            this.pagination.sortBy = this.headers[index].value
-            this.pagination.descending = !this.pagination.descending
-             
-            
-        },
-        setFilter(filterName){
-            this.filterValue='',
-            this.filterName = filterName;
-        },
+        next(page){
+            this.page = page;
+            this.search();
+        },        
         create() {                                    
             axios.get('/api/auth/lumber/create')            
-            .then(response => {                
-                console.log(response.data.lumber);
-                this.newLumber = response.data.lumber
+            .then(response => {                                
+                this.newLumber = response.data.lumber                
             })
             .catch(error => {                
                 console.log(error);
@@ -296,7 +311,16 @@ export default {
             this.dialog = true;
         },
         store(){
-
+            let index = -1;
+            axios.post('/api/auth/lumber/', this.newLumber)
+            .then(response => {                
+                //this.lumbers.push(response.data.lumber);
+                alert('dato creado');
+            })
+            .catch(error => {                
+                console.log(error);
+            });
+            this.dialog = false;
         },
         show(item) {                        
             axios.get(`/api/auth/lumber/${item.id}`)            
@@ -327,14 +351,14 @@ export default {
                 this.lumbers[index].high = response.data.lumber.high;
                 this.lumbers[index].width = response.data.lumber.width;
                 this.lumbers[index].density = response.data.lumber.density;
-                this.lumbers[index].specie = response.data.lumber.specie.name;
-                this.lumbers[index].type_id = response.data.lumber.type_id;
+                this.lumbers[index].specie = response.data.lumber.specie;
+                this.lumbers[index].type = response.data.lumber.type;
             })
             .catch(function (error) {
                 console.log(error);
             });            
             this.dialog =false;
-            this.getLumber();
+            //this.getLumber();
         },
         destroy (item) {
             let success_delete = false;
@@ -371,24 +395,6 @@ export default {
             this.dialog = false;
         }
         
-    },
-    watch: {
-        pagination: {
-            handler () {
-            this.getDataFromApi()
-                .then(data => {
-                this.desserts = data.items
-                this.totalDesserts = data.total
-                })
-            },
-            deep: true
-        },
-        filterValue (fv) {      
-            if (fv =='') {
-                this.getResult(false)
-            }
-
-        }
-    }
+    },    
 }
 </script>
