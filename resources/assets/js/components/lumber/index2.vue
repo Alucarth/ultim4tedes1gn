@@ -69,16 +69,6 @@
 
 
 <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
-
-        <!-- <v-text-field
-            v-model="search"
-            append-icon="search"
-            label="Buscar"
-            single-line
-            hide-details
-        > -->
-        
-        <!-- </v-text-field> -->
         </v-card-title>
         <v-data-table
         :headers="headers"
