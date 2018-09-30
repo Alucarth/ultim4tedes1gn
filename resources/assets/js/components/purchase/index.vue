@@ -270,7 +270,7 @@
                 <td class="text-xs-left">{{ props.item.specie.name+'-'+props.item.type.name }}</td>
                 <td class="text-xs-left" >{{ props.item.high+'X'+props.item.width+'X'+props.item.density }}</td>                                                            
                 <td class="text-xs-left">
-                    <v-text-field label="Cantidad" v-model="pl[props.item.id].quantity" hint="Ingrese cantidad" required></v-text-field>
+                    <v-text-field label="Cantidad" v-model="props.item.quantity" hint="Ingrese cantidad" required></v-text-field>
                 </td>
                 <td class="justify-center layout px-0">                    
                     <v-icon
@@ -466,10 +466,8 @@ export default {
         close() {
             this.dialog = false;
         },
-        addToPurchase(item) {
-            console.log(item.id);
-            //this.pl.push([{item.id: this.pivot}]);
-            this.pl[item.id] = this.pivot;
+        addToPurchase(item) {            
+            item.quantity = 0;
             this.purchase_lumbers.push(item);
         },
         removeFromPurchase(index) {

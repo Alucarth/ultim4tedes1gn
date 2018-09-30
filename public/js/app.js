@@ -74384,9 +74384,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.dialog = false;
         },
         addToPurchase: function addToPurchase(item) {
-            console.log(item.id);
-            //this.pl.push([{item.id: this.pivot}]);
-            this.pl[item.id] = this.pivot;
+            item.quantity = 0;
             this.purchase_lumbers.push(item);
         },
         removeFromPurchase: function removeFromPurchase(index) {
@@ -75331,15 +75329,11 @@ var render = function() {
                                         required: ""
                                       },
                                       model: {
-                                        value: _vm.pl[props.item.id].quantity,
+                                        value: props.item.quantity,
                                         callback: function($$v) {
-                                          _vm.$set(
-                                            _vm.pl[props.item.id],
-                                            "quantity",
-                                            $$v
-                                          )
+                                          _vm.$set(props.item, "quantity", $$v)
                                         },
-                                        expression: "pl[props.item.id].quantity"
+                                        expression: "props.item.quantity"
                                       }
                                     })
                                   ],

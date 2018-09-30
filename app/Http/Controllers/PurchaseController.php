@@ -41,7 +41,7 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //return response()->json($request->purchase['cefo']);
+        
         $purchase = new Purchase();
         $purchase->cefo = $request->purchase['cefo'];
         $purchase->date = $request->purchase['date'];
@@ -49,15 +49,14 @@ class PurchaseController extends Controller
         $purchase->description = "";
         $purchase->amount = 0;
         $purchase->save();
-        //$purchase->lumbers()->attach($request->lumbers);
-        $d = [1=>['quantity'=>'3'],
-        2=>['quantity'=>'34'],
-        3=>['quantity'=>'31'],
-    ];
-    $purchase->lumbers()->attach($d);
-        //$purchase->lumbers()->attach([1,2,3]);
-        return $purchase;
-        //$purchase->cefo = $request->
+        $lumbers = [];
+        foreach($request->lumbers as $lumber) {            
+            $lumbers[$lumber['id']] = [
+                'quantity' => $lumber['quantity']
+            ];
+        }                
+        $purchase->lumbers()->attach($lumbers);        
+        return $purchase;        
     }
 
     /**
