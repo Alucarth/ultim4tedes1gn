@@ -70262,6 +70262,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -70270,9 +70274,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pagination: {
                 sortBy: 'name'
             },
-            headers: [{ text: 'Proveedor', value: 'name', input: '' },
-            //   { text: 'Oferta', value: 'offer' },
-            { text: 'Nombres', value: 'first_name', input: '' }, { text: 'Apellidos', value: 'last_name', input: '' }, { text: 'Cargo', value: 'position', input: '' }, { text: 'Email', value: 'email', input: '' }, { text: 'Telefono', value: 'phone', input: '' }, { text: 'Balance', value: 'balance', input: '', sortable: false }, { text: 'Debito', value: 'debit', input: '', sortable: false }, { text: 'Acciones', value: 'actions', input: '', sortable: false }],
+            headers: [{ text: 'Proveedor', value: 'name', input: '', menu: false },
+            //   { text: 'Oferta', value: 'offer' , menu:false },
+            { text: 'Nombres', value: 'first_name', input: '', menu: false }, { text: 'Apellidos', value: 'last_name', input: '', menu: false }, { text: 'Cargo', value: 'position', input: '', menu: false }, { text: 'Email', value: 'email', input: '', menu: false }, { text: 'Telefono', value: 'phone', input: '', menu: false }, { text: 'Balance', value: 'balance', input: '', sortable: false, menu: false }, { text: 'Debito', value: 'debit', input: '', sortable: false, menu: false }, { text: 'Acciones', value: 'actions', input: '', sortable: false, menu: false }],
             providers: [],
             loading: true,
             newProvider: null,
@@ -70414,6 +70418,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
             this.search();
+        },
+        checkInput: function checkInput(search) {
+            if (search == '') {
+                this.search();
+            }
         }
     },
     watch: {},
@@ -70421,6 +70430,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         formTitle: function formTitle() {
             return this.editedIndex === -1 ? 'Nuevo Proveedor' : 'Editar Proveedor';
         }
+        // menuTooltip(menu){
+        //     return !menu;
+        // }
+
     }
 });
 
@@ -70979,17 +70992,30 @@ var render = function() {
                           ? _c(
                               "v-flex",
                               [
-                                _c("span", [
-                                  _vm._v(
-                                    _vm._s(header.text) +
-                                      "\n                        "
-                                  )
+                                _c("v-tooltip", { attrs: { bottom: "" } }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      attrs: { slot: "activator" },
+                                      slot: "activator"
+                                    },
+                                    [_vm._v(_vm._s(header.text))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v(_vm._s(header.input))])
                                 ]),
                                 _vm._v(" "),
                                 _c(
                                   "v-menu",
                                   {
-                                    attrs: { "close-on-content-click": false }
+                                    attrs: { "close-on-content-click": false },
+                                    model: {
+                                      value: header.menu,
+                                      callback: function($$v) {
+                                        _vm.$set(header, "menu", $$v)
+                                      },
+                                      expression: "header.menu"
+                                    }
                                   },
                                   [
                                     header.sortable != false
@@ -71005,7 +71031,15 @@ var render = function() {
                                           [
                                             _c(
                                               "v-icon",
-                                              { attrs: { small: "" } },
+                                              {
+                                                attrs: {
+                                                  small: "",
+                                                  color:
+                                                    header.input != ""
+                                                      ? "blue"
+                                                      : "black"
+                                                }
+                                              },
                                               [_vm._v("fa-filter")]
                                             )
                                           ],
@@ -71039,7 +71073,39 @@ var render = function() {
                                                 return null
                                               }
                                               _vm.search()
-                                            }
+                                            },
+                                            keyup: [
+                                              function($event) {
+                                                if (
+                                                  !("button" in $event) &&
+                                                  _vm._k(
+                                                    $event.keyCode,
+                                                    "delete",
+                                                    [8, 46],
+                                                    $event.key,
+                                                    ["Backspace", "Delete"]
+                                                  )
+                                                ) {
+                                                  return null
+                                                }
+                                                _vm.checkInput(header.input)
+                                              },
+                                              function($event) {
+                                                if (
+                                                  !("button" in $event) &&
+                                                  _vm._k(
+                                                    $event.keyCode,
+                                                    "esc",
+                                                    27,
+                                                    $event.key,
+                                                    "Escape"
+                                                  )
+                                                ) {
+                                                  return null
+                                                }
+                                                header.menu = false
+                                              }
+                                            ]
                                           },
                                           model: {
                                             value: header.input,
@@ -71758,6 +71824,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -71765,7 +71850,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pagination: {
                 sortBy: 'name'
             },
-            headers: [{ text: 'Especie', value: 'specie' }, { text: 'Tipo', value: 'type' }, { text: 'Alto', value: 'high' }, { text: 'Ancho', value: 'width' }, { text: 'Espesor', value: 'density' }],
+            headers: [{ text: 'Especie', value: 'specie', input: '', menu: false }, { text: 'Tipo', value: 'type', input: '', menu: false }, { text: 'Alto', value: 'high', input: '', menu: false }, { text: 'Ancho', value: 'width', input: '', menu: false }, { text: 'Espesor', value: 'density', input: '', menu: false }],
             species: null,
             types: null,
             lumbers: [],
@@ -71779,7 +71864,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             editedIndex: -1,
             last_page: 1,
             page: 1,
-            paginationRows: 10
+            paginationRows: 10,
+            total: 0,
+            from: 0,
+            to: 0,
+            pagination_select: [10, 20, 30]
         };
     },
 
@@ -71802,6 +71891,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.getData('/api/auth/lumber', _this.getParams()).then(function (data) {
                     _this.lumbers = data.data;
                     _this.last_page = data.last_page;
+                    _this.total = data.total;
+                    _this.from = data.from;
+                    _this.to = data.to;
                     resolve();
                 });
             });
@@ -71921,6 +72013,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         close: function close() {
             this.dialog = false;
+        },
+        checkInput: function checkInput(search) {
+            if (search == '') {
+                this.search();
+            }
         }
     }
 });
@@ -71941,6 +72038,32 @@ var render = function() {
         [
           _vm._v("\n            Madera\n        "),
           _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs1: "", sm1: "", md1: "" } },
+            [
+              _c("v-combobox", {
+                attrs: {
+                  items: _vm.pagination_select,
+                  label: "Mostrar Registros"
+                },
+                on: {
+                  change: function($event) {
+                    _vm.search()
+                  }
+                },
+                model: {
+                  value: _vm.paginationRows,
+                  callback: function($$v) {
+                    _vm.paginationRows = $$v
+                  },
+                  expression: "paginationRows"
+                }
+              })
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "v-dialog",
@@ -72230,17 +72353,30 @@ var render = function() {
                           ? _c(
                               "v-flex",
                               [
-                                _c("span", [
-                                  _vm._v(
-                                    _vm._s(header.text) +
-                                      "\n                            "
-                                  )
+                                _c("v-tooltip", { attrs: { bottom: "" } }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      attrs: { slot: "activator" },
+                                      slot: "activator"
+                                    },
+                                    [_vm._v(_vm._s(header.text))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v(_vm._s(header.input))])
                                 ]),
                                 _vm._v(" "),
                                 _c(
                                   "v-menu",
                                   {
-                                    attrs: { "close-on-content-click": false }
+                                    attrs: { "close-on-content-click": false },
+                                    model: {
+                                      value: header.menu,
+                                      callback: function($$v) {
+                                        _vm.$set(header, "menu", $$v)
+                                      },
+                                      expression: "header.menu"
+                                    }
                                   },
                                   [
                                     header.sortable != false
@@ -72256,7 +72392,15 @@ var render = function() {
                                           [
                                             _c(
                                               "v-icon",
-                                              { attrs: { small: "" } },
+                                              {
+                                                attrs: {
+                                                  color:
+                                                    header.input != ""
+                                                      ? "blue"
+                                                      : "black",
+                                                  small: ""
+                                                }
+                                              },
                                               [_vm._v("fa-filter")]
                                             )
                                           ],
@@ -72290,7 +72434,39 @@ var render = function() {
                                                 return null
                                               }
                                               _vm.search()
-                                            }
+                                            },
+                                            keyup: [
+                                              function($event) {
+                                                if (
+                                                  !("button" in $event) &&
+                                                  _vm._k(
+                                                    $event.keyCode,
+                                                    "delete",
+                                                    [8, 46],
+                                                    $event.key,
+                                                    ["Backspace", "Delete"]
+                                                  )
+                                                ) {
+                                                  return null
+                                                }
+                                                _vm.checkInput(header.input)
+                                              },
+                                              function($event) {
+                                                if (
+                                                  !("button" in $event) &&
+                                                  _vm._k(
+                                                    $event.keyCode,
+                                                    "esc",
+                                                    27,
+                                                    $event.key,
+                                                    "Escape"
+                                                  )
+                                                ) {
+                                                  return null
+                                                }
+                                                header.menu = false
+                                              }
+                                            ]
                                           },
                                           model: {
                                             value: header.input,
@@ -72415,7 +72591,7 @@ var render = function() {
                         _c("tr", [
                           _c("td", [
                             _vm._v(
-                              " \n                            Especie\n                        "
+                              " \n                            Especie:\n                        "
                             )
                           ]),
                           _vm._v(" "),
@@ -72437,7 +72613,7 @@ var render = function() {
                         _c("tr", [
                           _c("td", [
                             _vm._v(
-                              " \n                            Tipo\n                        "
+                              " \n                            Tipo:\n                        "
                             )
                           ]),
                           _vm._v(" "),
@@ -72459,7 +72635,7 @@ var render = function() {
                         _c("tr", [
                           _c("td", [
                             _vm._v(
-                              " \n                            Alto\n                        "
+                              " \n                            Alto:\n                        "
                             )
                           ]),
                           _vm._v(" "),
@@ -72481,7 +72657,7 @@ var render = function() {
                         _c("tr", [
                           _c("td", [
                             _vm._v(
-                              " \n                            Ancho\n                        "
+                              " \n                            Ancho:\n                        "
                             )
                           ]),
                           _vm._v(" "),
@@ -72503,7 +72679,7 @@ var render = function() {
                         _c("tr", [
                           _c("td", [
                             _vm._v(
-                              " \n                            Espesor\n                        "
+                              " \n                            Espesor:\n                        "
                             )
                           ]),
                           _vm._v(" "),
@@ -72525,7 +72701,7 @@ var render = function() {
                         _c("tr", [
                           _c("td", [
                             _vm._v(
-                              " \n                            Descripción \n                        "
+                              " \n                            Descripción:\n                        "
                             )
                           ]),
                           _vm._v(" "),
@@ -72567,6 +72743,25 @@ var render = function() {
               expression: "page"
             }
           })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "text-xs-right" },
+        [
+          _c("v-flex", { attrs: { xs11: "", sm11: "", md11: "" } }, [
+            _vm._v(
+              "\n                Mostrando " +
+                _vm._s(_vm.from) +
+                "-" +
+                _vm._s(_vm.to) +
+                " de " +
+                _vm._s(_vm.total) +
+                " registros \n            "
+            )
+          ])
         ],
         1
       )
