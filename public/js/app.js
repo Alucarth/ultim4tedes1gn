@@ -70212,6 +70212,56 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -70226,11 +70276,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             providers: [],
             loading: true,
             newProvider: null,
-            newContacts: [],
             newContact: null,
-            editedItem: -1,
+            provider: null,
+            contacts: [],
+            editedIndex: -1,
             page: 1,
-            last_page: 1
+            last_page: 1,
+            total: 0,
+            from: 0,
+            to: 0,
+            paginationRows: 10,
+
+            pagination_select: [10, 20, 30]
         };
     },
     mounted: function mounted() {
@@ -70239,9 +70296,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         var _this = this;
 
-        axios.get('/api/provider/create').then(function (response) {
+        axios.get('api/auth/provider/create').then(function (response) {
             _this.newProvider = response.data.provider;
             _this.newContact = response.data.contact;
+            _this.provider = _this.newProvider;
         });
     },
 
@@ -70277,25 +70335,85 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             return new Promise(function (resolve, reject) {
-                _this3.getData('/api/provider', _this3.getParams()).then(function (data) {
+                _this3.getData('api/auth/provider', _this3.getParams()).then(function (data) {
                     _this3.providers = data.data;
                     _this3.last_page = data.last_page;
+                    _this3.total = data.total;
+                    _this3.from = data.from;
+                    _this3.to = data.to;
                     resolve();
                 });
             });
         },
+        create: function create() {
+            this.editedIndex = -1;
+            this.provider = Object.assign({}, this.newProvider);
+            this.contacts = [];
+            this.contacts.push(Object.assign({}, this.newContact));
+            this.dialog = true;
+            console.log(this.newProvider);
+        },
+        show: function show(item) {
+            var _this4 = this;
+
+            axios.get('/api/auth/provider/' + item.id).then(function (response) {
+                _this4.provider = response.data.provider;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        store: function store() {
+            var parameters = this.provider;
+            parameters.contacts = this.contacts;
+            axios.post('api/auth/provider', parameters).then(function (response) {
+                console.log(response.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+            this.dialog = false;
+            this.search();
+        },
+        update: function update() {
+            var _this5 = this;
+
+            var parameters = this.provider;
+            parameters.contacts = this.contacts;
+            axios.put('api/auth/provider/' + this.provider.id, parameters).then(function (response) {
+                _this5.providers[_this5.editedIndex] = response.data.provider;
+                _this5.providers[_this5.editedIndex].contacts = response.data.provider.contacts;
+            }).catch(function (error) {
+                console.log(error);
+            });
+            this.dialog = false;
+        },
         editItem: function editItem(item) {
+            var _this6 = this;
+
             this.editedIndex = this.providers.indexOf(item);
-            this.editedItem = Object.assign({}, item);
+            console.log(item);
+            axios.get('/api/auth/provider/' + item.id + '/edit').then(function (response) {
+                _this6.provider = response.data.provider;
+                _this6.contacts = response.data.contacts;
+            }).catch(function (error) {
+                console.log(error);
+            });
             this.dialog = true;
         },
-        save: function save() {
-            // if (this.editedIndex > -1) {
-            // Object.assign(this.providers[this.editedIndex], this.editedItem)
-            // } else {
-            this.providers.push(this.editedItem);
-            // }
-            this.close();
+        addConactact: function addConactact() {
+            this.contacts.push(Object.assign({}, this.newContact));
+        },
+        removeContact: function removeContact(index) {
+            this.contacts.splice(index, 1);
+        },
+        destroy: function destroy(item) {
+            var success_delete = false;
+            axios.delete('/api/auth/provider/' + item.id).then(function (response) {
+                console.log(response.data.provider);
+                success_delete = true;
+            }).catch(function (error) {
+                console.log(error);
+            });
+            this.search();
         }
     },
     watch: {},
@@ -70324,6 +70442,32 @@ var render = function() {
           _c("v-spacer"),
           _vm._v(" "),
           _c(
+            "v-flex",
+            { attrs: { xs1: "", sm1: "", md1: "" } },
+            [
+              _c("v-combobox", {
+                attrs: {
+                  items: _vm.pagination_select,
+                  label: "Mostrar Registros"
+                },
+                on: {
+                  change: function($event) {
+                    _vm.search()
+                  }
+                },
+                model: {
+                  value: _vm.paginationRows,
+                  callback: function($$v) {
+                    _vm.paginationRows = $$v
+                  },
+                  expression: "paginationRows"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
             "v-dialog",
             {
               attrs: { "max-width": "800px", "max-high": "40px" },
@@ -70337,16 +70481,6 @@ var render = function() {
             },
             [
               _c(
-                "v-btn",
-                {
-                  staticClass: "mb-2",
-                  attrs: { slot: "activator", color: "primary", dark: "" },
-                  slot: "activator"
-                },
-                [_vm._v("Nuevo")]
-              ),
-              _vm._v(" "),
-              _c(
                 "v-card",
                 [
                   _c("v-card-title", [
@@ -70355,7 +70489,7 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm.newProvider
+                  _vm.provider
                     ? _c(
                         "v-card-text",
                         [
@@ -70374,15 +70508,11 @@ var render = function() {
                                       _c("v-text-field", {
                                         attrs: { label: "Proveedor" },
                                         model: {
-                                          value: _vm.newProvider.name,
+                                          value: _vm.provider.name,
                                           callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.newProvider,
-                                              "name",
-                                              $$v
-                                            )
+                                            _vm.$set(_vm.provider, "name", $$v)
                                           },
-                                          expression: "newProvider.name"
+                                          expression: "provider.name"
                                         }
                                       })
                                     ],
@@ -70396,37 +70526,11 @@ var render = function() {
                                       _c("v-text-field", {
                                         attrs: { label: "Oferta" },
                                         model: {
-                                          value: _vm.newProvider.offer,
+                                          value: _vm.provider.offer,
                                           callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.newProvider,
-                                              "offer",
-                                              $$v
-                                            )
+                                            _vm.$set(_vm.provider, "offer", $$v)
                                           },
-                                          expression: "newProvider.offer"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "", sm6: "", md12: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: { label: "Direccion 1" },
-                                        model: {
-                                          value: _vm.newProvider.direccion1,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.newProvider,
-                                              "direccion1",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "newProvider.direccion1"
+                                          expression: "provider.offer"
                                         }
                                       })
                                     ],
@@ -70438,17 +70542,17 @@ var render = function() {
                                     { attrs: { xs12: "", sm6: "", md6: "" } },
                                     [
                                       _c("v-text-field", {
-                                        attrs: { label: "Direccion 2" },
+                                        attrs: { label: "Direccion Principal" },
                                         model: {
-                                          value: _vm.newProvider.direccion2,
+                                          value: _vm.provider.address1,
                                           callback: function($$v) {
                                             _vm.$set(
-                                              _vm.newProvider,
-                                              "direccion2",
+                                              _vm.provider,
+                                              "address1",
                                               $$v
                                             )
                                           },
-                                          expression: "newProvider.direccion2"
+                                          expression: "provider.address1"
                                         }
                                       })
                                     ],
@@ -70458,19 +70562,61 @@ var render = function() {
                                   _c(
                                     "v-flex",
                                     { attrs: { xs12: "", sm6: "", md6: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Direccion Secundaria"
+                                        },
+                                        model: {
+                                          value: _vm.provider.address2,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.provider,
+                                              "address2",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "provider.address2"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", sm6: "", md8: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Descripcion" },
+                                        model: {
+                                          value: _vm.provider.description,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.provider,
+                                              "description",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "provider.description"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", sm6: "", md4: "" } },
                                     [
                                       _c("v-text-field", {
                                         attrs: { label: "Ciudad" },
                                         model: {
-                                          value: _vm.newProvider.city,
+                                          value: _vm.provider.city,
                                           callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.newProvider,
-                                              "city",
-                                              $$v
-                                            )
+                                            _vm.$set(_vm.provider, "city", $$v)
                                           },
-                                          expression: "newProvider.city"
+                                          expression: "provider.city"
                                         }
                                       })
                                     ],
@@ -70484,15 +70630,15 @@ var render = function() {
                                       _c("v-text-field", {
                                         attrs: { label: "Balance" },
                                         model: {
-                                          value: _vm.newProvider.balance,
+                                          value: _vm.provider.balance,
                                           callback: function($$v) {
                                             _vm.$set(
-                                              _vm.newProvider,
+                                              _vm.provider,
                                               "balance",
                                               $$v
                                             )
                                           },
-                                          expression: "newProvider.balance"
+                                          expression: "provider.balance"
                                         }
                                       })
                                     ],
@@ -70506,15 +70652,11 @@ var render = function() {
                                       _c("v-text-field", {
                                         attrs: { label: "Debito" },
                                         model: {
-                                          value: _vm.newProvider.debit,
+                                          value: _vm.provider.debit,
                                           callback: function($$v) {
-                                            _vm.$set(
-                                              _vm.newProvider,
-                                              "debit",
-                                              $$v
-                                            )
+                                            _vm.$set(_vm.provider, "debit", $$v)
                                           },
-                                          expression: "newProvider.debit"
+                                          expression: "provider.debit"
                                         }
                                       })
                                     ],
@@ -70522,79 +70664,214 @@ var render = function() {
                                   ),
                                   _vm._v(" "),
                                   _c(
-                                    "v-btn",
-                                    {
-                                      attrs: {
-                                        absolute: "",
-                                        dark: "",
-                                        fab: "",
-                                        top: "",
-                                        right: "",
-                                        color: "pink"
-                                      }
-                                    },
-                                    [_c("v-icon", [_vm._v("add")])],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("legend", [_vm._v("Contactos")]),
-                                  _vm._v(" "),
-                                  _c(
                                     "v-flex",
-                                    { attrs: { xs12: "", sm6: "", md6: "" } },
+                                    { attrs: { xs12: "", sm12: "", md12: "" } },
                                     [
-                                      _c("v-text-field", {
-                                        attrs: { label: "Nombres" }
-                                      })
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: {
+                                            dark: "",
+                                            round: "",
+                                            color: "blue"
+                                          },
+                                          on: { click: _vm.addConactact }
+                                        },
+                                        [
+                                          _c("v-icon", [_vm._v("add")]),
+                                          _vm._v(
+                                            "\n                    Agregar Contacto \n                "
+                                          )
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   ),
                                   _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "", sm6: "", md6: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: { label: "Apellidos" }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "", sm6: "", md4: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: { label: "Cargo" }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "", sm6: "", md4: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: { label: "Email" }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "", sm6: "", md4: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: { label: "Telefono" }
-                                      })
-                                    ],
-                                    1
-                                  )
+                                  _vm._l(_vm.contacts, function(
+                                    contact,
+                                    index
+                                  ) {
+                                    return _c(
+                                      "v-layout",
+                                      { key: index, attrs: { wrap: "" } },
+                                      [
+                                        _c(
+                                          "v-flex",
+                                          {
+                                            attrs: {
+                                              xs12: "",
+                                              sm6: "",
+                                              md6: ""
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Nombres" },
+                                              model: {
+                                                value: contact.first_name,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    contact,
+                                                    "first_name",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "contact.first_name"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-flex",
+                                          {
+                                            attrs: {
+                                              xs12: "",
+                                              sm6: "",
+                                              md6: ""
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Apellidos" },
+                                              model: {
+                                                value: contact.last_name,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    contact,
+                                                    "last_name",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "contact.last_name"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-flex",
+                                          {
+                                            attrs: {
+                                              xs12: "",
+                                              sm6: "",
+                                              md6: ""
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Cargo" },
+                                              model: {
+                                                value: contact.position,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    contact,
+                                                    "position",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "contact.position"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-flex",
+                                          {
+                                            attrs: {
+                                              xs12: "",
+                                              sm6: "",
+                                              md3: ""
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Email" },
+                                              model: {
+                                                value: contact.email,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    contact,
+                                                    "email",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "contact.email"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-flex",
+                                          {
+                                            attrs: {
+                                              xs12: "",
+                                              sm6: "",
+                                              md3: ""
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Telefono" },
+                                              model: {
+                                                value: contact.phone,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    contact,
+                                                    "phone",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "contact.phone"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-layout",
+                                          {
+                                            attrs: {
+                                              row: "",
+                                              "justify-center": ""
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                attrs: { icon: "" },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.removeContact(index)
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("v-icon", [
+                                                  _vm._v("fa-trash")
+                                                ])
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  })
                                 ],
-                                1
+                                2
                               )
                             ],
                             1
@@ -70613,27 +70890,40 @@ var render = function() {
                         "v-btn",
                         {
                           attrs: { color: "blue darken-1", flat: "" },
-                          nativeOn: {
+                          on: {
                             click: function($event) {
-                              return _vm.close($event)
+                              _vm.dialog = false
                             }
                           }
                         },
                         [_vm._v("Cancelar")]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "blue darken-1", flat: "" },
-                          nativeOn: {
-                            click: function($event) {
-                              return _vm.save($event)
-                            }
-                          }
-                        },
-                        [_vm._v("Guardar")]
-                      )
+                      _vm.editedIndex === -1
+                        ? _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              on: {
+                                click: function($event) {
+                                  _vm.store()
+                                }
+                              }
+                            },
+                            [_vm._v("Guardar")]
+                          )
+                        : _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "blue darken-1", flat: "" },
+                              on: {
+                                click: function($event) {
+                                  _vm.update()
+                                }
+                              }
+                            },
+                            [_vm._v("Actualizar")]
+                          )
                     ],
                     1
                   )
@@ -70642,6 +70932,20 @@ var render = function() {
               )
             ],
             1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "mb-2",
+              attrs: { color: "primary", dark: "" },
+              on: {
+                click: function($event) {
+                  _vm.create()
+                }
+              }
+            },
+            [_vm._v("Nuevo")]
           )
         ],
         1
@@ -70840,6 +71144,21 @@ var render = function() {
                         attrs: { small: "" },
                         on: {
                           click: function($event) {
+                            _vm.show(props.item)
+                            props.expanded = !props.expanded
+                          }
+                        }
+                      },
+                      [_vm._v("\n                    toc\n                ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-icon",
+                      {
+                        staticClass: "mr-2",
+                        attrs: { small: "" },
+                        on: {
+                          click: function($event) {
                             _vm.editItem(props.item)
                           }
                         }
@@ -70853,7 +71172,7 @@ var render = function() {
                         attrs: { small: "" },
                         on: {
                           click: function($event) {
-                            _vm.deleteItem(props.item)
+                            _vm.destroy(props.item)
                           }
                         }
                       },
@@ -70862,6 +71181,45 @@ var render = function() {
                   ],
                   1
                 )
+              ]
+            }
+          },
+          {
+            key: "expand",
+            fn: function(props) {
+              return [
+                _vm.provider
+                  ? _c(
+                      "v-card",
+                      { attrs: { flat: "" } },
+                      [
+                        _c("v-card-text", [_vm._v(_vm._s(_vm.provider.name))]),
+                        _vm._v(" "),
+                        _c("v-card-text", [_vm._v(_vm._s(_vm.provider.offer))]),
+                        _vm._v(" "),
+                        _c("v-card-text", [
+                          _vm._v(_vm._s(_vm.provider.address1))
+                        ]),
+                        _vm._v(" "),
+                        _c("v-card-text", [
+                          _vm._v(_vm._s(_vm.provider.address2))
+                        ]),
+                        _vm._v(" "),
+                        _c("v-card-text", [
+                          _vm._v(_vm._s(_vm.provider.description))
+                        ]),
+                        _vm._v(" "),
+                        _c("v-card-text", [_vm._v(_vm._s(_vm.provider.city))]),
+                        _vm._v(" "),
+                        _c("v-card-text", [
+                          _vm._v(_vm._s(_vm.provider.balance))
+                        ]),
+                        _vm._v(" "),
+                        _c("v-card-text", [_vm._v(_vm._s(_vm.provider.debit))])
+                      ],
+                      1
+                    )
+                  : _vm._e()
               ]
             }
           }
@@ -70883,6 +71241,25 @@ var render = function() {
               expression: "page"
             }
           })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "text-xs-right" },
+        [
+          _c("v-flex", { attrs: { xs11: "", sm11: "", md11: "" } }, [
+            _vm._v(
+              "\n                 Mostrando " +
+                _vm._s(_vm.from) +
+                "-" +
+                _vm._s(_vm.to) +
+                " de " +
+                _vm._s(_vm.total) +
+                " registros \n            "
+            )
+          ])
         ],
         1
       ),
@@ -74366,7 +74743,7 @@ var render = function() {
                   _c(
                     "v-card-title",
                     [
-                      _vm._v("\r\n            Madera\r\n        "),
+                      _vm._v("\n            Madera\n        "),
                       _c("v-spacer"),
                       _vm._v(" "),
                       _c(
@@ -74742,7 +75119,7 @@ var render = function() {
                                                 [
                                                   _vm._v(
                                                     _vm._s(header.text) +
-                                                      "                                \r\n                            "
+                                                      "                                \n                            "
                                                   )
                                                 ]
                                               ),
@@ -74940,7 +75317,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\r\n                        toc\r\n                    "
+                                                "\n                        toc\n                    "
                                               )
                                             ]
                                           )
@@ -74993,9 +75370,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                '\r\n            Your search for "' +
+                                '\n            Your search for "' +
                                   _vm._s(_vm.search) +
-                                  '" found no results.\r\n        '
+                                  '" found no results.\n        '
                               )
                             ]
                           )
@@ -75022,7 +75399,7 @@ var render = function() {
                   _c(
                     "v-card-title",
                     [
-                      _vm._v("\r\n            Compra\r\n        "),
+                      _vm._v("\n            Compra\n        "),
                       _c("v-spacer"),
                       _vm._v(" "),
                       _c(
@@ -75213,7 +75590,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\r\n                        delete\r\n                    "
+                                          "\n                        delete\n                    "
                                         )
                                       ]
                                     )
@@ -75313,7 +75690,7 @@ var content = __webpack_require__(121);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("ca15cbf2", content, false, {});
+var update = __webpack_require__(3)("56ee7b34", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -75337,7 +75714,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.w-240 {\r\n  width: 240px;\n}\r\n", ""]);
+exports.push([module.i, "\n.w-240 {\n  width: 240px;\n}\n", ""]);
 
 // exports
 
@@ -75581,7 +75958,7 @@ var content = __webpack_require__(127);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("4cd5548a", content, false, {});
+var update = __webpack_require__(3)("52c48ab7", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -75802,7 +76179,7 @@ var content = __webpack_require__(131);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("54362aa0", content, false, {});
+var update = __webpack_require__(3)("62c3db20", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -76042,7 +76419,7 @@ var content = __webpack_require__(135);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("3671e204", content, false, {});
+var update = __webpack_require__(3)("7fc38c78", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -79429,7 +79806,7 @@ var content = __webpack_require__(234);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("58078a02", content, false, {});
+var update = __webpack_require__(3)("4a747008", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -80474,7 +80851,7 @@ var content = __webpack_require__(252);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("846ec39a", content, false, {});
+var update = __webpack_require__(3)("3efaf8ad", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -81376,7 +81753,7 @@ var content = __webpack_require__(266);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("2aa024ca", content, false, {});
+var update = __webpack_require__(3)("df334be4", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -81672,7 +82049,7 @@ var content = __webpack_require__(273);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("07f8dd2a", content, false, {});
+var update = __webpack_require__(3)("3d911797", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -81696,7 +82073,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.-nested-dsp-row-comp {\r\n  position: relative;\r\n  padding: 10px;\n}\n.-nested-dsp-row-close-btn {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 5px;\n}\r\n", ""]);
+exports.push([module.i, "\n.-nested-dsp-row-comp {\n  position: relative;\n  padding: 10px;\n}\n.-nested-dsp-row-close-btn {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n}\n", ""]);
 
 // exports
 
@@ -81982,7 +82359,7 @@ var content = __webpack_require__(281);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("f9504caa", content, false, {});
+var update = __webpack_require__(3)("7bfbe15e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -82006,7 +82383,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.-nested-comp-open-btn {\r\n  color: #fff !important;\r\n  background-color: #337ab7 !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.-nested-comp-open-btn {\n  color: #fff !important;\n  background-color: #337ab7 !important;\n}\n", ""]);
 
 // exports
 
@@ -82556,7 +82933,7 @@ var content = __webpack_require__(286);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("60892584", content, false, {});
+var update = __webpack_require__(3)("681764ab", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -82580,7 +82957,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\r\n  -webkit-appearance: searchfield-cancel-button;\r\n  cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\n  -webkit-appearance: searchfield-cancel-button;\n  cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -82822,7 +83199,7 @@ var content = __webpack_require__(291);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("6bfc1871", content, false, {});
+var update = __webpack_require__(3)("64a02024", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -82846,7 +83223,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\r\n  -webkit-appearance: searchfield-cancel-button;\r\n  cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\ninput[type=search]::-webkit-search-cancel-button {\n  -webkit-appearance: searchfield-cancel-button;\n  cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -83185,7 +83562,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       dialog: false,
       drawer: null,
-      items: [{ icon: 'dashboard', text: 'Inicio', link: '/' }, { icon: 'group', text: 'Almacenes', link: '/storage' }, { icon: 'group', text: 'Madera', link: '/lumber' }, { icon: 'group', text: 'Especies', link: '/specie' }, { icon: 'group', text: 'Proveedores', link: '/providers' }],
+      items: [{ icon: 'dashboard', text: 'Inicio', link: '/' }, { icon: 'store', text: 'Almacenes', link: '/storage' }, { icon: 'group_work', text: 'Madera', link: '/lumber' }, { icon: 'local_florist', text: 'Especies', link: '/specie' }, { icon: 'group', text: 'Proveedores', link: '/provider' }],
       menu: false,
       message: false
     };

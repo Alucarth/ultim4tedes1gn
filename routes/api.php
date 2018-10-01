@@ -12,8 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::resource('provider','ProviderController');
-Route::post('/getProviderData','ProviderController@getData');
+
 
 Route::group(['prefix' => 'auth'], function ($router) {
 
@@ -30,4 +29,5 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::resource('storage','StorageController');
     Route::resource('type','TypeController');
     Route::resource('purchase','PurchaseController');
+    Route::resource('provider','ProviderController');
 });
