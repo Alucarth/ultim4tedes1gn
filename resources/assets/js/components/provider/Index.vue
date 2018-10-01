@@ -108,26 +108,30 @@
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
                         <v-flex v-if="header.value!='actions'">
-                            <span>{{ header.text }}
-                            </span>
-                            <v-menu :close-on-content-click="false">
+                            <v-tooltip bottom>
+                                <span slot="activator">{{header.text}}</span>
+                                <span >{{header.input}}</span>
+                            </v-tooltip>
+                            <v-menu  v-model="header.menu" :close-on-content-click="false">
                                     <v-btn
                                         slot="activator"
                                         icon
                                         v-if="header.sortable!=false"
                                     >
-                                    <v-icon  small>fa-filter</v-icon>
+                                    <v-icon small :color="header.input!=''?'blue':'black'" >fa-filter</v-icon>
                                     </v-btn>
                                     <v-card  >
-                                        <v-text-field
-                                         outline
-                                         hide-details
-                                        v-model="header.input"
-                                        append-icon="search"
-                                        :label="`Buscar ${header.text}...`"                                       
-                                        @keydown.enter="search()"
-                                    ></v-text-field>
-                                    
+                                            <v-text-field
+                                                outline
+                                                hide-details
+                                                v-model="header.input"
+                                                append-icon="search"
+                                                :label="`Buscar ${header.text}...`"                                       
+                                                @keydown.enter="search()"
+                                                @keyup.delete="checkInput(header.input)"
+                                                @keyup.esc="header.menu=false"
+                                            ></v-text-field>
+                                       
                                     </v-card>
                             </v-menu>
                             <!-- <v-icon small @click="toggleOrder(header.value)" v-if="header.value == filterName ">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon> -->
@@ -216,16 +220,16 @@ export default {
         },
         headers: [
           
-          { text: 'Proveedor', value: 'name' ,input:''},
-        //   { text: 'Oferta', value: 'offer' },
-          { text: 'Nombres', value: 'first_name',input:''},
-          { text: 'Apellidos', value: 'last_name',input:''},
-          { text: 'Cargo', value: 'position',input:''},
-          { text: 'Email', value: 'email',input:''},
-          { text: 'Telefono', value: 'phone',input:''},
-          { text: 'Balance', value: 'balance',input:'', sortable: false},
-          { text: 'Debito', value: 'debit',input:'', sortable: false},
-          { text: 'Acciones',value:'actions',input:'',  sortable: false },
+          { text: 'Proveedor', value: 'name' ,input:'', menu:false },
+        //   { text: 'Oferta', value: 'offer' , menu:false },
+          { text: 'Nombres', value: 'first_name',input:'', menu:false },
+          { text: 'Apellidos', value: 'last_name',input:'', menu:false },
+          { text: 'Cargo', value: 'position',input:'', menu:false },
+          { text: 'Email', value: 'email',input:'', menu:false },
+          { text: 'Telefono', value: 'phone',input:'', menu:false },
+          { text: 'Balance', value: 'balance',input:'', sortable: false, menu:false },
+          { text: 'Debito', value: 'debit',input:'', sortable: false, menu:false },
+          { text: 'Acciones',value:'actions',input:'',  sortable: false , menu:false },
         ],
         providers: [],
         loading: true,
@@ -372,6 +376,13 @@ export default {
             });  
             this.search();
         }, 
+        checkInput(search)
+        {
+            if(search=='')
+            {
+                this.search();
+            }
+        }
 
 
     },
@@ -382,6 +393,10 @@ export default {
         formTitle () {
             return this.editedIndex === -1 ? 'Nuevo Proveedor' : 'Editar Proveedor'
         }
+        // menuTooltip(menu){
+        //     return !menu;
+        // }
+
     }
 }
 </script>
