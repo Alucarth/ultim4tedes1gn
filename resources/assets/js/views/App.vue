@@ -150,7 +150,7 @@
     <v-content>
       <!-- <lumber-index></lumber-index> -->
        <v-container fluid fill-height>
-          <v-layout column fill-height>
+          <v-layout fluid column fill-height>
             <router-view></router-view>            
           </v-layout>
         </v-container>

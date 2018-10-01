@@ -1,5 +1,5 @@
 <template>
-<v-container grid-list-xs>
+<v-container fluid grid-list-xs>
     <v-layout row wrap>
       <v-flex xs6>
     <v-card class="px-0">
@@ -79,6 +79,7 @@
         :headers="headers"
         :items="lumbers"        
         hide-actions
+        style="max-width: 100%"
         >
      <template slot="headers" slot-scope="props" >
            <tr>
@@ -122,7 +123,7 @@
                 <td class="text-xs-left" >{{ props.item.high }}</td>            
                 <td class="text-xs-left">{{ props.item.width }}</td>
                 <td class="text-xs-left">{{ props.item.density }}</td>      
-                <td class="justify-center layout px-0">
+                <!-- <td class="justify-center layout px-0">
                     <v-icon
                         small
                         class="mr-2"
@@ -130,7 +131,7 @@
                     >
                         toc
                     </v-icon>                    
-                </td>      
+                </td>       -->
             </tr>
         </template>
         <template slot="expand" slot-scope="props">
@@ -239,6 +240,9 @@
                 <v-text-field label="CEFO" v-model="purchase.cefo" hint="Ingrese codigo CEFO" required ></v-text-field>
             </v-flex>
             <v-flex xs12 sm4 md4>
+                <v-text-field label="Costo" v-model="purchase.amount" hint="Ingrese Costo Total" required ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm4 md4>
                  <v-menu
                     ref="menu2"
                     :close-on-content-click="false"                    
@@ -260,6 +264,10 @@
 
                 </v-menu>
             </v-flex>
+            <v-flex xs12 sm4 md8>
+                <v-text-field label="Descripcion" v-model="purchase.description" hint="description"></v-text-field>
+            </v-flex>
+            <br>
         <v-data-table        
         :headers="purchase_headers"
         :items="purchase_lumbers"
@@ -416,11 +424,12 @@ export default {
                 console.log(error);
             });            
         },
-        store () {            
+        store () {                        
             axios.post('/api/auth/purchase/', {purchase: this.purchase, lumbers: this.purchase_lumbers})
             .then(response => {                
                 //this.lumbers.push(response.data.lumber);
                 alert('Compra realizada');
+                this.$router.replace('/purchase');
             })
             .catch(error => {                
                 console.log(error);
@@ -467,7 +476,7 @@ export default {
             this.dialog = false;
         },
         addToPurchase(item) {            
-            item.quantity = 0;
+            item.quantity = '';
             this.purchase_lumbers.push(item);
         },
         removeFromPurchase(index) {

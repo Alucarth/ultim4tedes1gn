@@ -3,7 +3,7 @@
         <v-card-title>
             Compras de madera
         <v-spacer></v-spacer>       
-        <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
+        <v-btn to="/purchase/create" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
         <v-data-table
         :headers="headers"
@@ -75,7 +75,7 @@
             <!-- </tr> -->
         </template>
         <template slot="expand" slot-scope="props">
-            <v-card flat v-if="lumber">
+            <v-card flat v-if="purchase">
                 <table>
                     <tr>
                         <td> 
@@ -83,41 +83,41 @@
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.specie.name }}
+                                {{ purchase.cefo }}
                             </v-card-text>
                         </td>
                     </tr>
                     <tr>
                         <td> 
-                            Tipo
+                            Proveedor
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.type.name }}
+                                {{ purchase.provider.name }}
                             </v-card-text>
                         </td>
                     </tr>
                     <tr>
                         <td> 
-                            Alto
+                            Fecha
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.high }}
+                                {{ purchase.date }}
                             </v-card-text>
                         </td>                 
                     </tr>
                     <tr>
                         <td> 
-                            Ancho
+                            Costo
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.width }}
+                                {{ purchase.amount }}
                             </v-card-text>
                         </td>       
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td> 
                             Espesor
                         </td>
@@ -126,14 +126,14 @@
                                 {{ lumber.density }}
                             </v-card-text>
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td> 
                             Descripción 
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.description }}
+                                {{ purchase.description }}
                             </v-card-text>
                         </td>
                     </tr>
@@ -164,21 +164,16 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'Especie', value: 'specie' },
-            { text: 'Tipo', value: 'type' },
-            { text: 'Alto', value: 'high' },        
-            { text: 'Ancho', value: 'width' },
-            { text: 'Espesor', value: 'density' },            
-        ],
-        species: null,
-        types: null,
+            { text: 'CEFO', value: 'cefo' },
+            { text: 'Proveedor', value: 'provider' },
+            { text: 'Fecha', value: 'date' },        
+            { text: 'Precio', value: 'amount' },            
+        ],        
         lumbers: [],
-        lumber: null,
-        newLumber: null,
-        totalLumber: 0,        
-        loading: true,
-        filterName: 'high',
-        filterValue: '',   
+        purchases: null,
+        purchase: null,
+        totalPurchases: 0,        
+        loading: true,                
         dialog: false,
         editedIndex: -1,          
         last_page: 1,
@@ -193,19 +188,19 @@ export default {
     },
     mounted()
     {
-        this.search();
-        this.getSpecies();
-        this.getTypes();        
+        this.search();           
     },
     methods:{
         search() {
             return new Promise((resolve,reject)=>{   
-                this.getData('/api/auth/lumber',this.getParams()).then((data)=>{
-                    this.lumbers = data.data;                    
+                this.getData('/api/auth/purchase',this.getParams()).then((data)=>{
+                    console.log("after response");
+                    this.purchases = data.data;                    
+                    console.log(this.purchases);
                     this.last_page = data.last_page;
                     resolve();                    
                 });
-            });            
+            });
         },
         getParams () {
             let params={};
@@ -224,7 +219,7 @@ export default {
                         params:parameters
                     })
                     .then((response) => {
-                        this.loading = false;
+                        this.loading = false;                        
                         resolve(response.data);                        
                     });
             });
@@ -233,7 +228,7 @@ export default {
             this.page = page;
             this.search();
         },        
-        create() {                                    
+        create() {                            
             axios.get('/api/auth/lumber/create')            
             .then(response => {                                
                 this.newLumber = response.data.lumber                
@@ -256,9 +251,9 @@ export default {
             this.dialog = false;
         },
         show(item) {                        
-            axios.get(`/api/auth/lumber/${item.id}`)            
-            .then(response => {                
-                this.lumber = response.data.lumber
+            axios.get(`/api/auth/purchase/${item.id}`)
+            .then(response => {
+                this.purchase = response.data.purchase
             })
             .catch(error => {                
                 console.log(error);

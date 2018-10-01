@@ -16,7 +16,14 @@ class Purchase extends Model
     );
 
     /**
-     * Get the lumbers for the purchase post.
+     * Get the provider for the purchase.
+     */
+    public function provider() {
+        return $this->hasOne('App\Provider','id','provider_id');
+    }
+
+    /**
+     * Get the lumbers for the purchase.
      */
     public function lumbers()
     {
