@@ -1,86 +1,16 @@
 <template>
-<v-container grid-list-xs>
-    <v-layout row wrap>
-      <v-flex xs6>
-    <v-card class="px-0">
+    <v-card>
         <v-card-title>
-            Madera
-        <v-spacer></v-spacer>
-
-        <v-dialog v-model="dialog" max-width="500px">            
-            <v-card>
-            <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
-
-            <v-card-text v-if="newLumber">
-                <v-container grid-list-md>
-                 <v-layout wrap>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field label="Alto" hint="Ingrese el alto de la madera" required v-model="newLumber.high"></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field label="Ancho" hint="Ingrese el ancho de la madera" v-model="newLumber.width"></v-text-field>
-                    </v-flex>   
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field
-                        label="Densidad"
-                        hint="Ingrese la densidad de la madera"                  
-                        required
-                        v-model="newLumber.density"
-                        ></v-text-field>
-                    </v-flex>                          
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Tipo de madera"
-                        v-model="newLumber.type_id"
-                        :items="types"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion del tipo seleccionado`"
-                        persistent-hint>
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Especie"                
-                        v-model="newLumber.specie_id"  
-                        :items="species"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion de la madera seleccionada`"
-                        persistent-hint>                                
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs12>
-                        <v-text-field label="Descripción" v-model="newLumber.description" ></v-text-field>
-                    </v-flex>  
-                </v-layout>
-                </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">store</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>update</v-btn>                                
-            </v-card-actions>
-            </v-card>
-        </v-dialog>
-
-
+            Compras de madera
+        <v-spacer></v-spacer>       
         <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
-
-
-        <v-layout row wrap>
-<!-- // style="max-width: 100%" -->
-        <v-data-table 
+        <v-data-table
         :headers="headers"
-        :items="lumbers"        
+        :items="purchases"        
         hide-actions
         >
-     <template slot="headers" slot-scope="props" >
+        <template slot="headers" slot-scope="props" >
            <tr>
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
@@ -109,19 +39,17 @@
                                     ></v-text-field>
                                     
                                     </v-card>
-                            </v-menu>
-                            <!-- <v-icon small @click="toggleOrder(header.value)" v-if="header.value == filterName ">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon> -->
+                            </v-menu>                            
                         </v-flex>
                 </th>
            </tr>
         </template>
         <template slot="items"  slot-scope="props">
-            <tr @click="addToPurchase(props.item)">
-                <td class="text-xs-left">{{ props.item.specie.name }}</td>
-                <td class="text-xs-left">{{ props.item.type.name }}</td>      
-                <td class="text-xs-left" >{{ props.item.high }}</td>            
-                <td class="text-xs-left">{{ props.item.width }}</td>
-                <td class="text-xs-left">{{ props.item.density }}</td>      
+            <!-- <tr @click="props.expanded = !props.expanded"> -->
+                <td class="text-xs-left">{{ props.item.cefo }}</td>
+                <td class="text-xs-left">{{ props.item.provider.name }}</td>      
+                <td class="text-xs-left" >{{ props.item.date }}</td>            
+                <td class="text-xs-left">{{ props.item.amount }}</td>                
                 <td class="justify-center layout px-0">
                     <v-icon
                         small
@@ -129,16 +57,29 @@
                         @click="show(props.item);props.expanded = !props.expanded"
                     >
                         toc
-                    </v-icon>                    
+                    </v-icon>
+                    <v-icon
+                        small
+                        class="mr-2"
+                        @click="edit(props.item)"
+                    >
+                        edit
+                    </v-icon>
+                    <v-icon
+                        small
+                        @click="destroy(props.item)"
+                    >
+                        delete
+                    </v-icon>
                 </td>      
-            </tr>
+            <!-- </tr> -->
         </template>
         <template slot="expand" slot-scope="props">
             <v-card flat v-if="lumber">
                 <table>
                     <tr>
                         <td> 
-                            Especie
+                            CEFO
                         </td>
                         <td>
                             <v-card-text>
@@ -203,7 +144,7 @@
         <!-- <v-alert slot="no-results" :value="true" color="error" icon="warning">
             Your search for "{{ search }}" found no results.
         </v-alert> -->
-        </v-data-table>        
+        </v-data-table>
         <div class="text-xs-center">
             <v-pagination
             v-model="page"
@@ -212,83 +153,8 @@
              @input="next"
             ></v-pagination>
         </div> 
-        </v-layout>
-    </v-card>
-      </v-flex>
-      <v-flex xs6>
-    <v-card>
-        <v-card-title>
-            Compra
-        <v-spacer></v-spacer>
-        <v-btn @click="store();" color="primary" dark class="mb-2">Guardar</v-btn>
-        </v-card-title>
-        <v-layout row wrap>
-            <v-flex xs12 sm4 md4 v-if="providers">                
-                <v-select                  
-                        label="Proveedor"
-                        v-model="purchase.provider_id"
-                        :items="providers"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion del tipo seleccionado`"
-                        persistent-hint>
-                        </v-select>
-
-            </v-flex>
-            <v-flex xs12 sm4 md4>
-                <v-text-field label="CEFO" v-model="purchase.cefo" hint="Ingrese codigo CEFO" required ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm4 md4>
-                 <v-menu
-                    ref="menu2"
-                    :close-on-content-click="false"                    
-                    :nudge-right="40"
-                    :return-value.sync="date"
-                    lazy
-                    transition="scale-transition"
-                    offset-y
-                    full-width
-                    min-width="290px"
-                >
-                    <v-text-field
-                    slot="activator"
-                    v-model="purchase.date"
-                    label="Fecha"          
-                    readonly
-                    ></v-text-field>
-                    <v-date-picker v-model="purchase.date" @input="$refs.menu2.save(date)"></v-date-picker>
-
-                </v-menu>
-            </v-flex>
-        <v-data-table        
-        :headers="purchase_headers"
-        :items="purchase_lumbers"
-         hide-actions        
-        >
-        <template slot="items"  slot-scope="props">
-            <!-- <tr @click="props.expanded = !props.expanded"> -->
-                <td class="text-xs-left">{{ props.item.specie.name+'-'+props.item.type.name }}</td>
-                <td class="text-xs-left" >{{ props.item.high+'X'+props.item.width+'X'+props.item.density }}</td>                                                            
-                <td class="text-xs-left">
-                    <v-text-field label="Cantidad" v-model="props.item.quantity" hint="Ingrese cantidad" required></v-text-field>
-                </td>
-                <td class="justify-center layout px-0">                    
-                    <v-icon
-                        small
-                        @click="removeFromPurchase(props.index)"
-                    >
-                        delete
-                    </v-icon>
-                </td>      
-            <!-- </tr> -->
-        </template>               
-        </v-data-table>        
         
-        </v-layout>
     </v-card>
-      </v-flex>
-    </v-layout>
-</v-container>    
 </template>
 <script>
 export default {
@@ -302,17 +168,11 @@ export default {
             { text: 'Tipo', value: 'type' },
             { text: 'Alto', value: 'high' },        
             { text: 'Ancho', value: 'width' },
-            { text: 'Espesor', value: 'density' },             
-        ],
-        purchase_headers: [
-            { text: 'Madera', value: 'Madera' },
-            { text: 'Medida', value: 'Madera' },
-            { text: 'Cantidad', value: 'Madera' },            
+            { text: 'Espesor', value: 'density' },            
         ],
         species: null,
         types: null,
         lumbers: [],
-        purchase_lumbers: [],
         lumber: null,
         newLumber: null,
         totalLumber: 0,        
@@ -321,14 +181,9 @@ export default {
         filterValue: '',   
         dialog: false,
         editedIndex: -1,          
-        date : null,
         last_page: 1,
         page: 1,    
         paginationRows: 10,
-        providers: [],
-        purchase: null,
-        pivot: null,
-        pl: [],
       }
     },
     computed: {
@@ -339,11 +194,8 @@ export default {
     mounted()
     {
         this.search();
-        this.create();
         this.getSpecies();
-        this.getTypes();
-        this.getProviders();
-        
+        this.getTypes();        
     },
     methods:{
         search() {
@@ -380,51 +232,28 @@ export default {
         next(page){
             this.page = page;
             this.search();
-        }, 
-        toggleOrder (index) {
-            this.pagination.sortBy = this.headers[index].value
-            this.pagination.descending = !this.pagination.descending
-             
-            
-        },
-        setFilter(filterName){
-            this.filterValue='',
-            this.filterName = filterName;
-        },
-        createLumber() {                                    
+        },        
+        create() {                                    
             axios.get('/api/auth/lumber/create')            
-            .then(response => {                
-                console.log(response.data.lumber);
-                this.newLumber = response.data.lumber;                
+            .then(response => {                                
+                this.newLumber = response.data.lumber                
             })
             .catch(error => {                
                 console.log(error);
             });
             this.dialog = true;
         },
-        storeLumber(){
-
-        },
-        create () {
-            axios.get('/api/auth/purchase/create')            
-            .then(response => {                
-                console.log(response.data.pivot);
-                this.purchase = response.data.purchase;                
-                this.pivot = response.data.pivot;
-            })
-            .catch(error => {                
-                console.log(error);
-            });            
-        },
-        store () {            
-            axios.post('/api/auth/purchase/', {purchase: this.purchase, lumbers: this.purchase_lumbers})
+        store(){
+            let index = -1;
+            axios.post('/api/auth/lumber/', this.newLumber)
             .then(response => {                
                 //this.lumbers.push(response.data.lumber);
-                alert('Compra realizada');
+                alert('dato creado');
             })
             .catch(error => {                
                 console.log(error);
-            });            
+            });
+            this.dialog = false;
         },
         show(item) {                        
             axios.get(`/api/auth/lumber/${item.id}`)            
@@ -434,7 +263,49 @@ export default {
             .catch(error => {                
                 console.log(error);
             });
-        },        
+        },
+        edit (item) {
+            this.editedIndex = this.lumbers.indexOf(item)
+            //this.editedItem = Object.assign({}, item)
+            axios.get(`/api/auth/lumber/${item.id}/edit`)            
+            .then(response => {                
+                this.newLumber = response.data.lumber
+            })
+            .catch(error => {                
+                console.log(error);
+            });
+            
+            this.dialog = true
+        },
+        update (item) {                        
+            let index = this.editedIndex;            
+            axios.put(`/api/auth/lumber/${this.newLumber.id}`, this.newLumber)            
+            .then(response => {                
+                this.lumbers[index].high = response.data.lumber.high;
+                this.lumbers[index].width = response.data.lumber.width;
+                this.lumbers[index].density = response.data.lumber.density;
+                this.lumbers[index].specie = response.data.lumber.specie;
+                this.lumbers[index].type = response.data.lumber.type;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+            this.dialog =false;
+            //this.getLumber();
+        },
+        destroy (item) {
+            let success_delete = false;
+            axios.delete(`/api/auth/lumber/${item.id}`)
+            .then(function (response) {
+                console.log(response.data.lumber_id);                   
+                success_delete = true;
+            })
+            .catch(function (error) {
+                console.log(error);                
+            });                                    
+            this.getLumber();
+            
+        },
         getSpecies (){
             axios.get('/api/auth/specie')
             .then(response => {
@@ -453,27 +324,10 @@ export default {
                 console.log(error);
             });
         },
-        getProviders () {
-            axios.get('/api/provider')
-            .then(response => {
-                console.log(response.data.data);
-                this.providers = response.data.data
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        },
         close() {
             this.dialog = false;
-        },
-        addToPurchase(item) {            
-            item.quantity = 0;
-            this.purchase_lumbers.push(item);
-        },
-        removeFromPurchase(index) {
-            this.purchase_lumbers.splice(index, 1);
         }
         
-    }
+    },    
 }
 </script>
