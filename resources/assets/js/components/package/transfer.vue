@@ -1,17 +1,26 @@
 <template>
-    <v-card>
+<v-container fluid grid-list-xs>
+    <v-layout row wrap>
+      <v-flex xs6>
+    <v-card class="px-0">
         <v-card-title>
-            Paquetes de madera
-        <v-spacer></v-spacer>       
-        <!-- <v-btn to="/package/transfer" color="primary" dark class="mb-2">Transferencias</v-btn> -->
-        <v-btn to="/package/create" color="primary" dark class="mb-2">Nuevo</v-btn>
+            Transferencia de Almacenes
+        <v-spacer></v-spacer>
+
+
+        <v-btn to="/package/create" color="primary" dark class="mb-2">Nuevo empaquetado</v-btn>
         </v-card-title>
-        <v-data-table
+
+
+        <v-layout row wrap>
+
+        <v-data-table 
         :headers="headers"
         :items="packages"        
         hide-actions
+        style="max-width: 100%"
         >
-        <template slot="headers" slot-scope="props" >
+     <template slot="headers" slot-scope="props" >
            <tr>
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
@@ -46,68 +55,65 @@
            </tr>
         </template>
         <template slot="items"  slot-scope="props">
-            <!-- <tr @click="props.expanded = !props.expanded"> -->
+            <tr @click="addToTransfer(props.item)">
                 <td class="text-xs-left">{{ props.item.code }}</td>
                 <td class="text-xs-left">{{ props.item.name }}</td>      
-                <td class="text-xs-left" >{{ props.item.storage.name }}</td>                           
-                <td class="justify-center layout px-0">
+                <td class="text-xs-left" >{{ props.item.storage.name }}</td>                            
+                <!-- <td class="justify-center layout px-0">
                     <v-icon
                         small
                         class="mr-2"
                         @click="show(props.item);props.expanded = !props.expanded"
                     >
                         toc
-                    </v-icon>
-                    <v-icon
-                        small
-                        class="mr-2"
-                        @click="edit(props.item)"
-                    >
-                        edit
-                    </v-icon>
-                    <v-icon
-                        small
-                        @click="destroy(props.item)"
-                    >
-                        delete
-                    </v-icon>
-                </td>      
-            <!-- </tr> -->
+                    </v-icon>                    
+                </td>       -->
+            </tr>
         </template>
         <template slot="expand" slot-scope="props">
-            <v-card flat v-if="packaged">
+            <!-- <v-card flat v-if="transfer">
                 <table>
                     <tr>
                         <td> 
-                            C&oacute;digo
+                            Especie
                         </td>
                         <td>
                             <v-card-text>
-                                {{ packaged.code }}
+                                {{ lumber.specie.name }}
                             </v-card-text>
                         </td>
                     </tr>
                     <tr>
                         <td> 
-                            Nombre
+                            Tipo
                         </td>
                         <td>
                             <v-card-text>
-                                {{ packaged.name }}
+                                {{ lumber.type.name }}
                             </v-card-text>
                         </td>
                     </tr>
                     <tr>
                         <td> 
-                            Fecha
+                            Alto
                         </td>
                         <td>
                             <v-card-text>
-                                {{ packaged.storage.name }}
+                                {{ lumber.high }}
                             </v-card-text>
                         </td>                 
-                    </tr>                   
-                    <!-- <tr>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Ancho
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.width }}
+                            </v-card-text>
+                        </td>       
+                    </tr>
+                    <tr>
                         <td> 
                             Espesor
                         </td>
@@ -116,15 +122,25 @@
                                 {{ lumber.density }}
                             </v-card-text>
                         </td>
-                    </tr> -->                    
+                    </tr>
+                    <tr>
+                        <td> 
+                            Descripción 
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ lumber.description }}
+                            </v-card-text>
+                        </td>
+                    </tr>
                 </table>                                
-            </v-card>
+            </v-card> -->
         </template>
 
         <!-- <v-alert slot="no-results" :value="true" color="error" icon="warning">
             Your search for "{{ search }}" found no results.
         </v-alert> -->
-        </v-data-table>
+        </v-data-table>        
         <div class="text-xs-center">
             <v-pagination
             v-model="page"
@@ -133,8 +149,63 @@
              @input="next"
             ></v-pagination>
         </div> 
-        
+        </v-layout>
     </v-card>
+      </v-flex>
+      <v-flex xs6>
+    <v-card>
+        <v-card-title>
+            A transferir
+        <v-spacer></v-spacer>
+        <v-btn @click="store();" color="primary" dark class="mb-2">Guardar</v-btn>
+        </v-card-title>
+        <v-layout row wrap>
+            <v-flex xs12 sm4 md4>
+                <v-text-field label="Codigo" v-model="transfer.code" hint="Ingrese codigo paquete" required ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm4 md4>
+                <v-text-field label="Nombre" v-model="transfer.storage_destination_id" hint="Ingrese nomre de paquete" required ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm4 md4 v-if="storages">                
+                <v-select                  
+                        label="Almacen"
+                        v-model="packaged.storage_id"
+                        :items="storages"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion del tipo seleccionado`"
+                        persistent-hint>
+                        </v-select>
+
+            </v-flex>                                    
+            <br>
+        <v-data-table        
+        :headers="transfer_headers"
+        :items="transfer_packages"
+         hide-actions
+        >
+        <template slot="items"  slot-scope="props">
+            <!-- <tr @click="props.expanded = !props.expanded"> -->
+                <td class="text-xs-left">{{ props.item.code }}</td>
+                <td class="text-xs-left">{{ props.item.name }}</td>      
+                <td class="text-xs-left" >{{ props.item.storage.name }}</td>
+                <td class="justify-center layout px-0">                    
+                    <v-icon
+                        small
+                        @click="removeFromPackage(props.index)"
+                    >
+                        delete
+                    </v-icon>
+                </td>      
+            <!-- </tr> -->
+        </template>               
+        </v-data-table>        
+        
+        </v-layout>
+    </v-card>
+      </v-flex>
+    </v-layout>
+</v-container>    
 </template>
 <script>
 export default {
@@ -146,18 +217,25 @@ export default {
         headers: [          
             { text: 'Codigo', value: 'code' },
             { text: 'Nombre', value: 'name' },
-            { text: 'Paquete', value: 'package' },
+            { text: 'Almacen', value: 'storage' },
+        ],
+        transfer_headers: [
+            { text: 'Codigo', value: 'code' },
+            { text: 'Nombre', value: 'name' },
+            { text: 'Almacen', value: 'storage' },            
         ],        
         packages: [],
-        storages: [],
-        packaged: null,
-        totalPackages: 0,        
-        loading: true,                
+        transfer_packages: [],    
+        transfer: null,    
+        totalPackage: 0,        
+        loading: true,        
         dialog: false,
-        editedIndex: -1,          
+        editedIndex: -1,                  
         last_page: 1,
         page: 1,    
         paginationRows: 10,
+        storages: [],
+        pivot: null,        
       }
     },
     computed: {
@@ -167,18 +245,20 @@ export default {
     },
     mounted()
     {
-        this.search();           
+        this.search();
+        this.create();        
+        this.getStorages();
+        
     },
     methods:{
         search() {
             return new Promise((resolve,reject)=>{   
                 this.getData('/api/auth/package',this.getParams()).then((data)=>{
-                    console.log("after response");
-                    this.packages = data.data;                                        
+                    this.lumbers = data.data;                    
                     this.last_page = data.last_page;
                     resolve();                    
                 });
-            });
+            });            
         },
         getParams () {
             let params={};
@@ -197,7 +277,7 @@ export default {
                         params:parameters
                     })
                     .then((response) => {
-                        this.loading = false;                        
+                        this.loading = false;
                         resolve(response.data);                        
                     });
             });
@@ -205,80 +285,59 @@ export default {
         next(page){
             this.page = page;
             this.search();
-        },        
-        create() {                            
-            axios.get('/api/auth/lumber/create')            
+        }, 
+        toggleOrder (index) {
+            this.pagination.sortBy = this.headers[index].value
+            this.pagination.descending = !this.pagination.descending
+             
+            
+        },
+        setFilter(filterName){package_transaction
+            this.filterValue='',
+            this.filterName = filterName;
+        },
+        createLumber() {                                    
+            axios.get('/api/auth/package/transfer')
             .then(response => {                                
-                this.newLumber = response.data.lumber                
+                this.transfer = response.data.transfer;
             })
             .catch(error => {                
                 console.log(error);
             });
             this.dialog = true;
         },
-        store(){
-            let index = -1;
-            axios.post('/api/auth/lumber/', this.newLumber)
-            .then(response => {                
-                //this.lumbers.push(response.data.lumber);
-                alert('dato creado');
-            })
-            .catch(error => {                
-                console.log(error);
-            });
-            this.dialog = false;
+        storeLumber(){
+
         },
-        show(item) {                        
-            axios.get(`/api/auth/purchase/${item.id}`)
-            .then(response => {
-                this.purchase = response.data.purchase
+        create () {
+            console.log('creating');
+            axios.get('/api/auth/package_transaction/create')
+            .then(response => {                        
+                this.transfer = response.data.transfer;
             })
             .catch(error => {                
                 console.log(error);
             });
         },
-        edit (item) {
-            this.editedIndex = this.lumbers.indexOf(item)
-            //this.editedItem = Object.assign({}, item)
-            axios.get(`/api/auth/lumber/${item.id}/edit`)            
-            .then(response => {                
-                this.newLumber = response.data.lumber
+        store () {                        
+            axios.post('/api/auth/package/', {package: this.packaged, lumbers: this.package_lumbers})
+            .then(response => {                                
+                alert('Madera empaquetada');
+                this.$router.replace('/package');
             })
             .catch(error => {                
-                console.log(error);
-            });
-            
-            this.dialog = true
-        },
-        update (item) {                        
-            let index = this.editedIndex;            
-            axios.put(`/api/auth/lumber/${this.newLumber.id}`, this.newLumber)            
-            .then(response => {                
-                this.lumbers[index].high = response.data.lumber.high;
-                this.lumbers[index].width = response.data.lumber.width;
-                this.lumbers[index].density = response.data.lumber.density;
-                this.lumbers[index].specie = response.data.lumber.specie;
-                this.lumbers[index].type = response.data.lumber.type;
-            })
-            .catch(function (error) {
                 console.log(error);
             });            
-            this.dialog =false;
-            //this.getLumber();
         },
-        destroy (item) {
-            let success_delete = false;
-            axios.delete(`/api/auth/lumber/${item.id}`)
-            .then(function (response) {
-                console.log(response.data.lumber_id);                   
-                success_delete = true;
+        show(item) {                        
+            axios.get(`/api/auth/lumber/${item.id}`)            
+            .then(response => {                
+                this.lumber = response.data.lumber
             })
-            .catch(function (error) {
-                console.log(error);                
-            });                                    
-            this.getLumber();
-            
-        },
+            .catch(error => {                
+                console.log(error);
+            });
+        },        
         getSpecies (){
             axios.get('/api/auth/specie')
             .then(response => {
@@ -297,10 +356,27 @@ export default {
                 console.log(error);
             });
         },
+        getStorages () {
+            axios.get('/api/auth/storage')
+            .then(response => {
+                console.log(response.data.data);
+                this.storages = response.data.storages
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
         close() {
             this.dialog = false;
+        },
+        addToPackage(item) {            
+            item.quantity = '';
+            this.package_lumbers.push(item);
+        },
+        removeFromPackage(index) {
+            this.pacakge_lumbers.splice(index, 1);
         }
         
-    },    
+    }
 }
 </script>

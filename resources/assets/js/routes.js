@@ -10,6 +10,7 @@ import Purchase from './components/purchase/index.vue';
 import EditPurchase from './components/purchase/edit.vue';
 import Package from './components/package/index.vue';
 import EditPackage from './components/package/edit.vue';
+import TransferPackage from './components/package/transfer.vue';
 
    
    export const routes= [
@@ -58,7 +59,7 @@ import EditPackage from './components/package/edit.vue';
             path: '/storage',
             name: 'Storage'    ,
             component: Storage,
-        },
+        },        
         {
             path: '/purchase',
             name: 'Purchase',
@@ -78,6 +79,11 @@ import EditPackage from './components/package/edit.vue';
             path: '/package/create',
             name: 'packageEdit',
             component: EditPackage,
+        },
+        {
+            path: '/package/transfer',
+            name: 'packageTransfer',
+            component: TransferPackage,
         },
         
     ];
