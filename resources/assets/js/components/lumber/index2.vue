@@ -3,7 +3,15 @@
         <v-card-title>
             Madera
         <v-spacer></v-spacer>
-
+         <v-flex xs1 sm1 md1>
+                <v-combobox
+                v-model="paginationRows"
+                :items="pagination_select"
+                label="Mostrar Registros"
+                @change="search()"
+                ></v-combobox>
+                
+        </v-flex>
         <v-dialog v-model="dialog" max-width="500px">            
             <v-card>
             <v-card-title>
@@ -80,18 +88,20 @@
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
                         <v-flex v-if="header.value!='actions'">
-                            <span>{{ header.text }}
-                            </span>
-                            <v-menu 
+                             <v-tooltip bottom>
+                                <span slot="activator">{{header.text}}</span>
+                                <span >{{header.input}}</span>
+                            </v-tooltip>
+                            <v-menu
+                                    v-model="header.menu"
                                     :close-on-content-click="false"
                                     >
                                     <v-btn
                                         slot="activator"
                                         icon
-                                   
                                         v-if="header.sortable!=false"
                                     >
-                                    <v-icon  small>fa-filter</v-icon>
+                                    <v-icon :color="header.input!=''?'blue':'black'" small>fa-filter</v-icon>
                                     </v-btn>
                                     <v-card  >
                                         <v-text-field
@@ -101,6 +111,8 @@
                                         append-icon="search"
                                         :label="`Buscar ${header.text}...`"                                       
                                         @keydown.enter="search()"
+                                        @keyup.delete="checkInput(header.input)"
+                                        @keyup.esc="header.menu=false"
                                     ></v-text-field>
                                     
                                     </v-card>
@@ -146,7 +158,7 @@
                 <table>
                     <tr>
                         <td> 
-                            Especie
+                            Especie:
                         </td>
                         <td>
                             <v-card-text>
@@ -156,7 +168,7 @@
                     </tr>
                     <tr>
                         <td> 
-                            Tipo
+                            Tipo:
                         </td>
                         <td>
                             <v-card-text>
@@ -166,7 +178,7 @@
                     </tr>
                     <tr>
                         <td> 
-                            Alto
+                            Alto:
                         </td>
                         <td>
                             <v-card-text>
@@ -176,7 +188,7 @@
                     </tr>
                     <tr>
                         <td> 
-                            Ancho
+                            Ancho:
                         </td>
                         <td>
                             <v-card-text>
@@ -186,7 +198,7 @@
                     </tr>
                     <tr>
                         <td> 
-                            Espesor
+                            Espesor:
                         </td>
                         <td>
                             <v-card-text>
@@ -196,7 +208,7 @@
                     </tr>
                     <tr>
                         <td> 
-                            Descripción 
+                            Descripción:
                         </td>
                         <td>
                             <v-card-text>
@@ -220,6 +232,13 @@
              @input="next"
             ></v-pagination>
         </div> 
+        <div class="text-xs-right">
+            
+            <v-flex xs11 sm11 md11>
+                Mostrando {{from}}-{{to}} de {{total}} registros 
+            </v-flex>
+
+        </div>
         
     </v-card>
 </template>
@@ -231,11 +250,11 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'Especie', value: 'specie' },
-            { text: 'Tipo', value: 'type' },
-            { text: 'Alto', value: 'high' },        
-            { text: 'Ancho', value: 'width' },
-            { text: 'Espesor', value: 'density' },            
+            { text: 'Especie', value: 'specie' ,input:'', menu:false},
+            { text: 'Tipo', value: 'type' ,input:'', menu:false},
+            { text: 'Alto', value: 'high' ,input:'', menu:false},        
+            { text: 'Ancho', value: 'width' ,input:'', menu:false},
+            { text: 'Espesor', value: 'density' ,input:'', menu:false},            
         ],
         species: null,
         types: null,
@@ -251,6 +270,10 @@ export default {
         last_page: 1,
         page: 1,    
         paginationRows: 10,
+         total:0,
+        from:0,
+        to:0,     
+        pagination_select:[10,20,30]
       }
     },
     computed: {
@@ -270,6 +293,9 @@ export default {
                 this.getData('/api/auth/lumber',this.getParams()).then((data)=>{
                     this.lumbers = data.data;                    
                     this.last_page = data.last_page;
+                    this.total = data.total;
+                    this.from = data.from;
+                    this.to = data.to;
                     resolve();                    
                 });
             });            
@@ -393,6 +419,13 @@ export default {
         },
         close() {
             this.dialog = false;
+        }, 
+        checkInput(search)
+        {
+            if(search=='')
+            {
+                this.search();
+            }
         }
         
     },    

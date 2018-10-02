@@ -29,13 +29,13 @@ class LumberController extends Controller
         $type = $request->type ?? null;
 
         if ($high) {
-            array_push($lumber_conditions, ['high','like',"%{$high}%"]);
+            array_push($lumber_conditions, ['high','=',"{$high}"]);
         }
         if ($width) {
-            array_push($lumber_conditions, ['width','like',"%{$width}%"]);
+            array_push($lumber_conditions, ['width','=',"{$width}"]);
         }
         if ($density) {
-            array_push($lumber_conditions, ['density','like',"%{$density}%"]);
+            array_push($lumber_conditions, ['density','=',"{$density}"]);
         }
         if ($description) {
             array_push($lumber_conditions, ['description','like',"%{$description}%"]);
