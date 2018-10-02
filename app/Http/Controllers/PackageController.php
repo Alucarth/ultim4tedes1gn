@@ -132,4 +132,8 @@ class PackageController extends Controller
     {
         //
     }
+
+    public function createTransfer(Request $request) {
+        return 123;
+    }
 }

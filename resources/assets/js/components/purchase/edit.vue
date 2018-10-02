@@ -1,7 +1,7 @@
 <template>
-<v-container fluid grid-list-xs>
+<v-container fluid grid-list-md>
     <v-layout row wrap>
-      <v-flex xs6>
+      <v-flex xs12 md6 lg6>
     <v-card class="px-0">
         <v-card-title>
             Madera
@@ -216,7 +216,7 @@
         </v-layout>
     </v-card>
       </v-flex>
-      <v-flex xs6>
+      <v-flex xs12 md6 lg6>
     <v-card>
         <v-card-title>
             Compra

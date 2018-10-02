@@ -24,7 +24,13 @@ class PackageTransactionController extends Controller
      */
     public function create()
     {
-        //
+        $transfer = new PackageTransaction();
+
+        $data = [
+            'transfer'  =>  'transfer'
+        ];
+
+        return response()->json($data);
     }
 
     /**

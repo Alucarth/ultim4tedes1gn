@@ -16,7 +16,7 @@
 
         <v-data-table 
         :headers="headers"
-        :items="packges"        
+        :items="packages"        
         hide-actions
         style="max-width: 100%"
         >
@@ -180,17 +180,15 @@
             </v-flex>                                    
             <br>
         <v-data-table        
-        :headers="package_headers"
-        :items="package_lumbers"
-         hide-actions        
+        :headers="transfer_headers"
+        :items="transfer_packages"
+         hide-actions
         >
         <template slot="items"  slot-scope="props">
             <!-- <tr @click="props.expanded = !props.expanded"> -->
-                <td class="text-xs-left">{{ props.item.specie.name+'-'+props.item.type.name }}</td>
-                <td class="text-xs-left" >{{ props.item.high+'X'+props.item.width+'X'+props.item.density }}</td>                                                            
-                <td class="text-xs-left">
-                    <v-text-field label="Cantidad" v-model="props.item.quantity" hint="Ingrese cantidad" required></v-text-field>
-                </td>
+                <td class="text-xs-left">{{ props.item.code }}</td>
+                <td class="text-xs-left">{{ props.item.name }}</td>      
+                <td class="text-xs-left" >{{ props.item.storage.name }}</td>
                 <td class="justify-center layout px-0">                    
                     <v-icon
                         small
@@ -217,35 +215,27 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'Especie', value: 'specie' },
-            { text: 'Tipo', value: 'type' },
-            { text: 'Alto', value: 'high' },        
-            { text: 'Ancho', value: 'width' },
-            { text: 'Espesor', value: 'density' },             
+            { text: 'Codigo', value: 'code' },
+            { text: 'Nombre', value: 'name' },
+            { text: 'Almacen', value: 'storage' },
         ],
-        package_headers: [
-            { text: 'Madera', value: 'Madera' },
-            { text: 'Medida', value: 'Madera' },
-            { text: 'Cantidad', value: 'Madera' },            
-        ],
-        species: null,
-        types: null,
-        lumbers: [],
-        package_lumbers: [],
-        lumber: null,
-        newLumber: null,
-        totalLumber: 0,        
+        transfer_headers: [
+            { text: 'Codigo', value: 'code' },
+            { text: 'Nombre', value: 'name' },
+            { text: 'Almacen', value: 'storage' },            
+        ],        
+        packages: [],
+        transfer_packages: [],    
+        transfer: null,    
+        totalPackage: 0,        
         loading: true,        
         dialog: false,
-        editedIndex: -1,          
-        date : null,
+        editedIndex: -1,                  
         last_page: 1,
         page: 1,    
         paginationRows: 10,
         storages: [],
-        packaged: null,
-        pivot: null,
-        pl: [],
+        pivot: null,        
       }
     },
     computed: {
@@ -256,16 +246,14 @@ export default {
     mounted()
     {
         this.search();
-        this.create();
-        this.getSpecies();
-        this.getTypes();
+        this.create();        
         this.getStorages();
         
     },
     methods:{
         search() {
             return new Promise((resolve,reject)=>{   
-                this.getData('/api/auth/lumber',this.getParams()).then((data)=>{
+                this.getData('/api/auth/package',this.getParams()).then((data)=>{
                     this.lumbers = data.data;                    
                     this.last_page = data.last_page;
                     resolve();                    
@@ -304,15 +292,14 @@ export default {
              
             
         },
-        setFilter(filterName){
+        setFilter(filterName){package_transaction
             this.filterValue='',
             this.filterName = filterName;
         },
         createLumber() {                                    
-            axios.get('/api/auth/lumber/create')            
-            .then(response => {                
-                console.log(response.data.lumber);
-                this.newLumber = response.data.lumber;                
+            axios.get('/api/auth/package/transfer')
+            .then(response => {                                
+                this.transfer = response.data.transfer;
             })
             .catch(error => {                
                 console.log(error);
@@ -324,11 +311,9 @@ export default {
         },
         create () {
             console.log('creating');
-            axios.get('/api/auth/package/create')            
-            .then(response => {                
-                console.log(response.data.pivot);
-                this.packaged = response.data.package;
-                this.pivot = response.data.pivot;
+            axios.get('/api/auth/package_transaction/create')
+            .then(response => {                        
+                this.transfer = response.data.transfer;
             })
             .catch(error => {                
                 console.log(error);
