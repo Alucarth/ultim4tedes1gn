@@ -172,6 +172,8 @@
         { icon: 'group', text: 'Especies' , link: '/specie' },
         { icon: 'group', text: 'Proveedores' , link: '/provider' },  
         { icon: 'money', text: 'Compra de madera', link: '/purchase' },
+        { icon: 'view_agenda', text: 'Paquetes', link: '/package' },
+
       ],
       menu: false, 
       message: false,
