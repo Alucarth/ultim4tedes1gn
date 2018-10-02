@@ -463,7 +463,7 @@ export default {
             });
         },
         getProviders () {
-            axios.get('/api/provider')
+            axios.get('/api/auth/provider')
             .then(response => {
                 console.log(response.data.data);
                 this.providers = response.data.data

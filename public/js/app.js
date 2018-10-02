@@ -75718,7 +75718,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getProviders: function getProviders() {
             var _this9 = this;
 
-            axios.get('/api/provider').then(function (response) {
+            axios.get('/api/auth/provider').then(function (response) {
                 console.log(response.data.data);
                 _this9.providers = response.data.data;
             }).catch(function (error) {
