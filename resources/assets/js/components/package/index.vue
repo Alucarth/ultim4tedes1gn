@@ -1,13 +1,13 @@
 <template>
     <v-card>
         <v-card-title>
-            Compras de madera
+            Paquetes de madera
         <v-spacer></v-spacer>       
-        <v-btn to="/purchase/create" color="primary" dark class="mb-2">Nuevo</v-btn>
+        <v-btn to="/package/create" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
         <v-data-table
         :headers="headers"
-        :items="purchases"        
+        :items="packages"        
         hide-actions
         >
         <template slot="headers" slot-scope="props" >
@@ -46,10 +46,9 @@
         </template>
         <template slot="items"  slot-scope="props">
             <!-- <tr @click="props.expanded = !props.expanded"> -->
-                <td class="text-xs-left">{{ props.item.cefo }}</td>
-                <td class="text-xs-left">{{ props.item.provider.name }}</td>      
-                <td class="text-xs-left" >{{ props.item.date }}</td>            
-                <td class="text-xs-left">{{ props.item.amount }}</td>                
+                <td class="text-xs-left">{{ props.item.code }}</td>
+                <td class="text-xs-left">{{ props.item.name }}</td>      
+                <td class="text-xs-left" >{{ props.item.storage.name }}</td>                           
                 <td class="justify-center layout px-0">
                     <v-icon
                         small
@@ -75,25 +74,25 @@
             <!-- </tr> -->
         </template>
         <template slot="expand" slot-scope="props">
-            <v-card flat v-if="purchase">
+            <v-card flat v-if="packaged">
                 <table>
                     <tr>
                         <td> 
-                            CEFO
+                            C&oacute;digo
                         </td>
                         <td>
                             <v-card-text>
-                                {{ purchase.cefo }}
+                                {{ packaged.code }}
                             </v-card-text>
                         </td>
                     </tr>
                     <tr>
                         <td> 
-                            Proveedor
+                            Nombre
                         </td>
                         <td>
                             <v-card-text>
-                                {{ purchase.provider.name }}
+                                {{ packaged.name }}
                             </v-card-text>
                         </td>
                     </tr>
@@ -103,20 +102,10 @@
                         </td>
                         <td>
                             <v-card-text>
-                                {{ purchase.date }}
+                                {{ packaged.storage.name }}
                             </v-card-text>
                         </td>                 
-                    </tr>
-                    <tr>
-                        <td> 
-                            Costo
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ purchase.amount }}
-                            </v-card-text>
-                        </td>       
-                    </tr>
+                    </tr>                   
                     <!-- <tr>
                         <td> 
                             Espesor
@@ -126,17 +115,7 @@
                                 {{ lumber.density }}
                             </v-card-text>
                         </td>
-                    </tr> -->
-                    <tr>
-                        <td> 
-                            Descripción 
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ purchase.description }}
-                            </v-card-text>
-                        </td>
-                    </tr>
+                    </tr> -->                    
                 </table>                                
             </v-card>
         </template>
@@ -164,15 +143,14 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'CEFO', value: 'cefo' },
-            { text: 'Proveedor', value: 'provider' },
-            { text: 'Fecha', value: 'date' },        
-            { text: 'Precio', value: 'amount' },            
+            { text: 'Codigo', value: 'code' },
+            { text: 'Nombre', value: 'name' },
+            { text: 'Paquete', value: 'package' },
         ],        
-        lumbers: [],
-        purchases: null,
-        purchase: null,
-        totalPurchases: 0,        
+        packages: [],
+        storages: [],
+        packaged: null,
+        totalPackages: 0,        
         loading: true,                
         dialog: false,
         editedIndex: -1,          
@@ -193,10 +171,9 @@ export default {
     methods:{
         search() {
             return new Promise((resolve,reject)=>{   
-                this.getData('/api/auth/purchase',this.getParams()).then((data)=>{
+                this.getData('/api/auth/package',this.getParams()).then((data)=>{
                     console.log("after response");
-                    this.purchases = data.data;                    
-                    console.log(this.purchases);
+                    this.packages = data.data;                                        
                     this.last_page = data.last_page;
                     resolve();                    
                 });

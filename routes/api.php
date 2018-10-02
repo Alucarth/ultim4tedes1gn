@@ -29,5 +29,6 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::resource('storage','StorageController');
     Route::resource('type','TypeController');
     Route::resource('purchase','PurchaseController');
+    Route::resource('package','PackageController');
     Route::resource('provider','ProviderController');
 });
