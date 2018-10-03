@@ -88,7 +88,7 @@
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
                         <v-flex v-if="header.value!='actions'">
-                             <v-tooltip bottom>
+                            <v-tooltip bottom>
                                 <span slot="activator">{{header.text}}</span>
                                 <span >{{header.input}}</span>
                             </v-tooltip>
