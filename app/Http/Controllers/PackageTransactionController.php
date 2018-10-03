@@ -27,7 +27,7 @@ class PackageTransactionController extends Controller
         $transfer = new PackageTransaction();
 
         $data = [
-            'transfer'  =>  'transfer'
+            'transfer'  => $transfer
         ];
 
         return response()->json($data);
@@ -40,8 +40,20 @@ class PackageTransactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {                
+        $number = $request->transfer['number'];
+        $destination = $request->transfer['storage_destination_id'];
+        foreach($request->packages as $package){
+            $transfer = new PackageTransaction();
+            $transfer->number = $number;
+            $transfer->storage_destination_id = $destination;
+            $transfer->date = date('Y-m-d');
+            $transfer->description = "";
+            $transfer->package_id = $package['id'];
+            $transfer->storage_origin_id = $package['storage_id'];
+            $transfer->save();            
+        }
+        return 200;
     }
 
     /**

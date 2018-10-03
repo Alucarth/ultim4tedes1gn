@@ -74068,7 +74068,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("p", [_vm._v("home XD")])
+  return _c("p", [_vm._v("home David y Nadia")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -78070,7 +78070,7 @@ var render = function() {
       _c(
         "v-card-title",
         [
-          _vm._v("\n            Almacenes\n        "),
+          _vm._v("\n        Almacenes\n    "),
           _c("v-spacer"),
           _vm._v(" "),
           _c(
@@ -78233,6 +78233,15 @@ var render = function() {
             "v-btn",
             {
               staticClass: "mb-2",
+              attrs: { to: "/package/transfer", color: "primary", dark: "" }
+            },
+            [_vm._v("Transferencias")]
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "mb-2",
               attrs: { color: "primary", dark: "" },
               on: {
                 click: function($event) {
@@ -78287,7 +78296,7 @@ var render = function() {
                                 [
                                   _vm._v(
                                     _vm._s(header.text) +
-                                      "                                \n                            "
+                                      "                                \n                        "
                                   )
                                 ]
                               ),
@@ -78420,11 +78429,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                        toc\n                    "
-                          )
-                        ]
+                        [_vm._v("\n                    toc\n                ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -78438,11 +78443,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                        edit\n                    "
-                          )
-                        ]
+                        [_vm._v("\n                    edit\n                ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -78457,7 +78458,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        delete\n                    "
+                            "\n                    delete\n                "
                           )
                         ]
                       )
@@ -78504,9 +78505,9 @@ var render = function() {
             },
             [
               _vm._v(
-                '\n            Your search for "' +
+                '\n        Your search for "' +
                   _vm._s(_vm.search) +
-                  '" found no results.\n        '
+                  '" found no results.\n    '
               )
             ]
           )
@@ -83182,7 +83183,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -83213,8 +83213,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        this.search();
         this.create();
+        this.search();
         this.getStorages();
     },
 
@@ -83224,7 +83224,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             return new Promise(function (resolve, reject) {
                 _this.getData('/api/auth/package', _this.getParams()).then(function (data) {
-                    _this.lumbers = data.data;
+                    console.log("");
+                    console.log(data.data);
+                    _this.packages = data.data;
                     _this.last_page = data.last_page;
                     resolve();
                 });
@@ -83289,9 +83291,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         store: function store() {
             var _this5 = this;
 
-            axios.post('/api/auth/package/', { package: this.packaged, lumbers: this.package_lumbers }).then(function (response) {
+            axios.post('/api/auth/package_transaction/', { transfer: this.transfer, packages: this.transfer_packages }).then(function (response) {
                 alert('Madera empaquetada');
-                _this5.$router.replace('/package');
+                _this5.$router.replace('/storage');
             }).catch(function (error) {
                 console.log(error);
             });
@@ -83328,7 +83330,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('/api/auth/storage').then(function (response) {
                 console.log(response.data.data);
-                _this9.storages = response.data.storages;
+                _this9.storages = response.data;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -83336,12 +83338,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         close: function close() {
             this.dialog = false;
         },
-        addToPackage: function addToPackage(item) {
+        addToTransfer: function addToTransfer(item) {
             item.quantity = '';
-            this.package_lumbers.push(item);
+            this.transfer_packages.push(item);
         },
-        removeFromPackage: function removeFromPackage(index) {
-            this.pacakge_lumbers.splice(index, 1);
+        removeFromTransfer: function removeFromTransfer(index) {
+            this.transfer_packages.splice(index, 1);
         }
     }
 });
@@ -83655,11 +83657,11 @@ var render = function() {
                               required: ""
                             },
                             model: {
-                              value: _vm.transfer.code,
+                              value: _vm.transfer.number,
                               callback: function($$v) {
-                                _vm.$set(_vm.transfer, "code", $$v)
+                                _vm.$set(_vm.transfer, "number", $$v)
                               },
-                              expression: "transfer.code"
+                              expression: "transfer.number"
                             }
                           })
                         ],
@@ -83672,20 +83674,15 @@ var render = function() {
                         [
                           _c("v-text-field", {
                             attrs: {
-                              label: "Nombre",
-                              hint: "Ingrese nomre de paquete",
-                              required: ""
+                              label: "Description",
+                              hint: "Ingrese descripcion"
                             },
                             model: {
-                              value: _vm.transfer.storage_destination_id,
+                              value: _vm.transfer.description,
                               callback: function($$v) {
-                                _vm.$set(
-                                  _vm.transfer,
-                                  "storage_destination_id",
-                                  $$v
-                                )
+                                _vm.$set(_vm.transfer, "description", $$v)
                               },
-                              expression: "transfer.storage_destination_id"
+                              expression: "transfer.description"
                             }
                           })
                         ],
@@ -83707,11 +83704,15 @@ var render = function() {
                                   "persistent-hint": ""
                                 },
                                 model: {
-                                  value: _vm.packaged.storage_id,
+                                  value: _vm.transfer.storage_destination_id,
                                   callback: function($$v) {
-                                    _vm.$set(_vm.packaged, "storage_id", $$v)
+                                    _vm.$set(
+                                      _vm.transfer,
+                                      "storage_destination_id",
+                                      $$v
+                                    )
                                   },
-                                  expression: "packaged.storage_id"
+                                  expression: "transfer.storage_destination_id"
                                 }
                               })
                             ],
@@ -83754,7 +83755,7 @@ var render = function() {
                                         attrs: { small: "" },
                                         on: {
                                           click: function($event) {
-                                            _vm.removeFromPackage(props.index)
+                                            _vm.removeFromTransfer(props.index)
                                           }
                                         }
                                       },

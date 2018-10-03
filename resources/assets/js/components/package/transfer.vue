@@ -161,22 +161,21 @@
         </v-card-title>
         <v-layout row wrap>
             <v-flex xs12 sm4 md4>
-                <v-text-field label="Codigo" v-model="transfer.code" hint="Ingrese codigo paquete" required ></v-text-field>
+                <v-text-field label="Codigo" v-model="transfer.number" hint="Ingrese codigo paquete" required ></v-text-field>
             </v-flex>
             <v-flex xs12 sm4 md4>
-                <v-text-field label="Nombre" v-model="transfer.storage_destination_id" hint="Ingrese nomre de paquete" required ></v-text-field>
+                <v-text-field label="Description" v-model="transfer.description" hint="Ingrese descripcion"></v-text-field>
             </v-flex>
             <v-flex xs12 sm4 md4 v-if="storages">                
                 <v-select                  
-                        label="Almacen"
-                        v-model="packaged.storage_id"
-                        :items="storages"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion del tipo seleccionado`"
-                        persistent-hint>
-                        </v-select>
-
+                    label="Almacen"
+                    v-model="transfer.storage_destination_id"
+                    :items="storages"
+                    item-text="name"
+                    item-value="id"
+                    :hint="`Descripcion del tipo seleccionado`"
+                    persistent-hint>
+                    </v-select>
             </v-flex>                                    
             <br>
         <v-data-table        
@@ -192,7 +191,7 @@
                 <td class="justify-center layout px-0">                    
                     <v-icon
                         small
-                        @click="removeFromPackage(props.index)"
+                        @click="removeFromTransfer(props.index)"
                     >
                         delete
                     </v-icon>
@@ -245,8 +244,8 @@ export default {
     },
     mounted()
     {
-        this.search();
         this.create();        
+        this.search();        
         this.getStorages();
         
     },
@@ -254,7 +253,9 @@ export default {
         search() {
             return new Promise((resolve,reject)=>{   
                 this.getData('/api/auth/package',this.getParams()).then((data)=>{
-                    this.lumbers = data.data;                    
+                    console.log("");
+                    console.log(data.data);
+                    this.packages = data.data;
                     this.last_page = data.last_page;
                     resolve();                    
                 });
@@ -320,10 +321,10 @@ export default {
             });
         },
         store () {                        
-            axios.post('/api/auth/package/', {package: this.packaged, lumbers: this.package_lumbers})
+            axios.post('/api/auth/package_transaction/', {transfer: this.transfer, packages: this.transfer_packages})
             .then(response => {                                
                 alert('Madera empaquetada');
-                this.$router.replace('/package');
+                this.$router.replace('/storage');
             })
             .catch(error => {                
                 console.log(error);
@@ -360,7 +361,7 @@ export default {
             axios.get('/api/auth/storage')
             .then(response => {
                 console.log(response.data.data);
-                this.storages = response.data.storages
+                this.storages = response.data
             })
             .catch(error => {
                 console.log(error);
@@ -369,12 +370,12 @@ export default {
         close() {
             this.dialog = false;
         },
-        addToPackage(item) {            
+        addToTransfer(item) {            
             item.quantity = '';
-            this.package_lumbers.push(item);
+            this.transfer_packages.push(item);
         },
-        removeFromPackage(index) {
-            this.pacakge_lumbers.splice(index, 1);
+        removeFromTransfer(index) {
+            this.transfer_packages.splice(index, 1);
         }
         
     }
