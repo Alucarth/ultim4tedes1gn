@@ -71,10 +71,7 @@
 
         <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
-
-
-        <v-layout row wrap>
-<!-- // style="max-width: 100%" -->
+    
         <v-data-table 
         :headers="headers"
         :items="lumbers"        
@@ -86,9 +83,11 @@
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
                         <v-flex v-if="header.value!='actions'">
-                            <span>{{ header.text }}
-                            </span>
-                            <v-menu 
+                            <v-tooltip bottom>
+                                <span slot="activator">{{header.text}}</span>
+                                <span >{{header.input}}</span>
+                            </v-tooltip>
+                            <v-menu  v-model="header.menu"
                                     :close-on-content-click="false"
                                     >
                                     <v-btn
@@ -97,7 +96,7 @@
                                    
                                         v-if="header.sortable!=false"
                                     >
-                                    <v-icon  small>fa-filter</v-icon>
+                                    <v-icon :color="header.input!=''?'blue':'black'" small>fa-filter</v-icon>
                                     </v-btn>
                                     <v-card  >
                                         <v-text-field
@@ -107,6 +106,8 @@
                                         append-icon="search"
                                         :label="`Buscar ${header.text}...`"                                       
                                         @keydown.enter="search()"
+                                        @keyup.delete="checkInput(header.input)"
+                                        @keyup.esc="header.menu=false"
                                     ></v-text-field>
                                     
                                     </v-card>
@@ -209,11 +210,18 @@
             <v-pagination
             v-model="page"
             :length="last_page"
-            :total-visible="10"
+            :total-visible="5"
              @input="next"
             ></v-pagination>
+        </div>
+        <div class="text-xs-right">
+            
+            <v-flex xs11 sm11 md11>
+                Mostrando {{from}}-{{to}} de {{total}} registros 
+            </v-flex>
+
         </div> 
-        </v-layout>
+      
     </v-card>
       </v-flex>
       <v-flex xs12 md6 lg6>
@@ -223,7 +231,8 @@
         <v-spacer></v-spacer>
         <v-btn @click="store();" color="primary" dark class="mb-2">Guardar</v-btn>
         </v-card-title>
-        <v-layout row wrap>
+        <v-container grid-list-md>
+        <v-layout wrap>
             <v-flex xs12 sm4 md4 v-if="providers">                
                 <v-select                  
                         label="Proveedor"
@@ -267,32 +276,45 @@
             <v-flex xs12 sm4 md8>
                 <v-text-field label="Descripcion" v-model="purchase.description" hint="description"></v-text-field>
             </v-flex>
-            <br>
-        <v-data-table        
-        :headers="purchase_headers"
-        :items="purchase_lumbers"
-         hide-actions        
-        >
-        <template slot="items"  slot-scope="props">
-            <!-- <tr @click="props.expanded = !props.expanded"> -->
-                <td class="text-xs-left">{{ props.item.specie.name+'-'+props.item.type.name }}</td>
-                <td class="text-xs-left" >{{ props.item.high+'X'+props.item.width+'X'+props.item.density }}</td>                                                            
-                <td class="text-xs-left">
-                    <v-text-field label="Cantidad" v-model="props.item.quantity" hint="Ingrese cantidad" required></v-text-field>
-                </td>
-                <td class="justify-center layout px-0">                    
-                    <v-icon
-                        small
-                        @click="removeFromPurchase(props.index)"
+            <v-flex xs12 sm12 md12>
+                 <v-data-table        
+                    :headers="purchase_headers"
+                    :items="purchase_lumbers"
+                    hide-actions        
                     >
-                        delete
-                    </v-icon>
-                </td>      
-            <!-- </tr> -->
-        </template>               
-        </v-data-table>        
+                    <template slot="items"  slot-scope="props">
+                        <!-- <tr @click="props.expanded = !props.expanded"> -->
+                            <td class="text-xs-left">{{ props.item.specie.name+'-'+props.item.type.name }}</td>
+                            <td class="text-xs-left" >{{ props.item.high+'X'+props.item.width+'X'+props.item.density }}</td>                                                            
+                            <td class="text-xs-left">
+                                <v-layout wrap>
+                                    <v-flex xs12 sm10 md10>
+                                    <v-text-field label="Cantidad" v-model="props.item.quantity" hint="Ingrese cantidad" required></v-text-field>
+                                    </v-flex>
+                                    
+
+                                </v-layout>
+                                
+                            </td>
+                            <td >
+                                <v-flex xs12 sm4 md4>
+                                        <v-icon
+                                        small
+                                        @click="removeFromPurchase(props.index)"
+                                    >
+                                        delete
+                                    </v-icon>
+                                    </v-flex>
+                            </td>
+                              
+                        <!-- </tr> -->
+                    </template>               
+                </v-data-table>     
+            </v-flex>
+        </v-layout>  
+        </v-container>  
         
-        </v-layout>
+      
     </v-card>
       </v-flex>
     </v-layout>
@@ -306,16 +328,16 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'Especie', value: 'specie' },
-            { text: 'Tipo', value: 'type' },
-            { text: 'Alto', value: 'high' },        
-            { text: 'Ancho', value: 'width' },
-            { text: 'Espesor', value: 'density' },             
+            { text: 'Especie', value: 'specie' ,input:'', menu:false},
+            { text: 'Tipo', value: 'type' ,input:'', menu:false},
+            { text: 'Alto', value: 'high' ,input:'', menu:false},        
+            { text: 'Ancho', value: 'width' ,input:'', menu:false},
+            { text: 'Espesor', value: 'density' ,input:'', menu:false},            
         ],
         purchase_headers: [
             { text: 'Madera', value: 'Madera' },
             { text: 'Medida', value: 'Madera' },
-            { text: 'Cantidad', value: 'Madera' },            
+            { text: 'Cantidad', value: 'Madera' },                 
         ],
         species: null,
         types: null,
@@ -330,9 +352,13 @@ export default {
         dialog: false,
         editedIndex: -1,          
         date : null,
-        last_page: 1,
+         last_page: 1,
         page: 1,    
         paginationRows: 10,
+         total:0,
+        from:0,
+        to:0,     
+        pagination_select:[10,20,30],
         providers: [],
         purchase: null,
         pivot: null,
@@ -359,6 +385,9 @@ export default {
                 this.getData('/api/auth/lumber',this.getParams()).then((data)=>{
                     this.lumbers = data.data;                    
                     this.last_page = data.last_page;
+                    this.total = data.total;
+                    this.from = data.from;
+                    this.to = data.to;
                     resolve();                    
                 });
             });            
@@ -481,6 +510,13 @@ export default {
         },
         removeFromPurchase(index) {
             this.purchase_lumbers.splice(index, 1);
+        },
+        checkInput(search)
+        {
+            if(search=='')
+            {
+                this.search();
+            }
         }
         
     }
