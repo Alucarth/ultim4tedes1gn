@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PackageTransaction;
+use App\Package;
 use Illuminate\Http\Request;
 
 class PackageTransactionController extends Controller
@@ -52,6 +53,10 @@ class PackageTransactionController extends Controller
             $transfer->package_id = $package['id'];
             $transfer->storage_origin_id = $package['storage_id'];
             $transfer->save();            
+
+            $package = Package::find($transfer->package_id);
+            $package->storage_id = $destination;
+            $package->save();
         }
         return 200;
     }
