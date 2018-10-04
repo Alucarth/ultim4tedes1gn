@@ -323,6 +323,7 @@ export default {
             axios.post('api/auth/provider', parameters)
             .then(response => {                
                 console.log(response.data);
+                
             })
             .catch(function (error) {
                 console.log(error);
@@ -337,6 +338,7 @@ export default {
             .then(response => {
                 this.providers[this.editedIndex] = response.data.provider;
                 this.providers[this.editedIndex].contacts = response.data.provider.contacts;
+                this.showSuccessMsg();
             })
             .catch(function (error) {
                 console.log(error);
@@ -393,7 +395,6 @@ export default {
         formTitle () {
             return this.editedIndex === -1 ? 'Nuevo Proveedor' : 'Editar Proveedor'
         }
-<<<<<<< HEAD
     },
     notifications: {
         showSuccessMsg: {
@@ -416,12 +417,6 @@ export default {
         title: 'Wow-wow',
         message: 'That\'s the error'
         }
-=======
-        // menuTooltip(menu){
-        //     return !menu;
-        // }
-
->>>>>>> 541725fa7711563d72f44aed6c417de7edcfd51b
     }
 }
 </script>
