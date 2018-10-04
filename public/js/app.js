@@ -41245,6 +41245,7 @@ if (token) {
 
       LazyWrapper.prototype[methodName + 'Right'] = function(n) {
         return this.reverse()[methodName](n).reverse();
+<<<<<<< HEAD
       };
     });
 
@@ -41282,6 +41283,45 @@ if (token) {
       };
     });
 
+=======
+      };
+    });
+
+    // Add `LazyWrapper` methods that accept an `iteratee` value.
+    arrayEach(['filter', 'map', 'takeWhile'], function(methodName, index) {
+      var type = index + 1,
+          isFilter = type == LAZY_FILTER_FLAG || type == LAZY_WHILE_FLAG;
+
+      LazyWrapper.prototype[methodName] = function(iteratee) {
+        var result = this.clone();
+        result.__iteratees__.push({
+          'iteratee': getIteratee(iteratee, 3),
+          'type': type
+        });
+        result.__filtered__ = result.__filtered__ || isFilter;
+        return result;
+      };
+    });
+
+    // Add `LazyWrapper` methods for `_.head` and `_.last`.
+    arrayEach(['head', 'last'], function(methodName, index) {
+      var takeName = 'take' + (index ? 'Right' : '');
+
+      LazyWrapper.prototype[methodName] = function() {
+        return this[takeName](1).value()[0];
+      };
+    });
+
+    // Add `LazyWrapper` methods for `_.initial` and `_.tail`.
+    arrayEach(['initial', 'tail'], function(methodName, index) {
+      var dropName = 'drop' + (index ? '' : 'Right');
+
+      LazyWrapper.prototype[methodName] = function() {
+        return this.__filtered__ ? new LazyWrapper(this) : this[dropName](1);
+      };
+    });
+
+>>>>>>> upstream/master
     LazyWrapper.prototype.compact = function() {
       return this.filter(identity);
     };
@@ -41657,6 +41697,100 @@ __webpack_require__(73)
 /***/ }),
 /* 64 */
 /***/ (function(module, exports) {
+<<<<<<< HEAD
+
+/* ========================================================================
+ * Bootstrap: button.js v3.3.7
+ * http://getbootstrap.com/javascript/#buttons
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // BUTTON PUBLIC CLASS DEFINITION
+  // ==============================
+
+  var Button = function (element, options) {
+    this.$element  = $(element)
+    this.options   = $.extend({}, Button.DEFAULTS, options)
+    this.isLoading = false
+  }
+
+  Button.VERSION  = '3.3.7'
+
+  Button.DEFAULTS = {
+    loadingText: 'loading...'
+  }
+
+  Button.prototype.setState = function (state) {
+    var d    = 'disabled'
+    var $el  = this.$element
+    var val  = $el.is('input') ? 'val' : 'html'
+    var data = $el.data()
+
+    state += 'Text'
+
+    if (data.resetText == null) $el.data('resetText', $el[val]())
+
+    // push to event loop to allow forms to submit
+    setTimeout($.proxy(function () {
+      $el[val](data[state] == null ? this.options[state] : data[state])
+
+      if (state == 'loadingText') {
+        this.isLoading = true
+        $el.addClass(d).attr(d, d).prop(d, true)
+      } else if (this.isLoading) {
+        this.isLoading = false
+        $el.removeClass(d).removeAttr(d).prop(d, false)
+      }
+    }, this), 0)
+  }
+
+  Button.prototype.toggle = function () {
+    var changed = true
+    var $parent = this.$element.closest('[data-toggle="buttons"]')
+
+    if ($parent.length) {
+      var $input = this.$element.find('input')
+      if ($input.prop('type') == 'radio') {
+        if ($input.prop('checked')) changed = false
+        $parent.find('.active').removeClass('active')
+        this.$element.addClass('active')
+      } else if ($input.prop('type') == 'checkbox') {
+        if (($input.prop('checked')) !== this.$element.hasClass('active')) changed = false
+        this.$element.toggleClass('active')
+      }
+      $input.prop('checked', this.$element.hasClass('active'))
+      if (changed) $input.trigger('change')
+    } else {
+      this.$element.attr('aria-pressed', !this.$element.hasClass('active'))
+      this.$element.toggleClass('active')
+    }
+  }
+
+
+  // BUTTON PLUGIN DEFINITION
+  // ========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.button')
+      var options = typeof option == 'object' && option
+
+      if (!data) $this.data('bs.button', (data = new Button(this, options)))
+
+      if (option == 'toggle') data.toggle()
+      else if (option) data.setState(option)
+    })
+  }
+
+  var old = $.fn.button
+=======
 
 /* ========================================================================
  * Bootstrap: button.js v3.3.7
@@ -41752,7 +41886,12 @@ __webpack_require__(73)
 
   $.fn.button             = Plugin
   $.fn.button.Constructor = Button
+>>>>>>> upstream/master
 
+  $.fn.button             = Plugin
+  $.fn.button.Constructor = Button
+
+<<<<<<< HEAD
 
   // BUTTON NO CONFLICT
   // ==================
@@ -41982,8 +42121,242 @@ __webpack_require__(73)
 
   $.fn.carousel             = Plugin
   $.fn.carousel.Constructor = Carousel
+=======
+  // BUTTON NO CONFLICT
+  // ==================
+
+  $.fn.button.noConflict = function () {
+    $.fn.button = old
+    return this
+  }
 
 
+  // BUTTON DATA-API
+  // ===============
+
+  $(document)
+    .on('click.bs.button.data-api', '[data-toggle^="button"]', function (e) {
+      var $btn = $(e.target).closest('.btn')
+      Plugin.call($btn, 'toggle')
+      if (!($(e.target).is('input[type="radio"], input[type="checkbox"]'))) {
+        // Prevent double click on radios, and the double selections (so cancellation) on checkboxes
+        e.preventDefault()
+        // The target component still receive the focus
+        if ($btn.is('input,button')) $btn.trigger('focus')
+        else $btn.find('input:visible,button:visible').first().trigger('focus')
+      }
+    })
+    .on('focus.bs.button.data-api blur.bs.button.data-api', '[data-toggle^="button"]', function (e) {
+      $(e.target).closest('.btn').toggleClass('focus', /^focus(in)?$/.test(e.type))
+    })
+
+}(jQuery);
+
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports) {
+
+/* ========================================================================
+ * Bootstrap: carousel.js v3.3.7
+ * http://getbootstrap.com/javascript/#carousel
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CAROUSEL CLASS DEFINITION
+  // =========================
+
+  var Carousel = function (element, options) {
+    this.$element    = $(element)
+    this.$indicators = this.$element.find('.carousel-indicators')
+    this.options     = options
+    this.paused      = null
+    this.sliding     = null
+    this.interval    = null
+    this.$active     = null
+    this.$items      = null
+
+    this.options.keyboard && this.$element.on('keydown.bs.carousel', $.proxy(this.keydown, this))
+
+    this.options.pause == 'hover' && !('ontouchstart' in document.documentElement) && this.$element
+      .on('mouseenter.bs.carousel', $.proxy(this.pause, this))
+      .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
+  }
+
+  Carousel.VERSION  = '3.3.7'
+
+  Carousel.TRANSITION_DURATION = 600
+
+  Carousel.DEFAULTS = {
+    interval: 5000,
+    pause: 'hover',
+    wrap: true,
+    keyboard: true
+  }
+
+  Carousel.prototype.keydown = function (e) {
+    if (/input|textarea/i.test(e.target.tagName)) return
+    switch (e.which) {
+      case 37: this.prev(); break
+      case 39: this.next(); break
+      default: return
+    }
+
+    e.preventDefault()
+  }
+
+  Carousel.prototype.cycle = function (e) {
+    e || (this.paused = false)
+
+    this.interval && clearInterval(this.interval)
+
+    this.options.interval
+      && !this.paused
+      && (this.interval = setInterval($.proxy(this.next, this), this.options.interval))
+
+    return this
+  }
+
+  Carousel.prototype.getItemIndex = function (item) {
+    this.$items = item.parent().children('.item')
+    return this.$items.index(item || this.$active)
+  }
+
+  Carousel.prototype.getItemForDirection = function (direction, active) {
+    var activeIndex = this.getItemIndex(active)
+    var willWrap = (direction == 'prev' && activeIndex === 0)
+                || (direction == 'next' && activeIndex == (this.$items.length - 1))
+    if (willWrap && !this.options.wrap) return active
+    var delta = direction == 'prev' ? -1 : 1
+    var itemIndex = (activeIndex + delta) % this.$items.length
+    return this.$items.eq(itemIndex)
+  }
+
+  Carousel.prototype.to = function (pos) {
+    var that        = this
+    var activeIndex = this.getItemIndex(this.$active = this.$element.find('.item.active'))
+
+    if (pos > (this.$items.length - 1) || pos < 0) return
+
+    if (this.sliding)       return this.$element.one('slid.bs.carousel', function () { that.to(pos) }) // yes, "slid"
+    if (activeIndex == pos) return this.pause().cycle()
+
+    return this.slide(pos > activeIndex ? 'next' : 'prev', this.$items.eq(pos))
+  }
+
+  Carousel.prototype.pause = function (e) {
+    e || (this.paused = true)
+
+    if (this.$element.find('.next, .prev').length && $.support.transition) {
+      this.$element.trigger($.support.transition.end)
+      this.cycle(true)
+    }
+
+    this.interval = clearInterval(this.interval)
+
+    return this
+  }
+
+  Carousel.prototype.next = function () {
+    if (this.sliding) return
+    return this.slide('next')
+  }
+
+  Carousel.prototype.prev = function () {
+    if (this.sliding) return
+    return this.slide('prev')
+  }
+
+  Carousel.prototype.slide = function (type, next) {
+    var $active   = this.$element.find('.item.active')
+    var $next     = next || this.getItemForDirection(type, $active)
+    var isCycling = this.interval
+    var direction = type == 'next' ? 'left' : 'right'
+    var that      = this
+
+    if ($next.hasClass('active')) return (this.sliding = false)
+
+    var relatedTarget = $next[0]
+    var slideEvent = $.Event('slide.bs.carousel', {
+      relatedTarget: relatedTarget,
+      direction: direction
+    })
+    this.$element.trigger(slideEvent)
+    if (slideEvent.isDefaultPrevented()) return
+
+    this.sliding = true
+
+    isCycling && this.pause()
+
+    if (this.$indicators.length) {
+      this.$indicators.find('.active').removeClass('active')
+      var $nextIndicator = $(this.$indicators.children()[this.getItemIndex($next)])
+      $nextIndicator && $nextIndicator.addClass('active')
+    }
+
+    var slidEvent = $.Event('slid.bs.carousel', { relatedTarget: relatedTarget, direction: direction }) // yes, "slid"
+    if ($.support.transition && this.$element.hasClass('slide')) {
+      $next.addClass(type)
+      $next[0].offsetWidth // force reflow
+      $active.addClass(direction)
+      $next.addClass(direction)
+      $active
+        .one('bsTransitionEnd', function () {
+          $next.removeClass([type, direction].join(' ')).addClass('active')
+          $active.removeClass(['active', direction].join(' '))
+          that.sliding = false
+          setTimeout(function () {
+            that.$element.trigger(slidEvent)
+          }, 0)
+        })
+        .emulateTransitionEnd(Carousel.TRANSITION_DURATION)
+    } else {
+      $active.removeClass('active')
+      $next.addClass('active')
+      this.sliding = false
+      this.$element.trigger(slidEvent)
+    }
+
+    isCycling && this.cycle()
+
+    return this
+  }
+
+
+  // CAROUSEL PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.carousel')
+      var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
+      var action  = typeof option == 'string' ? option : options.slide
+
+      if (!data) $this.data('bs.carousel', (data = new Carousel(this, options)))
+      if (typeof option == 'number') data.to(option)
+      else if (action) data[action]()
+      else if (options.interval) data.pause().cycle()
+    })
+  }
+
+  var old = $.fn.carousel
+
+  $.fn.carousel             = Plugin
+  $.fn.carousel.Constructor = Carousel
+
+>>>>>>> upstream/master
+
+  // CAROUSEL NO CONFLICT
+  // ====================
+
+<<<<<<< HEAD
   // CAROUSEL NO CONFLICT
   // ====================
 
@@ -42257,8 +42630,284 @@ __webpack_require__(73)
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
+=======
+  $.fn.carousel.noConflict = function () {
+    $.fn.carousel = old
+    return this
+  }
 
 
+  // CAROUSEL DATA-API
+  // =================
+
+  var clickHandler = function (e) {
+    var href
+    var $this   = $(this)
+    var $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) // strip for ie7
+    if (!$target.hasClass('carousel')) return
+    var options = $.extend({}, $target.data(), $this.data())
+    var slideIndex = $this.attr('data-slide-to')
+    if (slideIndex) options.interval = false
+
+    Plugin.call($target, options)
+
+    if (slideIndex) {
+      $target.data('bs.carousel').to(slideIndex)
+    }
+
+    e.preventDefault()
+  }
+
+  $(document)
+    .on('click.bs.carousel.data-api', '[data-slide]', clickHandler)
+    .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
+
+  $(window).on('load', function () {
+    $('[data-ride="carousel"]').each(function () {
+      var $carousel = $(this)
+      Plugin.call($carousel, $carousel.data())
+    })
+  })
+
+}(jQuery);
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports) {
+
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports) {
+
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.3.7
+ * http://getbootstrap.com/javascript/#dropdowns
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+>>>>>>> upstream/master
+
++function ($) {
+  'use strict';
+
+<<<<<<< HEAD
 +function ($) {
   'use strict';
 
@@ -42307,6 +42956,53 @@ __webpack_require__(73)
     })
   }
 
+=======
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle="dropdown"]'
+  var Dropdown = function (element) {
+    $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.VERSION = '3.3.7'
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+  function clearMenus(e) {
+    if (e && e.which === 3) return
+    $(backdrop).remove()
+    $(toggle).each(function () {
+      var $this         = $(this)
+      var $parent       = getParent($this)
+      var relatedTarget = { relatedTarget: this }
+
+      if (!$parent.hasClass('open')) return
+
+      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this.attr('aria-expanded', 'false')
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+    })
+  }
+
+>>>>>>> upstream/master
   Dropdown.prototype.toggle = function (e) {
     var $this = $(this)
 
@@ -42892,6 +43588,7 @@ __webpack_require__(73)
       self.hoverState = 'in'
       return
     }
+<<<<<<< HEAD
 
     clearTimeout(self.timeout)
 
@@ -42983,6 +43680,99 @@ __webpack_require__(73)
         var orgPlacement = placement
         var viewportDim = this.getPosition(this.$viewport)
 
+=======
+
+    clearTimeout(self.timeout)
+
+    self.hoverState = 'in'
+
+    if (!self.options.delay || !self.options.delay.show) return self.show()
+
+    self.timeout = setTimeout(function () {
+      if (self.hoverState == 'in') self.show()
+    }, self.options.delay.show)
+  }
+
+  Tooltip.prototype.isInStateTrue = function () {
+    for (var key in this.inState) {
+      if (this.inState[key]) return true
+    }
+
+    return false
+  }
+
+  Tooltip.prototype.leave = function (obj) {
+    var self = obj instanceof this.constructor ?
+      obj : $(obj.currentTarget).data('bs.' + this.type)
+
+    if (!self) {
+      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())
+      $(obj.currentTarget).data('bs.' + this.type, self)
+    }
+
+    if (obj instanceof $.Event) {
+      self.inState[obj.type == 'focusout' ? 'focus' : 'hover'] = false
+    }
+
+    if (self.isInStateTrue()) return
+
+    clearTimeout(self.timeout)
+
+    self.hoverState = 'out'
+
+    if (!self.options.delay || !self.options.delay.hide) return self.hide()
+
+    self.timeout = setTimeout(function () {
+      if (self.hoverState == 'out') self.hide()
+    }, self.options.delay.hide)
+  }
+
+  Tooltip.prototype.show = function () {
+    var e = $.Event('show.bs.' + this.type)
+
+    if (this.hasContent() && this.enabled) {
+      this.$element.trigger(e)
+
+      var inDom = $.contains(this.$element[0].ownerDocument.documentElement, this.$element[0])
+      if (e.isDefaultPrevented() || !inDom) return
+      var that = this
+
+      var $tip = this.tip()
+
+      var tipId = this.getUID(this.type)
+
+      this.setContent()
+      $tip.attr('id', tipId)
+      this.$element.attr('aria-describedby', tipId)
+
+      if (this.options.animation) $tip.addClass('fade')
+
+      var placement = typeof this.options.placement == 'function' ?
+        this.options.placement.call(this, $tip[0], this.$element[0]) :
+        this.options.placement
+
+      var autoToken = /\s?auto?\s?/i
+      var autoPlace = autoToken.test(placement)
+      if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
+
+      $tip
+        .detach()
+        .css({ top: 0, left: 0, display: 'block' })
+        .addClass(placement)
+        .data('bs.' + this.type, this)
+
+      this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
+      this.$element.trigger('inserted.bs.' + this.type)
+
+      var pos          = this.getPosition()
+      var actualWidth  = $tip[0].offsetWidth
+      var actualHeight = $tip[0].offsetHeight
+
+      if (autoPlace) {
+        var orgPlacement = placement
+        var viewportDim = this.getPosition(this.$viewport)
+
+>>>>>>> upstream/master
         placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top'    :
                     placement == 'top'    && pos.top    - actualHeight < viewportDim.top    ? 'bottom' :
                     placement == 'right'  && pos.right  + actualWidth  > viewportDim.width  ? 'left'   :
@@ -43188,6 +43978,7 @@ __webpack_require__(73)
 
     return title
   }
+<<<<<<< HEAD
 
   Tooltip.prototype.getUID = function (prefix) {
     do prefix += ~~(Math.random() * 1000000)
@@ -43195,6 +43986,15 @@ __webpack_require__(73)
     return prefix
   }
 
+=======
+
+  Tooltip.prototype.getUID = function (prefix) {
+    do prefix += ~~(Math.random() * 1000000)
+    while (document.getElementById(prefix))
+    return prefix
+  }
+
+>>>>>>> upstream/master
   Tooltip.prototype.tip = function () {
     if (!this.$tip) {
       this.$tip = $(this.options.template)
@@ -75571,6 +76371,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -75578,7 +76400,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pagination: {
                 sortBy: 'name'
             },
-            headers: [{ text: 'Especie', value: 'specie' }, { text: 'Tipo', value: 'type' }, { text: 'Alto', value: 'high' }, { text: 'Ancho', value: 'width' }, { text: 'Espesor', value: 'density' }],
+            headers: [{ text: 'Especie', value: 'specie', input: '', menu: false }, { text: 'Tipo', value: 'type', input: '', menu: false }, { text: 'Alto', value: 'high', input: '', menu: false }, { text: 'Ancho', value: 'width', input: '', menu: false }, { text: 'Espesor', value: 'density', input: '', menu: false }],
             purchase_headers: [{ text: 'Madera', value: 'Madera' }, { text: 'Medida', value: 'Madera' }, { text: 'Cantidad', value: 'Madera' }],
             species: null,
             types: null,
@@ -75596,6 +76418,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             last_page: 1,
             page: 1,
             paginationRows: 10,
+            total: 0,
+            from: 0,
+            to: 0,
+            pagination_select: [10, 20, 30],
             providers: [],
             purchase: null,
             pivot: null,
@@ -75624,6 +76450,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.getData('/api/auth/lumber', _this.getParams()).then(function (data) {
                     _this.lumbers = data.data;
                     _this.last_page = data.last_page;
+                    _this.total = data.total;
+                    _this.from = data.from;
+                    _this.to = data.to;
                     resolve();
                 });
             });
@@ -75742,6 +76571,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         removeFromPurchase: function removeFromPurchase(index) {
             this.purchase_lumbers.splice(index, 1);
+        },
+        checkInput: function checkInput(search) {
+            if (search == '') {
+                this.search();
+            }
         }
     }
 });
@@ -76097,39 +76931,34 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "v-layout",
-                    { attrs: { row: "", wrap: "" } },
-                    [
-                      _c("v-data-table", {
-                        staticStyle: { "max-width": "100%" },
-                        attrs: {
-                          headers: _vm.headers,
-                          items: _vm.lumbers,
-                          "hide-actions": ""
-                        },
-                        scopedSlots: _vm._u([
-                          {
-                            key: "headers",
-                            fn: function(props) {
-                              return [
-                                _c(
-                                  "tr",
-                                  _vm._l(props.headers, function(
-                                    header,
-                                    index
-                                  ) {
-                                    return _c(
-                                      "th",
-                                      {
-                                        key: index,
-                                        staticClass: "text-xs-left"
-                                      },
-                                      [
-                                        header.value != "actions"
-                                          ? _c(
-                                              "v-flex",
+                  _c("v-data-table", {
+                    staticStyle: { "max-width": "100%" },
+                    attrs: {
+                      headers: _vm.headers,
+                      items: _vm.lumbers,
+                      "hide-actions": ""
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "headers",
+                        fn: function(props) {
+                          return [
+                            _c(
+                              "tr",
+                              _vm._l(props.headers, function(header, index) {
+                                return _c(
+                                  "th",
+                                  { key: index, staticClass: "text-xs-left" },
+                                  [
+                                    header.value != "actions"
+                                      ? _c(
+                                          "v-flex",
+                                          [
+                                            _c(
+                                              "v-tooltip",
+                                              { attrs: { bottom: "" } },
                                               [
+<<<<<<< HEAD
                                                 _c("span", [
                                                   _vm._v(
                                                     _vm._s(header.text) +
@@ -76137,160 +76966,242 @@ var render = function() {
                                                   )
                                                 ]),
                                                 _vm._v(" "),
+=======
+>>>>>>> upstream/master
                                                 _c(
-                                                  "v-menu",
+                                                  "span",
                                                   {
                                                     attrs: {
-                                                      "close-on-content-click": false
-                                                    }
+                                                      slot: "activator"
+                                                    },
+                                                    slot: "activator"
                                                   },
-                                                  [
-                                                    header.sortable != false
-                                                      ? _c(
-                                                          "v-btn",
+                                                  [_vm._v(_vm._s(header.text))]
+                                                ),
+                                                _vm._v(" "),
+                                                _c("span", [
+                                                  _vm._v(_vm._s(header.input))
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-menu",
+                                              {
+                                                attrs: {
+                                                  "close-on-content-click": false
+                                                },
+                                                model: {
+                                                  value: header.menu,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      header,
+                                                      "menu",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "header.menu"
+                                                }
+                                              },
+                                              [
+                                                header.sortable != false
+                                                  ? _c(
+                                                      "v-btn",
+                                                      {
+                                                        attrs: {
+                                                          slot: "activator",
+                                                          icon: ""
+                                                        },
+                                                        slot: "activator"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "v-icon",
                                                           {
                                                             attrs: {
-                                                              slot: "activator",
-                                                              icon: ""
-                                                            },
-                                                            slot: "activator"
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "v-icon",
-                                                              {
-                                                                attrs: {
-                                                                  small: ""
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "fa-filter"
-                                                                )
-                                                              ]
-                                                            )
-                                                          ],
-                                                          1
-                                                        )
-                                                      : _vm._e(),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-card",
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            outline: "",
-                                                            "hide-details": "",
-                                                            "append-icon":
-                                                              "search",
-                                                            label:
-                                                              "Buscar " +
-                                                              header.text +
-                                                              "..."
-                                                          },
-                                                          on: {
-                                                            keydown: function(
-                                                              $event
-                                                            ) {
-                                                              if (
-                                                                !(
-                                                                  "button" in
-                                                                  $event
-                                                                ) &&
-                                                                _vm._k(
-                                                                  $event.keyCode,
-                                                                  "enter",
-                                                                  13,
-                                                                  $event.key,
-                                                                  "Enter"
-                                                                )
-                                                              ) {
-                                                                return null
-                                                              }
-                                                              _vm.search()
+                                                              color:
+                                                                header.input !=
+                                                                ""
+                                                                  ? "blue"
+                                                                  : "black",
+                                                              small: ""
                                                             }
                                                           },
-                                                          model: {
-                                                            value: header.input,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                header,
-                                                                "input",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "header.input"
-                                                          }
-                                                        })
+                                                          [_vm._v("fa-filter")]
+                                                        )
                                                       ],
                                                       1
                                                     )
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-card",
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        outline: "",
+                                                        "hide-details": "",
+                                                        "append-icon": "search",
+                                                        label:
+                                                          "Buscar " +
+                                                          header.text +
+                                                          "..."
+                                                      },
+                                                      on: {
+                                                        keydown: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            !(
+                                                              "button" in $event
+                                                            ) &&
+                                                            _vm._k(
+                                                              $event.keyCode,
+                                                              "enter",
+                                                              13,
+                                                              $event.key,
+                                                              "Enter"
+                                                            )
+                                                          ) {
+                                                            return null
+                                                          }
+                                                          _vm.search()
+                                                        },
+                                                        keyup: [
+                                                          function($event) {
+                                                            if (
+                                                              !(
+                                                                "button" in
+                                                                $event
+                                                              ) &&
+                                                              _vm._k(
+                                                                $event.keyCode,
+                                                                "delete",
+                                                                [8, 46],
+                                                                $event.key,
+                                                                [
+                                                                  "Backspace",
+                                                                  "Delete"
+                                                                ]
+                                                              )
+                                                            ) {
+                                                              return null
+                                                            }
+                                                            _vm.checkInput(
+                                                              header.input
+                                                            )
+                                                          },
+                                                          function($event) {
+                                                            if (
+                                                              !(
+                                                                "button" in
+                                                                $event
+                                                              ) &&
+                                                              _vm._k(
+                                                                $event.keyCode,
+                                                                "esc",
+                                                                27,
+                                                                $event.key,
+                                                                "Escape"
+                                                              )
+                                                            ) {
+                                                              return null
+                                                            }
+                                                            header.menu = false
+                                                          }
+                                                        ]
+                                                      },
+                                                      model: {
+                                                        value: header.input,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            header,
+                                                            "input",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "header.input"
+                                                      }
+                                                    })
                                                   ],
                                                   1
                                                 )
                                               ],
                                               1
                                             )
-                                          : _vm._e()
-                                      ],
-                                      1
-                                    )
-                                  })
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e()
+                                  ],
+                                  1
                                 )
+                              })
+                            )
+                          ]
+                        }
+                      },
+                      {
+                        key: "items",
+                        fn: function(props) {
+                          return [
+                            _c(
+                              "tr",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.addToPurchase(props.item)
+                                  }
+                                }
+                              },
+                              [
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(_vm._s(props.item.specie.name))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(_vm._s(props.item.type.name))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(_vm._s(props.item.high))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(_vm._s(props.item.width))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(_vm._s(props.item.density))
+                                ])
                               ]
-                            }
-                          },
-                          {
-                            key: "items",
-                            fn: function(props) {
-                              return [
-                                _c(
-                                  "tr",
-                                  {
-                                    on: {
-                                      click: function($event) {
-                                        _vm.addToPurchase(props.item)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("td", { staticClass: "text-xs-left" }, [
-                                      _vm._v(_vm._s(props.item.specie.name))
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", { staticClass: "text-xs-left" }, [
-                                      _vm._v(_vm._s(props.item.type.name))
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", { staticClass: "text-xs-left" }, [
-                                      _vm._v(_vm._s(props.item.high))
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", { staticClass: "text-xs-left" }, [
-                                      _vm._v(_vm._s(props.item.width))
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", { staticClass: "text-xs-left" }, [
-                                      _vm._v(_vm._s(props.item.density))
-                                    ])
-                                  ]
-                                )
-                              ]
-                            }
-                          },
-                          {
-                            key: "expand",
-                            fn: function(props) {
-                              return [
-                                _vm.lumber
-                                  ? _c("v-card", { attrs: { flat: "" } }, [
-                                      _c("table", [
-                                        _c("tr", [
-                                          _c("td", [
+                            )
+                          ]
+                        }
+                      },
+                      {
+                        key: "expand",
+                        fn: function(props) {
+                          return [
+                            _vm.lumber
+                              ? _c("v-card", { attrs: { flat: "" } }, [
+                                  _c("table", [
+                                    _c("tr", [
+                                      _c("td", [
+                                        _vm._v(
+                                          " \n                            Especie\n                        "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        [
+                                          _c("v-card-text", [
                                             _vm._v(
+<<<<<<< HEAD
                                               " \r\n                            Especie\r\n                        "
                                             )
                                           ]),
@@ -76426,34 +77337,173 @@ var render = function() {
                                           )
                                         ])
                                       ])
+=======
+                                              "\n                                " +
+                                                _vm._s(_vm.lumber.specie.name) +
+                                                "\n                            "
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c("td", [
+                                        _vm._v(
+                                          " \n                            Tipo\n                        "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        [
+                                          _c("v-card-text", [
+                                            _vm._v(
+                                              "\n                                " +
+                                                _vm._s(_vm.lumber.type.name) +
+                                                "\n                            "
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c("td", [
+                                        _vm._v(
+                                          " \n                            Alto\n                        "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        [
+                                          _c("v-card-text", [
+                                            _vm._v(
+                                              "\n                                " +
+                                                _vm._s(_vm.lumber.high) +
+                                                "\n                            "
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c("td", [
+                                        _vm._v(
+                                          " \n                            Ancho\n                        "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        [
+                                          _c("v-card-text", [
+                                            _vm._v(
+                                              "\n                                " +
+                                                _vm._s(_vm.lumber.width) +
+                                                "\n                            "
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c("td", [
+                                        _vm._v(
+                                          " \n                            Espesor\n                        "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        [
+                                          _c("v-card-text", [
+                                            _vm._v(
+                                              "\n                                " +
+                                                _vm._s(_vm.lumber.density) +
+                                                "\n                            "
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c("td", [
+                                        _vm._v(
+                                          " \n                            Descripción \n                        "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        [
+                                          _c("v-card-text", [
+                                            _vm._v(
+                                              "\n                                " +
+                                                _vm._s(_vm.lumber.description) +
+                                                "\n                            "
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
+>>>>>>> upstream/master
                                     ])
-                                  : _vm._e()
-                              ]
-                            }
-                          }
-                        ])
-                      }),
-                      _vm._v(" "),
+                                  ])
+                                ])
+                              : _vm._e()
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-xs-center" },
+                    [
+                      _c("v-pagination", {
+                        attrs: { length: _vm.last_page, "total-visible": 5 },
+                        on: { input: _vm.next },
+                        model: {
+                          value: _vm.page,
+                          callback: function($$v) {
+                            _vm.page = $$v
+                          },
+                          expression: "page"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-xs-right" },
+                    [
                       _c(
-                        "div",
-                        { staticClass: "text-xs-center" },
+                        "v-flex",
+                        { attrs: { xs11: "", sm11: "", md11: "" } },
                         [
-                          _c("v-pagination", {
-                            attrs: {
-                              length: _vm.last_page,
-                              "total-visible": 10
-                            },
-                            on: { input: _vm.next },
-                            model: {
-                              value: _vm.page,
-                              callback: function($$v) {
-                                _vm.page = $$v
-                              },
-                              expression: "page"
-                            }
-                          })
-                        ],
-                        1
+                          _vm._v(
+                            "\n                Mostrando " +
+                              _vm._s(_vm.from) +
+                              "-" +
+                              _vm._s(_vm.to) +
+                              " de " +
+                              _vm._s(_vm.total) +
+                              " registros \n            "
+                          )
+                        ]
                       )
                     ],
                     1
@@ -76496,140 +77546,315 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c(
-                    "v-layout",
-                    { attrs: { row: "", wrap: "" } },
+                    "v-container",
+                    { attrs: { "grid-list-md": "" } },
                     [
-                      _vm.providers
-                        ? _c(
+                      _c(
+                        "v-layout",
+                        { attrs: { wrap: "" } },
+                        [
+                          _vm.providers
+                            ? _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm4: "", md4: "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      label: "Proveedor",
+                                      items: _vm.providers,
+                                      "item-text": "name",
+                                      "item-value": "id",
+                                      hint: "Descripcion del tipo seleccionado",
+                                      "persistent-hint": ""
+                                    },
+                                    model: {
+                                      value: _vm.purchase.provider_id,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.purchase,
+                                          "provider_id",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "purchase.provider_id"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
                             "v-flex",
                             { attrs: { xs12: "", sm4: "", md4: "" } },
                             [
-                              _c("v-select", {
+                              _c("v-text-field", {
                                 attrs: {
-                                  label: "Proveedor",
-                                  items: _vm.providers,
-                                  "item-text": "name",
-                                  "item-value": "id",
-                                  hint: "Descripcion del tipo seleccionado",
-                                  "persistent-hint": ""
+                                  label: "CEFO",
+                                  hint: "Ingrese codigo CEFO",
+                                  required: ""
                                 },
                                 model: {
-                                  value: _vm.purchase.provider_id,
+                                  value: _vm.purchase.cefo,
                                   callback: function($$v) {
-                                    _vm.$set(_vm.purchase, "provider_id", $$v)
+                                    _vm.$set(_vm.purchase, "cefo", $$v)
                                   },
-                                  expression: "purchase.provider_id"
+                                  expression: "purchase.cefo"
                                 }
                               })
                             ],
                             1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm4: "", md4: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "CEFO",
-                              hint: "Ingrese codigo CEFO",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.purchase.cefo,
-                              callback: function($$v) {
-                                _vm.$set(_vm.purchase, "cefo", $$v)
-                              },
-                              expression: "purchase.cefo"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm4: "", md4: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "Costo",
-                              hint: "Ingrese Costo Total",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.purchase.amount,
-                              callback: function($$v) {
-                                _vm.$set(_vm.purchase, "amount", $$v)
-                              },
-                              expression: "purchase.amount"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm4: "", md4: "" } },
-                        [
+                          ),
+                          _vm._v(" "),
                           _c(
-                            "v-menu",
-                            {
-                              ref: "menu2",
-                              attrs: {
-                                "close-on-content-click": false,
-                                "nudge-right": 40,
-                                "return-value": _vm.date,
-                                lazy: "",
-                                transition: "scale-transition",
-                                "offset-y": "",
-                                "full-width": "",
-                                "min-width": "290px"
-                              },
-                              on: {
-                                "update:returnValue": function($event) {
-                                  _vm.date = $event
-                                }
-                              }
-                            },
+                            "v-flex",
+                            { attrs: { xs12: "", sm4: "", md4: "" } },
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  slot: "activator",
-                                  label: "Fecha",
-                                  readonly: ""
+                                  label: "Costo",
+                                  hint: "Ingrese Costo Total",
+                                  required: ""
                                 },
-                                slot: "activator",
                                 model: {
-                                  value: _vm.purchase.date,
+                                  value: _vm.purchase.amount,
                                   callback: function($$v) {
-                                    _vm.$set(_vm.purchase, "date", $$v)
+                                    _vm.$set(_vm.purchase, "amount", $$v)
                                   },
-                                  expression: "purchase.date"
+                                  expression: "purchase.amount"
                                 }
-                              }),
-                              _vm._v(" "),
-                              _c("v-date-picker", {
-                                on: {
-                                  input: function($event) {
-                                    _vm.$refs.menu2.save(_vm.date)
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm4: "", md4: "" } },
+                            [
+                              _c(
+                                "v-menu",
+                                {
+                                  ref: "menu2",
+                                  attrs: {
+                                    "close-on-content-click": false,
+                                    "nudge-right": 40,
+                                    "return-value": _vm.date,
+                                    lazy: "",
+                                    transition: "scale-transition",
+                                    "offset-y": "",
+                                    "full-width": "",
+                                    "min-width": "290px"
+                                  },
+                                  on: {
+                                    "update:returnValue": function($event) {
+                                      _vm.date = $event
+                                    }
                                   }
                                 },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      slot: "activator",
+                                      label: "Fecha",
+                                      readonly: ""
+                                    },
+                                    slot: "activator",
+                                    model: {
+                                      value: _vm.purchase.date,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.purchase, "date", $$v)
+                                      },
+                                      expression: "purchase.date"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("v-date-picker", {
+                                    on: {
+                                      input: function($event) {
+                                        _vm.$refs.menu2.save(_vm.date)
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.purchase.date,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.purchase, "date", $$v)
+                                      },
+                                      expression: "purchase.date"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm4: "", md8: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Descripcion",
+                                  hint: "description"
+                                },
                                 model: {
-                                  value: _vm.purchase.date,
+                                  value: _vm.purchase.description,
                                   callback: function($$v) {
-                                    _vm.$set(_vm.purchase, "date", $$v)
+                                    _vm.$set(_vm.purchase, "description", $$v)
                                   },
-                                  expression: "purchase.date"
+                                  expression: "purchase.description"
                                 }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm12: "", md12: "" } },
+                            [
+                              _c("v-data-table", {
+                                attrs: {
+                                  headers: _vm.purchase_headers,
+                                  items: _vm.purchase_lumbers,
+                                  "hide-actions": ""
+                                },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "items",
+                                    fn: function(props) {
+                                      return [
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                props.item.specie.name +
+                                                  "-" +
+                                                  props.item.type.name
+                                              )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                props.item.high +
+                                                  "X" +
+                                                  props.item.width +
+                                                  "X" +
+                                                  props.item.density
+                                              )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _c(
+                                              "v-layout",
+                                              { attrs: { wrap: "" } },
+                                              [
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      xs12: "",
+                                                      sm10: "",
+                                                      md10: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        label: "Cantidad",
+                                                        hint:
+                                                          "Ingrese cantidad",
+                                                        required: ""
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          props.item.quantity,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            props.item,
+                                                            "quantity",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "props.item.quantity"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          [
+                                            _c(
+                                              "v-flex",
+                                              {
+                                                attrs: {
+                                                  xs12: "",
+                                                  sm4: "",
+                                                  md4: ""
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "v-icon",
+                                                  {
+                                                    attrs: { small: "" },
+                                                    on: {
+                                                      click: function($event) {
+                                                        _vm.removeFromPurchase(
+                                                          props.index
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                        delete\n                                    "
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]
+                                    }
+                                  }
+                                ])
                               })
                             ],
                             1
                           )
                         ],
                         1
+<<<<<<< HEAD
                       ),
                       _vm._v(" "),
                       _c(
@@ -76738,6 +77963,9 @@ var render = function() {
                           }
                         ])
                       })
+=======
+                      )
+>>>>>>> upstream/master
                     ],
                     1
                   )
@@ -87684,7 +88912,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       dialog: false,
       drawer: null,
-      items: [{ icon: 'dashboard', text: 'Inicio', link: '/' }, { icon: 'store', text: 'Almacenes', link: '/storage' }, { icon: 'group_work', text: 'Madera', link: '/lumber' }, { icon: 'group', text: 'Especies', link: '/specie' }, { icon: 'group', text: 'Proveedores', link: '/provider' }, { icon: 'money', text: 'Compra de madera', link: '/purchase' }, { icon: 'view_agenda', text: 'Paquetes', link: '/package' }],
+      items: [{ icon: 'dashboard', text: 'Inicio', link: '/' }, { icon: 'store', text: 'Almacenes', link: '/storage' }, { icon: 'group_work', text: 'Madera', link: '/lumber' }, { icon: 'local_florist', text: 'Especies', link: '/specie' }, { icon: 'group', text: 'Proveedores', link: '/provider' }, { icon: 'money', text: 'Compra de madera', link: '/purchase' }, { icon: 'view_agenda', text: 'Paquetes', link: '/package' }],
       menu: false,
       message: false
     };
