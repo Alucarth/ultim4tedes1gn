@@ -1,17 +1,12 @@
 <template>
-    <v-card>
+<v-container fluid grid-list-xs>
+    <v-layout row wrap>
+      <v-flex xs6>
+    <v-card class="px-0">
         <v-card-title>
-            Madera
+            Empaquetado de madera
         <v-spacer></v-spacer>
-         <v-flex xs1 sm1 md1>
-                <v-combobox
-                v-model="paginationRows"
-                :items="pagination_select"
-                label="Mostrar Registros"
-                @change="search()"
-                ></v-combobox>
-                
-        </v-flex>
+
         <v-dialog v-model="dialog" max-width="500px">            
             <v-card>
             <v-card-title>
@@ -26,7 +21,7 @@
                     </v-flex>
                     <v-flex xs12 sm6 md4>
                         <v-text-field label="Ancho" hint="Ingrese el ancho de la madera" v-model="newLumber.width"></v-text-field>
-                    </v-flex>
+                    </v-flex>   
                     <v-flex xs12 sm6 md4>
                         <v-text-field
                         label="Densidad"
@@ -67,41 +62,42 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">Guardar</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>Actualizar</v-btn>
-                
-                
+                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">store</v-btn>
+                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>update</v-btn>                                
             </v-card-actions>
             </v-card>
         </v-dialog>
 
 
-<v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
+        <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
-        <v-data-table
+
+
+        <v-layout row wrap>
+
+        <v-data-table 
         :headers="headers"
         :items="lumbers"        
         hide-actions
+        style="max-width: 100%"
         >
-        <template slot="headers" slot-scope="props" >
+     <template slot="headers" slot-scope="props" >
            <tr>
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
                         <v-flex v-if="header.value!='actions'">
-                            <v-tooltip bottom>
-                                <span slot="activator">{{header.text}}</span>
-                                <span >{{header.input}}</span>
-                            </v-tooltip>
-                            <v-menu
-                                    v-model="header.menu"
+                            <span>{{ header.text }}
+                            </span>
+                            <v-menu 
                                     :close-on-content-click="false"
                                     >
                                     <v-btn
                                         slot="activator"
                                         icon
+                                   
                                         v-if="header.sortable!=false"
                                     >
-                                    <v-icon :color="header.input!=''?'blue':'black'" small>fa-filter</v-icon>
+                                    <v-icon  small>fa-filter</v-icon>
                                     </v-btn>
                                     <v-card  >
                                         <v-text-field
@@ -111,54 +107,38 @@
                                         append-icon="search"
                                         :label="`Buscar ${header.text}...`"                                       
                                         @keydown.enter="search()"
-                                        @keyup.delete="checkInput(header.input)"
-                                        @keyup.esc="header.menu=false"
                                     ></v-text-field>
                                     
                                     </v-card>
-                            </v-menu>
-                            <!-- <v-icon small @click="toggleOrder(header.value)" v-if="header.value == filterName ">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon> -->
+                            </v-menu>                            
                         </v-flex>
                 </th>
            </tr>
         </template>
         <template slot="items"  slot-scope="props">
-            <!-- <tr @click="props.expanded = !props.expanded"> -->
+            <tr @click="addToPackage(props.item)">
                 <td class="text-xs-left">{{ props.item.specie.name }}</td>
                 <td class="text-xs-left">{{ props.item.type.name }}</td>      
                 <td class="text-xs-left" >{{ props.item.high }}</td>            
                 <td class="text-xs-left">{{ props.item.width }}</td>
-                <td class="text-xs-left">{{ props.item.density }}</td>                
-                <td class="justify-center layout px-0">
+                <td class="text-xs-left">{{ props.item.density }}</td>      
+                <!-- <td class="justify-center layout px-0">
                     <v-icon
                         small
                         class="mr-2"
                         @click="show(props.item);props.expanded = !props.expanded"
                     >
                         toc
-                    </v-icon>
-                    <v-icon
-                        small
-                        class="mr-2"
-                        @click="edit(props.item)"
-                    >
-                        edit
-                    </v-icon>
-                    <v-icon
-                        small
-                        @click="destroy(props.item)"
-                    >
-                        delete
-                    </v-icon>
-                </td>      
-            <!-- </tr> -->
+                    </v-icon>                    
+                </td>       -->
+            </tr>
         </template>
         <template slot="expand" slot-scope="props">
             <v-card flat v-if="lumber">
                 <table>
                     <tr>
                         <td> 
-                            Especie:
+                            Especie
                         </td>
                         <td>
                             <v-card-text>
@@ -168,7 +148,7 @@
                     </tr>
                     <tr>
                         <td> 
-                            Tipo:
+                            Tipo
                         </td>
                         <td>
                             <v-card-text>
@@ -178,7 +158,7 @@
                     </tr>
                     <tr>
                         <td> 
-                            Alto:
+                            Alto
                         </td>
                         <td>
                             <v-card-text>
@@ -188,7 +168,7 @@
                     </tr>
                     <tr>
                         <td> 
-                            Ancho:
+                            Ancho
                         </td>
                         <td>
                             <v-card-text>
@@ -198,7 +178,7 @@
                     </tr>
                     <tr>
                         <td> 
-                            Espesor:
+                            Espesor
                         </td>
                         <td>
                             <v-card-text>
@@ -208,7 +188,7 @@
                     </tr>
                     <tr>
                         <td> 
-                            Descripción:
+                            Descripción 
                         </td>
                         <td>
                             <v-card-text>
@@ -223,7 +203,7 @@
         <!-- <v-alert slot="no-results" :value="true" color="error" icon="warning">
             Your search for "{{ search }}" found no results.
         </v-alert> -->
-        </v-data-table>
+        </v-data-table>        
         <div class="text-xs-center">
             <v-pagination
             v-model="page"
@@ -232,15 +212,65 @@
              @input="next"
             ></v-pagination>
         </div> 
-        <div class="text-xs-right">
-            
-            <v-flex xs11 sm11 md11>
-                Mostrando {{from}}-{{to}} de {{total}} registros 
-            </v-flex>
-
-        </div>
-        
+        </v-layout>
     </v-card>
+      </v-flex>
+      <v-flex xs6>
+    <v-card>
+        <v-card-title>
+            Empaquetado
+        <v-spacer></v-spacer>
+        <v-btn @click="store();" color="primary" dark class="mb-2">Guardar</v-btn>
+        </v-card-title>
+        <v-layout row wrap>
+            <v-flex xs12 sm4 md4>
+                <v-text-field label="Codigo" v-model="packaged.code" hint="Ingrese codigo paquete" required ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm4 md4>
+                <v-text-field label="Nombre" v-model="packaged.name" hint="Ingrese nomre de paquete" required ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm4 md4 v-if="storages">                
+                <v-select                  
+                        label="Almacen"
+                        v-model="packaged.storage_id"
+                        :items="storages"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion del tipo seleccionado`"
+                        persistent-hint>
+                        </v-select>
+
+            </v-flex>                                    
+            <br>
+        <v-data-table        
+        :headers="package_headers"
+        :items="package_lumbers"
+         hide-actions        
+        >
+        <template slot="items"  slot-scope="props">
+            <!-- <tr @click="props.expanded = !props.expanded"> -->
+                <td class="text-xs-left">{{ props.item.specie.name+'-'+props.item.type.name }}</td>
+                <td class="text-xs-left" >{{ props.item.high+'X'+props.item.width+'X'+props.item.density }}</td>                                                            
+                <td class="text-xs-left">
+                    <v-text-field label="Cantidad" v-model="props.item.quantity" hint="Ingrese cantidad" required></v-text-field>
+                </td>
+                <td class="justify-center layout px-0">                    
+                    <v-icon
+                        small
+                        @click="removeFromPackage(props.index)"
+                    >
+                        delete
+                    </v-icon>
+                </td>      
+            <!-- </tr> -->
+        </template>               
+        </v-data-table>        
+        
+        </v-layout>
+    </v-card>
+      </v-flex>
+    </v-layout>
+</v-container>    
 </template>
 <script>
 export default {
@@ -250,30 +280,35 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'Especie', value: 'specie' ,input:'', menu:false},
-            { text: 'Tipo', value: 'type' ,input:'', menu:false},
-            { text: 'Alto', value: 'high' ,input:'', menu:false},        
-            { text: 'Ancho', value: 'width' ,input:'', menu:false},
-            { text: 'Espesor', value: 'density' ,input:'', menu:false},            
+            { text: 'Especie', value: 'specie' },
+            { text: 'Tipo', value: 'type' },
+            { text: 'Alto', value: 'high' },        
+            { text: 'Ancho', value: 'width' },
+            { text: 'Espesor', value: 'density' },             
+        ],
+        package_headers: [
+            { text: 'Madera', value: 'Madera' },
+            { text: 'Medida', value: 'Madera' },
+            { text: 'Cantidad', value: 'Madera' },            
         ],
         species: null,
         types: null,
         lumbers: [],
+        package_lumbers: [],
         lumber: null,
         newLumber: null,
         totalLumber: 0,        
-        loading: true,
-        filterName: 'high',
-        filterValue: '',   
+        loading: true,        
         dialog: false,
         editedIndex: -1,          
+        date : null,
         last_page: 1,
         page: 1,    
         paginationRows: 10,
-         total:0,
-        from:0,
-        to:0,     
-        pagination_select:[10,20,30]
+        storages: [],
+        packaged: null,
+        pivot: null,
+        pl: [],
       }
     },
     computed: {
@@ -283,9 +318,12 @@ export default {
     },
     mounted()
     {
-        this.search();        
+        this.search();
+        this.create();
         this.getSpecies();
-        this.getTypes();        
+        this.getTypes();
+        this.getStorages();
+        
     },
     methods:{
         search() {
@@ -293,9 +331,6 @@ export default {
                 this.getData('/api/auth/lumber',this.getParams()).then((data)=>{
                     this.lumbers = data.data;                    
                     this.last_page = data.last_page;
-                    this.total = data.total;
-                    this.from = data.from;
-                    this.to = data.to;
                     resolve();                    
                 });
             });            
@@ -325,28 +360,52 @@ export default {
         next(page){
             this.page = page;
             this.search();
-        },        
-        create() {                                    
+        }, 
+        toggleOrder (index) {
+            this.pagination.sortBy = this.headers[index].value
+            this.pagination.descending = !this.pagination.descending
+             
+            
+        },
+        setFilter(filterName){
+            this.filterValue='',
+            this.filterName = filterName;
+        },
+        createLumber() {                                    
             axios.get('/api/auth/lumber/create')            
-            .then(response => {                                
-                this.newLumber = response.data.lumber                
+            .then(response => {                
+                console.log(response.data.lumber);
+                this.newLumber = response.data.lumber;                
             })
             .catch(error => {                
                 console.log(error);
             });
             this.dialog = true;
         },
-        store(){
-            let index = -1;
-            axios.post('/api/auth/lumber/', this.newLumber)
+        storeLumber(){
+
+        },
+        create () {
+            console.log('creating');
+            axios.get('/api/auth/package/create')            
             .then(response => {                
-                //this.lumbers.push(response.data.lumber);
-                alert('dato creado');
+                console.log(response.data.pivot);
+                this.packaged = response.data.package;
+                this.pivot = response.data.pivot;
             })
             .catch(error => {                
                 console.log(error);
             });
-            this.dialog = false;
+        },
+        store () {                        
+            axios.post('/api/auth/package/', {package: this.packaged, lumbers: this.package_lumbers})
+            .then(response => {                                
+                alert('Madera empaquetada');
+                this.$router.replace('/package');
+            })
+            .catch(error => {                
+                console.log(error);
+            });            
         },
         show(item) {                        
             axios.get(`/api/auth/lumber/${item.id}`)            
@@ -356,49 +415,7 @@ export default {
             .catch(error => {                
                 console.log(error);
             });
-        },
-        edit (item) {
-            this.editedIndex = this.lumbers.indexOf(item)
-            //this.editedItem = Object.assign({}, item)
-            axios.get(`/api/auth/lumber/${item.id}/edit`)            
-            .then(response => {                
-                this.newLumber = response.data.lumber
-            })
-            .catch(error => {                
-                console.log(error);
-            });
-            
-            this.dialog = true
-        },
-        update (item) {                        
-            let index = this.editedIndex;            
-            axios.put(`/api/auth/lumber/${this.newLumber.id}`, this.newLumber)            
-            .then(response => {                
-                this.lumbers[index].high = response.data.lumber.high;
-                this.lumbers[index].width = response.data.lumber.width;
-                this.lumbers[index].density = response.data.lumber.density;
-                this.lumbers[index].specie = response.data.lumber.specie;
-                this.lumbers[index].type = response.data.lumber.type;
-            })
-            .catch(function (error) {
-                console.log(error);
-            });            
-            this.dialog =false;
-            //this.getLumber();
-        },
-        destroy (item) {
-            let success_delete = false;
-            axios.delete(`/api/auth/lumber/${item.id}`)
-            .then(function (response) {
-                console.log(response.data.lumber_id);                   
-                success_delete = true;
-            })
-            .catch(function (error) {
-                console.log(error);                
-            });                                    
-            this.getLumber();
-            
-        },
+        },        
         getSpecies (){
             axios.get('/api/auth/specie')
             .then(response => {
@@ -417,17 +434,27 @@ export default {
                 console.log(error);
             });
         },
+        getStorages () {
+            axios.get('/api/auth/storage')
+            .then(response => {
+                console.log(response.data.data);
+                this.storages = response.data.storages
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
         close() {
             this.dialog = false;
-        }, 
-        checkInput(search)
-        {
-            if(search=='')
-            {
-                this.search();
-            }
+        },
+        addToPackage(item) {            
+            item.quantity = '';
+            this.package_lumbers.push(item);
+        },
+        removeFromPackage(index) {
+            this.pacakge_lumbers.splice(index, 1);
         }
         
-    },    
+    }
 }
 </script>

@@ -12,9 +12,54 @@ class LumberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {    
-        return view('lumber.index');
+    public function index(Request $request) {
+                
+        $order = $request->order ?? 'asc';
+        $pagination_rows = $request->pagination_rows ?? 10;               
+
+        $lumber_conditions = [];
+        $type_conditions = [];
+        $specie_conditions = [];
+
+        $high = $request->high ?? null;
+        $width = $request->width ?? null;
+        $density = $request->density ?? null;
+        $description = $request->description ?? null;
+        $specie = $request->specie ?? null;
+        $type = $request->type ?? null;
+
+        if ($high) {
+            array_push($lumber_conditions, ['high','=',"{$high}"]);
+        }
+        if ($width) {
+            array_push($lumber_conditions, ['width','=',"{$width}"]);
+        }
+        if ($density) {
+            array_push($lumber_conditions, ['density','=',"{$density}"]);
+        }
+        if ($description) {
+            array_push($lumber_conditions, ['description','like',"%{$description}%"]);
+        }
+        if ($specie) {
+            array_push($specie_conditions, ['name','like',"%{$specie}%"]);
+        }
+        if ($type) {
+            array_push($type_conditions, ['name','like',"%{$type}%"]);
+        }
+
+        $lumbers = Lumber::with(['specie','type'])
+                            ->where($lumber_conditions)
+                            ->whereHas('specie', function ($query) use ($specie_conditions) {
+                                $query->where($specie_conditions);
+                            })
+                            ->whereHas('type', function ($query) use ($type_conditions) {
+                                $query->where($type_conditions);
+                            })
+                            ->paginate($pagination_rows);
+        $data = [
+            'lumbers'   =>  $lumbers
+        ];
+        return response()->json($lumbers);    
     }
 
     /**
@@ -39,7 +84,19 @@ class LumberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lumber = new Lumber();
+        $lumber->high = $request->high;
+        $lumber->width = $request->width;
+        $lumber->density = $request->density;
+        $lumber->description = $request->description;
+        $lumber->specie_id = $request->specie_id;
+        $lumber->type_id = $request->type_id;
+        $lumber->save();
+                
+        $data = [
+            'lumber' => $lumber
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -50,7 +107,7 @@ class LumberController extends Controller
      */
     public function show($id)
     {        
-        $lumber = Lumber::find($id);
+        $lumber = Lumber::with(['specie','type'])->find($id);
         $data = [
             'lumber'    =>  $lumber
         ];
@@ -90,7 +147,7 @@ class LumberController extends Controller
         $lumber->type_id = $request->type_id;
         $lumber->specie_id = $request->specie_id;
         $lumber->save();
-        $lumber = Lumber::find($id);        
+        $lumber = Lumber::with(['specie', 'type'])->find($id);        
         $data = [
             'lumber'    =>  $lumber
         ];        
@@ -111,75 +168,5 @@ class LumberController extends Controller
         ];
         $lumber->delete();
         return response()->json($data);
-    }
-
-    /**
-     * Returns json data filtered from lumber
-     * 
-     * @param int $id
-     * @return \App\Lumber[] $lumbers 
-     */
-    public function getData(Request $request){
-
-        $offset = $request->offset ?? 0;
-        $limit = $request->limit ?? 10;
-        $sort = $request->sort ?? 'id';
-        $order = $request->order ?? 'asc';  
-
-        $high = $request->high ?? 0;
-        $width = $request->width ?? 0;
-        $density = $request->density ?? 0;        
-        $description = $request->description ?? '';
-        $specie = $request->specie ?? '';
-        $type = $request->type ?? '';
-
-        
-        $total = Lumber::
-            leftJoin('types','lumbers.type_id','=','types.id')
-            ->leftJoin('species','lumbers.specie_id','=','species.id')            
-            ->where('lumbers.description','like',$description.'%')        
-            ->where('species.name', 'like', $specie.'%')
-            ->where('types.name','like', $type.'%')
-            ->count();
-
-        $lumbers = Lumber::              
-            select(
-                'lumbers.id',                
-                'lumbers.width',
-                'lumbers.high',
-                'lumbers.density',
-//                'lumbers.description',
-                'types.name as type',
-                'species.name as specie'
-            )
-            ->leftJoin('types','lumbers.type_id','=','types.id')
-            ->leftJoin('species','lumbers.specie_id','=','species.id')            
-            //->where('lumbers.description','like',$description.'%')        
-            ->where('species.name', 'like', $specie.'%')
-            ->where('types.name','like', $type.'%')
-			->skip($offset)
-            ->take($limit)
-            ->orderBy($sort,$order)
-            ->get();
-        
-            $lumbers = Lumber::with(['type','specie'])
-            ->whereHas('type', function($query) use ($type) {
-                $query->where('name','like',$type.'%');
-            })
-            ->whereHas('specie', function($query) use ($specie){
-                $query->where('name','like',$specie.'%');
-            })
-            ->skip($offset)
-            ->take($limit)
-            ->orderBy($sort,$order)
-            ->get();
-            //return $lumbers->count();
-            //dd($lumbers);
-        //return $lumbers;
-        return response()->json(
-        [
-            'lumbers' => $lumbers->toArray(),
-            'total'=>$total,
-        ]);
     }
 }

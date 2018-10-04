@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Lumber extends Model
 {
     
+    protected $fillable = array('id');
+
     protected $attributes = array(
         'high' => null,
         'width' => null,

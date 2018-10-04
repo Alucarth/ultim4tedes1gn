@@ -15,31 +15,51 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $order = request('order');
-        if(request('sorted')!="name")
+        $order = request('order'??'');
+        $pagination_rows = request('pagination_rows'??10);
+        $name = request('name')??'';
+        $first_name = request('first_name')??'';
+        $last_name = request('last_name')??'';
+        $position = request('position')??'';
+        $email = request('email')??'';
+        $phone = request('phone')??'';
+        
+        $conditions_provider = [];
+        $conditions_contatcs = [];
+        if($name != '')
         {
-            //search in contacts
-            $search = request('search');
-            $sorted = request('sorted');
-          
-            Log::info('buscando por '.$search);
-            $provider_list = Provider::with('contacts')
-                                    ->whereHas('contacts',function($query) use ($sorted,$search){
-                                        $query->where($sorted,'like',"%{$search}%")->where('is_primary',true);
-                                    })
-                                    ->orderBy('name',$order)
-                                    ->paginate(10);
-            return response()->json($provider_list->toArray());
+            array_push($conditions_provider,array('name','like',"%{$name}%"));
         }
-        $provider_list = Provider::query()
-                        ->when(request('search'),function($query,$search){
-                            $query->where(request('sorted'),'like',"%{$search}%");
-                        })
-                        ->with('contacts')
-                        ->orderBy('name',$order)
-                        ->paginate(10);
+        if($first_name != '')
+        {
+            array_push($conditions_contatcs,array('first_name','like',"%{$first_name}%"));
+        }
+        if($last_name != '')
+        {
+            array_push($conditions_contatcs,array('last_name','like',"%{$last_name}%"));
+        }
+        if($position != '')
+        {
+            array_push($conditions_contatcs,array('position','like',"%{$position}%"));
+        }
+        if($email != '')
+        {
+            array_push($conditions_contatcs,array('email','like',"%{$email}%"));
+        }
+        if($phone != '')
+        {
+            array_push($conditions_contatcs,array('phone','like',"%{$phone}%"));
+        }
+
+            // Log::info('buscando por '.$conditions_contatcs);
+        $provider_list = Provider::with('contacts')
+                                ->where($conditions_provider)
+                                ->whereHas('contacts',function($query) use ($conditions_contatcs){
+                                    $query->where($conditions_contatcs)->where('is_primary',true);
+                                })
+                                ->orderBy('name')
+                                ->paginate($pagination_rows);
         return response()->json($provider_list->toArray());
-    
     }
 
     /**
@@ -64,6 +84,38 @@ class ProviderController extends Controller
     public function store(Request $request)
     {
         //
+        $provider = new Provider();
+        $provider->name = $request->name;
+        $provider->offer = $request->offer;
+        $provider->description = $request->description;
+        $provider->address1 = $request->address1;
+        $provider->address2 = $request->address2;
+        $provider->city = $request->city;
+        $provider->balance = $request->balance;
+        $provider->debit = $request->debit;
+        $provider->save();
+        $contacts = json_encode($request->contacts);
+        $contacts = json_decode($contacts);
+        
+        $is_primary=true;
+
+        foreach($contacts as $contact)
+        {
+            $new_contact = new Contact;
+            $new_contact->provider_id = $provider->id;
+            $new_contact->is_primary = $is_primary;
+            $new_contact->first_name = $contact->first_name;
+            $new_contact->last_name = $contact->last_name;
+            $new_contact->email = $contact->email;
+            $new_contact->phone = $contact->phone;
+            $new_contact->position = $contact->position;
+            $new_contact->save();
+            if($is_primary)
+            {
+                $is_primary = false;
+            }
+        }
+        return response()->json($provider);
     }
 
     /**
@@ -75,6 +127,14 @@ class ProviderController extends Controller
     public function show($id)
     {
         //
+        $provider = Provider::where('id',$id)->first();
+        $contacts = Contact::where('provider_id',$provider->id)->get();
+        $data = [
+            'provider'  =>  $provider,
+            'contacts' => $contacts
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -85,7 +145,14 @@ class ProviderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $provider = Provider::where('id',$id)->first();
+        $contacts = Contact::where('provider_id',$provider->id)->get();
+        $data = [
+            'provider'  =>  $provider,
+            'contacts' => $contacts
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -97,7 +164,55 @@ class ProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $provider = Provider::where('id',$id)->first();
+        $provider->name = $request->name;
+        $provider->offer = $request->offer;
+        $provider->description = $request->description;
+        $provider->address1 = $request->address1;
+        $provider->address2 = $request->address2;
+        $provider->city = $request->city;
+        $provider->balance = $request->balance;
+        $provider->debit = $request->debit;
+        $provider->save();
+        
+        $contacts = json_encode($request->contacts);
+        $contacts = json_decode($contacts);
+        $ids = [];
+        foreach($contacts as $contact)
+        {
+            if(isset($contact->id))
+            {
+                $new_contact = Contact::find($contact->id);
+            }else{
+                $new_contact = new Contact;
+                $new_contact->provider_id = $provider->id;
+                $new_contact->is_primary = false;
+            }
+            $new_contact->first_name = $contact->first_name;
+            $new_contact->last_name = $contact->last_name;
+            $new_contact->email = $contact->email;
+            $new_contact->phone = $contact->phone;
+            $new_contact->position = $contact->position;
+            $new_contact->save();
+            array_push($ids,$new_contact->id);
+        }
+        // //Todo: REvisar esta hueva
+     
+        // $delete_contancts = Contact::whereNotIn('id',$ids)->where('provider_id',$provider->id)->get();
+   
+        // foreach($delete_contancts as $contact)
+        // {
+        //     $contact->delete();
+        // }
+
+        $contacts = Contact::where('provider_id',$provider->id)->get();
+        $data = [
+            'provider'  =>  $provider,
+            'contacts' => $contacts
+        ];
+        return response()->json($data);
+        // $provider = Provider::find($id)->with('contacts')->first();
+        
     }
 
     /**
@@ -109,16 +224,12 @@ class ProviderController extends Controller
     public function destroy($id)
     {
         //
+        $provider = Provider::find($id);
+        $data = [
+            'provider_id'    =>  $provider->id
+        ];
+        $provider->delete();
+        return response()->json($data);
     }
 
-    public function getData(Request $request)
-    {
-        if($request->name== 'name')
-        {
-            return response()->json(Provider::where($request->name,'like',$request->value."%")->with('contacts')->get()->toArray()); 
-        }else{
-            return response()->json(Provider::with('contacts')->whereHas('contacts',function($q) use($request) { $q->where($request->name,'like',$request->value."%");})->get()->toArray()); 
-        }
-
-    }
 }

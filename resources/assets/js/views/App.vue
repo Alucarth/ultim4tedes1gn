@@ -150,7 +150,7 @@
     <v-content>
       <!-- <lumber-index></lumber-index> -->
        <v-container fluid fill-height>
-          <v-layout column fill-height>
+          <v-layout fluid column fill-height>
             <router-view></router-view>            
           </v-layout>
         </v-container>
@@ -167,10 +167,12 @@
       drawer: null,
       items: [
         { icon: 'dashboard', text: 'Inicio' , link: '/' },
-        { icon: 'group', text: 'Almacenes' , link: '/storage' },
-        { icon: 'group', text: 'Madera' , link: '/lumber' },
-        { icon: 'group', text: 'Especies' , link: '/specie' },
-        { icon: 'group', text: 'Proveedores' , link: '/providers' },       
+        { icon: 'store', text: 'Almacenes' , link: '/storage' },
+        { icon: 'group_work', text: 'Madera' , link: '/lumber' },
+        { icon: 'local_florist', text: 'Especies' , link: '/specie' },
+        { icon: 'group', text: 'Proveedores' , link: '/provider' },  
+        { icon: 'money', text: 'Compra de madera', link: '/purchase' },
+        { icon: 'view_agenda', text: 'Paquetes', link: '/package' },
       ],
       menu: false, 
       message: false,
