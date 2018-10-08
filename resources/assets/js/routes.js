@@ -11,6 +11,7 @@ import EditPurchase from './components/purchase/edit.vue';
 import Package from './components/package/index.vue';
 import EditPackage from './components/package/edit.vue';
 import TransferPackage from './components/package/transfer.vue';
+import Employee from './components/employee/index.vue';
 
    
    export const routes= [
@@ -85,6 +86,10 @@ import TransferPackage from './components/package/transfer.vue';
             name: 'packageTransfer',
             component: TransferPackage,
         },
-        
+        {
+            path: '/employee',
+            name: 'employee',
+            component: Employee,
+        },
     ];
     

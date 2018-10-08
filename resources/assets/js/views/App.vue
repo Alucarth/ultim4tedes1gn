@@ -173,6 +173,7 @@
         { icon: 'group', text: 'Proveedores' , link: '/provider' },  
         { icon: 'money', text: 'Compra de madera', link: '/purchase' },
         { icon: 'view_agenda', text: 'Paquetes', link: '/package' },
+        { icon: 'work', text: 'Empleados', link: '/employee' },
       ],
       menu: false, 
       message: false,
