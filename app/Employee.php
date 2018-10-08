@@ -8,12 +8,21 @@ class Employee extends Model
 {
         
     protected $attributes = array(
-        // 'high' => null,
-        // 'width' => null,
-        // 'density' => null,
-        // 'specie_id' => null,
-        // 'type_id'   => null,
-        // 'description'   =>  null
+        'name' => null,
+        'last_name' => null,
+        'identity_card' => null,
+        'item' => null,
+        'entry_date' => null,
+        'departure_date' => null,
+        'salary' => null,
+        'bonus' => null,
+        'extra_hour' => null,
+        'official_area_id' => null,
+        'tempora_area_id' => null,
+        'position_id' => null,
+        'employee_contract_type_id' => null,
+        'employee_type_id' => null,
+        'active' => null,       
     );
 
     public function type() {

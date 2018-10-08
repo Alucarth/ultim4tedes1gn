@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Employee;
 
 class EmployeeController extends Controller
 {
@@ -52,7 +53,7 @@ class EmployeeController extends Controller
         if ($type) {
             array_push($type_conditions, ['name','like',"%{$type}%"]);
         }
-        if($positions) {
+        if($position) {
             array_push($position_conditions, ['name','like',"%{$position}%"]);
         }
         $employees = Employee::with(['official_area','temporal_area','position','type'])
@@ -83,7 +84,13 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $employee = new Employee();
+
+        $data = [
+            'employee'  =>  $employee
+        ];
+
+        return response()->json($data);
     }
 
     /**

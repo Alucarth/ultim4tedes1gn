@@ -4,22 +4,94 @@
             Empleados
         <v-spacer></v-spacer>
 
-        <v-dialog v-model="dialog" max-width="500px">            
+        <v-dialog v-model="dialog" max-width="700px">            
             <v-card>
             <v-card-title>
                 <span class="headline">{{ formTitle }}</span>
             </v-card-title>
 
-            <v-card-text v-if="newLumber">
+            <v-card-text v-if="newEmployee">
                 <v-container grid-list-md>
                  <v-layout wrap>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field label="Alto" hint="Ingrese el alto de la madera" required v-model="newLumber.high"></v-text-field>
+                    <v-flex xs6 sm6 md2>
+                        <v-text-field label="Item" hint="Ingrese item" required v-model="newEmployee.item"></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field label="Ancho" hint="Ingrese el ancho de la madera" v-model="newLumber.width"></v-text-field>
+                    <v-flex xs6 sm6 md2>
+                        <v-text-field label="C.I." hint="Ingrese cedula de identidad" v-model="newEmployee.identity_card"></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm6 md4>
+                    <v-flex xs6 sm6 md4>
+                        <v-text-field label="Nombres" hint="Ingrese nombres" required v-model="newEmployee.name"></v-text-field>
+                    </v-flex>
+                    <v-flex xs6 sm6 md4>
+                        <v-text-field label="Apellidos" hint="Ingrese apellidos" v-model="newEmployee.last_name"></v-text-field>
+                    </v-flex>
+                    
+                    <v-flex xs6 sm6 md3>
+                        <v-menu
+                            ref="menu1"
+                            :close-on-content-click="false"                    
+                            :nudge-right="40"
+                            :return-value.sync="date"
+                            lazy
+                            transition="scale-transition"
+                            offset-y
+                            full-width
+                            min-width="290px"
+                        >
+                            <v-text-field
+                            slot="activator"
+                            v-model="newEmployee.entry_date"
+                            label="Fecha de Ingreso"          
+                            readonly
+                            ></v-text-field>
+                            <v-date-picker v-model="newEmployee.entry_date" @input="$refs.menu2.save(date)"></v-date-picker>
+
+                        </v-menu>
+                    </v-flex>
+                    <v-flex xs6 sm6 md3>
+                        <v-text-field label="Salario" hint="Ingrese total ganado" v-model="newEmployee.salary"></v-text-field>
+                    </v-flex>
+                    <v-flex xs6 sm6 md3>
+                        <v-text-field label="Bono" hint="Ingrese bono" v-model="newEmployee.bonus"></v-text-field>
+                    </v-flex>
+                    <v-flex xs6 sm6 md3>
+                        <v-text-field label="Hora extra" hint="Ingrese pago por hora extra" v-model="newEmployee.extra_hour"></v-text-field>
+                    </v-flex>
+
+                    <v-flex xs12 sm12 md4>
+                        <v-select                  
+                        label="Cargo"
+                        v-model="newEmployee.postion_id"
+                        :items="types"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion del tipo seleccionado`"
+                        persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12 sm12 md4>
+                        <v-select                  
+                        label="Area Oficial"
+                        v-model="newEmployee.official_area_id"
+                        :items="areas"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion del tipo seleccionado`"
+                        persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12 sm12 md4>
+                        <v-select                  
+                        label="Area Temporal"
+                        v-model="newEmployee.temporal_area_id"
+                        :items="areas"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion del tipo seleccionado`"
+                        persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <!-- <v-flex xs12 sm6 md4>
                         <v-text-field
                         label="Densidad"
                         hint="Ingrese la densidad de la madera"                  
@@ -51,7 +123,7 @@
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="newLumber.description" ></v-text-field>
-                    </v-flex>  
+                    </v-flex>   -->
                 </v-layout>
                 </v-container>
             </v-card-text>
@@ -59,8 +131,8 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">Guardar</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>Actualizar</v-btn>
+                <v-btn color="blue darken-1" flat @click="store(newEmployee)" v-if="editedIndex === -1">Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="update(newEmployee)" v-else>Actualizar</v-btn>
                 
                 
             </v-card-actions>
@@ -265,6 +337,7 @@ export default {
         this.getAreas();
         this.getTypes();
         this.getPositions();
+        this.getContracTypes();
     },
     methods:{
         search() {
@@ -303,9 +376,9 @@ export default {
             this.search();
         },        
         create() {                                    
-            axios.get('/api/auth/lumber/create')            
+            axios.get('/api/auth/employee/create')
             .then(response => {                                
-                this.newLumber = response.data.lumber                
+                this.newEmployee = response.data.employee
             })
             .catch(error => {                
                 console.log(error);
@@ -375,19 +448,37 @@ export default {
             this.getLumber();
             
         },
-        getSpecies (){
-            axios.get('/api/auth/specie')
+        getPositions (){
+            axios.get('/api/auth/position')
             .then(response => {
-                this.species = response.data.species          
+                this.positions = response.data.positions
             })
             .catch(error => {
                 console.log(error);
             });
         },
         getTypes() {
-            axios.get('/api/auth/type')
+            axios.get('/api/auth/employee_type')
             .then(response => {
                 this.types = response.data.types          
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
+        getAreas() {
+            axios.get('/api/auth/area')
+            .then(response => {
+                this.areas = response.data.areas
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
+        getContracTypes() {
+            axios.get('/api/auth/employee_contract_type')
+            .then(response => {
+                this.contract_types = response.data.contract_types
             })
             .catch(error => {
                 console.log(error);
