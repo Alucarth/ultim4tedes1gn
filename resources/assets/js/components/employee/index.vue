@@ -62,7 +62,7 @@
                         <v-select                  
                         label="Cargo"
                         v-model="newEmployee.postion_id"
-                        :items="types"
+                        :items="positions"
                         item-text="name"
                         item-value="id"
                         :hint="`Descripcion del tipo seleccionado`"
@@ -106,47 +106,19 @@
                         <v-select                  
                         label="Estado"
                         v-model="newEmployee.employee_contract_type_id"
-                        :items="areas"
+                        :items="contract_types"
                         item-text="name"
                         item-value="id"
                         :hint="`Descripcion del tipo seleccionado`"
                         persistent-hint>
                         </v-select>
                     </v-flex>
-
-                    <!-- <v-flex xs12 sm6 md4>
-                        <v-text-field
-                        label="Densidad"
-                        hint="Ingrese la densidad de la madera"                  
-                        required
-                        v-model="newLumber.density"
-                        ></v-text-field>
-                    </v-flex>                          
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Tipo de madera"
-                        v-model="newLumber.type_id"
-                        :items="types"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion del tipo seleccionado`"
-                        persistent-hint>
-                        </v-select>
+                    <v-flex xs12 sm12 md2>
+                        <v-checkbox
+                        :label="`Activo`"
+                        v-model="newEmployee.active"
+                        ></v-checkbox>
                     </v-flex>
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Especie"                
-                        v-model="newLumber.specie_id"  
-                        :items="species"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion de la madera seleccionada`"
-                        persistent-hint>                                
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs12>
-                        <v-text-field label="Descripción" v-model="newLumber.description" ></v-text-field>
-                    </v-flex>   -->
                 </v-layout>
                 </v-container>
             </v-card-text>
@@ -155,9 +127,7 @@
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
                 <v-btn color="blue darken-1" flat @click="store(newEmployee)" v-if="editedIndex === -1">Guardar</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newEmployee)" v-else>Actualizar</v-btn>
-                
-                
+                <v-btn color="blue darken-1" flat @click="update(newEmployee)" v-else>Actualizar</v-btn>                                
             </v-card-actions>
             </v-card>
         </v-dialog>
@@ -211,7 +181,7 @@
                 <td class="text-xs-left">{{ props.item.name }}</td>
                 <td class="text-xs-left">{{ props.item.official_area.name }}</td>                
                 <td class="text-xs-left">{{ props.item.temporal_area.name }}</td>
-                <td class="text-xs-left">{{ props.item.postion.name }}</td>                
+                <td class="text-xs-left">{{ props.item.position.name }}</td>                
                 <td class="text-xs-left">{{ props.item.type.name }}</td>
                 <td class="text-xs-left">{{ props.item.active }}</td>
                 <td class="justify-center layout px-0">
@@ -326,7 +296,7 @@ export default {
         headers: [          
             { text: 'Item', value: 'item' },
             { text: 'C.I.', value: 'identity_card' },
-            { text: 'Apellidos', value: 'last_name' },        
+            { text: 'Apellidos', value: 'last_name' },
             { text: 'Nombres', value: 'name' },
             { text: 'Area Oficial', value: 'official_area' },
             { text: 'Area Temporal', value: 'temporal_area' },
@@ -337,10 +307,11 @@ export default {
         areas: [],
         types: [],
         positions: [],
+        contract_types: [],
         employees: [],
         employee: null,
         newEmployee: null,
-        totalEmployees: 0,        
+        totalEmployees: 0,
         loading: true,
         dialog: false,
         editedIndex: -1,          
@@ -366,7 +337,7 @@ export default {
         search() {
             return new Promise((resolve,reject)=>{   
                 this.getData('/api/auth/employee',this.getParams()).then((data)=>{
-                    this.lumbers = data.data;                    
+                    this.employees = data.data;                    
                     this.last_page = data.last_page;
                     resolve();                    
                 });
@@ -410,9 +381,8 @@ export default {
         },
         store(){
             let index = -1;
-            axios.post('/api/auth/lumber/', this.newLumber)
+            axios.post('/api/auth/employee/', this.newEmployee)
             .then(response => {                
-                //this.lumbers.push(response.data.lumber);
                 alert('dato creado');
             })
             .catch(error => {                

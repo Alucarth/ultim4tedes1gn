@@ -33,13 +33,13 @@ class EmployeeController extends Controller
         $position = $request->position ?? null;
 
         if ($item) {
-            array_push($employee_conditions, ['item','=',"{$item}"]);
+            array_push($employee_conditions, ['item','like',"%{$item}%"]);
         }
         if ($identity_card) {
-            array_push($employee_conditions, ['identity_card','=',"{$identity_card}"]);
+            array_push($employee_conditions, ['identity_card','like',"%{$identity_card}%"]);
         }
         if ($name) {
-            array_push($employee_conditions, ['name','=',"{$name}"]);
+            array_push($employee_conditions, ['name','like',"%{$name}%"]);
         }
         if ($last_name) {
             array_push($employee_conditions, ['last_name','like',"%{$last_name}%"]);
@@ -55,7 +55,7 @@ class EmployeeController extends Controller
         }
         if($position) {
             array_push($position_conditions, ['name','like',"%{$position}%"]);
-        }
+        }        
         $employees = Employee::with(['official_area','temporal_area','position','type'])
                             ->where($employee_conditions)
                             ->whereHas('official_area', function ($query) use ($official_area_conditions) {
@@ -101,7 +101,28 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = new Employee();
+        $employee->item = $request->item;
+        $employee->identity_card = $request->identity_card;
+        $employee->last_name = $request->last_name;
+        $employee->name = $request->name;
+        $employee->entry_date = $request->entry_date;
+        $employee->salary = $request->salary;
+        $employee->bonus = $request->bonus;
+        $employee->extra_hour = $request->extra_hour;
+        $employee->official_area_id = $request->official_area_id;
+        $employee->temporal_area_id = $request->temporal_area_id;
+        $employee->position_id = $request->position_id;
+        $employee->employee_contract_type_id = $request->employee_contract_type_id;
+        $employee->employee_type_id = $request->employee_type_id;
+        $employee->active = $request->active;
+        $employee->save();
+        
+        $data = [
+            'employee' => $employee
+        ];
+
+        return response()->json($data);
     }
 
     /**
