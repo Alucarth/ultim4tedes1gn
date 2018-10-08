@@ -80274,6 +80274,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -80851,6 +80874,71 @@ var render = function() {
                                           },
                                           expression:
                                             "newEmployee.temporal_area_id"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", sm12: "", md5: "" } },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          label: "Tipo",
+                                          items: _vm.types,
+                                          "item-text": "name",
+                                          "item-value": "id",
+                                          hint:
+                                            "Descripcion del tipo seleccionado",
+                                          "persistent-hint": ""
+                                        },
+                                        model: {
+                                          value:
+                                            _vm.newEmployee.employee_type_id,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.newEmployee,
+                                              "employee_type_id",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "newEmployee.employee_type_id"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", sm12: "", md5: "" } },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          label: "Estado",
+                                          items: _vm.areas,
+                                          "item-text": "name",
+                                          "item-value": "id",
+                                          hint:
+                                            "Descripcion del tipo seleccionado",
+                                          "persistent-hint": ""
+                                        },
+                                        model: {
+                                          value:
+                                            _vm.newEmployee
+                                              .employee_contract_type_id,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.newEmployee,
+                                              "employee_contract_type_id",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "newEmployee.employee_contract_type_id"
                                         }
                                       })
                                     ],

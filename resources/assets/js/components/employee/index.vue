@@ -91,6 +91,29 @@
                         persistent-hint>
                         </v-select>
                     </v-flex>
+                    <v-flex xs12 sm12 md5>
+                        <v-select                  
+                        label="Tipo"
+                        v-model="newEmployee.employee_type_id"
+                        :items="types"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion del tipo seleccionado`"
+                        persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12 sm12 md5>
+                        <v-select                  
+                        label="Estado"
+                        v-model="newEmployee.employee_contract_type_id"
+                        :items="areas"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion del tipo seleccionado`"
+                        persistent-hint>
+                        </v-select>
+                    </v-flex>
+
                     <!-- <v-flex xs12 sm6 md4>
                         <v-text-field
                         label="Densidad"
