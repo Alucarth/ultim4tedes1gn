@@ -102,7 +102,7 @@ class PurchaseController extends Controller
      */
     public function show($id)
     {
-        $purchase = Purchase::with(['provider'])->find($id);
+        $purchase = Purchase::with(['provider','lumbers','lumbers.specie','lumbers.type'])->find($id);
 
         $data = [
             'purchase'  =>  $purchase
