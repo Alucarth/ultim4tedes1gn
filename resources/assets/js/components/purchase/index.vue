@@ -137,6 +137,28 @@
                             </v-card-text>
                         </td>
                     </tr>
+                    <tr>
+                        <td> 
+                            Descripción 
+                        </td>
+                        <td>
+                        <v-data-table                
+                            :headers="minitable_headers"                                        
+                            :items="purchase.lumbers"
+                            hide-actions
+                            class="elevation-1"
+                        >
+                            <template slot="items" slot-scope="props">
+                            <td>{{ props.item.specie.name }}</td>
+                            <td>{{ props.item.type.name }}</td>
+                            <td>{{ props.item.high }}</td>
+                            <td>{{ props.item.width}}</td>
+                            <td>{{ props.item.density }}</td>
+                            <td>{{ props.item.pivot.quantity }}</td>                            
+                            </template>
+                        </v-data-table>
+                        </td>
+                    </tr>
                 </table>                                
             </v-card>
         </template>
@@ -168,7 +190,15 @@ export default {
             { text: 'Proveedor', value: 'provider' },
             { text: 'Fecha', value: 'date' },        
             { text: 'Precio', value: 'amount' },            
-        ],        
+        ],
+        minitable_headers: [
+            { text: 'Especie', value: 'specie' },
+            { text: 'Tipo', value: 'type' },
+            { text: 'Alto', value: 'high' },
+            { text: 'Ancho', value: 'width' },
+            { text: 'Espesor', value: 'density' },
+            { text: 'Cantidad', value: 'quantity' },
+        ],
         lumbers: [],
         purchases: null,
         purchase: null,
