@@ -150,7 +150,13 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employee::with(['official_area','temporal_area','position','type','contract_type'])->find($id);
+        
+        $data = [
+            'employee' => $employee
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -162,7 +168,28 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employee = Employee::find($id);
+        $employee->item = $request->item;
+        $employee->identity_card = $request->identity_card;
+        $employee->last_name = $request->last_name;
+        $employee->name = $request->name;
+        $employee->entry_date = $request->entry_date;
+        $employee->salary = $request->salary;
+        $employee->bonus = $request->bonus;
+        $employee->extra_hour = $request->extra_hour;
+        $employee->official_area_id = $request->official_area_id;
+        $employee->temporal_area_id = $request->temporal_area_id;
+        $employee->position_id = $request->position_id;
+        $employee->employee_contract_type_id = $request->employee_contract_type_id;
+        $employee->employee_type_id = $request->employee_type_id;
+        $employee->active = $request->active;
+        $employee->save();
+        
+        $data = [
+            'employee' => $employee
+        ];
+
+        return response()->json($data);
     }
 
     /**

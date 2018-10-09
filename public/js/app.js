@@ -84489,6 +84489,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         create: function create() {
             var _this3 = this;
 
+            this.editedIndex = -1;
             axios.get('/api/auth/employee/create').then(function (response) {
                 _this3.newEmployee = response.data.employee;
             }).catch(function (error) {
@@ -84517,10 +84518,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         edit: function edit(item) {
             var _this5 = this;
 
-            this.editedIndex = this.lumbers.indexOf(item);
-            //this.editedItem = Object.assign({}, item)
-            axios.get('/api/auth/lumber/' + item.id + '/edit').then(function (response) {
-                _this5.newLumber = response.data.lumber;
+            this.editedIndex = this.employees.indexOf(item);
+            axios.get('/api/auth/employee/' + item.id + '/edit').then(function (response) {
+                _this5.newEmployee = response.data.employee;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -84531,12 +84531,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this6 = this;
 
             var index = this.editedIndex;
-            axios.put('/api/auth/lumber/' + this.newLumber.id, this.newLumber).then(function (response) {
-                _this6.lumbers[index].high = response.data.lumber.high;
-                _this6.lumbers[index].width = response.data.lumber.width;
-                _this6.lumbers[index].density = response.data.lumber.density;
-                _this6.lumbers[index].specie = response.data.lumber.specie;
-                _this6.lumbers[index].type = response.data.lumber.type;
+            axios.put('/api/auth/employee/' + this.newEmployee.id, this.newEmployee).then(function (response) {
+                _this6.employees[index].item = response.data.employee.item;
+                _this6.employees[index].identity_card = response.data.employee.identity_card;
+                _this6.employees[index].name = response.data.employee.name;
+                _this6.employees[index].last_name = response.data.employee.last_name;
+                _this6.employees[index].entry_date = response.data.employee.departure_date;
+                _this6.employees[index].salary = response.data.employee.salary;
+                _this6.employees[index].bonus = response.data.employee.bonus;
+                _this6.employees[index].extra_hour = response.data.employee.extra_hour;
+                _this6.employees[index].official_area_id = response.data.employee.official_area_id;
+                _this6.employees[index].temporal_area_id = response.data.employee.temporal_area_id;
+                _this6.employees[index].position_id = response.data.employee.position_id;
+                _this6.employees[index].employee_contract_type_id = response.data.employee.employee_contract_type_id;
+                _this6.employees[index].employee_type_id = response.data.employee.employee_type_id;
+                _this6.employees[index].active = response.data.employee.active;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -84544,14 +84553,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //this.getLumber();
         },
         destroy: function destroy(item) {
+
             var success_delete = false;
-            axios.delete('/api/auth/lumber/' + item.id).then(function (response) {
-                console.log(response.data.lumber_id);
+            axios.delete('/api/auth/employee/' + item.id).then(function (response) {
                 success_delete = true;
             }).catch(function (error) {
                 console.log(error);
             });
-            this.getLumber();
         },
         getPositions: function getPositions() {
             var _this7 = this;
@@ -84913,15 +84921,15 @@ var render = function() {
                                           "persistent-hint": ""
                                         },
                                         model: {
-                                          value: _vm.newEmployee.postion_id,
+                                          value: _vm.newEmployee.position_id,
                                           callback: function($$v) {
                                             _vm.$set(
                                               _vm.newEmployee,
-                                              "postion_id",
+                                              "position_id",
                                               $$v
                                             )
                                           },
-                                          expression: "newEmployee.postion_id"
+                                          expression: "newEmployee.position_id"
                                         }
                                       })
                                     ],
