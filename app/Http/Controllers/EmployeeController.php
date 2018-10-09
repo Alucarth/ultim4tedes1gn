@@ -133,7 +133,13 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = Employee::with(['official_area','temporal_area','position','type','contract_type'])->find($id);
+        
+        $data = [
+            'employee' => $employee
+        ];
+
+        return response()->json($data);
     }
 
     /**

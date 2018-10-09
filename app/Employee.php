@@ -29,7 +29,7 @@ class Employee extends Model
         return $this->hasOne('App\EmployeeType','id','employee_type_id');
     }
 
-    public function contact_type(){
+    public function contract_type(){
         return $this->hasOne('App\EmployeeContractType','id','employee_contract_type_id');
     } 
 

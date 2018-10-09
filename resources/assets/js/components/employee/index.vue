@@ -209,70 +209,163 @@
             <!-- </tr> -->
         </template>
         <template slot="expand" slot-scope="props">
-            <!-- <v-card flat v-if="lumber">
+            <v-card flat v-if="employee">
                 <table>
                     <tr>
                         <td> 
-                            Especie
+                            &Iacute;tem        
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.specie.name }}
+                                {{  employee.item }}
+                            </v-card-text>
+                        </td>                    
+                    </tr>
+                    <tr>
+                        <td> 
+                            C.I.   
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.identity_card }}
                             </v-card-text>
                         </td>
                     </tr>
                     <tr>
                         <td> 
-                            Tipo
+                            Nombres    
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.type.name }}
+                                {{ employee.name }}
                             </v-card-text>
                         </td>
                     </tr>
                     <tr>
                         <td> 
-                            Alto
+                            Apellidos   
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.high }}
-                            </v-card-text>
-                        </td>                 
-                    </tr>
-                    <tr>
-                        <td> 
-                            Ancho
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ lumber.width }}
-                            </v-card-text>
-                        </td>       
-                    </tr>
-                    <tr>
-                        <td> 
-                            Espesor
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ lumber.density }}
+                                {{ employee.last_name }}
                             </v-card-text>
                         </td>
                     </tr>
                     <tr>
                         <td> 
-                            Descripción 
+                            Fecha de ingreso
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.description }}
+                                {{ employee.entry_date }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr v-if="employee.departure_date">
+                        <td> 
+                            Fecha de Salida    
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.departure_date }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Salario Ganado    
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.salary }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Bono        
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.bonus }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            pago por Horas extras trabajadas
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.extra_hour }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            &Aacute;rea oficial    
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.official_area.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            &Aacute;rea temporal                            
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.temporal_area.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Cargo
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.position.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Estado   
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.contract_type.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Tipo   
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.type.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Activo    
+                        </td>
+                        <td>
+                            <v-card-text v-if="employee.active">
+                                S&Iacute;
+                            </v-card-text>
+                            <v-card-text v-else>
+                                NO
                             </v-card-text>
                         </td>
                     </tr>
                 </table>                                
-            </v-card> -->
+            </v-card>
         </template>        
         </v-data-table>
         <div class="text-xs-center">
@@ -391,9 +484,9 @@ export default {
             this.dialog = false;
         },
         show(item) {                        
-            axios.get(`/api/auth/lumber/${item.id}`)            
+            axios.get(`/api/auth/employee/${item.id}`)          
             .then(response => {                
-                this.lumber = response.data.lumber
+                this.employee = response.data.employee
             })
             .catch(error => {                
                 console.log(error);
