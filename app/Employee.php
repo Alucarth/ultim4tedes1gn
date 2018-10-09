@@ -18,7 +18,7 @@ class Employee extends Model
         'bonus' => null,
         'extra_hour' => null,
         'official_area_id' => null,
-        'tempora_area_id' => null,
+        'temporal_area_id' => null,
         'position_id' => null,
         'employee_contract_type_id' => null,
         'employee_type_id' => null,
@@ -29,12 +29,12 @@ class Employee extends Model
         return $this->hasOne('App\EmployeeType','id','employee_type_id');
     }
 
-    public function contact_type(){
+    public function contract_type(){
         return $this->hasOne('App\EmployeeContractType','id','employee_contract_type_id');
     } 
 
     public function position() {
-        return $this->hasOne('App\Position','id','positions_id');
+        return $this->hasOne('App\Position','id','position_id');
     }
 
     public function official_area() {

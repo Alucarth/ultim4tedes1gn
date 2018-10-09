@@ -61,8 +61,8 @@
                     <v-flex xs12 sm12 md4>
                         <v-select                  
                         label="Cargo"
-                        v-model="newEmployee.postion_id"
-                        :items="types"
+                        v-model="newEmployee.position_id"
+                        :items="positions"
                         item-text="name"
                         item-value="id"
                         :hint="`Descripcion del tipo seleccionado`"
@@ -106,47 +106,19 @@
                         <v-select                  
                         label="Estado"
                         v-model="newEmployee.employee_contract_type_id"
-                        :items="areas"
+                        :items="contract_types"
                         item-text="name"
                         item-value="id"
                         :hint="`Descripcion del tipo seleccionado`"
                         persistent-hint>
                         </v-select>
                     </v-flex>
-
-                    <!-- <v-flex xs12 sm6 md4>
-                        <v-text-field
-                        label="Densidad"
-                        hint="Ingrese la densidad de la madera"                  
-                        required
-                        v-model="newLumber.density"
-                        ></v-text-field>
-                    </v-flex>                          
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Tipo de madera"
-                        v-model="newLumber.type_id"
-                        :items="types"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion del tipo seleccionado`"
-                        persistent-hint>
-                        </v-select>
+                    <v-flex xs12 sm12 md2>
+                        <v-checkbox
+                        :label="`Activo`"
+                        v-model="newEmployee.active"
+                        ></v-checkbox>
                     </v-flex>
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Especie"                
-                        v-model="newLumber.specie_id"  
-                        :items="species"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion de la madera seleccionada`"
-                        persistent-hint>                                
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs12>
-                        <v-text-field label="Descripción" v-model="newLumber.description" ></v-text-field>
-                    </v-flex>   -->
                 </v-layout>
                 </v-container>
             </v-card-text>
@@ -155,9 +127,7 @@
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
                 <v-btn color="blue darken-1" flat @click="store(newEmployee)" v-if="editedIndex === -1">Guardar</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newEmployee)" v-else>Actualizar</v-btn>
-                
-                
+                <v-btn color="blue darken-1" flat @click="update(newEmployee)" v-else>Actualizar</v-btn>                                
             </v-card-actions>
             </v-card>
         </v-dialog>
@@ -211,7 +181,7 @@
                 <td class="text-xs-left">{{ props.item.name }}</td>
                 <td class="text-xs-left">{{ props.item.official_area.name }}</td>                
                 <td class="text-xs-left">{{ props.item.temporal_area.name }}</td>
-                <td class="text-xs-left">{{ props.item.postion.name }}</td>                
+                <td class="text-xs-left">{{ props.item.position.name }}</td>                
                 <td class="text-xs-left">{{ props.item.type.name }}</td>
                 <td class="text-xs-left">{{ props.item.active }}</td>
                 <td class="justify-center layout px-0">
@@ -239,70 +209,163 @@
             <!-- </tr> -->
         </template>
         <template slot="expand" slot-scope="props">
-            <!-- <v-card flat v-if="lumber">
+            <v-card flat v-if="employee">
                 <table>
                     <tr>
                         <td> 
-                            Especie
+                            &Iacute;tem        
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.specie.name }}
+                                {{  employee.item }}
+                            </v-card-text>
+                        </td>                    
+                    </tr>
+                    <tr>
+                        <td> 
+                            C.I.   
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.identity_card }}
                             </v-card-text>
                         </td>
                     </tr>
                     <tr>
                         <td> 
-                            Tipo
+                            Nombres    
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.type.name }}
+                                {{ employee.name }}
                             </v-card-text>
                         </td>
                     </tr>
                     <tr>
                         <td> 
-                            Alto
+                            Apellidos   
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.high }}
-                            </v-card-text>
-                        </td>                 
-                    </tr>
-                    <tr>
-                        <td> 
-                            Ancho
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ lumber.width }}
-                            </v-card-text>
-                        </td>       
-                    </tr>
-                    <tr>
-                        <td> 
-                            Espesor
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ lumber.density }}
+                                {{ employee.last_name }}
                             </v-card-text>
                         </td>
                     </tr>
                     <tr>
                         <td> 
-                            Descripción 
+                            Fecha de ingreso
                         </td>
                         <td>
                             <v-card-text>
-                                {{ lumber.description }}
+                                {{ employee.entry_date }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr v-if="employee.departure_date">
+                        <td> 
+                            Fecha de Salida    
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.departure_date }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Salario Ganado    
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.salary }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Bono        
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.bonus }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            pago por Horas extras trabajadas
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.extra_hour }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            &Aacute;rea oficial    
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.official_area.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            &Aacute;rea temporal                            
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.temporal_area.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Cargo
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.position.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Estado   
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.contract_type.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Tipo   
+                        </td>
+                        <td>
+                            <v-card-text>
+                                {{ employee.type.name }}
+                            </v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            Activo    
+                        </td>
+                        <td>
+                            <v-card-text v-if="employee.active">
+                                S&Iacute;
+                            </v-card-text>
+                            <v-card-text v-else>
+                                NO
                             </v-card-text>
                         </td>
                     </tr>
                 </table>                                
-            </v-card> -->
+            </v-card>
         </template>        
         </v-data-table>
         <div class="text-xs-center">
@@ -326,7 +389,7 @@ export default {
         headers: [          
             { text: 'Item', value: 'item' },
             { text: 'C.I.', value: 'identity_card' },
-            { text: 'Apellidos', value: 'last_name' },        
+            { text: 'Apellidos', value: 'last_name' },
             { text: 'Nombres', value: 'name' },
             { text: 'Area Oficial', value: 'official_area' },
             { text: 'Area Temporal', value: 'temporal_area' },
@@ -337,10 +400,11 @@ export default {
         areas: [],
         types: [],
         positions: [],
+        contract_types: [],
         employees: [],
         employee: null,
         newEmployee: null,
-        totalEmployees: 0,        
+        totalEmployees: 0,
         loading: true,
         dialog: false,
         editedIndex: -1,          
@@ -366,7 +430,7 @@ export default {
         search() {
             return new Promise((resolve,reject)=>{   
                 this.getData('/api/auth/employee',this.getParams()).then((data)=>{
-                    this.lumbers = data.data;                    
+                    this.employees = data.data;                    
                     this.last_page = data.last_page;
                     resolve();                    
                 });
@@ -398,7 +462,8 @@ export default {
             this.page = page;
             this.search();
         },        
-        create() {                                    
+        create() {            
+            this.editedIndex = -1;                        
             axios.get('/api/auth/employee/create')
             .then(response => {                                
                 this.newEmployee = response.data.employee
@@ -410,9 +475,8 @@ export default {
         },
         store(){
             let index = -1;
-            axios.post('/api/auth/lumber/', this.newLumber)
+            axios.post('/api/auth/employee/', this.newEmployee)
             .then(response => {                
-                //this.lumbers.push(response.data.lumber);
                 alert('dato creado');
             })
             .catch(error => {                
@@ -421,20 +485,19 @@ export default {
             this.dialog = false;
         },
         show(item) {                        
-            axios.get(`/api/auth/lumber/${item.id}`)            
+            axios.get(`/api/auth/employee/${item.id}`)          
             .then(response => {                
-                this.lumber = response.data.lumber
+                this.employee = response.data.employee
             })
             .catch(error => {                
                 console.log(error);
             });
         },
         edit (item) {
-            this.editedIndex = this.lumbers.indexOf(item)
-            //this.editedItem = Object.assign({}, item)
-            axios.get(`/api/auth/lumber/${item.id}/edit`)            
+            this.editedIndex = this.employees.indexOf(item)            
+            axios.get(`/api/auth/employee/${item.id}/edit`)            
             .then(response => {                
-                this.newLumber = response.data.lumber
+                this.newEmployee = response.data.employee
             })
             .catch(error => {                
                 console.log(error);
@@ -444,13 +507,22 @@ export default {
         },
         update (item) {                        
             let index = this.editedIndex;            
-            axios.put(`/api/auth/lumber/${this.newLumber.id}`, this.newLumber)            
+            axios.put(`/api/auth/employee/${this.newEmployee.id}`, this.newEmployee)
             .then(response => {                
-                this.lumbers[index].high = response.data.lumber.high;
-                this.lumbers[index].width = response.data.lumber.width;
-                this.lumbers[index].density = response.data.lumber.density;
-                this.lumbers[index].specie = response.data.lumber.specie;
-                this.lumbers[index].type = response.data.lumber.type;
+                this.employees[index].item = response.data.employee.item;
+                this.employees[index].identity_card = response.data.employee.identity_card;
+                this.employees[index].name = response.data.employee.name;
+                this.employees[index].last_name = response.data.employee.last_name;
+                this.employees[index].entry_date = response.data.employee.departure_date;
+                this.employees[index].salary = response.data.employee.salary;
+                this.employees[index].bonus = response.data.employee.bonus;
+                this.employees[index].extra_hour = response.data.employee.extra_hour;
+                this.employees[index].official_area_id = response.data.employee.official_area_id;
+                this.employees[index].temporal_area_id = response.data.employee.temporal_area_id;
+                this.employees[index].position_id = response.data.employee.position_id;
+                this.employees[index].employee_contract_type_id = response.data.employee.employee_contract_type_id;
+                this.employees[index].employee_type_id = response.data.employee.employee_type_id;
+                this.employees[index].active = response.data.employee.active;                
             })
             .catch(function (error) {
                 console.log(error);
@@ -459,17 +531,15 @@ export default {
             //this.getLumber();
         },
         destroy (item) {
+
             let success_delete = false;
-            axios.delete(`/api/auth/lumber/${item.id}`)
-            .then(function (response) {
-                console.log(response.data.lumber_id);                   
+            axios.delete(`/api/auth/employee/${item.id}`)
+            .then(function (response) {                                
                 success_delete = true;
             })
             .catch(function (error) {
                 console.log(error);                
-            });                                    
-            this.getLumber();
-            
+            });                                                            
         },
         getPositions (){
             axios.get('/api/auth/position')

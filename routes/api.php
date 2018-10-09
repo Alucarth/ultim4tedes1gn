@@ -36,5 +36,5 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::resource('position','PositionController');
     Route::resource('area','AreaController');
     Route::resource('employee_type','EmployeeTypeController');
-    Route::resource('employee_contract_types','EmployeeContractTypeController');
+    Route::resource('employee_contract_type','EmployeeContractTypeController');
 });
