@@ -78776,7 +78776,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 sortBy: 'name'
             },
             headers: [{ text: 'CEFO', value: 'cefo' }, { text: 'Proveedor', value: 'provider' }, { text: 'Fecha', value: 'date' }, { text: 'Precio', value: 'amount' }],
-            minitable_geaders: [{ text: 'Especie', value: 'specie' }, { text: 'Tipo', value: 'type' }, { text: 'Alto', value: 'high' }, { text: 'Ancho', value: 'width' }, { text: 'Espesor', value: 'density' }, { text: 'Cantidad', value: 'quantity' }],
+            minitable_headers: [{ text: 'Especie', value: 'specie' }, { text: 'Tipo', value: 'type' }, { text: 'Alto', value: 'high' }, { text: 'Ancho', value: 'width' }, { text: 'Espesor', value: 'density' }, { text: 'Cantidad', value: 'quantity' }],
             lumbers: [],
             purchases: null,
             purchase: null,
@@ -79272,7 +79272,7 @@ var render = function() {
                               _c("v-data-table", {
                                 staticClass: "elevation-1",
                                 attrs: {
-                                  headers: _vm.minitable_geaders,
+                                  headers: _vm.minitable_headers,
                                   items: _vm.purchase.lumbers,
                                   "hide-actions": ""
                                 },
@@ -81262,6 +81262,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -81269,7 +81280,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pagination: {
                 sortBy: 'name'
             },
-            headers: [{ text: 'Codigo', value: 'code' }, { text: 'Nombre', value: 'name' }, { text: 'Paquete', value: 'package' }],
+            headers: [{ text: 'Codigo', value: 'code' }, { text: 'Nombre', value: 'name' }, { text: 'Almacen', value: 'storage' }],
+            minitable_headers: [{ text: 'Especie', value: 'specie' }, { text: 'Tipo', value: 'type' }, { text: 'Alto', value: 'high' }, { text: 'Ancho', value: 'width' }, { text: 'Espesor', value: 'density' }, { text: 'Cantidad', value: 'quantity' }],
             packages: [],
             storages: [],
             packaged: null,
@@ -81355,8 +81367,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         show: function show(item) {
             var _this4 = this;
 
-            axios.get('/api/auth/purchase/' + item.id).then(function (response) {
-                _this4.purchase = response.data.purchase;
+            axios.get('/api/auth/package/' + item.id).then(function (response) {
+                _this4.packaged = response.data.package;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -81698,6 +81710,63 @@ var render = function() {
                                     "\n                        "
                                 )
                               ])
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [
+                            _vm._v(
+                              " \n                        Descripción \n                    "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-data-table", {
+                                staticClass: "elevation-1",
+                                attrs: {
+                                  headers: _vm.minitable_headers,
+                                  items: _vm.packaged.lumbers,
+                                  "hide-actions": ""
+                                },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "items",
+                                    fn: function(props) {
+                                      return [
+                                        _c("td", [
+                                          _vm._v(_vm._s(props.item.specie.name))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(props.item.type.name))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(props.item.high))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(props.item.width))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(props.item.density))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(
+                                            _vm._s(props.item.pivot.quantity)
+                                          )
+                                        ])
+                                      ]
+                                    }
+                                  }
+                                ])
+                              })
                             ],
                             1
                           )
@@ -82225,7 +82294,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('/api/auth/storage').then(function (response) {
                 console.log(response.data.data);
-                _this9.storages = response.data.storages;
+                _this9.storages = response.data;
             }).catch(function (error) {
                 console.log(error);
             });

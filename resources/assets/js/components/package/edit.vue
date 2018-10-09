@@ -438,7 +438,7 @@ export default {
             axios.get('/api/auth/storage')
             .then(response => {
                 console.log(response.data.data);
-                this.storages = response.data.storages
+                this.storages = response.data
             })
             .catch(error => {
                 console.log(error);

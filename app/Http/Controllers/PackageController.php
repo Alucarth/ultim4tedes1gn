@@ -95,8 +95,15 @@ class PackageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Package $package)
-    {
-        //
+    {        
+        
+        $package = Package::with(['storage','lumbers','lumbers.specie','lumbers.type'])->find($package->id);
+        
+        $data = [
+            'package' => $package
+        ];
+
+        return response()->json($data);
     }
 
     /**

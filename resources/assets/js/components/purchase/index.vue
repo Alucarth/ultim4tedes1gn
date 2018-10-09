@@ -143,7 +143,7 @@
                         </td>
                         <td>
                         <v-data-table                
-                            :headers="minitable_geaders"                                        
+                            :headers="minitable_headers"                                        
                             :items="purchase.lumbers"
                             hide-actions
                             class="elevation-1"
@@ -191,7 +191,7 @@ export default {
             { text: 'Fecha', value: 'date' },        
             { text: 'Precio', value: 'amount' },            
         ],
-        minitable_geaders: [
+        minitable_headers: [
             { text: 'Especie', value: 'specie' },
             { text: 'Tipo', value: 'type' },
             { text: 'Alto', value: 'high' },
