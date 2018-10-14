@@ -323,6 +323,7 @@ export default {
             axios.post('api/auth/provider', parameters)
             .then(response => {                
                 console.log(response.data);
+                
             })
             .catch(function (error) {
                 console.log(error);
@@ -337,6 +338,7 @@ export default {
             .then(response => {
                 this.providers[this.editedIndex] = response.data.provider;
                 this.providers[this.editedIndex].contacts = response.data.provider.contacts;
+                this.showSuccessMsg();
             })
             .catch(function (error) {
                 console.log(error);
@@ -393,10 +395,28 @@ export default {
         formTitle () {
             return this.editedIndex === -1 ? 'Nuevo Proveedor' : 'Editar Proveedor'
         }
-        // menuTooltip(menu){
-        //     return !menu;
-        // }
-
+    },
+    notifications: {
+        showSuccessMsg: {
+        type: VueNotifications.types.success,
+        title: 'Hello there',
+        message: 'That\'s the success!'
+        },
+        showInfoMsg: {
+        type: VueNotifications.types.info,
+        title: 'Hey you',
+        message: 'Here is some info for you'
+        },
+        showWarnMsg: {
+        type: VueNotifications.types.warn,
+        title: 'Wow, man',
+        message: 'That\'s the kind of warning'
+        },
+        showErrorMsg: {
+        type: VueNotifications.types.error,
+        title: 'Wow-wow',
+        message: 'That\'s the error'
+        }
     }
 }
 </script>
