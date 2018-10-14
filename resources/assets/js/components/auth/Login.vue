@@ -5,7 +5,7 @@
         <v-form @submit.prevent="login">
         <v-card class="elevation-12">
             <v-toolbar dark color="primary">
-            <v-toolbar-title>Spectral Bridamac</v-toolbar-title>
+            <v-toolbar-title>Ultimate Design</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
             
@@ -37,7 +37,10 @@ export default {
          let email = this.email 
           let password = this.password
           this.$store.dispatch('auth/login', { email, password })
-          .then(() => this.$router.push('/'))
+          .then(() => {
+              console.log("autenticado")
+              this.$router.push('/')
+              })
           .catch(err => console.log(err))
         }
     }

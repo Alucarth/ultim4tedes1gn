@@ -1,3 +1,3 @@
 <template>
-  <p>home David y Nadia</p>
+  <p>Brian de Mena Amaru</p>
 </template>

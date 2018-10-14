@@ -30,8 +30,10 @@ export const autentication = {
               .then(resp => {
                 const token = resp.data.token
                 const user = resp.data.user
+                console.log(resp.data.token);
                 localStorage.setItem('token', token)
-                axios.defaults.headers.common['Authorization'] = token
+
+                axios.defaults.headers.common['Authorization'] = 'Bearer '+token
                 commit('auth_success', token, user)
                 resolve(resp)
               })
