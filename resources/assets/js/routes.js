@@ -1,4 +1,6 @@
 
+import Nav from './components/layout/Nav';
+import Toolbar from './components/layout/Toolbar';
 import Home from './views/Home';
 
 import ProviderList from './components/provider/Index';
@@ -18,78 +20,164 @@ import Employee from './components/employee/index.vue';
         {
             path: '/',
             name: 'home',
-            component: Home,
-            meta:{
-               // requireAuth:true
-            }
+            components:{ 
+                default:Home,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
+            
         },
         {
             path: '/provider',
             name: 'Provider',
-            component: ProviderList,
-            meta:{
-            //    requireAuth:true
-            }
+            components:{ 
+                default:ProviderList,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },
         {
             path: '/login',
             name: 'Login',
-            component: Login
+            component: Login  
         },
         {
             path: '/lumber',
             name: 'Lumber',
-            component: Lumber
+            components:{ 
+                default:Lumber,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },
         {
             path: '/getLumberData',
             name: 'GetLumberData',
-            component: Lumber
+            components:{ 
+                default:Lumber,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },
         {
             path: '/specie',
             name: 'Specie',
-            component: Specie
+            components:{ 
+                default:Specie,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },
         {
             path: '/type',
             name: 'Type',
-            component: Lumber
+            components:{ 
+                default:Lumber,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },
         {
             path: '/storage',
             name: 'Storage'    ,
-            component: Storage,
+            components:{ 
+                default:Storage,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },        
         {
             path: '/purchase',
             name: 'Purchase',
-            component: Purchase,
+            components:{ 
+                default:Purchase,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },
         {
             path: '/purchase/create',
             name: 'PurchaseEdit',
-            component: EditPurchase,
+            components:{ 
+                default:EditPurchase,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },
         {
             path: '/package',
             name: 'package',
-            component: Package,
+            components:{ 
+                default:Package,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },
         {
             path: '/package/create',
             name: 'packageEdit',
-            component: EditPackage,
+            components:{ 
+                default:EditPackage,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },
         {
             path: '/package/transfer',
             name: 'packageTransfer',
-            component: TransferPackage,
+            components:{ 
+                default:TransferPackage,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },
         {
             path: '/employee',
             name: 'employee',
-            component: Employee,
+            components:{ 
+                default:Employee,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
         },
     ];
     

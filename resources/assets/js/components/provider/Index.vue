@@ -323,6 +323,7 @@ export default {
             axios.post('api/auth/provider', parameters)
             .then(response => {                
                 console.log(response.data);
+                
             })
             .catch(function (error) {
                 console.log(error);
@@ -337,6 +338,7 @@ export default {
             .then(response => {
                 this.providers[this.editedIndex] = response.data.provider;
                 this.providers[this.editedIndex].contacts = response.data.provider.contacts;
+                this.showSuccessMsg();
             })
             .catch(function (error) {
                 console.log(error);
@@ -393,10 +395,6 @@ export default {
         formTitle () {
             return this.editedIndex === -1 ? 'Nuevo Proveedor' : 'Editar Proveedor'
         }
-        // menuTooltip(menu){
-        //     return !menu;
-        // }
-
     }
 }
 </script>

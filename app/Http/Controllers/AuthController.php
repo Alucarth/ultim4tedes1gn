@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use JWTAuth;
+use Validator;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -12,77 +16,65 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function login(Request $request)
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
-    }
-
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function login()
-    {
-        $credentials = request(['email', 'password']);
-
-        if (! $token = auth('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $credentials = $request->only('email', 'password');
+        $rules = [
+            'email' => 'required|email',
+            'password' => 'required',
+        ];
+        $validator = Validator::make($credentials, $rules);
+        if($validator->fails()) {
+            return response()->json([
+                'status' => 'error', 
+                'message' => $validator->messages()
+            ]);
         }
-
-        return $this->respondWithToken($token);
-    }
-
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function me()
-    {
-        return response()->json(auth('api')->user());
-    }
-
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function logout()
-    {
-        auth()->logout('api');
-
-        return response()->json(['message' => 'Successfully logged out']);
-    }
-
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function refresh()
-    {
-        return $this->respondWithToken(auth()->refresh());
-    }
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
+        try {
+            // Attempt to verify the credentials and create a token for the user
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json([
+                    'status' => 'error', 
+                    'message' => 'We can`t find an account with this credentials.'
+                ], 401);
+            }
+        } catch (JWTException $e) {
+            // Something went wrong with JWT Auth.
+            return response()->json([
+                'status' => 'error', 
+                'message' => 'Failed to login, please try again.'
+            ], 500);
+        }
+        // All good so return the token
         return response()->json([
-            'access_token' => $token,
-            'user'=> $this->guard()->user(),
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'status' => 'success', 
+            'token' => $token,
+            'user' => Auth::user(),
+            
         ]);
     }
-    public function guard()
+    /**
+     * Logout
+     * Invalidate the token. User have to relogin to get a new token.
+     * @param Request $request 'header'
+     */
+    public function logout(Request $request) 
     {
-        return \Auth::Guard('api');
+        // Get JWT Token from the request header key "Authorization"
+        $token = $request->header('Authorization');
+        // Invalidate the token
+        try {
+            JWTAuth::invalidate($token);
+            return response()->json([
+                'status' => 'success', 
+                'message'=> "User successfully logged out."
+            ]);
+        } catch (JWTException $e) {
+            // something went wrong whilst attempting to encode the token
+            return response()->json([
+              'status' => 'error', 
+              'message' => 'Failed to logout, please try again.'
+            ], 500);
+        }
     }
 }
