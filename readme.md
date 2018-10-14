@@ -13,10 +13,10 @@
 ## Install
 
 cp .env.example .env  
-composer install
-yarn or npm Install
-php artisan key:generate
-php artisan jwt:secret
+composer install   
+yarn or npm Install  
+php artisan key:generate  
+php artisan jwt:secret  
 
 
 ## Contributing
