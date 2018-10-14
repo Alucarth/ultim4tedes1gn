@@ -15,10 +15,11 @@ class StorageController extends Controller
     public function index()
     {
         $storages = Storage::get();
-        return response()->json(
-        [
-            'storages' => $storages,
-        ]);
+
+        $data = [
+            'storages'  =>  $storages
+        ];
+        return response()->json($storages);
     }
 
     /**

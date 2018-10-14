@@ -2,8 +2,7 @@
     <v-card>
         <v-card-title>
             Paquetes de madera
-        <v-spacer></v-spacer>       
-        <!-- <v-btn to="/package/transfer" color="primary" dark class="mb-2">Transferencias</v-btn> -->
+        <v-spacer></v-spacer>        
         <v-btn to="/package/create" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
         <v-data-table
@@ -107,16 +106,28 @@
                             </v-card-text>
                         </td>                 
                     </tr>                   
-                    <!-- <tr>
+                    <tr>
                         <td> 
-                            Espesor
+                            Descripción 
                         </td>
                         <td>
-                            <v-card-text>
-                                {{ lumber.density }}
-                            </v-card-text>
+                        <v-data-table                
+                            :headers="minitable_headers"                                        
+                            :items="packaged.lumbers"
+                            hide-actions
+                            class="elevation-1"
+                        >
+                            <template slot="items" slot-scope="props">
+                            <td>{{ props.item.specie.name }}</td>
+                            <td>{{ props.item.type.name }}</td>
+                            <td>{{ props.item.high }}</td>
+                            <td>{{ props.item.width}}</td>
+                            <td>{{ props.item.density }}</td>
+                            <td>{{ props.item.pivot.quantity }}</td>                            
+                            </template>
+                        </v-data-table>
                         </td>
-                    </tr> -->                    
+                    </tr>                  
                 </table>                                
             </v-card>
         </template>
@@ -146,8 +157,16 @@ export default {
         headers: [          
             { text: 'Codigo', value: 'code' },
             { text: 'Nombre', value: 'name' },
-            { text: 'Paquete', value: 'package' },
-        ],        
+            { text: 'Almacen', value: 'storage' },
+        ],
+        minitable_headers: [
+            { text: 'Especie', value: 'specie' },
+            { text: 'Tipo', value: 'type' },
+            { text: 'Alto', value: 'high' },
+            { text: 'Ancho', value: 'width' },
+            { text: 'Espesor', value: 'density' },
+            { text: 'Cantidad', value: 'quantity' },
+        ],
         packages: [],
         storages: [],
         packaged: null,
@@ -229,9 +248,9 @@ export default {
             this.dialog = false;
         },
         show(item) {                        
-            axios.get(`/api/auth/purchase/${item.id}`)
+            axios.get(`/api/auth/package/${item.id}`)
             .then(response => {
-                this.purchase = response.data.purchase
+                this.packaged = response.data.package
             })
             .catch(error => {                
                 console.log(error);

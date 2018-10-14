@@ -36,8 +36,8 @@
             </v-card>
         </v-dialog>
 
-
-<v-btn @click="create()" color="primary" dark class="mb-2">Nuevo</v-btn>    
+        <v-btn to="/package/transfer" color="primary" dark class="mb-2">Transferencias</v-btn>
+        <v-btn @click="create()" color="primary" dark class="mb-2">Nuevo</v-btn>    
         </v-card-title>
         <v-data-table
         :headers="headers"

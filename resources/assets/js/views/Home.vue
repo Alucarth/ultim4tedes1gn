@@ -1,3 +1,3 @@
 <template>
-  <p>home XD</p>
+  <p>home David y Nadia</p>
 </template>
