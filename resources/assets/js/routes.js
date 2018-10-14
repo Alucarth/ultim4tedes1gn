@@ -19,7 +19,7 @@ import TransferPackage from './components/package/transfer.vue';
             name: 'home',
             component: Home,
             meta:{
-               // requireAuth:true
+               requireAuth:true
             }
         },
         {
@@ -27,7 +27,7 @@ import TransferPackage from './components/package/transfer.vue';
             name: 'Provider',
             component: ProviderList,
             meta:{
-            //    requireAuth:true
+               requireAuth:true
             }
         },
         {
