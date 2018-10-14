@@ -10,10 +10,11 @@ require('./bootstrap');
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
-import StoreData from './store';
 import {routes} from './routes';
-import Notifications from 'vue-notification'
-
+import Notifications from 'vue-notification';
+import App from './views/App';
+import {storage} from './store_modules/storage';
+import {autentication} from './store_modules/autentication';
 
 
 window.$ = window.jQuery = require('jquery')
@@ -22,36 +23,36 @@ Vue.use(Notifications);
 Vue.use(VueRouter)
 Vue.use(Vuetify);
 Vue.use(Vuex);
-import Lumber from './components/lumber/index.vue';
-const store = new Vuex.Store(StoreData);
-const router = new VueRouter({
-        routes,
-        mode: 'history'
-});
-import App from './views/App';
-  
-router.beforeEach((to,from,next)=>{
-    const requireAuth = to.matched.some(record=>record.meta.requireAuth);
-    const currenUser = store.state.currentUser;
 
-    if(requireAuth && !currenUser){
-        next('/login');
-    }else if(to.path == '/login' && currenUser)
-    {
-        next ('/');
-    }else{
-        next();
+const store = new Vuex.Store({
+    modules:{
+        template: storage,
+        auth: autentication,
     }
-})
+});
+const router = new VueRouter({
+    mode: 'history',
+    routes: routes
+});
+
+//proteccion de rutas
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+      if (store.getters['auth/isLoggedIn']) {
+        next()
+        return
+      }
+      next('/login') 
+    } else {
+      next() 
+    }
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-//Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('lumber-index', Lumber);
 
 const app = new Vue({
     el: '#app',
