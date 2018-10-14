@@ -33,7 +33,7 @@ export const autentication = {
                 console.log(resp.data.token);
                 localStorage.setItem('token', token)
 
-                axios.defaults.headers.common['Authorization'] = 'Bearer '+token
+                axios.defaults.headers.common['Authorization'] = 'Bearer '+token // para todas las consultas axios XD
                 commit('auth_success', token, user)
                 resolve(resp)
               })
