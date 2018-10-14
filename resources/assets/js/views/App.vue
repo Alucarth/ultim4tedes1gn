@@ -1,6 +1,7 @@
 <template>
 
  <v-app id="inspire">
+    <notifications group="foo" />
     <v-navigation-drawer
       fixed
       :clipped="$vuetify.breakpoint.mdAndUp"
