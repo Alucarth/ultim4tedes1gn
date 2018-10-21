@@ -143,4 +143,9 @@ class PackageController extends Controller
     public function createTransfer(Request $request) {
         return 123;
     }
+    public function importExcel(Request $request)
+    {
+        $path = $request->file('excel');
+        return $path;
+    }
 }

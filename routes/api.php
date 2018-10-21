@@ -32,6 +32,7 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('purchase','PurchaseController');
     Route::resource('package_transaction','PackageTransactionController');
     Route::resource('package','PackageController');    
+    Route::post('import_package','PackageController@importExcel');    
     Route::resource('provider','ProviderController');
     Route::resource('employee','EmployeeController');
     Route::resource('position','PositionController');
