@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Package;
 use Illuminate\Http\Request;
-
+use Maatwebsite\Excel\Facades\Excel;
+use Log;
 class PackageController extends Controller
 {
     /**
@@ -146,6 +147,12 @@ class PackageController extends Controller
     public function importExcel(Request $request)
     {
         $path = $request->file('excel');
-        return $path;
+        global $rows;
+        Excel::selectSheetsByIndex(0)->load($path, function($reader) {
+            global $rows;
+            $rows = $reader->select(array('cefo','fecha','madera', 'codigo', 'tipo', 'unidad','espesor','ancho','largo','cantidad','cantidad_pie','precio_unitario'))->get();
+        });
+        // Log::info(sizeof($rows));
+        return response()->json($rows);
     }
 }
