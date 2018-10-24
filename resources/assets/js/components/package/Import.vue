@@ -10,6 +10,32 @@
                 @change="onFilePicked"
             >
             <v-btn @click="store">importar</v-btn>
+            <v-data-table
+            :headers="headers"
+            :items="packages"
+            :search="search"
+            >
+            <template slot="items" slot-scope="props">
+                <td class="text-xs-left">{{ props.item.cefo }}</td>
+                <td class="text-xs-left">{{ props.item.fecha }}</td>
+                <td class="text-xs-left">{{ props.item.madera }}</td>
+                <td class="text-xs-left">{{ props.item.codigo }}</td>
+                <td class="text-xs-left">{{ props.item.tipo }}</td>
+                <td class="text-xs-left">{{ props.item.unidad }}</td>
+                <td class="text-xs-left">{{ props.item.espesor }}</td>
+                <td class="text-xs-left">{{ props.item.ancho }}</td>
+                <td class="text-xs-left">{{ props.item.largo }}</td>
+                <td class="text-xs-left">{{ props.item.cantidad }}</td>
+                <td class="text-xs-left">{{ props.item.cantidad_pie }}</td>
+                <td class="text-xs-left">{{ props.item.precio_unitario }}</td>
+                <td class="text-xs-left">actions</td>
+                
+                
+            </template>
+            <v-alert slot="no-results" :value="true" color="error" icon="warning">
+                Su busqueda para "{{ search }}" no se encontraron resultados.
+            </v-alert>
+            </v-data-table>
         </v-flex>
 </template>
 <script>
@@ -18,7 +44,24 @@ export default {
 
 		excelName: '',
 		excelUrl: '',
-		excelFile: ''
+		excelFile: '',
+        search: '',
+        headers: [
+            { text: 'CEFO', value: 'cefo' },
+            { text: 'Fecha', value: 'fecha' },
+            { text: 'Madera', value: 'madera' },
+            { text: 'Codigo', value: 'codigo' },
+            { text: 'Tipo', value: 'tipo' },
+            { text: 'Unidad ', value: 'unidad' },
+            { text: 'Espesor ', value: 'espesor' },
+            { text: 'Ancho ', value: 'ancho' },
+            { text: 'Largo ', value: 'largo' },
+            { text: 'Cantidad ', value: 'cantidad' },
+            { text: 'Canitdad Pie ', value: 'cantidad_pie' },
+            { text: 'Precio Unitario', value: 'precio_unitario' },
+            { text: 'Accion ' }
+        ],
+        packages:[],
     }),
     methods:{
         pickFile () {
@@ -55,7 +98,7 @@ export default {
             })
             .then(response => {                
                 console.log(response.data);
-                
+                this.packages = response.data;
             })
             .catch(function (error) {
                 console.log(error);
