@@ -11,9 +11,9 @@
             >
             <v-btn @click="store">importar</v-btn>
             <v-data-table
-            :headers="headers"
-            :items="packages"
-            :search="search"
+                :headers="headers"
+                :items="packages"
+                :search="search"
             >
             <template slot="items" slot-scope="props">
                 <td class="text-xs-left">{{ props.item.cefo }}</td>
