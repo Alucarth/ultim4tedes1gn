@@ -6,6 +6,9 @@ use App\Package;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Log;
+use App\Specie;
+use App\Type;
+use App\Unit;
 class PackageController extends Controller
 {
     /**
@@ -149,8 +152,27 @@ class PackageController extends Controller
         $path = $request->file('excel');
         global $rows;
         Excel::selectSheetsByIndex(0)->load($path, function($reader) {
+            
             global $rows;
-            $rows = $reader->select(array('cefo','fecha','madera', 'codigo', 'tipo', 'unidad','espesor','ancho','largo','cantidad','cantidad_pie','precio_unitario'))->get();
+            $result = $reader->select(array('cefo','fecha','madera', 'codigo', 'tipo', 'unidad','espesor','ancho','largo','cantidad','cantidad_pie','precio_unitario'))->get();
+            $rows =array();
+            foreach($result as $row)
+            {
+                $specie = Specie::where('name','=',$row->madera)->first();
+                // $row->specie_id = $specie?$specie->id:'';
+                $type = Type::where('name',$row->tipo)->first();
+                // $row->type_id = $type?$type->id:'';
+                $unit = Unit::where('name')->first();
+                // $row->unit_id = $unit?$unit->id:'';
+                if($specie && $type && $unit)
+                {
+                    $row->valid = true;
+                }else{
+                    $row->valid = false;
+                }
+                array_push($rows,$row);
+            }
+
         });
         // Log::info(sizeof($rows));
         return response()->json($rows);
