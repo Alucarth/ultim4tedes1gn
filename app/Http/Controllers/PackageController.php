@@ -162,19 +162,24 @@ class PackageController extends Controller
                 // $row->specie_id = $specie?$specie->id:'';
                 $type = Type::where('name',$row->tipo)->first();
                 // $row->type_id = $type?$type->id:'';
-                $unit = Unit::where('name')->first();
+                $unit = Unit::where('name',$row->unidad)->first();
                 // $row->unit_id = $unit?$unit->id:'';
+                
                 if($specie && $type && $unit)
                 {
-                    $row->valid = true;
+                    $row['valid'] = true;
                 }else{
-                    $row->valid = false;
+                    $row['valid']= false;
                 }
+                // Log::info($row);
                 array_push($rows,$row);
             }
 
         });
         // Log::info(sizeof($rows));
         return response()->json($rows);
+    }
+    public function saveExcel(Request $request){
+        return $request->all();
     }
 }
