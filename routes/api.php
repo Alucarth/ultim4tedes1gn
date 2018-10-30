@@ -33,6 +33,7 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('package_transaction','PackageTransactionController');
     Route::resource('package','PackageController');    
     Route::post('import_package','PackageController@importExcel');    
+    Route::post('save_packages','PackageController@saveExcel');    
     Route::resource('provider','ProviderController');
     Route::resource('employee','EmployeeController');
     Route::resource('position','PositionController');

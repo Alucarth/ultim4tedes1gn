@@ -9,7 +9,7 @@
                 accept="application/vnd.ms-excel"
                 @change="onFilePicked"
             >
-            <v-btn @click="store">importar</v-btn>
+            <v-btn @click="loadExcel">importar</v-btn> <v-btn @click="store"> Guardar</v-btn>
             <v-data-table
                 :headers="headers"
                 :items="packages"
@@ -28,7 +28,16 @@
                 <td class="text-xs-left">{{ props.item.cantidad }}</td>
                 <td class="text-xs-left">{{ props.item.cantidad_pie }}</td>
                 <td class="text-xs-left">{{ props.item.precio_unitario }}</td>
-                <td class="text-xs-left">actions</td>
+                <td class="text-xs-left">
+                      <v-badge :color="props.item.valid=true?'green':'red'" left>
+                        <span slot="badge" >!</span>
+                        <v-icon>
+                            edit
+                        </v-icon>
+                        </v-badge>
+                    <!-- <v-icon>edit</v-icon> -->
+                    <v-icon>delete</v-icon> 
+                </td>
                 
                 
             </template>
@@ -87,7 +96,7 @@ export default {
 				this.excelUrl = ''
 			}
         },
-        store(){
+        loadExcel(){
             console.log("mandando la hueva");
             var formData = new FormData();
             formData.append("excel", this.excelFile);
@@ -99,6 +108,19 @@ export default {
             .then(response => {                
                 console.log(response.data);
                 this.packages = response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+            this.dialog =false;      
+            // this.search();      
+        },
+        store(){
+            console.log("para guardado");
+            axios.post('api/auth/save_packages', this.packages)
+            .then(response => {                
+                console.log(response.data);
+                // this.packages = response.data;
             })
             .catch(function (error) {
                 console.log(error);
