@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Log;
 use App\Specie;
+use App\LumberInventory;
+use App\Lumber;
 use App\Type;
 use App\Unit;
 class PackageController extends Controller
@@ -159,12 +161,12 @@ class PackageController extends Controller
             foreach($result as $row)
             {
                 $specie = Specie::where('name','=',$row->madera)->first();
-                // $row->specie_id = $specie?$specie->id:'';
+                $row['specie_id'] = $specie?$specie->id:0;
                 $type = Type::where('name',$row->tipo)->first();
-                // $row->type_id = $type?$type->id:'';
+                $row['type_id'] = $type?$type->id:0;
                 $unit = Unit::where('name',$row->unidad)->first();
-                // $row->unit_id = $unit?$unit->id:'';
-                
+                $row['unit_id'] = $unit?$unit->id:0;
+   
                 if($specie && $type && $unit)
                 {
                     $row['valid'] = true;
@@ -180,6 +182,37 @@ class PackageController extends Controller
         return response()->json($rows);
     }
     public function saveExcel(Request $request){
+        
+        foreach($request->all() as $row)
+        {
+            $object = json_decode(json_encode($row)) ;
+            // Log::info($object->unit_id );
+            if($object->valid)
+            {
+                $lumber = Lumber::where('type_id',$object->type_id)
+                        ->where('specie_id',$object->specie_id)
+                        ->where('unit_id',$object->unit_id)
+                        ->where('high',$object->largo)
+                        ->where('width',$object->ancho)
+                        ->where('density',$object->espesor)
+                        ->first();
+                if(!$lumber){
+                    $lumber = new Lumber;
+                    $lumber->type_id= $object->type_id;
+                    $lumber->specie_id= $object->specie_id;
+                    $lumber->unit_id= $object->unit_id;
+                    $lumber->high= $object->largo;
+                    $lumber->width= $object->ancho;
+                    $lumber->density= $object->espesor;
+                    $lumber->save();
+                }
+                
+                
+                Log::info($lumber);
+
+                
+            }
+        }
         return $request->all();
     }
 }
