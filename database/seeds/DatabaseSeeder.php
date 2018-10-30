@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
                 	TypeSeeder::class,
                     ProviderSeeder::class,
                     SpecieSeeder::class,
+                    UnitSeeder::class,
                     LumberSeeder::class
                     ]);
     }

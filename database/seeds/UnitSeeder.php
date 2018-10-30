@@ -12,5 +12,7 @@ class UnitSeeder extends Seeder
     public function run()
     {
         //
+        DB::table('units')->insert(['code'=>'pie','name' => 'pie', 'description'=>'pie tablar']);
+
     }
 }
