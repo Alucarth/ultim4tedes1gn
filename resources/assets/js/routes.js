@@ -15,6 +15,7 @@ import EditPackage from './components/package/edit.vue';
 import TransferPackage from './components/package/transfer.vue';
 import Employee from './components/employee/index.vue';
 
+import ExcelImport from './components/package/Import.vue';
    
    export const routes= [
         {
@@ -172,6 +173,18 @@ import Employee from './components/employee/index.vue';
             name: 'employee',
             components:{ 
                 default:Employee,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
+        },
+        {
+            path: '/import_package',
+            name: 'import_package',
+            components:{ 
+                default:ExcelImport,
                 toolbar:Toolbar,
                 nav: Nav
             },

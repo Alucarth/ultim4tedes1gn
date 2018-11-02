@@ -79,6 +79,7 @@ export default {
                 { icon: 'group', text: 'Proveedores' , link: '/provider' },  
                 { icon: 'money', text: 'Compra de madera', link: '/purchase' },
                 { icon: 'view_agenda', text: 'Paquetes', link: '/package' },
+                { icon: 'cloud_upload', text: 'Importar Paquetes', link: '/import_package' },
                 { icon: 'work', text: 'Empleados', link: '/employee' },
             ],
         }

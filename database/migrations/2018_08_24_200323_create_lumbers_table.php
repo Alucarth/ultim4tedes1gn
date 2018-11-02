@@ -19,10 +19,13 @@ class CreateLumbersTable extends Migration
             $table->foreign('type_id')->references('id')->on('types');
             $table->integer('specie_id')->nullable();
             $table->foreign('specie_id')->references('id')->on('species');
+            $table->integer('unit_id')->nullable();
+            $table->foreign('unit_id')->references('id')->on('units');
             $table->decimal('high',13,2);
             $table->decimal('width',13,2);
             $table->decimal('density',13,2);
             $table->string('description')->nullable();
+
             $table->timestamps();
 			$table->softDeletes();  				
         });	
