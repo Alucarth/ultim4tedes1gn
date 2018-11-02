@@ -25,6 +25,9 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+//window.axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
+
+
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
