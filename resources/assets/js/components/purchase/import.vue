@@ -2,6 +2,15 @@
     	<v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
             <leyend>Importar Compras</leyend>
             <v-text-field label="Selecionar excel" @click='pickFile' v-model='excelName' prepend-icon='attach_file'></v-text-field>
+            <v-combobox                  
+                label="Proveedor"                
+                v-model="providerSelected"  
+                :items="providers"
+                item-text="name"
+                item-value="id"
+                placeholder="Seleccione un Proveedor"
+                persistent-hint>                                
+            </v-combobox>
             <input
                 type="file"
                 style="display: none"
@@ -10,9 +19,10 @@
                 @change="onFilePicked"
             >
             <v-btn @click="loadExcel">importar</v-btn> <v-btn @click="store"> Guardar</v-btn>
+             TOTAL {{ formatMoney(getTotal) }}
             <v-data-table
                 :headers="headers"
-                :items="packages"
+                :items="purchases"
                 :search="search"
             >
             <template slot="items" slot-scope="props">
@@ -70,7 +80,9 @@ export default {
             { text: 'Precio Unitario', value: 'precio_unitario' },
             { text: 'Accion ' }
         ],
-        packages:[],
+        providerSelected:null,
+        providers:[],
+        purchases:[],
     }),
     methods:{
         pickFile () {
@@ -107,7 +119,7 @@ export default {
             })
             .then(response => {                
                 console.log(response.data);
-                this.packages = response.data;
+                this.purchases = response.data;
             })
             .catch(function (error) {
                 console.log(error);
@@ -117,10 +129,10 @@ export default {
         },
         store(){
             console.log("para guardado");
-            axios.post('api/auth/save_purchases', this.packages)
+            axios.post('api/auth/save_purchases',{purchases: this.purchases, provider_id:this.providerSelected.id, amount: this.getTotal})
             .then(response => {                
                 console.log(response.data);
-                // this.packages = response.data;
+                // this.purchases = response.data;
             })
             .catch(function (error) {
                 console.log(error);
@@ -128,7 +140,28 @@ export default {
             this.dialog =false;      
             // this.search();      
         },
+        formatMoney(amount)
+        {
+            return "Bs "+numeral(amount).format("0,0.00");
+        }
     
+    },
+    computed:{
+        getTotal(){
+            
+            let amount = 0 ;
+            this.purchases.forEach(item => {
+                amount += item.cantidad * item.precio_unitario;
+            });
+            return amount;
+        }
+
+    },
+    mounted(){
+         axios.get('api/auth/getProviderData')
+                .then((response) => {                                       
+                    this.providers = response.data;                    
+                });  
     }
 }
 </script>

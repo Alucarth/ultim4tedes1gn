@@ -222,7 +222,7 @@ class ProviderController extends Controller
     }
     public function list()
     {
-        return Provider::select('id','name')->all();
+        return Provider::select('id','name')->get();
     }
 
     /**

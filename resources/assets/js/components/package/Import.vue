@@ -2,6 +2,7 @@
     	<v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
             
             <v-text-field label="Selecionar excel" @click='pickFile' v-model='excelName' prepend-icon='attach_file'></v-text-field>
+          
             <input
                 type="file"
                 style="display: none"
@@ -70,6 +71,7 @@ export default {
             { text: 'Precio Unitario', value: 'precio_unitario' },
             { text: 'Accion ' }
         ],
+
         packages:[],
     }),
     methods:{

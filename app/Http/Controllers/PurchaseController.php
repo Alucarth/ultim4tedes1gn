@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Purchase;
+use App\PurchaseLumber;
 use App\Specie;
 use App\LumberInventory;
 use App\Lumber;
@@ -12,6 +13,8 @@ use App\Type;
 use App\Unit;
 use App\PackageLumber;
 use App\Package;
+use App\Provider;
+use Log;
 class PurchaseController extends Controller
 {
     /**
@@ -186,10 +189,26 @@ class PurchaseController extends Controller
     }
     public function saveExcel(Request $request){
         
-        foreach($request->all() as $row)
+        $provider = Provider::find($request->provider_id);
+        
+        $purchase = null;
+        foreach($request->purchases as $row)
         {
             $object = json_decode(json_encode($row)) ;
-            // Log::info($object->unit_id );
+            Log::info(strtotime($object->fecha));
+            Log::info(date('Y-m-d',strtotime($object->fecha)));
+            if(!$purchase){
+
+                $purchase = new Purchase;
+                $purchase->date = date('Y-m-d',strtotime($object->fecha));
+                $purchase->cefo = $object->cefo;
+                $purchase->provider_id = $provider->id;
+                $purchase->description = "importacion de compra via excel";
+                $purchase->amount = $request->amount;
+                $purchase->save();
+            }
+
+
             if($object->valid)
             {
                 $lumber = Lumber::where('type_id',$object->type_id)
@@ -211,50 +230,12 @@ class PurchaseController extends Controller
                     $lumber->save();
                 }
                 
-                $inventory = LumberInventory::where('lumber_id',$lumber->id)->first();
-
-                if(!$inventory)
-                {
-                    $inventory = new LumberInventory;
-                    $inventory->lumber_id = $inventory->lumber_id;
-                    $inventory->minimum = 0;
-                    $inventory->maximum = 0;
-                    $inventory->average = 0;
-                    $inventory->quantity = 0;
-                    $inventory->price = 0;
-                    $inventory->storage_id = 1;//almacen por de fecto consultar
-                    $inventory->save();
-                }
+                $purchase_lumber = new PurchaseLumber;
+                $purchase_lumber->purchase_id = $purchase->id;
+                $purchase_lumber->lumber_id = $lumber->id;
+                $purchase_lumber->quantity = $object->cantidad;
+                $purchase_lumber->save();
                 
-                // $inventory->quantity += $object->cantidad;
-                $inventory->price = $object->precio_unitario;
-                $inventory->save();
-                // hasta aqui guardado en inventario
-
-                $package =  Package::where('name',$object->cefo)
-                                    ->where('code',$object->codigo)
-                                    ->first();
-                if(!$package){
-                    $package = new Package;
-                    $package->name = $object->cefo;
-                    $package->code = $object->codigo;
-                    $package->quantity = 0;
-                    $package->storage_id = 1;
-                    $package->save();
-                }
-
-                $package->quantity += $object->cantidad;
-                $package->save();
-
-                $package_lumber = new PackageLumber;
-                $package_lumber->package_id = $package->id;
-                $package_lumber->lumber_id = $lumber->id;
-                $package_lumber->quantity = $object->cantidad;
-                $package_lumber->save();
-
-
-                //Log::info($lumber);
-
                 
             }
         }
