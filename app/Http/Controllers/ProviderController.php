@@ -220,6 +220,10 @@ class ProviderController extends Controller
         // $provider = Provider::find($id)->with('contacts')->first();
         
     }
+    public function list()
+    {
+        return Provider::select('id','name')->get();
+    }
 
     /**
      * Remove the specified resource from storage.

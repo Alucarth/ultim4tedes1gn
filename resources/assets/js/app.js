@@ -39,6 +39,8 @@ import {autentication} from './store_modules/autentication';
 
 
 window.Vue = require('vue');
+window.numeral = require('numeral');
+
 Vue.use(Notifications);
 Vue.use(VueRouter)
 Vue.use(Vuetify);

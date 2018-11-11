@@ -3,7 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Purchase;
+use App\PurchaseLumber;
+use App\Specie;
+use App\LumberInventory;
+use App\Lumber;
+use App\Type;
+use App\Unit;
+use App\PackageLumber;
+use App\Package;
+use App\Provider;
+use Log;
 class PurchaseController extends Controller
 {
     /**
@@ -143,5 +154,91 @@ class PurchaseController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function importExcel(Request $request)
+    {
+        $path = $request->file('excel');
+        global $rows;
+        Excel::selectSheetsByIndex(0)->load($path, function($reader) {
+            
+            global $rows;
+            $result = $reader->select(array('cefo','fecha','madera',  'tipo', 'unidad','espesor','ancho','largo','cantidad','cantidad_pie','precio_unitario'))->get();
+            $rows =array();
+            foreach($result as $row)
+            {
+                $specie = Specie::where('name','=',$row->madera)->first();
+                $row['specie_id'] = $specie?$specie->id:0;
+                $type = Type::where('name',$row->tipo)->first();
+                $row['type_id'] = $type?$type->id:0;
+                $unit = Unit::where('name',$row->unidad)->first();
+                $row['unit_id'] = $unit?$unit->id:0;
+   
+                if($specie && $type && $unit)
+                {
+                    $row['valid'] = true;
+                }else{
+                    $row['valid']= false;
+                }
+                // Log::info($row);
+                array_push($rows,$row);
+            }
+
+        });
+        // Log::info(sizeof($rows));
+        return response()->json($rows);
+    }
+    public function saveExcel(Request $request){
+        
+        $provider = Provider::find($request->provider_id);
+        
+        $purchase = null;
+        foreach($request->purchases as $row)
+        {
+            $object = json_decode(json_encode($row)) ;
+            Log::info(strtotime($object->fecha));
+            Log::info(date('Y-m-d',strtotime($object->fecha)));
+            if(!$purchase){
+
+                $purchase = new Purchase;
+                $purchase->date = date('Y-m-d',strtotime($object->fecha));
+                $purchase->cefo = $object->cefo;
+                $purchase->provider_id = $provider->id;
+                $purchase->description = "importacion de compra via excel";
+                $purchase->amount = $request->amount;
+                $purchase->save();
+            }
+
+
+            if($object->valid)
+            {
+                $lumber = Lumber::where('type_id',$object->type_id)
+                        ->where('specie_id',$object->specie_id)
+                        ->where('unit_id',$object->unit_id)
+                        ->where('high',$object->largo)
+                        ->where('width',$object->ancho)
+                        ->where('density',$object->espesor)
+                        ->first();
+                if(!$lumber){
+
+                    $lumber = new Lumber;
+                    $lumber->type_id= $object->type_id;
+                    $lumber->specie_id= $object->specie_id;
+                    $lumber->unit_id= $object->unit_id;
+                    $lumber->high= $object->largo;
+                    $lumber->width= $object->ancho;
+                    $lumber->density= $object->espesor;
+                    $lumber->save();
+                }
+                
+                $purchase_lumber = new PurchaseLumber;
+                $purchase_lumber->purchase_id = $purchase->id;
+                $purchase_lumber->lumber_id = $lumber->id;
+                $purchase_lumber->quantity = $object->cantidad;
+                $purchase_lumber->save();
+                
+                
+            }
+        }
+        return $request->all();
     }
 }
