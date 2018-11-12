@@ -1,5 +1,5 @@
 <template>
-  <p>Brian de Mena Amaru</p>
+  <p>DAVID Y NADIA</p>
 </template>
 <script>
 // console.log(localStorage.getItem('token'));
