@@ -2,7 +2,15 @@
     	<v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
             
             <v-text-field label="Selecionar excel" @click='pickFile' v-model='excelName' prepend-icon='attach_file'></v-text-field>
-          
+            <v-combobox                  
+                label="Almacen"                
+                v-model="storageSelected"  
+                :items="storages"
+                item-text="name"
+                item-value="id"
+                placeholder="Seleccione un Almacen"
+                persistent-hint>                                
+            </v-combobox>
             <input
                 type="file"
                 style="display: none"
@@ -71,7 +79,8 @@ export default {
             { text: 'Precio Unitario', value: 'precio_unitario' },
             { text: 'Accion ' }
         ],
-
+        storageSelected:null,
+        storages:[],
         packages:[],
     }),
     methods:{
@@ -119,7 +128,7 @@ export default {
         },
         store(){
             console.log("para guardado");
-            axios.post('api/auth/save_packages', this.packages)
+            axios.post('api/auth/save_packages',{packages:this.packages,storage_id: this.storageSelected.id } )
             .then(response => {                
                 console.log(response.data);
                 // this.packages = response.data;
@@ -131,6 +140,13 @@ export default {
             // this.search();      
         },
     
+    },
+    mounted(){
+         axios.get('api/auth/storage')
+                .then((response) => {    
+                    console.log(response);                                   
+                    this.storages = response.data;                    
+                });  
     }
 }
 </script>

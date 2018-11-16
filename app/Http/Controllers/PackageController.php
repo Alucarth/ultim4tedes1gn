@@ -12,6 +12,7 @@ use App\Lumber;
 use App\Type;
 use App\Unit;
 use App\PackageLumber;
+use App\Storage;
 class PackageController extends Controller
 {
     /**
@@ -184,6 +185,8 @@ class PackageController extends Controller
     }
     public function saveExcel(Request $request){
         
+        $store = Storage::find($request->storage_id);
+
         foreach($request->all() as $row)
         {
             $object = json_decode(json_encode($row)) ;
@@ -209,25 +212,7 @@ class PackageController extends Controller
                     $lumber->save();
                 }
                 
-                $inventory = LumberInventory::where('lumber_id',$lumber->id)->first();
-
-                if(!$inventory)
-                {
-                    $inventory = new LumberInventory;
-                    $inventory->lumber_id = $inventory->lumber_id;
-                    $inventory->minimum = 0;
-                    $inventory->maximum = 0;
-                    $inventory->average = 0;
-                    $inventory->quantity = 0;
-                    $inventory->price = 0;
-                    $inventory->storage_id = 1;//almacen por de fecto consultar
-                    $inventory->save();
-                }
-                
-                // $inventory->quantity += $object->cantidad;
-                $inventory->price = $object->precio_unitario;
-                $inventory->save();
-                // hasta aqui guardado en inventario
+                            
 
                 $package =  Package::where('name',$object->cefo)
                                     ->where('code',$object->codigo)
@@ -237,16 +222,22 @@ class PackageController extends Controller
                     $package->name = $object->cefo;
                     $package->code = $object->codigo;
                     $package->quantity = 0;
-                    $package->storage_id = 1;
+                    $package->storage_id = $store->id;
                     $package->save();
                 }
 
                 $package->quantity += $object->cantidad;
                 $package->save();
 
-                $package_lumber = new PackageLumber;
-                $package_lumber->package_id = $package->id;
-                $package_lumber->lumber_id = $lumber->id;
+                $package_lumber = PackageLumber::where('package_id',$package->id)->where('lumber_id')->first();
+                if(!$package_lumber)
+                {
+                    $package_lumber = new PackageLumber;
+                    $package_lumber->package_id = $package->id;
+                    $package_lumber->lumber_id = $lumber->id;
+                    $package_lumber->quantity = 0;
+                    $package_lumber->save();
+                }
                 $package_lumber->quantity = $object->cantidad;
                 $package_lumber->save();
 
