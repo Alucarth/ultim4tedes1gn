@@ -1,25 +1,102 @@
 <template>
-    	<v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
-            <legend>Importar Compras</legend>
-            <v-text-field label="Selecionar excel" @click='pickFile' v-model='excelName' prepend-icon='attach_file'></v-text-field>
-            <v-combobox                  
-                label="Proveedor"                
-                v-model="providerSelected"  
-                :items="providers"
-                item-text="name"
-                item-value="id"
-                placeholder="Seleccione un Proveedor"
-                persistent-hint>                                
-            </v-combobox>
-            <input
-                type="file"
-                style="display: none"
-                ref="excel"
-                accept="application/vnd.ms-excel"
-                @change="onFilePicked"
-            >
-            <v-btn @click="loadExcel">importar</v-btn> <v-btn @click="store"> Guardar</v-btn>
-             TOTAL {{ formatMoney(getTotal) }}
+<v-card>
+        <v-card-title primary-title>
+          <div>
+            <h3 class="headline mb-0">Importacion de Compras</h3>
+          </div>
+        </v-card-title>
+        <v-card-text>
+            <v-container grid-list-md text-xs-center>
+                <v-layout row wrap>
+                <v-flex xs6>
+                    <v-layout row wrap> 
+                        <v-flex xs12>
+                            <v-combobox                  
+                                label="Proveedor"                
+                                v-model="providerSelected"  
+                                :items="providers"
+                                item-text="name"
+                                item-value="id"
+                                placeholder="Seleccione un Proveedor"
+                                persistent-hint>                                
+                            </v-combobox>
+                            <input
+                                type="file"
+                                style="display: none"
+                                ref="excel"
+                                accept="application/vnd.ms-excel"
+                                @change="onFilePicked"
+                            >
+                        </v-flex>
+                        <v-flex xs12>
+                            <v-text-field label="Selecionar excel" @click='pickFile' v-model='excelName' prepend-icon='attach_file'></v-text-field>
+                        </v-flex>
+                     
+                        <v-flex xs12>
+                            <v-btn @click="loadExcel" ><v-icon>file_upload</v-icon>importar </v-btn>
+                            <v-btn @click="store"> <v-icon>save</v-icon> Guardar</v-btn>
+                        </v-flex>
+                    </v-layout>
+
+                </v-flex>
+                <v-flex xs6 v-if="details.length >0">
+                    <v-card >
+                        <v-list two-line>
+                        <template v-for="(item, index) in details">
+                            <v-subheader
+                            v-if="item.header"
+                            :key="item.header"
+                            >
+                            {{ item.header }}
+                            </v-subheader>
+
+                            <v-divider
+                            v-else-if="item.divider"
+                            :inset="item.inset"
+                            :key="index"
+                            ></v-divider>
+
+                            <v-list-tile
+                            v-else
+                            :key="item.title"
+                            avatar
+                        
+                            >
+                            <v-list-tile-avatar>
+                                <v-icon>{{item.icon}}</v-icon>
+                            </v-list-tile-avatar>
+
+                            <v-list-tile-content>
+                                <v-list-tile-title v-html="item.title"></v-list-tile-title>
+                                <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                            </v-list-tile-content>
+                            </v-list-tile>
+                        </template>
+                        </v-list>
+                    </v-card>
+                </v-flex>
+                
+                </v-layout>
+                <!-- <v-layout row>
+                    <v-flex xs6>
+                        
+                    </v-flex>
+                </v-layout>
+                <v-layout row>
+                   <v-flex xs6>
+                        
+                        
+                    </v-flex>
+                    <v-flex xs6>
+                       
+                    </v-flex>
+                </v-layout> -->
+            </v-container>
+
+
+
+            <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
+        
             <v-data-table
                 :headers="headers"
                 :items="purchases"
@@ -42,6 +119,7 @@
                 <td class="text-xs-left">{{ props.item.espesor }}</td>
                 <td class="text-xs-left">{{ props.item.ancho }}</td>
                 <td class="text-xs-left">{{ props.item.largo }}</td>
+                <td class="text-xs-left">{{ props.item.state.name }}</td>
                 <td class="text-xs-left">{{ props.item.cantidad }}</td>
                 <td class="text-xs-left">{{ props.item.cantidad_pie }}</td>
                 <td class="text-xs-left">{{ props.item.precio_unitario }}</td>
@@ -141,10 +219,21 @@
                     <v-flex xs12 sm6 md4>
                         <v-text-field label="Largo" hint="Ingrese largo" required v-model="item.largo"></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm6 md6>
+                    <v-flex xs12 sm6 md4> 
+                        <v-combobox                  
+                            label="Estado"                
+                            v-model="item.state"  
+                            :items="states"
+                            item-text="name"
+                            item-value="id"
+                            placeholder="Seleccione Estado"
+                            persistent-hint>                                
+                        </v-combobox>
+                    </v-flex>
+                    <v-flex xs12 sm6 md4>
                         <v-text-field label="Cantidad" hint="Ingrese cantidad" required v-model="item.cantidad"></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm6 md6>
+                    <v-flex xs12 sm6 md4>
                         <v-text-field label="Cantidad Pie" hint="Ingrese cantidad" required v-model="item.cantidad_pie"></v-text-field>
                     </v-flex>
                     <!-- <v-flex xs12 sm6 md4> -->
@@ -192,6 +281,10 @@
         </v-dialog>
 
         </v-flex>
+        </v-card-text>
+       
+</v-card>
+    	
 </template>
 <script>
 export default {
@@ -208,12 +301,13 @@ export default {
             { text: 'Especie', value: 'especie' },
             // { text: 'Codigo', value: 'codigo' },
             { text: 'Tipo', value: 'tipo' },
-            { text: 'Unidad ', value: 'unidad' },
-            { text: 'Espesor ', value: 'espesor' },
-            { text: 'Ancho ', value: 'ancho' },
-            { text: 'Largo ', value: 'largo' },
-            { text: 'Cantidad ', value: 'cantidad' },
-            { text: 'Canitdad Pie ', value: 'cantidad_pie' },
+            { text: 'Unidad', value: 'unidad' },
+            { text: 'Espesor', value: 'espesor' },
+            { text: 'Ancho', value: 'ancho' },
+            { text: 'Largo', value: 'largo' },
+            { text: 'Estado', value: 'estado' },
+            { text: 'Cantidad', value: 'cantidad' },
+            { text: 'Canitdad Pie', value: 'cantidad_pie' },
             { text: 'Precio Unitario', value: 'precio_unitario' },
             { text: 'Accion ' }
         ],
@@ -223,6 +317,8 @@ export default {
         species:[],
         types:[],
         units:[],
+        states:[],
+        details:[],
         dialog:false,
         item: null,
         indexItem : -1,
@@ -265,6 +361,26 @@ export default {
             .then(response => {                
                 console.log(response.data);
                 this.purchases = response.data;
+                this.details = [
+                    { header: 'Detalle de la Compra' },
+                    {
+                        icon: 'functions',
+                        title: ''+this.getQuantity,
+                        subtitle: 'Cantidad'
+                    },
+                    { divider: true, inset: true },
+                    {
+                        icon: 'functions',
+                        title: ''+this.getQuantityFeet,
+                        subtitle:  'Cantidad Pies'
+                    },
+                    { divider: true, inset: true },
+                    {
+                        icon: 'fa-money',
+                        title: 'Bs '+this.formatMoney(this.getTotal),
+                        subtitle: 'Total',
+                    }
+                ]
             })
             .catch(function (error) {
                 console.log(error);
@@ -322,6 +438,23 @@ export default {
                 amount += item.cantidad * item.precio_unitario;
             });
             return amount;
+        },
+        getQuantity(){
+            
+            let amount = 0 ;
+            this.purchases.forEach(item => {
+                amount += item.cantidad;
+            });
+            return amount;
+        },
+        getQuantityFeet(){
+            
+            let amount = 0 ;
+            this.purchases.forEach(item => {
+                amount = amount + parseFloat(item.cantidad_pie) ;
+               // console.log(amount)
+            });
+            return numeral(amount).format('0,0.00');
         }
     },
     mounted(){
@@ -342,6 +475,11 @@ export default {
          axios.get('api/auth/unit')
                 .then((response) => {                                       
                     this.units = response.data.units;                    
+                    // console.log(response.data);
+                });  
+         axios.get('api/auth/state')
+                .then((response) => {                                       
+                    this.states = response.data.states;                    
                     console.log(response.data);
                 });  
 
