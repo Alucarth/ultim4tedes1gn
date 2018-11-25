@@ -30,6 +30,7 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('storage','StorageController');
     Route::resource('type','TypeController');
     Route::resource('unit','UnitController');
+    Route::resource('state','StateController');
     Route::resource('purchase','PurchaseController');
     Route::resource('package_transaction','PackageTransactionController');
     Route::resource('package','PackageController');    

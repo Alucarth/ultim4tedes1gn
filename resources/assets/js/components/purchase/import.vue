@@ -119,6 +119,7 @@
                 <td class="text-xs-left">{{ props.item.espesor }}</td>
                 <td class="text-xs-left">{{ props.item.ancho }}</td>
                 <td class="text-xs-left">{{ props.item.largo }}</td>
+                <td class="text-xs-left">{{ props.item.state.name }}</td>
                 <td class="text-xs-left">{{ props.item.cantidad }}</td>
                 <td class="text-xs-left">{{ props.item.cantidad_pie }}</td>
                 <td class="text-xs-left">{{ props.item.precio_unitario }}</td>
@@ -218,10 +219,21 @@
                     <v-flex xs12 sm6 md4>
                         <v-text-field label="Largo" hint="Ingrese largo" required v-model="item.largo"></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm6 md6>
+                    <v-flex xs12 sm6 md4> 
+                        <v-combobox                  
+                            label="Estado"                
+                            v-model="item.state"  
+                            :items="states"
+                            item-text="name"
+                            item-value="id"
+                            placeholder="Seleccione Estado"
+                            persistent-hint>                                
+                        </v-combobox>
+                    </v-flex>
+                    <v-flex xs12 sm6 md4>
                         <v-text-field label="Cantidad" hint="Ingrese cantidad" required v-model="item.cantidad"></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm6 md6>
+                    <v-flex xs12 sm6 md4>
                         <v-text-field label="Cantidad Pie" hint="Ingrese cantidad" required v-model="item.cantidad_pie"></v-text-field>
                     </v-flex>
                     <!-- <v-flex xs12 sm6 md4> -->
@@ -289,12 +301,13 @@ export default {
             { text: 'Especie', value: 'especie' },
             // { text: 'Codigo', value: 'codigo' },
             { text: 'Tipo', value: 'tipo' },
-            { text: 'Unidad ', value: 'unidad' },
-            { text: 'Espesor ', value: 'espesor' },
-            { text: 'Ancho ', value: 'ancho' },
-            { text: 'Largo ', value: 'largo' },
-            { text: 'Cantidad ', value: 'cantidad' },
-            { text: 'Canitdad Pie ', value: 'cantidad_pie' },
+            { text: 'Unidad', value: 'unidad' },
+            { text: 'Espesor', value: 'espesor' },
+            { text: 'Ancho', value: 'ancho' },
+            { text: 'Largo', value: 'largo' },
+            { text: 'Estado', value: 'estado' },
+            { text: 'Cantidad', value: 'cantidad' },
+            { text: 'Canitdad Pie', value: 'cantidad_pie' },
             { text: 'Precio Unitario', value: 'precio_unitario' },
             { text: 'Accion ' }
         ],
@@ -304,6 +317,7 @@ export default {
         species:[],
         types:[],
         units:[],
+        states:[],
         details:[],
         dialog:false,
         item: null,
@@ -363,7 +377,7 @@ export default {
                     { divider: true, inset: true },
                     {
                         icon: 'fa-money',
-                        title: 'Bs '+this.getTotal,
+                        title: 'Bs '+this.formatMoney(this.getTotal),
                         subtitle: 'Total',
                     }
                 ]
@@ -423,7 +437,7 @@ export default {
             this.purchases.forEach(item => {
                 amount += item.cantidad * item.precio_unitario;
             });
-            return numeral(amount).format('0,0.00');
+            return amount;
         },
         getQuantity(){
             
@@ -461,6 +475,11 @@ export default {
          axios.get('api/auth/unit')
                 .then((response) => {                                       
                     this.units = response.data.units;                    
+                    // console.log(response.data);
+                });  
+         axios.get('api/auth/state')
+                .then((response) => {                                       
+                    this.states = response.data.states;                    
                     console.log(response.data);
                 });  
 
