@@ -173,6 +173,8 @@ class PurchaseController extends Controller
                 $unit = Unit::where('name',$row->unidad)->first();
                 $row['unit'] = $unit??0;
                 
+                $row['cantidad_pie'] = number_format($row['cantidad_pie'], 2);
+
                 $row['fecha'] =date('Y-m-d',strtotime($row->fecha));
 
                 if($specie && $type && $unit)
@@ -236,6 +238,7 @@ class PurchaseController extends Controller
                 $purchase_lumber->purchase_id = $purchase->id;
                 $purchase_lumber->lumber_id = $lumber->id;
                 $purchase_lumber->quantity = $object->cantidad;
+                $purchase_lumber->quantity_feet = $object->cantidad_pie;
                 $purchase_lumber->save();
                 
                 
