@@ -162,17 +162,19 @@ class PurchaseController extends Controller
         Excel::selectSheetsByIndex(0)->load($path, function($reader) {
             
             global $rows;
-            $result = $reader->select(array('cefo','fecha','madera',  'tipo', 'unidad','espesor','ancho','largo','cantidad','cantidad_pie','precio_unitario'))->get();
+            $result = $reader->select(array('cefo','fecha','especie',  'tipo', 'unidad','espesor','ancho','largo','cantidad','cantidad_pie','precio_unitario'))->get();
             $rows =array();
             foreach($result as $row)
             {
-                $specie = Specie::where('name','=',$row->madera)->first();
-                $row['specie_id'] = $specie?$specie->id:0;
+                $specie = Specie::where('name','=',$row->especie)->first();
+                $row['specie'] = $specie??0;
                 $type = Type::where('name',$row->tipo)->first();
-                $row['type_id'] = $type?$type->id:0;
+                $row['type'] = $type??0;
                 $unit = Unit::where('name',$row->unidad)->first();
-                $row['unit_id'] = $unit?$unit->id:0;
-   
+                $row['unit'] = $unit??0;
+                
+                $row['fecha'] =date('Y-m-d',strtotime($row->fecha));
+
                 if($specie && $type && $unit)
                 {
                     $row['valid'] = true;
@@ -211,9 +213,9 @@ class PurchaseController extends Controller
 
             if($object->valid)
             {
-                $lumber = Lumber::where('type_id',$object->type_id)
-                        ->where('specie_id',$object->specie_id)
-                        ->where('unit_id',$object->unit_id)
+                $lumber = Lumber::where('type_id',$object->type->id)
+                        ->where('specie_id',$object->specie->id)
+                        ->where('unit_id',$object->unit->id)
                         ->where('high',$object->largo)
                         ->where('width',$object->ancho)
                         ->where('density',$object->espesor)
@@ -221,9 +223,9 @@ class PurchaseController extends Controller
                 if(!$lumber){
 
                     $lumber = new Lumber;
-                    $lumber->type_id= $object->type_id;
-                    $lumber->specie_id= $object->specie_id;
-                    $lumber->unit_id= $object->unit_id;
+                    $lumber->type_id= $object->type->id;
+                    $lumber->specie_id= $object->specie->id;
+                    $lumber->unit_id= $object->unit->id;
                     $lumber->high= $object->largo;
                     $lumber->width= $object->ancho;
                     $lumber->density= $object->espesor;
