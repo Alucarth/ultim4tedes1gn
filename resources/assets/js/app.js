@@ -61,6 +61,19 @@ const router = new VueRouter({
     routes: routes
 });
 
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+      if (store.getters['auth/isLoggedIn']) {
+        next()
+        return
+      }
+      next('/login') 
+    } else {
+      next() 
+    }
+});
+
+
 // //proteccion de rutas
 // router.beforeEach((to, from, next) => {
 //     if(to.matched.some(record => record.meta.requiresAuth)) {
