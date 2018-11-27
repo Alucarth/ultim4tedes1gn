@@ -83,6 +83,7 @@
 </template>
 <script>
 console.log("toolbar XD");
+import { mapState } from 'vuex';
 export default {
     data: () => ({
       menu: false, 
@@ -96,9 +97,14 @@ export default {
             this.$store.commit('template/updateDrawer',value);
           }
         },
-        user(){
-           return this.$store.state.auth.user;
-        }
+        ...mapState({
+          user: state => state.auth.user,
+        })
+        // user(){
+        //   console.log("IMPRIMIENDO STORE AUTH  USER ");
+        //   // console.log(this.$store.getters(['auth/authStatus']) );
+        //    return this.$store.state.auth.user;
+        // }
        
     },
     methods:{
