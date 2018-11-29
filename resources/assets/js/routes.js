@@ -14,6 +14,7 @@ import Package from './components/package/index.vue';
 import EditPackage from './components/package/edit.vue';
 import TransferPackage from './components/package/transfer.vue';
 import Employee from './components/employee/index.vue';
+import Inventory from './components/inventory/index.vue';
 
 import ExcelImport from './components/package/Import.vue';
 import ExcelImportPurchases from './components/purchase/import.vue';
@@ -205,6 +206,18 @@ import ExcelImportPurchases from './components/purchase/import.vue';
             meta: { 
                 requiresAuth: true
             }    
+        },
+        {
+            path: '/inventory',
+            name: 'inventory',
+            components: {
+                default: Inventory,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
         },
     ];
     
