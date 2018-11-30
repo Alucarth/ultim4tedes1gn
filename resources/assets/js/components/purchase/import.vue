@@ -462,7 +462,7 @@ export default {
                 .then((response) => {                                       
                     this.providers = response.data;                    
                 });  
-         axios.get('api/auth/getProviderData')
+         axios.get('api/auth/getSpecieData')
                 .then((response) => {                                       
                     this.species = response.data;                    
                     // console.log(response.data);
