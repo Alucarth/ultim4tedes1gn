@@ -1,37 +1,54 @@
 <template>
     <v-card>
         <v-card-title>
-            Inventario
+            Insumos
         <v-spacer></v-spacer>
 
-        <!-- <v-dialog v-model="dialog" max-width="500px">            
+        <v-dialog v-model="dialog" max-width="500px">            
             <v-card>
             <v-card-title>
                 <span class="headline">{{ formTitle }}</span>
             </v-card-title>
-            <v-card-text v-if="newStorage">
+
+            <v-card-text v-if="newInventory">
                 <v-container grid-list-md>
                  <v-layout wrap>                   
                      <v-flex xs12>
-                        <v-text-field label="Nombre" v-model="newStorage.name" ></v-text-field>
+                        <v-text-field label="Code" v-model="newIventory.code" ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm6>
+                        <v-select                  
+                        label="Tipo"
+                        v-model="newIventory.type_inventory_id"
+                        :items="inventory_types"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion del tipo seleccionado`"
+                        persistent-hint>
+                        </v-select>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="Descripción" v-model="newStorage.description" ></v-text-field>
+                        <v-text-field label="Descripción" v-model="newInventory.description" ></v-text-field>
                     </v-flex>
+                    <v-switch
+                        :label="'Activo'"
+                        v-model="newInventory.is_enabled"
+                    ></v-switch>
                 </v-layout>
                 </v-container>
             </v-card-text>
+
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="store(newStorage)" v-if="editedIndex === -1">Guardar</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newStorage)" v-else>Actualizar</v-btn>
+                <v-btn color="blue darken-1" flat @click="store(newInventory)" v-if="editedIndex === -1">Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="update(newInventory)" v-else>Actualizar</v-btn>
             </v-card-actions>
             </v-card>
-        </v-dialog> -->
+        </v-dialog>
 
-
-<v-btn @click="create()" color="primary" dark class="mb-2">Nuevo</v-btn>    
+        <v-btn to="/package/transfer" color="primary" dark class="mb-2">Transferencias</v-btn>
+        <v-btn @click="create()" color="primary" dark class="mb-2">Nuevo</v-btn>    
         </v-card-title>
         <v-data-table
         :headers="headers"
@@ -73,18 +90,10 @@
            </tr>
         </template>
         <template slot="items"  slot-scope="props">
-            <!-- <tr @click="props.expanded = !props.expanded"> -->                
-                <td class="text-xs-left" >{{ props.item.lumber.high }}</td>
-                <td class="text-xs-left">{{ props.item.lumber.width }}</td>
-                <td class="text-xs-left">{{ props.item.lumber.density }}</td>
-                <td class="text-xs-left">{{ props.item.lumber.specie.name }}</td>
-                <td class="text-xs-left">{{ props.item.lumber.type.name }}</td>
-                <td class="text-xs-left">{{ props.item.minimum }}</td>
-                <td class="text-xs-left">{{ props.item.average }}</td>
-                <td class="text-xs-left">{{ props.item.maximum }}</td>
-                <td class="text-xs-left">{{ props.item.price }}</td>
-                <td class="text-xs-left">{{ props.item.quantity }}</td>
-
+            <!-- <tr @click="props.expanded = !props.expanded"> -->
+                <td class="text-xs-left" >{{ props.item.id }}</td>            
+                <td class="text-xs-left">{{ props.item.name }}</td>
+                <td class="text-xs-left">{{ props.item.description }}</td>                    
                 <td class="justify-center layout px-0">
                     <v-icon
                         small
@@ -110,9 +119,9 @@
             <!-- </tr> -->
         </template>
         <template slot="expand" slot-scope="props">
-            <v-card flat v-if="storage">
-                <v-card-text>{{ storage.name }}</v-card-text>
-                <v-card-text>{{ storage.description }}</v-card-text>
+            <v-card flat v-if="inventory">
+                <v-card-text>{{ inventory.name }}</v-card-text>
+                <v-card-text>{{ inventory.description }}</v-card-text>
             </v-card>
         </template>
 
@@ -132,16 +141,14 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'Alto', value: 'id' },        
-            { text: 'Ancho', value: 'name' },
-            { text: 'Densidad', value: 'density' },          
-            { text: 'Especie', value: 'specie' },
-            { text: 'Tipo', value: 'type' },
+            { text: 'ID', value: 'id' },        
+            { text: 'Nombre', value: 'name' },
+            { text: 'Descripcion', value: 'description' },            
         ],                
-        storages: [],        
-        storage: null,
-        newStorage: null,
-        totalStorage: 0,        
+        inventories: [],        
+        inventory: null,
+        newInventory: null,
+        totalInventory: 0,        
         loading: true,
         filterName: 'name',
         filterValue: '',   
@@ -156,11 +163,11 @@ export default {
     },
     mounted()
     {
-        this.getStorages().then(
+        this.getInventories().then(
             this.getDataFromApi()
                 .then(data => {
-                this.storages = data.storages
-                this.totalStorage = data.total
+                this.inventories = data.inventories
+                this.totalInventory = data.total
                 })
         );                
     },
@@ -168,12 +175,15 @@ export default {
         getDataFromApi () {            
             return new Promise((resolve, reject) => {
             const { sortBy, descending, page, rowsPerPage } = this.pagination
-            let items= this.storages;
+
+            let items= this.inventories;
             const total = items.length;
+
             if (this.pagination.sortBy) {
                 items = items.sort((a, b) => {
                 const sortA = a[sortBy]
                 const sortB = b[sortBy]
+
                 if (descending) {
                     if (sortA < sortB) return 1
                     if (sortA > sortB) return -1
@@ -185,9 +195,11 @@ export default {
                 }
                 })
             }
+
             if (rowsPerPage > 0) {
                 items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
             }
+
                 resolve({
                 items,
                 total
@@ -195,31 +207,27 @@ export default {
          
             })
         },
-        getStorages(withFilter){
-            console.log("starting receiving data");
+        getInventories(withFilter){            
             return new Promise((resolve,reject)=>{
                this.loading = true
-               let filterName = withFilter==true?this.filterName:'name';
-               console.log(withFilter);
-               axios.get('/api/auth/getStorageData',{ name:filterName,value:this.filterValue})
-                    .then((response) => {
-                                        // let providers = response.data;
-                                        console.log(response.data);
-                            this.storages = response.data.storages;
-                                        this.loading = false
-                                        resolve();
-                                    });
+               let filterName = withFilter==true?this.filterName:'name';               
+               axios.get('/api/auth/getInventoryData',{ name:filterName,value:this.filterValue})
+                    .then((response) => {                                        
+                            this.inventories = response.data.inventories;
+                                this.loading = false
+                                resolve();
+                            });
                         });
         },
         getResult(withFilter){
             console.log(this.filterName);
             //axios.post('/api/providers/getdata',{name:this.filterName})
               //   .then((response)=>{ console.log(response.data)});
-              this.getStorages(withFilter).then(
+              this.getinventories(withFilter).then(
                         this.getDataFromApi()
                             .then(data => {
-                            this.storages = data.storages
-                            this.totalStorages = data.total
+                            this.inventories = data.inventories
+                            this.totalinventories = data.total
                             })
                     );
         },
@@ -233,9 +241,9 @@ export default {
         },
         create() {                                    
             this.editedIndex = -1;
-            axios.get('/api/auth/storage/create')
+            axios.get('/api/auth/inventory/create')
             .then(response => {                                
-                this.newStorage = response.data.storage
+                this.newInventory = response.data.inventory
             })
             .catch(error => {
                 console.log(error);
@@ -244,9 +252,9 @@ export default {
         },
         store(){
             let index = -1;            
-            axios.post('/api/auth/storage', this.newStorage)
+            axios.post('/api/auth/inventory', this.newInventory)
             .then(response => {                    
-                this.getStorages();
+                this.getinventories();
             })
             .catch(function (error) {
                 console.log(error);
@@ -254,19 +262,19 @@ export default {
             this.dialog =false;            
         },
         show(item) {                        
-            axios.get(`/api/auth/storage/${item.id}`)            
+            axios.get(`/api/auth/inventory/${item.id}`)            
             .then(response => {                
-                this.storage = response.data.storage
+                this.inventory = response.data.inventory
             })
             .catch(error => {                
                 console.log(error);
             });
         },
         edit (item) {
-            this.editedIndex = this.storages.indexOf(item);
-            axios.get(`/api/auth/storage/${item.id}/edit`)            
+            this.editedIndex = this.inventories.indexOf(item);
+            axios.get(`/api/auth/inventory/${item.id}/edit`)            
             .then(response => {                
-                this.newStorage = response.data.storage
+                this.newInventory = response.data.inventory
             })
             .catch(error => {                
                 console.log(error);
@@ -275,10 +283,10 @@ export default {
         },
         update (item) {                        
             let index = this.editedIndex;            
-            axios.put(`/api/auth/storage/${this.newStorage.id}`, this.newStorage)
+            axios.put(`/api/auth/inventory/${this.newInventory.id}`, this.newInventory)
             .then(response => {
-                this.storages[index].name = response.data.storage.name
-                this.storages[index].description = response.data.storage.description
+                this.inventories[index].name = response.data.inventory.name
+                this.inventories[index].description = response.data.inventory.description
             })
             .catch(function (error) {
                 console.log(error);
@@ -287,9 +295,9 @@ export default {
         },
         destroy (item) {
             let success_delete = false;
-            axios.delete(`/api/auth/storage/${item.id}`)
+            axios.delete(`/api/auth/inventory/${item.id}`)
             .then(function (response) {
-                console.log(response.data.storage_id);
+                console.log(response.data.inventory_id);
                 success_delete = true;
             })
             .catch(function (error) {
@@ -316,6 +324,7 @@ export default {
             if (fv =='') {
                 this.getResult(false)
             }
+
         }
     }
 }

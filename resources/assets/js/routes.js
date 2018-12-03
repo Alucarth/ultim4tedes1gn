@@ -219,5 +219,17 @@ import ExcelImportPurchases from './components/purchase/import.vue';
                 requiresAuth: true
             }
         },
+        {
+            path: '/getInventoryData',
+            name: 'GetInventoryData',
+            components:{ 
+                default:Inventory,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
+        },
     ];
     
