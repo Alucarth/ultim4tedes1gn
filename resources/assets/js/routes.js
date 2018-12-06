@@ -14,7 +14,7 @@ import Package from './components/package/index.vue';
 import EditPackage from './components/package/edit.vue';
 import TransferPackage from './components/package/transfer.vue';
 import Employee from './components/employee/index.vue';
-import Inventory from './components/inventory/index.vue';
+import Inventory from './components/inventory/indexInventory.vue';
 
 import ExcelImport from './components/package/Import.vue';
 import ExcelImportPurchases from './components/purchase/import.vue';

@@ -14,12 +14,12 @@
                 <v-container grid-list-md>
                  <v-layout wrap>                   
                      <v-flex xs12>
-                        <v-text-field label="Code" v-model="newIventory.code" ></v-text-field>
+                        <v-text-field label="Code" v-model="newInventory.code" ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm6>
                         <v-select                  
                         label="Tipo"
-                        v-model="newIventory.type_inventory_id"
+                        v-model="newInventory.type_inventory_id"
                         :items="inventory_types"
                         item-text="name"
                         item-value="id"
@@ -153,23 +153,28 @@ export default {
         filterName: 'name',
         filterValue: '',   
         dialog: false,
-        editedIndex: -1,          
+        editedIndex: -1,
+        inventory_types: null,
+        families: null,
       }
     },
     computed: {
         formTitle () {
-                return this.editedIndex === -1 ? 'Agregar Nuevo Almacen' : 'Editar Almacen'
+                return this.editedIndex === -1 ? 'Agregar Nuevo Insumo' : 'Editar Insumo'
             }
     },
     mounted()
     {
+        console.log("getting in this part");
         this.getInventories().then(
             this.getDataFromApi()
                 .then(data => {
                 this.inventories = data.inventories
                 this.totalInventory = data.total
                 })
-        );                
+        ); 
+        this.getInventoryTypes();
+        this.getFamilies();
     },
     methods:{
         getDataFromApi () {            
@@ -242,7 +247,8 @@ export default {
         create() {                                    
             this.editedIndex = -1;
             axios.get('/api/auth/inventory/create')
-            .then(response => {                                
+            .then(response => {     
+                console.log(response);
                 this.newInventory = response.data.inventory
             })
             .catch(error => {
@@ -306,6 +312,28 @@ export default {
         },        
         close() {
             this.dialog = false;
+        },
+        getInventoryTypes() {            
+            axios.get('/api/auth/inventory_type',{
+                headers: {
+                        'Content-Type': 'multipart/form-data'
+                        }
+            })
+            .then(response => {
+                this.inventory_types = response.data.inventory_types          
+            })
+                .catch(error => {
+                console.log(error);
+            });
+        },
+        getFamilies() {
+            axios.get('/api/auth/family')
+            .then(response => {
+                this.families = response.data.families          
+            })
+            .catch(error => {
+                console.log(error);
+            });
         }
         
     },
