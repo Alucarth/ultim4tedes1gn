@@ -28,7 +28,7 @@ console.log("abriendo app vue");
         return this.$store.state.auth.token;
       }
     },
-    mounted(){
+    created(){
       console.log(this.getToken);
 
       console.log("setteando token");

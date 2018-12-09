@@ -158,20 +158,24 @@ class PackageController extends Controller
         Excel::selectSheetsByIndex(0)->load($path, function($reader) {
             
             global $rows;
-            $result = $reader->select(array('cefo','fecha','madera', 'codigo', 'tipo', 'unidad','espesor','ancho','largo','cantidad','cantidad_pie','precio_unitario'))->get();
+            $result = $reader->select(array('cefo','fecha','especie', 'paquete', 'tipo', 'unidad','espesor','ancho','largo','cantidad','cantidad_pie','precio_unitario'))->get();
             $rows =array();
             foreach($result as $row)
             {
-                $specie = Specie::where('name','=',$row->madera)->first();
-                $row['specie_id'] = $specie?$specie->id:0;
+                $specie = Specie::where('name','=',$row->especie)->first();
+                $row['specie'] = $specie??0;
                 $type = Type::where('name',$row->tipo)->first();
-                $row['type_id'] = $type?$type->id:0;
+                $row['type'] = $type??0;
                 $unit = Unit::where('name',$row->unidad)->first();
-                $row['unit_id'] = $unit?$unit->id:0;
+                $row['unit'] = $unit??0;
+                
+                $row['cantidad_pie'] = number_format($row['cantidad_pie'], 2);
+
+                $row['fecha'] =date('Y-m-d',strtotime($row->fecha));
    
                 if($specie && $type && $unit)
                 {
-                    $row['valid'] = true;
+                    $row['valid'] = true; 
                 }else{
                     $row['valid']= false;
                 }
@@ -187,15 +191,15 @@ class PackageController extends Controller
         
         $store = Storage::find($request->storage_id);
 
-        foreach($request->all() as $row)
+        foreach($request->packages as $row)
         {
             $object = json_decode(json_encode($row)) ;
             // Log::info($object->unit_id );
             if($object->valid)
             {
-                $lumber = Lumber::where('type_id',$object->type_id)
-                        ->where('specie_id',$object->specie_id)
-                        ->where('unit_id',$object->unit_id)
+                $lumber = Lumber::where('type_id',$object->type->id)
+                        ->where('specie_id',$object->specie->id)
+                        ->where('unit_id',$object->unit->id)
                         ->where('high',$object->largo)
                         ->where('width',$object->ancho)
                         ->where('density',$object->espesor)
@@ -203,9 +207,9 @@ class PackageController extends Controller
                 if(!$lumber){
 
                     $lumber = new Lumber;
-                    $lumber->type_id= $object->type_id;
-                    $lumber->specie_id= $object->specie_id;
-                    $lumber->unit_id= $object->unit_id;
+                    $lumber->type_id= $object->type->id;
+                    $lumber->specie_id= $object->specie->id;
+                    $lumber->unit_id= $object->unit->id;
                     $lumber->high= $object->largo;
                     $lumber->width= $object->ancho;
                     $lumber->density= $object->espesor;
@@ -215,18 +219,19 @@ class PackageController extends Controller
                             
 
                 $package =  Package::where('name',$object->cefo)
-                                    ->where('code',$object->codigo)
+                                    ->where('code',$object->paquete)
                                     ->first();
                 if(!$package){
                     $package = new Package;
                     $package->name = $object->cefo;
-                    $package->code = $object->codigo;
+                    $package->code = $object->paquete;
                     $package->quantity = 0;
                     $package->storage_id = $store->id;
                     $package->save();
                 }
 
                 $package->quantity += $object->cantidad;
+                $package->quantity_feet += $object->cantidad_pie;
                 $package->save();
 
                 $package_lumber = PackageLumber::where('package_id',$package->id)->where('lumber_id')->first();
