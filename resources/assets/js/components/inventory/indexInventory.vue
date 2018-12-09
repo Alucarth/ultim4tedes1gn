@@ -19,7 +19,7 @@
                     <v-flex xs12 sm6>
                         <v-select                  
                         label="Tipo"
-                        v-model="newInventory.type_inventory_id"
+                        v-model="newInventory.inventory_type_id"
                         :items="inventory_types"
                         item-text="name"
                         item-value="id"
@@ -27,12 +27,37 @@
                         persistent-hint>
                         </v-select>
                     </v-flex>
+                    <v-flex xs12 sm6>
+                        <v-select                  
+                        label="Familia"
+                        v-model="newInventory.family_id"
+                        :items="families"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Familia`"
+                        persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12 sm6>
+                        <v-select                  
+                        label="Unidad"
+                        v-model="newInventory.unit_id"
+                        :items="units"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Unidad`"
+                        persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs6>
+                        <v-text-field label="Stock mínimo" v-model="newInventory.minimum" ></v-text-field>
+                    </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="newInventory.description" ></v-text-field>
                     </v-flex>
                     <v-switch
                         :label="'Activo'"
-                        v-model="newInventory.is_enabled"
+                        v-model="newInventory.active"
                     ></v-switch>
                 </v-layout>
                 </v-container>
@@ -91,9 +116,12 @@
         </template>
         <template slot="items"  slot-scope="props">
             <!-- <tr @click="props.expanded = !props.expanded"> -->
-                <td class="text-xs-left" >{{ props.item.id }}</td>            
-                <td class="text-xs-left">{{ props.item.name }}</td>
-                <td class="text-xs-left">{{ props.item.description }}</td>                    
+                <td class="text-xs-left" >{{ props.item.code }}</td>            
+                <td class="text-xs-left">{{ props.item.description }}</td>
+                <td class="text-xs-left">{{ props.item.inventory_type }}</td>
+                <td class="text-xs-left">{{ props.item.family }}</td>                 
+                <td class="text-xs-left">{{ props.item.unit }}</td>
+                
                 <td class="justify-center layout px-0">
                     <v-icon
                         small
@@ -135,15 +163,16 @@
 <script>
 export default {
     data () {
-      return {
-        search: '',
+      return {        
         pagination: {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'ID', value: 'id' },        
-            { text: 'Nombre', value: 'name' },
+            { text: 'Code', value: 'code' },
             { text: 'Descripcion', value: 'description' },            
+            { text: 'Typo', value: 'iventory_type' },
+            { text: 'Familia', value: 'family' },
+            { text: 'Unidad', value: 'unit' },            
         ],                
         inventories: [],        
         inventory: null,
@@ -153,9 +182,10 @@ export default {
         filterName: 'name',
         filterValue: '',   
         dialog: false,
-        editedIndex: -1,
-        inventory_types: null,
-        families: null,
+        editedIndex: -1,    
+        units: [],
+        families: [],
+        inventory_types: [],
       }
     },
     computed: {
@@ -166,84 +196,49 @@ export default {
     mounted()
     {
         console.log("getting in this part");
-        this.getInventories().then(
-            this.getDataFromApi()
-                .then(data => {
-                this.inventories = data.inventories
-                this.totalInventory = data.total
-                })
-        ); 
+        this.search();
         this.getInventoryTypes();
         this.getFamilies();
+        this.getUnits();
+        console.log('complete');
+        console.log(this.inventory_types);
     },
     methods:{
-        getDataFromApi () {            
-            return new Promise((resolve, reject) => {
-            const { sortBy, descending, page, rowsPerPage } = this.pagination
-
-            let items= this.inventories;
-            const total = items.length;
-
-            if (this.pagination.sortBy) {
-                items = items.sort((a, b) => {
-                const sortA = a[sortBy]
-                const sortB = b[sortBy]
-
-                if (descending) {
-                    if (sortA < sortB) return 1
-                    if (sortA > sortB) return -1
-                    return 0
-                } else {
-                    if (sortA < sortB) return -1
-                    if (sortA > sortB) return 1
-                    return 0
-                }
-                })
-            }
-
-            if (rowsPerPage > 0) {
-                items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-            }
-
-                resolve({
-                items,
-                total
+        search() {
+            return new Promise((resolve,reject)=>{   
+                this.getData('/api/auth/inventory',this.getParams()).then((data)=>{
+                    this.inventories = data.data;                    
+                    this.last_page = data.last_page;
+                    resolve();                    
                 });
-         
-            })
+            });            
         },
-        getInventories(withFilter){            
+        getParams () {
+            let params={};
+            this.headers.forEach(element => {
+                params[element.value] = element.input;
+            });
+            params['order']=this.pagination.descending==true?'asc':'desc';
+            params['page']=this.page;
+            params['pagination_rows']=this.paginationRows;
+            return params;
+        },
+        getData(url,parameters){
             return new Promise((resolve,reject)=>{
-               this.loading = true
-               let filterName = withFilter==true?this.filterName:'name';               
-               axios.get('/api/auth/getInventoryData',{ name:filterName,value:this.filterValue})
-                    .then((response) => {                                        
-                            this.inventories = response.data.inventories;
-                                this.loading = false
-                                resolve();
-                            });
-                        });
+               this.loading = true;
+               axios.get(url,{
+                        params:parameters
+                    })
+                    .then((response) => {
+                        this.loading = false;
+                        resolve(response.data);                        
+                    });
+            });
         },
-        getResult(withFilter){
-            console.log(this.filterName);
-            //axios.post('/api/providers/getdata',{name:this.filterName})
-              //   .then((response)=>{ console.log(response.data)});
-              this.getinventories(withFilter).then(
-                        this.getDataFromApi()
-                            .then(data => {
-                            this.inventories = data.inventories
-                            this.totalinventories = data.total
-                            })
-                    );
-        },
-        toggleOrder (index) {
-            this.pagination.sortBy = this.headers[index].value;
-            this.pagination.descending = !this.pagination.descending;
-        },
-        setFilter(filterName){
-            this.filterValue='',
-            this.filterName = filterName;
-        },
+        next(page){
+            this.page = page;
+            this.search();
+        },        
         create() {                                    
             this.editedIndex = -1;
             axios.get('/api/auth/inventory/create')
@@ -314,11 +309,7 @@ export default {
             this.dialog = false;
         },
         getInventoryTypes() {            
-            axios.get('/api/auth/inventory_type',{
-                headers: {
-                        'Content-Type': 'multipart/form-data'
-                        }
-            })
+            axios.get('/api/auth/inventory_type')
             .then(response => {
                 this.inventory_types = response.data.inventory_types          
             })
@@ -330,6 +321,15 @@ export default {
             axios.get('/api/auth/family')
             .then(response => {
                 this.families = response.data.families          
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
+        getUnits() {
+            axios.get('/api/auth/unit')
+            .then(response => {
+                this.units = response.data.units
             })
             .catch(error => {
                 console.log(error);

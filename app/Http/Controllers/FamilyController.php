@@ -14,11 +14,11 @@ class FamilyController extends Controller
      */
     public function index()
     {
-        $family = Family::get();
-        return response()->json(
-        [
-            'family' => $family,
-        ]);
+        $families = Family::get();
+        $data = [
+            'families' => $families,
+        ];
+        return response()->json($data);
     }
 
     /**

@@ -14,10 +14,10 @@ class InventoryTypeController extends Controller
      */
     public function index()
     {
-        $inventory_type = InventoryType::get();
+        $inventory_types = InventoryType::get();
         return response()->json(
         [
-            'inventory_type' => $inventory_type,
+            'inventory_types' => $inventory_types,
         ]);
     }
 

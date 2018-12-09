@@ -80,7 +80,22 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inventory = new Inventory();
+        $inventory->code = $request->code;
+        $inventory->minimum = $request->minimum;
+        $inventory->description = $request->description;
+        $inventory->active = $request->active;
+        $inventory->inventory_type_id = $request->inventory_type_id;
+        $inventory->family_id = $request->family_id;
+        $inventory->unit_id = $request->unit_id;
+        $inventory->observation = "";
+        $inventory->save();
+
+        $data = [
+            'inventory' => $inventory
+        ];
+
+        return response()->json($data);
     }
 
     /**
