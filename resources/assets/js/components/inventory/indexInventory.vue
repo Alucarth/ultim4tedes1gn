@@ -78,7 +78,7 @@
         <v-data-table
         :headers="headers"
         :items="inventories"
-        :search="search"
+        :searchInventory="searchInventory"
             :pagination.sync="pagination"
         >
         <template slot="headers" slot-scope="props" >
@@ -101,7 +101,7 @@
                                     <v-card>
                                         <v-text-field
                                         v-model="filterValue"
-                                        append-icon="search"
+                                        append-icon="searchInventory"
                                         :label="`Buscar ${header.text}...`"
                                     
                                         @keydown.enter="getResult(true)"
@@ -118,9 +118,9 @@
             <!-- <tr @click="props.expanded = !props.expanded"> -->
                 <td class="text-xs-left" >{{ props.item.code }}</td>            
                 <td class="text-xs-left">{{ props.item.description }}</td>
-                <td class="text-xs-left">{{ props.item.inventory_type }}</td>
-                <td class="text-xs-left">{{ props.item.family }}</td>                 
-                <td class="text-xs-left">{{ props.item.unit }}</td>
+                <td class="text-xs-left">{{ props.item.type.name }}</td>
+                <td class="text-xs-left">{{ props.item.family.name }}</td>                 
+                <td class="text-xs-left">{{ props.item.unit.name }}</td>
                 
                 <td class="justify-center layout px-0">
                     <v-icon
@@ -154,7 +154,7 @@
         </template>
 
         <v-alert slot="no-results" :value="true" color="error" icon="warning">
-            Your search for "{{ search }}" found no results.
+            Your searchInventory for "{{ searchInventory }}" found no results.
         </v-alert>
         </v-data-table>
         
@@ -170,7 +170,7 @@ export default {
         headers: [          
             { text: 'Code', value: 'code' },
             { text: 'Descripcion', value: 'description' },            
-            { text: 'Typo', value: 'iventory_type' },
+            { text: 'Typo', value: 'type' },
             { text: 'Familia', value: 'family' },
             { text: 'Unidad', value: 'unit' },            
         ],                
@@ -194,19 +194,16 @@ export default {
             }
     },
     mounted()
-    {
-        console.log("getting in this part");
-        this.search();
+    {        
+        this.searchInventory();
         this.getInventoryTypes();
         this.getFamilies();
-        this.getUnits();
-        console.log('complete');
-        console.log(this.inventory_types);
+        this.getUnits();    
     },
     methods:{
-        search() {
+        searchInventory() {
             return new Promise((resolve,reject)=>{   
-                this.getData('/api/auth/inventory',this.getParams()).then((data)=>{
+                this.getData('/api/auth/inventory',this.getParams()).then((data)=>{                    
                     this.inventories = data.data;                    
                     this.last_page = data.last_page;
                     resolve();                    
@@ -237,7 +234,7 @@ export default {
         },
         next(page){
             this.page = page;
-            this.search();
+            this.searchInventory();
         },        
         create() {                                    
             this.editedIndex = -1;
@@ -336,24 +333,6 @@ export default {
             });
         }
         
-    },
-    watch: {
-        pagination: {
-            handler () {
-            this.getDataFromApi()
-                .then(data => {
-                this.desserts = data.items
-                this.totalDesserts = data.total
-                })
-            },
-            deep: true
-        },
-        filterValue (fv) {      
-            if (fv =='') {
-                this.getResult(false)
-            }
-
-        }
     }
 }
 </script>

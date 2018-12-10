@@ -21,11 +21,14 @@ class InventoryController extends Controller
         $inventory_conditions = [];
         $family_conditions = [];
         $type_conditions = [];
+        $unit_conditions = [];
         $code = $request->high ?? null;
         $minimum = $request->minimum ?? null;
         $description = $request->description ?? null;
         $family = $request->family ?? null;
         $type = $request->type ?? null;
+        $unit = $request->unit ?? null;
+        
 
         if ($code) {
             array_push($inventory_conditions, ['code','=',"{$code}"]);
@@ -42,14 +45,20 @@ class InventoryController extends Controller
         if ($type) {
             array_push($type_conditions, ['name','like',"%{$type}%"]);
         }
+        if ($unit) {
+            array_push($unit_conditions, ['name','like',"%{$unit}%"]);
+        }
 
-        $inventories = Inventory::with(['family','type'])
+        $inventories = Inventory::with(['family','type','unit'])
                             ->where($inventory_conditions)
                             ->whereHas('family', function ($query) use ($family_conditions) {
                                 $query->where($family_conditions);
                             })
                             ->whereHas('type', function ($query) use ($type_conditions) {
                                 $query->where($type_conditions);
+                            })
+                            ->whereHas('unit', function ($query) use ($unit_conditions) {
+                                $query->where($unit_conditions);
                             })
                             ->paginate($pagination_rows);
         $data = [

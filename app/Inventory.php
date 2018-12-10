@@ -16,4 +16,16 @@ class Inventory extends Model
         'observation' => null,
         'active'   => null,
     );
+
+    public function type() {
+        return $this->hasOne('App\InventoryType','id','inventory_type_id');
+    }
+
+    public function family() {
+        return $this->hasOne('App\Family','id','family_id');
+    }
+
+    public function unit() {
+        return $this->hasOne('App\Unit','id','unit_id');
+    }
 }
