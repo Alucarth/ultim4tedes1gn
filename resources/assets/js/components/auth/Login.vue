@@ -9,7 +9,7 @@
             </v-toolbar>
             <v-card-text>
             
-                <v-text-field prepend-icon="person" label="Login" type="text" v-model="email"></v-text-field>
+                <v-text-field prepend-icon="person" label="Usuario" type="text" v-model="username"></v-text-field>
                 <v-text-field prepend-icon="lock" label="Password" id="password" type="password" v-model="password"></v-text-field>
             
             </v-card-text>
@@ -27,16 +27,16 @@
 export default {
   data(){
       return {
-        email : "",
+        username : "",
         password : ""
       }
     },
     methods:{
         login() {
          console.log('enviando datos auth');
-         let email = this.email 
+         let username = this.username 
           let password = this.password
-          this.$store.dispatch('auth/login', { email, password })
+          this.$store.dispatch('auth/login', { username, password })
           .then(() => {
               console.log("autenticado")
               this.$router.push('/')
