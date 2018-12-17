@@ -9,7 +9,6 @@
             <v-card-title>
                 <span class="headline">{{ formTitle }}</span>
             </v-card-title>
-
             <v-card-text v-if="newStorage">
                 <v-container grid-list-md>
                  <v-layout wrap>                   
@@ -22,7 +21,6 @@
                 </v-layout>
                 </v-container>
             </v-card-text>
-
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
@@ -170,15 +168,12 @@ export default {
         getDataFromApi () {            
             return new Promise((resolve, reject) => {
             const { sortBy, descending, page, rowsPerPage } = this.pagination
-
             let items= this.storages;
             const total = items.length;
-
             if (this.pagination.sortBy) {
                 items = items.sort((a, b) => {
                 const sortA = a[sortBy]
                 const sortB = b[sortBy]
-
                 if (descending) {
                     if (sortA < sortB) return 1
                     if (sortA > sortB) return -1
@@ -190,11 +185,9 @@ export default {
                 }
                 })
             }
-
             if (rowsPerPage > 0) {
                 items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
             }
-
                 resolve({
                 items,
                 total
@@ -323,7 +316,6 @@ export default {
             if (fv =='') {
                 this.getResult(false)
             }
-
         }
     }
 }

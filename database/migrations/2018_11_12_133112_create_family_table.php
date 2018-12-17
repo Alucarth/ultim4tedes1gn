@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUnitsTable extends Migration
+class CreateFamilyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateUnitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('units', function (Blueprint $table) {
+        Schema::create('families', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
-            $table->string('name');            
+            $table->string('name');
+            $table->boolean('active')->default(true);
             $table->string('description')->nullable();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateUnitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('families');
     }
 }
