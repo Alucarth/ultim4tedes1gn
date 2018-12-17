@@ -15,7 +15,18 @@ class CreatePurchaseInventoryTable extends Migration
     {
         Schema::create('purchase_inventory', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();   
+            $table->integer('purchase_id')->nullable();
+            $table->foreign('purchase_id')->references('id')->on('purchases');
+            //$table->integer('lumber_id')->nullable();
+            //$table->foreign('lumber_id')->references('id')->on('lumbers');
+            $table->integer('purchasable_id');
+            $table->string('purchaseable_type');
+            $table->integer('state_id')->nullable();
+            $table->foreign('state_id')->references('id')->on('states');
+            $table->integer('quantity')->default(0);
+            $table->decimal('quantity_feet',13,2)->default(0);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

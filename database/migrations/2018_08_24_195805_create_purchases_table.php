@@ -21,6 +21,8 @@ class CreatePurchasesTable extends Migration
             $table->date('date');
             $table->string('description');
             $table->decimal('amount',13,2)->default(0);
+            $table->integer('employee_id')->nullable();
+            $table->foreign('employee_id')->references('id')->on('employees');
             $table->timestamps();
             $table->softDeletes();
         });
