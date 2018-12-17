@@ -41,10 +41,13 @@ import {autentication} from './store_modules/autentication';
 window.Vue = require('vue');
 window.numeral = require('numeral');
 window.moment = require('moment');
+window.Chart = require('chart.js');
+
 Vue.use(Notifications);
 Vue.use(VueRouter)
 Vue.use(Vuetify);
 Vue.use(Vuex);
+
 Vue.prototype.$http = axios;
 const tokenJWT = localStorage.getItem('token')
 if (tokenJWT) {

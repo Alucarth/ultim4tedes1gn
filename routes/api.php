@@ -45,4 +45,6 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('area','AreaController');
     Route::resource('employee_type','EmployeeTypeController');
     Route::resource('employee_contract_type','EmployeeContractTypeController');
+    
 });
+Route::resource('report','ReportController');
