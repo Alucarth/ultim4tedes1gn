@@ -50,3 +50,4 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('/inventory_type','InventoryTypeController');
     Route::resource('/family','FamilyController');
 });
+Route::resource('report','ReportController');
