@@ -9,7 +9,9 @@ import Lumber from './components/lumber/index2.vue';
 import Specie from './components/specie/index.vue';
 import Storage from './components/storage/index.vue';
 import Purchase from './components/purchase/index.vue';
+import Buyout from './components/purchase/indexInventory.vue';
 import EditPurchase from './components/purchase/edit.vue';
+import EditBuyout from './components/purchase/editInventory.vue';
 import Package from './components/package/index.vue';
 import EditPackage from './components/package/edit.vue';
 import TransferPackage from './components/package/transfer.vue';
@@ -124,10 +126,34 @@ import ExcelImportPurchases from './components/purchase/import.vue';
             }    
         },
         {
+            path: '/buyout',
+            name: 'Buyout',
+            components:{ 
+                default:Buyout,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
+        },
+        {
             path: '/purchase/create',
             name: 'PurchaseEdit',
             components:{ 
                 default:EditPurchase,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
+        },
+        {
+            path: '/buyout/create',
+            name: 'BuyoutEdit',
+            components:{ 
+                default:EditBuyout,
                 toolbar:Toolbar,
                 nav: Nav
             },

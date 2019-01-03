@@ -3,11 +3,11 @@
         <v-card-title>
             Compras de Insumo
         <v-spacer></v-spacer>       
-        <v-btn to="/purchase/create" color="primary" dark class="mb-2">Nuevo</v-btn>
+        <v-btn to="/buyout/create" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
         <v-data-table
         :headers="headers"
-        :items="purchases"        
+        :items="buyouts"        
         hide-actions
         >
         <template slot="headers" slot-scope="props" >
@@ -46,10 +46,11 @@
         </template>
         <template slot="items"  slot-scope="props">
             <!-- <tr @click="props.expanded = !props.expanded"> -->
-                <td class="text-xs-left">{{ props.item.cefo }}</td>
-                <td class="text-xs-left">{{ props.item.provider.name }}</td>      
-                <td class="text-xs-left" >{{ props.item.date }}</td>            
-                <td class="text-xs-left">{{ props.item.amount }}</td>                
+                <td class="text-xs-left">{{ props.item.date }}</td>                
+                <td class="text-xs-left">{{ props.item.provider.name }}</td>
+                <td class="text-xs-left">{{ props.item.employee.name }}</td>
+                <td class="text-xs-left">{{ props.item.date }}</td>
+                <td class="text-xs-left">{{ props.item.amount }}</td>                         
                 <td class="justify-center layout px-0">
                     <v-icon
                         small
@@ -186,18 +187,17 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'CEFO', value: 'cefo' },
+            { text: 'Fecha', value: 'date' },
             { text: 'Proveedor', value: 'provider' },
-            { text: 'Fecha', value: 'date' },        
+            { text: 'Responsable', value: 'employee' },
             { text: 'Precio', value: 'amount' },            
         ],
         minitable_headers: [
-            { text: 'Especie', value: 'specie' },
+            { text: 'Codigo', value: 'code' },
+            { text: 'description', value: 'description' },
             { text: 'Tipo', value: 'type' },
-            { text: 'Alto', value: 'high' },
-            { text: 'Ancho', value: 'width' },
-            { text: 'Espesor', value: 'density' },
-            { text: 'Cantidad', value: 'quantity' },
+            { text: 'Familia', value: 'family' },
+            { text: 'Unidad', value: 'unit' },            
         ],
         lumbers: [],
         purchases: null,
