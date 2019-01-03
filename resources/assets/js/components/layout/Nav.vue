@@ -78,6 +78,7 @@ export default {
                 { icon: 'local_florist', text: 'Especies' , link: '/specie' },
                 { icon: 'group', text: 'Proveedores' , link: '/provider' },  
                 { icon: 'money', text: 'Compra de madera', link: '/purchase' },
+                { icon: 'repeat', text: 'Transferencia de Madera', link: '/lumber_transaction' },
                 { icon: 'view_agenda', text: 'Paquetes', link: '/package' },
                 { icon: 'cloud_upload', text: 'Importar Compras', link: '/import_purchases' },
                 { icon: 'cloud_upload', text: 'Importar Paquetes', link: '/import_package' },
