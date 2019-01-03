@@ -1,9 +1,20 @@
+let user ;
+try {
+        user =  JSON.parse(localStorage.getItem('user'));
+    }
+    catch(error) {
+    console.error(error);
+    user = {};
+    // expected output: SyntaxError: unterminated string literal
+    // Note - error messages will vary depending on browser
+    }
+
 export const autentication = {
     namespaced: true,
     state:{
         status: '',
         token: localStorage.getItem('token') || '',
-        user : {}
+        user : user
     },
     mutations: {
         auth_request(state){
@@ -39,7 +50,7 @@ export const autentication = {
                 console.log('imprimiendo variable');
                 console.log(user);
                 localStorage.setItem('token', token)
-
+                localStorage.setItem('user',JSON.stringify(user))//te amo nadia --> pendejo brian 
                 axios.defaults.headers.common['Authorization'] = 'Bearer '+token // para todas las consultas axios XD
                 commit('auth_success', {token, user});
                 resolve(resp)
@@ -55,6 +66,7 @@ export const autentication = {
             return new Promise((resolve, reject) => {
                 commit('logout')
                 localStorage.removeItem('token')
+                console.log('cerrando sesion')
                 delete axios.defaults.headers.common['Authorization']
                 resolve()
             })
