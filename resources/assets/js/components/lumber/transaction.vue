@@ -10,9 +10,9 @@
             </v-card-title>
         
         <v-card-text>
-            <v-layout xs12 align-center justify-center wrap>
+            <v-layout xs12 wrap>
                 <v-flex xs6 >
-                    <v-card>
+                <v-card>
                 
                     <v-card-title primary-title>
                     <div>
@@ -34,53 +34,87 @@
                                 Almacen: {{this.packaged.storage.name}}
                             </v-flex>
                             <v-flex xs12 v-if="this.packaged!=null">
-                                <v-data-table                
-                                    :headers="minitable_headers"                                        
-                                    :items="packaged.lumbers"
-                                    hide-actions
-                                    class="elevation-1"
-                                >
-                                    <template slot="items" slot-scope="props">
-                                    <td>
-                                        <v-checkbox
-                                        v-model="props.item.selected"
-                                        primary
-                                        hide-details
-                                        ></v-checkbox>
-                                    </td>
-                                    <td>{{ props.item.specie.name }}</td>
-                                    <td>{{ props.item.type.name }}</td>
-                                    <td>{{ props.item.high }}</td>
-                                    <td>{{ props.item.width}}</td>
-                                    <td>{{ props.item.density }}</td>
-                                    <td v-if="props.item.selected"> <v-text-field v-model="props.item.pivot.quantity" ></v-text-field> </td>                            
-                                    <td v-else>{{ props.item.pivot.quantity }}</td>                            
-                                    </template>
-                                </v-data-table>
+                                
+                            <v-data-table
+                                :headers="headers_lumber"
+                                :items="packaged.lumbers"
+                                hide-actions
+                                class="elevation-1"
+                            >
+                                <template slot="items" slot-scope="props">
+                                <td><v-checkbox
+                                    v-model="props.item.checked"
+                                    primary
+                                    hide-details
+                                ></v-checkbox></td>
+                                <td class="text-xs-right">{{ props.item.specie.name }}</td>
+                                <td class="text-xs-right">{{ props.item.type.name }}</td>
+                                <td class="text-xs-right">{{ props.item.high }}</td>
+                                <td class="text-xs-right">{{ props.item.width }}</td>
+                                <td class="text-xs-right">{{ props.item.density }}</td> 
+                                <td class="text-xs-right"> <v-text-field v-model="props.item.pivot.quantity"></v-text-field> </td> 
+                                </template>
+                            </v-data-table>
                                           
                             </v-flex>
                         </v-layout>  
                     </v-card-text>
                     <v-card-actions>
-                    <v-btn flat color="orange">Transferir</v-btn>
+                    <v-btn flat color="orange" @click="transfer(1)"> Transferir <v-icon>keyboard_arrow_right</v-icon> </v-btn>
                     
                     </v-card-actions>
                 </v-card>
                 </v-flex>
                 <v-flex xs6>
-                    <v-card>
-                
-
+                <v-card>
                     <v-card-title primary-title>
                     <div>
-                        <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-                        <div>Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
+                       <v-btn @click="showDialog(2)">
+                           Seleccionar Paquete
+                       </v-btn>
+                       
                     </div>
                     </v-card-title>
-
+                    <v-card-text>
+                        <v-layout xs12 wrap>
+                            <v-flex xs3 v-if="this.packaged2!=null">
+                                Codigo: {{this.packaged2.code}}
+                            </v-flex>
+                            <v-flex xs5 v-if="this.packaged2!=null">
+                                Nombre: {{this.packaged2.name}}
+                            </v-flex>
+                            <v-flex xs4 v-if="this.packaged2!=null">
+                                Almacen: {{this.packaged2.storage.name}}
+                            </v-flex>
+                            <v-flex xs12 v-if="this.packaged2!=null">
+                                
+                            <v-data-table
+                                :headers="headers_lumber"
+                                :items="packaged2.lumbers"
+                                hide-actions
+                                class="elevation-1"
+                            >
+                                <template slot="items" slot-scope="props">
+                                <td><v-checkbox
+                                    v-model="props.item.checked"
+                                    primary
+                                    hide-details
+                                ></v-checkbox></td>
+                                <td class="text-xs-right">{{ props.item.specie.name }}</td>
+                                <td class="text-xs-right">{{ props.item.type.name }}</td>
+                                <td class="text-xs-right">{{ props.item.high }}</td>
+                                <td class="text-xs-right">{{ props.item.width }}</td>
+                                <td class="text-xs-right">{{ props.item.density }}</td> 
+                                <td class="text-xs-right"> <v-text-field v-model="props.item.pivot.quantity"></v-text-field> </td> 
+                                </template>
+                            </v-data-table>
+                                          
+                            </v-flex>
+                        </v-layout>  
+                    </v-card-text>
                     <v-card-actions>
-                    <v-btn flat color="orange">Share</v-btn>
-                    <v-btn flat color="orange">Explore</v-btn>
+                    <v-btn flat color="orange" @click="transfer(2)"><v-icon>keyboard_arrow_left</v-icon> Transferir </v-btn>
+                    
                     </v-card-actions>
                 </v-card>
                 </v-flex>
@@ -183,7 +217,7 @@ export default {
             { text: 'Almacen', value: 'storage' },
             { text: 'Accion', value: '' },
         ],
-        minitable_headers: [
+        headers_lumber: [
             { text: 'Sel.', value: 'selected' },
             { text: 'Especie', value: 'specie' },
             { text: 'Tipo', value: 'type' },
@@ -203,6 +237,8 @@ export default {
         last_page: 1,
         page: 1,    
         paginationRows: 10,
+        checkBox: false,
+        dialog_switch:null,
       }
     },
     computed: {
@@ -284,18 +320,26 @@ export default {
             });
         },
         selectItem(item){
-            //this.editedIndex = this.lumbers.indexOf(item)
-            // console.log(item);
+            
              axios.get(`/api/auth/package/${item.id}`)
             .then(response => {
-                this.packaged = response.data.package
-                this.packaged.lumbers.forEach((item)=>{
-                    item.selected=false;
-                    // console.log(item);
-                    
-                    return item;
-                });
-                console.log(this.packaged);
+
+                if(this.dialog_switch==1){
+                    this.packaged = response.data.package
+                    this.packaged.lumbers.forEach((item)=>{
+                        item.checked=false;
+                        // console.log(item);
+                        return item;
+                    });
+                    console.log(this.packaged);
+                }else{
+                    this.packaged2 = response.data.package
+                    this.packaged2.lumbers.forEach((item)=>{
+                        item.checked=false;
+                        // console.log(item);
+                        return item;
+                    });
+                }
                 this.dialog=false;
             })
             .catch(error => {                
@@ -314,35 +358,6 @@ export default {
             });
             
             this.dialog = true
-        },
-        update (item) {                        
-            let index = this.editedIndex;            
-            axios.put(`/api/auth/lumber/${this.newLumber.id}`, this.newLumber)            
-            .then(response => {                
-                this.lumbers[index].high = response.data.lumber.high;
-                this.lumbers[index].width = response.data.lumber.width;
-                this.lumbers[index].density = response.data.lumber.density;
-                this.lumbers[index].specie = response.data.lumber.specie;
-                this.lumbers[index].type = response.data.lumber.type;
-            })
-            .catch(function (error) {
-                console.log(error);
-            });            
-            this.dialog =false;
-            //this.getLumber();
-        },
-        destroy (item) {
-            let success_delete = false;
-            axios.delete(`/api/auth/lumber/${item.id}`)
-            .then(function (response) {
-                console.log(response.data.lumber_id);                   
-                success_delete = true;
-            })
-            .catch(function (error) {
-                console.log(error);                
-            });                                    
-            this.getLumber();
-            
         },
         getSpecies (){
             axios.get('/api/auth/specie')
@@ -366,9 +381,91 @@ export default {
             this.dialog = false;
         },
         showDialog(selector){
+            this.dialog_switch = selector;
             this.dialog =true;
             this.search();
+        },
+        toggleAll () {
+            // if (this.selected.length) this.selected = []
+            // else this.selected = this.desserts.slice()
+        },
+        changeSort (column) {
+            if (this.pagination.sortBy === column) {
+            this.pagination.descending = !this.pagination.descending
+            } else {
+            this.pagination.sortBy = column
+            this.pagination.descending = false
+            }
+        },
+        itemUpdate(item){
+            item.selected =!item.selected;
+            console.log(item);
+            return item;
+        },
+        transfer(id){
+            
+            if(id==1){
+                let params = {package_id: this.packaged.id,lumbers: this.packaged.lumbers,package_destiny_id: this.packaged2.id}
+                axios.post('/api/auth/transfer_lumber', params)
+                .then(response => {                
+                    //this.lumbers.push(response.data.lumber);
+                    console.log(response.data);
+                    // alert('dato creado');    
+               
+                        this.packaged = response.data.packaged
+                        this.packaged.lumbers.forEach((item)=>{
+                            item.checked=false;
+                            // console.log(item);
+                            return item;
+                        });
+                        // console.log(this.packaged);
+              
+                        this.packaged2 = response.data.packaged2
+                        this.packaged2.lumbers.forEach((item)=>{
+                            item.checked=false;
+                            // console.log(item);
+                            return item;
+                        });
+                 
+                })
+                .catch(error => {                
+                    console.log(error);
+                });
+                this.dialog = false;
+                console.log(this.packaged);
+                
+            }else{
+                let params = {package_id: this.packaged2.id,lumbers: this.packaged2.lumbers,package_destiny_id: this.packaged.id}
+                 axios.post('/api/auth/transfer_lumber', params)
+                .then(response => {                
+                    //this.lumbers.push(response.data.lumber);
+                    console.log(response.data);
+                    // alert('dato creado');    
+               
+                        this.packaged = response.data.packaged2
+                        this.packaged.lumbers.forEach((item)=>{
+                            item.checked=false;
+                            // console.log(item);
+                            return item;
+                        });
+                        // console.log(this.packaged);
+              
+                        this.packaged2 = response.data.packaged
+                        this.packaged2.lumbers.forEach((item)=>{
+                            item.checked=false;
+                            // console.log(item);
+                            return item;
+                        });
+                 
+                })
+                .catch(error => {                
+                    console.log(error);
+                });
+                this.dialog = false;
+                console.log(this.packaged);
+            }
         }
+
         
     },  
     
