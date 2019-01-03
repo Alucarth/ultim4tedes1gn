@@ -19,6 +19,7 @@ import Inventory from './components/inventory/indexInventory.vue';
 import ExcelImport from './components/package/Import.vue';
 import ExcelImportPurchases from './components/purchase/import.vue';
 
+import LumberTransaction from './components/lumber/transaction.vue';
    
    export const routes= [
         {
@@ -224,6 +225,18 @@ import ExcelImportPurchases from './components/purchase/import.vue';
             name: 'GetInventoryData',
             components:{ 
                 default:Inventory,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
+        },
+        {
+            path: '/lumber_transaction',
+            name: 'LumberTransaction',
+            components:{ 
+                default:LumberTransaction,
                 toolbar:Toolbar,
                 nav: Nav
             },
