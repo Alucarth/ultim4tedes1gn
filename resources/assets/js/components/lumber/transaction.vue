@@ -125,7 +125,7 @@
         
     </v-flex>
    <!-- dialogo de seleccion de paquete -->
-    <v-dialog v-model="dialog" persistent max-width="700px">
+    <v-dialog v-model="dialog" persistent max-width="800px">
       <!-- <v-btn slot="activator" color="primary" dark>Open Dialog</v-btn> -->
       <v-card>
         <v-card-title>
@@ -137,9 +137,9 @@
           <v-container grid-list-md>
             <v-layout wrap>
              <v-data-table
-        :headers="headers"
-        :items="packages"        
-        hide-actions
+            :headers="headers"
+            :items="packages"        
+            hide-actions
         >
         <template slot="headers" slot-scope="props" >
            <tr>
@@ -174,8 +174,8 @@
                 <td class="text-xs-left">{{ props.item.name }}</td>      
                 <td class="text-xs-left" >{{ props.item.storage.name }}</td>                           
                 <td class="justify-center layout px-0">
-                    <v-btn @click="selectItem(props.item)">
-                        Seleccionar
+                    <v-btn @click="selectItem(props.item)" icon>
+                        <v-icon>playlist_add_check</v-icon>
                     </v-btn>
                     
                 </td>      
@@ -187,7 +187,19 @@
             Your search for "{{ search }}" found no results.
         </v-alert> -->
         </v-data-table>   
-             
+            <v-card-text>
+                <div class="text-xs-center">
+                <v-pagination
+                    v-model="page"
+                    :length="last_page"
+                    :total-visible="10"
+                    @input="next"
+                    
+                > </v-pagination>
+                </div>
+              
+                Mostrando {{from}}-{{to}} de {{total}} 
+            </v-card-text>
             </v-layout>
           </v-container>
         </v-card-text>
@@ -232,6 +244,9 @@ export default {
         paginationRows: 10,
         checkBox: false,
         dialog_switch:null,
+        total:0,
+        from:0,
+        to:0, 
       }
     },
     computed: {
@@ -256,9 +271,11 @@ export default {
             return new Promise((resolve,reject)=>{   
                 this.getData('/api/auth/package',this.getParams()).then((data)=>{
                     console.log(data);
-                    this.packages = data.data;    
-                                                        
+                    this.packages = data.data;                                           
                     this.last_page = data.last_page;
+                    this.total = data.total;
+                    this.from = data.from;
+                    this.to = data.to;
                     resolve();                    
                 });
             });

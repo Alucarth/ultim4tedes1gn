@@ -156,15 +156,19 @@
             Your search for "{{ search }}" found no results.
         </v-alert> -->
         </v-data-table>
-        <div class="text-xs-center">
+       <v-card-text>
+            <div class="text-xs-center">
             <v-pagination
-            v-model="page"
-            :length="last_page"
-            :total-visible="10"
-             @input="next"
-            ></v-pagination>
-        </div> 
-        
+                v-model="page"
+                :length="last_page"
+                :total-visible="10"
+                @input="next"
+                
+            > </v-pagination>
+            </div>
+            <v-spacer></v-spacer>
+            Mostrando {{from}}-{{to}} de {{total}} 
+        </v-card-text>
     </v-card>
 </template>
 <script>
@@ -198,6 +202,9 @@ export default {
         last_page: 1,
         page: 1,    
         paginationRows: 10,
+        total:0,
+        from:0,
+        to:0,   
       }
     },
     computed: {
@@ -223,6 +230,9 @@ export default {
                     console.log("after response");
                     this.packages = data.data;                                        
                     this.last_page = data.last_page;
+                    this.total = data.total;
+                    this.from = data.from;
+                    this.to = data.to;
                     resolve();                    
                 });
             });
