@@ -145,33 +145,26 @@
            <tr>
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
-                        <v-flex v-if="header.value!='actions'">
-                            <span>{{ header.text }}
-                            </span>
-                            <v-menu 
-                                    :close-on-content-click="false"
-                                    >
-                                    <v-btn
-                                        slot="activator"
-                                        icon
-                                   
-                                        v-if="header.sortable!=false"
-                                    >
-                                    <v-icon  small>fa-filter</v-icon>
-                                    </v-btn>
-                                    <v-card  >
-                                        <v-text-field
-                                         outline
-                                         hide-details
-                                        v-model="header.input"
-                                        append-icon="search"
-                                        :label="`Buscar ${header.text}...`"                                       
-                                        @keydown.enter="search()"
-                                    ></v-text-field>
-                                    
-                                    </v-card>
-                            </v-menu>                            
+                        <v-flex v-if="header.filter">
+                            <!-- <v-btn flat >{{header.text }} <v-icon  right small> fa-filter</v-icon></v-btn> -->
+                            <v-text-field  
+                                v-if="header.type=='text'"
+                                append-icon="search"
+                                :label="header.text"
+                                v-model="header.input"
+                                @keydown.enter="search()"
+                                @keyup.delete="checkInput(header.input)"
+                            ></v-text-field>
+                            <v-combobox
+                                v-if="header.type=='select' && header.items.length>0"
+                                v-model="header.input"
+                                :items="header.items"
+                                :label="header.text"
+                                item-text="name"
+                                @change="search()"
+                            ></v-combobox>
                         </v-flex>
+                        <span v-else> {{header.text}} </span>
                 </th>
            </tr>
         </template>
@@ -212,10 +205,10 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'Codigo', value: 'code' },
-            { text: 'Nombre', value: 'name' },
-            { text: 'Almacen', value: 'storage' },
-            { text: 'Accion', value: '' },
+            { text: 'Codigo', value: 'code', type:"text", filter:true, input:''},
+            { text: 'Nombre', value: 'name', type:"text", filter:true, input:''},
+            { text: 'Almacen', value: 'storage_id', type:"select", filter:true, items:[], input:null},
+            { text: 'Accion', value: '', type:"text", filter:false, input:''},
         ],
         headers_lumber: [
             { text: 'Sel.', value: 'selected' },
@@ -248,13 +241,21 @@ export default {
     },
     mounted()
     {
-        this.search();           
+        axios.get('/api/auth/getStorageData')
+        .then((response) => {
+            
+            //console.log(response.data.storages);
+            this.headers[2].items = response.data.storages;
+            console.log(this.headers[2]);
+            this.search();   
+        });
+                
     },
     methods:{
         search() {
             return new Promise((resolve,reject)=>{   
                 this.getData('/api/auth/package',this.getParams()).then((data)=>{
-                    console.log("after response");
+                    console.log(data);
                     this.packages = data.data;    
                                                         
                     this.last_page = data.last_page;
@@ -265,7 +266,18 @@ export default {
         getParams () {
             let params={};
             this.headers.forEach(element => {
-                params[element.value] = element.input;
+                if(element.type=='text'){
+                    params[element.value] = element.input;
+                }
+                if(element.type=='select')
+                {
+                    if(element.input!=null)
+                    {
+                        params[element.value] = element.input.id;
+
+                    }
+                    console.log(element.input)
+                }
             });
             params['order']=this.pagination.descending==true?'asc':'desc';
             params['page']=this.page;
@@ -388,6 +400,13 @@ export default {
         toggleAll () {
             // if (this.selected.length) this.selected = []
             // else this.selected = this.desserts.slice()
+        },
+        checkInput(search)
+        {
+            if(search=='')
+            {
+                this.search();
+            }
         },
         changeSort (column) {
             if (this.pagination.sortBy === column) {

@@ -15,7 +15,27 @@
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
                         <v-flex v-if="header.value!='actions'">
-                            <span>{{ header.text }}
+                            <v-flex v-if="header.filter">
+                            <!-- <v-btn flat >{{header.text }} <v-icon  right small> fa-filter</v-icon></v-btn> -->
+                            <v-text-field  
+                                v-if="header.type=='text'"
+                                append-icon="search"
+                                :label="header.text"
+                                v-model="header.input"
+                                @keydown.enter="search()"
+                                @keyup.delete="checkInput(header.input)"
+                            ></v-text-field>
+                            <v-combobox
+                                v-if="header.type=='select' && header.items.length>0"
+                                v-model="header.input"
+                                :items="header.items"
+                                :label="header.text"
+                                item-text="name"
+                                @change="search()"
+                            ></v-combobox>
+                        </v-flex>
+                        <span v-else> {{header.text}} </span>
+                            <!-- <span>{{ header.text }}
                             </span>
                             <v-menu 
                                     :close-on-content-click="false"
@@ -39,7 +59,7 @@
                                     ></v-text-field>
                                     
                                     </v-card>
-                            </v-menu>                            
+                            </v-menu>                             -->
                         </v-flex>
                 </th>
            </tr>
@@ -155,9 +175,10 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'Codigo', value: 'code' },
-            { text: 'Nombre', value: 'name' },
-            { text: 'Almacen', value: 'storage' },
+            { text: 'Codigo', value: 'code', type:"text", filter:true, input:''},
+            { text: 'Nombre', value: 'name', type:"text", filter:true, input:''},
+            { text: 'Almacen', value: 'storage_id', type:"select", filter:true, items:[], input:null},
+            { text: 'Accion', value: '', type:"text", filter:false, input:''},
         ],
         minitable_headers: [
             { text: 'Especie', value: 'specie' },
@@ -186,7 +207,14 @@ export default {
     },
     mounted()
     {
-        this.search();           
+        axios.get('/api/auth/getStorageData')
+        .then((response) => {
+            
+            //console.log(response.data.storages);
+            this.headers[2].items = response.data.storages;
+            console.log(this.headers[2]);
+            this.search();   
+        });        
     },
     methods:{
         search() {
@@ -202,7 +230,18 @@ export default {
         getParams () {
             let params={};
             this.headers.forEach(element => {
-                params[element.value] = element.input;
+                if(element.type=='text'){
+                    params[element.value] = element.input;
+                }
+                if(element.type=='select')
+                {
+                    if(element.input!=null)
+                    {
+                        params[element.value] = element.input.id;
+
+                    }
+                    console.log(element.input)
+                }
             });
             params['order']=this.pagination.descending==true?'asc':'desc';
             params['page']=this.page;
@@ -318,7 +357,14 @@ export default {
         },
         close() {
             this.dialog = false;
-        }
+        },
+        checkInput(search)
+        {
+            if(search=='')
+            {
+                this.search();
+            }
+        },
         
     },    
 }

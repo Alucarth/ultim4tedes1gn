@@ -24,17 +24,18 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $order = $request->order ?? 'asc';
-        $pagination_rows = $request->pagination_rows ?? 10;               
+      
+        $order = request('orde'??'asc'); 
+        $pagination_rows =request('pagination_rows'??10);        
 
         $package_conditions = [];
         $storage_conditions = [];        
         
 
-        $code = $request->code ?? null;        
-        $name = $request->name ?? null;        
-        $storage = $request->storage ?? null;
-
+        $code = request('code'??'');        
+        $name = request('name'??'');        
+        $storage = request('storage_id'??'');
+        Log::info($storage);
         if ($code) {
             array_push($package_conditions, ['code','like',"%{$code}%"]);
         }
@@ -42,15 +43,15 @@ class PackageController extends Controller
             array_push($package_conditions, ['name','like',"%{$name}%"]);
         }        
         if ($storage) {
-            array_push($storage_conditions, ['name','like',"%{$storage}%"]);
+            array_push($package_conditions, ['storage_id','=',$storage]);
         }        
         
 
         $storages = Package::with(['storage'])
                             ->where($package_conditions)
-                            ->whereHas('storage', function ($query) use ($storage_conditions) {
-                                $query->where($storage_conditions);
-                            })                            
+                            // ->whereHas('storage', function ($query) use ($storage_conditions) {
+                            //     $query->where($storage_conditions);
+                            // })                            
                             ->paginate($pagination_rows);
         $data = [
             'storages'   =>  $storages
