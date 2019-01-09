@@ -38,6 +38,7 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::post('save_packages','PackageController@saveExcel');    
     Route::post('import_purchases','PurchaseController@importExcel');    
     Route::post('save_purchases','PurchaseController@saveExcel');    
+    Route::post('transfer_lumber','PackageController@transfer_lumber');    
     Route::resource('provider','ProviderController');
     Route::get('getProviderData','ProviderController@list');
     Route::resource('employee','EmployeeController');
