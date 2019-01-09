@@ -2,79 +2,82 @@
 <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex xs12 md6 lg6>
-        <v-card class="px-0">
+          <v-card class="px-0">
             <v-card-title>
                 Madera
             <v-spacer></v-spacer>
 
             <v-dialog v-model="dialog" max-width="500px">            
                 <v-card>
-                <v-card-title>
-                    <span class="headline">{{ formTitle }}</span>
-                </v-card-title>
-
-                <v-card-text v-if="newLumber">
-                    <v-container grid-list-md>
-                        <v-layout wrap>
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field label="Alto" hint="Ingrese el alto de la madera" required v-model="newLumber.high"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field label="Ancho" hint="Ingrese el ancho de la madera" v-model="newLumber.width"></v-text-field>
-                        </v-flex>   
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field
-                            label="Densidad"
-                            hint="Ingrese la densidad de la madera"                  
-                            required
-                            v-model="newLumber.density"
-                            ></v-text-field>
-                        </v-flex>                          
-                        <v-flex xs12 sm6>
-                            <v-select                  
-                            label="Tipo de madera"
-                            v-model="newLumber.type_id"
-                            :items="types"
-                            item-text="name"
-                            item-value="id"
-                            :hint="`Descripcion del tipo seleccionado`"
-                            persistent-hint>
-                            </v-select>
-                        </v-flex>
-                        <v-flex xs12 sm6>
-                            <v-select                  
-                            label="Especie"                
-                            v-model="newLumber.specie_id"  
-                            :items="species"
-                            item-text="name"
-                            item-value="id"
-                            :hint="`Descripcion de la madera seleccionada`"
-                            persistent-hint>                                
-                            </v-select>
-                        </v-flex>
-                        <v-flex xs12>
-                            <v-text-field label="Descripción" v-model="newLumber.description" ></v-text-field>
-                        </v-flex>  
-                    </v-layout>
-                    </v-container>
-                </v-card-text>
-
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                    <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">store</v-btn>
-                    <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>update</v-btn>                                
-                </v-card-actions>
+                    <v-card-title>
+                        <span class="headline">{{ formTitle }}</span>
+                    </v-card-title>
+                    <v-card-text v-if="newInventory">
+                        <v-container grid-list-md>
+                            <v-layout wrap>                   
+                                <v-flex xs12>
+                                <v-text-field label="Code" v-model="newInventory.code" ></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-select                  
+                                label="Tipo"
+                                v-model="newInventory.inventory_type_id"
+                                :items="inventory_types"
+                                item-text="name"
+                                item-value="id"
+                                :hint="`Descripcion del tipo seleccionado`"
+                                persistent-hint>
+                                </v-select>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-select                  
+                                label="Familia"
+                                v-model="newInventory.family_id"
+                                :items="families"
+                                item-text="name"
+                                item-value="id"
+                                :hint="`Familia`"
+                                persistent-hint>
+                                </v-select>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-select                  
+                                label="Unidad"
+                                v-model="newInventory.unit_id"
+                                :items="units"
+                                item-text="name"
+                                item-value="id"
+                                :hint="`Unidad`"
+                                persistent-hint>
+                                </v-select>
+                            </v-flex>
+                            <v-flex xs6>
+                                <v-text-field label="Stock mínimo" v-model="newInventory.minimum" ></v-text-field>
+                            </v-flex>
+                            <v-flex xs12>
+                                <v-text-field label="Descripción" v-model="newInventory.description" ></v-text-field>
+                            </v-flex>
+                            <v-switch
+                                :label="'Activo'"
+                                v-model="newInventory.active"
+                            ></v-switch>
+                        </v-layout>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
+                        <v-btn color="blue darken-1" flat @click="store(newInventory)" v-if="editedIndex === -1">Guardar</v-btn>
+                        <v-btn color="blue darken-1" flat @click="update(newInventory)" v-else>Actualizar</v-btn>
+                    </v-card-actions>
                 </v-card>
             </v-dialog>
-
-
-        <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
-        </v-card-title>
-    
+            
+            <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
+            </v-card-title>
         <v-data-table 
         :headers="headers"
-        :items="lumbers"        
+        :items="inventories"
         hide-actions
         style="max-width: 100%"
         >
@@ -118,12 +121,12 @@
            </tr>
         </template>
         <template slot="items"  slot-scope="props">
-            <tr @click="addToPurchase(props.item)">
-                <td class="text-xs-left">{{ props.item.specie.name }}</td>
-                <td class="text-xs-left">{{ props.item.type.name }}</td>      
-                <td class="text-xs-left" >{{ props.item.high }}</td>            
-                <td class="text-xs-left">{{ props.item.width }}</td>
-                <td class="text-xs-left">{{ props.item.density }}</td>      
+            <tr @click="addToBuyout(props.item)">
+                <td class="text-xs-left">{{ props.item.code }}</td>
+                <td class="text-xs-left">{{ props.item.description }}</td>      
+                <td class="text-xs-left" >{{ props.item.type.name }}</td>            
+                <td class="text-xs-left">{{ props.item.family.name }}</td>
+                <td class="text-xs-left">{{ props.item.unit.name }}</td>      
                 <!-- <td class="justify-center layout px-0">
                     <v-icon
                         small
@@ -136,7 +139,7 @@
             </tr>
         </template>
         <template slot="expand" slot-scope="props">
-            <v-card flat v-if="lumber">
+            <!-- <v-card flat v-if="lumber">
                 <table>
                     <tr>
                         <td> 
@@ -199,7 +202,7 @@
                         </td>
                     </tr>
                 </table>                                
-            </v-card>
+            </v-card> -->
         </template>
 
         <!-- <v-alert slot="no-results" :value="true" color="error" icon="warning">
@@ -221,35 +224,43 @@
             </v-flex>
 
         </div> 
-      
-    </v-card>
+
+            </v-card>
+        </v-dialog>
       </v-flex>
       <v-flex xs12 md6 lg6>
     <v-card>
         <v-card-title>
-            Compra
+            Compra de insumo
         <v-spacer></v-spacer>
         <v-btn @click="store();" color="primary" dark class="mb-2">Guardar</v-btn>
         </v-card-title>
         <v-container grid-list-md>
-        <v-layout wrap>
+        <v-layout wrap v-if="buyout">
             <v-flex xs12 sm4 md4 v-if="providers">                
                 <v-select                  
-                        label="Proveedor"
-                        v-model="purchase.provider_id"
-                        :items="providers"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion del tipo seleccionado`"
-                        persistent-hint>
-                        </v-select>
-
+                    label="Proveedor"
+                    v-model="buyout.provider_id"
+                    :items="providers"
+                    item-text="name"
+                    item-value="id"
+                    :hint="`Descripcion del tipo seleccionado`"
+                    persistent-hint>
+                </v-select>
             </v-flex>
+            <v-flex xs12 sm4 md4 v-if="employees">
+                <v-select                  
+                    label="Encargado"
+                    v-model="buyout.employee_id"
+                    :items="employees"
+                    item-text="name"
+                    item-value="id"
+                    :hint="`Descripcion del tipo seleccionado`"
+                    persistent-hint>
+                </v-select>
+            </v-flex>            
             <v-flex xs12 sm4 md4>
-                <v-text-field label="CEFO" v-model="purchase.cefo" hint="Ingrese codigo CEFO" required ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm4 md4>
-                <v-text-field label="Costo" v-model="purchase.amount" hint="Ingrese Costo Total" required ></v-text-field>
+                <v-text-field label="Costo" v-model="buyout.amount" hint="Ingrese Costo Total" required ></v-text-field>
             </v-flex>
             <v-flex xs12 sm4 md4>
                  <v-menu
@@ -265,27 +276,27 @@
                 >
                     <v-text-field
                     slot="activator"
-                    v-model="purchase.date"
+                    v-model="buyout.date"
                     label="Fecha"          
                     readonly
                     ></v-text-field>
-                    <v-date-picker v-model="purchase.date" @input="$refs.menu2.save(date)"></v-date-picker>
+                    <v-date-picker v-model="buyout.date" @input="$refs.menu2.save(date)"></v-date-picker>
 
                 </v-menu>
             </v-flex>
             <v-flex xs12 sm4 md8>
-                <v-text-field label="Descripcion" v-model="purchase.description" hint="description"></v-text-field>
+                <v-text-field label="Descripcion" v-model="buyout.description" hint="description"></v-text-field>
             </v-flex>
             <v-flex xs12 sm12 md12>
                  <v-data-table        
-                    :headers="purchase_headers"
-                    :items="purchase_lumbers"
+                    :headers="buyout_headers"
+                    :items="buyout_inventory"
                     hide-actions        
                     >
                     <template slot="items"  slot-scope="props">
                         <!-- <tr @click="props.expanded = !props.expanded"> -->
-                            <td class="text-xs-left">{{ props.item.specie.name+'-'+props.item.type.name }}</td>
-                            <td class="text-xs-left" >{{ props.item.high+'X'+props.item.width+'X'+props.item.density }}</td>                                                            
+                            <td class="text-xs-left">{{ props.item.code }}</td>
+                            <td class="text-xs-left" >{{ props.item.description }}</td>
                             <td class="text-xs-left">
                                 <v-layout wrap>
                                     <v-flex xs12 sm10 md10>
@@ -300,7 +311,7 @@
                                 <v-flex xs12 sm4 md4>
                                         <v-icon
                                         small
-                                        @click="removeFromPurchase(props.index)"
+                                        @click="removeFromBuyout(props.index)"
                                     >
                                         delete
                                     </v-icon>
@@ -334,18 +345,18 @@ export default {
             { text: 'Ancho', value: 'width' ,input:'', menu:false},
             { text: 'Espesor', value: 'density' ,input:'', menu:false},            
         ],
-        purchase_headers: [
+        buyout_headers: [
             { text: 'Madera', value: 'Madera' },
             { text: 'Medida', value: 'Madera' },
             { text: 'Cantidad', value: 'Madera' },                 
         ],
         species: null,
         types: null,
-        lumbers: [],
-        purchase_lumbers: [],
-        lumber: null,
-        newLumber: null,
-        totalLumber: 0,        
+        inventories: [],
+        buyout_inventory: [],
+        inventory: null,
+        newInventory: null,
+        totalInventory: 0,        
         loading: true,
         filterName: 'high',
         filterValue: '',   
@@ -360,7 +371,8 @@ export default {
         to:0,     
         pagination_select:[10,20,30],
         providers: [],
-        purchase: null,
+        employees: [],
+        buyout: null,
         pivot: null,
         pl: [],
       }
@@ -371,24 +383,24 @@ export default {
             }
     },
     mounted()
-    {
+    {        
         this.search();
         this.create();
         this.getSpecies();
         this.getTypes();
         this.getProviders();
-        
+        this.getEmployees();        
     },
     methods:{
         search() {
             return new Promise((resolve,reject)=>{   
-                this.getData('/api/auth/lumber',this.getParams()).then((data)=>{
-                    this.lumbers = data.data;                    
+                this.getData('/api/auth/inventory',this.getParams()).then((data)=>{
+                    this.inventories = data.data;                    
                     this.last_page = data.last_page;
                     this.total = data.total;
                     this.from = data.from;
                     this.to = data.to;
-                    resolve();                    
+                    resolve();
                 });
             });            
         },
@@ -428,46 +440,46 @@ export default {
             this.filterValue='',
             this.filterName = filterName;
         },
-        createLumber() {                                    
-            axios.get('/api/auth/lumber/create')            
+        createinventory() {                                    
+            axios.get('/api/auth/inventory/create')            
             .then(response => {                
-                console.log(response.data.lumber);
-                this.newLumber = response.data.lumber;                
+                console.log(response.data.inventory);
+                this.newInventory = response.data.inventory;                
             })
             .catch(error => {                
                 console.log(error);
             });
             this.dialog = true;
         },
-        storeLumber(){
+        storeinventory(){
 
         },
         create () {
-            axios.get('/api/auth/purchase/create')            
+            axios.get('/api/auth/buyout/create')            
             .then(response => {                
-                console.log(response.data.pivot);
-                this.purchase = response.data.purchase;                
-                this.pivot = response.data.pivot;
+                //console.log(response.data.pivot);
+                this.buyout = response.data.buyout;
+                //this.pivot = response.data.pivot;
             })
             .catch(error => {                
                 console.log(error);
             });            
         },
         store () {                        
-            axios.post('/api/auth/purchase/', {purchase: this.purchase, lumbers: this.purchase_lumbers})
+            axios.post('/api/auth/buyout/', {buyout: this.buyout, inventories: this.buyout_inventory})
             .then(response => {                
-                //this.lumbers.push(response.data.lumber);
+                //this.inventory.push(response.data.inventory);
                 alert('Compra realizada');
-                this.$router.replace('/purchase');
+                this.$router.replace('/buyout');
             })
             .catch(error => {                
                 console.log(error);
             });            
         },
         show(item) {                        
-            axios.get(`/api/auth/lumber/${item.id}`)            
+            axios.get(`/api/auth/inventory/${item.id}`)            
             .then(response => {                
-                this.lumber = response.data.lumber
+                this.inventory = response.data.inventory
             })
             .catch(error => {                
                 console.log(error);
@@ -501,15 +513,24 @@ export default {
                 console.log(error);
             });
         },
+        getEmployees () {
+            axios.get('/api/auth/employee')
+            .then(response => {                
+                this.employees = response.data.data
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
         close() {
             this.dialog = false;
         },
-        addToPurchase(item) {            
+        addToBuyout(item) {            
             item.quantity = '';
-            this.purchase_lumbers.push(item);
+            this.buyout_inventory.push(item);
         },
-        removeFromPurchase(index) {
-            this.purchase_lumbers.splice(index, 1);
+        removeFromBuyout(index) {
+            this.buyout_inventory.splice(index, 1);
         },
         checkInput(search)
         {
