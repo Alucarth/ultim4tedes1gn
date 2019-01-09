@@ -12,7 +12,9 @@ use App\Lumber;
 use App\Type;
 use App\Unit;
 use App\PackageLumber;
+use App\LumberTransaction;
 use App\Storage;
+use Carbon\Carbon;
 class PackageController extends Controller
 {
     /**
@@ -22,17 +24,18 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $order = $request->order ?? 'asc';
-        $pagination_rows = $request->pagination_rows ?? 10;               
+      
+        $order = request('orde'??'asc'); 
+        $pagination_rows =request('pagination_rows'??10);        
 
         $package_conditions = [];
         $storage_conditions = [];        
         
 
-        $code = $request->code ?? null;        
-        $name = $request->name ?? null;        
-        $storage = $request->storage ?? null;
-
+        $code = request('code'??'');        
+        $name = request('name'??'');        
+        $storage = request('storage_id'??'');
+        Log::info($storage);
         if ($code) {
             array_push($package_conditions, ['code','like',"%{$code}%"]);
         }
@@ -40,15 +43,15 @@ class PackageController extends Controller
             array_push($package_conditions, ['name','like',"%{$name}%"]);
         }        
         if ($storage) {
-            array_push($storage_conditions, ['name','like',"%{$storage}%"]);
+            array_push($package_conditions, ['storage_id','=',$storage]);
         }        
         
 
         $storages = Package::with(['storage'])
                             ->where($package_conditions)
-                            ->whereHas('storage', function ($query) use ($storage_conditions) {
-                                $query->where($storage_conditions);
-                            })                            
+                            // ->whereHas('storage', function ($query) use ($storage_conditions) {
+                            //     $query->where($storage_conditions);
+                            // })                            
                             ->paginate($pagination_rows);
         $data = [
             'storages'   =>  $storages
@@ -253,5 +256,64 @@ class PackageController extends Controller
             }
         }
         return $request->all();
+    }
+    public function transfer_lumber(Request $request)
+    {
+        // $package_lumbers = Lumber::where($request->padestiny_id)->get();
+        //$package_id = $request->package_id;
+        foreach($request->lumbers as $lumber){
+            // $object = json_decode(json_encode($lumber)) ;
+            Log::info($lumber['checked']);
+            if($lumber['checked']==1){
+                Log::info($lumber['checked']);
+                $lumber_id = $lumber['id'];
+                $quantity = $lumber['pivot']['quantity'];
+                Log::info($lumber_id);
+                Log::info($quantity);
+                
+                // actualizar paquete origen
+                $package_lumber = PackageLumber::where('package_id',$request->package_id)->where('lumber_id',$lumber_id)->first(); //siembre debe existir
+                Log::info($package_lumber);
+                if($package_lumber->quantity -  $quantity >=0){
+                    $package_lumber->quantity -= $quantity;
+                    $package_lumber->save();
+                }
+                if($package_lumber->quantity==0){
+                    $package_lumber->delete();
+                }
+                $package_lumber = PackageLumber::where('package_id',$request->package_destiny_id)->where('lumber_id',$lumber_id)->first();
+                //transferir
+                if(!$package_lumber)
+                {
+                    $package_lumber = new PackageLumber;
+                    $package_lumber->package_id = $request->package_destiny_id;
+                    $package_lumber->quantity = 0;
+                    $package_lumber->lumber_id = $lumber_id;
+                }
+                $package_lumber->quantity+=$quantity;
+                $package_lumber->save();
+
+
+                // crear registro de la transaccion;
+                $lumber_transaction = new LumberTransaction;
+                $lumber_transaction->lumber_id=$lumber_id;
+                $lumber_transaction->package_origin_id = $request->package_id;
+                $lumber_transaction->package_destination_id= $request->package_destiny_id;
+                $lumber_transaction->quantity =$quantity;
+                $lumber_transaction->date = Carbon::now();
+                $lumber_transaction->save();
+            }
+            
+           
+            // Log::info($lumber['pivot']['quantity']);
+        }
+
+        $packaged = Package::with(['storage','lumbers','lumbers.specie','lumbers.type'])->find($request->package_id);
+        $packaged2 = Package::with(['storage','lumbers','lumbers.specie','lumbers.type'])->find($request->package_destiny_id);
+        $data = [
+            'packaged'   =>  $packaged,
+            'packaged2'   =>  $packaged2
+        ];
+        return response()->json($data);
     }
 }

@@ -224,21 +224,56 @@
             Your search for "{{ search }}" found no results.
         </v-alert> -->
         </v-data-table>
-        <div class="text-xs-center">
+        <!-- <v-layout>
+            <v-flex class="text-xs-center" xs10> 
+                <v-pagination
+                    v-model="page"
+                    :length="last_page"
+                    :total-visible="10"
+                    @input="next"
+                > </v-pagination>
+
+            </v-flex>
+            <v-flex class="text-xs-center" xs2>
+                Mostrando {{from}}-{{to}} de {{total}}
+            </v-flex>
+        </v-layout> -->
+        <!-- Mostrando {{from}}-{{to}} de {{total}} -->
+        <!-- <v-card> -->
+            <v-card-text>
+                <div class="text-xs-center">
+                <v-pagination
+                    v-model="page"
+                    :length="last_page"
+                    :total-visible="10"
+                    @input="next"
+                    
+                > </v-pagination>
+                </div>
+                <v-spacer></v-spacer>
+                Mostrando {{from}}-{{to}} de {{total}} 
+            </v-card-text>
+        <!-- </v-card> -->
+        <!-- <div class="text-xs-center">
             <v-pagination
-            v-model="page"
-            :length="last_page"
-            :total-visible="10"
-             @input="next"
-            ></v-pagination>
-        </div> 
-        <div class="text-xs-right">
+                v-model="page"
+                :length="last_page"
+                :total-visible="10"
+                @input="next"
+                
+                
+            > </v-pagination>
+            <v-spacer></v-spacer>
+              Mostrando {{from}}-{{to}} de {{total}} registros 
+           
+        </div>  -->
+        <!-- <div class="text-xs-left">
             
             <v-flex xs11 sm11 md11>
                 Mostrando {{from}}-{{to}} de {{total}} registros 
             </v-flex>
 
-        </div>
+        </div> -->
         
     </v-card>
 </template>
