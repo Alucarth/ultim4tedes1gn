@@ -12,7 +12,6 @@ import Vue from 'vue'
 import axios from 'axios'
 import Datatable from 'vue2-datatable-component'
 
-
 Vue.use(Datatable)
 import components from '../datatable/'
 export default {
