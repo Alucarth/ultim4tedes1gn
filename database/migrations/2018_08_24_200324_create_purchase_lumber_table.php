@@ -23,6 +23,7 @@ class CreatePurchaseLumberTable extends Migration
             $table->foreign('state_id')->references('id')->on('states');
             $table->integer('quantity')->default(0);
             $table->decimal('quantity_feet',13,2)->default(0);
+            $table->decimal('amount',13,2)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
