@@ -78,8 +78,16 @@ export default {
                 { icon: 'local_florist', text: 'Especies' , link: '/specie' },
                 { icon: 'group', text: 'Proveedores' , link: '/provider' },  
                 { icon: 'money', text: 'Compra de madera', link: '/purchase' },
+<<<<<<< HEAD
                 { icon: 'money', text: 'Compra de Insumos', link: '/buyout' },
                 { icon: 'repeat', text: 'Transferencia de Madera', link: '/lumber_transaction' },
+=======
+
+                { icon: 'money', text: 'Compra de Insumos', link: '/buyout' },
+
+                { icon: 'repeat', text: 'Transferencia de Madera', link: '/lumber_transaction' },
+
+>>>>>>> upstream/master
                 { icon: 'view_agenda', text: 'Paquetes', link: '/package' },
                 { icon: 'cloud_upload', text: 'Importar Compras', link: '/import_purchases' },
                 { icon: 'cloud_upload', text: 'Importar Paquetes', link: '/import_package' },
