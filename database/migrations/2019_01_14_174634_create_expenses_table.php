@@ -12,7 +12,15 @@ class CreateExpensesTable extends Migration
      * @return void
      */
     public function up()
-    {       
+    {    
+        Schema::create('expenses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('description');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+           
         Schema::create('purchase_expenses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('purchase_id')->nullable();
@@ -24,13 +32,7 @@ class CreateExpensesTable extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('expenses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+     
     }
 
     /**
