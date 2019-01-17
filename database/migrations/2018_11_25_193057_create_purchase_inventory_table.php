@@ -18,7 +18,7 @@ class CreatePurchaseInventoryTable extends Migration
             $table->integer('buyout_id')->nullable();
             $table->foreign('buyout_id')->references('id')->on('buyouts');
             $table->integer('inventory_id')->nullable();
-            $table->foreign('inventory_id')->references('id')->on('inventorys');            
+            $table->foreign('inventory_id')->references('id')->on('inventories');            
             $table->integer('state_id')->nullable();
             $table->foreign('state_id')->references('id')->on('states');
             $table->integer('quantity')->default(0);

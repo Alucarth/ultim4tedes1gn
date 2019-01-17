@@ -93,55 +93,87 @@
                 </v-layout> -->
             </v-container>
 
+            <v-tabs
+                centered
+                color="cyan"
+                dark
+                icons-and-text
+            >
+                <v-tabs-slider color="yellow"></v-tabs-slider>
+
+                <v-tab href="#tab-1">
+                Compras 
+                <v-icon>shopping_cart</v-icon>
+                </v-tab>
+
+                <v-tab href="#tab-2">
+                Gastos
+                <v-icon>attach_money</v-icon>
+                </v-tab>
+
+                <v-tab-item
+                id="tab-1"
+                >
+                    <v-data-table
+                    :headers="headers"
+                    :items="purchases"
+                    :search="search"
+                    >
+                    <template slot="items" slot-scope="props">
+                        <td class="text-xs-left">
+                            <v-checkbox
+                                readonly
+                                :color="props.item.valid?'success':'warning'"
+                                v-model="props.item.valid"
+                            ></v-checkbox>
+                        </td>
+                        <td class="text-xs-left">{{ props.item.cefo }}</td>
+                        <td class="text-xs-left">{{ props.item.fecha }}</td>
+                        <td class="text-xs-left">{{ props.item.specie.name }}</td>
+                        <!-- <td class="text-xs-left">{{ props.item.codigo }}</td> -->
+                        <td class="text-xs-left">{{ props.item.type.name }}</td>
+                        <td class="text-xs-left">{{ props.item.unit.name }}</td>
+                        <td class="text-xs-left">{{ props.item.espesor }}</td>
+                        <td class="text-xs-left">{{ props.item.ancho }}</td>
+                        <td class="text-xs-left">{{ props.item.largo }}</td>
+                        <td class="text-xs-left">{{ props.item.state.name }}</td>
+                        <td class="text-xs-left">{{ props.item.cantidad }}</td>
+                        <td class="text-xs-left">{{ props.item.cantidad_pie }}</td>
+                        <td class="text-xs-left">{{ props.item.precio_unitario }}</td>
+                        <td class="text-xs-left">
+                            <!-- <v-badge :color="props.item.valid==true?'green':'red'" left>
+                                <span slot="badge" >!</span> -->
+                                <v-icon @click="edit(props.item)">
+                                    edit
+                                </v-icon>
+                                <!-- </v-badge> -->
+                            <!-- <v-icon>edit</v-icon> -->
+                            <v-icon @click="deleteItem(props.item)">delete</v-icon> 
+                        </td>
+                        
+                        
+                    </template>
+                    <v-alert slot="no-results" :value="true" color="error" icon="warning">
+                        Su busqueda para "{{ search }}" no se encontraron resultados.
+                    </v-alert>
+                    </v-data-table>
+                </v-tab-item>
+                <v-tab-item
+                id="tab-2"
+                >
+                <v-card flat>
+                    <v-card-text> contenido del 2</v-card-text>
+                </v-card>
+                </v-tab-item>
+            </v-tabs>
 
 
             <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
         
-            <v-data-table
-                :headers="headers"
-                :items="purchases"
-                :search="search"
-            >
-            <template slot="items" slot-scope="props">
-                <td class="text-xs-left">
-                    <v-checkbox
-                        readonly
-                        :color="props.item.valid?'success':'warning'"
-                        v-model="props.item.valid"
-                    ></v-checkbox>
-                </td>
-                <td class="text-xs-left">{{ props.item.cefo }}</td>
-                <td class="text-xs-left">{{ props.item.fecha }}</td>
-                <td class="text-xs-left">{{ props.item.specie.name }}</td>
-                <!-- <td class="text-xs-left">{{ props.item.codigo }}</td> -->
-                <td class="text-xs-left">{{ props.item.type.name }}</td>
-                <td class="text-xs-left">{{ props.item.unit.name }}</td>
-                <td class="text-xs-left">{{ props.item.espesor }}</td>
-                <td class="text-xs-left">{{ props.item.ancho }}</td>
-                <td class="text-xs-left">{{ props.item.largo }}</td>
-                <td class="text-xs-left">{{ props.item.state.name }}</td>
-                <td class="text-xs-left">{{ props.item.cantidad }}</td>
-                <td class="text-xs-left">{{ props.item.cantidad_pie }}</td>
-                <td class="text-xs-left">{{ props.item.precio_unitario }}</td>
-                <td class="text-xs-left">
-                      <!-- <v-badge :color="props.item.valid==true?'green':'red'" left>
-                        <span slot="badge" >!</span> -->
-                        <v-icon @click="edit(props.item)">
-                            edit
-                        </v-icon>
-                        <!-- </v-badge> -->
-                    <!-- <v-icon>edit</v-icon> -->
-                    <v-icon @click="deleteItem(props.item)">delete</v-icon> 
-                </td>
-                
-                
-            </template>
-            <v-alert slot="no-results" :value="true" color="error" icon="warning">
-                Su busqueda para "{{ search }}" no se encontraron resultados.
-            </v-alert>
-            </v-data-table>
+            
 
-            <v-dialog v-model="dialog" max-width="800px">            
+            <!-- Dialogo para edicion de linea -->
+            <v-dialog v-model="dialog" max-width="800px">             
             <v-card >
             <v-card-title>
                 <span class="headline">Editar</span>
