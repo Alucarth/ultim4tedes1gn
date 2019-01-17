@@ -22,6 +22,7 @@ import ExcelImport from './components/package/Import.vue';
 import ExcelImportPurchases from './components/purchase/import.vue';
 
 import LumberTransaction from './components/lumber/transaction.vue';
+import Expensive from './components/expensive/index.vue';
    
    export const routes= [
         {
@@ -263,6 +264,18 @@ import LumberTransaction from './components/lumber/transaction.vue';
             name: 'LumberTransaction',
             components:{ 
                 default:LumberTransaction,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
+        },
+        {
+            path: '/expenses',
+            name: 'expenses',
+            components:{ 
+                default:Expensive,
                 toolbar:Toolbar,
                 nav: Nav
             },

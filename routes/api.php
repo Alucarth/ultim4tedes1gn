@@ -52,4 +52,6 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('/family','FamilyController');
     Route::resource('/buyout','BuyoutController');
     Route::resource('report','ReportController');
+    Route::resource('expenses','ExpensiveController');
+    
 });
