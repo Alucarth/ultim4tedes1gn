@@ -97,6 +97,14 @@ export default {
             this.$store.commit('template/updateDrawer',value);
           }
         },
+        show_message:{
+          get(){
+            return this.$store.state.template.show_message;
+          },
+          set(value){
+            this.$store.commit('template/updateShowMessage',value);
+          }
+        },
         ...mapState({
           user: state => state.auth.user,
         })

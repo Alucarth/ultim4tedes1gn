@@ -45,6 +45,13 @@ class ExpensiveController extends Controller
     public function create()
     {
         //
+        $expensive = new Expensive();
+        $expensive->name = '';
+        $expensive->description = '';
+        $data = [
+            'expensive'    =>  $expensive,
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -56,6 +63,23 @@ class ExpensiveController extends Controller
     public function store(Request $request)
     {
         //
+        //1 para operacion fallida
+        $status = 1; 
+        try {
+            //code...
+            $expensive = new Expensive();
+            $expensive->name = $request->name;
+            $expensive->description = $request->description;
+            $expensive->save();
+            $status =0;
+        } catch (Exception $e) {
+            //throw $th;
+        }
+        
+        $data = [
+            'status'    =>  $status,
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -64,9 +88,15 @@ class ExpensiveController extends Controller
      * @param  \App\Expensive  $expensive
      * @return \Illuminate\Http\Response
      */
-    public function show(Expensive $expensive)
+    public function show($id)
     {
         //
+        $expensive = Expensive::find($id);
+
+        $data = [
+            'expensive'    =>  $expensive,
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -75,9 +105,15 @@ class ExpensiveController extends Controller
      * @param  \App\Expensive  $expensive
      * @return \Illuminate\Http\Response
      */
-    public function edit(Expensive $expensive)
+    public function edit($id)
     {
         //
+        $expensive = Expensive::find($id);
+        
+        $data = [
+            'expensive'    =>  $expensive,
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -87,9 +123,18 @@ class ExpensiveController extends Controller
      * @param  \App\Expensive  $expensive
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expensive $expensive)
+    public function update(Request $request, $id)
     {
         //
+        $expensive = Expensive::find($id);
+        $expensive->name = $request->name;
+        $expensive->description = $request->description;
+        $expensive->save();
+
+        $data = [
+            'expensive'    =>  $expensive,
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -98,8 +143,22 @@ class ExpensiveController extends Controller
      * @param  \App\Expensive  $expensive
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Expensive $expensive)
+    public function destroy($id)
     {
         //
+        $status = 1; 
+        try {
+            //code...
+            $expensive = Expensive::find($id);
+            $expensive->delete();
+            $status =0;
+        } catch (Exception $e) {
+            //throw $th;
+        }
+
+        $data = [
+            'status'    =>  $status,
+        ];
+        return response()->json($data);
     }
 }
