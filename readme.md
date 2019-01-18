@@ -17,9 +17,14 @@ composer install
 yarn or npm Install  
 php artisan key:generate  
 php artisan jwt:secret  
+## Utils
+for send a message with vuex use this:
 
+this.$store.dispatch('template/showMessage',{message:'Se registro correctamente el Gasto ',color:'success'});
+
+where color options is 'success', 'info', 'error'
 
 ## Contributing
 
-Thanks Melisa and Brian, sorry thas is Melisa and Carlita  XD
+Thanks Brian cerrucho XD
 

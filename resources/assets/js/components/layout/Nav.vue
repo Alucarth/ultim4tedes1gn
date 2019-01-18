@@ -84,6 +84,7 @@ export default {
                 { icon: 'cloud_upload', text: 'Importar Compras', link: '/import_purchases' },
                 { icon: 'cloud_upload', text: 'Importar Paquetes', link: '/import_package' },
                 { icon: 'work', text: 'Empleados', link: '/employee' },
+                { icon: 'attach_money', text: 'Gastos', link: '/expenses' },
             ],
         }
     },
