@@ -165,7 +165,32 @@
                     <v-card-text> 
                     
                         <v-btn color='success' @click="createExpensive()" >adcionar <v-icon>attach_money</v-icon> </v-btn>
-                    
+                        <v-data-table
+                            :headers="header_expensive"
+                            :items="purchase_expenses"
+                            :search="search"
+                        >
+                            <template slot="items" slot-scope="props">
+                                
+                                <td class="text-xs-left">{{ props.item.expensive.name }}</td>
+                                <td class="text-xs-left">{{ props.item.cost }}</td>
+                                <td class="text-xs-left">
+                                    <!-- <v-badge :color="props.item.valid==true?'green':'red'" left>
+                                        <span slot="badge" >!</span> -->
+                                        <v-icon @click="edit(props.item)">
+                                            edit
+                                        </v-icon>
+                                        <!-- </v-badge> -->
+                                    <!-- <v-icon>edit</v-icon> -->
+                                    <v-icon @click="deleteItem(props.item)">delete</v-icon> 
+                                </td>
+                                
+                                
+                            </template>
+                            <v-alert slot="no-results" :value="true" color="error" icon="warning">
+                                Su busqueda para "{{ search }}" no se encontraron resultados.
+                            </v-alert>
+                        </v-data-table>
                     </v-card-text>
                 </v-card>
                 </v-tab-item>
@@ -359,7 +384,12 @@ export default {
             { text: 'Cantidad', value: 'cantidad' },
             { text: 'Canitdad Pie', value: 'cantidad_pie' },
             { text: 'Precio Unitario', value: 'precio_unitario' },
-            { text: 'Accion ' }
+            { text: 'Accion ', value:''}
+        ],
+        header_expensive:[
+            { text: 'Nombre', value: 'name'},
+            { text: 'Costo Bs', value: 'cost'},
+            { text: 'Accion ', value:''}
         ],
         providerSelected:null,
         providers:[],
@@ -444,10 +474,12 @@ export default {
         },
         store(){
             console.log("para guardado");
-            axios.post('api/auth/save_purchases',{purchases: this.purchases, provider_id:this.providerSelected.id, amount: this.getTotal})
+            axios.post('api/auth/save_purchases',{purchases: this.purchases,purchase_expenses: this.purchase_expenses, provider_id:this.providerSelected.id, amount: this.getTotal})
             .then(response => {                
                 console.log(response.data);
+                //adicionar status a las respuesta XD
                 // this.purchases = response.data;
+                 this.$store.dispatch('template/showMessage',{message:'Se registro correctamente el Gasto ',color:'success'});
             })
             .catch(function (error) {
                 console.log(error);
@@ -498,6 +530,7 @@ export default {
             // console.log(item);
             //guardar en lista 
             this.purchase_expenses.push(item);
+             this.dialog_expensive = false;
             console.log(this.purchase_expenses);
         },
         updateExpensive(item){

@@ -85,7 +85,7 @@ class PurchaseController extends Controller
     {
         $expenses = Expensive::all();
         $purchase_expensive = new PurchaseExpensive;
-        $purchase_expensive->expensive_id =1;
+        // $purchase_expensive->expensive_id =1;
         $purchase_expensive->cost = 0;
         $data = [
             'expenses'  =>  $expenses,
@@ -262,6 +262,18 @@ class PurchaseController extends Controller
                 
                 
             }
+        }
+        Log::info($purchase);
+        foreach($request->purchase_expenses as $expense)
+        {
+            // Log::info($expense['expensive']);
+            $expensive = new PurchaseExpensive;
+            $expensive->purchase_id = $purchase->id;
+            $expensive->expensive_id=$expense['expensive']['id'];
+            $expensive->cost =$expense['cost'];
+            $expensive->save();
+            Log::info($expensive);
+         
         }
         return $request->all();
     }
