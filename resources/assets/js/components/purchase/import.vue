@@ -162,7 +162,36 @@
                 id="tab-2"
                 >
                 <v-card flat>
-                    <v-card-text> contenido del 2</v-card-text>
+                    <v-card-text> 
+                    
+                        <v-btn color='success' @click="createExpensive()" >adcionar <v-icon>attach_money</v-icon> </v-btn>
+                        <v-data-table
+                            :headers="header_expensive"
+                            :items="purchase_expenses"
+                            :search="search"
+                        >
+                            <template slot="items" slot-scope="props">
+                                
+                                <td class="text-xs-left">{{ props.item.expensive.name }}</td>
+                                <td class="text-xs-left">{{ props.item.cost }}</td>
+                                <td class="text-xs-left">
+                                    <!-- <v-badge :color="props.item.valid==true?'green':'red'" left>
+                                        <span slot="badge" >!</span> -->
+                                        <v-icon @click="edit(props.item)">
+                                            edit
+                                        </v-icon>
+                                        <!-- </v-badge> -->
+                                    <!-- <v-icon>edit</v-icon> -->
+                                    <v-icon @click="deleteItem(props.item)">delete</v-icon> 
+                                </td>
+                                
+                                
+                            </template>
+                            <v-alert slot="no-results" :value="true" color="error" icon="warning">
+                                Su busqueda para "{{ search }}" no se encontraron resultados.
+                            </v-alert>
+                        </v-data-table>
+                    </v-card-text>
                 </v-card>
                 </v-tab-item>
             </v-tabs>
@@ -268,35 +297,7 @@
                     <v-flex xs12 sm6 md4>
                         <v-text-field label="Cantidad Pie" hint="Ingrese cantidad" required v-model="item.cantidad_pie"></v-text-field>
                     </v-flex>
-                    <!-- <v-flex xs12 sm6 md4> -->
-                        <!-- <v-text-field label="Ancho" hint="Ingrese el ancho de la madera" v-model="newLumber.width"></v-text-field> -->
-                    <!-- </v-flex> -->
-                                            
-                    <!-- <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Tipo de madera"
-                        v-model="newLumber.type_id"
-                        :items="types"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion del tipo seleccionado`"
-                        persistent-hint>
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Especie"                
-                        v-model="newLumber.specie_id"  
-                        :items="species"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion de la madera seleccionada`"
-                        persistent-hint>                                
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs12>
-                        <v-text-field label="Descripción" v-model="newLumber.description" ></v-text-field>
-                    </v-flex>   -->
+          
                 </v-layout>
                 </v-container>
             </v-card-text>
@@ -306,6 +307,48 @@
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
         
                 <v-btn color="blue darken-1" flat @click="update()">Actualizar</v-btn>
+                
+                
+            </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <!-- dialog del expensive -->
+        <v-dialog v-model="dialog_expensive" max-width="600px">             
+            <v-card >
+            <v-card-title>
+                <span class="headline">{{formTitle}}</span>
+            </v-card-title>
+         <v-card-text v-if="item_expensive!=null">
+                <v-container grid-list-md>
+                 <v-layout wrap>
+                    
+                   
+                    <v-flex xs12 sm6 md6> 
+                        <v-combobox                  
+                            label="Especie"                
+                            v-model="item_expensive.expensive"  
+                            :items="expenses"
+                            item-text="name"
+                            item-value="id"
+                            placeholder="Seleccione Tipo de Gasto"
+                            persistent-hint>                                
+                        </v-combobox>
+                    </v-flex>
+                 
+                    <v-flex xs12 sm6 md6>
+                        <v-text-field label="Costo" hint="Ingrese costo" required v-model="item_expensive.cost"></v-text-field>
+                    </v-flex>
+                 
+                </v-layout>
+                </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
+                <v-btn color="blue darken-1" flat @click="storeExpensive(item_expensive)" v-if="indexItem === -1">Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="updateExpensive(item_expensive)" v-else>Actualizar</v-btn>
+                <!-- <v-btn color="blue darken-1" flat @click="update()">Actualizar</v-btn> -->
                 
                 
             </v-card-actions>
@@ -341,7 +384,12 @@ export default {
             { text: 'Cantidad', value: 'cantidad' },
             { text: 'Canitdad Pie', value: 'cantidad_pie' },
             { text: 'Precio Unitario', value: 'precio_unitario' },
-            { text: 'Accion ' }
+            { text: 'Accion ', value:''}
+        ],
+        header_expensive:[
+            { text: 'Nombre', value: 'name'},
+            { text: 'Costo Bs', value: 'cost'},
+            { text: 'Accion ', value:''}
         ],
         providerSelected:null,
         providers:[],
@@ -351,8 +399,12 @@ export default {
         units:[],
         states:[],
         details:[],
+        expenses:[],
+        purchase_expenses:[],
         dialog:false,
+        dialog_expensive:false,
         item: null,
+        item_expensive: null,
         indexItem : -1,
         menu2: false,
         date: new Date().toISOString().substr(0, 10),
@@ -422,10 +474,12 @@ export default {
         },
         store(){
             console.log("para guardado");
-            axios.post('api/auth/save_purchases',{purchases: this.purchases, provider_id:this.providerSelected.id, amount: this.getTotal})
+            axios.post('api/auth/save_purchases',{purchases: this.purchases,purchase_expenses: this.purchase_expenses, provider_id:this.providerSelected.id, amount: this.getTotal})
             .then(response => {                
                 console.log(response.data);
+                //adicionar status a las respuesta XD
                 // this.purchases = response.data;
+                 this.$store.dispatch('template/showMessage',{message:'Se registro correctamente el Gasto ',color:'success'});
             })
             .catch(function (error) {
                 console.log(error);
@@ -460,6 +514,28 @@ export default {
         close() {
             this.dialog = false;
         },
+        createExpensive() {                            
+            axios.get('/api/auth/create_purchase_expensive')            
+            .then((response) => {      
+                 console.log(response.data);                          
+                this.expenses = response.data.expenses
+                this.item_expensive = response.data.purchase_expensive;
+            })
+            .catch(error => {                
+                console.log(error);
+            });
+            this.dialog_expensive = true;
+        },
+        storeExpensive(item){
+            // console.log(item);
+            //guardar en lista 
+            this.purchase_expenses.push(item);
+             this.dialog_expensive = false;
+            console.log(this.purchase_expenses);
+        },
+        updateExpensive(item){
+
+        }
     
     },
     computed:{
@@ -487,6 +563,9 @@ export default {
                // console.log(amount)
             });
             return numeral(amount).format('0,0.00');
+        },
+        formTitle () {
+            return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
         }
     },
     mounted(){

@@ -15,6 +15,8 @@ use App\PackageLumber;
 use App\Package;
 use App\Provider;
 use App\State;
+use App\Expensive;
+use App\PurchaseExpensive;
 use Log;
 class PurchaseController extends Controller
 {
@@ -75,6 +77,19 @@ class PurchaseController extends Controller
         $data = [
             'purchase'  =>  $purchase,
             'pivot'    =>  $pivot,
+        ];
+
+        return response()->json($data);
+    }
+    public function createPurchaseExpensive()
+    {
+        $expenses = Expensive::all();
+        $purchase_expensive = new PurchaseExpensive;
+        // $purchase_expensive->expensive_id =1;
+        $purchase_expensive->cost = 0;
+        $data = [
+            'expenses'  =>  $expenses,
+            'purchase_expensive'    =>  $purchase_expensive,
         ];
 
         return response()->json($data);
@@ -247,6 +262,18 @@ class PurchaseController extends Controller
                 
                 
             }
+        }
+        Log::info($purchase);
+        foreach($request->purchase_expenses as $expense)
+        {
+            // Log::info($expense['expensive']);
+            $expensive = new PurchaseExpensive;
+            $expensive->purchase_id = $purchase->id;
+            $expensive->expensive_id=$expense['expensive']['id'];
+            $expensive->cost =$expense['cost'];
+            $expensive->save();
+            Log::info($expensive);
+         
         }
         return $request->all();
     }
