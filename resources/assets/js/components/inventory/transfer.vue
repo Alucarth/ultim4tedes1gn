@@ -6,30 +6,30 @@
         <v-card-title>
             Transferencia de insumos
         <v-spacer></v-spacer>
-        <v-btn to="/package/create" color="primary" dark class="mb-2">Nueva Area</v-btn>
+        <v-btn to="/area" color="primary" dark class="mb-2">Nueva Area</v-btn>
         </v-card-title>
         <v-layout row wrap>
 
-        <v-data-table 
+        <v-data-table
         :headers="headers"
-        :items="packages"        
+        :items="inventories"
         hide-actions
         style="max-width: 100%"
         >
      <template slot="headers" slot-scope="props" >
            <tr>
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
-                    
+
                         <v-flex v-if="header.value!='actions'">
                             <span>{{ header.text }}
                             </span>
-                            <v-menu 
+                            <v-menu
                                     :close-on-content-click="false"
                                     >
                                     <v-btn
                                         slot="activator"
                                         icon
-                                   
+
                                         v-if="header.sortable!=false"
                                     >
                                     <v-icon  small>fa-filter</v-icon>
@@ -40,12 +40,12 @@
                                          hide-details
                                         v-model="header.input"
                                         append-icon="search"
-                                        :label="`Buscar ${header.text}...`"                                       
+                                        :label="`Buscar ${header.text}...`"
                                         @keydown.enter="search()"
                                     ></v-text-field>
-                                    
+
                                     </v-card>
-                            </v-menu>                            
+                            </v-menu>
                         </v-flex>
                 </th>
            </tr>
@@ -53,24 +53,16 @@
         <template slot="items"  slot-scope="props">
             <tr @click="addToTransfer(props.item)">
                 <td class="text-xs-left">{{ props.item.code }}</td>
-                <td class="text-xs-left">{{ props.item.name }}</td>      
-                <td class="text-xs-left" >{{ props.item.area.name }}</td>                            
-                <!-- <td class="justify-center layout px-0">
-                    <v-icon
-                        small
-                        class="mr-2"
-                        @click="show(props.item);props.expanded = !props.expanded"
-                    >
-                        toc
-                    </v-icon>                    
-                </td>       -->
+                <td class="text-xs-left">{{ props.item.description }}</td>
+                <td class="text-xs-left" >{{ props.item.type.name }}</td>
+                <td class="text-xs-left" >{{ props.item.family.name }}</td>
             </tr>
         </template>
         <template slot="expand" slot-scope="props">
             <!-- <v-card flat v-if="transfer">
                 <table>
                     <tr>
-                        <td> 
+                        <td>
                             Especie
                         </td>
                         <td>
@@ -80,7 +72,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td> 
+                        <td>
                             Tipo
                         </td>
                         <td>
@@ -90,17 +82,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <td> 
+                        <td>
                             Alto
                         </td>
                         <td>
                             <v-card-text>
                                 {{ lumber.high }}
                             </v-card-text>
-                        </td>                 
+                        </td>
                     </tr>
                     <tr>
-                        <td> 
+                        <td>
                             Ancho
                         </td>
                         <td>
@@ -176,15 +168,15 @@
             <br>
         <v-data-table        
         :headers="transfer_headers"
-        :items="transfer_packages"
+        :items="transfer_inventories"
          hide-actions
         >
         <template slot="items"  slot-scope="props">
             <!-- <tr @click="props.expanded = !props.expanded"> -->
                 <td class="text-xs-left">{{ props.item.code }}</td>
-                <td class="text-xs-left">{{ props.item.name }}</td>      
-                <td class="text-xs-left" >{{ props.item.area.name }}</td>
-                <td class="justify-center layout px-0">                    
+                <td class="text-xs-left">{{ props.item.description }}</td>      
+                <td class="text-xs-left" >{{ props.item.type.name }}</td>
+                <td class="justify-center layout px-0">
                     <v-icon
                         small
                         @click="removeFromTransfer(props.index)"
@@ -212,6 +204,7 @@ export default {
         headers: [          
             { text: 'Codigo', value: 'code' },
             { text: 'Nombre', value: 'name' },
+            { text: 'Tipo', value: 'type' },
             { text: 'Almacen', value: 'area' },
         ],
         transfer_headers: [
@@ -219,8 +212,8 @@ export default {
             { text: 'Nombre', value: 'name' },
             { text: 'Almacen', value: 'area' },            
         ],        
-        packages: [],
-        transfer_packages: [],    
+        inventories: [],
+        transfer_inventories: [],    
         transfer: null,    
         totalPackage: 0,        
         loading: true,        
@@ -248,12 +241,12 @@ export default {
     methods:{
         search() {
             return new Promise((resolve,reject)=>{   
-                this.getData('/api/auth/package',this.getParams()).then((data)=>{
+                this.getData('/api/auth/inventory',this.getParams()).then((data)=>{
                     console.log("");
                     console.log(data.data);
-                    this.packages = data.data;
+                    this.inventories = data.data;
                     this.last_page = data.last_page;
-                    resolve();                    
+                    resolve();
                 });
             });            
         },
@@ -317,7 +310,7 @@ export default {
             });
         },
         store () {                        
-            axios.post('/api/auth/package_transaction/', {transfer: this.transfer, packages: this.transfer_packages})
+            axios.post('/api/auth/package_transaction/', {transfer: this.transfer, inventories: this.transfer_inventories})
             .then(response => {                                
                 alert('Madera empaquetada');
                 this.$router.replace('/area');
@@ -368,10 +361,10 @@ export default {
         },
         addToTransfer(item) {            
             item.quantity = '';
-            this.transfer_packages.push(item);
+            this.transfer_inventories.push(item);
         },
         removeFromTransfer(index) {
-            this.transfer_packages.splice(index, 1);
+            this.transfer_inventories.splice(index, 1);
         }
         
     }
