@@ -8,18 +8,51 @@
         <v-card-text>
             <v-container grid-list-md text-xs-center>
                 <v-layout row wrap>
-                <v-flex xs6>
+                <v-flex xs12>
                     <v-layout row wrap> 
-                        <v-flex xs12>
+                        <v-flex xs4 sm4 md4>
                             <v-combobox                  
                                 label="Proveedor"                
-                                v-model="providerSelected"  
+                                v-model="proveedor"  
                                 :items="providers"
                                 item-text="name"
                                 item-value="id"
                                 placeholder="Seleccione un Proveedor"
                                 persistent-hint>                                
                             </v-combobox>
+                           
+                        </v-flex>
+                        <v-flex xs4 sm4 md4>
+                            <v-text-field label="CEFO" hint="Ingrese CEFO" required v-model="cefo"></v-text-field>
+                        </v-flex>
+                         <v-flex xs4 sm4 md4>
+                            <v-menu
+                            :close-on-content-click="false"
+                            v-model="menu2"
+                            :nudge-right="40"
+                            lazy
+                            transition="scale-transition"
+                            offset-y
+                            full-width
+                            max-width="290px"
+                            min-width="290px"
+                            >
+                            <v-text-field
+                                slot="activator"
+                                v-model="fecha"
+                                label="Fecha"
+                                hint="Año-Mes-Dia"
+                                persistent-hint
+                                prepend-icon="event"
+                                readonly
+                            ></v-text-field>
+                            <v-date-picker v-model="fecha" no-title @input="menu2 = false"></v-date-picker>
+                            </v-menu>
+                        </v-flex>
+                        <v-flex xs12 sm12 md12>
+                            <v-text-field label="Descripcion" hint="Ingrese descripcion" required v-model="descripcion"></v-text-field>
+                        </v-flex>
+                        <v-flex xs12>
                             <input
                                 type="file"
                                 style="display: none"
@@ -27,8 +60,6 @@
                                 accept="application/vnd.ms-excel"
                                 @change="onFilePicked"
                             >
-                        </v-flex>
-                        <v-flex xs12>
                             <v-text-field label="Selecionar excel" @click='pickFile' v-model='excelName' prepend-icon='attach_file'></v-text-field>
                         </v-flex>
                      
@@ -114,6 +145,7 @@
                 <v-tab-item
                 id="tab-1"
                 >
+                    <v-btn color='success' small @click="create()" >adcionar <v-icon small right >fa-plus-circle</v-icon> </v-btn>
                     <v-data-table
                     :headers="headers"
                     :items="purchases"
@@ -127,8 +159,8 @@
                                 v-model="props.item.valid"
                             ></v-checkbox>
                         </td>
-                        <td class="text-xs-left">{{ props.item.cefo }}</td>
-                        <td class="text-xs-left">{{ props.item.fecha }}</td>
+                        <!-- <td class="text-xs-left">{{ props.item.cefo }}</td>
+                        <td class="text-xs-left">{{ props.item.fecha }}</td> -->
                         <td class="text-xs-left">{{ props.item.specie.name }}</td>
                         <!-- <td class="text-xs-left">{{ props.item.codigo }}</td> -->
                         <td class="text-xs-left">{{ props.item.type.name }}</td>
@@ -205,39 +237,14 @@
             <v-dialog v-model="dialog" max-width="800px">             
             <v-card >
             <v-card-title>
-                <span class="headline">Editar</span>
+                <span class="headline">{{ formTitle }}</span>
             </v-card-title>
 
             <v-card-text v-if="item!=null">
                 <v-container grid-list-md>
                  <v-layout wrap>
-                    <v-flex xs12 sm6 md6>
-                        <v-text-field label="CEFO" hint="Ingrese CEFO" required v-model="item.cefo"></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm6 md6>
-                        <v-menu
-                        :close-on-content-click="false"
-                        v-model="menu2"
-                        :nudge-right="40"
-                        lazy
-                        transition="scale-transition"
-                        offset-y
-                        full-width
-                        max-width="290px"
-                        min-width="290px"
-                        >
-                        <v-text-field
-                            slot="activator"
-                            v-model="item.fecha"
-                            label="Fecha"
-                            hint="Año-Mes-Dia"
-                            persistent-hint
-                            prepend-icon="event"
-                            readonly
-                        ></v-text-field>
-                        <v-date-picker v-model="item.fecha" no-title @input="menu2 = false"></v-date-picker>
-                        </v-menu>
-                    </v-flex>
+                    
+                   
                     <v-flex xs12 sm6 md4> 
                         <v-combobox                  
                             label="Especie"                
@@ -297,6 +304,9 @@
                     <v-flex xs12 sm6 md4>
                         <v-text-field label="Cantidad Pie" hint="Ingrese cantidad" required v-model="item.cantidad_pie"></v-text-field>
                     </v-flex>
+                    <v-flex xs12 sm6 md4>
+                        <v-text-field label="Precion Unitario" hint="Ingrese precio" required v-model="item.precio_unitario"></v-text-field>
+                    </v-flex>
           
                 </v-layout>
                 </v-container>
@@ -305,8 +315,9 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-        
-                <v-btn color="blue darken-1" flat @click="update()">Actualizar</v-btn>
+
+                <v-btn v-if='editedIndex === -1' color="blue darken-1" flat @click="addItem(item)" >Crear</v-btn>
+                <v-btn v-else color="blue darken-1" flat @click="update()">Actualizar</v-btn>
                 
                 
             </v-card-actions>
@@ -371,8 +382,8 @@ export default {
         search: '',
         headers: [
             { text: 'Valido', value: 'valid' },
-            { text: 'CEFO', value: 'cefo' },
-            { text: 'Fecha', value: 'fecha' },
+            // { text: 'CEFO', value: 'cefo' },
+            // { text: 'Fecha', value: 'fecha' },
             { text: 'Especie', value: 'especie' },
             // { text: 'Codigo', value: 'codigo' },
             { text: 'Tipo', value: 'tipo' },
@@ -391,7 +402,10 @@ export default {
             { text: 'Costo Bs', value: 'cost'},
             { text: 'Accion ', value:''}
         ],
-        providerSelected:null,
+        proveedor:null, //dato global de compra
+        fecha: new Date().toISOString().substr(0, 10), //dato global de compra
+        cefo: '', //dato global de compra
+        descripcion: '', //dato global de compra
         providers:[],
         purchases:[],
         species:[],
@@ -406,6 +420,7 @@ export default {
         item: null,
         item_expensive: null,
         indexItem : -1,
+        editedIndex:-1,
         menu2: false,
         date: new Date().toISOString().substr(0, 10),
     }),
@@ -474,7 +489,7 @@ export default {
         },
         store(){
             console.log("para guardado");
-            axios.post('api/auth/save_purchases',{purchases: this.purchases,purchase_expenses: this.purchase_expenses, provider_id:this.providerSelected.id, amount: this.getTotal})
+            axios.post('api/auth/save_purchases',{purchases: this.purchases,purchase_expenses: this.purchase_expenses, provider_id:this.proveedor.id, amount: this.getTotal, fecha: this.fechas, cefo: this.cefo, descripcion:this.descripcion})
             .then(response => {                
                 console.log(response.data);
                 //adicionar status a las respuesta XD
@@ -486,6 +501,29 @@ export default {
             });            
             this.dialog =false;      
             // this.search();      
+        },
+        create(){ //para adicionar items manualmente
+            axios.get('api/auth/add_item_purchase')
+                .then(response =>{
+                    console.log(response.data);
+                    this.species = response.data.species;
+                    this.units = response.data.units;
+                    this.types = response.data.types;
+                    this.states = response.data.states;
+                    this.editedIndex = -1;
+                    this.item = response.data.item;
+                    this.dialog = true;
+                })  
+                .catch(function (error) {
+                    console.log(error);
+                }); 
+
+        },
+        addItem(item){
+            console.log(item);
+            this.purchases.push(item);
+            item.valid =true;
+            this.dialog =false;
         },
         edit(item){
             this.indexItem = this.purchases.indexOf(item)
