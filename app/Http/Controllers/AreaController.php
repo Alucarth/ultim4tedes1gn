@@ -14,7 +14,7 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $areas = Area::get();
+        $areas = Area::with(['inventories'])->get();
 
         $data = [
             'areas' => $areas

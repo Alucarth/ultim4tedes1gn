@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inventory extends Model
 {
-      
+
     protected $fillable = array('id');
 
     protected $attributes = array(
@@ -34,6 +34,6 @@ class Inventory extends Model
      */
     public function areas()
     {
-        return $this->belongsToMany('App\Area');
+        return $this->belongsToMany('App\Area','inventory_area')->withPivot(['quantity']);
     }
 }

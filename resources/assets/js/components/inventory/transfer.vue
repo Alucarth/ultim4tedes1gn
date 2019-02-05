@@ -6,7 +6,17 @@
         <v-card-title>
             Transferencia de insumos
         <v-spacer></v-spacer>
-        <v-btn to="/area" color="primary" dark class="mb-2">Nueva Area</v-btn>
+        <v-flex xs12 sm4 md4 v-if="areas">
+                <v-select
+                    label="Area"
+                    :items="areas"
+                    item-text="name"
+                    item-value="id"
+                    v-model="actual_area"
+                    :hint="`Descripcion del tipo seleccionado`"
+                    persistent-hint>
+                    </v-select>
+            </v-flex>
         </v-card-title>
         <v-layout row wrap>
 
@@ -55,7 +65,7 @@
                 <td class="text-xs-left">{{ props.item.code }}</td>
                 <td class="text-xs-left">{{ props.item.description }}</td>
                 <td class="text-xs-left" >{{ props.item.type.name }}</td>
-                <td class="text-xs-left" >{{ props.item.family.name }}</td>
+                <td class="text-xs-left" >{{ props.item.area.pivot.quantity }}</td>
             </tr>
         </template>
         <template slot="expand" slot-scope="props">
@@ -147,15 +157,15 @@
         <v-spacer></v-spacer>
         <v-btn @click="store();" color="primary" dark class="mb-2">Guardar</v-btn>
         </v-card-title>
-        <v-layout row wrap>
+        <v-layout row wrap v-if="transfer">
             <v-flex xs12 sm4 md4>
                 <v-text-field label="Codigo" v-model="transfer.number" hint="Ingrese codigo paquete" required ></v-text-field>
             </v-flex>
             <v-flex xs12 sm4 md4>
                 <v-text-field label="Description" v-model="transfer.description" hint="Ingrese descripcion"></v-text-field>
             </v-flex>
-            <v-flex xs12 sm4 md4 v-if="areas">                
-                <v-select                  
+            <v-flex xs12 sm4 md4 v-if="areas">
+                <v-select
                     label="Almacen"
                     v-model="transfer.area_destination_id"
                     :items="areas"
@@ -164,9 +174,9 @@
                     :hint="`Descripcion del tipo seleccionado`"
                     persistent-hint>
                     </v-select>
-            </v-flex>                                    
+            </v-flex>
             <br>
-        <v-data-table        
+        <v-data-table
         :headers="transfer_headers"
         :items="transfer_inventories"
          hide-actions
@@ -174,7 +184,7 @@
         <template slot="items"  slot-scope="props">
             <!-- <tr @click="props.expanded = !props.expanded"> -->
                 <td class="text-xs-left">{{ props.item.code }}</td>
-                <td class="text-xs-left">{{ props.item.description }}</td>      
+                <td class="text-xs-left">{{ props.item.description }}</td>
                 <td class="text-xs-left" >{{ props.item.type.name }}</td>
                 <td class="justify-center layout px-0">
                     <v-icon
@@ -197,11 +207,11 @@
 <script>
 export default {
     data () {
-      return {        
+      return {
         pagination: {
           sortBy: 'name'
         },
-        headers: [          
+        headers: [
             { text: 'Codigo', value: 'code' },
             { text: 'Nombre', value: 'name' },
             { text: 'Tipo', value: 'type' },
@@ -210,20 +220,21 @@ export default {
         transfer_headers: [
             { text: 'Codigo', value: 'code' },
             { text: 'Nombre', value: 'name' },
-            { text: 'Almacen', value: 'area' },            
-        ],        
+            { text: 'Almacen', value: 'area' },
+        ],
         inventories: [],
-        transfer_inventories: [],    
-        transfer: null,    
-        totalPackage: 0,        
-        loading: true,        
+        transfer_inventories: [],
+        transfer: null,
+        totalPackage: 0,
+        loading: true,
         dialog: false,
-        editedIndex: -1,                  
+        editedIndex: -1,
         last_page: 1,
-        page: 1,    
+        page: 1,
         paginationRows: 10,
         areas: [],
-        pivot: null,        
+        pivot: null,
+        actual_area: 1,
       }
     },
     computed: {
@@ -233,10 +244,9 @@ export default {
     },
     mounted()
     {
-        this.create();        
-        this.search();        
+        this.create();
+        this.search();
         this.getareas();
-        
     },
     methods:{
         search() {
@@ -350,7 +360,7 @@ export default {
             axios.get('/api/auth/area')
             .then(response => {
                 console.log(response.data.data);
-                this.areas = response.data
+                this.areas = response.data.areas
             })
             .catch(error => {
                 console.log(error);
@@ -365,8 +375,13 @@ export default {
         },
         removeFromTransfer(index) {
             this.transfer_inventories.splice(index, 1);
+        },
+        filtered_inventory() {
+            console.log('starting filtering');
+            let new_areas = this.areas.filter(e => e.id == this.actual_area);
+            console.log(new_areas);
+            return new_areas;
         }
-        
     }
 }
 </script>

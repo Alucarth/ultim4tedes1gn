@@ -49,7 +49,7 @@ class InventoryController extends Controller
             array_push($unit_conditions, ['name','like',"%{$unit}%"]);
         }
 
-        $inventories = Inventory::with(['family','type','unit'])
+        $inventories = Inventory::with(['family','type','unit','areas'])
                             ->where($inventory_conditions)
                             ->whereHas('family', function ($query) use ($family_conditions) {
                                 $query->where($family_conditions);
@@ -73,7 +73,7 @@ class InventoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {        
+    {
         $inventory = new Inventory();
         $data = [
             'inventory'    =>  $inventory

@@ -6,34 +6,30 @@
         <v-card-title>
             Transferencia de Almacenes
         <v-spacer></v-spacer>
-
-
         <v-btn to="/package/create" color="primary" dark class="mb-2">Nuevo empaquetado</v-btn>
         </v-card-title>
-
-
         <v-layout row wrap>
 
-        <v-data-table 
+        <v-data-table
         :headers="headers"
-        :items="packages"        
+        :items="packages"
         hide-actions
         style="max-width: 100%"
         >
      <template slot="headers" slot-scope="props" >
            <tr>
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
-                    
+
                         <v-flex v-if="header.value!='actions'">
                             <span>{{ header.text }}
                             </span>
-                            <v-menu 
+                            <v-menu
                                     :close-on-content-click="false"
                                     >
                                     <v-btn
                                         slot="activator"
                                         icon
-                                   
+
                                         v-if="header.sortable!=false"
                                     >
                                     <v-icon  small>fa-filter</v-icon>
@@ -44,12 +40,11 @@
                                          hide-details
                                         v-model="header.input"
                                         append-icon="search"
-                                        :label="`Buscar ${header.text}...`"                                       
+                                        :label="`Buscar ${header.text}...`"
                                         @keydown.enter="search()"
                                     ></v-text-field>
-                                    
                                     </v-card>
-                            </v-menu>                            
+                            </v-menu>
                         </v-flex>
                 </th>
            </tr>

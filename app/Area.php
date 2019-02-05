@@ -11,6 +11,6 @@ class Area extends Model
      */
     public function inventories()
     {
-        return $this->belongsToMany('App\Inventory');
+        return $this->belongsToMany('App\Inventory','inventory_area')->withPivot(['quantity']);
     }
 }
