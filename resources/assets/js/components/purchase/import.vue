@@ -373,6 +373,11 @@
     	
 </template>
 <script>
+
+import Confirm from '../Confirm';
+import { create } from 'vue-modal-dialogs';
+
+const confirm = create(Confirm, 'title', 'content');
 export default {
     data: () => ({
 
@@ -540,9 +545,23 @@ export default {
             // this.item= item;
             this.dialog = false;
         },
-        deleteItem (item) {
+        async deleteItem (item) {
             const index = this.purchases.indexOf(item)
-            confirm('Esta seguro de Eliminar el resgitro') && this.purchases.splice(index, 1)
+                // this.$store.dispatch('template/showConfirmDialog',{title:'Esta seguro de Eliminar el resgitro?',content:''});
+                // while(this.getShowConfirm){}
+                // if(this.getResponseConfirm)
+                // {
+                    // this.ask();
+            this.dialog_confirm =true;
+            if (await confirm('Hey', 'Do you like this project?')) {
+              this.dialog_confirm =false;  
+              this.purchases.splice(index, 1);
+            } else{
+                this.dialog_confirm =false; 
+            }
+                    // this.purchases.splice(index, 1);
+                // }
+            //confirm('Esta seguro de Eliminar el resgitro') && 
         },
 
         formatMoney(amount)
@@ -573,7 +592,16 @@ export default {
         },
         updateExpensive(item){
 
-        }
+        },
+        async ask () {
+            console.log('haciendo clik');
+            this.dialog_confirm =true;
+            if (await confirm('Hey', 'Do you like this project?')) {
+              this.dialog_confirm =false;  
+            } else{
+                this.dialog_confirm =false; 
+            }
+        },
     
     },
     computed:{
@@ -604,7 +632,23 @@ export default {
         },
         formTitle () {
             return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
+        },
+        getShowConfirm(){
+            return this.$store.state.template.dialog_confirm;
+        },
+        getResponseConfirm(){
+            return this.$store.state.template.response;
+        },
+        dialog_confirm:{
+        get(){
+          return this.$store.state.template.dialog_confirm;
+        },
+        set(value)
+        {
+          this.$store.commit('template/updateConfirmDialog',value);
         }
+      },
+
     },
     mounted(){
          axios.get('api/auth/getProviderData')

@@ -32,21 +32,22 @@ import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import {routes} from './routes';
-import Notifications from 'vue-notification';
 import App from './views/App';
+// import Confirm from './components/Confirm';
 import {storage} from './store_modules/storage';
 import {autentication} from './store_modules/autentication';
-
+import * as ModalDialogs from 'vue-modal-dialogs';
+// import { create } from 'vue-modal-dialogs';
 
 window.Vue = require('vue');
 window.numeral = require('numeral');
 window.moment = require('moment');
 window.Chart = require('chart.js');
 
-Vue.use(Notifications);
 Vue.use(VueRouter)
 Vue.use(Vuetify);
 Vue.use(Vuex);
+Vue.use(ModalDialogs);
 
 Vue.prototype.$http = axios;
 const tokenJWT = localStorage.getItem('token')
@@ -63,7 +64,7 @@ const router = new VueRouter({
     mode: 'history',
     routes: routes
 });
-
+// const confirm = create(Confirm, 'title', 'content');
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
       if (store.getters['auth/isLoggedIn']) {
@@ -100,6 +101,7 @@ const app = new Vue({
     el: '#app',
     components: { App },
     router,
-    store
+    store,
+    // confirm
   });
   

@@ -10,7 +10,8 @@
           <v-layout fluid column fill-height>
                 <router-view></router-view>         
           </v-layout>
-          <v-snackbar
+          <!-- para los mensajes tipo alert-->
+          <v-snackbar 
             v-model="show_message"
             :timeout="timeout"
             top='top'
@@ -26,6 +27,19 @@
               <v-icon>close</v-icon>
             </v-btn>
           </v-snackbar>
+           <dialogs-wrapper transition-name="fade"></dialogs-wrapper>
+          <!-- para los mensajes tipo confirm   -->
+          <!-- <v-dialog v-model="dialog_confirm" persistent max-width="290">
+            <v-card>
+              <v-card-title class="headline">{{getConfirmTitle}}</v-card-title>
+              <v-card-text> {{ getConfirmContent}} </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="red darken-1" flat @click="setConfirmResponse(true) ">Si</v-btn>
+                <v-btn color="green darken-1" flat @click="setConfirmResponse(false)">No</v-btn>
+              </v-card-actions> 
+            </v-card>
+          </v-dialog> -->
         </v-container>
     </v-content>
   </v-app>
@@ -59,29 +73,38 @@ console.log("abriendo app vue");
       },
       color(){
         return this.$store.state.template.color;
-      }
+      },
+      // dialog_confirm:{
+      //   get(){
+      //     return this.$store.state.template.dialog_confirm;
+      //   },
+      //   set(value)
+      //   {
+      //     this.$store.commit('template/updateConfirmDialog',value);
+      //   }
+      // },
+      // response:{
+      //   get(){
+      //     return this.$store.state.template.response;
+      //   },
+      //   set(value)
+      //   {
+      //     this.$store.commit('template/updateConfirmResponse',value);
+      //   }
+      // },
+      // getConfirmTitle(){
+      //   return this.$store.state.template.title;
+      // },
+      // getConfirmContent(){
+      //   return this.$store.state.template.content;
+      // }
+      
     },
     created(){
       console.log(this.getToken);
 
       console.log("setteando token");
       axios.defaults.headers.common['Authorization'] = 'Bearer '+this.getToken;
-
-      // axios.interceptors.response.use(function (response) {
-      //   // Do something with response data
-      //     // console.log(response);
-      //   return response;
-      // }, function (error) {
-      //   // Do something with response error
-      //   console.log(error.response.status)
-      //   if(error.response.status == 401)
-      //   {
-      //     this.$store.dispatch('auth/logout')
-      //     .then(() => this.$router.push('/login'))
-      //     .catch(err => console.log(err))
-      //   }
-      //   return Promise.reject(error);
-      // });
 
       axios.interceptors.response.use(undefined,(err) => {
         return new Promise( (resolve, reject) => {
@@ -98,6 +121,13 @@ console.log("abriendo app vue");
       });
 
 
-    }
+      },
+      // methods:{
+      //   // setConfirmResponse(value)
+      //   // {
+      //   //   this.response = value;
+      //   //   this.dialog_confirm = false;
+      //   // }
+      // }
     }
 </script>
