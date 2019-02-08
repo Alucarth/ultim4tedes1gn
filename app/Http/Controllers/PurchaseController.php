@@ -95,6 +95,16 @@ class PurchaseController extends Controller
         return response()->json($data);
     }
 
+    public function newPurchaseItem()
+    {
+        $species = Specie::all();
+        $types = Type::all();
+        $units = Unit::all();
+        $states = State::all();
+        $item = array('cefo'=>'','fecha'=>'','espesor'=>'','ancho'=>'','largo'=>'','cantidad'=>'','cantidad_pie'=>'','precio_unitario'=>'');
+        return compact('species','types','units','states','item');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -213,23 +223,21 @@ class PurchaseController extends Controller
         
         $provider = Provider::find($request->provider_id);
         
-        $purchase = null;
+        
+        $purchase = new Purchase;
+        $purchase->date = date('Y-m-d',strtotime($request->fecha));
+        $purchase->cefo = $request->cefo;
+        $purchase->provider_id = $provider->id;
+        $purchase->description = $request->descripcion;
+        $purchase->amount = $request->amount;
+        $purchase->save();
+        
+
         foreach($request->purchases as $row)
         {
             $object = json_decode(json_encode($row)) ;
             Log::info(strtotime($object->fecha));
             Log::info(date('Y-m-d',strtotime($object->fecha)));
-            if(!$purchase){
-
-                $purchase = new Purchase;
-                $purchase->date = date('Y-m-d',strtotime($object->fecha));
-                $purchase->cefo = $object->cefo;
-                $purchase->provider_id = $provider->id;
-                $purchase->description = "importacion de compra via excel";
-                $purchase->amount = $request->amount;
-                $purchase->save();
-            }
-
 
             if($object->valid)
             {

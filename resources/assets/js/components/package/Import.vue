@@ -246,62 +246,7 @@
         </v-card-text>
        
     </v-card>
-    	<!-- <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
-            
-            <v-text-field label="Selecionar excel" @click='pickFile' v-model='excelName' prepend-icon='attach_file'></v-text-field>
-            <v-combobox                  
-                label="Almacen"                
-                v-model="storageSelected"  
-                :items="storages"
-                item-text="name"
-                item-value="id"
-                placeholder="Seleccione un Almacen"
-                persistent-hint>                                
-            </v-combobox>
-            <input
-                type="file"
-                style="display: none"
-                ref="excel"
-                accept="application/vnd.ms-excel"
-                @change="onFilePicked"
-            >
-            <v-btn @click="loadExcel">importar</v-btn> <v-btn @click="store"> Guardar</v-btn>
-            <v-data-table
-                :headers="headers"
-                :items="packages"
-                :search="search"
-            >
-            <template slot="items" slot-scope="props">
-                <td class="text-xs-left">{{ props.item.cefo }}</td>
-                <td class="text-xs-left">{{ props.item.fecha }}</td>
-                <td class="text-xs-left">{{ props.item.madera }}</td>
-                <td class="text-xs-left">{{ props.item.codigo }}</td>
-                <td class="text-xs-left">{{ props.item.tipo }}</td>
-                <td class="text-xs-left">{{ props.item.unidad }}</td>
-                <td class="text-xs-left">{{ props.item.espesor }}</td>
-                <td class="text-xs-left">{{ props.item.ancho }}</td>
-                <td class="text-xs-left">{{ props.item.largo }}</td>
-                <td class="text-xs-left">{{ props.item.cantidad }}</td>
-                <td class="text-xs-left">{{ props.item.cantidad_pie }}</td>
-                <td class="text-xs-left">{{ props.item.precio_unitario }}</td>
-                <td class="text-xs-left">
-                      <v-badge :color="props.item.valid=true?'green':'red'" left>
-                        <span slot="badge" >!</span>
-                        <v-icon>
-                            edit
-                        </v-icon>
-                        </v-badge>
-      
-                    <v-icon>delete</v-icon> 
-                </td>
-                
-                
-            </template>
-            <v-alert slot="no-results" :value="true" color="error" icon="warning">
-                Su busqueda para "{{ search }}" no se encontraron resultados.
-            </v-alert>
-            </v-data-table>
-        </v-flex> -->
+    	
 </template>
 <script>
 export default {

@@ -2,44 +2,143 @@
 <v-card>
         <v-card-title primary-title>
           <div>
-            <h3 class="headline mb-0">Importacion de Compras</h3>
+            <h3 class="headline mb-0">Nueva Compra</h3>
           </div>
         </v-card-title>
         <v-card-text>
             <v-container grid-list-md text-xs-center>
                 <v-layout row wrap>
-                <v-flex xs6>
+                <v-flex xs12>
                     <v-layout row wrap> 
-                        <v-flex xs12>
+                        <v-flex xs4 sm4 md4>
                             <v-combobox                  
                                 label="Proveedor"                
-                                v-model="providerSelected"  
+                                v-model="proveedor"  
                                 :items="providers"
                                 item-text="name"
                                 item-value="id"
                                 placeholder="Seleccione un Proveedor"
                                 persistent-hint>                                
                             </v-combobox>
-                            <input
-                                type="file"
-                                style="display: none"
-                                ref="excel"
-                                accept="application/vnd.ms-excel"
-                                @change="onFilePicked"
+                           
+                        </v-flex>
+                        <v-flex xs4 sm4 md4>
+                            <v-text-field label="CEFO" hint="Ingrese CEFO" required v-model="cefo"></v-text-field>
+                        </v-flex>
+                         <v-flex xs4 sm4 md4>
+                            <v-menu
+                            :close-on-content-click="false"
+                            v-model="menu2"
+                            :nudge-right="40"
+                            lazy
+                            transition="scale-transition"
+                            offset-y
+                            full-width
+                            max-width="290px"
+                            min-width="290px"
                             >
+                            <v-text-field
+                                slot="activator"
+                                v-model="fecha"
+                                label="Fecha"
+                                hint="Año-Mes-Dia"
+                                persistent-hint
+                                prepend-icon="event"
+                                readonly
+                            ></v-text-field>
+                            <v-date-picker v-model="fecha" no-title @input="menu2 = false"></v-date-picker>
+                            </v-menu>
+                        </v-flex>
+                        <v-flex xs12 sm12 md12>
+                            <v-text-field label="Descripcion" hint="Ingrese descripcion" required v-model="descripcion"></v-text-field>
                         </v-flex>
                         <v-flex xs12>
-                            <v-text-field label="Selecionar excel" @click='pickFile' v-model='excelName' prepend-icon='attach_file'></v-text-field>
+                           
                         </v-flex>
                      
-                        <v-flex xs12>
-                            <v-btn @click="loadExcel" ><v-icon>file_upload</v-icon>importar </v-btn>
-                            <v-btn @click="store"> <v-icon>save</v-icon> Guardar</v-btn>
-                        </v-flex>
+                       
                     </v-layout>
 
                 </v-flex>
-                <v-flex xs6 v-if="details.length >0">
+                <v-flex xs6>
+                    <v-card color="cyan darken-1" class="white--text">
+                    <v-card-title>
+                        <v-layout row wrap>
+                        <v-flex xs2 >
+                            <v-icon>functions</v-icon>  
+                        </v-flex>
+                        <v-flex xs7 >
+                           <p class="text-xs-left">Cantidad</p>  
+                        </v-flex>
+                        <v-flex xs3 >
+                            <p class="text-xs-right">{{this.getQuantity}}  </p>
+                        </v-flex>
+                        <v-spacer></v-spacer>
+                        <v-flex xs2 >
+                            <v-icon>functions</v-icon>  
+                        </v-flex>
+                        <v-flex xs7 >
+                           <p class="text-xs-left">Cantidad Pie</p>  
+                        </v-flex>
+                        <v-flex xs3 >
+                            <p class="text-xs-right">{{this.getQuantityFeet}}  </p>
+                        </v-flex>
+                        </v-layout>
+                        
+                    </v-card-title>
+                    <v-divider light></v-divider>
+                    <v-card-actions class="pa-3">
+                        
+                        Total Compras
+                        <v-spacer></v-spacer>
+                        {{this.formatMoney(this.getTotal)}}
+                    </v-card-actions>
+                    </v-card>
+                </v-flex>
+                <v-flex xs6>
+                    <v-card color="cyan darken-1" class="white--text">
+                    <v-card-title>
+                        <v-layout row wrap>
+                        <v-flex xs2 >
+                            <v-icon>functions</v-icon>  
+                        </v-flex>
+                        <v-flex xs7 >
+                           <p class="text-xs-left">Cantidad de Gastos</p>  
+                        </v-flex>
+                        <v-flex xs3 >
+                            <p class="text-xs-right">{{this.getQuantityExpensive}}  </p>
+                        </v-flex>
+                        <v-spacer></v-spacer>
+                        <v-flex xs2 >
+                            <!-- <v-icon>attach_money</v-icon>   -->
+                        </v-flex>
+                        <v-flex xs7 >
+                           <p class="text-xs-left">&nbsp;</p>  
+                        </v-flex>
+                        <v-flex xs3 >
+                            <p class="text-xs-right">&nbsp; </p>
+                        </v-flex>
+                        </v-layout>
+                        
+                    </v-card-title>
+                    <v-divider light></v-divider>
+                    <v-card-actions class="pa-3">
+                        
+                        Total Gastos
+                        <v-spacer></v-spacer>
+                        {{this.formatMoney(this.getTotalExpensive)}}
+                    </v-card-actions>
+                    </v-card>
+                </v-flex>
+              
+                <v-flex xs12>
+            
+                     <p class="text-xs-left">
+                     
+                        <v-btn color='success' dark  @click="store()" >Guardar <v-icon  right dark>save</v-icon> </v-btn>
+                     </p>
+                </v-flex>
+                <!-- <v-flex xs6 v-if="details.length >0">
                     <v-card >
                         <v-list two-line>
                         <template v-for="(item, index) in details">
@@ -74,7 +173,7 @@
                         </template>
                         </v-list>
                     </v-card>
-                </v-flex>
+                </v-flex> -->
                 
                 </v-layout>
                 <!-- <v-layout row>
@@ -114,6 +213,23 @@
                 <v-tab-item
                 id="tab-1"
                 >
+                    <v-btn color='success' small @click="create()" >adcionar <v-icon small right >fa-plus-circle</v-icon> </v-btn>
+                    <input
+                                type="file"
+                                style="display: none"
+                                ref="excel"
+                                accept="application/vnd.ms-excel"
+                                @change="onFilePicked"
+                            >
+                    
+                    <v-btn  @click='pickFile' small color="success"> importar  <v-icon small right >fa-file-excel-o</v-icon> </v-btn>        
+                    <v-chip close v-model="chip">
+                        <v-avatar>
+                            <v-icon small color="success">fa-file-excel-o</v-icon>
+                        </v-avatar>
+                        {{excelName}}
+                    </v-chip>
+                    <!-- <v-text-field label="Selecionar excel"  v-model='excelName' prepend-icon='attach_file'></v-text-field> -->
                     <v-data-table
                     :headers="headers"
                     :items="purchases"
@@ -127,8 +243,8 @@
                                 v-model="props.item.valid"
                             ></v-checkbox>
                         </td>
-                        <td class="text-xs-left">{{ props.item.cefo }}</td>
-                        <td class="text-xs-left">{{ props.item.fecha }}</td>
+                        <!-- <td class="text-xs-left">{{ props.item.cefo }}</td>
+                        <td class="text-xs-left">{{ props.item.fecha }}</td> -->
                         <td class="text-xs-left">{{ props.item.specie.name }}</td>
                         <!-- <td class="text-xs-left">{{ props.item.codigo }}</td> -->
                         <td class="text-xs-left">{{ props.item.type.name }}</td>
@@ -164,7 +280,7 @@
                 <v-card flat>
                     <v-card-text> 
                     
-                        <v-btn color='success' @click="createExpensive()" >adcionar <v-icon>attach_money</v-icon> </v-btn>
+                        <v-btn color='success' @click="createExpensive()"  small>adcionar <v-icon right small>fa-plus-circle</v-icon> </v-btn>
                         <v-data-table
                             :headers="header_expensive"
                             :items="purchase_expenses"
@@ -177,12 +293,12 @@
                                 <td class="text-xs-left">
                                     <!-- <v-badge :color="props.item.valid==true?'green':'red'" left>
                                         <span slot="badge" >!</span> -->
-                                        <v-icon @click="edit(props.item)">
+                                        <v-icon @click="editeExpensive(props.item)">
                                             edit
                                         </v-icon>
                                         <!-- </v-badge> -->
                                     <!-- <v-icon>edit</v-icon> -->
-                                    <v-icon @click="deleteItem(props.item)">delete</v-icon> 
+                                    <v-icon @click="deleteExpensive(props.item)">delete</v-icon> 
                                 </td>
                                 
                                 
@@ -205,39 +321,14 @@
             <v-dialog v-model="dialog" max-width="800px">             
             <v-card >
             <v-card-title>
-                <span class="headline">Editar</span>
+                <span class="headline">{{ formTitle }}</span>
             </v-card-title>
 
             <v-card-text v-if="item!=null">
                 <v-container grid-list-md>
                  <v-layout wrap>
-                    <v-flex xs12 sm6 md6>
-                        <v-text-field label="CEFO" hint="Ingrese CEFO" required v-model="item.cefo"></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm6 md6>
-                        <v-menu
-                        :close-on-content-click="false"
-                        v-model="menu2"
-                        :nudge-right="40"
-                        lazy
-                        transition="scale-transition"
-                        offset-y
-                        full-width
-                        max-width="290px"
-                        min-width="290px"
-                        >
-                        <v-text-field
-                            slot="activator"
-                            v-model="item.fecha"
-                            label="Fecha"
-                            hint="Año-Mes-Dia"
-                            persistent-hint
-                            prepend-icon="event"
-                            readonly
-                        ></v-text-field>
-                        <v-date-picker v-model="item.fecha" no-title @input="menu2 = false"></v-date-picker>
-                        </v-menu>
-                    </v-flex>
+                    
+                   
                     <v-flex xs12 sm6 md4> 
                         <v-combobox                  
                             label="Especie"                
@@ -297,6 +388,9 @@
                     <v-flex xs12 sm6 md4>
                         <v-text-field label="Cantidad Pie" hint="Ingrese cantidad" required v-model="item.cantidad_pie"></v-text-field>
                     </v-flex>
+                    <v-flex xs12 sm6 md4>
+                        <v-text-field label="Precion Unitario" hint="Ingrese precio" required v-model="item.precio_unitario"></v-text-field>
+                    </v-flex>
           
                 </v-layout>
                 </v-container>
@@ -305,8 +399,9 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-        
-                <v-btn color="blue darken-1" flat @click="update()">Actualizar</v-btn>
+
+                <v-btn v-if='editedIndex === -1' color="blue darken-1" flat @click="addItem(item)" >Crear</v-btn>
+                <v-btn v-else color="blue darken-1" flat @click="updateExpensive()">Actualizar</v-btn>
                 
                 
             </v-card-actions>
@@ -316,7 +411,7 @@
         <v-dialog v-model="dialog_expensive" max-width="600px">             
             <v-card >
             <v-card-title>
-                <span class="headline">{{formTitle}}</span>
+                <span class="headline">{{formTitleExpensive}}</span>
             </v-card-title>
          <v-card-text v-if="item_expensive!=null">
                 <v-container grid-list-md>
@@ -346,7 +441,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="storeExpensive(item_expensive)" v-if="indexItem === -1">Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="storeExpensive(item_expensive)" v-if="expensiveIndex === -1">Guardar</v-btn>
                 <v-btn color="blue darken-1" flat @click="updateExpensive(item_expensive)" v-else>Actualizar</v-btn>
                 <!-- <v-btn color="blue darken-1" flat @click="update()">Actualizar</v-btn> -->
                 
@@ -362,6 +457,7 @@
     	
 </template>
 <script>
+
 export default {
     data: () => ({
 
@@ -371,8 +467,8 @@ export default {
         search: '',
         headers: [
             { text: 'Valido', value: 'valid' },
-            { text: 'CEFO', value: 'cefo' },
-            { text: 'Fecha', value: 'fecha' },
+            // { text: 'CEFO', value: 'cefo' },
+            // { text: 'Fecha', value: 'fecha' },
             { text: 'Especie', value: 'especie' },
             // { text: 'Codigo', value: 'codigo' },
             { text: 'Tipo', value: 'tipo' },
@@ -391,23 +487,27 @@ export default {
             { text: 'Costo Bs', value: 'cost'},
             { text: 'Accion ', value:''}
         ],
-        providerSelected:null,
+        proveedor:null, //dato global de compra
+        fecha: new Date().toISOString().substr(0, 10), //dato global de compra
+        cefo: '', //dato global de compra
+        descripcion: '', //dato global de compra
         providers:[],
         purchases:[],
         species:[],
         types:[],
         units:[],
         states:[],
-        details:[],
         expenses:[],
         purchase_expenses:[],
         dialog:false,
         dialog_expensive:false,
         item: null,
         item_expensive: null,
-        indexItem : -1,
+        expensiveIndex : -1,//para los expensive items
+        editedIndex:-1,//para los purchase items
         menu2: false,
         date: new Date().toISOString().substr(0, 10),
+        chip:false
     }),
     methods:{
         pickFile () {
@@ -415,66 +515,51 @@ export default {
         },
         onFilePicked (e) {
             const files = e.target.files
-            console.log(files);
-			if(files[0] !== undefined) {
-				this.excelName = files[0].name
-				if(this.excelName.lastIndexOf('.') <= 0) {
-					return
-				}
-				const fr = new FileReader ()
-				fr.readAsDataURL(files[0])
-				fr.addEventListener('load', () => {
-					this.excelUrl = fr.result
-					this.excelFile = files[0] // this is an excel file that can be sent to server...
-				})
-			} else {
-				this.excelName = ''
-				this.excelFile = ''
-				this.excelUrl = ''
-			}
-        },
-        loadExcel(){
-            console.log("mandando la hueva");
-            var formData = new FormData();
-            formData.append("excel", this.excelFile);
-            axios.post('api/auth/import_purchases', formData,{
-                headers: {
-                        'Content-Type': 'multipart/form-data'
-                        }
-            })
-            .then(response => {                
-                console.log(response.data);
-                this.purchases = response.data;
-                this.details = [
-                    { header: 'Detalle de la Compra' },
-                    {
-                        icon: 'functions',
-                        title: ''+this.getQuantity,
-                        subtitle: 'Cantidad'
-                    },
-                    { divider: true, inset: true },
-                    {
-                        icon: 'functions',
-                        title: ''+this.getQuantityFeet,
-                        subtitle:  'Cantidad Pies'
-                    },
-                    { divider: true, inset: true },
-                    {
-                        icon: 'fa-money',
-                        title: 'Bs '+this.formatMoney(this.getTotal),
-                        subtitle: 'Total',
+            // console.log(files);
+            new Promise((resolve,reject)=>{
+                if(files[0] !== undefined) {
+                    this.excelName = files[0].name
+                    if(this.excelName.lastIndexOf('.') <= 0) {
+                        return
                     }
-                ]
-            })
-            .catch(function (error) {
-                console.log(error);
-            });            
-            this.dialog =false;      
-            // this.search();      
+                    const fr = new FileReader ()
+                    fr.readAsDataURL(files[0])
+                    fr.addEventListener('load', () => {
+                        this.excelUrl = fr.result
+                        this.excelFile = files[0] // this is an excel file that can be sent to server...
+                        var formData = new FormData();
+                        formData.append("excel", this.excelFile);
+                        axios.post('api/auth/import_purchases', formData,{
+                            headers: {
+                                    'Content-Type': 'multipart/form-data'
+                                    }
+                        })
+                        .then(response => {                
+                            console.log(response.data);
+                            this.purchases = response.data;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });  
+                         console.log(this.excelFile);
+                        this.chip=true;
+                        resolve()
+                    })
+                    
+                } else {
+                    this.excelName = ''
+                    this.excelFile = ''
+                    this.excelUrl = ''
+                    reject();
+                }
+                
+            }).then(console.log('cargo con exito XD'));
+            
         },
+    
         store(){
             console.log("para guardado");
-            axios.post('api/auth/save_purchases',{purchases: this.purchases,purchase_expenses: this.purchase_expenses, provider_id:this.providerSelected.id, amount: this.getTotal})
+            axios.post('api/auth/save_purchases',{purchases: this.purchases,purchase_expenses: this.purchase_expenses, provider_id:this.proveedor.id, amount: this.getTotal, fecha: this.fechas, cefo: this.cefo, descripcion:this.descripcion})
             .then(response => {                
                 console.log(response.data);
                 //adicionar status a las respuesta XD
@@ -487,8 +572,31 @@ export default {
             this.dialog =false;      
             // this.search();      
         },
+        create(){ //para adicionar items manualmente 
+            axios.get('api/auth/add_item_purchase')
+                .then(response =>{
+                    console.log(response.data);
+                    this.species = response.data.species;
+                    this.units = response.data.units;
+                    this.types = response.data.types;
+                    this.states = response.data.states;
+                    this.editedIndex = -1;
+                    this.item = response.data.item;
+                    this.dialog = true;
+                })  
+                .catch(function (error) {
+                    console.log(error);
+                }); 
+
+        },
+        addItem(item){
+            console.log(item);
+            this.purchases.push(item);
+            item.valid =true;
+            this.dialog =false;
+        },
         edit(item){
-            this.indexItem = this.purchases.indexOf(item)
+            this.editedIndex = this.purchases.indexOf(item)
             this.item = item;
             console.log(this.item);
             this.dialog = true;
@@ -497,14 +605,20 @@ export default {
             console.log(this.indexItem);
             this.item.valid =true;
             // Vue.purchases[this.indexItem] = this.item;
-            Object.assign(this.purchases[this.indexItem], this.item);
+            Object.assign(this.purchases[this.editedIndex], this.item);
 
             // this.item= item;
             this.dialog = false;
         },
         deleteItem (item) {
-            const index = this.purchases.indexOf(item)
-            confirm('Esta seguro de Eliminar el resgitro') && this.purchases.splice(index, 1)
+           const index = this.purchases.indexOf(item)
+           this.$confirm({title:'Eliminar', message: 'Esta seguro de eliminar el item?', confirm: 'Si', cancel: 'No' }).then(response =>{
+               if(response){ 
+                   this.purchases.splice(index, 1);
+               }
+            });
+          
+               
         },
 
         formatMoney(amount)
@@ -529,13 +643,31 @@ export default {
         storeExpensive(item){
             // console.log(item);
             //guardar en lista 
+            this.expensiveIndex = -1;
             this.purchase_expenses.push(item);
              this.dialog_expensive = false;
             console.log(this.purchase_expenses);
         },
-        updateExpensive(item){
-
-        }
+        editeExpensive(item){
+            this.expensiveIndex = this.purchase_expenses.indexOf(item);
+            this.item_expensive =item;
+            this.dialog_expensive = true;
+        },
+        updateExpensive(){
+            // const index = this.purchase_expenses.indexOf(item);
+            Object.assign(this.purchase_expenses[this.expensiveIndex], this.item_expensive);
+            this.dialog_expensive = false;
+        },
+        deleteExpensive (item) {
+           const index = this.purchase_expenses.indexOf(item)
+           this.$confirm({title:'Eliminar', message: 'Esta seguro de eliminar el gasto '+item.expensive.name+'?', confirm: 'Si', cancel: 'No' }).then(response =>{
+               if(response){ 
+                   this.purchase_expenses.splice(index, 1);
+               }
+            });
+          
+               
+        },
     
     },
     computed:{
@@ -551,9 +683,9 @@ export default {
             
             let amount = 0 ;
             this.purchases.forEach(item => {
-                amount += item.cantidad;
+                amount += parseFloat(item.cantidad);
             });
-            return amount;
+            return numeral(amount).format('0,0.00');
         },
         getQuantityFeet(){
             
@@ -564,9 +696,27 @@ export default {
             });
             return numeral(amount).format('0,0.00');
         },
+        getQuantityExpensive(){
+            let quantity = 0 ;
+            if(this.purchase_expenses!=null){quantity =this.purchase_expenses.length};
+            return numeral(quantity).format('0,0.00');
+        },
+        getTotalExpensive(){
+            let amount = 0 ;
+            this.purchase_expenses.forEach(item => {
+                amount = amount + parseFloat(item.cost) ;
+               // console.log(amount)
+            });
+            return numeral(amount).format('0,0.00');
+        },
         formTitle () {
             return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
-        }
+        },
+        formTitleExpensive () {
+            return this.expensiveIndex === -1 ? 'Nuevo' : 'Editar'
+        },
+
+
     },
     mounted(){
          axios.get('api/auth/getProviderData')
