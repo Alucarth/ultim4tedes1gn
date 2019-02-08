@@ -33,11 +33,11 @@ import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import {routes} from './routes';
 import App from './views/App';
-// import Confirm from './components/Confirm';
 import {storage} from './store_modules/storage';
 import {autentication} from './store_modules/autentication';
-import * as ModalDialogs from 'vue-modal-dialogs';
-// import { create } from 'vue-modal-dialogs';
+// import {confirm} from './store_modules/confirm';
+import notivuecation from 'notivuecation';
+
 
 window.Vue = require('vue');
 window.numeral = require('numeral');
@@ -47,7 +47,8 @@ window.Chart = require('chart.js');
 Vue.use(VueRouter)
 Vue.use(Vuetify);
 Vue.use(Vuex);
-Vue.use(ModalDialogs);
+
+Vue.use(notivuecation);
 
 Vue.prototype.$http = axios;
 const tokenJWT = localStorage.getItem('token')
@@ -58,8 +59,24 @@ const store = new Vuex.Store({
     modules:{
         template: storage,
         auth: autentication,
+        dconfirm: confirm,
     }
 });
+
+// Vue.component('custom-component', {
+//     mixins: [componentMixin],
+//     template: `<div v-if="notification">
+//         <h1>{{title}}</h1>
+//         <p>{{message}}</p>
+  
+//         <button
+//           v-for="button in buttons"
+//           :class="button.css"
+//           @click="resolve(button.value)"
+//         >{{button.label}}</button>
+//       </div>`,
+//   });
+
 const router = new VueRouter({
     mode: 'history',
     routes: routes
