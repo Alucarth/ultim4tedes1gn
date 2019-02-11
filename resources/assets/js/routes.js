@@ -152,7 +152,7 @@ import Expensive from './components/expensive/index.vue';
         //     }    
         // },
         {
-            path: '/purchase/create',
+            path: '/create_purchase',
             name: 'import_purchases',
             components:{ 
                 default:ExcelImportPurchases,
