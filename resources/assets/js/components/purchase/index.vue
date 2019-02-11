@@ -7,7 +7,7 @@
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 
-                <v-btn to="/purchase/create" color="primary" dark class="mb-2" small >Nuevo <v-spacer></v-spacer>  <v-icon small>fa-plus-circle</v-icon> </v-btn>
+                <v-btn to="/create_purchase" color="primary" dark class="mb-2" small >Nuevo <v-spacer></v-spacer>  <v-icon small>fa-plus-circle</v-icon> </v-btn>
             </v-toolbar>
        
         </v-card-title>

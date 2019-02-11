@@ -721,6 +721,7 @@ export default {
     mounted(){
          axios.get('api/auth/getProviderData')
                 .then((response) => {                                       
+                    console.log(response);
                     this.providers = response.data;                    
                 });  
          axios.get('api/auth/getSpecieData')
