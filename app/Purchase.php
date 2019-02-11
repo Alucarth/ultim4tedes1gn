@@ -27,6 +27,10 @@ class Purchase extends Model
      */
     public function lumbers()
     {
-        return $this->belongsToMany('App\Lumber','purchase_lumber')->withPivot(['quantity']);
+        return $this->belongsToMany('App\Lumber','purchase_lumber')->withPivot(['quantity','quantity_feet','amount','state_id']);
+    }
+
+    public function expenses(){
+        return $this->belongsToMany('App\Expensive','purchase_expenses')->withPivot(['cost']);
     }
 }

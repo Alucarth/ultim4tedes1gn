@@ -139,11 +139,23 @@ import Expensive from './components/expensive/index.vue';
                 requiresAuth: true
             }    
         },
+        // {
+        //     path: '/purchase/create',
+        //     name: 'PurchaseEdit',
+        //     components:{ 
+        //         default:EditPurchase,
+        //         toolbar:Toolbar,
+        //         nav: Nav
+        //     },
+        //     meta: { 
+        //         requiresAuth: true
+        //     }    
+        // },
         {
             path: '/purchase/create',
-            name: 'PurchaseEdit',
+            name: 'import_purchases',
             components:{ 
-                default:EditPurchase,
+                default:ExcelImportPurchases,
                 toolbar:Toolbar,
                 nav: Nav
             },
@@ -223,18 +235,7 @@ import Expensive from './components/expensive/index.vue';
                 requiresAuth: true
             }    
         },
-        {
-            path: '/import_purchases',
-            name: 'import_purchases',
-            components:{ 
-                default:ExcelImportPurchases,
-                toolbar:Toolbar,
-                nav: Nav
-            },
-            meta: { 
-                requiresAuth: true
-            }    
-        },
+       
         {
             path: '/inventory',
             name: 'inventory',

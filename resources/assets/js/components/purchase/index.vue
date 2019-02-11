@@ -1,9 +1,15 @@
 <template>
     <v-card>
         <v-card-title>
-            Compras de madera
-        <v-spacer></v-spacer>       
-        <v-btn to="/purchase/create" color="primary" dark class="mb-2">Nuevo</v-btn>
+           <v-toolbar flat color="white">
+                <v-toolbar-title>Compra de Madera
+                    
+                </v-toolbar-title>
+                <v-spacer></v-spacer>
+                
+                <v-btn to="/purchase/create" color="primary" dark class="mb-2" small >Nuevo <v-spacer></v-spacer>  <v-icon small>fa-plus-circle</v-icon> </v-btn>
+            </v-toolbar>
+       
         </v-card-title>
         <v-data-table
         :headers="headers"
@@ -15,32 +21,28 @@
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
                         <v-flex v-if="header.value!='actions'">
-                            <span>{{ header.text }}
-                            </span>
-                            <v-menu 
-                                    :close-on-content-click="false"
-                                    >
-                                    <v-btn
-                                        slot="activator"
-                                        icon
-                                   
-                                        v-if="header.sortable!=false"
-                                    >
-                                    <v-icon  small>fa-filter</v-icon>
-                                    </v-btn>
-                                    <v-card  >
-                                        <v-text-field
-                                         outline
-                                         hide-details
-                                        v-model="header.input"
-                                        append-icon="search"
-                                        :label="`Buscar ${header.text}...`"                                       
-                                        @keydown.enter="search()"
-                                    ></v-text-field>
-                                    
-                                    </v-card>
-                            </v-menu>                            
+                            <v-flex v-if="header.filter">
+                            <!-- <v-btn flat >{{header.text }} <v-icon  right small> fa-filter</v-icon></v-btn> -->
+                            <v-text-field  
+                                v-if="header.type=='text'"
+                                append-icon="search"
+                                :label="header.text"
+                                v-model="header.input"
+                                @keydown.enter="search()"
+                                @keyup.delete="checkInput(header.input)"
+                            ></v-text-field>
+                            <v-combobox
+                                v-if="header.type=='select' && header.items.length>0"
+                                v-model="header.input"
+                                :items="header.items"
+                                :label="header.text"
+                                item-text="name"
+                                @change="search()"
+                            ></v-combobox>
                         </v-flex>
+                        <span v-else> {{header.text}} </span>
+                    
+                    </v-flex>
                 </th>
            </tr>
         </template>
@@ -51,19 +53,13 @@
                 <td class="text-xs-left" >{{ props.item.date }}</td>            
                 <td class="text-xs-left">{{ props.item.amount }}</td>                
                 <td class="justify-center layout px-0">
+                   
                     <v-icon
                         small
                         class="mr-2"
-                        @click="show(props.item);props.expanded = !props.expanded"
+                        @click="show(props.item)"
                     >
                         toc
-                    </v-icon>
-                    <v-icon
-                        small
-                        class="mr-2"
-                        @click="edit(props.item)"
-                    >
-                        edit
                     </v-icon>
                     <v-icon
                         small
@@ -74,108 +70,176 @@
                 </td>      
             <!-- </tr> -->
         </template>
-        <template slot="expand" slot-scope="props">
-            <v-card flat v-if="purchase">
-                <table>
-                    <tr>
-                        <td> 
-                            CEFO
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ purchase.cefo }}
-                            </v-card-text>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td> 
-                            Proveedor
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ purchase.provider.name }}
-                            </v-card-text>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td> 
-                            Fecha
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ purchase.date }}
-                            </v-card-text>
-                        </td>                 
-                    </tr>
-                    <tr>
-                        <td> 
-                            Costo
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ purchase.amount }}
-                            </v-card-text>
-                        </td>       
-                    </tr>
-                    <!-- <tr>
-                        <td> 
-                            Espesor
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ lumber.density }}
-                            </v-card-text>
-                        </td>
-                    </tr> -->
-                    <tr>
-                        <td> 
-                            Descripción 
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ purchase.description }}
-                            </v-card-text>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td> 
-                            Descripción 
-                        </td>
-                        <td>
-                        <v-data-table                
-                            :headers="minitable_headers"                                        
-                            :items="purchase.lumbers"
-                            hide-actions
-                            class="elevation-1"
-                        >
-                            <template slot="items" slot-scope="props">
-                            <td>{{ props.item.specie.name }}</td>
-                            <td>{{ props.item.type.name }}</td>
-                            <td>{{ props.item.high }}</td>
-                            <td>{{ props.item.width}}</td>
-                            <td>{{ props.item.density }}</td>
-                            <td>{{ props.item.pivot.quantity }}</td>                            
-                            </template>
-                        </v-data-table>
-                        </td>
-                    </tr>
-                </table>                                
-            </v-card>
-        </template>
-
-        <!-- <v-alert slot="no-results" :value="true" color="error" icon="warning">
+             <!-- <v-alert slot="no-results" :value="true" color="error" icon="warning">
             Your search for "{{ search }}" found no results.
         </v-alert> -->
         </v-data-table>
-        <div class="text-xs-center">
-            <v-pagination
-            v-model="page"
-            :length="last_page"
-            :total-visible="10"
-             @input="next"
-            ></v-pagination>
-        </div> 
+         <v-card-text>  
+            <v-layout row justify-space-between>
+            <v-flex xs1 sm2>
+                <v-combobox
+                    v-model="paginationRows"
+                    :items="pagination_select"
+                    label="Mostrar Registros"
+                    @change="search()"
+                ></v-combobox>
+            </v-flex>
+            <v-flex xs5>
+                <v-pagination
+                    v-model="page"
+                    :length="last_page"
+                    :total-visible="10"
+                    @input="next"
+
+                > </v-pagination>
+            </v-flex>
+            <v-flex xs1  sm2>
+                <div class="caption"> Mostrando {{from}}-{{to}} de {{total}} </div>
+            </v-flex>
+            </v-layout>
+      
+            
+        </v-card-text>
         
+        <!-- colocar aqui los dialogos -->
+        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+        <v-card v-if="purchase">
+            <v-toolbar dark color="primary">
+            <v-btn icon dark @click="dialog = false">
+                <v-icon>close</v-icon>
+            </v-btn>
+            <v-toolbar-title>Cefo: {{purchase.cefo}}</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-toolbar-items>
+                <v-btn dark flat @click="dialog = false">cerrar</v-btn>
+            </v-toolbar-items>
+            </v-toolbar>
+            <v-list three-line subheader>
+            <v-subheader>Compra </v-subheader>
+            <v-list-tile avatar>
+                <v-list-tile-avatar> 
+                    <v-icon>fa-user</v-icon>
+                </v-list-tile-avatar>
+                <v-list-tile-content>
+                <v-list-tile-title>{{purchase.provider.name}}</v-list-tile-title>
+                <v-list-tile-sub-title>Proveedor</v-list-tile-sub-title>
+                </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile avatar>
+                <v-list-tile-avatar> 
+                    <v-icon>fa-calendar</v-icon>
+                </v-list-tile-avatar>
+                <v-list-tile-content>
+                <v-list-tile-title>{{purchase.date}}</v-list-tile-title>
+                <v-list-tile-sub-title>Fecha</v-list-tile-sub-title>
+                </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile avatar>
+                <v-list-tile-avatar> 
+                    <v-icon>fa-comment</v-icon>
+                </v-list-tile-avatar>
+                <v-list-tile-content>
+                <v-list-tile-title>{{purchase.description}}</v-list-tile-title>
+                <v-list-tile-sub-title>Descripcion</v-list-tile-sub-title>
+                </v-list-tile-content>
+            </v-list-tile>
+            
+            </v-list>
+            <v-divider></v-divider>
+            <v-list three-line subheader>
+            <v-subheader>Detalle</v-subheader>
+                <v-tabs
+                centered
+                color="cyan"
+                dark
+                icons-and-text
+            >
+                <v-tabs-slider color="yellow"></v-tabs-slider>
+
+                <v-tab href="#tab-1">
+                Compras 
+                <v-icon>shopping_cart</v-icon>
+                </v-tab>
+
+                <v-tab href="#tab-2">
+                Gastos
+                <v-icon>attach_money</v-icon>
+                </v-tab>
+
+                <v-tab-item
+                id="tab-1"
+                >
+                    <v-chip color="green" text-color="white">
+                    <v-avatar class="green darken-4"> <v-icon small>fa-money</v-icon> </v-avatar>
+                     <h4>{{getTotal}}</h4> 
+                    </v-chip>
+                    <v-chip color="green" text-color="white">
+                    <v-avatar class="green darken-4"> <v-icon small>functions</v-icon> </v-avatar>
+                        <h4>cantidad: {{getQuantityPurchase}}</h4> 
+                    </v-chip>
+                    <v-chip color="green" text-color="white">
+                    <v-avatar class="green darken-4"> <v-icon small>functions</v-icon> </v-avatar>
+                        <h4>cantidad Pie: {{getQuantityFeetPurchase}}</h4> 
+                    </v-chip>
+
+              
+                    <v-data-table
+                    :headers="header_purchase"
+                    :items="purchase.lumbers"
+                    >
+                    <template slot="items" slot-scope="props">
+                
+                        <td class="text-xs-left">{{ props.item.specie.name }}</td>
+               
+                        <td class="text-xs-left">{{ props.item.type.name }}</td>
+                        <td class="text-xs-left">{{ props.item.unit.name }}</td>
+                        <td class="text-xs-left">{{ props.item.density  }}</td>
+                        <td class="text-xs-left">{{ props.item.width }}</td>
+                        <td class="text-xs-left">{{ props.item.high }}</td>
+                        <td class="text-xs-left">{{ getState(props.item.pivot.state_id).name }}</td>
+                        <td class="text-xs-left">{{ props.item.pivot.quantity }}</td>
+                        <td class="text-xs-left">{{ props.item.pivot.quantity_feet }}</td>
+                        <td class="text-xs-left">{{ props.item.pivot.amount }}</td>
+                        
+                        
+                    </template>
+                    <!-- <v-alert slot="no-results" :value="true" color="error" icon="warning">
+                        Su busqueda para "{{ search }}" no se encontraron resultados.
+                    </v-alert> -->
+                    </v-data-table>
+                </v-tab-item>
+                <v-tab-item
+                id="tab-2"
+                >
+                
+                   
+                    
+                        <v-chip color="green" text-color="white">
+                        <v-avatar class="green darken-4"> <v-icon small>fa-money</v-icon> </v-avatar>
+                        <h4>{{getTotalCost}}</h4> 
+                        </v-chip>
+                        <v-data-table
+                            :headers="header_expensive"
+                            :items="purchase.expenses"
+                        >
+                            <template slot="items" slot-scope="props">
+                                
+                                <td class="text-xs-left">{{ props.item.name }}</td>
+                                <td class="text-xs-left">{{ props.item.pivot.cost }}</td>
+
+                            </template>
+                            <v-alert slot="no-results" :value="true" color="error" icon="warning">
+                                Su busqueda para "{{ search }}" no se encontraron resultados.
+                            </v-alert>
+                        </v-data-table>
+                   
+             
+                </v-tab-item>
+            </v-tabs>
+            </v-list>
+        </v-card>
+        </v-dialog>
+
     </v-card>
 </template>
 <script>
@@ -186,21 +250,32 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'CEFO', value: 'cefo' },
-            { text: 'Proveedor', value: 'provider' },
-            { text: 'Fecha', value: 'date' },        
-            { text: 'Precio', value: 'amount' },            
+            { text: 'CEFO', value: 'cefo' ,input:'', type:'text', filter:true},
+            { text: 'Proveedor', value: 'provider' ,input:'', type:'text', filter:true},
+            { text: 'Fecha', value: 'date' ,input:'', type:'text', filter:true},        
+            { text: 'Precio', value: 'amount' ,input:'', type:'text', filter:true},  
+            { text: 'Accion', value: '', type:"text", filter:false, input:''},          
         ],
-        minitable_headers: [
-            { text: 'Especie', value: 'specie' },
-            { text: 'Tipo', value: 'type' },
-            { text: 'Alto', value: 'high' },
-            { text: 'Ancho', value: 'width' },
-            { text: 'Espesor', value: 'density' },
-            { text: 'Cantidad', value: 'quantity' },
+        header_purchase: [
+            { text: 'Especie', value: 'especie' },
+            // { text: 'Codigo', value: 'codigo' },
+            { text: 'Tipo', value: 'tipo' },
+            { text: 'Unidad', value: 'unidad' },
+            { text: 'Espesor', value: 'espesor' },
+            { text: 'Ancho', value: 'ancho' },
+            { text: 'Largo', value: 'largo' },
+            { text: 'Estado', value: 'estado' },
+            { text: 'Cantidad', value: 'cantidad' },
+            { text: 'Canitdad Pie', value: 'cantidad_pie' },
+            { text: 'Precio Unitario', value: 'precio_unitario' },
+        ],
+        header_expensive:[
+            { text: 'Nombre', value: 'name'},
+            { text: 'Costo Bs', value: 'cost'},
         ],
         lumbers: [],
-        purchases: null,
+        purchases: [],
+        states:[],
         purchase: null,
         totalPurchases: 0,        
         loading: true,                
@@ -209,16 +284,68 @@ export default {
         last_page: 1,
         page: 1,    
         paginationRows: 10,
+        total:0,
+        from:0,
+        to:0,     
+        pagination_select:[10,20,30]
       }
     },
     computed: {
-        formTitle () {
-                return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
+        getTotal(){
+            
+            let amount = 0 ;
+            if(this.purchase){
+                amount = this.purchase.amount;
             }
+            return "Bs "+numeral(amount).format('0,0.00');
+        },
+        getQuantityPurchase(){
+            
+            let amount = 0 ;
+            if(this.purchase){
+                
+                this.purchase.lumbers.forEach(item => {
+                    amount += parseFloat(item.pivot.quantity);
+                });
+            }
+            return numeral(amount).format('0,0.00');
+        },
+        getQuantityFeetPurchase(){
+            
+            let amount = 0 ;
+            if(this.purchase){
+                
+                this.purchase.lumbers.forEach(item => {
+                    amount += parseFloat(item.pivot.quantity_feet);
+                });
+            }
+            return numeral(amount).format('0,0.00');
+        },
+        getTotalCost(){
+            
+            let amount = 0 ;
+            if(this.purchase){
+                
+                this.purchase.expenses.forEach(item => {
+                    amount += parseFloat(item.pivot.cost);
+                });
+            }
+            return "Bs "+numeral(amount).format('0,0.00');
+        },
     },
     mounted()
     {
-        this.search();           
+        axios.get('/api/auth/state/')            
+            .then(response => {                                
+                this.states = response.data.states;
+                console.log(this.states);
+                this.search(); 
+                //his.newLumber = response.data.lumber                
+            })
+            .catch(error => {                
+                console.log(error);
+            });
+                 
     },
     methods:{
         search() {
@@ -228,6 +355,9 @@ export default {
                     this.purchases = data.data;                    
                     console.log(this.purchases);
                     this.last_page = data.last_page;
+                    this.total = data.total;
+                    this.from = data.from;
+                    this.to = data.to;
                     resolve();                    
                 });
             });
@@ -284,6 +414,8 @@ export default {
             axios.get(`/api/auth/purchase/${item.id}`)
             .then(response => {
                 this.purchase = response.data.purchase
+                console.log(this.purchase);
+                this.dialog =true;
             })
             .catch(error => {                
                 console.log(error);
@@ -351,6 +483,16 @@ export default {
         },
         close() {
             this.dialog = false;
+        },
+        checkInput(search)
+        {
+            if(search=='')
+            {
+                this.search();
+            }
+        },
+        getState(id){
+            return _.find(this.states, (state) => { return state.id == id }); //solucion temporal XD 
         }
         
     },    
