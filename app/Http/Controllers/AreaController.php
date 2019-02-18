@@ -52,7 +52,12 @@ class AreaController extends Controller
      */
     public function show($id)
     {
-        //
+        $area = Area::find($id)->with(['inventories']);
+        $data = [
+            'area' => $area
+        ];
+
+        return response()->json($data);
     }
 
     /**

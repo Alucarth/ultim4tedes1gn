@@ -201,7 +201,7 @@ import Expensive from './components/expensive/index.vue';
             }
         },
         {
-            path: '/inventory/transfer',
+            path: '/inventory/transfer/:id',
             name: 'inventoryTransfer',
             components:{ 
                 default:TransferInventory,

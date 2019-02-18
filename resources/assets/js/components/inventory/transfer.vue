@@ -232,9 +232,10 @@ export default {
         last_page: 1,
         page: 1,
         paginationRows: 10,
-        areas: [],
+        area: null,
         pivot: null,
         actual_area: 1,
+        area_id: 0,
       }
     },
     computed: {
@@ -244,9 +245,11 @@ export default {
     },
     mounted()
     {
-        this.create();
-        this.search();
-        this.getareas();
+        this.area_id = this.$route.params.id
+        this.create()
+        this.search()
+        this.getArea()
+        console.log(this.area);
     },
     methods:{
         search() {
@@ -356,11 +359,11 @@ export default {
                 console.log(error);
             });
         },
-        getareas () {
-            axios.get('/api/auth/area')
+        getArea () {
+            axios.get('/api/auth/area/'+this.area_id)
             .then(response => {
                 console.log(response.data.data);
-                this.areas = response.data.areas
+                this.area = response.data.area
             })
             .catch(error => {
                 console.log(error);

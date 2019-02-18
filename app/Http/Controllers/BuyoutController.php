@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Buyout;
+use App\Area;
 
 class BuyoutController extends Controller
 {
@@ -42,7 +43,7 @@ class BuyoutController extends Controller
      */
     public function store(Request $request)
     {
-        $buyout = new Buyout();        
+        $buyout = new Buyout();
         $buyout->date = $request->buyout['date'];
         $buyout->provider_id = $request->buyout['provider_id'];
         $buyout->employee_id = $request->buyout['employee_id'];
@@ -54,8 +55,11 @@ class BuyoutController extends Controller
             $inventories[$inventory['id']] = [
                 'quantity' => $inventory['quantity']
             ];
-        }                
-        $buyout->inventories()->attach($inventories);        
+        }
+        $buyout->inventories()->attach($inventories);
+        $area = Area::find(1);
+        $area->inventories()->attach($inventories);
+
         return $buyout;
     }
 
