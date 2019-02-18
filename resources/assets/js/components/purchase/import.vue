@@ -256,6 +256,7 @@
                         <td class="text-xs-left">{{ props.item.cantidad }}</td>
                         <td class="text-xs-left">{{ props.item.cantidad_pie }}</td>
                         <td class="text-xs-left">{{ props.item.precio_unitario }}</td>
+                        <td class="text-xs-left">{{ props.item.origin_type.name }}</td>
                         <td class="text-xs-left">
                             <!-- <v-badge :color="props.item.valid==true?'green':'red'" left>
                                 <span slot="badge" >!</span> -->
@@ -391,7 +392,17 @@
                     <v-flex xs12 sm6 md4>
                         <v-text-field label="Precion Unitario" hint="Ingrese precio" required v-model="item.precio_unitario"></v-text-field>
                     </v-flex>
-          
+                    <v-flex xs12 sm6 md4> 
+                        <v-combobox                  
+                            label="Tipo de Origen"                
+                            v-model="item.origin_type"  
+                            :items="origin_types"
+                            item-text="name"
+                            item-value="id"
+                            placeholder="Seleccione Tipo de Origen"
+                            persistent-hint>                                
+                        </v-combobox>
+                    </v-flex>
                 </v-layout>
                 </v-container>
             </v-card-text>
@@ -480,6 +491,7 @@ export default {
             { text: 'Cantidad', value: 'cantidad' },
             { text: 'Canitdad Pie', value: 'cantidad_pie' },
             { text: 'Precio Unitario', value: 'precio_unitario' },
+            { text: 'Origen', value: 'origen' },
             { text: 'Accion ', value:''}
         ],
         header_expensive:[
@@ -495,6 +507,7 @@ export default {
         purchases:[],
         species:[],
         types:[],
+        origin_types:[],
         units:[],
         states:[],
         expenses:[],
@@ -742,6 +755,11 @@ export default {
          axios.get('api/auth/state')
                 .then((response) => {                                       
                     this.states = response.data.states;                    
+                    console.log(response.data);
+                });  
+         axios.get('api/auth/getOriginTypesData')
+                .then((response) => {                                       
+                    this.origin_types = response.data;                    
                     console.log(response.data);
                 });  
 

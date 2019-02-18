@@ -36,6 +36,11 @@ class OriginTypeController extends Controller
         return response()->json($expenses->toArray());
     }
 
+    public function getData(){
+        $origin_types = OriginType::all();
+        return response()->json($origin_types->toArray());
+    }
+
     /**
      * Show the form for creating a new resource.
      *
