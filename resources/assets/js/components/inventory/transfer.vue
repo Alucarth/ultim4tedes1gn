@@ -70,8 +70,8 @@
         </template>
         <template slot="expand" slot-scope="props">
             <!-- <v-card flat v-if="transfer">
-                <table>
-                    <tr>
+                <table> $V3l3r0S3s4m0*
+                    <tr> 
                         <td>
                             Especie
                         </td>
@@ -364,6 +364,7 @@ export default {
             .then(response => {
                 console.log(response.data.data);
                 this.area = response.data.area
+                this.inventories = this.area.inventories
             })
             .catch(error => {
                 console.log(error);
