@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
                     SpecieSeeder::class,
                     UnitSeeder::class,
                     StateSeeder::class,
-                    LumberSeeder::class
+                    LumberSeeder::class,
+                    OriginTypeSeeder::class
                     ]);
     }
 }
