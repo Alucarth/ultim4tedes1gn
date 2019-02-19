@@ -6,17 +6,17 @@
         <v-card-title>
             Transferencia de insumos
         <v-spacer></v-spacer>
-        <v-flex xs12 sm4 md4 v-if="areas">
+        <!-- <v-flex xs12 sm4 md4 v-if="area">
                 <v-select
                     label="Area"
-                    :items="areas"
+                    :items="area"
                     item-text="name"
                     item-value="id"
                     v-model="actual_area"
                     :hint="`Descripcion del tipo seleccionado`"
                     persistent-hint>
                     </v-select>
-            </v-flex>
+            </v-flex> -->
         </v-card-title>
         <v-layout row wrap>
 
@@ -65,7 +65,7 @@
                 <td class="text-xs-left">{{ props.item.code }}</td>
                 <td class="text-xs-left">{{ props.item.description }}</td>
                 <td class="text-xs-left" >{{ props.item.type.name }}</td>
-                <td class="text-xs-left" >{{ props.item.area.pivot.quantity }}</td>
+                <td class="text-xs-left" >{{ props.item.pivot.quantity }}</td>
             </tr>
         </template>
         <template slot="expand" slot-scope="props">
@@ -158,15 +158,15 @@
         <v-btn @click="store();" color="primary" dark class="mb-2">Guardar</v-btn>
         </v-card-title>
         <v-layout row wrap v-if="transfer">
-            <v-flex xs12 sm4 md4>
+            <!-- <v-flex xs12 sm4 md4>
                 <v-text-field label="Codigo" v-model="transfer.number" hint="Ingrese codigo paquete" required ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm4 md4>
+            </v-flex> -->
+            <v-flex xs12 sm4 md6>
                 <v-text-field label="Description" v-model="transfer.description" hint="Ingrese descripcion"></v-text-field>
             </v-flex>
-            <v-flex xs12 sm4 md4 v-if="areas">
+            <v-flex xs12 sm4 md6 v-if="areas">
                 <v-select
-                    label="Almacen"
+                    label="Area"
                     v-model="transfer.area_destination_id"
                     :items="areas"
                     item-text="name"
@@ -185,7 +185,8 @@
             <!-- <tr @click="props.expanded = !props.expanded"> -->
                 <td class="text-xs-left">{{ props.item.code }}</td>
                 <td class="text-xs-left">{{ props.item.description }}</td>
-                <td class="text-xs-left" >{{ props.item.type.name }}</td>
+                <td class="text-xs-left">{{ props.item.type.name }}</td>
+                <td class="text-xs-left"> <v-text-field type='number' v-model="props.item.quantity"></v-text-field></td>
                 <td class="justify-center layout px-0">
                     <v-icon
                         small
@@ -221,6 +222,7 @@ export default {
             { text: 'Codigo', value: 'code' },
             { text: 'Nombre', value: 'name' },
             { text: 'Almacen', value: 'area' },
+            { text: 'Cantidad', value: 'quantity' },
         ],
         inventories: [],
         transfer_inventories: [],
@@ -236,6 +238,7 @@ export default {
         pivot: null,
         actual_area: 1,
         area_id: 0,
+        areas: [],
       }
     },
     computed: {
@@ -249,7 +252,7 @@ export default {
         this.create()
         this.search()
         this.getArea()
-        console.log(this.area);
+        this.getAreas()
     },
     methods:{
         search() {
@@ -281,7 +284,7 @@ export default {
                     })
                     .then((response) => {
                         this.loading = false;
-                        resolve(response.data);                        
+                        resolve(response.data);
                     });
             });
         },
@@ -292,19 +295,17 @@ export default {
         toggleOrder (index) {
             this.pagination.sortBy = this.headers[index].value
             this.pagination.descending = !this.pagination.descending
-             
-            
         },
         setFilter(filterName){package_transaction
             this.filterValue='',
             this.filterName = filterName;
         },
-        createLumber() {                                    
+        createLumber() {
             axios.get('/api/auth/package/transfer')
-            .then(response => {                                
+            .then(response => {
                 this.transfer = response.data.transfer;
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
             });
             this.dialog = true;
@@ -315,36 +316,37 @@ export default {
         create () {
             console.log('creating');
             axios.get('/api/auth/package_transaction/create')
-            .then(response => {                        
+            .then(response => {
                 this.transfer = response.data.transfer;
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
             });
         },
-        store () {                        
-            axios.post('/api/auth/package_transaction/', {transfer: this.transfer, inventories: this.transfer_inventories})
-            .then(response => {                                
+        store () {
+            axios.post('/api/auth/area/transfer', {transfer: this.transfer, inventories: this.transfer_inventories})
+            .then(response => {
                 alert('Madera empaquetada');
-                this.$router.replace('/area');
+                console.log(123);
+                //this.$router.replace('/area');
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
-            });            
+            });
         },
-        show(item) {                        
-            axios.get(`/api/auth/lumber/${item.id}`)            
-            .then(response => {                
+        show(item) {
+            axios.get(`/api/auth/lumber/${item.id}`)
+            .then(response => {
                 this.lumber = response.data.lumber
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
             });
-        },        
+        },
         getSpecies (){
             axios.get('/api/auth/specie')
             .then(response => {
-                this.species = response.data.species          
+                this.species = response.data.species
             })
             .catch(error => {
                 console.log(error);
@@ -353,7 +355,7 @@ export default {
         getTypes() {
             axios.get('/api/auth/type')
             .then(response => {
-                this.types = response.data.types          
+                this.types = response.data.types
             })
             .catch(error => {
                 console.log(error);
@@ -370,22 +372,31 @@ export default {
                 console.log(error);
             });
         },
+        getAreas () {
+            axios.get('/api/auth/area')
+            .then(response => {
+                this.areas = response.data.areas
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
         close() {
             this.dialog = false;
         },
-        addToTransfer(item) {            
-            item.quantity = '';
+        addToTransfer(item) {
+            item.quantity = 1;
             this.transfer_inventories.push(item);
         },
         removeFromTransfer(index) {
             this.transfer_inventories.splice(index, 1);
         },
-        filtered_inventory() {
-            console.log('starting filtering');
-            let new_areas = this.areas.filter(e => e.id == this.actual_area);
-            console.log(new_areas);
-            return new_areas;
-        }
+        // filtered_inventory() {
+        //     console.log('starting filtering');
+        //     let new_areas = this.areas.filter(e => e.id == this.actual_area);
+        //     console.log(new_areas);
+        //     return new_areas;
+        // }
     }
 }
 </script>

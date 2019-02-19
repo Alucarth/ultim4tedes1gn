@@ -52,7 +52,7 @@ class AreaController extends Controller
      */
     public function show($id)
     {
-        $area = Area::with(['inventories'])->find($id);
+        $area = Area::with(['inventories','inventories.type'])->find($id);
         $data = [
             'area' => $area
         ];
@@ -92,5 +92,9 @@ class AreaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function transfer(Request $request) {
+        return $request->all();
     }
 }
