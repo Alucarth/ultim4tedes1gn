@@ -32,10 +32,11 @@ import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import {routes} from './routes';
-import Notifications from 'vue-notification';
 import App from './views/App';
 import {storage} from './store_modules/storage';
 import {autentication} from './store_modules/autentication';
+// import {confirm} from './store_modules/confirm';
+import notivuecation from 'notivuecation';
 
 
 window.Vue = require('vue');
@@ -43,10 +44,11 @@ window.numeral = require('numeral');
 window.moment = require('moment');
 window.Chart = require('chart.js');
 
-Vue.use(Notifications);
 Vue.use(VueRouter)
 Vue.use(Vuetify);
 Vue.use(Vuex);
+
+Vue.use(notivuecation);
 
 Vue.prototype.$http = axios;
 const tokenJWT = localStorage.getItem('token')
@@ -57,13 +59,29 @@ const store = new Vuex.Store({
     modules:{
         template: storage,
         auth: autentication,
+        dconfirm: confirm,
     }
 });
+
+// Vue.component('custom-component', {
+//     mixins: [componentMixin],
+//     template: `<div v-if="notification">
+//         <h1>{{title}}</h1>
+//         <p>{{message}}</p>
+  
+//         <button
+//           v-for="button in buttons"
+//           :class="button.css"
+//           @click="resolve(button.value)"
+//         >{{button.label}}</button>
+//       </div>`,
+//   });
+
 const router = new VueRouter({
     mode: 'history',
     routes: routes
 });
-
+// const confirm = create(Confirm, 'title', 'content');
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
       if (store.getters['auth/isLoggedIn']) {
@@ -100,6 +118,7 @@ const app = new Vue({
     el: '#app',
     components: { App },
     router,
-    store
+    store,
+    // confirm
   });
   

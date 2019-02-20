@@ -1,83 +1,17 @@
 <template>
     <v-card>
         <v-card-title>
-            Madera
-        <v-spacer></v-spacer>
-         <v-flex xs1 sm1 md1>
-                <v-combobox
-                v-model="paginationRows"
-                :items="pagination_select"
-                label="Mostrar Registros"
-                @change="search()"
-                ></v-combobox>
-                
-        </v-flex>
-        <v-dialog v-model="dialog" max-width="500px">            
-            <v-card>
-            <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
-
-            <v-card-text v-if="newLumber">
-                <v-container grid-list-md>
-                 <v-layout wrap>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field label="Alto" hint="Ingrese el alto de la madera" required v-model="newLumber.high"></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field label="Ancho" hint="Ingrese el ancho de la madera" v-model="newLumber.width"></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm6 md4>
-                        <v-text-field
-                        label="Densidad"
-                        hint="Ingrese la densidad de la madera"                  
-                        required
-                        v-model="newLumber.density"
-                        ></v-text-field>
-                    </v-flex>                          
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Tipo de madera"
-                        v-model="newLumber.type_id"
-                        :items="types"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion del tipo seleccionado`"
-                        persistent-hint>
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs12 sm6>
-                        <v-select                  
-                        label="Especie"                
-                        v-model="newLumber.specie_id"  
-                        :items="species"
-                        item-text="name"
-                        item-value="id"
-                        :hint="`Descripcion de la madera seleccionada`"
-                        persistent-hint>                                
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs12>
-                        <v-text-field label="Descripción" v-model="newLumber.description" ></v-text-field>
-                    </v-flex>  
-                </v-layout>
-                </v-container>
-            </v-card-text>
-
-            <v-card-actions>
+            <v-toolbar flat color="white">
+                <v-toolbar-title>Listado de Madera
+                    
+                </v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">Guardar</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>Actualizar</v-btn>
                 
-                
-            </v-card-actions>
-            </v-card>
-        </v-dialog>
+                <v-btn @click="create()" color="primary" dark class="mb-2" small >Nuevo <v-spacer></v-spacer>  <v-icon small>fa-plus-circle</v-icon> </v-btn>
+            </v-toolbar>
 
-
-<v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
+       
         <v-data-table
         :headers="headers"
         :items="lumbers"        
@@ -88,37 +22,28 @@
                 <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                     
                         <v-flex v-if="header.value!='actions'">
-                            <v-tooltip bottom>
-                                <span slot="activator">{{header.text}}</span>
-                                <span >{{header.input}}</span>
-                            </v-tooltip>
-                            <v-menu
-                                    v-model="header.menu"
-                                    :close-on-content-click="false"
-                                    >
-                                    <v-btn
-                                        slot="activator"
-                                        icon
-                                        v-if="header.sortable!=false"
-                                    >
-                                    <v-icon :color="header.input!=''?'blue':'black'" small>fa-filter</v-icon>
-                                    </v-btn>
-                                    <v-card  >
-                                        <v-text-field
-                                         outline
-                                         hide-details
-                                        v-model="header.input"
-                                        append-icon="search"
-                                        :label="`Buscar ${header.text}...`"                                       
-                                        @keydown.enter="search()"
-                                        @keyup.delete="checkInput(header.input)"
-                                        @keyup.esc="header.menu=false"
-                                    ></v-text-field>
-                                    
-                                    </v-card>
-                            </v-menu>
-                            <!-- <v-icon small @click="toggleOrder(header.value)" v-if="header.value == filterName ">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon> -->
+                            <v-flex v-if="header.filter">
+                            <!-- <v-btn flat >{{header.text }} <v-icon  right small> fa-filter</v-icon></v-btn> -->
+                            <v-text-field  
+                                v-if="header.type=='text'"
+                                append-icon="search"
+                                :label="header.text"
+                                v-model="header.input"
+                                @keydown.enter="search()"
+                                @keyup.delete="checkInput(header.input)"
+                            ></v-text-field>
+                            <v-combobox
+                                v-if="header.type=='select' && header.items.length>0"
+                                v-model="header.input"
+                                :items="header.items"
+                                :label="header.text"
+                                item-text="name"
+                                @change="search()"
+                            ></v-combobox>
                         </v-flex>
+                        <span v-else> {{header.text}} </span>
+                    
+                    </v-flex>
                 </th>
            </tr>
         </template>
@@ -224,58 +149,102 @@
             Your search for "{{ search }}" found no results.
         </v-alert> -->
         </v-data-table>
-        <!-- <v-layout>
-            <v-flex class="text-xs-center" xs10> 
+        <v-card-text>  
+            <v-layout row justify-space-between>
+            <v-flex xs1 sm2>
+                <v-combobox
+                    v-model="paginationRows"
+                    :items="pagination_select"
+                    label="Mostrar Registros"
+                    @change="search()"
+                ></v-combobox>
+            </v-flex>
+            <v-flex xs5>
                 <v-pagination
                     v-model="page"
                     :length="last_page"
                     :total-visible="10"
                     @input="next"
-                > </v-pagination>
 
-            </v-flex>
-            <v-flex class="text-xs-center" xs2>
-                Mostrando {{from}}-{{to}} de {{total}}
-            </v-flex>
-        </v-layout> -->
-        <!-- Mostrando {{from}}-{{to}} de {{total}} -->
-        <!-- <v-card> -->
-            <v-card-text>
-                <div class="text-xs-center">
-                <v-pagination
-                    v-model="page"
-                    :length="last_page"
-                    :total-visible="10"
-                    @input="next"
-                    
                 > </v-pagination>
-                </div>
-                <v-spacer></v-spacer>
-                Mostrando {{from}}-{{to}} de {{total}} 
-            </v-card-text>
-        <!-- </v-card> -->
-        <!-- <div class="text-xs-center">
-            <v-pagination
-                v-model="page"
-                :length="last_page"
-                :total-visible="10"
-                @input="next"
-                
-                
-            > </v-pagination>
-            <v-spacer></v-spacer>
-              Mostrando {{from}}-{{to}} de {{total}} registros 
-           
-        </div>  -->
-        <!-- <div class="text-xs-left">
+            </v-flex>
+            <v-flex xs1  sm2>
+                <div class="caption"> Mostrando {{from}}-{{to}} de {{total}} </div>
+            </v-flex>
+            </v-layout>
+      
             
-            <v-flex xs11 sm11 md11>
-                Mostrando {{from}}-{{to}} de {{total}} registros 
-            </v-flex>
+        </v-card-text>
 
-        </div> -->
-        
+
+
+        <!-- colocar dialogos aqui  -->
+         <v-dialog v-model="dialog" max-width="500px">            
+            <v-card>
+            <v-card-title>
+                <span class="headline">{{ formTitle }}</span>
+            </v-card-title>
+
+            <v-card-text v-if="newLumber">
+                <v-container grid-list-md>
+                 <v-layout wrap>
+                    <v-flex xs12 sm6 md4>
+                        <v-text-field label="Alto" hint="Ingrese el alto de la madera" required v-model="newLumber.high"></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm6 md4>
+                        <v-text-field label="Ancho" hint="Ingrese el ancho de la madera" v-model="newLumber.width"></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm6 md4>
+                        <v-text-field
+                        label="Densidad"
+                        hint="Ingrese la densidad de la madera"                  
+                        required
+                        v-model="newLumber.density"
+                        ></v-text-field>
+                    </v-flex>                          
+                    <v-flex xs12 sm6>
+                        <v-select                  
+                        label="Tipo de madera"
+                        v-model="newLumber.type_id"
+                        :items="types"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion del tipo seleccionado`"
+                        persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12 sm6>
+                        <v-select                  
+                        label="Especie"                
+                        v-model="newLumber.specie_id"  
+                        :items="species"
+                        item-text="name"
+                        item-value="id"
+                        :hint="`Descripcion de la madera seleccionada`"
+                        persistent-hint>                                
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-text-field label="Descripción" v-model="newLumber.description" ></v-text-field>
+                    </v-flex>  
+                </v-layout>
+                </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
+                <v-btn color="blue darken-1" flat @click="store(newLumber)" v-if="editedIndex === -1">Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="update(newLumber)" v-else>Actualizar</v-btn>
+                
+                
+            </v-card-actions>
+            </v-card>
+        </v-dialog>
+
     </v-card>
+
+    
 </template>
 <script>
 export default {
@@ -285,11 +254,12 @@ export default {
           sortBy: 'name'
         },
         headers: [          
-            { text: 'Especie', value: 'specie' ,input:'', menu:false},
-            { text: 'Tipo', value: 'type' ,input:'', menu:false},
-            { text: 'Alto', value: 'high' ,input:'', menu:false},        
-            { text: 'Ancho', value: 'width' ,input:'', menu:false},
-            { text: 'Espesor', value: 'density' ,input:'', menu:false},            
+            { text: 'Especie', value: 'specie' ,input:'', type:'text', filter:true },
+            { text: 'Tipo', value: 'type' ,input:'', type:'text', filter:true },
+            { text: 'Alto', value: 'high' ,input:'', type:'text', filter:true },        
+            { text: 'Ancho', value: 'width' ,input:'', type:'text', filter:true },
+            { text: 'Espesor', value: 'density' ,input:'', type:'text', filter:true }, 
+            { text: 'Accion', value: '', type:"text", filter:false, input:''},
         ],
         species: null,
         types: null,
@@ -376,7 +346,7 @@ export default {
             axios.post('/api/auth/lumber/', this.newLumber)
             .then(response => {                
                 //this.lumbers.push(response.data.lumber);
-                alert('dato creado');
+                this.$store.dispatch('template/showMessage',{message:'Se registro exitosamente',color:'success'});
             })
             .catch(error => {                
                 console.log(error);
@@ -398,6 +368,7 @@ export default {
             axios.get(`/api/auth/lumber/${item.id}/edit`)            
             .then(response => {                
                 this.newLumber = response.data.lumber
+                
             })
             .catch(error => {                
                 console.log(error);
@@ -414,6 +385,7 @@ export default {
                 this.lumbers[index].density = response.data.lumber.density;
                 this.lumbers[index].specie = response.data.lumber.specie;
                 this.lumbers[index].type = response.data.lumber.type;
+                 this.$store.dispatch('template/showMessage',{message:'Se actualizo el registro ',color:'success'});
             })
             .catch(function (error) {
                 console.log(error);
@@ -427,6 +399,7 @@ export default {
             .then(function (response) {
                 console.log(response.data.lumber_id);                   
                 success_delete = true;
+                 this.$store.dispatch('template/showMessage',{message:'Se el elimino el registro ',color:'danger'});
             })
             .catch(function (error) {
                 console.log(error);                

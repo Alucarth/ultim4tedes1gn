@@ -24,6 +24,7 @@ import ExcelImportPurchases from './components/purchase/import.vue';
 
 import LumberTransaction from './components/lumber/transaction.vue';
 import Expensive from './components/expensive/index.vue';
+import OriginTypes from './components/origin_type/index.vue';
    
    export const routes= [
         {
@@ -140,11 +141,23 @@ import Expensive from './components/expensive/index.vue';
                 requiresAuth: true
             }    
         },
+        // {
+        //     path: '/purchase/create',
+        //     name: 'PurchaseEdit',
+        //     components:{ 
+        //         default:EditPurchase,
+        //         toolbar:Toolbar,
+        //         nav: Nav
+        //     },
+        //     meta: { 
+        //         requiresAuth: true
+        //     }    
+        // },
         {
-            path: '/purchase/create',
-            name: 'PurchaseEdit',
+            path: '/create_purchase',
+            name: 'import_purchases',
             components:{ 
-                default:EditPurchase,
+                default:ExcelImportPurchases,
                 toolbar:Toolbar,
                 nav: Nav
             },
@@ -236,18 +249,7 @@ import Expensive from './components/expensive/index.vue';
                 requiresAuth: true
             }    
         },
-        {
-            path: '/import_purchases',
-            name: 'import_purchases',
-            components:{ 
-                default:ExcelImportPurchases,
-                toolbar:Toolbar,
-                nav: Nav
-            },
-            meta: { 
-                requiresAuth: true
-            }    
-        },
+       
         {
             path: '/inventory',
             name: 'inventory',
@@ -289,6 +291,18 @@ import Expensive from './components/expensive/index.vue';
             name: 'expenses',
             components:{ 
                 default:Expensive,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
+        },
+        {
+            path: '/origin_types',
+            name: 'origin_types',
+            components:{ 
+                default:OriginTypes,
                 toolbar:Toolbar,
                 nav: Nav
             },

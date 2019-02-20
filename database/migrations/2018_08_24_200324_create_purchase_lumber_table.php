@@ -21,6 +21,8 @@ class CreatePurchaseLumberTable extends Migration
             $table->foreign('lumber_id')->references('id')->on('lumbers');
             $table->integer('state_id')->nullable();
             $table->foreign('state_id')->references('id')->on('states');
+            $table->integer('origin_type_id')->nullable();
+            $table->foreign('origin_type_id')->references('id')->on('origin_types');
             $table->integer('quantity')->default(0);
             $table->decimal('quantity_feet',13,2)->default(0);
             $table->decimal('amount',13,2)->nullable();

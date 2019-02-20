@@ -13,8 +13,8 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-    
 
+     
      <v-menu
         v-model="menu"
         :close-on-content-click="false"
@@ -22,7 +22,7 @@
         offset-x
         v-if="user"
       >
-        <v-btn 
+         <v-btn 
           slot="activator"
           icon
           large
@@ -48,10 +48,6 @@
 
           </v-list-tile>
         </v-list>
-
-       
-
-
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-tooltip bottom>
@@ -97,14 +93,7 @@ export default {
             this.$store.commit('template/updateDrawer',value);
           }
         },
-        show_message:{
-          get(){
-            return this.$store.state.template.show_message;
-          },
-          set(value){
-            this.$store.commit('template/updateShowMessage',value);
-          }
-        },
+
         ...mapState({
           user: state => state.auth.user,
         })
@@ -121,6 +110,10 @@ export default {
         this.$store.dispatch('auth/logout')
           .then(() => this.$router.push('/login'))
           .catch(err => console.log(err))
+      },
+      show_user(){
+        console.log('open dialog ');
+        this.menu=true;
       }
     }
    

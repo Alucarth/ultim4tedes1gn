@@ -24,5 +24,9 @@ class Lumber extends Model
 
     public function specie(){
         return $this->hasOne('App\Specie','id','specie_id');
+    }         
+       
+    public function unit(){
+        return $this->hasOne('App\Unit','id','unit_id');
     }            
 }

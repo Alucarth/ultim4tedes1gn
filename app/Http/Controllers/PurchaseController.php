@@ -17,6 +17,7 @@ use App\Provider;
 use App\State;
 use App\Expensive;
 use App\PurchaseExpensive;
+use App\OriginType;
 use Log;
 class PurchaseController extends Controller
 {
@@ -95,6 +96,16 @@ class PurchaseController extends Controller
         return response()->json($data);
     }
 
+    public function newPurchaseItem()
+    {
+        $species = Specie::all();
+        $types = Type::all();
+        $units = Unit::all();
+        $states = State::all();
+        $item = array('cefo'=>'','fecha'=>'','espesor'=>'','ancho'=>'','largo'=>'','cantidad'=>'','cantidad_pie'=>'','precio_unitario'=>'');
+        return compact('species','types','units','states','item');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -129,7 +140,7 @@ class PurchaseController extends Controller
      */
     public function show($id)
     {
-        $purchase = Purchase::with(['provider','lumbers','lumbers.specie','lumbers.type'])->find($id);
+        $purchase = Purchase::with(['provider','lumbers','lumbers.specie','lumbers.type','lumbers.unit','expenses'])->find($id);
 
         $data = [
             'purchase'  =>  $purchase
@@ -178,7 +189,7 @@ class PurchaseController extends Controller
         Excel::selectSheetsByIndex(0)->load($path, function($reader) {
             
             global $rows;
-            $result = $reader->select(array('cefo','fecha','especie','estado', 'tipo', 'unidad','espesor','ancho','largo','cantidad','cantidad_pie','precio_unitario'))->get();
+            $result = $reader->select(array('cefo','fecha','especie','estado', 'tipo', 'unidad','espesor','ancho','largo','cantidad','cantidad_pie','precio_unitario','origen'))->get();
             $rows =array();
             foreach($result as $row)
             {
@@ -190,7 +201,9 @@ class PurchaseController extends Controller
                 $row['unit'] = $unit??0;
                 $state = State::where('name',$row->estado)->first();
                 $row['state'] = $state??0;
-                
+                $origin_type = OriginType::where('name',$row->origen)->first();
+                $row['origin_type'] =$origin_type??0;
+
                 $row['cantidad_pie'] = number_format($row['cantidad_pie'], 2);
 
                 $row['fecha'] =date('Y-m-d',strtotime($row->fecha));
@@ -213,23 +226,21 @@ class PurchaseController extends Controller
         
         $provider = Provider::find($request->provider_id);
         
-        $purchase = null;
+        
+        $purchase = new Purchase;
+        $purchase->date = date('Y-m-d',strtotime($request->fecha));
+        $purchase->cefo = $request->cefo;
+        $purchase->provider_id = $provider->id;
+        $purchase->description = $request->descripcion;
+        $purchase->amount = $request->amount;
+        $purchase->save();
+        
+
         foreach($request->purchases as $row)
         {
             $object = json_decode(json_encode($row)) ;
             Log::info(strtotime($object->fecha));
             Log::info(date('Y-m-d',strtotime($object->fecha)));
-            if(!$purchase){
-
-                $purchase = new Purchase;
-                $purchase->date = date('Y-m-d',strtotime($object->fecha));
-                $purchase->cefo = $object->cefo;
-                $purchase->provider_id = $provider->id;
-                $purchase->description = "importacion de compra via excel";
-                $purchase->amount = $request->amount;
-                $purchase->save();
-            }
-
 
             if($object->valid)
             {
@@ -256,6 +267,7 @@ class PurchaseController extends Controller
                 $purchase_lumber->purchase_id = $purchase->id;
                 $purchase_lumber->lumber_id = $lumber->id;
                 $purchase_lumber->state_id = $object->state->id;
+                $purchase_lumber->origin_type_id = $object->origin_type->id;
                 $purchase_lumber->quantity = $object->cantidad;
                 $purchase_lumber->quantity_feet = $object->cantidad_pie;
                 $purchase_lumber->save();
