@@ -167,7 +167,7 @@
             <v-flex xs12 sm4 md6 v-if="areas">
                 <v-select
                     label="Area"
-                    v-model="transfer.area_destination_id"
+                    v-model="to_area_id"
                     :items="areas"
                     item-text="name"
                     item-value="id"
@@ -239,6 +239,7 @@ export default {
         actual_area: 1,
         area_id: 0,
         areas: [],
+        to_area_id: 0,
       }
     },
     computed: {
@@ -324,11 +325,10 @@ export default {
             });
         },
         store () {
-            axios.post('/api/auth/area/transfer', {transfer: this.transfer, inventories: this.transfer_inventories})
+            axios.post('/api/auth/area/transfer', {from_area_id: this.area.id,to_area_id: this.to_area_id , inventories: this.transfer_inventories})
             .then(response => {
-                alert('Madera empaquetada');
-                console.log(123);
-                //this.$router.replace('/area');
+                alert('Transferencia realizada correctamente');
+                this.$router.replace('/inventory');
             })
             .catch(error => {
                 console.log(error);

@@ -72,8 +72,19 @@
             </v-card>
         </v-dialog>
 
-        <v-btn to="/inventory/transfer" color="primary" dark class="mb-2">Transferencias</v-btn>
-        <v-btn @click="create()" color="primary" dark class="mb-2">Nuevo</v-btn>    
+        
+        <v-select
+          v-model="area_id"
+          :items="areas"
+          hide-details
+          item-text="name"
+           item-value="id"
+          label="Seleccione área"
+          single-line
+        ></v-select>
+        <v-btn v-if="area_id != 0" @click="transfer()" color="primary" dark class="mb-2">Realizar trasnferencia </v-btn>
+
+        <v-btn @click="create()" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
         <v-data-table
         :headers="headers"
@@ -83,12 +94,12 @@
         >
         <template slot="headers" slot-scope="props" >
            <tr>
-                <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">                    
+                <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
                         <v-flex>
-                            <span @click="toggleOrder(index)">{{ header.text }}                                
+                            <span @click="toggleOrder(index)">{{ header.text }}
                             </span>
                             <v-menu
-                                    :close-on-content-click="false"                                    
+                                    :close-on-content-click="false"
                                     >
                                     <v-btn
                                         slot="activator"
@@ -103,14 +114,14 @@
                                         v-model="filterValue"
                                         append-icon="searchInventory"
                                         :label="`Buscar ${header.text}...`"
-                                    
+
                                         @keydown.enter="getResult(true)"
                                     ></v-text-field>
-                                    
+
                                     </v-card>
                             </v-menu>
                             <v-icon small @click="toggleOrder(index)" v-if="header.value == pagination.sortBy">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon>
-                        </v-flex>                     
+                        </v-flex>
                 </th>
            </tr>
         </template>
@@ -148,8 +159,76 @@
         </template>
         <template slot="expand" slot-scope="props">
             <v-card flat v-if="inventory">
-                <v-card-text>{{ inventory.name }}</v-card-text>
-                <v-card-text>{{ inventory.description }}</v-card-text>
+                <table>
+                    <tr>
+                        <td> 
+                            Código
+                        </td>
+                        <td>
+                            <v-card-text>{{ inventory.code }}</v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Nombre
+                        </td>
+                        <td>
+                            <v-card-text>{{ inventory.description }}</v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tipo
+                        </td>
+                        <td>
+                            <v-card-text>{{ inventory.type.name }}</v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Familia
+                        </td>
+                        <td>
+                            <v-card-text>{{ inventory.family.name }}</v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Unidad
+                        </td>
+                        <td>
+                            <v-card-text>{{ inventory.unit.name }}</v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Cantidad total
+                        </td>
+                        <td>
+                            <v-card-text>{{ inventory.quantity }}</v-card-text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Detalle de ubicación
+                        </td>
+                        <td>
+                             <v-data-table
+                                :headers="minitable_headers"
+                                :items="inventory.areas"
+                                hide-actions
+                                class="elevation-1"
+                            >
+                                <template slot="items" slot-scope="props">
+                                    <td>{{ props.item.name }}</td>
+                                    <td>{{ props.item.pivot.quantity }}</td>
+                                </template>
+                            </v-data-table>
+                        </td>
+                    </tr>
+                </table>
+
+
             </v-card>
         </template>
 
@@ -173,7 +252,11 @@ export default {
             { text: 'Typo', value: 'type' },
             { text: 'Familia', value: 'family' },
             { text: 'Unidad', value: 'unit' },            
-        ],                
+        ],
+        minitable_headers: [
+            { text: 'Nombre', value: 'name' },
+            { text: 'Cantidad', value: 'quantity' },
+        ],
         inventories: [],        
         inventory: null,
         newInventory: null,
@@ -186,6 +269,8 @@ export default {
         units: [],
         families: [],
         inventory_types: [],
+        areas: [],
+        area_id: 0
       }
     },
     computed: {
@@ -194,11 +279,12 @@ export default {
             }
     },
     mounted()
-    {        
+    {
         this.searchInventory();
         this.getInventoryTypes();
         this.getFamilies();
-        this.getUnits();    
+        this.getUnits();
+        this.getAreas();
     },
     methods:{
         searchInventory() {
@@ -331,8 +417,20 @@ export default {
             .catch(error => {
                 console.log(error);
             });
+        },
+        getAreas () {
+            axios.get('/api/auth/area')
+            .then(response => {
+                this.areas = response.data.areas
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
+        transfer() {
+            this.$router.replace('inventory/transfer/'+this.area_id);
         }
-        
+
     }
 }
 </script>
