@@ -15,6 +15,7 @@ import EditBuyout from './components/purchase/editInventory.vue';
 import Package from './components/package/index.vue';
 import EditPackage from './components/package/edit.vue';
 import TransferPackage from './components/package/transfer.vue';
+import TransferInventory from './components/inventory/transfer.vue';
 import Employee from './components/employee/index.vue';
 import Inventory from './components/inventory/indexInventory.vue';
 
@@ -210,8 +211,20 @@ import OriginTypes from './components/origin_type/index.vue';
             },
             meta: { 
                 requiresAuth: true
-            }    
+            }
         },
+        {
+            path: '/inventory/transfer/:id',
+            name: 'inventoryTransfer',
+            components:{ 
+                default:TransferInventory,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }
+        },        
         {
             path: '/employee',
             name: 'employee',

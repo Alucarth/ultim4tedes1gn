@@ -14,7 +14,7 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $areas = Area::get();
+        $areas = Area::with(['inventories'])->get();
 
         $data = [
             'areas' => $areas
@@ -52,7 +52,12 @@ class AreaController extends Controller
      */
     public function show($id)
     {
-        //
+        $area = Area::with(['inventories','inventories.type'])->find($id);
+        $data = [
+            'area' => $area
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -87,5 +92,25 @@ class AreaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function transfer(Request $request) {
+        $from = Area::with(['inventories'])->find($request->from_area_id);
+        $to = Area::with(['inventories'])->find($request->to_area_id);
+        $from_inventories = [];
+        $to_inventories = [];
+        foreach($request->inventories as $inventory) {
+            $from_inventories[$inventory['id']] = [
+                'quantity' => $from->inventories()->find($inventory['id'])->pivot->quantity - $inventory['quantity']
+            ];
+            $to_inventories[$inventory['id']] = [
+                'quantity' => $inventory['quantity']+($to->inventories()->find($inventory['id'])->pivot->quantity ?? 0)
+            ];
+        }
+        $from->inventories()->syncWithoutDetaching($from_inventories);
+        $to->inventories()->syncWithoutDetaching($to_inventories);
+
+
+        return $to;
     }
 }

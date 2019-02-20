@@ -74,6 +74,7 @@ export default {
            items: [
                 { icon: 'dashboard', text: 'Inicio' , link: '/' },
                 { icon: 'store', text: 'Almacenes' , link: '/storage' },
+                { icon: 'store', text: 'Insumos' , link: '/inventory' },
                 { icon: 'group_work', text: 'Madera' , link: '/lumber' },
                 { icon: 'local_florist', text: 'Especies' , link: '/specie' },
                 { icon: 'group', text: 'Proveedores' , link: '/provider' },  

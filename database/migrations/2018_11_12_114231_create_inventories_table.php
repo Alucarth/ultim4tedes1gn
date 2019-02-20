@@ -17,6 +17,7 @@ class CreateInventoriesTable extends Migration
             $table->increments('id');
             $table->string('code');
             $table->integer('minimum');
+            $table->integer('quantity')->nullable();
             $table->string('description');
             $table->string('observation');
             $table->boolean('active')->default(true);
