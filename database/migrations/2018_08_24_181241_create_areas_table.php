@@ -17,8 +17,8 @@ class CreateAreasTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('description');
-            $table->integer('employee_id');
-            $table->foreign('employee_id')->references('id')->on('employees');
+            // $table->integer('employee_id')->nullable();
+            // $table->foreign('employee_id')->references('id')->on('employees');
             $table->timestamps();
             $table->softDeletes();
         });
