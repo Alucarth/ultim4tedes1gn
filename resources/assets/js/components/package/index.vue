@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-card-title>
+        <!-- <v-card-title>
            <h3> Paquetes de madera </h3>
            <v-chip color="green" text-color="white">
             <v-avatar class="green darken-4" >  <v-icon>store</v-icon> </v-avatar>
@@ -13,9 +13,9 @@
            <v-chip color="green" text-color="white">
             <v-avatar class="green darken-4" >  <v-icon>group_work</v-icon> </v-avatar>
             cantidad Pie: {{this.cantidad_pie}}
-            </v-chip>
+            </v-chip> -->
            
-        <v-spacer></v-spacer>        
+        <!-- <v-spacer></v-spacer>        
         <v-btn to="/package/create" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
         <v-data-table
@@ -29,7 +29,6 @@
                     
                         <v-flex v-if="header.value!='actions'">
                             <v-flex v-if="header.filter">
-                            <!-- <v-btn flat >{{header.text }} <v-icon  right small> fa-filter</v-icon></v-btn> -->
                             <v-text-field  
                                 v-if="header.type=='text'"
                                 append-icon="search"
@@ -48,37 +47,13 @@
                             ></v-combobox>
                         </v-flex>
                         <span v-else> {{header.text}} </span>
-                            <!-- <span>{{ header.text }}
-                            </span>
-                            <v-menu 
-                                    :close-on-content-click="false"
-                                    >
-                                    <v-btn
-                                        slot="activator"
-                                        icon
-                                   
-                                        v-if="header.sortable!=false"
-                                    >
-                                    <v-icon  small>fa-filter</v-icon>
-                                    </v-btn>
-                                    <v-card  >
-                                        <v-text-field
-                                         outline
-                                         hide-details
-                                        v-model="header.input"
-                                        append-icon="search"
-                                        :label="`Buscar ${header.text}...`"                                       
-                                        @keydown.enter="search()"
-                                    ></v-text-field>
-                                    
-                                    </v-card>
-                            </v-menu>                             -->
+                              
                         </v-flex>
                 </th>
            </tr>
         </template>
         <template slot="items"  slot-scope="props">
-            <!-- <tr @click="props.expanded = !props.expanded"> -->
+          
                 <td class="text-xs-left">{{ props.item.code }}</td>
                 <td class="text-xs-left">{{ props.item.name }}</td>      
                 <td class="text-xs-left" >{{ props.item.storage.name }}</td>                           
@@ -104,7 +79,7 @@
                         delete
                     </v-icon>
                 </td>      
-            <!-- </tr> -->
+           
         </template>
         <template slot="expand" slot-scope="props">
             <v-card flat v-if="packaged">
@@ -164,10 +139,6 @@
                 </table>                                
             </v-card>
         </template>
-
-        <!-- <v-alert slot="no-results" :value="true" color="error" icon="warning">
-            Your search for "{{ search }}" found no results.
-        </v-alert> -->
         </v-data-table>
        <v-card-text>
             <div class="text-xs-center">
@@ -181,10 +152,14 @@
             </div>
             <v-spacer></v-spacer>
             Mostrando {{from}}-{{to}} de {{total}} 
-        </v-card-text>
+        </v-card-text> -->
+        <vue-bootstrap4-table :rows="rows" :columns="columns" :config="config">
+        </vue-bootstrap4-table>
     </v-card>
 </template>
 <script>
+import VueBootstrap4Table from 'vue-bootstrap4-table';
+
 export default {
     data () {
       return {        
@@ -219,7 +194,77 @@ export default {
         from:0,
         to:0,
         cantidad:0,
-        cantidad_pie:0   
+        cantidad_pie:0,
+        rows: [{
+                    "id": 1,
+                    "name": {
+                        "first_name": "Vladimir",
+                        "last_name": "Nitzsche"
+                    },
+                    "address": {
+                        "country": "Mayotte"
+                    },
+                    "email": "franecki.anastasia@gmail.com",
+                },
+                {
+                    "id": 2,
+                    "name": {
+                        "first_name": "Irwin",
+                        "last_name": "Bayer"
+                    },
+                    "age": 23,
+                    "address": {
+                        "country": "Guernsey"
+                    },
+                    "email": "rlittle@macejkovic.biz",
+                },
+                {
+                    "id": 3,
+                    "name": {
+                        "first_name": "Don",
+                        "last_name": "Herman"
+                    },
+                    "address": {
+                        "country": "Papua New Guinea"
+                    },
+                    "email": "delia.becker@cormier.com",
+                }],
+        columns: [{
+                label: "id",
+                name: "id",
+                filter: {
+                    type: "simple",
+                    placeholder: "id"
+                },
+                sort: true,
+            },
+            {
+                label: "First Name",
+                name: "name.first_name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Enter first name"
+                },
+                sort: true,
+            },
+            {
+                label: "Email",
+                name: "email",
+                sort: true,
+            },
+            {
+                label: "Country",
+                name: "address.country",
+                filter: {
+                    type: "simple",
+                    placeholder: "Enter country"
+                },
+            }],
+        config: {
+            checkbox_rows: true,
+            rows_selectable: true,
+            card_title: "Vue Bootsrap 4 advanced table"
+        }  
       }
     },
     computed: {
@@ -393,6 +438,9 @@ export default {
             }
         },
         
-    },    
+    },  
+    components: {
+        VueBootstrap4Table
+    }  
 }
 </script>

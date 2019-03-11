@@ -6,7 +6,7 @@
 // vuetify
 @import '~vuetify/dist/vuetify.min.css';
 //@import '~bootstrap/dist/css/bootstrap.min.css';
-@import '~vue2-datatable-component/dist/min.css';
+@import 'bootstrap';
 
 #styled-input {
 	height: 20px;
@@ -15,4 +15,4 @@
   .styled-input label[for] {
 	height: 20px;
 	font-size: 10pt;
-  }
+  } 
