@@ -1,7 +1,20 @@
 <template>
     <v-card>
         <v-card-title>
-            Paquetes de madera
+           <h3> Paquetes de madera </h3>
+           <v-chip color="green" text-color="white">
+            <v-avatar class="green darken-4" >  <v-icon>store</v-icon> </v-avatar>
+             {{this.headers[2].input?this.headers[2].input.name:'Todos los Almacenes' }}
+            </v-chip>
+           <v-chip color="green" text-color="white">
+            <v-avatar class="green darken-4" >  <v-icon>group_work</v-icon> </v-avatar>
+            cantidad: {{this.cantidad}}
+            </v-chip>
+           <v-chip color="green" text-color="white">
+            <v-avatar class="green darken-4" >  <v-icon>group_work</v-icon> </v-avatar>
+            cantidad Pie: {{this.cantidad_pie}}
+            </v-chip>
+           
         <v-spacer></v-spacer>        
         <v-btn to="/package/create" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
@@ -204,7 +217,9 @@ export default {
         paginationRows: 10,
         total:0,
         from:0,
-        to:0,   
+        to:0,
+        cantidad:0,
+        cantidad_pie:0   
       }
     },
     computed: {
@@ -227,12 +242,14 @@ export default {
         search() {
             return new Promise((resolve,reject)=>{   
                 this.getData('/api/auth/package',this.getParams()).then((data)=>{
-                    console.log("after response");
-                    this.packages = data.data;                                        
-                    this.last_page = data.last_page;
-                    this.total = data.total;
-                    this.from = data.from;
-                    this.to = data.to;
+                    console.log(data.storages);
+                    this.packages = data.storages.data;                                        
+                    this.last_page = data.storages.last_page;
+                    this.total = data.storages.total;
+                    this.from = data.storages.from;
+                    this.to = data.storages.to;
+                    this.cantidad = data.cantidad;
+                    this.cantidad_pie = data.cantidad_pie;
                     resolve();                    
                 });
             });
