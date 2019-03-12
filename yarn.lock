@@ -569,14 +569,6 @@
     js-levenshtein "^1.1.3"
     semver "^5.3.0"
 
-"@babel/runtime@7.0.0-beta.53":
-  version "7.0.0-beta.53"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.53.tgz#9df22ae34823ce89f790060594b83ee572e2c5d2"
-  integrity sha1-nfIq40gjzon3kAYFlLg+5XLixdI=
-  dependencies:
-    core-js "^2.5.7"
-    regenerator-runtime "^0.12.0"
-
 "@babel/runtime@^7.2.0":
   version "7.3.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.4.tgz#73d12ba819e365fcf7fd152aed56d6df97d21c83"
@@ -1743,11 +1735,6 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
-
-core-js@^2.5.7:
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
-  integrity sha512-klh/kDpwX8hryYL14M9w/xei6vrv6sE8gTHDG7/T/+SEovB/G4ejwcfE/CBzO6Edsu+OETZMZ3wcX/EjUkrl5A==
 
 core-util-is@~1.0.0:
   version "1.0.2"
@@ -4346,13 +4333,6 @@ normalize-url@^3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
 
-notivuecation@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/notivuecation/-/notivuecation-3.2.1.tgz#b417905071227644601f9934a0b818f13a6831f7"
-  integrity sha512-EumDi2zOKHjN8/D6qSdmTQbPRXdGDECSGi7StVTqfKCMMlTTh+junwRlqArKZin9sRaw0RRXpV50FQaxe8NA4g==
-  dependencies:
-    "@babel/runtime" "7.0.0-beta.53"
-
 npm-bundled@^1.0.1:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/npm-bundled/-/npm-bundled-1.0.5.tgz#3c1732b7ba936b3a10325aef616467c0ccbcc979"
@@ -6065,6 +6045,11 @@ svgo@^1.0.0:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+sweetalert2@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-8.3.0.tgz#ebbcd3438a1249c8f75615955273f5a22675cf6c"
+  integrity sha512-HpZVbAxAyh03N5uzNs2e4gpVaaPyZYtBctyAZP8jUrF8Es9e3uvWFsO9I0m8DnlY4771dYIIeUDvlkwhdcKacA==
 
 tapable@^1.0.0, tapable@^1.1.0:
   version "1.1.1"

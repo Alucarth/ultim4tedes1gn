@@ -25,14 +25,11 @@ class PackageController extends Controller
      */
     public function index()
     {
-      
-        $order = request('orde'??'asc'); 
+        // return request();
+        $order = request('order'??'asc'); 
         $pagination_rows =request('pagination_rows'??10);        
 
         $package_conditions = [];
-        
-        
-
         $code = request('code'??'');        
         $name = request('name'??'');        
         $storage = request('storage_id'??'');
