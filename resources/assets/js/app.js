@@ -7,6 +7,14 @@ window._ = require('lodash');
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+try {
+  window.Popper = require('popper.js').default;
+  window.$ = window.jQuery = require('jquery');
+
+  require('bootstrap');
+} catch (e) {}
+
+
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -35,20 +43,18 @@ import {routes} from './routes';
 import App from './views/App';
 import {storage} from './store_modules/storage';
 import {autentication} from './store_modules/autentication';
-// import {confirm} from './store_modules/confirm';
-import notivuecation from 'notivuecation';
 
 
 window.Vue = require('vue');
 window.numeral = require('numeral');
 window.moment = require('moment');
 window.Chart = require('chart.js');
+window.Swal = require('sweetalert2');
 
 Vue.use(VueRouter)
 Vue.use(Vuetify);
 Vue.use(Vuex);
 
-Vue.use(notivuecation);
 
 Vue.prototype.$http = axios;
 const tokenJWT = localStorage.getItem('token')
@@ -62,20 +68,6 @@ const store = new Vuex.Store({
         dconfirm: confirm,
     }
 });
-
-// Vue.component('custom-component', {
-//     mixins: [componentMixin],
-//     template: `<div v-if="notification">
-//         <h1>{{title}}</h1>
-//         <p>{{message}}</p>
-  
-//         <button
-//           v-for="button in buttons"
-//           :class="button.css"
-//           @click="resolve(button.value)"
-//         >{{button.label}}</button>
-//       </div>`,
-//   });
 
 const router = new VueRouter({
     mode: 'history',
@@ -93,20 +85,6 @@ router.beforeEach((to, from, next) => {
       next() 
     }
 });
-
-
-// //proteccion de rutas
-// router.beforeEach((to, from, next) => {
-//     if(to.matched.some(record => record.meta.requiresAuth)) {
-//       if (store.getters['auth/isLoggedIn']==true) {
-//         next()
-//         return
-//       }
-//       next('/login') 
-//     } else {
-//       next() 
-//     }
-// });
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -15,6 +15,7 @@ use App\PackageLumber;
 use App\LumberTransaction;
 use App\Storage;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 class PackageController extends Controller
 {
     /**
@@ -24,18 +25,15 @@ class PackageController extends Controller
      */
     public function index()
     {
-      
-        $order = request('orde'??'asc'); 
+        // return request();
+        $order = request('order'??'asc'); 
         $pagination_rows =request('pagination_rows'??10);        
 
         $package_conditions = [];
-        $storage_conditions = [];        
-        
-
         $code = request('code'??'');        
         $name = request('name'??'');        
         $storage = request('storage_id'??'');
-        Log::info($storage);
+        // Log::info(var_dump($storage));
         if ($code) {
             array_push($package_conditions, ['code','like',"%{$code}%"]);
         }
@@ -46,17 +44,32 @@ class PackageController extends Controller
             array_push($package_conditions, ['storage_id','=',$storage]);
         }        
         
-
+        // return $package_conditions;
         $storages = Package::with(['storage'])
                             ->where($package_conditions)
                             // ->whereHas('storage', function ($query) use ($storage_conditions) {
                             //     $query->where($storage_conditions);
                             // })                            
                             ->paginate($pagination_rows);
+        // Log::info($package_conditions);
+        $cantidad = DB::table('packages')
+                        ->where($package_conditions)
+                        ->sum('quantity');                        
+        $cantidad_pie = DB::table('packages')
+                        ->where($package_conditions)
+                        ->sum('quantity_feet');                        
+            // ->where('storage_id','=',$storage)
+            // ->where('storage_id','=',$storage)
+            // ->get();
+                                // ->sum('quantity');
+                                // ->select('storage_id',DB::raw('count(packages.quantity) as cantidad'))
+                                // ->groupBy('storage_id')->get(); 
         $data = [
-            'storages'   =>  $storages
+            'storages'   =>  $storages,
+            'cantidad'  =>  $cantidad,
+            'cantidad_pie'  =>  $cantidad_pie,
         ];
-        return response()->json($storages);
+        return response()->json($data);
     }
 
     /**
@@ -315,5 +328,10 @@ class PackageController extends Controller
             'packaged2'   =>  $packaged2
         ];
         return response()->json($data);
+    }
+
+    public function lumberStorage($storage_id)
+    {
+    
     }
 }
