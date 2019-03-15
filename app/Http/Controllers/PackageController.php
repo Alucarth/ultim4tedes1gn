@@ -26,13 +26,14 @@ class PackageController extends Controller
     public function index()
     {
         // return request();
-        $order = request('order'??'asc'); 
-        $pagination_rows =request('pagination_rows'??10);        
+        $order = request('order')??'asc'; 
+        $sort_name= request('sort_name')??'code';
+        $pagination_rows =request('pagination_rows')??10;        
 
         $package_conditions = [];
-        $code = request('code'??'');        
-        $name = request('name'??'');        
-        $storage = request('storage_id'??'');
+        $code = request('code')??'';        
+        $name = request('name')??'';        
+        $storage = request('storage_id')??'';
         // Log::info(var_dump($storage));
         if ($code) {
             array_push($package_conditions, ['code','like',"%{$code}%"]);
@@ -49,7 +50,8 @@ class PackageController extends Controller
                             ->where($package_conditions)
                             // ->whereHas('storage', function ($query) use ($storage_conditions) {
                             //     $query->where($storage_conditions);
-                            // })                            
+                            // })   
+                            ->orderBy($sort_name, $order)                    
                             ->paginate($pagination_rows);
         // Log::info($package_conditions);
         $cantidad = DB::table('packages')
@@ -121,7 +123,7 @@ class PackageController extends Controller
     public function show(Package $package)
     {        
         
-        $package = Package::with(['storage','lumbers','lumbers.specie','lumbers.type'])->find($package->id);
+        $package = Package::with(['storage','lumbers','lumbers.specie','lumbers.type','lumbers.unit'])->find($package->id);
         
         $data = [
             'package' => $package
