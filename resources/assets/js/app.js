@@ -18,6 +18,13 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+/**
+ * IMPORTANTE 
+ * Sea globalmente el axios baseURL este se obtiene de las variables MIX_
+ * que se encuentra en el archivo .env de las confiruaciones de laravel
+ * para que este haga efecto a los nuevos cambios se deve volver a correr npm run dev.
+ */
+window.axios.defaults.baseURL = process.env.MIX_SENTRY_DSN_PUBLIC; 
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

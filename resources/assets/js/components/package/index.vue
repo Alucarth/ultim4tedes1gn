@@ -4,7 +4,7 @@
         <v-card-title>
             <h3> Paquetes de madera </h3>
             <v-spacer></v-spacer>
-            <v-btn to="/package/create" color="primary" dark class="mb-2">Nuevo</v-btn>
+            <v-btn color="primary" dark class="mb-2" @click="create()">Nuevo</v-btn>
         </v-card-title>
         <v-card-text>
             <v-flex xs12>
@@ -41,19 +41,19 @@
                     <i class="fa fa-sort"></i>
                 </template>
                 <template slot="option" slot-scope="props">
-                    <v-icon  small>
+                    <!-- <v-icon  small>
                         remove_red_eye
-                    </v-icon>
+                    </v-icon> -->
                     <v-icon @click="edit(props)" small>
                         edit
                     </v-icon>
-                    <v-icon @click="destroy(props)" small>
+                    <v-icon @click="destroy(props.row)" small>
                         delete
                     </v-icon>
                 </template>
             </vue-bootstrap4-table>
         </v-card-text>
-        <edit-package :dialog="dialog" :storages="storages" :edit-item="item" @close="close" @package="update"></edit-package>
+        <edit-package :dialog="dialog" :edit-item="item" @close="close" @package="update"></edit-package>
      
     </v-card>
 </template>
@@ -216,25 +216,17 @@ export default {
             params['pagination_rows']=queryParams.per_page;
             return params;
         },
-        
+        setStorage(storage){
+            this.storage = storage;
+            this.search();
+        },
         close(dialog){
             this.dialog= dialog;
         },
              
         create() {                            
-        
-        },
-        store(){
-            let index = -1;
-            // axios.post('/api/auth/lumber/', this.newLumber)
-            // .then(response => {                
-            //     //this.lumbers.push(response.data.lumber);
-            //     alert('dato creado');
-            // })
-            // .catch(error => {                
-            //     console.log(error);
-            // });
-            this.dialog = false;
+            this.item = {lumbers:[]};
+            this.dialog =true;
         },
         show(item) {                        
             // axios.get(`/api/auth/package/${item.id}`)
@@ -248,33 +240,28 @@ export default {
         async edit (item) {
           
             this.item = await axios.get(`/api/auth/package/${item.row.id}`)
-            .then(response=>{
-                return response.data.package;
-            })
-            .catch(error => {                
-                console.log(error);
-            });
-
-            console.log(this.item);
+                        .then(response=>{
+                            return response.data.package;
+                        })
+                        .catch(error => {                
+                            console.log(error);
+                        });
             this.dialog = true;
-            // console.log('open dialog');
         },
         update (item) {                        
-            // let index = this.editedIndex;            
-            // axios.put(`/api/auth/lumber/${this.newLumber.id}`, this.newLumber)            
-            // .then(response => {                
-            //     this.lumbers[index].high = response.data.lumber.high;
-            //     this.lumbers[index].width = response.data.lumber.width;
-            //     this.lumbers[index].density = response.data.lumber.density;
-            //     this.lumbers[index].specie = response.data.lumber.specie;
-            //     this.lumbers[index].type = response.data.lumber.type;
-            // })
-            // .catch(function (error) {
-            //     console.log(error);
-            // });    
-            console.log(item);        
+            // let index = this.editedIndex; 
+            // console.log(item);           
+            axios.post(`/api/auth/package`, item)            
+            .then(response => {                
+              console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });    
+            this.search();
+            // console.log(item);        
             this.dialog =false;
-            //this.getLumber();
+            
         },
         destroy (item) {
             
@@ -291,15 +278,16 @@ export default {
             }).then((result) => {
                 if (result.value) {
                     axios.delete(`/api/auth/package/${item.id}`)
-                    .then(function (response) {
-                        console.log(response.data.lumber_id);                   
+                    .then( (response)=> {
+                        // console.log(response.data);                   
                         Swal.fire(
                             'Borrado!',
-                            'El paquete ha sido eliminado.',
+                            'El paquete '+response.data.code+' ha sido eliminado.',
                             'success'
                         )
+                        this.search();
                     })
-                    .catch(function (error) {
+                    .catch( (error)=> {
                         console.log(error);
                         Swal.fire(
                             'No se pudo Borrar!',
