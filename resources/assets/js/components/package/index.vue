@@ -254,6 +254,7 @@ export default {
             axios.post(`/api/auth/package`, item)            
             .then(response => {                
               console.log(response.data);
+              this.$store.dispatch('template/showMessage',{message:'Operacion Exitosa ',color:'success'});
             })
             .catch(function (error) {
                 console.log(error);

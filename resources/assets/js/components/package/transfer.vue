@@ -32,7 +32,16 @@
                                 </v-chip>
                             
                         </v-flex>
-                        <vue-bootstrap4-table :classes="classes" :rows="rows" :columns="columns" :config="config"  @on-change-query="onChangeQuery"  :totalRows="total_rows">
+                        <vue-bootstrap4-table :classes="classes" 
+                            :rows="rows"
+                            :columns="columns"
+                            :config="config"
+                            @on-change-query="onChangeQuery"
+                            @on-select-row="getSeletedRows"
+                            @on-unselect-row="getSeletedRows"
+                            @on-all-select-rows="getSeletedRows"
+                            @on-all-unselect-rows="getSeletedRows"
+                            :totalRows="total_rows" >
                             <template slot="sort-asc-icon">
                                 <i class="fa fa-sort-asc"></i>
                             </template>
@@ -49,9 +58,9 @@
                                 <v-icon @click="edit(props)" small>
                                     edit
                                 </v-icon>
-                                <v-icon @click="destroy(props.row)" small>
+                                <!-- <v-icon @click="destroy(props.row)" small>
                                     delete
-                                </v-icon>
+                                </v-icon> -->
                             </template>
                         </vue-bootstrap4-table>
                     </v-card-text>
@@ -61,10 +70,72 @@
             </v-flex>
             <v-flex xs4 style="padding-left: 5px;padding-right: 5px">
                 <v-card >
-                    <v-card-title>
-                        <h3> Tranferencia</h3>
-                    
-                    </v-card-title>
+                    <v-card-text>
+                       
+                        <v-layout row wrap>
+                            <v-flex shrink pa-1>  
+                                <h6 >Transferir a</h6>
+                            </v-flex>
+                            <v-flex grow pa-1>  
+                                <v-combobox label="Almacen"  v-model="transfer.storage" :items="destiny_storages" item-text="name" item-value="id"
+                                    placeholder="Seleccione Almacen" persistent-hint>
+                                </v-combobox>
+                            </v-flex>
+                        </v-layout>
+                        <v-layout row wrap>
+                            <v-flex xs6>  
+                                 <v-text-field label="Numero" hint="Ingrese Numero" required v-model="transfer.number"></v-text-field>
+                            </v-flex>
+                            <v-flex xs6>  
+                                <v-menu
+                                    v-model="menu2"
+                                    :close-on-content-click="false"
+                                    :nudge-right="40"
+                                    lazy
+                                    transition="scale-transition"
+                                    offset-y
+                                    full-width
+                                    max-width="290px"
+                                    min-width="290px"
+                                >
+                                <template v-slot:activator="{ on }">
+                                    <v-text-field
+                                    v-model="transfer.date"
+                                    label="Fecha"
+                                    hint="Año-Mes-Dia"
+                                    persistent-hint
+                                    prepend-icon="event"
+                                    readonly
+                                    v-on="on"
+                                    ></v-text-field>
+                                </template>
+                                <v-date-picker v-model="transfer.date" no-title @input="menu2 = false"></v-date-picker>
+                                </v-menu>
+                            </v-flex>
+                           
+                        </v-layout>
+                        <v-layout row wrap>
+                            <v-flex grow pa-1>  
+                                 <v-text-field label="Descripcion" hint="Ingrese Descripcion" required v-model="transfer.description"></v-text-field>
+                            </v-flex>
+                            <v-flex  shrink pa-1>  
+                                    <!-- <button class="btn btn-primary">Transferir </button> -->
+                                    <v-btn color="primary" small @click="storeTransfer()"> Transferir <i class="material-icons">swap_horiz</i> </v-btn>
+                            </v-flex>
+                           
+                        </v-layout>
+                        
+                    </v-card-text>
+                    <h6> Paquetes Seleccionados: {{this.seleted_rows.length}}</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(item,index) in seleted_rows" :key="index">
+                            <span> <v-icon>view_quilt</v-icon>  {{item.code}}</span> 
+    
+                            <v-chip>{{'en '+item.storage.name}}</v-chip>
+                            
+                            <!-- <span class="badge badge-primary badge-pill">14</span> -->
+                        </li>
+                    </ul>
                 </v-card>
             </v-flex>
         </v-layout>
@@ -80,30 +151,17 @@ export default {
         pagination: {
           sortBy: 'name'
         },
-        headers: [          
-            { text: 'Codigo', value: 'code', type:"text", filter:true, input:''},
-            { text: 'Nombre', value: 'name', type:"text", filter:true, input:''},
-            { text: 'Almacen', value: 'storage_id', type:"select", filter:true, items:[], input:null},
-            { text: 'Accion', value: '', type:"text", filter:false, input:''},
-        ],
-        minitable_headers: [
-            { text: 'Especie', value: 'specie' },
-            { text: 'Tipo', value: 'type' },
-            { text: 'Alto', value: 'high' },
-            { text: 'Ancho', value: 'width' },
-            { text: 'Espesor', value: 'density' },
-            { text: 'Cantidad', value: 'quantity' },
-        ],
         packages: [],
         storages: [],
+        destiny_storages: [],
+        transfer:{},
         storage:{},
-        packaged: null,
-        totalPackages: 0,        
+        packaged: null,      
         loading: true,                
-        dialog: false,
-        editedIndex: -1,          
+        dialog: false,        
         cantidad:0,
         cantidad_pie:0,
+        menu2:false,
         item:{},
         rows: [],
         columns: [{
@@ -140,8 +198,8 @@ export default {
                 sort: false,
             }],
         config: {
-            checkbox_rows: false,
-            rows_selectable: false,
+            checkbox_rows: true,
+            rows_selectable: true,
             pagination: true,
             card_mode: false,
             show_refresh_button:  false,
@@ -165,9 +223,9 @@ export default {
         classes: {
              table : {
                 "table-striped " : false,
-                
             },
-        }  
+        },
+        seleted_rows:[]  
       }
     },
     computed: {
@@ -181,14 +239,23 @@ export default {
         .then((response) => {
             
             //console.log(response.data.storages);
+
             this.storages= response.data.storages;
             let item = {id:null,name:'Todos' };
             this.storage = item;
             this.storages.push(item);
             // this.queryParams.filters.push({"type":"simple","name":"storage_id","text":this.storage.id})
-            console.log(this.storages);
+            // console.log(this.storages);
             this.search();   
-        });        
+        });  
+         axios.get('/api/auth/getStorageData')
+        .then((response) => {
+            
+            //console.log(response.data.storages);
+            let data = response.data.storages;
+            this.destiny_storages = data;
+
+        });       
     },
     methods:{
         search() {
@@ -314,6 +381,27 @@ export default {
             })
                                             
         },
+        getSeletedRows(datatable)
+        {
+            this.seleted_rows = datatable.selected_items;
+            console.log(datatable);
+        },
+        storeTransfer(){
+            let transfer = this.transfer;
+            transfer.items = this.seleted_rows;
+            axios.post(`/api/auth/package_transfer`, transfer)            
+            .then(response => {                
+              console.log(response.data);
+              this.$router.push('/package');
+              this.$store.dispatch('template/showMessage',{message:'Se realizo la Transaccion de paquetes',color:'success'});
+            })
+            .catch(function (error) {
+                console.log(error);
+            });    
+            // this.search();
+            // console.log(item);        
+            // this.dialog =false;
+        }
         
     },  
     components: {
