@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Package;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use Log;
+use Illuminate\Support\Facades\Log;
 use App\Specie;
 use App\LumberInventory;
 use App\Lumber;
@@ -16,6 +16,8 @@ use App\LumberTransaction;
 use App\Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Null_;
+use SebastianBergmann\Environment\Console;
 class PackageController extends Controller
 {
     /**
@@ -26,13 +28,14 @@ class PackageController extends Controller
     public function index()
     {
         // return request();
-        $order = request('order'??'asc'); 
-        $pagination_rows =request('pagination_rows'??10);        
+        $order = request('order')??'asc'; 
+        $sort_name= request('sort_name')??'code';
+        $pagination_rows =request('pagination_rows')??10;        
 
         $package_conditions = [];
-        $code = request('code'??'');        
-        $name = request('name'??'');        
-        $storage = request('storage_id'??'');
+        $code = request('code')??'';        
+        $name = request('name')??'';        
+        $storage = request('storage_id')??'';
         // Log::info(var_dump($storage));
         if ($code) {
             array_push($package_conditions, ['code','like',"%{$code}%"]);
@@ -49,7 +52,8 @@ class PackageController extends Controller
                             ->where($package_conditions)
                             // ->whereHas('storage', function ($query) use ($storage_conditions) {
                             //     $query->where($storage_conditions);
-                            // })                            
+                            // })   
+                            ->orderBy($sort_name, $order)                    
                             ->paginate($pagination_rows);
         // Log::info($package_conditions);
         $cantidad = DB::table('packages')
@@ -97,19 +101,48 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        $package = new Package();
-        $package->code = $request->package['code'];
-        $package->name = $request->package['name'];
-        $package->storage_id = $request->package['storage_id'];        
+        // return $request->all();
+        if(!$request->has('id')){
+            $package = new Package();
+        }else{
+            $package = Package::find($request->id);
+        }
+        $package->code = $request->code;
+        $package->name = $request->name;
+        $package->storage_id =  $request->storage['id'];   
+        $package->quantity = $request->quantity;     
+        $package->quantity_feet = $request->quantity_feet;     
         $package->save();
-        $lumbers = [];
+        $async_packages =[];
         foreach($request->lumbers as $lumber) {            
-            $lumbers[$lumber['id']] = [
-                'quantity' => $lumber['quantity']
-            ];
+            if($lumber['id']=='')
+            {
+                $madera = Lumber::where('specie_id',$lumber['specie_id'])
+                                ->where('type_id',$lumber['type_id'])
+                                ->where('unit_id',$lumber['unit_id'])
+                                ->where('high',$lumber['high'])
+                                ->where('width',$lumber['width'])
+                                ->where('density',$lumber['density'])
+                                ->first();
+                if(!$madera){
+                    $madera = new Lumber();
+                    $madera->specie_id = $lumber['specie_id'];
+                    $madera->type_id = $lumber['type_id'];
+                    $madera->unit_id = $lumber['unit_id'];
+                    $madera->high = $lumber['high'];
+                    $madera->width = $lumber['width'];
+                    $madera->density = $lumber['density'];
+                    $madera->save();
+                }
+            }else
+            {
+                $madera = Lumber::find($lumber['id']);
+            }        
+             // estableciendo formato para el sync de eloquent
+             $async_packages += array($madera->id=>['quantity'=>$lumber['pivot']['quantity'],'quantity_feet'=>$lumber['pivot']['quantity_feet']]);    
         }                
-        $package->lumbers()->attach($lumbers);        
-        return $package;        
+        $package->lumbers()->sync($async_packages);    
+        return $async_packages;        
     }
 
     /**
@@ -121,7 +154,7 @@ class PackageController extends Controller
     public function show(Package $package)
     {        
         
-        $package = Package::with(['storage','lumbers','lumbers.specie','lumbers.type'])->find($package->id);
+        $package = Package::with(['storage','lumbers','lumbers.specie','lumbers.type','lumbers.unit'])->find($package->id);
         
         $data = [
             'package' => $package
@@ -159,9 +192,14 @@ class PackageController extends Controller
      * @param  \App\Package  $package
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Package $package)
+    public function destroy($id)
     {
         //
+        $package = Package::find($id);
+        $code = $package->code;
+        $package->lumbers()->detach();
+        $package->delete();
+        return response()->json(compact('code'));
     }
 
     public function createTransfer(Request $request) {
