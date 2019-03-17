@@ -1,235 +1,231 @@
 <template>
-<v-container fluid grid-list-xs>
-    <v-layout row wrap>
-      <v-flex xs6>
-    <v-card class="px-0">
-        <v-card-title>
-            Transferencia de Almacenes
-        <v-spacer></v-spacer>
-        <v-btn to="/package/create" color="primary" dark class="mb-2">Nuevo empaquetado</v-btn>
-        </v-card-title>
-        <v-layout row wrap>
-
-        <v-data-table
-        :headers="headers"
-        :items="packages"
-        hide-actions
-        style="max-width: 100%"
-        >
-     <template slot="headers" slot-scope="props" >
-           <tr>
-                <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">
-
-                        <v-flex v-if="header.value!='actions'">
-                            <span>{{ header.text }}
-                            </span>
-                            <v-menu
-                                    :close-on-content-click="false"
-                                    >
-                                    <v-btn
-                                        slot="activator"
-                                        icon
-
-                                        v-if="header.sortable!=false"
-                                    >
-                                    <v-icon  small>fa-filter</v-icon>
-                                    </v-btn>
-                                    <v-card  >
-                                        <v-text-field
-                                         outline
-                                         hide-details
-                                        v-model="header.input"
-                                        append-icon="search"
-                                        :label="`Buscar ${header.text}...`"
-                                        @keydown.enter="search()"
-                                    ></v-text-field>
-                                    </v-card>
-                            </v-menu>
+    <v-flex xs12>
+        <v-layout justify-space-between row fill-height>
+            <v-flex xs8 style="padding-left: 5px">
+                <v-card>
+                    <v-card-title>
+                        <h3> Paquetes de madera </h3>
+                        <!-- <v-spacer></v-spacer> -->
+                        <!-- <v-btn color="primary" dark class="mb-2" @click="create()">Nuevo</v-btn> -->
+                    </v-card-title>
+                    <v-card-text>
+                        <v-flex xs12>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <v-icon color="white">store</v-icon> {{storage.name}}
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#" v-for="(item, index) in storages" :key="index" @click="setStorage(item)" >{{item.name}} </a>
+                                    </div>
+                                </div>
+                                <v-chip color="green" text-color="white">
+                                    <v-avatar class="green darken-4">
+                                        <v-icon>group_work</v-icon>
+                                    </v-avatar>
+                                    cantidad: {{this.cantidad}}
+                                </v-chip>
+                                <v-chip color="green" text-color="white">
+                                    <v-avatar class="green darken-4">
+                                        <v-icon>group_work</v-icon>
+                                    </v-avatar>
+                                    cantidad Pie: {{this.cantidad_pie}}
+                                </v-chip>
+                            
                         </v-flex>
-                </th>
-           </tr>
-        </template>
-        <template slot="items"  slot-scope="props">
-            <tr @click="addToTransfer(props.item)">
-                <td class="text-xs-left">{{ props.item.code }}</td>
-                <td class="text-xs-left">{{ props.item.name }}</td>      
-                <td class="text-xs-left" >{{ props.item.storage.name }}</td>                            
-                <!-- <td class="justify-center layout px-0">
-                    <v-icon
-                        small
-                        class="mr-2"
-                        @click="show(props.item);props.expanded = !props.expanded"
-                    >
-                        toc
-                    </v-icon>                    
-                </td>       -->
-            </tr>
-        </template>
-        <template slot="expand" slot-scope="props">
-            <!-- <v-card flat v-if="transfer">
-                <table>
-                    <tr>
-                        <td> 
-                            Especie
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ lumber.specie.name }}
-                            </v-card-text>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td> 
-                            Tipo
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ lumber.type.name }}
-                            </v-card-text>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td> 
-                            Alto
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ lumber.high }}
-                            </v-card-text>
-                        </td>                 
-                    </tr>
-                    <tr>
-                        <td> 
-                            Ancho
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ lumber.width }}
-                            </v-card-text>
-                        </td>       
-                    </tr>
-                    <tr>
-                        <td> 
-                            Espesor
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ lumber.density }}
-                            </v-card-text>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td> 
-                            Descripción 
-                        </td>
-                        <td>
-                            <v-card-text>
-                                {{ lumber.description }}
-                            </v-card-text>
-                        </td>
-                    </tr>
-                </table>                                
-            </v-card> -->
-        </template>
-
-        <!-- <v-alert slot="no-results" :value="true" color="error" icon="warning">
-            Your search for "{{ search }}" found no results.
-        </v-alert> -->
-        </v-data-table>        
-        <div class="text-xs-center">
-            <v-pagination
-            v-model="page"
-            :length="last_page"
-            :total-visible="10"
-             @input="next"
-            ></v-pagination>
-        </div> 
-        </v-layout>
-    </v-card>
-      </v-flex>
-      <v-flex xs6>
-    <v-card>
-        <v-card-title>
-            A transferir
-        <v-spacer></v-spacer>
-        <v-btn @click="store();" color="primary" dark class="mb-2">Guardar</v-btn>
-        </v-card-title>
-        <v-layout row wrap>
-            <v-flex xs12 sm4 md4>
-                <v-text-field label="Codigo" v-model="transfer.number" hint="Ingrese codigo paquete" required ></v-text-field>
+                        <vue-bootstrap4-table :classes="classes" 
+                            :rows="rows"
+                            :columns="columns"
+                            :config="config"
+                            @on-change-query="onChangeQuery"
+                            @on-select-row="getSeletedRows"
+                            @on-unselect-row="getSeletedRows"
+                            @on-all-select-rows="getSeletedRows"
+                            @on-all-unselect-rows="getSeletedRows"
+                            :totalRows="total_rows" >
+                            <template slot="sort-asc-icon">
+                                <i class="fa fa-sort-asc"></i>
+                            </template>
+                            <template slot="sort-desc-icon">
+                                <i class="fa fa-sort-desc"></i>
+                            </template>
+                            <template slot="no-sort-icon">
+                                <i class="fa fa-sort"></i>
+                            </template>
+                            <template slot="option" slot-scope="props">
+                                <!-- <v-icon  small>
+                                    remove_red_eye
+                                </v-icon> -->
+                                <v-icon @click="edit(props)" small>
+                                    edit
+                                </v-icon>
+                                <!-- <v-icon @click="destroy(props.row)" small>
+                                    delete
+                                </v-icon> -->
+                            </template>
+                        </vue-bootstrap4-table>
+                    </v-card-text>
+                    <edit-package :dialog="dialog" :edit-item="item" @close="close" @package="update"></edit-package>
+                
+                </v-card>
             </v-flex>
-            <v-flex xs12 sm4 md4>
-                <v-text-field label="Description" v-model="transfer.description" hint="Ingrese descripcion"></v-text-field>
+            <v-flex xs4 style="padding-left: 5px;padding-right: 5px">
+                <v-card >
+                    <v-card-text>
+                       
+                        <v-layout row wrap>
+                            <v-flex shrink pa-1>  
+                                <h6 >Transferir a</h6>
+                            </v-flex>
+                            <v-flex grow pa-1>  
+                                <v-combobox label="Almacen"  v-model="transfer.storage" :items="destiny_storages" item-text="name" item-value="id"
+                                    placeholder="Seleccione Almacen" persistent-hint>
+                                </v-combobox>
+                            </v-flex>
+                        </v-layout>
+                        <v-layout row wrap>
+                            <v-flex xs6>  
+                                 <v-text-field label="Numero" hint="Ingrese Numero" required v-model="transfer.number"></v-text-field>
+                            </v-flex>
+                            <v-flex xs6>  
+                                <v-menu
+                                    v-model="menu2"
+                                    :close-on-content-click="false"
+                                    :nudge-right="40"
+                                    lazy
+                                    transition="scale-transition"
+                                    offset-y
+                                    full-width
+                                    max-width="290px"
+                                    min-width="290px"
+                                >
+                                <template v-slot:activator="{ on }">
+                                    <v-text-field
+                                    v-model="transfer.date"
+                                    label="Fecha"
+                                    hint="Año-Mes-Dia"
+                                    persistent-hint
+                                    prepend-icon="event"
+                                    readonly
+                                    v-on="on"
+                                    ></v-text-field>
+                                </template>
+                                <v-date-picker v-model="transfer.date" no-title @input="menu2 = false"></v-date-picker>
+                                </v-menu>
+                            </v-flex>
+                           
+                        </v-layout>
+                        <v-layout row wrap>
+                            <v-flex grow pa-1>  
+                                 <v-text-field label="Descripcion" hint="Ingrese Descripcion" required v-model="transfer.description"></v-text-field>
+                            </v-flex>
+                            <v-flex  shrink pa-1>  
+                                    <!-- <button class="btn btn-primary">Transferir </button> -->
+                                    <v-btn color="primary" small @click="storeTransfer()"> Transferir <i class="material-icons">swap_horiz</i> </v-btn>
+                            </v-flex>
+                           
+                        </v-layout>
+                        
+                    </v-card-text>
+                    <h6> Paquetes Seleccionados: {{this.seleted_rows.length}}</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(item,index) in seleted_rows" :key="index">
+                            <span> <v-icon>view_quilt</v-icon>  {{item.code}}</span> 
+    
+                            <v-chip>{{'en '+item.storage.name}}</v-chip>
+                            
+                            <!-- <span class="badge badge-primary badge-pill">14</span> -->
+                        </li>
+                    </ul>
+                </v-card>
             </v-flex>
-            <v-flex xs12 sm4 md4 v-if="storages">                
-                <v-select                  
-                    label="Almacen"
-                    v-model="transfer.storage_destination_id"
-                    :items="storages"
-                    item-text="name"
-                    item-value="id"
-                    :hint="`Descripcion del tipo seleccionado`"
-                    persistent-hint>
-                    </v-select>
-            </v-flex>                                    
-            <br>
-        <v-data-table        
-        :headers="transfer_headers"
-        :items="transfer_packages"
-         hide-actions
-        >
-        <template slot="items"  slot-scope="props">
-            <!-- <tr @click="props.expanded = !props.expanded"> -->
-                <td class="text-xs-left">{{ props.item.code }}</td>
-                <td class="text-xs-left">{{ props.item.name }}</td>      
-                <td class="text-xs-left" >{{ props.item.storage.name }}</td>
-                <td class="justify-center layout px-0">                    
-                    <v-icon
-                        small
-                        @click="removeFromTransfer(props.index)"
-                    >
-                        delete
-                    </v-icon>
-                </td>      
-            <!-- </tr> -->
-        </template>               
-        </v-data-table>        
-        
         </v-layout>
-    </v-card>
-      </v-flex>
-    </v-layout>
-</v-container>    
+    </v-flex>
+  
 </template>
 <script>
+import VueBootstrap4Table from 'vue-bootstrap4-table';
+import EditPackage from './edit';
 export default {
     data () {
       return {        
         pagination: {
           sortBy: 'name'
         },
-        headers: [          
-            { text: 'Codigo', value: 'code' },
-            { text: 'Nombre', value: 'name' },
-            { text: 'Almacen', value: 'storage' },
-        ],
-        transfer_headers: [
-            { text: 'Codigo', value: 'code' },
-            { text: 'Nombre', value: 'name' },
-            { text: 'Almacen', value: 'storage' },            
-        ],        
         packages: [],
-        transfer_packages: [],    
-        transfer: null,    
-        totalPackage: 0,        
-        loading: true,        
-        dialog: false,
-        editedIndex: -1,                  
-        last_page: 1,
-        page: 1,    
-        paginationRows: 10,
         storages: [],
-        pivot: null,        
+        destiny_storages: [],
+        transfer:{},
+        storage:{},
+        packaged: null,      
+        loading: true,                
+        dialog: false,        
+        cantidad:0,
+        cantidad_pie:0,
+        menu2:false,
+        item:{},
+        rows: [],
+        columns: [{
+                label: "Cod.",
+                name: "code",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese codigo"
+                },
+                sort: true,
+            },
+            {
+                label: "Nombre",
+                name: "name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Nombre"
+                },
+                sort: true,
+            },
+            {
+                label: "Cantidad",
+                name: "quantity",
+                sort: true,
+            },
+            {
+                label: "Cantidad Pie",
+                name: "quantity_feet",
+                sort: true,
+            },
+            {
+                label: "Opciones",
+                name: "option",
+                sort: false,
+            }],
+        config: {
+            checkbox_rows: true,
+            rows_selectable: true,
+            pagination: true,
+            card_mode: false,
+            show_refresh_button:  false,
+            show_reset_button:  false,
+            global_search:  {
+                placeholder:  "Enter custom Search text",
+                visibility:  false,
+                case_sensitive:  false
+            },
+            per_page_options:  [5,  10,  20,  30],
+            server_mode:  true,
+        },
+        queryParams: {
+            sort: [],
+            filters: [],
+            global_search: "",
+            per_page: 10,
+            page: 1,
+        },
+        total_rows: 0,
+        classes: {
+             table : {
+                "table-striped " : false,
+            },
+        },
+        seleted_rows:[]  
       }
     },
     computed: {
@@ -239,140 +235,178 @@ export default {
     },
     mounted()
     {
-        this.create();        
-        this.search();        
-        this.getStorages();
-        
+        axios.get('/api/auth/getStorageData')
+        .then((response) => {
+            
+            //console.log(response.data.storages);
+
+            this.storages= response.data.storages;
+            let item = {id:null,name:'Todos' };
+            this.storage = item;
+            this.storages.push(item);
+            // this.queryParams.filters.push({"type":"simple","name":"storage_id","text":this.storage.id})
+            // console.log(this.storages);
+            this.search();   
+        });  
+         axios.get('/api/auth/getStorageData')
+        .then((response) => {
+            
+            //console.log(response.data.storages);
+            let data = response.data.storages;
+            this.destiny_storages = data;
+
+        });       
     },
     methods:{
         search() {
-            return new Promise((resolve,reject)=>{   
-                this.getData('/api/auth/package',this.getParams()).then((data)=>{
-                    console.log("");
-                    console.log(data.data);
-                    this.packages = data.data;
-                    this.last_page = data.last_page;
-                    resolve();                    
-                });
-            });            
+            axios.get('/api/auth/package', {
+                        params: this.getParams(this.queryParams)
+                    })
+                    .then((response)=> {
+                        console.log(response.data);
+                        this.rows= response.data.storages.data;
+                        this.total_rows =response.data.storages.total;
+                        this.cantidad =response.data.cantidad
+                        this.cantidad_pie =response.data.cantidad_pie
+    
+                    })
+                    .catch((error)=> {
+                        console.log(error);
+                    });
         },
-        getParams () {
+        onChangeQuery(queryParams) {
+            // queryParams.filters.push({"type":"simple","name":"storage_id","text":this.storage.id})
+            console.log(this.getParams(queryParams));
+            this.queryParams = queryParams;
+            this.search();
+          //  this.fetchData();
+        },
+        getParams (queryParams) {
             let params={};
-            this.headers.forEach(element => {
-                params[element.value] = element.input;
+            queryParams.filters.forEach(element => {
+                if(element.type=='simple'){
+                    params[element.name] = element.text;
+                }
             });
-            params['order']=this.pagination.descending==true?'asc':'desc';
-            params['page']=this.page;
-            params['pagination_rows']=this.paginationRows;
+            if(queryParams.sort.length > 0){
+                params['order']= queryParams.sort[0].order;
+                params['sort_name']= queryParams.sort[0].name;
+            }
+            params['storage_id']=this.storage.id;//solo para este caso XD
+            params['page']=queryParams.page;
+            params['pagination_rows']=queryParams.per_page;
             return params;
         },
-        getData(url,parameters){
-            return new Promise((resolve,reject)=>{
-               this.loading = true;
-               axios.get(url,{
-                        params:parameters
-                    })
-                    .then((response) => {
-                        this.loading = false;
-                        resolve(response.data);                        
-                    });
-            });
-        },
-        next(page){
-            this.page = page;
+        setStorage(storage){
+            this.storage = storage;
             this.search();
-        }, 
-        toggleOrder (index) {
-            this.pagination.sortBy = this.headers[index].value
-            this.pagination.descending = !this.pagination.descending
+        },
+        close(dialog){
+            this.dialog= dialog;
+        },
              
-            
-        },
-        setFilter(filterName){package_transaction
-            this.filterValue='',
-            this.filterName = filterName;
-        },
-        createLumber() {                                    
-            axios.get('/api/auth/package/transfer')
-            .then(response => {                                
-                this.transfer = response.data.transfer;
-            })
-            .catch(error => {                
-                console.log(error);
-            });
-            this.dialog = true;
-        },
-        storeLumber(){
-
-        },
-        create () {
-            console.log('creating');
-            axios.get('/api/auth/package_transaction/create')
-            .then(response => {                        
-                this.transfer = response.data.transfer;
-            })
-            .catch(error => {                
-                console.log(error);
-            });
-        },
-        store () {                        
-            axios.post('/api/auth/package_transaction/', {transfer: this.transfer, packages: this.transfer_packages})
-            .then(response => {                                
-                alert('Madera empaquetada');
-                this.$router.replace('/storage');
-            })
-            .catch(error => {                
-                console.log(error);
-            });            
+        create() {                            
+            this.item = {lumbers:[]};
+            this.dialog =true;
         },
         show(item) {                        
-            axios.get(`/api/auth/lumber/${item.id}`)            
+            // axios.get(`/api/auth/package/${item.id}`)
+            // .then(response => {
+            //     this.packaged = response.data.package
+            // })
+            // .catch(error => {                
+            //     console.log(error);
+            // });
+        },
+        async edit (item) {
+          
+            this.item = await axios.get(`/api/auth/package/${item.row.id}`)
+                        .then(response=>{
+                            return response.data.package;
+                        })
+                        .catch(error => {                
+                            console.log(error);
+                        });
+            this.dialog = true;
+        },
+        update (item) {                        
+            // let index = this.editedIndex; 
+            // console.log(item);           
+            axios.post(`/api/auth/package`, item)            
             .then(response => {                
-                this.lumber = response.data.lumber
+              console.log(response.data);
             })
-            .catch(error => {                
+            .catch(function (error) {
                 console.log(error);
-            });
-        },        
-        getSpecies (){
-            axios.get('/api/auth/specie')
-            .then(response => {
-                this.species = response.data.species          
+            });    
+            this.search();
+            // console.log(item);        
+            this.dialog =false;
+            
+        },
+        destroy (item) {
+            
+            console.log(item);
+            Swal.fire({
+                title: 'Esta seguro de Eliminar el Paquete?',
+                text: "Tenga en cuenta que no se puede revertir una ves eliminado!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.value) {
+                    axios.delete(`/api/auth/package/${item.id}`)
+                    .then( (response)=> {
+                        // console.log(response.data);                   
+                        Swal.fire(
+                            'Borrado!',
+                            'El paquete '+response.data.code+' ha sido eliminado.',
+                            'success'
+                        )
+                        this.search();
+                    })
+                    .catch( (error)=> {
+                        console.log(error);
+                        Swal.fire(
+                            'No se pudo Borrar!',
+                            ''+error,
+                            'error'
+                        )                
+                    });  
+                   
+                }
             })
-            .catch(error => {
-                console.log(error);
-            });
+                                            
         },
-        getTypes() {
-            axios.get('/api/auth/type')
-            .then(response => {
-                this.types = response.data.types          
+        getSeletedRows(datatable)
+        {
+            this.seleted_rows = datatable.selected_items;
+            console.log(datatable);
+        },
+        storeTransfer(){
+            let transfer = this.transfer;
+            transfer.items = this.seleted_rows;
+            axios.post(`/api/auth/package_transfer`, transfer)            
+            .then(response => {                
+              console.log(response.data);
+              this.$router.push('/package');
+              this.$store.dispatch('template/showMessage',{message:'Se realizo la Transaccion de paquetes',color:'success'});
             })
-            .catch(error => {
+            .catch(function (error) {
                 console.log(error);
-            });
-        },
-        getStorages () {
-            axios.get('/api/auth/storage')
-            .then(response => {
-                console.log(response.data.data);
-                this.storages = response.data
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        },
-        close() {
-            this.dialog = false;
-        },
-        addToTransfer(item) {            
-            item.quantity = '';
-            this.transfer_packages.push(item);
-        },
-        removeFromTransfer(index) {
-            this.transfer_packages.splice(index, 1);
+            });    
+            // this.search();
+            // console.log(item);        
+            // this.dialog =false;
         }
         
-    }
+    },  
+    components: {
+        VueBootstrap4Table,
+        EditPackage 
+    }  
 }
 </script>

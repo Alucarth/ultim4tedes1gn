@@ -16,8 +16,7 @@ use App\LumberTransaction;
 use App\Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\Null_;
-use SebastianBergmann\Environment\Console;
+use App\PackageTransaction;
 class PackageController extends Controller
 {
     /**
@@ -368,8 +367,24 @@ class PackageController extends Controller
         return response()->json($data);
     }
 
-    public function lumberStorage($storage_id)
+    public function package_transfer(Request $request)
     {
-    
+        foreach($request->items as $paquete){
+            $package = (Object) $paquete;
+            $package_transaction = new PackageTransaction;
+            $package_transaction->number = $request->number;
+            $package_transaction->date = $request->date;
+            $package_transaction->description = $request->description;
+            $package_transaction->package_id = $package->id;
+            $package_transaction->storage_origin_id = $package->storage_id;
+            $package_transaction->storage_destination_id = $request->storage['id'];
+            $package_transaction->save();
+            
+            $package_transfer = Package::find($package->id);
+            $package_transfer->storage_id= $request->storage['id'];
+            $package_transfer->save();
+            // Log::info($package->id);
+        }
+        return $request->all();
     }
 }
