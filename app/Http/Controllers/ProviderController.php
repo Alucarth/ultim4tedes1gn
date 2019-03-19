@@ -21,12 +21,12 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $order = request('order'??'');
-        $pagination_rows = request('pagination_rows'??10);
+        $order = request('order')??'';
+        $pagination_rows = request('pagination_rows')??10;
         $name = request('name')??'';
         $first_name = request('first_name')??'';
         $last_name = request('last_name')??'';
-        $position = request('position')??'';
+        // $position = request('position')??'';
         $email = request('email')??'';
         $phone = request('phone')??'';
         
@@ -44,10 +44,10 @@ class ProviderController extends Controller
         {
             array_push($conditions_contatcs,array('last_name','like',"%{$last_name}%"));
         }
-        if($position != '')
-        {
-            array_push($conditions_contatcs,array('position','like',"%{$position}%"));
-        }
+        // if($position != '')
+        // {
+        //     array_push($conditions_contatcs,array('position','like',"%{$position}%"));
+        // }
         if($email != '')
         {
             array_push($conditions_contatcs,array('email','like',"%{$email}%"));
@@ -58,13 +58,24 @@ class ProviderController extends Controller
         }
 
             // Log::info('buscando por '.$conditions_contatcs);
-        $provider_list = Provider::with('contacts')
+        if(sizeof($conditions_contatcs)>0){
+            $provider_list = Provider::with('contacts')
                                 ->where($conditions_provider)
                                 ->whereHas('contacts',function($query) use ($conditions_contatcs){
-                                    $query->where($conditions_contatcs)->where('is_primary',true);
+                                    $query->where($conditions_contatcs);
                                 })
                                 ->orderBy('name')
-                                ->paginate($pagination_rows);
+                                ->paginate($pagination_rows);    
+        }else{
+            
+            $provider_list = Provider::with('contacts')
+                                    ->where($conditions_provider)
+                                    // ->whereHas('contacts',function($query) use ($conditions_contatcs){
+                                    //     $query->where($conditions_contatcs);
+                                    // })
+                                    ->orderBy('name')
+                                    ->paginate($pagination_rows);
+        }   
         return response()->json($provider_list->toArray());
     }
 

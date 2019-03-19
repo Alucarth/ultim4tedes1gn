@@ -1,17 +1,9 @@
 <template>
     <v-card>
         <v-card-title>
-        Provedores
+        <h3>Provedores</h3> 
         <v-spacer></v-spacer>
-            <v-flex xs1 sm1 md1>
-                    <v-combobox
-                    v-model="paginationRows"
-                    :items="pagination_select"
-                    label="Mostrar Registros"
-                    @change="search()"
-                    ></v-combobox>
-                    
-            </v-flex>
+       
         <v-dialog v-model="dialog" max-width="800px" max-high="40px">
             <v-card>
             <v-card-title>
@@ -97,7 +89,42 @@
         </v-dialog>  
         <v-btn @click="create()" color="primary" dark class="mb-2">Nuevo</v-btn>         
         </v-card-title>
-        <v-data-table
+
+        <v-card-text>
+             <vue-bootstrap4-table :classes="classes" :rows="providers" :columns="columns" :config="config"  @on-change-query="onChangeQuery"  :totalRows="total_rows">
+                <template slot="sort-asc-icon">
+                    <i class="fa fa-sort-asc"></i>
+                </template>
+                <template slot="sort-desc-icon">
+                    <i class="fa fa-sort-desc"></i>
+                </template>
+                <template slot="no-sort-icon">
+                    <i class="fa fa-sort"></i>
+                </template>
+                <template slot="first_name" slot-scope="props">
+                   {{props.row.contacts[0]?props.row.contacts[0].first_name:''}}
+                </template>
+                <template slot="last_name" slot-scope="props">
+                   {{props.row.contacts[0]?props.row.contacts[0].last_name:''}}
+                </template>
+                <template slot="phone" slot-scope="props">
+                   {{props.row.contacts[0]?props.row.contacts[0].phone:''}}
+                </template>
+                <template slot="option" slot-scope="props">
+                    <!-- <v-icon  small>
+                        remove_red_eye
+                    </v-icon> -->
+                    <v-icon @click="editItem(props.row)" small>
+                        edit
+                    </v-icon>
+                    <v-icon @click="destroy(props.row)" small>
+                        delete
+                    </v-icon>
+                </template>
+            </vue-bootstrap4-table>
+        </v-card-text>
+
+        <!-- <v-data-table
         :headers="headers"
         :items="providers"
         :pagination.sync="pagination"
@@ -134,14 +161,13 @@
                                        
                                     </v-card>
                             </v-menu>
-                            <!-- <v-icon small @click="toggleOrder(header.value)" v-if="header.value == filterName ">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon> -->
                         </v-flex>
                 </th>
            </tr>
         </template>
         <template slot="items"  slot-scope="props">
             <td class="text-xs-left" >{{ props.item.name }}</td>
-            <!-- <td class="text-xs-left">{{ props.item.offer }}</td> -->
+  
             <td class="text-xs-left">{{ props.item.contacts.length>0?props.item.contacts[0].first_name:'' }}</td>
             <td class="text-xs-left">{{ props.item.contacts.length>0?props.item.contacts[0].last_name:'' }}</td>
             <td class="text-xs-left">{{ props.item.contacts.length>0?props.item.contacts[0].position:'' }}</td>
@@ -150,13 +176,7 @@
             <td class="text-xs-left">{{ props.item.balance }}</td>
             <td class="text-xs-left">{{ props.item.debit }}</td>
             <td class="justify-center layout px-0">
-                <v-icon
-                        small
-                        class="mr-2"
-                        @click="show(props.item);props.expanded = !props.expanded"
-                    >
-                        toc
-                    </v-icon>
+              
                 <v-icon
                     small
                     class="mr-2"
@@ -172,45 +192,16 @@
                 </v-icon>
             </td>
         </template>
-        <template slot="expand" slot-scope="props">
-            <v-card flat v-if="provider">
-                <v-card-text>{{ provider.name }}</v-card-text>
-                <v-card-text>{{ provider.offer }}</v-card-text>
-                <v-card-text>{{ provider.address1 }}</v-card-text>
-                <v-card-text>{{ provider.address2 }}</v-card-text>
-                <v-card-text>{{ provider.description }}</v-card-text>
-                <v-card-text>{{ provider.city }}</v-card-text>
-                <v-card-text>{{ provider.balance }}</v-card-text>
-                <v-card-text>{{ provider.debit }}</v-card-text>
-            </v-card>
-        </template>
+        
 
         </v-data-table>
-        
-        <div class="text-xs-center">
-           
-            <v-pagination
-            v-model="page"
-            :length="last_page"
-            :total-visible="7"
-             @input="next"
-            ></v-pagination>
-           
-        </div>
-        <div class="text-xs-right">
-            
-                <v-flex xs11 sm11 md11>
-                     Mostrando {{from}}-{{to}} de {{total}} registros 
-                </v-flex>
+         -->
 
-            
-        </div>
-         
-        <br>
     </v-card>
     
 </template>
 <script>
+import VueBootstrap4Table from 'vue-bootstrap4-table';
 export default {
     data () {
       return {
@@ -238,14 +229,96 @@ export default {
         provider:null,
         contacts:[],
         editedIndex: -1,
-        page:1,
-        last_page:1,
-        total:0,
-        from:0,
-        to:0,
-        paginationRows:10,
-     
-        pagination_select:[10,20,30]
+        // rows:[],
+        //desde aqui lo del databale
+         columns: [{
+                label: "Proveedor",
+                name: "name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Proveedor"
+                },
+                sort: true,
+            },
+            {
+                label: "Oferta",
+                name: "offer",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Oferta"
+                },
+                sort: true,
+            },
+            {
+                label: "Descripcion",
+                name: "description",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Descripcion"
+                },
+                sort: true,
+            },
+            {
+                label: "Nombre ",
+                name: "first_name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Nombre"
+                },
+                sort: true,
+            },
+            {
+                label: "Apellidos",
+                name: "last_name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Apellidos"
+                },
+                sort: true,
+            },
+            {
+                label: "Telefono",
+                name: "phone",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Telefono"
+                },
+                sort: true,
+            },
+            {
+                label: "Opciones",
+                name: "option",
+                sort: false,
+            }],
+        config: {
+            checkbox_rows: false,
+            rows_selectable: false,
+            pagination: true,
+            card_mode: false,
+            show_refresh_button:  false,
+            show_reset_button:  false,
+            global_search:  {
+                placeholder:  "Enter custom Search text",
+                visibility:  false,
+                case_sensitive:  false
+            },
+            per_page_options:  [5,  10,  20,  30],
+            server_mode:  true,
+        },
+        queryParams: {
+            sort: [],
+            filters: [],
+            global_search: "",
+            per_page: 10,
+            page: 1,
+        },
+        total_rows: 0,
+        classes: {
+             table : {
+                "table-striped " : false,
+                
+            },
+        }  
       }
     },
     mounted()
@@ -261,7 +334,45 @@ export default {
                 });    
     },
     methods:{
-        
+         search() {
+            axios.get('api/auth/provider', {
+                        params: this.getParams(this.queryParams)
+                    })
+                    .then((response)=> {
+                        console.log(response.data);
+                        this.providers= response.data.data;
+                        this.total_rows =response.data.total;
+                        // this.cantidad =response.data.cantidad
+                        // this.cantidad_pie =response.data.cantidad_pie
+    
+                    })
+                    .catch((error)=> {
+                        console.log(error);
+                    });
+        },
+        onChangeQuery(queryParams) {
+            // queryParams.filters.push({"type":"simple","name":"storage_id","text":this.storage.id})
+            console.log(this.getParams(queryParams));
+            this.queryParams = queryParams;
+            this.search();
+          //  this.fetchData();
+        },
+        getParams (queryParams) {
+            let params={};
+            queryParams.filters.forEach(element => {
+                if(element.type=='simple'){
+                    params[element.name] = element.text;
+                }
+            });
+            if(queryParams.sort.length > 0){
+                params['order']= queryParams.sort[0].order;
+                params['sort_name']= queryParams.sort[0].name;
+            }
+
+            params['page']=queryParams.page;
+            params['pagination_rows']=queryParams.per_page;
+            return params;
+        },
         getData(url,parameters){
             return new Promise((resolve,reject)=>{
                this.loading = true;
@@ -274,32 +385,7 @@ export default {
                     });
             });
         },
-        getParams(){
-            let params={};
-            this.headers.forEach(element => {
-                params[element.value] = element.input;
-            });
-            params['order']=this.pagination.descending==true?'asc':'desc';
-            params['page']=this.page;
-            params['pagination_rows']=this.paginationRows;
-            return params;
-        },
-        next(page){
-            this.page = page;
-            this.search();
-        },
-        search(){
-            return new Promise((resolve,reject)=>{   
-                this.getData('api/auth/provider',this.getParams()).then((data)=>{
-                    this.providers = data.data;
-                    this.last_page = data.last_page;
-                    this.total = data.total;
-                    this.from = data.from;
-                    this.to = data.to;
-                    resolve();
-                });
-            });
-        },    
+     
         create() {                                    
             this.editedIndex = -1;
             this.provider = Object.assign({}, this.newProvider);
@@ -323,22 +409,25 @@ export default {
             axios.post('api/auth/provider', parameters)
             .then(response => {                
                 console.log(response.data);
-                
+                this.$store.dispatch('template/showMessage',{message:'Se Actualizo los Datos del Proveedor ',color:'success'});
+                this.dialog =false;      
+                this.search();   
             })
             .catch(function (error) {
                 console.log(error);
             });            
-            this.dialog =false;      
-            this.search();      
+              
         },
         update () {
             let parameters = this.provider;
             parameters.contacts = this.contacts;                        
             axios.put(`api/auth/provider/${this.provider.id}`, parameters)
             .then(response => {
-                this.providers[this.editedIndex] = response.data.provider;
-                this.providers[this.editedIndex].contacts = response.data.provider.contacts;
-                this.showSuccessMsg();
+                // this.providers[this.editedIndex] = response.data.provider;
+                // this.providers[this.editedIndex].contacts = response.data.provider.contacts;
+                this.search();
+                this.$store.dispatch('template/showMessage',{message:'Se Actualizo los Datos del Proveedor ',color:'success'});
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -367,16 +456,39 @@ export default {
             this.contacts.splice(index,1);
         },
         destroy (item) {
-            let success_delete = false;
-            axios.delete(`/api/auth/provider/${item.id}`)
-            .then(function (response) {
-                console.log(response.data.provider);
-                success_delete = true;
+            Swal.fire({
+                title: 'Esta seguro de Eliminar al Proveedor?',
+                text: "Tenga en cuenta que no se puede revertir una ves eliminado!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.value) {
+                    axios.delete(`/api/auth/provider/${item.id}`)
+                    .then( (response)=> {
+                        // console.log(response.data);                   
+                        Swal.fire(
+                            'Borrado!',
+                            'El proveedor ha sido eliminado.',
+                            'success'
+                        )
+                        this.search();
+                    })
+                    .catch( (error)=> {
+                        console.log(error);
+                        Swal.fire(
+                            'No se pudo Borrar!',
+                            ''+error,
+                            'error'
+                        )                
+                    });  
+                   
+                }
             })
-            .catch(function (error) {
-                console.log(error);                
-            });  
-            this.search();
+          
         }, 
         checkInput(search)
         {
@@ -395,6 +507,10 @@ export default {
         formTitle () {
             return this.editedIndex === -1 ? 'Nuevo Proveedor' : 'Editar Proveedor'
         }
-    }
+    },
+     components: {
+        VueBootstrap4Table,
+        // EditPackage 
+    }  
 }
 </script>
