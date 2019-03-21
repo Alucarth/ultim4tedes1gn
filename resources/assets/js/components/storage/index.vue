@@ -7,7 +7,7 @@
         <v-btn to="/package/transfer" color="primary" dark class="mb-2" small>Transferencias</v-btn>
         <v-btn @click="create()" color="primary" dark class="mb-2" small >Nuevo</v-btn>    
         </v-card-title>
-         <v-card-text>
+        <v-card-text>
              <vue-bootstrap4-table :rows="storages" :columns="columns" :config="config" >
                 <template slot="sort-asc-icon">
                     <i class="fa fa-sort-asc"></i>
@@ -52,7 +52,7 @@ export default {
         loading: true,  
         dialog: false,
         //desde aqui lo del databale
-         columns: [{
+        columns: [{
                 label: "id",
                 name: "id",
                 filter: {
