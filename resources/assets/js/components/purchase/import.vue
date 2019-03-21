@@ -625,11 +625,25 @@ export default {
         },
         deleteItem (item) {
            const index = this.purchases.indexOf(item)
-           this.$confirm({title:'Eliminar', message: 'Esta seguro de eliminar el item?', confirm: 'Si', cancel: 'No' }).then(response =>{
-               if(response){ 
-                   this.purchases.splice(index, 1);
-               }
-            });
+           Swal.fire({
+                    title: 'Esta seguro de eliminar el item?',
+                    text: "Una ves realizada esta accion no podra revertirse!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, borrar!'
+                    }).then((result) => {
+                    if (result.value) {
+                        Swal.fire(
+                        'Item Eliminado!',
+                        'el item ha sido elimiado de la lista.',
+                        'success'
+                        )
+                         this.purchases.splice(index, 1);
+                    }
+                    })
+          
           
                
         },
@@ -672,12 +686,26 @@ export default {
             this.dialog_expensive = false;
         },
         deleteExpensive (item) {
+            console.log(item);
            const index = this.purchase_expenses.indexOf(item)
-           this.$confirm({title:'Eliminar', message: 'Esta seguro de eliminar el gasto '+item.expensive.name+'?', confirm: 'Si', cancel: 'No' }).then(response =>{
-               if(response){ 
-                   this.purchase_expenses.splice(index, 1);
-               }
-            });
+             Swal.fire({
+                    title: 'Esta seguro de eliminar el item?',
+                    text: "Una ves realizada esta accion no podra revertirse!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, borrar!'
+                    }).then((result) => {
+                    if (result.value) {
+                        Swal.fire(
+                        'Item Eliminado!',
+                        'el item ha sido elimiado de la lista.',
+                        'success'
+                        )
+                          this.purchase_expenses.splice(index, 1);
+                    }
+                    });
           
                
         },
