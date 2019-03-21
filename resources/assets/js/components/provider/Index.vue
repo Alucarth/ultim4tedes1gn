@@ -173,7 +173,7 @@ export default {
         this.search();
     },
     methods:{
-         search() {
+        search() {
             axios.get('api/auth/provider', {
                         params: this.getParams(this.queryParams)
                     })
