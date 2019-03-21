@@ -1,320 +1,191 @@
 <template>
     <v-card>
         <v-card-title>
-            Especies de Madera
-        <v-spacer></v-spacer>
-
-        <v-dialog v-model="dialog" max-width="500px">            
-            <v-card>
-            <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
-
-            <v-card-text v-if="newSpecie">
-                <v-container grid-list-md>
-                 <v-layout wrap>                   
-                     <v-flex xs12>
-                        <v-text-field label="Nombre" v-model="newSpecie.name" ></v-text-field>
-                    </v-flex>
-                    <v-flex xs12>
-                        <v-text-field label="Descripción" v-model="newSpecie.description" ></v-text-field>
-                    </v-flex>
-                </v-layout>
-                </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="store(newSpecie)" v-if="editedIndex === -1">Guardar</v-btn>
-                <v-btn color="blue darken-1" flat @click="update(newSpecie)" v-else>Actualizar</v-btn>
-            </v-card-actions>
-            </v-card>
-        </v-dialog>
-
-
-<v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>    
+           <h3>Especies de Madera</h3> 
+            <v-spacer></v-spacer>
+            <v-btn @click="create();" color="primary" dark class="mb-2" small>Nuevo</v-btn>    
         </v-card-title>
-        <v-data-table
-        :headers="headers"
-        :items="species"
-        :search="search"
-            :pagination.sync="pagination"
-        >
-        <template slot="headers" slot-scope="props" >
-           <tr>
-                <th v-for="(header,index) in props.headers" :key="index" class="text-xs-left">                    
-                        <v-flex>
-                            <span @click="toggleOrder(index)">{{ header.text }}                                
-                            </span>
-                            <v-menu
-                                    :close-on-content-click="false"                                    
-                                    >
-                                    <v-btn
-                                        slot="activator"
-                                        icon
-                                        @click="setFilter(header.value)"
-                                    >
-                                    <v-icon  small>fa-filter</v-icon>
-                                    </v-btn>
-
-                                    <v-card>
-                                        <v-text-field
-                                        v-model="filterValue"
-                                        append-icon="search"
-                                        :label="`Buscar ${header.text}...`"
-                                    
-                                        @keydown.enter="getResult(true)"
-                                    ></v-text-field>
-                                    
-                                    </v-card>
-                            </v-menu>
-                            <v-icon small @click="toggleOrder(index)" v-if="header.value == pagination.sortBy">{{pagination.descending==false?'arrow_upward':'arrow_downward'}}</v-icon>
-                        </v-flex>                     
-                </th>
-           </tr>
-        </template>
-        <template slot="items"  slot-scope="props">
-            <!-- <tr @click="props.expanded = !props.expanded"> -->
-                <td class="text-xs-left" >{{ props.item.id }}</td>            
-                <td class="text-xs-left">{{ props.item.name }}</td>
-                <td class="text-xs-left">{{ props.item.description }}</td>                    
-                <td class="justify-center layout px-0">
-                    <v-icon
-                        small
-                        class="mr-2"
-                        @click="show(props.item);props.expanded = !props.expanded"
-                    >
-                        toc
-                    </v-icon>
-                    <v-icon
-                        small
-                        class="mr-2"
-                        @click="edit(props.item)"
-                    >
+        <v-card-text>
+             <vue-bootstrap4-table :rows="species" :columns="columns" :config="config" >
+                <template slot="sort-asc-icon">
+                    <i class="fa fa-sort-asc"></i>
+                </template>
+                <template slot="sort-desc-icon">
+                    <i class="fa fa-sort-desc"></i>
+                </template>
+                <template slot="no-sort-icon">
+                    <i class="fa fa-sort"></i>
+                </template>
+                <!-- <template slot="is_enabled" slot-scope="props">
+                   <div class="text-xs-center">
+                    <v-chip :color="props.row.is_enabled?'success':'danger'" :text-color="props.row.is_enabled?'white':'danger'" >{{props.row.is_enabled?'Activo':'Inactivo'}}</v-chip>
+                    </div>
+                </template> -->
+                <template slot="option" slot-scope="props">
+                    <!-- <v-icon  small>
+                        remove_red_eye
+                    </v-icon> -->
+                    <v-icon @click="edit(props.row)" small>
                         edit
                     </v-icon>
-                    <v-icon
-                        small
-                        @click="destroy(props.item)"
-                    >
+                    <v-icon @click="destroy(props.row)" small>
                         delete
                     </v-icon>
-                </td>      
-            <!-- </tr> -->
-        </template>
-        <template slot="expand" slot-scope="props">
-            <v-card flat v-if="specie">
-                <v-card-text>{{ specie.name }}</v-card-text>
-                <v-card-text>{{ specie.description }}</v-card-text>
-            </v-card>
-        </template>
-
-        <v-alert slot="no-results" :value="true" color="error" icon="warning">
-            Your search for "{{ search }}" found no results.
-        </v-alert>
-        </v-data-table>
-        
+                </template>
+            </vue-bootstrap4-table>
+        </v-card-text>
+        <edit-specie :dialog="dialog" :specie="specie" @close="close" @specie="update"></edit-specie>    
     </v-card>
 </template>
 <script>
+import VueBootstrap4Table from 'vue-bootstrap4-table';
+import EditSpecie from './edit.vue';
 export default {
     data () {
       return {
-        search: '',
-        pagination: {
-          sortBy: 'name'
-        },
         headers: [          
             { text: 'ID', value: 'id' },        
             { text: 'Nombre', value: 'name' },
             { text: 'Descripcion', value: 'description' },            
         ],                
         species: [],        
-        specie: null,
-        newSpecie: null,
-        totalSpecie: 0,        
-        loading: true,
-        filterName: 'name',
-        filterValue: '',   
+        specie: {},
         dialog: false,
-        editedIndex: -1,          
+        columns: [{
+                label: "id",
+                name: "id",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Id"
+                },
+                sort: true,
+            },
+            {
+                label: "Nombre",
+                name: "name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Nombre"
+                },
+                sort: true,
+            },
+            {
+                label: "Descripcion",
+                name: "description",
+                sort: true,
+            },
+            {
+                label: "Opciones",
+                name: "option",
+                sort: false,
+            }],
+        config: {
+            checkbox_rows: false,
+            rows_selectable: false,
+            pagination: true,
+            card_mode: false,
+            show_refresh_button:  false,
+            show_reset_button:  false,
+            global_search:  {
+                placeholder:  "Enter custom Search text",
+                visibility:  false,
+                case_sensitive:  false
+            },
+            per_page_options:  [5,  10,  20,  30],
+            server_mode:  false,
+        },
+       
       }
-    },
-    computed: {
-        formTitle () {
-                return this.editedIndex === -1 ? 'Agregar Nueva Especie' : 'Editar Especie'
-            }
     },
     mounted()
     {
-        this.getSpecies().then(
-            this.getDataFromApi()
-                .then(data => {
-                this.species = data.species
-                this.totalSpecies = data.total
-                })
-        );                
+        this.search();
     },
     methods:{
-        getDataFromApi () {            
-            return new Promise((resolve, reject) => {
-            const { sortBy, descending, page, rowsPerPage } = this.pagination
-
-            let items= this.species;
-            const total = items.length;
-
-            if (this.pagination.sortBy) {
-                items = items.sort((a, b) => {
-                const sortA = a[sortBy]
-                const sortB = b[sortBy]
-
-                if (descending) {
-                    if (sortA < sortB) return 1
-                    if (sortA > sortB) return -1
-                    return 0
-                } else {
-                    if (sortA < sortB) return -1
-                    if (sortA > sortB) return 1
-                    return 0
-                }
-                })
-            }
-
-            if (rowsPerPage > 0) {
-                items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-            }
-
-                resolve({
-                items,
-                total
-                });
-         
-            })
-        },
-        getSpecies(withFilter){
-            console.log("starting receiving data");
-            return new Promise((resolve,reject)=>{
-               this.loading = true
-               let filterName = withFilter==true?this.filterName:'name';
-               console.log(withFilter);
-               axios.get('/api/auth/getSpecieData',{ name:filterName,value:this.filterValue})
-                    .then((response) => {
-                                        // let providers = response.data;
-                                        console.log(response.data);
-                            this.species = response.data.species;
-                                        this.loading = false
-                                        resolve();
-                                    });
-                        });
-        },
-        getResult(withFilter){
-            console.log(this.filterName);
-            //axios.post('/api/providers/getdata',{name:this.filterName})
-              //   .then((response)=>{ console.log(response.data)});
-              this.getSpecies(withFilter).then(
-                        this.getDataFromApi()
-                            .then(data => {
-                            this.species = data.species
-                            this.totalSpecies = data.total
-                            })
-                    );
-        },
-        toggleOrder (index) {
-            this.pagination.sortBy = this.headers[index].value
-            this.pagination.descending = !this.pagination.descending                         
-        },
-        setFilter(filterName){
-            this.filterValue='',
-            this.filterName = filterName;
+       search() {
+            axios.get('/api/auth/specie')
+                    .then((response)=> {
+                        console.log(response.data);
+                        this.species= response.data.species;
+                    
+                    })
+                    .catch((error)=> {
+                        console.log(error);
+                    });
         },
         create() {                                    
-            this.editedIndex = -1;
-            axios.get('/api/auth/specie/create')
-            .then(response => {                                
-                this.newSpecie = response.data.specie
-            })
-            .catch(error => {
-                console.log(error);
-            });
+            this.specie={};
             this.dialog = true;
         },
-        store(){
-            let index = -1;
-            axios.post('/api/auth/specie', this.newSpecie)
-            .then(response => {                
-                console.log(response.data.specie);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });            
-            this.dialog =false;            
-        },
-        show(item) {                        
-            axios.get(`/api/auth/specie/${item.id}`)            
-            .then(response => {                
-                this.specie = response.data.specie
-            })
-            .catch(error => {                
-                console.log(error);
-            });
-        },
         edit (item) {
-            this.editedIndex = this.species.indexOf(item);
+            // this.editedIndex = this.species.indexOf(item);
             axios.get(`/api/auth/specie/${item.id}/edit`)            
             .then(response => {                
-                this.newSpecie = response.data.specie
+                this.specie = response.data.specie
+                this.dialog = true
             })
             .catch(error => {                
-                console.log(error);
+                 this.$store.dispatch('template/showMessage',{message:error,color:'danger'});
             });            
-            this.dialog = true
         },
-        update (item) {                        
-            let index = this.editedIndex;            
-            axios.put(`/api/auth/specie/${this.newSpecie.id}`, this.newSpecie)
-            .then(response => {
-                this.species[index].name = response.data.specie.name
-                this.species[index].description = response.data.specie.description
+        update (item) {    
+
+             axios.post('/api/auth/specie', item)
+            .then(response => {                
+                console.log(response.data.specie);
+                
+                this.$store.dispatch('template/showMessage',{message:'Se Actualizo los Datos de la Especie ',color:'success'});
+                this.dialog =false;  
+                this.search();
             })
             .catch(function (error) {
-                console.log(error);
+                this.$store.dispatch('template/showMessage',{message:error,color:'danger'})
             });            
-            this.dialog =false;            
+                      
         },
         destroy (item) {
-            let success_delete = false;
-            axios.delete(`/api/auth/specie/${item.id}`)
-            .then(function (response) {
-                console.log(response.data.specie_id);
-                success_delete = true;
-            })
-            .catch(function (error) {
-                console.log(error);                
-            });            
+            Swal.fire({
+                title: 'Esta seguro de Eliminar al Proveedor?',
+                text: "Tenga en cuenta que no se puede revertir una ves eliminado!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.value) {
+                    axios.delete(`/api/auth/specie/${item.id}`)
+                    .then( (response)=> {
+                                  
+                        Swal.fire(
+                            'Borrado!',
+                            'La Especie ha sido eliminado.',
+                            'success'
+                        )
+                        this.search();
+                    })
+                    .catch( (error)=> {
+                        console.log(error);
+                        Swal.fire(
+                            'No se pudo Borrar!',
+                            ''+error,
+                            'error'
+                        )                
+                    });  
+                   
+                }
+            })  
+           
         },        
         close() {
             this.dialog = false;
         }
         
     },
-    watch: {
-        pagination: {
-            handler () {
-            this.getDataFromApi()
-                .then(data => {
-                this.desserts = data.items
-                this.totalDesserts = data.total
-                })
-            },
-            deep: true
-        },
-        filterValue (fv) {      
-            if (fv =='') {
-                this.getResult(false)
-            }
-
-        }
-    }
+    components: {
+        VueBootstrap4Table,
+        EditSpecie
+    } 
 }
 </script>
