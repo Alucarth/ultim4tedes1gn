@@ -12,7 +12,32 @@
                     <v-text-field v-model="item.name" label="Proveedor"></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm6 md6>
-                    <v-text-field v-model="item.offer" label="Oferta"></v-text-field>
+                    <!-- <v-text-field v-model="item.offer" label="Oferta"></v-text-field> -->
+                        <v-combobox
+                        v-model="item.offer_types"
+                        :items="offer_types_list"
+                        item-text = "name"
+                        label="Oferta"
+                        multiple
+                        chips
+                        >
+                        <template v-slot:selection="data">
+                            <v-chip
+                            :key="JSON.stringify(data.item)"
+                            :selected="data.selected"
+                            :disabled="data.disabled"
+                            class="v-chip--select-multi"
+                            @input="data.parent.selectItem(data.item)"
+                            >
+                            <v-avatar
+                                class="accent white--text"
+                                v-text="data.item.name.slice(0, 1).toUpperCase()"
+                            ></v-avatar>
+                            {{ data.item.name }}
+                            </v-chip>
+                        </template>
+                        </v-combobox>
+
                     </v-flex>
                     <v-flex xs12 sm6 md6>
                     <v-text-field v-model="item.address1" label="Direccion Principal"></v-text-field>
@@ -90,10 +115,14 @@ export default {
 		dialog: Boolean
 	},
 	data:()=>({
-
+        offer_types_list:[],
+        // offer_types:[],
 	}),
 	mounted(){
-		
+        axios.get('api/auth/offer_types').then(response=>{
+                                console.log(response.data); 
+                                this.offer_types_list = response.data.offer_types;        
+                                });
 		console.log(this.provider); 
 	},
 	methods:{
