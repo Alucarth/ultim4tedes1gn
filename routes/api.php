@@ -59,5 +59,6 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('report','ReportController');
     Route::resource('expenses','ExpensiveController');
     Route::post('package_transfer','PackageController@package_transfer');
+    Route::resource('offer_types','OfferTypeController');
     
 });

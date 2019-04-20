@@ -25,6 +25,7 @@ import ExcelImportPurchases from './components/purchase/import.vue';
 import LumberTransaction from './components/lumber/transaction.vue';
 import Expensive from './components/expensive/index.vue';
 import OriginTypes from './components/origin_type/index.vue';
+import OfferTypes from './components/offer_type/index.vue';
    
    export const routes= [
         {
@@ -303,6 +304,18 @@ import OriginTypes from './components/origin_type/index.vue';
             name: 'origin_types',
             components:{ 
                 default:OriginTypes,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }    
+        },
+        {
+            path: '/offer_types',
+            name: 'offer_types',
+            components:{ 
+                default:OfferTypes,
                 toolbar:Toolbar,
                 nav: Nav
             },

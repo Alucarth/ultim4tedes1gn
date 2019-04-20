@@ -11,7 +11,6 @@ class Provider extends Model
     protected $dates = ['deleted_at'];
     protected $attributes = array(
         'name' => null,
-        'offer' => null,
         'description' => null,
         'address1' => null,
         'address2' => null,
@@ -20,8 +19,12 @@ class Provider extends Model
         'debit'   => null,
     );
 
-     public function contacts()
-     {
+    public function contacts()
+    {
         return $this->hasMany('App\Contact');
-     }
+    }
+    public function offer_types()
+    {
+        return $this->belongsToMany('App\OfferType','offer_type_providers');
+    }
 }

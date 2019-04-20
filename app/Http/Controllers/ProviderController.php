@@ -109,7 +109,7 @@ class ProviderController extends Controller
             $provider = new Provider();
         }
         $provider->name = $request->name;
-        $provider->offer = $request->offer;
+        // $provider->offer = $request->offer;
         $provider->description = $request->description;
         $provider->address1 = $request->address1;
         $provider->address2 = $request->address2;
@@ -120,6 +120,16 @@ class ProviderController extends Controller
 
         $contacts = json_encode($request->contacts);
         $contacts = json_decode($contacts);
+        
+        $offer_types = json_encode($request->offer_types);
+        $offer_types = json_decode($offer_types);
+        $offer_ids = [];
+        foreach($offer_types as $offer_type){
+            array_push($offer_ids,$offer_type->id);
+        }
+        // return $offer_ids;
+        $provider->offer_types()->sync($offer_ids);
+        // return $offer_types;
         // return $contacts;
         $is_primary=true;
         $contact_news=[];
@@ -190,7 +200,7 @@ class ProviderController extends Controller
     public function show($id)
     {
         //
-        $provider = Provider::with('contacts')->where('id',$id)->first();
+        $provider = Provider::with('contacts','offer_types')->where('id',$id)->first();
         // $contacts = Contact::where('provider_id',$provider->id)->get();
         $data = [
             'provider'  =>  $provider,
@@ -208,7 +218,7 @@ class ProviderController extends Controller
      */
     public function edit($id)
     {
-        $provider = Provider::with('contacts')->where('id',$id)->first();
+        $provider = Provider::with('contacts','offer_types')->where('id',$id)->first();
         $data = [
             'provider'  =>  $provider,
         ];
