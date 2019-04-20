@@ -70,7 +70,7 @@
                             </v-flex>
 
                             <v-flex xs12 sm2 md1>
-                                <v-text-field label="Cantidad" hint="Ingrese cantidad" required v-model="lumber.quantity"></v-text-field>
+                                <v-text-field label="Cantidad Pz" hint="Ingrese cantidad" required v-model="lumber.quantity"></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm2 md1>
                                 <v-text-field label="Cantidad Pie" hint="Ingrese cantidad" required v-model="lumber.quantity_feet"></v-text-field>
@@ -180,7 +180,7 @@ export default {
                 sort: true,
             },
             {
-                label: "Cantidad",
+                label: "Cantidad Pz",
                 name: "pivot.quantity",
                 sort: true,
             },

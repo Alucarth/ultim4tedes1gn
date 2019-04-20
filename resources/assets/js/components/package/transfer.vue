@@ -183,7 +183,7 @@ export default {
                 sort: true,
             },
             {
-                label: "Cantidad",
+                label: "Cantidad Pz",
                 name: "quantity",
                 sort: true,
             },
