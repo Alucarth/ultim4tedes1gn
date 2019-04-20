@@ -68,7 +68,7 @@
                             <v-icon>functions</v-icon>  
                         </v-flex>
                         <v-flex xs7 >
-                           <p class="text-xs-left">Cantidad</p>  
+                           <p class="text-xs-left">Cantidad Pz</p>  
                         </v-flex>
                         <v-flex xs3 >
                             <p class="text-xs-right">{{this.getQuantity}}  </p>
@@ -488,7 +488,7 @@ export default {
             { text: 'Ancho', value: 'ancho' },
             { text: 'Largo', value: 'largo' },
             { text: 'Estado', value: 'estado' },
-            { text: 'Cantidad', value: 'cantidad' },
+            { text: 'Cantidad Pz', value: 'cantidad' },
             { text: 'Canitdad Pie', value: 'cantidad_pie' },
             { text: 'Precio Unitario', value: 'precio_unitario' },
             { text: 'Origen', value: 'origen' },

@@ -20,7 +20,7 @@
                         <v-avatar class="green darken-4">
                             <v-icon>group_work</v-icon>
                         </v-avatar>
-                        cantidad: {{this.cantidad}}
+                        cantidad Pz: {{this.cantidad}}
                     </v-chip>
                     <v-chip color="green" text-color="white">
                         <v-avatar class="green darken-4">
@@ -111,7 +111,7 @@ export default {
                 sort: true,
             },
             {
-                label: "Cantidad",
+                label: "Cantidad Pz",
                 name: "quantity",
                 sort: true,
             },
