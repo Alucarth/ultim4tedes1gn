@@ -14,7 +14,7 @@ class StorageController extends Controller
      */
     public function index()
     {
-        $storages = Storage::get();
+        $storages = Storage::orderBy('id')->get();
 
         $data = [
             'storages'  =>  $storages
@@ -44,10 +44,16 @@ class StorageController extends Controller
      */
     public function store(Request $request)
     {        
-        $storage = new Storage();
+        if($request->has('id')){
+            
+            $storage = Storage::find($request->id);
+        }else
+        {
+            $storage = new Storage();
+        }
         $storage->name = $request->name;
         $storage->description = $request->description;
-        $storage->is_enabled = $request->is_enabled;
+        $storage->is_enabled = $request->is_enabled??false;
         $storage->save();
         
         $data = [
@@ -99,16 +105,16 @@ class StorageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $storage = Storage::find($id);
-        $storage->name = $request->name;
-        $storage->description = $request->description;
-        $storage->is_enabled = $request->is_enabled;
-        $storage->save();
+        // $storage = Storage::find($id);
+        // $storage->name = $request->name;
+        // $storage->description = $request->description;
+        // $storage->is_enabled = $request->is_enabled;
+        // $storage->save();
         
-        $data = [
-            'storage'    =>  $storage
-        ];
-        return response()->json($data);
+        // $data = [
+        //     'storage'    =>  $storage
+        // ];
+        // return response()->json($data);
     }
 
     /**

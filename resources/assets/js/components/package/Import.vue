@@ -267,7 +267,7 @@ export default {
             { text: 'Espesor ', value: 'espesor' },
             { text: 'Ancho ', value: 'ancho' },
             { text: 'Largo ', value: 'largo' },
-            { text: 'Cantidad ', value: 'cantidad' },
+            { text: 'Cantidad Pz', value: 'cantidad' },
             { text: 'Canitdad Pie ', value: 'cantidad_pie' },
             { text: 'Precio Unitario', value: 'precio_unitario' },
             { text: 'Accion ' }

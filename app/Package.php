@@ -25,6 +25,6 @@ class Package extends Model
      */
     public function lumbers()
     {
-        return $this->belongsToMany('App\Lumber','package_lumber')->withPivot(['quantity']);
+        return $this->belongsToMany('App\Lumber','package_lumber')->withPivot(['quantity','quantity_feet']);
     }
 }

@@ -1,12 +1,12 @@
 <template>
     <v-card>
         <v-card-title>
-           <h3>Especies de Madera</h3> 
+           <h3>Tipos de Oferta</h3> 
             <v-spacer></v-spacer>
             <v-btn @click="create();" color="primary" dark class="mb-2" small>Nuevo</v-btn>    
         </v-card-title>
         <v-card-text>
-             <vue-bootstrap4-table :rows="species" :columns="columns" :config="config" >
+             <vue-bootstrap4-table :rows="offer_types" :columns="columns" :config="config" >
                 <template slot="sort-asc-icon">
                     <i class="fa fa-sort-asc"></i>
                 </template>
@@ -34,12 +34,12 @@
                 </template>
             </vue-bootstrap4-table>
         </v-card-text>
-        <edit-specie :dialog="dialog" :specie="specie" @close="close" @specie="update"></edit-specie>    
+        <edit-offer :dialog="dialog" :offer="offer" @close="close" @offer="update"></edit-offer>    
     </v-card>
 </template>
 <script>
 import VueBootstrap4Table from 'vue-bootstrap4-table';
-import EditSpecie from './edit.vue';
+import EditOffer from './edit.vue';
 export default {
     data () {
       return {
@@ -48,8 +48,8 @@ export default {
             { text: 'Nombre', value: 'name' },
             { text: 'Descripcion', value: 'description' },            
         ],                
-        species: [],        
-        specie: {},
+        offer_types: [],        
+        offer: {},
         dialog: false,
         columns: [{
                 label: "id",
@@ -67,11 +67,6 @@ export default {
                     type: "simple",
                     placeholder: "Ingrese Nombre"
                 },
-                sort: true,
-            },
-            {
-                label: "Descripcion",
-                name: "description",
                 sort: true,
             },
             {
@@ -103,25 +98,25 @@ export default {
     },
     methods:{
        search() {
-            axios.get('/api/auth/specie')
+            axios.get('/api/auth/offer_types')
                     .then((response)=> {
                         console.log(response.data);
-                        this.species= response.data.species;
-                    
+                        this.offer_types= response.data.offer_types;
                     })
                     .catch((error)=> {
                         console.log(error);
                     });
         },
         create() {                                    
-            this.specie={};
+            this.offer={};
             this.dialog = true;
         },
         edit (item) {
-            // this.editedIndex = this.species.indexOf(item);
-            axios.get(`/api/auth/specie/${item.id}/edit`)            
+			// this.editedIndex = this.offer_types.indexOf(item);
+			console.log(item);
+            axios.get(`/api/auth/offer_types/${item.id}/edit`)            
             .then(response => {                
-                this.specie = response.data.specie
+                this.offer = response.data.offer
                 this.dialog = true
             })
             .catch(error => {                
@@ -129,12 +124,12 @@ export default {
             });            
         },
         update (item) {    
-
-             axios.post('/api/auth/specie', item)
+			console.log(item);
+             axios.post('/api/auth/offer_types', item)
             .then(response => {                
-                console.log(response.data.specie);
+                console.log(response.data);
                 
-                this.$store.dispatch('template/showMessage',{message:'Se Actualizo los Datos de la Especie ',color:'success'});
+                this.$store.dispatch('template/showMessage',{message:'Se Actualizo los Datos del Tipo de Oferta ',color:'success'});
                 this.dialog =false;  
                 this.search();
             })
@@ -145,7 +140,7 @@ export default {
         },
         destroy (item) {
             Swal.fire({
-                title: 'Esta seguro de Eliminar al Proveedor?',
+                title: 'Esta seguro de Eliminar al Tipo de Oferta?',
                 text: "Tenga en cuenta que no se puede revertir una ves eliminado!",
                 type: 'warning',
                 showCancelButton: true,
@@ -155,12 +150,12 @@ export default {
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.value) {
-                    axios.delete(`/api/auth/specie/${item.id}`)
+                    axios.delete(`/api/auth/offer_types/${item.id}`)
                     .then( (response)=> {
                                   
                         Swal.fire(
                             'Borrado!',
-                            'La Especie ha sido eliminado.',
+                            'El tipo de Offerta ha sido eliminado.',
                             'success'
                         )
                         this.search();
@@ -185,7 +180,7 @@ export default {
     },
     components: {
         VueBootstrap4Table,
-        EditSpecie
+        EditOffer
     } 
 }
 </script>

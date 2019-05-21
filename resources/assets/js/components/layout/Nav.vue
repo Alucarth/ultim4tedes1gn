@@ -6,7 +6,48 @@
       v-model="drawer"
     >
       <v-list dense>
-        <template v-for="item in items">
+        <v-list-tile to="/">
+            <v-list-tile-action>
+                <v-icon>home</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title >Inicio</v-list-tile-title>
+        </v-list-tile>
+        <v-list-group prepend-icon="group_work">
+            <template v-slot:activator>
+                <v-list-tile>
+                    <v-list-tile-title>Modulo de Madera</v-list-tile-title>
+                </v-list-tile>
+            </template>
+            <v-list-tile
+              v-for="(lumber, i) in lumbers"
+              :key="i"
+              :to="lumber.link"
+            >
+              <v-list-tile-title v-text="lumber.text"></v-list-tile-title>
+              <v-list-tile-action>
+                <v-icon v-text="lumber.icon"></v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+        </v-list-group>
+        
+        <v-list-group prepend-icon="shopping_basket">
+            <template v-slot:activator>
+                <v-list-tile>
+                    <v-list-tile-title>Modulo de Insumos</v-list-tile-title>
+                </v-list-tile>
+            </template>
+            <v-list-tile
+              v-for="(item, i) in items"
+              :key="i"
+              :to="item.link"
+            >
+              <v-list-tile-title v-text="item.text"></v-list-tile-title>
+              <v-list-tile-action>
+                <v-icon v-text="item.icon"></v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+        </v-list-group>
+        <!-- <template v-for="item in items">
           <v-layout
             row
             v-if="item.heading"
@@ -62,7 +103,7 @@
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-        </template>
+        </template> -->
       </v-list>
     </v-navigation-drawer>
 </template>
@@ -72,22 +113,34 @@ export default {
         return {
             // drawer:null,
            items: [
-                { icon: 'dashboard', text: 'Inicio' , link: '/' },
-                { icon: 'store', text: 'Almacenes' , link: '/storage' },
+                // { icon: 'dashboard', text: 'Inicio' , link: '/' },
+                
                 { icon: 'store', text: 'Insumos' , link: '/inventory' },
-                { icon: 'group_work', text: 'Madera' , link: '/lumber' },
+                
+                
+                             
+                { icon: 'money', text: 'Compra de Insumos', link: '/buyout' },
+               
+                
+                // { icon: 'cloud_upload', text: 'Importar Compras', link: '/import_purchases' },
+               
+                { icon: 'work', text: 'Empleados', link: '/employee' },
+                
+            ],
+          lumbers:[
+                { icon: 'store', text: 'Almacenes' , link: '/storage' },
                 { icon: 'local_florist', text: 'Especies' , link: '/specie' },
                 { icon: 'group', text: 'Proveedores' , link: '/provider' },  
-                { icon: 'shopping_cart', text: 'Compra de madera', link: '/purchase' },              
-                { icon: 'money', text: 'Compra de Insumos', link: '/buyout' },
+                { icon: 'shopping_cart', text: 'Compra de madera', link: '/purchase' }, 
+                { icon: 'group_work', text: 'Madera' , link: '/lumber' },
                 { icon: 'repeat', text: 'Transferencia de Madera', link: '/lumber_transaction' },
                 { icon: 'view_agenda', text: 'Paquetes', link: '/package' },
-                // { icon: 'cloud_upload', text: 'Importar Compras', link: '/import_purchases' },
+                { icon: 'repeat', text: 'Transferencia de Paquetes', link: '/package/transfer' },
                 { icon: 'cloud_upload', text: 'Importar Paquetes', link: '/import_package' },
-                { icon: 'work', text: 'Empleados', link: '/employee' },
                 { icon: 'attach_money', text: 'Gastos', link: '/expenses' },
                 { icon: 'shop_two', text: 'Tipos de Origen', link: '/origin_types' },
-            ],
+                { icon: 'widgets', text: 'Tipos de Oferta', link: '/offer_types' },
+          ]
         }
     },
     computed:{

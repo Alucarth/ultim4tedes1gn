@@ -171,15 +171,15 @@
                 >
                     <v-chip color="green" text-color="white">
                     <v-avatar class="green darken-4"> <v-icon small>fa-money</v-icon> </v-avatar>
-                     <h4>{{getTotal}}</h4> 
+                     {{getTotal}} 
                     </v-chip>
                     <v-chip color="green" text-color="white">
                     <v-avatar class="green darken-4"> <v-icon small>functions</v-icon> </v-avatar>
-                        <h4>cantidad: {{getQuantityPurchase}}</h4> 
+                        cantidad Pz: {{getQuantityPurchase}}
                     </v-chip>
                     <v-chip color="green" text-color="white">
                     <v-avatar class="green darken-4"> <v-icon small>functions</v-icon> </v-avatar>
-                        <h4>cantidad Pie: {{getQuantityFeetPurchase}}</h4> 
+                        cantidad Pie: {{getQuantityFeetPurchase}}
                     </v-chip>
 
               

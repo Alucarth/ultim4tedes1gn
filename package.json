@@ -12,19 +12,24 @@
     "devDependencies": {
         "axios": "^0.18",
         "cross-env": "^5.1",
-        "laravel-mix": "^2.0",
+        "laravel-mix": "^4.0.7",
         "lodash": "^4.17.11",
-        "vue": "^2.5.22"
+        "resolve-url-loader": "2.3.1",
+        "sass": "^1.17.2",
+        "sass-loader": "7.*",
+        "vue": "^2.5.17"
     },
     "dependencies": {
+        "bootstrap": "^4.3.1",
         "chart.js": "^2.7.3",
-        "mockjs": "^1.0.1-beta3",
+        "jquery": "^3.3.1",
         "moment": "^2.23.0",
-        "notivuecation": "^3.2.1",
         "numeral": "^2.0.6",
+        "popper.js": "^1.14.7",
+        "sweetalert2": "^8.3.0",
+        "vue-bootstrap4-table": "^1.0.28",
         "vue-router": "^3.0.2",
-        "vue-template-compiler": "^2.5.22",
-        "vue2-datatable-component": "^2.3.1",
+        "vue-template-compiler": "^2.6.8",
         "vuetify": "^1.5.0",
         "vuex": "^3.0.1"
     }

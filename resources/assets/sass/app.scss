@@ -2,11 +2,14 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons');
 @import url('http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
 // vuetify
 @import '~vuetify/dist/vuetify.min.css';
+@import '~sweetalert2/src/sweetalert2.scss';
+
 //@import '~bootstrap/dist/css/bootstrap.min.css';
-@import '~vue2-datatable-component/dist/min.css';
+@import 'bootstrap';
 
 #styled-input {
 	height: 20px;
@@ -15,4 +18,4 @@
   .styled-input label[for] {
 	height: 20px;
 	font-size: 10pt;
-  }
+  } 

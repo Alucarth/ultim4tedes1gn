@@ -16,37 +16,37 @@ class ProviderSeeder extends Seeder
          DB::statement('TRUNCATE TABLE providers RESTART IDENTITY CASCADE');
 
          	DB::table('providers')->insert(['name' => 'Bitumbo Bolivian Wood SRL', 
-         		'offer'=>'Madera',
+         		// 'offer'=>'Madera',
          		'description'=>'Diferentes especies de madera',]); 
 			DB::table('providers')->insert(['name' => 'Lorena Denice Camacho', 
-				'offer'=>'Madera',
+				// 'offer'=>'Madera',
 				'description'=>'Diferentes especies de madera',]); 
 			DB::table('providers')->insert(['name' => 'Barraca Coco', 
-				'offer'=>'Madera',
+				// 'offer'=>'Madera',
 				'description'=>'Diferentes especies de madera',]); 
 			DB::table('providers')->insert(['name' => 'Exceso en Recuento Fisico (M)', 
-				'offer'=>'Madera',
+				// 'offer'=>'Madera',
 				'description'=>'Ajuste por Diferencias en Recuento Fisico en almacenes',]); 
 			DB::table('providers')->insert(['name' => 'Dekma Bolivia S.A.', 
-				'offer'=>'Madera',
+				// 'offer'=>'Madera',
 				'description'=>'Diferentes especies de madera',]); 
 			DB::table('providers')->insert(['name' => 'Felzi Gamez', 
-				'offer'=>'Madera',
+				// 'offer'=>'Madera',
 				'description'=>'Diferentes especies de madera',]); 
 			DB::table('providers')->insert(['name' => 'Ultimate Design SRL', 
-				'offer'=>'Madera',
+				// 'offer'=>'Madera',
 				'description'=>'Inventario Inicial, Pedidos Stock, etc.',]); 
 			DB::table('providers')->insert(['name' => 'Ovidio Escalante', 
-				'offer'=>'Madera',
+				// 'offer'=>'Madera',
 				'description'=>'Diferentes especies de madera',]); 
 			DB::table('providers')->insert(['name' => 'Bolivian Timberland SRL', 
-				'offer'=>'Madera',
+				// 'offer'=>'Madera',
 				'description'=>'Diferentes especies de madera',]);
 			DB::table('providers')->insert(['name' => 'Antonio Camilo Da Silva Filho', 
-				'offer'=>'Madera',
+				// 'offer'=>'Madera',
 				'description'=>'Diferentes especies de madera',]);
 			DB::table('providers')->insert(['name' => 'Romelio Hurtado Gutierrez', 
-				'offer'=>'Madera',
+				// 'offer'=>'Madera',
 				'description'=>'Diferentes especies de madera',]);
     }
 }
