@@ -15,7 +15,7 @@ class CreateContractTable extends Migration
     {
         Schema::create('contract', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('construction_id');
+            $table->integer('construction_id')->unsigned();
             $table->foreign('construction_id')->references('id')->on('constructions');
             $table->string('name');
             $table->string('description');

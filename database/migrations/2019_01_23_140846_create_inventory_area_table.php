@@ -15,9 +15,9 @@ class CreateInventoryAreaTable extends Migration
     {
         Schema::create('inventory_area', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('inventory_id')->nullable();
+            $table->integer('inventory_id')->unsigned()->nullable();
             $table->foreign('inventory_id')->references('id')->on('inventories');
-            $table->integer('area_id')->nullable();
+            $table->integer('area_id')->unsigned()->nullable();
             $table->foreign('area_id')->references('id')->on('areas');
             $table->integer('quantity')->default(0);
             $table->timestamps();

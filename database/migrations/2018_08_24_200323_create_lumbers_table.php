@@ -15,11 +15,11 @@ class CreateLumbersTable extends Migration
     {
         Schema::create('lumbers', function (Blueprint $table) {
             $table->increments('id');            
-            $table->integer('type_id')->nullable();
+            $table->integer('type_id')->unsigned()->nullable();
             $table->foreign('type_id')->references('id')->on('types');
-            $table->integer('specie_id')->nullable();
+            $table->integer('specie_id')->unsigned()->nullable();
             $table->foreign('specie_id')->references('id')->on('species');
-            $table->integer('unit_id')->nullable();
+            $table->integer('unit_id')->unsigned()->nullable();
             $table->foreign('unit_id')->references('id')->on('units');
             $table->decimal('high',13,2);
             $table->decimal('width',13,2);

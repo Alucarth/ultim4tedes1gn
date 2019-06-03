@@ -15,11 +15,11 @@ class CreatePurchaseInventoryTable extends Migration
     {
         Schema::create('purchase_inventory', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('buyout_id')->nullable();
+            $table->integer('buyout_id')->unsigned()->nullable();
             $table->foreign('buyout_id')->references('id')->on('buyouts');
-            $table->integer('inventory_id')->nullable();
+            $table->integer('inventory_id')->unsigned()->nullable();
             $table->foreign('inventory_id')->references('id')->on('inventories');            
-            $table->integer('state_id')->nullable();
+            $table->integer('state_id')->unsigned()->nullable();
             $table->foreign('state_id')->references('id')->on('states');
             $table->integer('quantity')->default(0);
             $table->decimal('price',13,2)->default(0);

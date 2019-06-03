@@ -18,6 +18,12 @@ class CreateInventoriesTable extends Migration
             $table->string('code');
             $table->integer('minimum');
             $table->integer('quantity')->nullable();
+            $table->integer('inventory_type_id')->unsigned();
+            $table->foreign('inventory_type_id')->references('id')->on('inventory_types');
+            $table->integer('family_id')->unsigned();
+            $table->foreign('family_id')->references('id')->on('families');
+            $table->integer('unit_id')->unsigned();
+            $table->foreign('unit_id')->references('id')->on('units');
             $table->string('description');
             $table->string('observation');
             $table->boolean('active')->default(true);

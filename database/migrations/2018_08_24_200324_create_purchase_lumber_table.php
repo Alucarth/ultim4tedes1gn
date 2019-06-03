@@ -15,13 +15,13 @@ class CreatePurchaseLumberTable extends Migration
     {
         Schema::create('purchase_lumber', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('purchase_id')->nullable();
+            $table->integer('purchase_id')->unsigned()->nullable();
             $table->foreign('purchase_id')->references('id')->on('purchases');
-            $table->integer('lumber_id')->nullable();
+            $table->integer('lumber_id')->unsigned()->nullable();
             $table->foreign('lumber_id')->references('id')->on('lumbers');
-            $table->integer('state_id')->nullable();
+            $table->integer('state_id')->unsigned()->nullable();
             $table->foreign('state_id')->references('id')->on('states');
-            $table->integer('origin_type_id')->nullable();
+            $table->integer('origin_type_id')->unsigned()->nullable();
             $table->foreign('origin_type_id')->references('id')->on('origin_types');
             $table->integer('quantity')->default(0);
             $table->decimal('quantity_feet',13,2)->default(0);
