@@ -26,6 +26,7 @@ class CreateInventoriesTable extends Migration
             $table->foreign('unit_id')->references('id')->on('units');
             $table->string('description');
             $table->string('observation');
+            $table->decimal('amount',13,2)->default(0);
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

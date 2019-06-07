@@ -9,9 +9,9 @@ class SpecieSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run()   
     {
-    	DB::statement('TRUNCATE TABLE species RESTART IDENTITY CASCADE');
+    	//DB::statement('TRUNCATE TABLE species RESTART IDENTITY CASCADE');
     	//DB::table('species')->truncate();
 
 
