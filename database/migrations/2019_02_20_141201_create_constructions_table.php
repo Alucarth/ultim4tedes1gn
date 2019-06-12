@@ -21,6 +21,7 @@ class CreateConstructionsTable extends Migration
             $table->string('description');
             $table->decimal('amount',13,2)->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
