@@ -16,12 +16,12 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
             $table->string('cefo');
-            $table->integer('provider_id')->nullable();
+            $table->integer('provider_id')->unsigned()->nullable();
             $table->foreign('provider_id')->references('id')->on('providers');
             $table->date('date');
             $table->string('description');
             $table->decimal('amount',13,2)->default(0);
-            $table->integer('employee_id')->nullable();
+            $table->integer('employee_id')->unsigned()->nullable();
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->timestamps();
             $table->softDeletes();

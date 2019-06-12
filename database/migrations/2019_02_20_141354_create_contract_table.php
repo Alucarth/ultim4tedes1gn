@@ -13,10 +13,8 @@ class CreateContractTable extends Migration
      */
     public function up()
     {
-        Schema::create('contract', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('construction_id');
-            $table->foreign('construction_id')->references('id')->on('constructions');
+        Schema::create('contracts', function (Blueprint $table) {
+            $table->increments('id');            
             $table->string('name');
             $table->string('description');
             $table->decimal('amount',13,2)->default(0);

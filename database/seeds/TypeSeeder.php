@@ -12,7 +12,7 @@ class TypeSeeder extends Seeder
     public function run()
     {
         
-        DB::statement('TRUNCATE TABLE types RESTART IDENTITY CASCADE');
+        //DB::statement('TRUNCATE TABLE types RESTART IDENTITY CASCADE');
 
         DB::table('types')->insert(['name' => 'Aserrada A', 'description'=>'Madera de buena calidad.',]);
 		DB::table('types')->insert(['name' => 'Aserrada B', 'description'=>'Madera de mediana calidad.',]);

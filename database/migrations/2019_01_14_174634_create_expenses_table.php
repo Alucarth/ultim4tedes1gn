@@ -23,9 +23,9 @@ class CreateExpensesTable extends Migration
            
         Schema::create('purchase_expenses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('purchase_id')->nullable();
+            $table->integer('purchase_id')->unsigned()->nullable();
             $table->foreign('purchase_id')->references('id')->on('purchases');
-            $table->integer('expensive_id')->nullable();
+            $table->integer('expensive_id')->unsigned()->nullable();
             $table->foreign('expensive_id')->references('id')->on('expenses');
             $table->double('cost',13,2)->default(0);
             $table->timestamps();

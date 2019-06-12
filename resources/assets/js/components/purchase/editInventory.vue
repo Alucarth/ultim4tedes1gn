@@ -4,7 +4,7 @@
       <v-flex xs12 md6 lg6>
           <v-card class="px-0">
             <v-card-title>
-                Madera
+                Insumos
             <v-spacer></v-spacer>
 
             <v-dialog v-model="dialog" max-width="500px">            
@@ -237,11 +237,11 @@
         </v-card-title>
         <v-container grid-list-md>
         <v-layout wrap v-if="buyout">
-            <v-flex xs12 sm4 md4 v-if="providers">                
+            <v-flex xs12 sm4 md4 v-if="products">                
                 <v-select                  
-                    label="Proveedor"
+                    label="Obra"
                     v-model="buyout.provider_id"
-                    :items="providers"
+                    :items="products"
                     item-text="name"
                     item-value="id"
                     :hint="`Descripcion del tipo seleccionado`"
@@ -370,7 +370,7 @@ export default {
         from:0,
         to:0,     
         pagination_select:[10,20,30],
-        providers: [],
+        products: [],
         employees: [],
         buyout: null,
         pivot: null,
@@ -388,7 +388,7 @@ export default {
         this.create();
         this.getSpecies();
         this.getTypes();
-        this.getProviders();
+        this.getproducts();
         this.getEmployees();        
     },
     methods:{
@@ -503,11 +503,11 @@ export default {
                 console.log(error);
             });
         },
-        getProviders () {
+        getproducts () {
             axios.get('/api/auth/provider')
             .then(response => {
                 console.log(response.data.data);
-                this.providers = response.data.data
+                this.products = response.data.data
             })
             .catch(error => {
                 console.log(error);
