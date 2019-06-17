@@ -95,7 +95,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in client.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -106,7 +106,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from client.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -125,7 +125,7 @@ class ClientController extends Controller
      * Returns json data filtered from lumber
      * 
      * @param int $id
-     * @return \App\Storage[] $storages 
+     * @return \App\Client[] $clients
      */
     public function getData(Request $request){
 
@@ -138,7 +138,7 @@ class ClientController extends Controller
         $nit = $request->nit ?? '';
         $description = $request->description ?? '';
                         
-        $total = Storage::
+        $total = Client::
             where('name','like',$name.'%')
             ->where('nit', 'like', $nit.'%')
             ->where('description','like',$description.'%')
