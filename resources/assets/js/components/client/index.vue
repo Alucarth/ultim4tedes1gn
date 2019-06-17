@@ -35,7 +35,7 @@
                 </template>
             </vue-bootstrap4-table>
         </v-card-text>      
-        <edit-client :dialog="dialog" :client="client" @close="close" @client="update" ></edit-client>        
+        <edit-client :dialog="dialog" :client="client" @close="close" @client="update" ></edit-client>
     </v-card>
 </template>
 <script>
@@ -126,7 +126,7 @@ export default {
         search() {
             axios.get('/api/auth/client')
                 .then((response)=> {                        
-                    this.storages= response.data;                    
+                    this.clients= response.data;                    
                 })
                 .catch((error)=> {
                     console.log(error);
@@ -158,7 +158,7 @@ export default {
         update (item) {                      
              axios.post('/api/auth/client', item)
                   .then(response => {                        
-                        this.$store.dispatch('template/showMessage',{message:'Se Actualizo los Datos del Almacen ',color:'success'});
+                        this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de clientes',color:'success'});
                         this.search();                        
                     })
                     .catch(function (error) {                        

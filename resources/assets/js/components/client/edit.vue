@@ -12,7 +12,7 @@
                         <v-text-field label="Nombre" v-model="item.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="Nombre" v-model="item.nit" ></v-text-field>
+                        <v-text-field label="NIT\CI" v-model="item.nit" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
@@ -28,7 +28,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click="sendClose()">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="sendStorage()" >Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="sendClient()" >Guardar</v-btn>
                 <!-- <v-btn color="blue darken-1" flat @click="update(item)" v-else>Actualizar</v-btn> -->
             </v-card-actions>
             </v-card>
@@ -38,14 +38,14 @@
 export default {
 	props:{
         dialog: Boolean,
-        storage: Object
+        client: Object
 	},
 	data:()=>({
 
 	}),
 	methods:{
-        sendStorage() {
-            this.$emit('storage',this.item)
+        sendClient() {
+            this.$emit('client',this.item)
         },
         sendClose() {
             this.$emit('close',false)
@@ -57,7 +57,7 @@ export default {
            let item = this.client
            return item
         },
-        parent_dialog(){            
+        parent_dialog(){
 			return this.dialog
         },
         title(){
