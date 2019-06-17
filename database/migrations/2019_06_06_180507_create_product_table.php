@@ -15,10 +15,10 @@ class CreateProductTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('contract_id')->unsigned();
-            $table->foreign('contract_id')->references('id')->on('contracts');
-            $table->integer('construction_id')->unsigned();
-            $table->foreign('construction_id')->references('id')->on('constructions');
+            $table->string('density');
+            $table->decimal('high',13,2);
+            $table->decimal('width',13,2);
+            $table->string('completed_type');
             $table->string('name');
             $table->string('description');
             $table->decimal('amount',13,2)->default(0);
