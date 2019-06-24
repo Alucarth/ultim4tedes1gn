@@ -27,6 +27,7 @@ import Expensive from './components/expensive/index.vue';
 import OriginTypes from './components/origin_type/index.vue';
 import OfferTypes from './components/offer_type/index.vue'
 import Client from './components/client/index.vue'
+import Construction from './components/construction/index.vue'
    export const routes= [
         {
             path: '/',
@@ -328,6 +329,18 @@ import Client from './components/client/index.vue'
             name: 'Client'    ,
             components:{ 
                 default:Client,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/construction',
+            name: 'Construction',
+            components:{ 
+                default:Construction,
                 toolbar:Toolbar,
                 nav: Nav
             },

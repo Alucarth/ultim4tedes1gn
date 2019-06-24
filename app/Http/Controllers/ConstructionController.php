@@ -14,7 +14,7 @@ class ConstructionController extends Controller
      */
     public function index()
     {
-        $constructions = Constructions::orderBy('id')->get();
+        $constructions = Construction::with(['client'])->orderBy('id')->get();
 
         $data = [
             'constructions'  =>  $constructions
@@ -130,27 +130,42 @@ class ConstructionController extends Controller
         $offset = $request->offset ?? 0;
         $limit = $request->limit ?? 10;
         $sort = $request->sort ?? 'id';
-        $order = $request->order ?? 'asc';  
-        
-        $client = $request->name ?? '';
-        $name = $request->name ?? '';        
+        $order = $request->order ?? 'asc';
+
+        $client = $request->client ?? '';
+        $name = $request->name ?? '';
         $description = $request->description ?? '';
-                        
-        $total = Construction::
-            where('name','like',$name.'%')            
-            ->where('description','like',$description.'%')
+
+        $construction_conditions = [];
+        $client_conditions = [];
+        if($name) {
+            array_push($construction_conditions, ['name','like',$name.'%']);
+        }
+        if($description) {
+            array_push($construction_conditions, ['description', 'like', $description.'%']);
+        }
+        if($client) {
+            array_push($client_conditions, ['name', 'like', $name.'%']);
+        }
+        $total = Construction::with(['client'])
+            ->where($construction_conditions)
+            ->whereHas('client', function($query) use($client_conditions) {
+                $query->where($client_conditions);
+            })
             ->count();
 
-        $construction = Construction::
-            where('name','like',$name.'%')            
-            ->where('description','like',$description.'%')
+        $construction = Construction::with(['client'])
+            ->where($construction_conditions)
+            ->whereHas('client', function($query) use($client_conditions) {
+                $query->where($client_conditions);
+            })
             ->skip($offset)
             ->take($limit)
             ->orderBy($sort,$order)
             ->get();
-            
+
         return response()->json([
-            'clients' => $construction->toArray(),
+            'constructions' => $construction->toArray(),
             'total'=>$total,
         ]);
     }

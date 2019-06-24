@@ -116,7 +116,8 @@ export default {
                 // { icon: 'dashboard', text: 'Inicio' , link: '/' },
                 
                 { icon: 'store', text: 'Insumos' , link: '/inventory' },
-                
+                { icon: 'person', text: 'Clientes' , link: '/client' },
+                { icon: 'building', text: 'Construcciones' , link: '/construction' },
                 
                              
                 { icon: 'money', text: 'Compra de Insumos', link: '/buyout' },

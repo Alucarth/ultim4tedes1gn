@@ -7,12 +7,23 @@
 
             <v-card-text v-if="item">
                 <v-container grid-list-md>
-                 <v-layout wrap>                   
+                 <v-layout wrap>
                      <v-flex xs12>
                         <v-text-field label="Nombre" v-model="item.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="NIT\CI" v-model="item.nit" ></v-text-field>
+                        <v-text-field label="Costo" v-model="item.amount" ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-select
+                            label="Cliente"
+                            v-model="item.client_id"
+                            :items="clients"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
@@ -28,7 +39,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click="sendClose()">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="sendClient()" >Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="sendConstruction()" >Guardar</v-btn>
                 <!-- <v-btn color="blue darken-1" flat @click="update(item)" v-else>Actualizar</v-btn> -->
             </v-card-actions>
             </v-card>
@@ -38,32 +49,44 @@
 export default {
 	props:{
         dialog: Boolean,
-        client: Object
+        construction: Object,
 	},
 	data:()=>({
-
+        clients: []
 	}),
 	methods:{
-        sendClient() {
-            this.$emit('client',this.item)
+        sendConstruction() {
+            this.$emit('construction',this.item)
         },
         sendClose() {
             this.$emit('close',false)
         },
-	},
+        getClients() {
+            axios.get('/api/auth/client')
+                .then((response)=> {
+                    console.log(response.data)
+                    this.clients= response.data
+                })
+                .catch((error)=> {
+                    console.log(error);
+                })
+        },
+    },
+    mounted() {
+        this.getClients()
+    },
     computed:{
-        
         item(){
-           let item = this.client
+           let item = this.construction
            return item
         },
         parent_dialog(){
 			return this.dialog
         },
         title(){
-            let title='Crear Cliente'
+            let title='Crear Construcción'
             if(this.item.id) {
-                title = 'Editar Cliente'
+                title = 'Editar Costrucción'
             }
             return title
         },

@@ -48,21 +48,22 @@ export default {
         construction: {}, 
         loading: true,  
         dialog: false,        
-        columns: [{
-                label: "id",
-                name: "id",
-                filter: {
-                    type: "simple",
-                    placeholder: "Ingrese Id"
-                },
-                sort: true,
-            },
+        columns: [
             {
                 label: "Nombre",
                 name: "name",
                 filter: {
                     type: "simple",
                     placeholder: "Ingrese Nombre"
+                },
+                sort: true,
+            },
+            {
+                label: "Costo",
+                name: "amount",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese costo"
                 },
                 sort: true,
             },            
@@ -77,13 +78,13 @@ export default {
             },
             {
                 label: "Cliete",
-                name: "client",
+                name: "client.name",
                 filter: {
                     type: "simple",
                     placeholder: "cliente"
                 },
                 sort: true,
-            },            
+            },        
             {
                 label: "Opciones",
                 name: "option",
@@ -107,9 +108,8 @@ export default {
         classes: {
              table : {
                 "table-striped " : false,
-                
             },
-        }           
+        }
       }
     },
     computed: {
@@ -119,53 +119,53 @@ export default {
     },
     mounted()
     {
-        this.search();           
+        this.search();
     },
     methods:{
         search() {
             axios.get('/api/auth/construction')
-                .then((response)=> {                        
-                    this.construction= response.data;                    
+                .then((response)=> {
+                    this.constructions = response.data;
                 })
                 .catch((error)=> {
                     console.log(error);
                 })
         },
-        create() {                                    
+        create() {
             this.construction={}
             this.dialog = true;
         },
-        show(item) {                        
-            axios.get(`/api/auth/construction/${item.id}`)            
-            .then(response => {                
+        show(item) {
+            axios.get(`/api/auth/construction/${item.id}`)
+            .then(response => {
                 this.construction = response.data.construction
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
             })
         },
-        edit (item) {            
-            axios.get(`/api/auth/construction/${item.id}/edit`)            
-            .then(response => {                
+        edit (item) {
+            axios.get(`/api/auth/construction/${item.id}/edit`)
+            .then(response => {
                 this.construction = response.data.construction;
                 this.dialog=true;
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
-            });            
+            });
         },
-        update (item) {                      
+        update (item) {
              axios.post('/api/auth/construction', item)
-                  .then(response => {                        
-                        this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de clientes',color:'success'});
-                        this.search();                        
+                  .then(response => {
+                        this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de construcciones',color:'success'});
+                        this.search();
                     })
-                    .catch(function (error) {                        
+                    .catch(function (error) {
                         this.$store.dispatch('template/showMessage',{message:error,color:'danger'});
-                    });            
-            this.dialog =false;          
+                    });
+            this.dialog =false;
         },
-        destroy (item) {            
+        destroy (item) {
             Swal.fire({
                 title: 'Esta seguro de Eliminar al Construcción?',
                 text: "Tenga en cuenta que no se puede revertir una ves eliminado!",
@@ -178,13 +178,13 @@ export default {
             }).then((result) => {
                 if (result.value) {
                     axios.delete(`/api/auth/construction/${item.id}`)
-                    .then( (response)=> {                        
+                    .then( (response)=> {
                         Swal.fire(
                             'Borrado!',
                             'La construcción ha sido eliminado.',
                             'success'
                         )
-                        this.search()                        
+                        this.search()
                     })
                     .catch( (error)=> {
                         console.log(error);
@@ -192,21 +192,21 @@ export default {
                             'No se pudo Borrar!',
                             ''+error,
                             'error'
-                        )                
-                    });                   
+                        )
+                    });
                 }
-            })  
+            })
         },
         close() {
             this.dialog = false;;
-        }        
+        }
     },
     watch: {
-      
+
     },
     components: {
         VueBootstrap4Table,
-        EditClient
-    }  
+        EditConstruction
+    }
 }
 </script>
