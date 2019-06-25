@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Client;
+use App\Product;
 
-class ClientController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +14,13 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::orderBy('id')->get();
+        $products = Product::get();
 
         $data = [
-            'clients'  =>  $clients
+            'products'  =>  $products
         ];
 
-        return response()->json($clients);
+        return response()->json($products);
     }
 
     /**
@@ -30,15 +30,15 @@ class ClientController extends Controller
      */
     public function create()
     {
-        $client = new Client();
+        $product = new Prouct();
         $data = [
-            'client'   =>  $client,
+            'product'   =>  $product,
         ];
         return response()->json($data);
     }
 
     /**
-     * Store a newly created resource in client.
+     * Store a newly created resource in product.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -46,20 +46,21 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         if($request->has('id')) {
-            $client = Client::find($request->id);
+            $product = Product::find($request->id);
         } else {
-            $client = new Client();
-            $client->total = 0;
-            $client->paid = 0;
-            $client->debt = 0;
+            $product = new Product();
         }
-        $client->name = $request->name;
-        $client->nit = $request->nit;
-        $client->description = $request->description;
-        $client->save();
+        $product->name = $request->name;
+        $product->amount = $request->amount;
+        $product->density = $request->density;
+        $product->high = $request->high;
+        $product->width = $request->width;
+        $product->completed_type = $request->completed_type;
+        $product->description = $request->description;
+        $product->save();
 
         $data = [
-            'client'    =>  $client
+            'product'    =>  $product
         ];
         return response()->json($data);
     }
@@ -72,9 +73,9 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $client = Client::find($id);
+        $product = Product::find($id);
         $data = [
-            'client'  =>  $client
+            'product'  =>  $product
         ];
         return response()->json($data);
     }
@@ -87,15 +88,15 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        $client = Client::find($id);
+        $product = Product::find($id);
         $data = [
-            'client'  =>  $client
+            'product'  =>  $product
         ];
         return response()->json($data);
     }
 
     /**
-     * Update the specified resource in client.
+     * Update the specified resource in product.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -113,11 +114,11 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $client = Client::find($id);
+        $product = Product::find($id);
         $data = [
-            'client_id'    =>  $client->id
+            'product_id'    =>  $product->id
         ];
-        $client->delete();
+        $product->delete();
         return response()->json($data);
     }
 
@@ -125,7 +126,7 @@ class ClientController extends Controller
      * Returns json data filtered from lumber
      *
      * @param int $id
-     * @return \App\Client[] $clients
+     * @return \App\Prouct[] $products
      */
     public function getData(Request $request){
 
@@ -135,18 +136,18 @@ class ClientController extends Controller
         $order = $request->order ?? 'asc';
 
         $name = $request->name ?? '';
-        $nit = $request->nit ?? '';
+        $completed_type = $request->completed_type ?? '';
         $description = $request->description ?? '';
 
-        $total = Client::
+        $total = Product::
             where('name','like',$name.'%')
-            ->where('nit', 'like', $nit.'%')
+            ->where('completed_type', 'like', $completed_type.'%')
             ->where('description','like',$description.'%')
             ->count();
 
-        $clients = Client::
+        $products = Product::
             where('name','like',$name.'%')
-            ->where('nit', 'like', $nit.'%')
+            ->where('completed_type', 'like', $completed_type.'%')
             ->where('description','like',$description.'%')
             ->skip($offset)
             ->take($limit)
@@ -154,7 +155,7 @@ class ClientController extends Controller
             ->get();
 
         return response()->json([
-            'clients' => $clients->toArray(),
+            'products' => $products->toArray(),
             'total'=>$total,
         ]);
     }

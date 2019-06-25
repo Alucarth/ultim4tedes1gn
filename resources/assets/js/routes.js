@@ -28,6 +28,7 @@ import OriginTypes from './components/origin_type/index.vue';
 import OfferTypes from './components/offer_type/index.vue'
 import Client from './components/client/index.vue'
 import Construction from './components/construction/index.vue'
+import Product from './components/product/index.vue'
    export const routes= [
         {
             path: '/',
@@ -348,5 +349,17 @@ import Construction from './components/construction/index.vue'
                 requiresAuth: true
             }
         },
+        {
+            path: '/product',
+            name: 'Product',
+            components: {
+                default: Product,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        }
     ];
     
