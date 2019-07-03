@@ -29,6 +29,7 @@ import OfferTypes from './components/offer_type/index.vue'
 import Client from './components/client/index.vue'
 import Construction from './components/construction/index.vue'
 import Product from './components/product/index.vue'
+import Order from './components/order/index.vue'
    export const routes= [
         {
             path: '/',
@@ -360,6 +361,17 @@ import Product from './components/product/index.vue'
             meta: {
                 requiresAuth: true
             }
+        },
+        {
+            path: '/order',
+            name: '/Order',
+            components: {
+                default: Order,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
         }
     ];
-    

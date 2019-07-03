@@ -133,36 +133,45 @@ class OrderController extends Controller
         $sort = $request->sort ?? 'id';
         $order = $request->order ?? 'asc';
 
-        $client = $request->client ?? '';
+        $contract = $request->contract ?? '';
         $name = $request->name ?? '';
         $description = $request->description ?? '';
+        $construction = $request->construction ?? '';
 
         $construction_conditions = [];
-        $client_conditions = [];
+        $contract_conditions = [];
+        $order_conditions = [];
+
         if($name) {
             array_push($construction_conditions, ['name','like',$name.'%']);
         }
         if($description) {
             array_push($construction_conditions, ['description', 'like', $description.'%']);
         }
-        if($client) {
-            array_push($client_conditions, ['name', 'like', $name.'%']);
+        if($contract) {
+            array_push($contract_conditions, ['name', 'like', $contract.'%']);
         }
-        $total = order::with(['client'])
-            ->where($construction_conditions)
-            ->whereHas('client', function($query) use($client_conditions) {
-                $query->where($client_conditions);
+        if($construction) {
+            array_push($construction_conditions,['name','like',$construction.'%']);
+        }
+        $total = Order::with(['contract','construction'])
+            ->where($order_conditions)
+            ->whereHas('contract', function($query) use($contract_conditions) {
+                $query->where($contract_conditions);
+            })
+            ->whereHas('', function($query) use($construction_conditions){
+                $query->where($construction_conditions);
             })
             ->count();
 
-        $order = Order::with(['client'])
+        $order = Order::with(['contract','construction'])
             ->where($order_conditions)
-            ->whereHas('client', function($query) use($client_conditions) {
-                $query->where($client_conditions);
+            ->whereHas('contract', function($query) use($contract_conditions) {
+                $query->where($contract_conditions);
             })
-            ->skip($offset)
-            ->take($limit)
-            ->orderBy($sort,$order)
+            ->whereHas('', function($query) use($construction_conditions){
+                $query->where($construction_conditions);
+            })
             ->get();
 
         return response()->json([
