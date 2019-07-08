@@ -40,7 +40,7 @@
 </template>
 <script>
 import VueBootstrap4Table from 'vue-bootstrap4-table';
-import OrderConstruction from './edit.vue';
+import EditOrder from './edit.vue';
 export default {
     data () {
       return {
