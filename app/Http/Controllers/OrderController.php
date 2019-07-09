@@ -45,6 +45,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        return $request->all();
         if($request->has('id')) {
             $order = Order::find($request->id);
         } else {
