@@ -26,6 +26,15 @@
                         </v-select>
                     </v-flex>
                     <v-flex xs12>
+                        <v-text-field label="Nombre" v-model="contract.amount" ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-text-field label="Monto" v-model="contract.amount" ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-text-field label="Descripción" v-model="contract.amount" ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
                         <v-select
                             label="Construccion"
                             v-model="item.construction_id"
@@ -65,9 +74,12 @@ export default {
 	data:()=>({
         contracts: [],
         constructions: [],
+        contract: Object
 	}),
 	methods:{
         sendOrder() {
+            this.item.contract = this.contract
+            console.log(this.item)
             this.$emit('order',this.item)
         },
         sendClose() {
@@ -98,16 +110,17 @@ export default {
     },
     computed:{
         item(){
-           let item = this.construction
+           let item = this.order
+           item.contract = Object
            return item
         },
         parent_dialog(){
 			return this.dialog
         },
         title(){
-            let title='Crear Construcción'
+            let title='Crear order'
             if(this.item.id) {
-                title = 'Editar Costrucción'
+                title = 'Editar orders'
             }
             return title
         },
