@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="parent_dialog" max-width="500px" persistent>
+	<v-dialog v-model="parent_dialog" max-width="90%" persistent>
             <v-card>
             <v-card-title>
                 <span class="headline">{{ title }}</span>
@@ -26,13 +26,13 @@
                         </v-select>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="Nombre" v-model="contract.amount" ></v-text-field>
+                        <v-text-field label="Nombre" v-model="contract.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Monto" v-model="contract.amount" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="Descripción" v-model="contract.amount" ></v-text-field>
+                        <v-text-field label="Descripción" v-model="contract.description" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                         <v-select
@@ -45,13 +45,28 @@
                             persistent-hint>
                         </v-select>
                     </v-flex>
+                    <v-card-text>
+                        <vue-bootstrap4-table :rows="products" :columns="product_columns" :config="config" >
+                            <template slot="sort-asc-icon">
+                                <i class="fa fa-sort-asc"></i>
+                            </template>
+                            <template slot="sort-desc-icon">
+                                <i class="fa fa-sort-desc"></i>
+                            </template>
+                            <template slot="no-sort-icon">
+                                <i class="fa fa-sort"></i>
+                            </template>
+                            <template slot="option" slot-scope="props">
+                                <v-icon @click="add(props.row)" small>
+                                    Agregar
+                                </v-icon>
+                            </template>
+                        </vue-bootstrap4-table>
+                    </v-card-text>
+                    <b-table striped hover :items="item.products||[]" :fields="fields"></b-table>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
                     </v-flex>
-                    <!-- <v-switch
-                        :label="'Activo'"
-                        v-model="item.is_enabled"
-                    ></v-switch> -->
                 </v-layout>
                 </v-container>
             </v-card-text>
@@ -66,6 +81,7 @@
     </v-dialog>
 </template>
 <script>
+import VueBootstrap4Table from 'vue-bootstrap4-table';
 export default {
 	props:{
         dialog: Boolean,
@@ -74,7 +90,60 @@ export default {
 	data:()=>({
         contracts: [],
         constructions: [],
-        contract: Object
+        products: [],
+        contract: Object,
+        product_columns: [{
+                label: "Nombre",
+                name: "name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese nombre"
+                },
+                sort: true,
+            },
+            {
+                label: "Acabado",
+                name: "completed_type",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Acabado"
+                },
+                sort: true,
+            },
+            {
+                label: "Descripcion",
+                name: "description",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Descripcion"
+                },
+                sort: true,
+            },
+            {
+                label: "Opciones",
+                name: "option",
+                sort: false,
+            }],
+        config: {
+            checkbox_rows: false,
+            rows_selectable: false,
+            pagination: true,
+            card_mode: false,
+            show_refresh_button:  false,
+            show_reset_button:  false,
+            global_search:  {
+                placeholder:  "Enter custom Search text",
+                visibility:  false,
+                case_sensitive:  false
+            },
+            per_page_options:  [5,  10,  20,  30],
+            server_mode:  false,
+        },
+        classes: {
+             table : {
+                "table-striped " : false,
+            },
+        }
 	}),
 	methods:{
         sendOrder() {
@@ -97,16 +166,29 @@ export default {
         getConstructions() {
             axios.get('/api/auth/construction')
                 .then((response)=> {
-                    this.constructions = resonse.data
+                    this.constructions = response.data
                 })
                 .catch((erro)=> {
                     console.log(error)
                 })
+        },
+        getProducts() {
+            axios.get('/api/auth/product')
+                .then((response)=> {
+                    this.products = response.data
+                })
+                .catch((erro)=> {
+                    console.log(error)
+                })
+        },
+        agregar() {
+
         }
     },
     mounted() {
         this.getContracts()
         this.getConstructions()
+        this.getProducts()
     },
     computed:{
         item(){
@@ -124,6 +206,9 @@ export default {
             }
             return title
         },
-	}
+    },
+    components: {
+        VueBootstrap4Table
+    }
 }
 </script>

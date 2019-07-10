@@ -34,7 +34,7 @@
                     </v-icon>
                 </template>
             </vue-bootstrap4-table>
-        </v-card-text>      
+        </v-card-text>
         <edit-product :dialog="dialog" :product="product" @close="close" @product="update" ></edit-product>
     </v-card>
 </template>
