@@ -215,7 +215,7 @@ export default {
     },
     components: {
         VueBootstrap4Table,
-        EditOrder
+        //EditOrder
     }
 }
 </script>
