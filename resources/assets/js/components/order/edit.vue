@@ -63,7 +63,18 @@
                             </template>
                         </vue-bootstrap4-table>
                     </v-card-text>
-                    <b-table striped hover :items="item.products||[]" :fields="fields"></b-table>
+                    <v-card-text>
+                        <table>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                            </tr>
+                            <tr v-for="(pro,index) in added_products" :key="index">
+                                <td>{{pro.name}}</td>
+                                <td>{{pro.description}}</td>
+                            </tr>
+                        </table>
+                    </v-card-text>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
                     </v-flex>
@@ -181,8 +192,11 @@ export default {
                     console.log(error)
                 })
         },
-        agregar() {
-
+        add(prod) {
+            console.log('ading a new element')
+            console.log(prod)
+            console.log(this.item.products)
+            this.item.products.push(prod)
         }
     },
     mounted() {
@@ -193,6 +207,7 @@ export default {
     computed:{
         item(){
            let item = this.order
+           item.products = []
            item.contract = Object
            return item
         },
@@ -206,6 +221,12 @@ export default {
             }
             return title
         },
+    },
+    watch: {
+      added_products() {
+         //   return this.products
+            return  this.item.products
+        }
     },
     components: {
         VueBootstrap4Table
