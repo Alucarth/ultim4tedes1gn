@@ -13,7 +13,7 @@ class ProviderSeeder extends Seeder
     {
      //   factory(App\Provider::class, 500)->create();
          
-         DB::statement('TRUNCATE TABLE providers RESTART IDENTITY CASCADE');
+         //DB::statement('TRUNCATE TABLE providers RESTART IDENTITY CASCADE');
 
          	DB::table('providers')->insert(['name' => 'Bitumbo Bolivian Wood SRL', 
          		// 'offer'=>'Madera',

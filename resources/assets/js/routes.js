@@ -25,8 +25,10 @@ import ExcelImportPurchases from './components/purchase/import.vue';
 import LumberTransaction from './components/lumber/transaction.vue';
 import Expensive from './components/expensive/index.vue';
 import OriginTypes from './components/origin_type/index.vue';
-import OfferTypes from './components/offer_type/index.vue';
-   
+import OfferTypes from './components/offer_type/index.vue'
+import Client from './components/client/index.vue'
+import Construction from './components/construction/index.vue'
+import Product from './components/product/index.vue'
    export const routes= [
         {
             path: '/',
@@ -323,5 +325,41 @@ import OfferTypes from './components/offer_type/index.vue';
                 requiresAuth: true
             }    
         },
+        {
+            path: '/client',
+            name: 'Client'    ,
+            components:{ 
+                default:Client,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/construction',
+            name: 'Construction',
+            components:{ 
+                default:Construction,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: { 
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/product',
+            name: 'Product',
+            components: {
+                default: Product,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        }
     ];
     

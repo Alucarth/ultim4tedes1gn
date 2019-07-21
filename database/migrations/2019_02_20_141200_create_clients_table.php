@@ -22,6 +22,7 @@ class CreateClientsTable extends Migration
             $table->decimal('paid',13,2)->default(0);
             $table->decimal('debt',13,2)->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

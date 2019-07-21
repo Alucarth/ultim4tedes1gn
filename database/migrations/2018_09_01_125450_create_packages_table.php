@@ -19,7 +19,7 @@ class CreatePackagesTable extends Migration
             $table->string('name')->nullable();   
             $table->integer('quantity')->default(0);  //cantidad
             $table->decimal('quantity_feet',13,2)->default(0); 
-            $table->integer('storage_id');
+            $table->integer('storage_id')->unsigned();
             $table->foreign('storage_id')->references('id')->on('storages');
             $table->timestamps();
             $table->softDeletes();

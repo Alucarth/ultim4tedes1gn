@@ -15,12 +15,13 @@ class CreateConstructionsTable extends Migration
     {
         Schema::create('constructions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id');
+            $table->integer('client_id')->unsigned();
             $table->foreign('client_id')->references('id')->on('clients');
             $table->string('name');
             $table->string('description');
             $table->decimal('amount',13,2)->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
