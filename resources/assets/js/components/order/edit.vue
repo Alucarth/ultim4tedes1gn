@@ -169,7 +169,7 @@ export default {
         getContracts() {
             axios.get('/api/auth/contract')
                 .then((response)=> {
-                    this.contacts= response.data
+                    this.contracts= response.data
                 })
                 .catch((error)=> {
                     console.log(error)

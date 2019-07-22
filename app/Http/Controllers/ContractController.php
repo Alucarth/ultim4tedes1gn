@@ -44,8 +44,8 @@ class ContractController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
-        if($request->has('id')) {        
+    {
+        if($request->has('id')) {
             $contract = Contract::find($request->id);
         } else {
             $contract = new Contract();

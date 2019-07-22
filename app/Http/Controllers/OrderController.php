@@ -45,7 +45,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        //return $request->all();
         if($request->has('id')) {
             $order = Order::find($request->id);
         } else {
@@ -57,7 +57,11 @@ class OrderController extends Controller
         $order->quantity = $request->quantity;
         $order->descripcion = $request->description;
         $order->amount = 0;
-        $order->product_id = $request->product_id;
+        $products = [];
+        foreach($request->products as $product) {
+            array_push($products,$product['id']);
+        }
+        $order->products()->sync($products);
         $data = [
             'order'    =>  $order
         ];
