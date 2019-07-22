@@ -25,15 +25,15 @@
                             persistent-hint>
                         </v-select>
                     </v-flex>
-                    <v-flex xs12>
-                        <v-text-field label="Nombre" v-model="contract.name" ></v-text-field>
+                    <!-- <v-flex xs12>
+                        <v-text-field label="Nombre contrato" v-model="contract.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="Monto" v-model="contract.amount" ></v-text-field>
+                        <v-text-field label="Monto contrato" v-model="contract.amount" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="Descripción" v-model="contract.description" ></v-text-field>
-                    </v-flex>
+                        <v-text-field label="Descripción contrato" v-model="contract.description" ></v-text-field>
+                    </v-flex> -->
                     <v-flex xs12>
                         <v-select
                             label="Construccion"
@@ -64,16 +64,12 @@
                         </vue-bootstrap4-table>
                     </v-card-text>
                     <v-card-text>
-                        <table>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                            </tr>
-                            <tr v-for="(pro,index) in added_products" :key="index">
-                                <td>{{pro.name}}</td>
-                                <td>{{pro.description}}</td>
-                            </tr>
-                        </table>
+                        <ul class="list-group">Productos seleccionados
+                        <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(product,index) in selected_products" :key="index">
+                            <span> {{product.name}}</span> 
+                            <span>{{product.description}}</span>
+                        </li>
+                        </ul>
                     </v-card-text>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
@@ -154,15 +150,20 @@ export default {
              table : {
                 "table-striped " : false,
             },
-        }
+        },
+        selected_products: []
 	}),
 	methods:{
         sendOrder() {
             this.item.contract = this.contract
+            console.log('sending post request')
             console.log(this.item)
+            this.item.products =  this.selected_products
             this.$emit('order',this.item)
+            this.selected_products = []
         },
         sendClose() {
+            this.selected_products = []
             this.$emit('close',false)
         },
         getContracts() {
@@ -194,9 +195,9 @@ export default {
         },
         add(prod) {
             console.log('ading a new element')
-            console.log(prod)
-            console.log(this.item.products)
-            this.item.products.push(prod)
+            
+            this.selected_products.push(prod)
+            //console.log(this.item.products.length)
         }
     },
     mounted() {
@@ -207,8 +208,9 @@ export default {
     computed:{
         item(){
            let item = this.order
-           item.products = []
-           item.contract = Object
+           //item.products.push(prod)
+           //item.products = prod
+           //item.contract = Object
            return item
         },
         parent_dialog(){
@@ -222,12 +224,7 @@ export default {
             return title
         },
     },
-    watch: {
-      added_products() {
-         //   return this.products
-            return  this.item.products
-        }
-    },
+
     components: {
         VueBootstrap4Table
     }
