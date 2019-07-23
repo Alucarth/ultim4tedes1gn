@@ -126,6 +126,9 @@ export default {
                 // { icon: 'cloud_upload', text: 'Importar Compras', link: '/import_purchases' },
                
                 { icon: 'work', text: 'Empleados', link: '/employee' },
+                { icon: 'widgets', text: 'Productos', link: '/product' },
+                { icon: 'widgets', text: 'Contratos', link: '/contract' },
+                { icon: 'widgets', text: 'Ordenes', link: '/order' },
                 
             ],
           lumbers:[

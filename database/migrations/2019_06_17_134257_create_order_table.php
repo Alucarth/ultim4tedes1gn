@@ -19,10 +19,8 @@ class CreateOrderTable extends Migration
             $table->foreign('contract_id')->references('id')->on('contracts');
             $table->integer('construction_id')->unsigned();
             $table->foreign('construction_id')->references('id')->on('constructions');
-            $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->decimal('amount',13,2)->default(0);
             $table->integer('quantity')->unsigned()->default(0);
             $table->timestamps();

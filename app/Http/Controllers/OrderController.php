@@ -52,15 +52,16 @@ class OrderController extends Controller
             $order = new Order();
         }
         $order->contract_id = $request->contract_id;
-        $order->constructtion_id = $request->construction_id;
+        $order->construction_id = $request->construction_id;
         $order->name = $request->name;
-        $order->quantity = $request->quantity;
-        $order->descripcion = $request->description;
-        $order->amount = 0;
+        $order->quantity = 0;
+        $order->description = $request->description;
+        $order->amount = $request->amount;
         $products = [];
         foreach($request->products as $product) {
             array_push($products,$product['id']);
         }
+        $order->save();
         $order->products()->sync($products);
         $data = [
             'order'    =>  $order
