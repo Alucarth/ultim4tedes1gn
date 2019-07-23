@@ -13,16 +13,14 @@ class CreateOrderTable extends Migration
      */
     public function up()
     {
-        Schema::create('order', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('contract_id')->unsigned();
             $table->foreign('contract_id')->references('id')->on('contracts');
             $table->integer('construction_id')->unsigned();
             $table->foreign('construction_id')->references('id')->on('constructions');
-            $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->decimal('amount',13,2)->default(0);
             $table->integer('quantity')->unsigned()->default(0);
             $table->timestamps();
@@ -37,6 +35,6 @@ class CreateOrderTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order');
+        Schema::dropIfExists('orders');
     }
 }

@@ -1,13 +1,13 @@
 <template>
     <v-card>
         <v-card-title>
-            <h3>Productos</h3> 
+            <h3>Ordenes</h3>
         <v-spacer></v-spacer>
         <!-- <v-btn to="/package/transfer" color="primary" dark class="mb-2" small>Transferencias</v-btn> -->
-        <v-btn @click="create()" color="primary" dark class="mb-2" small >Nuevo</v-btn>
+        <v-btn @click="create()" color="primary" dark class="mb-2" small>Nuevo</v-btn>
         </v-card-title>
         <v-card-text>
-             <vue-bootstrap4-table :rows="products" :columns="columns" :config="config" >
+             <vue-bootstrap4-table :rows="orders" :columns="columns" :config="config" >
                 <template slot="sort-asc-icon">
                     <i class="fa fa-sort-asc"></i>
                 </template>
@@ -35,46 +35,38 @@
                 </template>
             </vue-bootstrap4-table>
         </v-card-text>
-        <edit-product :dialog="dialog" :product="product" @close="close" @product="update" ></edit-product>
+        <edit-order :dialog="dialog" :order="order" @close="close" @order="update" ></edit-order>
     </v-card>
 </template>
 <script>
 import VueBootstrap4Table from 'vue-bootstrap4-table';
-import EditProduct from './edit.vue';
+import EditOrder from './edit.vue';
 export default {
     data () {
       return {
-        products: [],
-        product: {},
+        orders: [],
+        order: {},
         loading: true,
         dialog: false,
-        columns: [{
+        columns: [
+            {
                 label: "Nombre",
                 name: "name",
                 filter: {
                     type: "simple",
-                    placeholder: "Ingrese nombre"
+                    placeholder: "Ingrese Nombre"
                 },
                 sort: true,
             },
             {
-                label: "Acabado",
-                name: "completed_type",
+                label: "Costo",
+                name: "amount",
                 filter: {
                     type: "simple",
-                    placeholder: "Ingrese Acabado"
+                    placeholder: "Ingrese costo"
                 },
                 sort: true,
             },
-            // {
-            //     label: "CI/NIT",
-            //     name: "nit",
-            //     filter: {
-            //         type: "simple",
-            //         placeholder: "Ingrese CI o NIT"
-            //     },
-            //     sort: true,
-            // },
             {
                 label: "Descripcion",
                 name: "description",
@@ -83,6 +75,24 @@ export default {
                     placeholder: "Ingrese Descripcion"
                 },
                 sort: true,
+            },
+            {
+                label: "Contrato",
+                name: "contract.name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Contrato"
+                },
+                sort: true,
+            },
+            {
+                label: "Construccion",
+                name: "construction.name`",
+                filter: {
+                    type: "simple",
+                    placeholder: "construccion"
+                },
+                sort: true
             },
             {
                 label: "Opciones",
@@ -113,7 +123,7 @@ export default {
     },
     computed: {
         formTitle () {
-                return this.editedIndex === -1 ? 'Crear nuevo proucto' : 'Editar Producto'
+                return this.editedIndex === -1 ? 'Crear nueva orden' : 'Editar orden'
             }
     },
     mounted()
@@ -122,31 +132,31 @@ export default {
     },
     methods:{
         search() {
-            axios.get('/api/auth/product')
+            axios.get('/api/auth/order')
                 .then((response)=> {
-                    this.products= response.data;
+                    this.orders = response.data;
                 })
                 .catch((error)=> {
                     console.log(error);
                 })
         },
         create() {
-            this.product={}
+            this.order={}
             this.dialog = true;
         },
         show(item) {
-            axios.get(`/api/auth/product/${item.id}`)
+            axios.get(`/api/auth/order/${item.id}`)
             .then(response => {
-                this.product = response.data.product
+                this.order = response.data.order
             })
             .catch(error => {
                 console.log(error);
             })
         },
         edit (item) {
-            axios.get(`/api/auth/product/${item.id}/edit`)
+            axios.get(`/api/auth/order/${item.id}/edit`)
             .then(response => {
-                this.product = response.data.product;
+                this.order = response.data.order;
                 this.dialog=true;
             })
             .catch(error => {
@@ -154,9 +164,9 @@ export default {
             });
         },
         update (item) {
-             axios.post('/api/auth/product', item)
+             axios.post('/api/auth/order', item)
                   .then(response => {
-                        this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de productos',color:'success'});
+                        this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de ordenes',color:'success'});
                         this.search();
                     })
                     .catch(function (error) {
@@ -166,7 +176,7 @@ export default {
         },
         destroy (item) {
             Swal.fire({
-                title: 'Esta seguro de Eliminar al Producto?',
+                title: 'Esta seguro de Eliminar la orden?',
                 text: "Tenga en cuenta que no se puede revertir una ves eliminado!",
                 type: 'warning',
                 showCancelButton: true,
@@ -176,11 +186,11 @@ export default {
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.value) {
-                    axios.delete(`/api/auth/product/${item.id}`)
+                    axios.delete(`/api/auth/order/${item.id}`)
                     .then( (response)=> {
                         Swal.fire(
                             'Borrado!',
-                            'El producto ha sido eliminado.',
+                            'La orden ha sido eliminado.',
                             'success'
                         )
                         this.search()
@@ -205,7 +215,7 @@ export default {
     },
     components: {
         VueBootstrap4Table,
-        EditProduct
+        EditOrder
     }
 }
 </script>
