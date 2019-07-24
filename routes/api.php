@@ -17,7 +17,7 @@ Route::post('login', 'AuthController@login');
 
 Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router) {
 
-   
+
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
 
@@ -37,15 +37,16 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::get('create_purchase_expensive','PurchaseController@createPurchaseExpensive');
     Route::get('add_item_purchase','PurchaseController@newPurchaseItem');
     Route::resource('package_transaction','PackageTransactionController');
-    Route::resource('package','PackageController');    
-    Route::post('import_package','PackageController@importExcel');    
-    Route::post('save_packages','PackageController@saveExcel');    
-    Route::post('import_purchases','PurchaseController@importExcel');    
-    Route::post('save_purchases','PurchaseController@saveExcel');    
-    Route::post('transfer_lumber','PackageController@transfer_lumber');    
+    Route::resource('package','PackageController');
+    Route::post('import_package','PackageController@importExcel');
+    Route::post('save_packages','PackageController@saveExcel');
+    Route::post('import_purchases','PurchaseController@importExcel');
+    Route::post('save_purchases','PurchaseController@saveExcel');
+    Route::post('transfer_lumber','PackageController@transfer_lumber');
     Route::resource('provider','ProviderController');
     Route::get('getProviderData','ProviderController@list');
     Route::resource('employee','EmployeeController');
+    Route::get('getEmployeeData','EmployeeController@getData');
     Route::resource('position','PositionController');
     Route::resource('area','AreaController');
     Route::post('area/transfer','AreaController@transfer');

@@ -15,7 +15,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $order = $request->order ?? 'asc';
-        $pagination_rows = $request->pagination_rows ?? 10;               
+        $pagination_rows = $request->pagination_rows ?? 10;
 
         $employee_conditions = [];
         $official_area_conditions = [];
@@ -55,7 +55,7 @@ class EmployeeController extends Controller
         }
         if($position) {
             array_push($position_conditions, ['name','like',"%{$position}%"]);
-        }        
+        }
         $employees = Employee::with(['official_area','temporal_area','position','type'])
                             ->where($employee_conditions)
                             ->whereHas('official_area', function ($query) use ($official_area_conditions) {
@@ -74,7 +74,13 @@ class EmployeeController extends Controller
         $data = [
             'employees'   =>  $employees
         ];
-        return response()->json($employees);    
+        return response()->json($employees);
+    }
+
+    public function getData()
+    {
+        $employees = Employee::with(['official_area','temporal_area','position','type','contract_type'])->get();
+        return response()->json($employees);
     }
 
     /**
@@ -101,7 +107,13 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $employee = new Employee();
+        if($request->has('id'))
+        {
+            $employee = Employee::find($request->id);
+        }else {
+            # code...
+            $employee = new Employee();
+        }
         $employee->item = $request->item;
         $employee->identity_card = $request->identity_card;
         $employee->last_name = $request->last_name;
@@ -117,7 +129,7 @@ class EmployeeController extends Controller
         $employee->employee_type_id = $request->employee_type_id;
         $employee->active = $request->active;
         $employee->save();
-        
+
         $data = [
             'employee' => $employee
         ];
@@ -134,7 +146,7 @@ class EmployeeController extends Controller
     public function show($id)
     {
         $employee = Employee::with(['official_area','temporal_area','position','type','contract_type'])->find($id);
-        
+
         $data = [
             'employee' => $employee
         ];
@@ -151,7 +163,7 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::with(['official_area','temporal_area','position','type','contract_type'])->find($id);
-        
+
         $data = [
             'employee' => $employee
         ];
@@ -184,7 +196,7 @@ class EmployeeController extends Controller
         $employee->employee_type_id = $request->employee_type_id;
         $employee->active = $request->active;
         $employee->save();
-        
+
         $data = [
             'employee' => $employee
         ];

@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-card-title>
-            <h3>Productos</h3> 
+            <h3>Productos</h3>
         <v-spacer></v-spacer>
         <!-- <v-btn to="/package/transfer" color="primary" dark class="mb-2" small>Transferencias</v-btn> -->
         <v-btn @click="create()" color="primary" dark class="mb-2" small >Nuevo</v-btn>
