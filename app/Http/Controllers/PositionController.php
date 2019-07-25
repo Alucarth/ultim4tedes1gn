@@ -42,6 +42,17 @@ class PositionController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->has('id')){
+            $position = Position::find($request->id);
+        }else{
+
+            $position = new Position;
+        }
+        $position->name = $request->name;
+        $position->description = $request->description;
+        $position->save();
+
+        return $position;
     }
 
     /**
@@ -64,6 +75,8 @@ class PositionController extends Controller
     public function edit($id)
     {
         //
+        $position = Position::find($id);
+        return response()->json($position);
     }
 
     /**
@@ -87,5 +100,11 @@ class PositionController extends Controller
     public function destroy($id)
     {
         //
+        $position = Position::find($id);
+        $data = [
+            'position_id'    =>  $position->id
+        ];
+        $position->delete();
+        return response()->json($data);
     }
 }
