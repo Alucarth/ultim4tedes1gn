@@ -129,6 +129,9 @@ export default {
                 { icon: 'widgets', text: 'Productos', link: '/product' },
                 { icon: 'library_books', text: 'Contratos', link: '/contract' },
                 { icon: 'chrome_reader_mode', text: 'Ordenes', link: '/order' },
+                { icon: 'assignment_ind', text: 'Tipos de Empleado', link: '/employee_type' },
+                { icon: 'assignment', text: 'Tipos de Contrato', link: '/contract_type' },
+                { icon: 'collections_bookmark', text: 'Areas', link: '/area' },
 
             ],
           lumbers:[
@@ -144,6 +147,7 @@ export default {
                 { icon: 'attach_money', text: 'Gastos', link: '/expenses' },
                 { icon: 'shop_two', text: 'Tipos de Origen', link: '/origin_types' },
                 { icon: 'widgets', text: 'Tipos de Oferta', link: '/offer_types' },
+
           ]
         }
     },
