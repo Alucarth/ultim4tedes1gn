@@ -99,12 +99,12 @@
                     </v-flex>
                     <v-flex xs12 sm12 md5>
                         <v-select
-                        label="Estado"
+                        label="Tipo de Contrato"
                         v-model="item.employee_contract_type_id"
                         :items="contract_types"
                         item-text="name"
                         item-value="id"
-                        :hint="`Descripcion del tipo seleccionado`"
+                        :hint="`Descripcion del tipo de contrato`"
                         persistent-hint>
                         </v-select>
                     </v-flex>

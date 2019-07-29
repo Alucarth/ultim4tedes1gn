@@ -32,6 +32,9 @@ import Product from './components/product/index.vue'
 import Order from './components/order/index.vue'
 import Contract from './components/contract/index.vue'
 import Position from './components/position/index.vue'
+import Area from './components/area/index.vue'
+import EmployeeType from './components/employee_type/index.vue'
+import ContractType from './components/contract_type/index.vue'
 
 
    export const routes= [
@@ -395,6 +398,42 @@ import Position from './components/position/index.vue'
             name: '/position',
             components: {
                 default: Position,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/area',
+            name: '/area',
+            components: {
+                default: Area,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/employee_type',
+            name: '/employee_type',
+            components: {
+                default: EmployeeType,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/contract_type',
+            name: '/contract_type',
+            components: {
+                default: ContractType,
                 toolbar: Toolbar,
                 nav: Nav
             },

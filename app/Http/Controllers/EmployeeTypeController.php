@@ -42,6 +42,17 @@ class EmployeeTypeController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->has('id')){
+            $employe_type = EmployeeType::find($request->id);
+        }else{
+
+            $employe_type = new EmployeeType;
+        }
+        $employe_type->name = $request->name;
+        $employe_type->description = $request->description;
+        $employe_type->save();
+
+        return $employe_type;
     }
 
     /**
@@ -64,6 +75,8 @@ class EmployeeTypeController extends Controller
     public function edit($id)
     {
         //
+        $employee_type = EmployeeType::find($id);
+        return response()->json($employee_type);
     }
 
     /**
@@ -87,5 +100,11 @@ class EmployeeTypeController extends Controller
     public function destroy($id)
     {
         //
+        $employee_type = EmployeeType::find($id);
+        $data = [
+            'employee_type_id'    =>  $employee_type->id
+        ];
+        $employee_type->delete();
+        return response()->json($data);
     }
 }
