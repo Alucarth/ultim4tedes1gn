@@ -8,8 +8,8 @@
             <v-card-text v-if="item">
                 <v-container grid-list-md>
                  <v-layout wrap>
-                     <v-flex xs12>
-                        <v-text-field label="Nombre" v-model="item.name" ></v-text-field>
+                    <v-flex xs12>
+                        <v-text-field label="Número de orden" v-model="item.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Costo" v-model="item.amount" ></v-text-field>

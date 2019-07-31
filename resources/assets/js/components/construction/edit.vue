@@ -12,9 +12,6 @@
                         <v-text-field label="Nombre" v-model="item.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="Costo" v-model="item.amount" ></v-text-field>
-                    </v-flex>
-                    <v-flex xs12>
                         <v-select
                             label="Cliente"
                             v-model="item.client_id"
@@ -24,6 +21,9 @@
                             :hint="`Descripcion del tipo seleccionado`"
                             persistent-hint>
                         </v-select>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-text-field label="Dirección" v-model="item.address" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
@@ -84,9 +84,9 @@ export default {
 			return this.dialog
         },
         title(){
-            let title='Crear Construcción'
+            let title='Crear Obra'
             if(this.item.id) {
-                title = 'Editar Costrucción'
+                title = 'Editar Obra'
             }
             return title
         },
