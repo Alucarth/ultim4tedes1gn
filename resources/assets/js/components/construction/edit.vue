@@ -23,6 +23,17 @@
                         </v-select>
                     </v-flex>
                     <v-flex xs12>
+                        <v-select
+                            label="Estado"
+                            v-model="item.status_id"
+                            :items="statuses"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12>
                         <v-text-field label="Dirección" v-model="item.address" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
@@ -52,7 +63,8 @@ export default {
         construction: Object,
 	},
 	data:()=>({
-        clients: []
+        clients: [],
+        statuses: []
 	}),
 	methods:{
         sendConstruction() {
@@ -71,9 +83,19 @@ export default {
                     console.log(error);
                 })
         },
+        getStatuses() {
+            axios.get('/api/auth/status')
+                .then((response)=> {
+                    this.statuses = response.data
+                })
+                .catch((error)=> {
+                    console.log(error);
+                })
+        },
     },
     mounted() {
         this.getClients()
+        this.getStatuses()
     },
     computed:{
         item(){
