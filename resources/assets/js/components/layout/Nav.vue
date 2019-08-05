@@ -1,10 +1,16 @@
 <template>
     <v-navigation-drawer
-      fixed
-      :clipped="$vuetify.breakpoint.mdAndUp"
-      app
-      v-model="drawer"
-    >
+    v-model="drawer"
+    fixed app>
+    <v-toolbar flat dark :color="$root.themeColor" class="toolbar">
+      <router-link to="/">
+        <img src="images/logo2.png" width="40px"/>
+      </router-link>
+      <router-link to="/" class="text">
+         Ultimate Design
+      </router-link>
+    </v-toolbar>
+    
       <v-list dense>
         <v-list-tile to="/">
             <v-list-tile-action>
@@ -163,3 +169,28 @@ export default {
     }
 }
 </script>
+<style>
+  .toolbar {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .toolbar .text {
+    padding-left: 15px;
+    color: white;
+    text-decoration:none;
+  }
+
+  .item-title {
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .item-sub-title {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .active {
+    font-weight: bold;
+  }
+</style>
