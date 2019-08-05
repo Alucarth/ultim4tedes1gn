@@ -1,21 +1,46 @@
 <template>
       
     <v-toolbar
-      color="blue darken-2"
-      dark
-      app
-      :clipped-left="$vuetify.breakpoint.mdAndUp"
-      fixed
-    >
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <span class="hidden-sm-and-down">Ultimate Design</span>
+    dark
+    app
+    :color="$root.themeColor">
+      <v-toolbar-title>
+        <v-toolbar-side-icon @click="drawer=!drawer"></v-toolbar-side-icon>
       </v-toolbar-title>
-
+      <!-- <v-text-field
+        flat
+        solo-inverted
+        append-icon="search"
+        label="Search">
+      </v-text-field> -->
       <v-spacer></v-spacer>
-
+      <v-menu offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
+        <v-btn icon large flat slot="activator" :ripple="false">
+          <v-avatar size="42px">
+            <img src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairDreads01&accessoriesType=Round&hairColor=Black&facialHairType=Blank&clotheType=GraphicShirt&clotheColor=Black&graphicType=SkullOutline&eyeType=Default&eyebrowType=RaisedExcited&mouthType=Default&skinColor=Yellow"/>
+          </v-avatar>
+        </v-btn>
+        <v-list>
+          <v-list-tile
+            v-for="(item,index) in items"
+            :key="index"
+            :to="!item.href ? { name: item.name } : null"
+            :href="item.href"
+            ripple="ripple"
+            :disabled="item.disabled"
+            :target="item.target"
+            @click="menuOptions(item.title)">
+            <v-list-tile-action v-if="item.icon">
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content >
+              <v-list-tile-title  >{{ item.title }}</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
      
-     <v-menu
+     <!-- <v-menu
         v-model="menu"
         :close-on-content-click="false"
         :nudge-width="100"
@@ -74,7 +99,7 @@
           </v-tooltip>
         </v-card-actions>
       </v-card>
-    </v-menu>
+    </v-menu> -->
     </v-toolbar>
 </template>
 <script>
@@ -83,6 +108,23 @@ import { mapState } from 'vuex';
 export default {
     data: () => ({
       menu: false, 
+       items: [
+        {
+          icon: 'account_circle',
+          href: '#',
+          title: 'Perfil',
+        },
+        {
+          icon: 'settings',
+          href: '#',
+          title: 'Configuracion',
+        },
+        {
+          icon: 'exit_to_app',
+          href: '#',
+          title: 'Salir',
+        }
+      ],
     }),
     computed:{
         drawer:{
@@ -104,7 +146,13 @@ export default {
         // }
        
     },
-    methods:{
+    methods:
+    {
+      menuOptions(title){
+        if(title=="Salir"){
+          this.logout();
+        }  
+      },
       logout()
       {
         this.$store.dispatch('auth/logout')
