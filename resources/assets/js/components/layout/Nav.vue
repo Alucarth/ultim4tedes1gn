@@ -29,7 +29,7 @@
               </v-list-tile-action>
             </v-list-tile>
         </v-list-group>
-        
+
         <v-list-group prepend-icon="shopping_basket">
             <template v-slot:activator>
                 <v-list-tile>
@@ -81,7 +81,7 @@
             <v-list-tile
               v-for="(child, i) in item.children"
               :key="i"
-           
+
             >
               <v-list-tile-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
@@ -114,25 +114,31 @@ export default {
             // drawer:null,
            items: [
                 // { icon: 'dashboard', text: 'Inicio' , link: '/' },
-                
+
                 { icon: 'store', text: 'Insumos' , link: '/inventory' },
                 { icon: 'person', text: 'Clientes' , link: '/client' },
-                { icon: 'building', text: 'Construcciones' , link: '/construction' },
-                
-                             
+                { icon: 'building', text: 'Obras' , link: '/construction' },
+
+
                 { icon: 'money', text: 'Compra de Insumos', link: '/buyout' },
-               
-                
+
+
                 // { icon: 'cloud_upload', text: 'Importar Compras', link: '/import_purchases' },
-               
+
                 { icon: 'work', text: 'Empleados', link: '/employee' },
-                
+                { icon: 'widgets', text: 'Productos', link: '/product' },
+                { icon: 'library_books', text: 'Contratos', link: '/contract' },
+                { icon: 'chrome_reader_mode', text: 'Ordenes', link: '/order' },
+                { icon: 'assignment_ind', text: 'Tipos de Empleado', link: '/employee_type' },
+                { icon: 'assignment', text: 'Tipos de Contrato', link: '/contract_type' },
+                { icon: 'collections_bookmark', text: 'Areas', link: '/area' },
+
             ],
           lumbers:[
                 { icon: 'store', text: 'Almacenes' , link: '/storage' },
                 { icon: 'local_florist', text: 'Especies' , link: '/specie' },
-                { icon: 'group', text: 'Proveedores' , link: '/provider' },  
-                { icon: 'shopping_cart', text: 'Compra de madera', link: '/purchase' }, 
+                { icon: 'group', text: 'Proveedores' , link: '/provider' },
+                { icon: 'shopping_cart', text: 'Compra de madera', link: '/purchase' },
                 { icon: 'group_work', text: 'Madera' , link: '/lumber' },
                 { icon: 'repeat', text: 'Transferencia de Madera', link: '/lumber_transaction' },
                 { icon: 'view_agenda', text: 'Paquetes', link: '/package' },
@@ -141,6 +147,7 @@ export default {
                 { icon: 'attach_money', text: 'Gastos', link: '/expenses' },
                 { icon: 'shop_two', text: 'Tipos de Origen', link: '/origin_types' },
                 { icon: 'widgets', text: 'Tipos de Oferta', link: '/offer_types' },
+
           ]
         }
     },

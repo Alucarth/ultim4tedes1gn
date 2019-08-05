@@ -30,230 +30,237 @@ import Client from './components/client/index.vue'
 import Construction from './components/construction/index.vue'
 import Product from './components/product/index.vue'
 import Order from './components/order/index.vue'
+import Contract from './components/contract/index.vue'
+import Position from './components/position/index.vue'
+import Area from './components/area/index.vue'
+import EmployeeType from './components/employee_type/index.vue'
+import ContractType from './components/contract_type/index.vue'
+
+
    export const routes= [
         {
             path: '/',
             name: 'home',
-            components:{ 
+            components:{
                 default:Home,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
-            
+            }
+
         },
         {
             path: '/provider',
             name: 'Provider',
-            components:{ 
+            components:{
                 default:ProviderList,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/login',
             name: 'Login',
-            component: Login  
+            component: Login
         },
         {
             path: '/lumber',
             name: 'Lumber',
-            components:{ 
+            components:{
                 default:Lumber,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/getLumberData',
             name: 'GetLumberData',
-            components:{ 
+            components:{
                 default:Lumber,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/specie',
             name: 'Specie',
-            components:{ 
+            components:{
                 default:Specie,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/type',
             name: 'Type',
-            components:{ 
+            components:{
                 default:Lumber,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/storage',
             name: 'Storage'    ,
-            components:{ 
+            components:{
                 default:Storage,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
-        },        
+            }
+        },
         {
             path: '/purchase',
             name: 'Purchase',
-            components:{ 
+            components:{
                 default:Purchase,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/buyout',
             name: 'Buyout',
-            components:{ 
+            components:{
                 default:Buyout,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         // {
         //     path: '/purchase/create',
         //     name: 'PurchaseEdit',
-        //     components:{ 
+        //     components:{
         //         default:EditPurchase,
         //         toolbar:Toolbar,
         //         nav: Nav
         //     },
-        //     meta: { 
+        //     meta: {
         //         requiresAuth: true
-        //     }    
+        //     }
         // },
         {
             path: '/create_purchase',
             name: 'import_purchases',
-            components:{ 
+            components:{
                 default:ExcelImportPurchases,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/buyout/create',
             name: 'BuyoutEdit',
-            components:{ 
+            components:{
                 default:EditBuyout,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/package',
             name: 'package',
-            components:{ 
+            components:{
                 default:Package,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/package/create',
             name: 'packageEdit',
-            components:{ 
+            components:{
                 default:EditPackage,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/package/transfer',
             name: 'packageTransfer',
-            components:{ 
+            components:{
                 default:TransferPackage,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
             }
         },
         {
             path: '/inventory/transfer/:id',
             name: 'inventoryTransfer',
-            components:{ 
+            components:{
                 default:TransferInventory,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
             }
-        },        
+        },
         {
             path: '/employee',
             name: 'employee',
-            components:{ 
+            components:{
                 default:Employee,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/import_package',
             name: 'import_package',
-            components:{ 
+            components:{
                 default:ExcelImport,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
-       
+
         {
             path: '/inventory',
             name: 'inventory',
@@ -269,84 +276,84 @@ import Order from './components/order/index.vue'
         {
             path: '/getInventoryData',
             name: 'GetInventoryData',
-            components:{ 
+            components:{
                 default:Inventory,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/lumber_transaction',
             name: 'LumberTransaction',
-            components:{ 
+            components:{
                 default:LumberTransaction,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/expenses',
             name: 'expenses',
-            components:{ 
+            components:{
                 default:Expensive,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/origin_types',
             name: 'origin_types',
-            components:{ 
+            components:{
                 default:OriginTypes,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/offer_types',
             name: 'offer_types',
-            components:{ 
+            components:{
                 default:OfferTypes,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
-            }    
+            }
         },
         {
             path: '/client',
             name: 'Client'    ,
-            components:{ 
+            components:{
                 default:Client,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
             }
         },
         {
             path: '/construction',
             name: 'Construction',
-            components:{ 
+            components:{
                 default:Construction,
                 toolbar:Toolbar,
                 nav: Nav
             },
-            meta: { 
+            meta: {
                 requiresAuth: true
             }
         },
@@ -367,6 +374,66 @@ import Order from './components/order/index.vue'
             name: '/Order',
             components: {
                 default: Order,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/contract',
+            name: '/Contract',
+            components: {
+                default: Contract,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/position',
+            name: '/position',
+            components: {
+                default: Position,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/area',
+            name: '/area',
+            components: {
+                default: Area,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/employee_type',
+            name: '/employee_type',
+            components: {
+                default: EmployeeType,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/contract_type',
+            name: '/contract_type',
+            components: {
+                default: ContractType,
                 toolbar: Toolbar,
                 nav: Nav
             },

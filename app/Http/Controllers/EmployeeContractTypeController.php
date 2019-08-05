@@ -41,6 +41,17 @@ class EmployeeContractTypeController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->has('id')){
+            $employe_contract_type = EmployeeContractType::find($request->id);
+        }else{
+
+            $employe_contract_type = new EmployeeContractType;
+        }
+        $employe_contract_type->name = $request->name;
+        $employe_contract_type->description = $request->description;
+        $employe_contract_type->save();
+
+        return $employe_contract_type;
     }
 
     /**
@@ -63,6 +74,8 @@ class EmployeeContractTypeController extends Controller
     public function edit($id)
     {
         //
+        $employee_contract_type = EmployeeContractType::find($id);
+        return response()->json($employee_contract_type);
     }
 
     /**
@@ -86,5 +99,11 @@ class EmployeeContractTypeController extends Controller
     public function destroy($id)
     {
         //
+        $employee_contract_type = EmployeeContractType::find($id);
+        $data = [
+            'employee_contract_type_id'    =>  $employee_contract_type->id
+        ];
+        $employee_contract_type->delete();
+        return response()->json($data);
     }
 }

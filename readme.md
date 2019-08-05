@@ -17,6 +17,16 @@ composer install
 yarn or npm Install  
 php artisan key:generate  
 php artisan jwt:secret  
+
+## .env 
+add url proyect into .env file
+
+example "http://ultim4tedes1gn.test" 
+
+APP_URL=http://ultim4tedes1gn.test
+
+then make run: npm run dev
+
 ## Utils
 for send a message with vuex use this:
 

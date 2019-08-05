@@ -1,13 +1,12 @@
 <template>
     <v-card>
         <v-card-title>
-            <h3>Productos</h3>
+            <h3>Contratos</h3> 
         <v-spacer></v-spacer>
-        <!-- <v-btn to="/package/transfer" color="primary" dark class="mb-2" small>Transferencias</v-btn> -->
         <v-btn @click="create()" color="primary" dark class="mb-2" small >Nuevo</v-btn>
         </v-card-title>
         <v-card-text>
-             <vue-bootstrap4-table :rows="products" :columns="columns" :config="config" >
+             <vue-bootstrap4-table :rows="contracts" :columns="columns" :config="config" >
                 <template slot="sort-asc-icon">
                     <i class="fa fa-sort-asc"></i>
                 </template>
@@ -17,15 +16,7 @@
                 <template slot="no-sort-icon">
                     <i class="fa fa-sort"></i>
                 </template>
-                <!-- <template slot="is_enabled" slot-scope="props">
-                   <div class="text-xs-center">
-                    <v-chip :color="props.row.is_enabled?'success':'danger'" :text-color="props.row.is_enabled?'white':'danger'" >{{props.row.is_enabled?'Activo':'Inactivo'}}</v-chip>
-                    </div>
-                </template> -->
                 <template slot="option" slot-scope="props">
-                    <!-- <v-icon  small>
-                        remove_red_eye
-                    </v-icon> -->
                     <v-icon @click="edit(props.row)" small>
                         edit
                     </v-icon>
@@ -34,47 +25,39 @@
                     </v-icon>
                 </template>
             </vue-bootstrap4-table>
-        </v-card-text>
-        <edit-product :dialog="dialog" :product="product" @close="close" @product="update" ></edit-product>
+        </v-card-text>      
+        <edit-contract :dialog="dialog" :contract="contract" @close="close" @contract="update" ></edit-contract>
     </v-card>
 </template>
 <script>
 import VueBootstrap4Table from 'vue-bootstrap4-table';
-import EditProduct from './edit.vue';
+import EditContract from './edit.vue';
 export default {
     data () {
       return {
-        products: [],
-        product: {},
+        contracts: [],
+        contract: {},
         loading: true,
         dialog: false,
-        columns: [{
+        columns: [
+            {
                 label: "Nombre",
                 name: "name",
                 filter: {
                     type: "simple",
-                    placeholder: "Ingrese nombre"
+                    placeholder: "Ingrese Nombre"
                 },
                 sort: true,
             },
             {
-                label: "Acabado",
-                name: "completed_type",
+                label: "Costo",
+                name: "amount",
                 filter: {
                     type: "simple",
-                    placeholder: "Ingrese Acabado"
+                    placeholder: "Ingrese costo"
                 },
                 sort: true,
             },
-            // {
-            //     label: "CI/NIT",
-            //     name: "nit",
-            //     filter: {
-            //         type: "simple",
-            //         placeholder: "Ingrese CI o NIT"
-            //     },
-            //     sort: true,
-            // },
             {
                 label: "Descripcion",
                 name: "description",
@@ -113,7 +96,7 @@ export default {
     },
     computed: {
         formTitle () {
-                return this.editedIndex === -1 ? 'Crear nuevo proucto' : 'Editar Producto'
+                return this.editedIndex === -1 ? 'Crear nuevo contrato' : 'Editar Contrato'
             }
     },
     mounted()
@@ -122,31 +105,31 @@ export default {
     },
     methods:{
         search() {
-            axios.get('/api/auth/product')
+            axios.get('/api/auth/contract')
                 .then((response)=> {
-                    this.products= response.data;
+                    this.contracts = response.data;
                 })
                 .catch((error)=> {
                     console.log(error);
                 })
         },
         create() {
-            this.product={}
+            this.contract= {}
             this.dialog = true;
         },
         show(item) {
-            axios.get(`/api/auth/product/${item.id}`)
+            axios.get(`/api/auth/contract/${item.id}`)
             .then(response => {
-                this.product = response.data.product
+                this.contract = response.data.contract
             })
             .catch(error => {
                 console.log(error);
             })
         },
         edit (item) {
-            axios.get(`/api/auth/product/${item.id}/edit`)
+            axios.get(`/api/auth/contract/${item.id}/edit`)
             .then(response => {
-                this.product = response.data.product;
+                this.contract = response.data.contract;
                 this.dialog=true;
             })
             .catch(error => {
@@ -154,9 +137,9 @@ export default {
             });
         },
         update (item) {
-             axios.post('/api/auth/product', item)
+             axios.post('/api/auth/contract', item)
                   .then(response => {
-                        this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de productos',color:'success'});
+                        this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de contratos',color:'success'});
                         this.search();
                     })
                     .catch(function (error) {
@@ -166,7 +149,7 @@ export default {
         },
         destroy (item) {
             Swal.fire({
-                title: 'Esta seguro de Eliminar al Producto?',
+                title: 'Esta seguro de Eliminar al contrato?',
                 text: "Tenga en cuenta que no se puede revertir una ves eliminado!",
                 type: 'warning',
                 showCancelButton: true,
@@ -176,11 +159,11 @@ export default {
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.value) {
-                    axios.delete(`/api/auth/product/${item.id}`)
+                    axios.delete(`/api/auth/contract/${item.id}`)
                     .then( (response)=> {
                         Swal.fire(
                             'Borrado!',
-                            'El producto ha sido eliminado.',
+                            'El contrato ha sido eliminado.',
                             'success'
                         )
                         this.search()
@@ -205,7 +188,7 @@ export default {
     },
     components: {
         VueBootstrap4Table,
-        EditProduct
+        EditContract
     }
 }
 </script>

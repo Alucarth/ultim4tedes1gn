@@ -42,6 +42,17 @@ class AreaController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->has('id')){
+            $area = Area::find($request->id);
+        }else{
+
+            $area = new Area;
+        }
+        $area->name = $request->name;
+        $area->description = $request->description;
+        $area->save();
+
+        return $area;
     }
 
     /**
@@ -69,6 +80,8 @@ class AreaController extends Controller
     public function edit($id)
     {
         //
+        $area = Area::find($id);
+        return response()->json($area);
     }
 
     /**
@@ -92,6 +105,12 @@ class AreaController extends Controller
     public function destroy($id)
     {
         //
+        $area = Area::find($id);
+        $data = [
+            'area_id'    =>  $area->id
+        ];
+        $area->delete();
+        return response()->json($data);
     }
 
     public function transfer(Request $request) {

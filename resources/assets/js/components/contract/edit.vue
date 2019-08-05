@@ -12,18 +12,7 @@
                         <v-text-field label="Nombre" v-model="item.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                        <v-select
-                            label="Cliente"
-                            v-model="item.client_id"
-                            :items="clients"
-                            item-text="name"
-                            item-value="id"
-                            :hint="`Descripcion del tipo seleccionado`"
-                            persistent-hint>
-                        </v-select>
-                    </v-flex>
-                    <v-flex xs12>
-                        <v-text-field label="Dirección" v-model="item.address" ></v-text-field>
+                        <v-text-field label="Costo" v-model="item.amount" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
@@ -39,7 +28,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click="sendClose()">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click="sendConstruction()" >Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="sendContract()" >Guardar</v-btn>
                 <!-- <v-btn color="blue darken-1" flat @click="update(item)" v-else>Actualizar</v-btn> -->
             </v-card-actions>
             </v-card>
@@ -49,44 +38,28 @@
 export default {
 	props:{
         dialog: Boolean,
-        construction: Object,
+        contract: Object,
 	},
-	data:()=>({
-        clients: []
-	}),
 	methods:{
-        sendConstruction() {
-            this.$emit('construction',this.item)
+        sendContract() {
+            this.$emit('contract',this.item)
         },
         sendClose() {
             this.$emit('close',false)
         },
-        getClients() {
-            axios.get('/api/auth/client')
-                .then((response)=> {
-                    console.log(response.data)
-                    this.clients= response.data
-                })
-                .catch((error)=> {
-                    console.log(error);
-                })
-        },
-    },
-    mounted() {
-        this.getClients()
     },
     computed:{
         item(){
-           let item = this.construction
+           let item = this.contract
            return item
         },
         parent_dialog(){
 			return this.dialog
         },
         title(){
-            let title='Crear Obra'
+            let title='Crear Contrato'
             if(this.item.id) {
-                title = 'Editar Obra'
+                title = 'Editar Contrato'
             }
             return title
         },

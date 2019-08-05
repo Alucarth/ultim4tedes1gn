@@ -34,7 +34,7 @@
                     </v-icon>
                 </template>
             </vue-bootstrap4-table>
-        </v-card-text>      
+        </v-card-text>
         <edit-order :dialog="dialog" :order="order" @close="close" @order="update" ></edit-order>
     </v-card>
 </template>

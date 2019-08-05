@@ -22,6 +22,10 @@ class CreateProductTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->decimal('amount',13,2)->default(0);
+            $table->integer('product_type_id')->unsigned();
+            $table->foreign('product_type_id')->references('id')->on('product_types');
+            $table->integer('status_id')->unsigned();
+            $table->foreign('status_id')->references('id')->on('statuses');
             $table->timestamps();
             $table->softDeletes();
         });
