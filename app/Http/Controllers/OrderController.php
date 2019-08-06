@@ -59,7 +59,13 @@ class OrderController extends Controller
         $order->amount = $request->amount;
         $products = [];
         foreach($request->products as $product) {
-            array_push($products,$product['id']);
+            $products[$product['id']] = [
+                'quantity' => $product['quantity'],
+                'description' => $product['description'],
+                'density' => $product['density'],
+                'high' => $product['high'],
+                'width' => $product['width']
+            ];            
         }
         $order->save();
         $order->products()->sync($products);
