@@ -29,6 +29,7 @@ class CreateWorkItemsTable extends Migration
             $table->decimal('time');
             $table->decimal('quantity');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
