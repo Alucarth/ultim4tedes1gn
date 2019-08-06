@@ -55,6 +55,9 @@ class ClientController extends Controller
         }
         $client->name = $request->name;
         $client->nit = $request->nit;
+        $client->legal_representative = $request->legal_representative;
+        $client->address = $request->address;
+        $client->phone = $request->phone;
         $client->description = $request->description;
         $client->save();
 

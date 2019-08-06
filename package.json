@@ -15,7 +15,7 @@
         "laravel-mix": "^4.0.16",
         "lodash": "^4.17.11",
         "resolve-url-loader": "^2.3.2",
-        "sass": "^1.20.3",
+        "sass": "^1.22.3",
         "sass-loader": "^7.1.0",
         "vue": "^2.6.10"
     },
@@ -27,11 +27,11 @@
         "moment": "^2.23.0",
         "numeral": "^2.0.6",
         "popper.js": "^1.14.7",
-        "sweetalert2": "^8.11.7",
+        "sweetalert2": "^8.13.1",
         "vue-bootstrap4-table": "^1.1.9",
-        "vue-router": "^3.0.6",
+        "vue-router": "^3.0.7",
         "vue-template-compiler": "^2.6.10",
-        "vuetify": "^1.5.14",
+        "vuetify": "^1.5.16",
         "vuex": "^3.1.1"
     }
 }

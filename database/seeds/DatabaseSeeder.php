@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
                     OriginTypeSeeder::class,
                     InventoryTypeSeeder::class,
                     FamilySeeder::class,
+                    StatusesTableSeeder::class,
+                    OrderTypeTableSeeder::class,
+                    ProductTypeTableSeeder::class
                     ]);
     }
 }
