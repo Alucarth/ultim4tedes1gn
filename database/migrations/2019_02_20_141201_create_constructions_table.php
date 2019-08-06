@@ -23,6 +23,8 @@ class CreateConstructionsTable extends Migration
             $table->string('address')->nullable();
             $table->integer('status_id')->unsigned();
             $table->integer('level')->default(1);
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->foreign('status_id')->references('id')->on('statuses');
             $table->timestamps();
             $table->softDeletes();
