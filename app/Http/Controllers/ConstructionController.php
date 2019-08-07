@@ -51,8 +51,10 @@ class ConstructionController extends Controller
         } else {
             $construction = new Construction();
             $construction->amount = 0;         
+
         }
         $construction->client_id = $request->client_id;
+        $construction->status_id = $request->status_id;
         $construction->name = $request->name;        
         $construction->address = $request->addresss;
         $construction->status_id = $request->status_id;
