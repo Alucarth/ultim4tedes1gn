@@ -12,6 +12,17 @@
                         <v-text-field label="Nombre" v-model="item.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
+                        <v-select
+                            label="Tipo"
+                            v-model="item.product_type_id"
+                            :items="product_types"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12>
                         <v-text-field label="Acabado" v-model="item.completed_type" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
@@ -53,7 +64,7 @@ export default {
         product: Object
 	},
 	data:()=>({
-
+        product_types: []
 	}),
 	methods:{
         sendProduct() {
@@ -62,7 +73,19 @@ export default {
         sendClose() {
             this.$emit('close',false)
         },
-	},
+        getProductTypes() {
+            axios.get('/api/auth/product_type')
+                .then((response)=> {
+                    this.product_types = response.data
+                })
+                .catch((erro)=> {
+                    console.log(error)
+                })
+        },
+    },
+    mounted() {
+        this.getProductTypes()
+    },
     computed:{
         item(){
            let item = this.product

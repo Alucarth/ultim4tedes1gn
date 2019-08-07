@@ -53,6 +53,23 @@
               </v-list-tile-action>
             </v-list-tile>
         </v-list-group>
+        <v-list-group prepend-icon="assignment">
+            <template v-slot:activator>
+                <v-list-tile>
+                    <v-list-tile-title>Modulo de Pedidos</v-list-tile-title>
+                </v-list-tile>
+            </template>
+            <v-list-tile
+              v-for="(order, i) in orders"
+              :key="i"
+              :to="order.link"
+            >
+              <v-list-tile-title v-text="order.text"></v-list-tile-title>
+              <v-list-tile-action>
+                <v-icon v-text="order.icon"></v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+        </v-list-group>
         <!-- <template v-for="item in items">
           <v-layout
             row
@@ -122,24 +139,21 @@ export default {
                 // { icon: 'dashboard', text: 'Inicio' , link: '/' },
 
                 { icon: 'store', text: 'Insumos' , link: '/inventory' },
-                { icon: 'person', text: 'Clientes' , link: '/client' },
-                { icon: 'building', text: 'Construcciones' , link: '/construction' },
-
-
                 { icon: 'money', text: 'Compra de Insumos', link: '/buyout' },
-
-
                 // { icon: 'cloud_upload', text: 'Importar Compras', link: '/import_purchases' },
-
                 { icon: 'work', text: 'Empleados', link: '/employee' },
-                { icon: 'widgets', text: 'Productos', link: '/product' },
-                { icon: 'library_books', text: 'Contratos', link: '/contract' },
-                { icon: 'chrome_reader_mode', text: 'Ordenes', link: '/order' },
                 { icon: 'assignment_ind', text: 'Tipos de Empleado', link: '/employee_type' },
-                { icon: 'assignment', text: 'Tipos de Contrato', link: '/contract_type' },
                 { icon: 'collections_bookmark', text: 'Areas', link: '/area' },
 
             ],
+          orders: [
+            { icon: 'widgets', text: 'Productos', link: '/product' },
+            { icon: 'person', text: 'Clientes' , link: '/client' },
+            { icon: 'assignment', text: 'Tipos de Contrato', link: '/contract_type' },
+            { icon: 'library_books', text: 'Contratos', link: '/contract' },
+            { icon: 'building', text: 'Obras' , link: '/construction' },
+            { icon: 'chrome_reader_mode', text: 'Ordenes', link: '/order' },
+          ],
           lumbers:[
                 { icon: 'store', text: 'Almacenes' , link: '/storage' },
                 { icon: 'local_florist', text: 'Especies' , link: '/specie' },

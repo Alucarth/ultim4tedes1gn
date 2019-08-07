@@ -8,8 +8,8 @@
             <v-card-text v-if="item">
                 <v-container grid-list-md>
                  <v-layout wrap>
-                     <v-flex xs12>
-                        <v-text-field label="Nombre" v-model="item.name" ></v-text-field>
+                    <v-flex xs12>
+                        <v-text-field label="Número de orden" v-model="item.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Costo" v-model="item.amount" ></v-text-field>
@@ -36,7 +36,7 @@
                     </v-flex> -->
                     <v-flex xs12>
                         <v-select
-                            label="Construccion"
+                            label="Obra"
                             v-model="item.construction_id"
                             :items="constructions"
                             item-text="name"
@@ -45,6 +45,18 @@
                             persistent-hint>
                         </v-select>
                     </v-flex>
+                    <v-flex xs12>
+                        <v-select
+                            label="Estado"
+                            v-model="item.status_id"
+                            :items="statuses"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
+                    </v-flex>
+
                     <v-card-text>
                         <vue-bootstrap4-table :rows="products" :columns="product_columns" :config="config" >
                             <template slot="sort-asc-icon">
@@ -66,8 +78,12 @@
                     <v-card-text>
                         <ul class="list-group">Productos seleccionados
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(product,index) in selected_products" :key="index">
-                            <span> {{product.name}}</span> 
-                            <span>{{product.description}}</span>
+                            <span> {{product.name}}</span>                             
+                            <v-text-field label="Cantidad" v-model="product.quantity"></v-text-field>
+                            <v-text-field label="Densidad" v-model="product.density"></v-text-field>
+                            <v-text-field label="Altura" v-model="product.high"></v-text-field>
+                            <v-text-field label="Ancho" v-model="product.width"></v-text-field>
+                            <v-text-field label="Descripción" v-model="product.description"></v-text-field>                            
                         </li>
                         </ul>
                     </v-card-text>
@@ -97,6 +113,7 @@ export default {
 	data:()=>({
         contracts: [],
         constructions: [],
+        statuses: [],
         products: [],
         contract: Object,
         product_columns: [{
@@ -193,6 +210,15 @@ export default {
                     console.log(error)
                 })
         },
+        getStatuses() {
+            axios.get('/api/auth/status')
+                .then((response)=> {
+                    this.statuses = response.data
+                })
+                .catch((erro)=> {
+                    console.log(error)
+                })
+        },
         add(prod) {
             console.log('ading a new element')
             
@@ -204,6 +230,7 @@ export default {
         this.getContracts()
         this.getConstructions()
         this.getProducts()
+        this.getStatuses()
     },
     computed:{
         item(){

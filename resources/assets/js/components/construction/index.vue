@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-card-title>
-            <h3>Construcciones</h3> 
+            <h3>Obras</h3> 
         <v-spacer></v-spacer>
         <!-- <v-btn to="/package/transfer" color="primary" dark class="mb-2" small>Transferencias</v-btn> -->
         <v-btn @click="create()" color="primary" dark class="mb-2" small >Nuevo</v-btn>
@@ -157,7 +157,7 @@ export default {
         update (item) {
              axios.post('/api/auth/construction', item)
                   .then(response => {
-                        this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de construcciones',color:'success'});
+                        this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de obras',color:'success'});
                         this.search();
                     })
                     .catch(function (error) {
