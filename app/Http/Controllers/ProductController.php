@@ -55,6 +55,7 @@ class ProductController extends Controller
         $product->density = $request->density;
         $product->high = $request->high;
         $product->width = $request->width;
+        $product->product_type_id = $request->product_type_id;
         $product->completed_type = $request->completed_type;
         $product->description = $request->description;
         $product->save();

@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
+use App\ProductType;
 use Illuminate\Http\Request;
-use App\Status;
-=======
-use App\Status;
-use Illuminate\Http\Request;
->>>>>>> origin/master
 
-class StatusController extends Controller
+class ProductTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,18 +14,12 @@ class StatusController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $statuses = Status::get();
-        $data = [
-            'statuses' =>  $statuses,
-=======
         //
-        $statuses = Status::get();
+        $product_types = ProductType::get();
         $data = [
-            'statuses' =>  $statuses,            
->>>>>>> origin/master
+            'product_types' =>  $product_types,            
         ];
-        return response()->json($statuses);
+        return response()->json($product_types);
     }
 
     /**
@@ -57,17 +46,10 @@ class StatusController extends Controller
     /**
      * Display the specified resource.
      *
-<<<<<<< HEAD
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-=======
      * @param  \App\State  $state
      * @return \Illuminate\Http\Response
      */
     public function show(State $state)
->>>>>>> origin/master
     {
         //
     }
@@ -75,17 +57,10 @@ class StatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-<<<<<<< HEAD
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-=======
      * @param  \App\State  $state
      * @return \Illuminate\Http\Response
      */
     public function edit(State $state)
->>>>>>> origin/master
     {
         //
     }
@@ -94,17 +69,10 @@ class StatusController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-<<<<<<< HEAD
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-=======
      * @param  \App\State  $state
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, State $state)
->>>>>>> origin/master
     {
         //
     }
@@ -112,17 +80,10 @@ class StatusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-<<<<<<< HEAD
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-=======
      * @param  \App\State  $state
      * @return \Illuminate\Http\Response
      */
     public function destroy(State $state)
->>>>>>> origin/master
     {
         //
     }
