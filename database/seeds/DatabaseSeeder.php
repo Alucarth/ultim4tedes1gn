@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
                     FamilySeeder::class,
                     StatusesTableSeeder::class,
                     OrderTypeTableSeeder::class,
-                    ProductTypeTableSeeder::class
+                    ProductTypeTableSeeder::class,
+                    ContractTypeSeeder::class,
                     ]);
     }
 }
