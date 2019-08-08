@@ -17,8 +17,8 @@ class CreateContractTable extends Migration
             $table->increments('id');            
             $table->string('name');
             $table->string('description');
-            $table->integer('contract_types_id')->unsigned();
-            $table->foreign('contract_types_id')->references('id')->on('contract_types_id');
+            $table->integer('contract_type_id')->unsigned();
+            $table->foreign('contract_type_id')->references('id')->on('contract_types_id');
             $table->integer('constructions_id')->unsigned();
             $table->foreign('constructions_id')->references('id')->on('constructions_id');
             $table->decimal('amount',13,2)->default(0);
