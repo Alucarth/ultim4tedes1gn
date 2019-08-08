@@ -17,6 +17,8 @@ class CreateContractTable extends Migration
             $table->increments('id');            
             $table->string('name');
             $table->string('description');
+            $table->integer('contract_id')->unsigned();
+            $table->foreign('contract_id')->references('id')->on('contracts');
             $table->decimal('amount',13,2)->default(0);
             $table->timestamps();
             $table->softDeletes();

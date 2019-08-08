@@ -34,7 +34,7 @@ import Contract from './components/contract/index.vue'
 import Position from './components/position/index.vue'
 import Area from './components/area/index.vue'
 import EmployeeType from './components/employee_type/index.vue'
-import ContractType from './components/contract_type/index.vue'
+import EmployeeContractType from './components/employee_contract_type/index.vue'
 
 
    export const routes= [
@@ -430,10 +430,10 @@ import ContractType from './components/contract_type/index.vue'
             }
         },
         {
-            path: '/contract_type',
-            name: '/contract_type',
+            path: '/employee_contract_type',
+            name: '/employee_contract_type',
             components: {
-                default: ContractType,
+                default: EmployeeContractType,
                 toolbar: Toolbar,
                 nav: Nav
             },
