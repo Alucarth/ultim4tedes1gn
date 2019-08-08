@@ -77,7 +77,7 @@ export default {
                 sort: true,
             },
             {
-                label: "Cliete",
+                label: "Cliente",
                 name: "client.name",
                 filter: {
                     type: "simple",
