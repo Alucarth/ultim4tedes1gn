@@ -11,9 +11,9 @@
                     <v-flex xs12>
                         <v-text-field label="Número de orden" v-model="item.name" ></v-text-field>
                     </v-flex>
-                    <v-flex xs12>
+                    <!-- <v-flex xs12>
                         <v-text-field label="Costo" v-model="item.amount" ></v-text-field>
-                    </v-flex>
+                    </v-flex> -->
                     <v-flex xs12>
                         <v-select
                             label="Contrato"
@@ -126,6 +126,15 @@ export default {
                 sort: true,
             },
             {
+                label: "Tipo",
+                name: "product_type.name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Tipo de producto"
+                },
+                sort: true,
+            },
+            {
                 label: "Acabado",
                 name: "completed_type",
                 filter: {
@@ -221,8 +230,8 @@ export default {
         },
         add(prod) {
             console.log('ading a new element')
-            
-            this.selected_products.push(prod)
+            let new_product = _.cloneDeep(prod)
+            this.selected_products.push(new_product)
             //console.log(this.item.products.length)
         }
     },
