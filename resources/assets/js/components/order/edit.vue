@@ -80,9 +80,9 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(product,index) in selected_products" :key="index">
                             <span> {{product.name}}</span>                             
                             <v-text-field label="Cantidad" v-model="product.quantity"></v-text-field>
-                            <v-text-field label="Densidad" v-model="product.density"></v-text-field>
-                            <v-text-field label="Altura" v-model="product.high"></v-text-field>
-                            <v-text-field label="Ancho" v-model="product.width"></v-text-field>
+                            <v-text-field label="Espesor(mm)" v-model="product.density"></v-text-field>
+                            <v-text-field label="Altura(mm)" v-model="product.high"></v-text-field>
+                            <v-text-field label="Ancho(mm)" v-model="product.width"></v-text-field>
                             <v-text-field label="Descripción" v-model="product.description"></v-text-field>                            
                         </li>
                         </ul>
