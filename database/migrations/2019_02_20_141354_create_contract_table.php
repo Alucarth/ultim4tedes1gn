@@ -18,9 +18,7 @@ class CreateContractTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->integer('contract_type_id')->unsigned();
-            $table->foreign('contract_type_id')->references('id')->on('contract_types_id');
-            $table->integer('constructions_id')->unsigned();
-            $table->foreign('constructions_id')->references('id')->on('constructions_id');
+            $table->foreign('contract_type_id')->references('id')->on('contract_types');
             $table->decimal('amount',13,2)->default(0);
             $table->timestamps();
             $table->softDeletes();
@@ -34,6 +32,6 @@ class CreateContractTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contract');
+        Schema::dropIfExists('contracts');
     }
 }
