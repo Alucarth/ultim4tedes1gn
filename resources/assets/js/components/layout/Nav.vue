@@ -143,7 +143,7 @@ export default {
           orders: [
             { icon: 'widgets', text: 'Productos', link: '/product' },
             { icon: 'person', text: 'Clientes' , link: '/client' },
-            { icon: 'assignment', text: 'Tipos de Contrato', link: '/contract_type' },
+            { icon: 'assignment', text: 'Tipos de Contrato', link: '/employee_contract_type' },
             { icon: 'library_books', text: 'Contratos', link: '/contract' },
             { icon: 'building', text: 'Obras' , link: '/construction' },
             { icon: 'chrome_reader_mode', text: 'Ordenes', link: '/order' },
