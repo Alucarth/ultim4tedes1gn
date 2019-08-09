@@ -50,6 +50,15 @@ export default {
                 sort: true,
             },
             {
+                label: "Obra",
+                name: "construction.name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese obra"
+                },
+                sort: true,
+            },
+            {
                 label: "Costo",
                 name: "amount",
                 filter: {

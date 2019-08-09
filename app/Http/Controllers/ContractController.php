@@ -14,7 +14,7 @@ class ContractController extends Controller
      */
     public function index()
     {
-        $contracts = Contract::get();
+        $contracts = Contract::with(['construction'])->get();
 
         $data = [
             'contracts'  =>  $contracts
