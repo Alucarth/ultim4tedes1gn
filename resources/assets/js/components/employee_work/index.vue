@@ -1,12 +1,12 @@
 <template>
     <v-card>
         <v-card-title>
-            <h3>Tareas</h3>
+            <h3>Tiempos Empleado {{$route.params.id}} </h3>
         <v-spacer></v-spacer>
         <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
         <v-card-text>
-             <vue-bootstrap4-table :rows="tasks" :columns="columns" :config="config" >
+             <vue-bootstrap4-table :rows="works" :columns="columns" :config="config" >
                 <template slot="sort-asc-icon">
                     <i class="fa fa-sort-asc"></i>
                 </template>
@@ -34,34 +34,34 @@
                 </template>
             </vue-bootstrap4-table>
         </v-card-text>
-        <edit-task :dialog="dialog" :task="task" @close="close"  @task="update"></edit-task>
+        <!-- <edit-work :dialog="dialog" :work="work" @close="close"  @work="update"></edit-work> -->
 
     </v-card>
 </template>
 <script>
 import VueBootstrap4Table from 'vue-bootstrap4-table';
-import EditTask from './edit.vue';
+import EditWork from './edit.vue';
 export default {
     data:()=>({
-        tasks:[],
-        task:{},
+        works:[],
+        work:{},
         dialog:false,
         columns: [
+            // {
+            //     label: "Codigo",
+            //     name: "code",
+            //     filter: {
+            //         type: "simple",
+            //         placeholder: "Ingrese codigo"
+            //     },
+            //     sort: true,
+            // },
             {
-                label: "Codigo",
-                name: "code",
+                label: "Fecha",
+                name: "date",
                 filter: {
                     type: "simple",
-                    placeholder: "Ingrese codigo"
-                },
-                sort: true,
-            },
-            {
-                label: "Nombre",
-                name: "name",
-                filter: {
-                    type: "simple",
-                    placeholder: "Ingrese Nombre"
+                    placeholder: "Ingrese Fecha"
                 },
                 sort: true,
             },
@@ -91,27 +91,31 @@ export default {
 
     }),
     mounted(){
-        this.search();
-    },
+		
+      console.log($route.params);
+	},
+	created(){
+		//   this.search();
+	},
     methods:{
         search(){
-            axios.get('/api/auth/task')
+            axios.get(`/api/auth/employee_work/${$route.params.id}`)
                  .then((response)=>{
                     // this.employees = response.data;
-                    this.tasks = response.data.tasks;
+                    this.works = response.data.works;
                     console.log(response.data);
                 });
         },
         create() {
-            this.task ={};
+            this.work ={};
             this.dialog = true;
         },
 
         edit (item) {
             console.log(item);
-            axios.get(`/api/auth/task/${item.id}/edit`)
+            axios.get(`/api/auth/work/${item.id}/edit`)
             .then(response => {
-                this.task = response.data
+                this.work = response.data
             })
             .catch(error => {
                 console.log(error);
@@ -121,7 +125,7 @@ export default {
         },
         update (item) {
             console.log(item);
-            axios.post('/api/auth/task', item)
+            axios.post('/api/auth/work', item)
                   .then(response => {
                         this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de productos',color:'success'});
                         this.search();
@@ -135,7 +139,7 @@ export default {
         destroy (item) {
 
             let success_delete = false;
-            axios.delete(`/api/auth/task/${item.id}`)
+            axios.delete(`/api/auth/work/${item.id}`)
             .then((response) =>{
                 // success_delete = true;
                 this.search();
@@ -153,7 +157,7 @@ export default {
     },
     components: {
         VueBootstrap4Table,
-        EditTask
+        EditWork
     }
 }
 </script>

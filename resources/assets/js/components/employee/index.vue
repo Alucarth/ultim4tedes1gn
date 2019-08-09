@@ -26,15 +26,16 @@
                     </div>
                 </template>
                 <template slot="option" slot-scope="props">
-                    <!-- <v-icon  small>
-                        remove_red_eye
-                    </v-icon> -->
+                    <v-icon  small @click="$router.push({ path: `/employee_work/${props.row.id}` })" >
+                        access_time
+                    </v-icon>
                     <v-icon @click="edit(props.row)" small>
                         edit
                     </v-icon>
                     <v-icon @click="destroy(props.row)" small>
                         delete
                     </v-icon>
+
                 </template>
             </vue-bootstrap4-table>
         </v-card-text>
@@ -94,15 +95,15 @@ export default {
                 },
                 sort: true,
             },
-            {
-                label: "Area Temporal",
-                name: "temporal_area.name",
-                filter: {
-                    type: "simple",
-                    placeholder: "Ingrese Area Temporal"
-                },
-                sort: true,
-            },
+            // {
+            //     label: "Area Temporal",
+            //     name: "temporal_area.name",
+            //     filter: {
+            //         type: "simple",
+            //         placeholder: "Ingrese Area Temporal"
+            //     },
+            //     sort: true,
+            // },
             {
                 label: "Cargo",
                 name: "position.name",

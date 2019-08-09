@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Task;
-class TaskController extends Controller
+use App\Employee;
+use App\Work;
+class WorkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,13 @@ class TaskController extends Controller
     public function index()
     {
         //
-        $tasks = Task::all();
-        return response()->json(compact('tasks'));
+    }
+
+    public function index_employee($employee_id)
+    {
+        $works= Work::where('employee_id',$employee_id)->get();
+        $employe = Employee::find($employee_id);
+        return response()->json(compact('works','employee'));
     }
 
     /**
@@ -37,16 +43,6 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         //
-        if($request->has('id')){
-            $task = Task::find($request->id);
-        }else{
-            $task = new Task;
-        }
-        $task->code = $request->code;
-        $task->name = $request->name;
-        $task->save();
-
-        return $task;
     }
 
     /**
@@ -68,8 +64,7 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $task = Task::find($id);
-        return response()->json(compact('task'));
+        //
     }
 
     /**

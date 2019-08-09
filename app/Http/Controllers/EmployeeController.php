@@ -19,7 +19,7 @@ class EmployeeController extends Controller
 
         $employee_conditions = [];
         $official_area_conditions = [];
-        $temporal_area_conditions = [];
+  
         $position_conditions = [];
         $type_conditions = [];
 
@@ -28,7 +28,7 @@ class EmployeeController extends Controller
         $name = $request->name ?? null;
         $last_name = $request->last_name ?? null;
         $official_area = $request->official_area ?? null;
-        $temporal_area = $request->temporal_area ?? null;
+ 
         $type = $request->type ?? null;
         $position = $request->position ?? null;
 
@@ -56,13 +56,10 @@ class EmployeeController extends Controller
         if($position) {
             array_push($position_conditions, ['name','like',"%{$position}%"]);
         }
-        $employees = Employee::with(['official_area','temporal_area','position','type'])
+        $employees = Employee::with(['official_area','position','type'])
                             ->where($employee_conditions)
                             ->whereHas('official_area', function ($query) use ($official_area_conditions) {
                                 $query->where($official_area_conditions);
-                            })
-                            ->whereHas('temporal_area', function ($query) use ($temporal_area_conditions) {
-                                $query->where($temporal_area_conditions);
                             })
                             ->whereHas('type', function ($query) use ($type_conditions) {
                                 $query->where($type_conditions);
@@ -79,7 +76,7 @@ class EmployeeController extends Controller
 
     public function getData()
     {
-        $employees = Employee::with(['official_area','temporal_area','position','type','contract_type'])->get();
+        $employees = Employee::with(['official_area','position','type','contract_type'])->get();
         return response()->json($employees);
     }
 
@@ -107,12 +104,13 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         if($request->has('id'))
         {
             $employee = Employee::find($request->id);
         }else {
             # code...
-            $employee = new Employee();
+            $employee = new Employee;
         }
         $employee->item = $request->item;
         $employee->identity_card = $request->identity_card;
@@ -123,7 +121,6 @@ class EmployeeController extends Controller
         $employee->bonus = $request->bonus;
         $employee->extra_hour = $request->extra_hour;
         $employee->official_area_id = $request->official_area_id;
-        $employee->temporal_area_id = $request->temporal_area_id;
         $employee->position_id = $request->position_id;
         $employee->employee_contract_type_id = $request->employee_contract_type_id;
         $employee->employee_type_id = $request->employee_type_id;
@@ -145,7 +142,7 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = Employee::with(['official_area','temporal_area','position','type','contract_type'])->find($id);
+        $employee = Employee::with(['official_area','position','type','contract_type'])->find($id);
 
         $data = [
             'employee' => $employee
@@ -162,7 +159,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $employee = Employee::with(['official_area','temporal_area','position','type','contract_type'])->find($id);
+        $employee = Employee::with(['official_area','position','type','contract_type'])->find($id);
 
         $data = [
             'employee' => $employee
@@ -180,28 +177,27 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $employee = Employee::find($id);
-        $employee->item = $request->item;
-        $employee->identity_card = $request->identity_card;
-        $employee->last_name = $request->last_name;
-        $employee->name = $request->name;
-        $employee->entry_date = $request->entry_date;
-        $employee->salary = $request->salary;
-        $employee->bonus = $request->bonus;
-        $employee->extra_hour = $request->extra_hour;
-        $employee->official_area_id = $request->official_area_id;
-        $employee->temporal_area_id = $request->temporal_area_id;
-        $employee->position_id = $request->position_id;
-        $employee->employee_contract_type_id = $request->employee_contract_type_id;
-        $employee->employee_type_id = $request->employee_type_id;
-        $employee->active = $request->active;
-        $employee->save();
+        // $employee = Employee::find($id);
+        // $employee->item = $request->item;
+        // $employee->identity_card = $request->identity_card;
+        // $employee->last_name = $request->last_name;
+        // $employee->name = $request->name;
+        // $employee->entry_date = $request->entry_date;
+        // $employee->salary = $request->salary;
+        // $employee->bonus = $request->bonus;
+        // $employee->extra_hour = $request->extra_hour;
+        // $employee->official_area_id = $request->official_area_id;
+        // $employee->position_id = $request->position_id;
+        // $employee->employee_contract_type_id = $request->employee_contract_type_id;
+        // $employee->employee_type_id = $request->employee_type_id;
+        // $employee->active = $request->active;
+        // $employee->save();
 
-        $data = [
-            'employee' => $employee
-        ];
+        // $data = [
+        //     'employee' => $employee
+        // ];
 
-        return response()->json($data);
+        // return response()->json($data);
     }
 
     /**
