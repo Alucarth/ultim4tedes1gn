@@ -51,6 +51,9 @@
                         <v-text-field label="Comisión" v-model="item.sales_commission" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
+                        <v-text-field label="Contrato PDF" type="file" v-model="item.file" ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
                     </v-flex>
                     <!-- <v-switch
@@ -78,7 +81,11 @@ export default {
 	},
 	methods:{
         sendContract() {
-            this.$emit('contract',this.item)
+            this.$emit('contract',this.item, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
         },
         sendClose() {
             this.$emit('close',false)
