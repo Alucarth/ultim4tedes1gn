@@ -53,6 +53,9 @@ class ContractController extends Controller
         $contract->name = $request->name;
         $contract->description = $request->description;
         $contract->contract_type_id = $request->contract_type_id;
+        $contract->construction_id = $request->construction_id;
+        $contract->employee_id = $request->employee_id;
+        $contract->sales_commission = $request->sales_commission;
         $contract->amount = $request->amount;
         $contract->save();
 

@@ -12,6 +12,17 @@
                         <v-text-field label="Nombre" v-model="item.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
+                        <v-select
+                            label="Obra"
+                            v-model="item.construction_id"
+                            :items="constructions"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12>
                         <v-text-field label="Costo" v-model="item.amount" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
@@ -24,6 +35,20 @@
                             :hint="`Descripcion del tipo seleccionado`"
                             persistent-hint>
                         </v-select>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-select
+                            label="Vendedor"
+                            v-model="item.employee_id"
+                            :items="employees"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-text-field label="Comisión" v-model="item.sales_commission" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
@@ -67,12 +92,35 @@ export default {
                     console.log(error)
                 })
         },
+        getConstructions() {
+            axios.get('/api/auth/construction')
+                .then((response)=> {
+                    this.constructions = response.data
+                })
+                .catch((error)=> {
+                    console.log(error)
+                })
+        },
+        getEmployees() {
+            axios.get('/api/auth/getEmployeeData')
+                .then((response)=> {
+                    let temp = response.data
+                    this.employees = temp.filter(employee => employee.employee_type_id == 1)
+                })
+                .catch((error)=> {
+                    console.log(error)
+                })
+        },
     },
     data:()=>({
-        contract_types: []
+        contract_types: [],
+        constructions: [],
+        employees: []
     }),
     mounted (){
         this.getContractTypes()
+        this.getConstructions()
+        this.getEmployees()
     },
     computed:{
         item(){

@@ -55,6 +55,7 @@ class OrderController extends Controller
         }
         $order->contract_id = $request->contract_id;
         $order->construction_id = $request->construction_id;
+        $order->status_id = $request->status_id;        
         $order->name = $request->name;
         $order->quantity = 0;
         $order->description = $request->description;
