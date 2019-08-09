@@ -86,8 +86,8 @@ export default {
                 sort: true,
             },
             {
-                label: "Construccion",
-                name: "construction.name`",
+                label: "Obra",
+                name: "construction.name",
                 filter: {
                     type: "simple",
                     placeholder: "construccion"
