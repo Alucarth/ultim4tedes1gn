@@ -33,6 +33,7 @@ import Order from './components/order/index.vue'
 import Contract from './components/contract/index.vue'
 import Position from './components/position/index.vue'
 import Area from './components/area/index.vue'
+import Task from './components/task/index.vue'
 import EmployeeType from './components/employee_type/index.vue'
 import ContractType from './components/contract_type/index.vue'
 
@@ -434,6 +435,18 @@ import ContractType from './components/contract_type/index.vue'
             name: '/contract_type',
             components: {
                 default: ContractType,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/task',
+            name: '/task',
+            components: {
+                default: Task,
                 toolbar: Toolbar,
                 nav: Nav
             },
