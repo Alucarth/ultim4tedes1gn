@@ -19,12 +19,12 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
- * IMPORTANTE 
+ * IMPORTANTE
  * Sea globalmente el axios baseURL este se obtiene de las variables MIX_
  * que se encuentra en el archivo .env de las confiruaciones de laravel
  * para que este haga efecto a los nuevos cambios se deve volver a correr npm run dev.
  */
-window.axios.defaults.baseURL = process.env.MIX_SENTRY_DSN_PUBLIC; 
+window.axios.defaults.baseURL = process.env.MIX_SENTRY_DSN_PUBLIC;
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -87,9 +87,9 @@ router.beforeEach((to, from, next) => {
         next()
         return
       }
-      next('/login') 
+      next('/login')
     } else {
-      next() 
+      next()
     }
 });
 // ejemplo de vue router
@@ -105,13 +105,6 @@ router.beforeEach((to, from, next) => {
 
 // adicionar roles y permisos en el tokken
 
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
 const app = new Vue({
     el: '#app',
     components: { App },
@@ -124,4 +117,4 @@ const app = new Vue({
     }
     // confirm
   });
-  
+

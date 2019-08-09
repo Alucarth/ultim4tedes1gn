@@ -15,6 +15,17 @@
                         <v-text-field label="Costo" v-model="item.amount" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
+                        <v-select
+                            label="Tipo"
+                            v-model="item.contract_type_id"
+                            :items="contract_types"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
                     </v-flex>
                     <!-- <v-switch
@@ -47,6 +58,21 @@ export default {
         sendClose() {
             this.$emit('close',false)
         },
+        getContractTypes() {
+            axios.get('/api/auth/contract_type')
+                .then((response)=> {
+                    this.contract_types = response.data
+                })
+                .catch((error)=> {
+                    console.log(error)
+                })
+        },
+    },
+    data:()=>({
+        contract_types: []
+    }),
+    mounted (){
+        this.getContractTypes()
     },
     computed:{
         item(){

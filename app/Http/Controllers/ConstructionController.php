@@ -47,13 +47,21 @@ class ConstructionController extends Controller
     {        
         if($request->has('id')) {        
             $construction = Construction::find($request->id);
+            $construction->amount = $request->amount;
         } else {
-            $construction = new Construction();                        
+            $construction = new Construction();
+            $construction->amount = 0;         
+
         }
         $construction->client_id = $request->client_id;
+        $construction->status_id = $request->status_id;
         $construction->name = $request->name;        
+        $construction->address = $request->addresss;
+        $construction->status_id = $request->status_id;
+        $construction->start_date = $request->start_date;
+        $construction->end_date = $request->end_date;
         $construction->description = $request->description;
-        $construction->amount = $request->amount;
+        
         $construction->save();
         
         $data = [

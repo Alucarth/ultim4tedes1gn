@@ -48,18 +48,25 @@ class OrderController extends Controller
         //return $request->all();
         if($request->has('id')) {
             $order = Order::find($request->id);
+            $order->amount = $request->amount;
         } else {
             $order = new Order();
+            $order->amount = 0;
         }
         $order->contract_id = $request->contract_id;
         $order->construction_id = $request->construction_id;
         $order->name = $request->name;
         $order->quantity = 0;
         $order->description = $request->description;
-        $order->amount = $request->amount;
         $products = [];
         foreach($request->products as $product) {
-            array_push($products,$product['id']);
+            $products[$product['id']] = [
+                'quantity' => $product['quantity'],
+                'description' => $product['description'],
+                'density' => $product['density'],
+                'high' => $product['high'],
+                'width' => $product['width']
+            ];            
         }
         $order->save();
         $order->products()->sync($products);
