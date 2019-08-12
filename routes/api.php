@@ -66,7 +66,10 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('product','ProductController');
     Route::resource('order', 'OrderController');
     Route::resource('contract','ContractController');
+    Route::resource('task','TaskController');
     Route::resource('status','StatusController');
     Route::resource('product_type','ProductTypeController');
     Route::resource('contract_type','ContractTypeController');
+    Route::resource('work','WorkController');
+    Route::get('employee_work/{emplyee_id}','WorkController@index_employee');
 });

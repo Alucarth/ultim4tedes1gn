@@ -26,8 +26,6 @@ class CreateEmployeesTable extends Migration
             $table->decimal('extra_hour',13,2);
             $table->integer('official_area_id')->unsigned()->nullable();
             $table->foreign('official_area_id')->references('id')->on('areas');
-            // $table->integer('temporal_area_id')->unsigned()->nullable(); // esto va en la tabla de tiempos
-            // $table->foreign('temporal_area_id')->references('id')->on('areas');
             $table->integer('position_id')->unsigned()->nullable();
             $table->foreign('position_id')->references('id')->on('positions');
             $table->integer('employee_contract_type_id')->unsigned()->nullable();

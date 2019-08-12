@@ -33,8 +33,10 @@ import Order from './components/order/index.vue'
 import Contract from './components/contract/index.vue'
 import Position from './components/position/index.vue'
 import Area from './components/area/index.vue'
+import Task from './components/task/index.vue'
 import EmployeeType from './components/employee_type/index.vue'
 import EmployeeContractType from './components/employee_contract_type/index.vue'
+import EmployeeWork from './components/employee_work/index.vue'
 
 
    export const routes= [
@@ -434,6 +436,30 @@ import EmployeeContractType from './components/employee_contract_type/index.vue'
             name: '/employee_contract_type',
             components: {
                 default: EmployeeContractType,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/task',
+            name: '/task',
+            components: {
+                default: Task,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/employee_work/:id',
+            name: '/employee_work',
+            components: {
+                default: EmployeeWork,
                 toolbar: Toolbar,
                 nav: Nav
             },
