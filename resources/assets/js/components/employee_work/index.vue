@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-card-title>
-            <h3>Tiempos Empleado {{$route.params.id}} </h3>
+            <h3>Tiempos de {{full_name}}  </h3>
         <v-spacer></v-spacer>
         <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
@@ -34,7 +34,7 @@
                 </template>
             </vue-bootstrap4-table>
         </v-card-text>
-        <!-- <edit-work :dialog="dialog" :work="work" @close="close"  @work="update"></edit-work> -->
+        <edit-work :dialog="dialog" :work="work" @close="close"  @work="update"></edit-work>
 
     </v-card>
 </template>
@@ -45,6 +45,7 @@ export default {
     data:()=>({
         works:[],
         work:{},
+        employee:null,
         dialog:false,
         columns: [
             // {
@@ -91,18 +92,30 @@ export default {
 
     }),
     mounted(){
-		
-      console.log($route.params);
+
+        this.search();
 	},
 	created(){
 		//   this.search();
-	},
+    },
+    computed:{
+        full_name()
+        {
+            let full_name='';
+            if(this.employee)
+            {
+                full_name = this.employee.name + ' ' + this.employee.last_name;
+            }
+            return full_name;
+        }
+    },
     methods:{
         search(){
-            axios.get(`/api/auth/employee_work/${$route.params.id}`)
+            axios.get(`/api/auth/employee_work/${this.$route.params.id}`)
                  .then((response)=>{
                     // this.employees = response.data;
                     this.works = response.data.works;
+                    this.employee = response.data.employee;
                     console.log(response.data);
                 });
         },

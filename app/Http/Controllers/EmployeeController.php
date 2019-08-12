@@ -19,7 +19,7 @@ class EmployeeController extends Controller
 
         $employee_conditions = [];
         $official_area_conditions = [];
-  
+
         $position_conditions = [];
         $type_conditions = [];
 
@@ -28,7 +28,7 @@ class EmployeeController extends Controller
         $name = $request->name ?? null;
         $last_name = $request->last_name ?? null;
         $official_area = $request->official_area ?? null;
- 
+
         $type = $request->type ?? null;
         $position = $request->position ?? null;
 
@@ -144,11 +144,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::with(['official_area','position','type','contract_type'])->find($id);
 
-        $data = [
-            'employee' => $employee
-        ];
-
-        return response()->json($data);
+        return response()->json(compact("employee"));
     }
 
     /**
@@ -161,11 +157,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::with(['official_area','position','type','contract_type'])->find($id);
 
-        $data = [
-            'employee' => $employee
-        ];
-
-        return response()->json($data);
+        return response()->json(compact("employee"));
     }
 
     /**
