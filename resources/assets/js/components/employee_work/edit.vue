@@ -36,7 +36,7 @@
                         </v-menu>
                     </v-flex>
                     <v-flex xs12 sm6 md2>
-                        <v-btn class="mx-1" fab dark color="green">
+                        <v-btn class="mx-1" fab dark color="green" @click="addWorkItem()">
                             <v-icon dark>add</v-icon>
                         </v-btn>
                     </v-flex>
@@ -53,19 +53,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <td >
-                            <v-combobox
-                                v-model="item.area"
-                                :items="areas"
-                                label="Area"
-                                item-text="name"
-                                item-value="id"
-                            ></v-combobox>
-                            </td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <tr v-for="(work_item,index) in item.work_items" :key="index">
+                                <td >
+                                <v-combobox
+                                    v-model="work_item.area"
+                                    :items="areas"
+                                    label="Area"
+                                    item-text="name"
+                                    item-value="id"
+                                ></v-combobox>
+                                </td>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
                             </tr>
 
                         </tbody>
@@ -96,6 +96,8 @@ export default
         date: new Date().toISOString().substr(0, 10),
         menu: false,
         areas:[],
+        edit:false,
+
     }),
     mounted(){
         this.getAreas();
@@ -116,6 +118,10 @@ export default
                 console.log(error);
             });
         },
+        addWorkItem()
+        {
+            this.item.work_items.push({});
+        }
     },
     computed:{
         item(){

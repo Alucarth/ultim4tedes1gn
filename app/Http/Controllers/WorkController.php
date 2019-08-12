@@ -19,7 +19,7 @@ class WorkController extends Controller
 
     public function index_employee($employee_id)
     {
-        $works= Work::where('employee_id',$employee_id)->get();
+        $works= Work::with('work_items')->where('employee_id',$employee_id)->get();
         $employee = Employee::find($employee_id);
         return response()->json(compact('works','employee'));
     }
