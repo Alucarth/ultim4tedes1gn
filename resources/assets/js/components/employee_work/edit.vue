@@ -56,14 +56,20 @@
                             <tr v-for="(work_item,index) in item.work_items" :key="index">
                                 <td >
                                 <v-combobox
-                                    v-model="work_item.area"
+                                    v-model="work_item.area_id"
                                     :items="areas"
                                     label="Area"
                                     item-text="name"
                                     item-value="id"
                                 ></v-combobox>
                                 </td>
-                                <td>Mark</td>
+                                <td><v-combobox
+                                    v-model="work_item.task_id"
+                                    :items="tasks"
+                                    label="Tarea"
+                                    item-text="name"
+                                    item-value="id"
+                                ></v-combobox></td>
                                 <td>Otto</td>
                                 <td>@mdo</td>
                             </tr>
@@ -96,11 +102,13 @@ export default
         date: new Date().toISOString().substr(0, 10),
         menu: false,
         areas:[],
+        tasks:[],
         edit:false,
 
     }),
     mounted(){
         this.getAreas();
+        this.getTasks();
     },
     methods:{
         sendWork() {
@@ -118,9 +126,18 @@ export default
                 console.log(error);
             });
         },
+        getTasks(){
+            axios.get('/api/auth/task')
+                 .then((response)=>{
+                    // this.employees = response.data;
+                    this.tasks = response.data.tasks;
+                    console.log(response.data);
+                });
+        },
         addWorkItem()
         {
-            this.item.work_items.push({});
+            //  console.log(this.work);
+            this.item.work_items.push({area_id:null,task_id:null});
         }
     },
     computed:{

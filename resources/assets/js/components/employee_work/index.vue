@@ -120,8 +120,8 @@ export default {
                 });
         },
         create() {
-            this.work ={};
-            this.works.work_items=[];
+            this.work ={work_items:[]};
+            // this.work.=[];
             this.dialog = true;
         },
 
