@@ -51,7 +51,17 @@
                         <v-text-field label="Comisión" v-model="item.sales_commission" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="Contrato PDF" type="file" v-model="item.file" ></v-text-field>
+                        <input
+                                type="file"
+                                style="display: none"
+                                ref="pdf"
+                                accept="application/pdf"
+                                @change="onFilePicked"
+                            >
+                        <v-flex xs12>
+                            <v-text-field label="Selecionar excel" @click='pickFile' v-model='attachment.name' prepend-icon='attach_file'></v-text-field>
+                        </v-flex>
+                        <!-- <v-text-field label="Contrato PDF" type="file" v-model="item.file" ></v-text-field> -->
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
@@ -80,12 +90,51 @@ export default {
         contract: Object,
 	},
 	methods:{
+        pickFile () {
+            this.$refs.pdf.click ()
+        },
+        onFilePicked (e) {
+            const files = e.target.files
+            console.log(files);
+			if(files[0] !== undefined) {
+				this.attachment.name = files[0].name
+				if(this.attachment.name.lastIndexOf('.') <= 0) {
+					return
+				}
+				const fr = new FileReader ()
+				fr.readAsDataURL(files[0])
+				fr.addEventListener('load', () => {
+					this.attachment.url = fr.result
+					this.attachment.file = files[0] // this is an excel file that can be sent to server...
+				})
+			} else {
+				this.attachment.name = ''
+                this.attachment.file = ''
+                this.attachment.url = ''
+				//this.excelUrl = ''
+			}
+        },
         sendContract() {
-            this.$emit('contract',this.item, {
+            var form = new FormData()
+            form.append('name',"file")
+            form.append('file',this.attachment.file);
+            console.log("before sending")
+            console.log(this.attachment)
+            this.$emit('contract',form, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
+            // this.$emit('contract',this.item, {
+            //     headers: {
+            //         'Content-Type': 'multipart/form-data'
+            //     }
+            // })
+        },
+        onFileChange(event) {
+            console.log('changin file ')
+            this.attachment.file = event.target.files[0]
+            console.log(this.attachment.file)
         },
         sendClose() {
             this.$emit('close',false)
@@ -122,7 +171,8 @@ export default {
     data:()=>({
         contract_types: [],
         constructions: [],
-        employees: []
+        employees: [],
+        attachment : { name : null,file: null, url: null }
     }),
     mounted (){
         this.getContractTypes()
