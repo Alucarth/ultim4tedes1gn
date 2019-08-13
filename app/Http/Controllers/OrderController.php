@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['contract','construction'])->get();
+        $orders = Order::with(['contract','construction','products'])->get();
 
         $data = [
             'orders'  =>  $orders

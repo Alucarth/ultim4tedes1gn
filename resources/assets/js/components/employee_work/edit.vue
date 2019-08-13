@@ -56,26 +56,41 @@
                             <tr v-for="(work_item,index) in item.work_items" :key="index">
                                 <td >
                                 <v-combobox
-                                    v-model="work_item.area_id"
+                                    v-model="work_item.area"
                                     :items="areas"
                                     label="Area"
                                     item-text="name"
-                                    item-value="id"
+                                    
                                 ></v-combobox>
                                 </td>
                                 <td><v-combobox
-                                    v-model="work_item.task_id"
+                                    v-model="work_item.task"
                                     :items="tasks"
                                     label="Tarea"
                                     item-text="name"
-                                    item-value="id"
+                                    
                                 ></v-combobox></td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td><v-combobox
+                                    v-model="work_item.order"
+                                    :items="orders"
+                                    label="Orden"
+                                    item-text="name"
+                                    
+                                ></v-combobox></td>
+                                <td>
+                                    <v-combobox
+                                    v-model="work_item.product"
+                                    :items="work_item.order.products"
+                                    label="Producto"
+                                    item-text="name"
+                                    v-if="work_item.order"
+                                ></v-combobox>
+                                </td>
                             </tr>
 
                         </tbody>
                     </table>
+                    <!-- {{JSON.stringify(this.item)}} -->
                     </v-flex>
 
                 </v-layout>
@@ -103,12 +118,14 @@ export default
         menu: false,
         areas:[],
         tasks:[],
+        orders:[],
         edit:false,
 
     }),
     mounted(){
         this.getAreas();
         this.getTasks();
+        this.getOrders();
     },
     methods:{
         sendWork() {
@@ -134,10 +151,18 @@ export default
                     console.log(response.data);
                 });
         },
+        getOrders(){
+            axios.get('/api/auth/order')
+                 .then((response)=>{
+                    // this.employees = response.data;
+                    this.orders = response.data;
+                    console.log(response.data);
+                });
+        },
         addWorkItem()
         {
             //  console.log(this.work);
-            this.item.work_items.push({area_id:null,task_id:null});
+            this.item.work_items.push({area:null,task:null,order:null,product:null});
         }
     },
     computed:{
