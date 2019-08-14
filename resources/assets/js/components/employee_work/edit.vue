@@ -50,34 +50,39 @@
                             <th scope="col">Orden</th>
                             <th scope="col">Producto</th>
                             <th scope="col">Hora</th>
+                            <!-- <th scope="col">Accion</th> -->
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(work_item,index) in item.work_items" :key="index">
-                                <td >
+
+                                <td  v-if="work_item.edit">
                                 <v-combobox
                                     v-model="work_item.area"
                                     :items="areas"
                                     label="Area"
                                     item-text="name"
-                                    
+
                                 ></v-combobox>
                                 </td>
-                                <td><v-combobox
+                                <td v-else>{{work_item.area.name}}</td>
+                                <td v-if="work_item.edit"><v-combobox
                                     v-model="work_item.task"
                                     :items="tasks"
                                     label="Tarea"
                                     item-text="name"
-                                    
+
                                 ></v-combobox></td>
-                                <td><v-combobox
+                                <td v-else>{{work_item.task.name}}</td>
+                                <td v-if="work_item.edit"><v-combobox
                                     v-model="work_item.order"
                                     :items="orders"
                                     label="Orden"
                                     item-text="name"
-                                    
+
                                 ></v-combobox></td>
-                                <td>
+                                <td v-else>{{work_item.order.name}}</td>
+                                <td v-if="work_item.edit">
                                     <v-combobox
                                     v-model="work_item.product"
                                     :items="work_item.order.products"
@@ -85,6 +90,15 @@
                                     item-text="name"
                                     v-if="work_item.order"
                                 ></v-combobox>
+                                </td>
+                                <td v-else>{{work_item.product.name}}</td>
+                                <td v-if="work_item.edit">
+                                    <v-text-field label="Hora" v-model="work_item.time"></v-text-field>
+                                </td>
+                                <td v-else>{{work_item.time}}</td>
+                                <td>
+                                    <v-icon @click="work_item.edit=false" >check_circle</v-icon>
+                                    <v-icon>cancel</v-icon>
                                 </td>
                             </tr>
 
@@ -162,7 +176,7 @@ export default
         addWorkItem()
         {
             //  console.log(this.work);
-            this.item.work_items.push({area:null,task:null,order:null,product:null});
+            this.item.work_items.push({area:null,task:null,order:null,product:null,edit:true});
         }
     },
     computed:{
