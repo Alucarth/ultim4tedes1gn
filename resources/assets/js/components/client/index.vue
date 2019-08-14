@@ -23,9 +23,9 @@
                     </div>
                 </template> -->
                 <template slot="option" slot-scope="props">
-                    <!-- <v-icon  small>
-                        remove_red_eye
-                    </v-icon> -->
+                    <v-icon @click="pay(props.row)"  small>
+                        money
+                    </v-icon>
                     <v-icon @click="edit(props.row)" small>
                         edit
                     </v-icon>
@@ -34,20 +34,24 @@
                     </v-icon>
                 </template>
             </vue-bootstrap4-table>
-        </v-card-text>      
+        </v-card-text>
         <edit-client :dialog="dialog" :client="client" @close="close" @client="update" ></edit-client>
+        <client-payment :dialog="payment_dialog" :client="client" @close="close" @payment="create_payment"></client-payment>
     </v-card>
 </template>
 <script>
-import VueBootstrap4Table from 'vue-bootstrap4-table';
-import EditClient from './edit.vue';
+import VueBootstrap4Table from 'vue-bootstrap4-table'
+import EditClient from './edit.vue'
+import ClientPayment from './payment.vue'
 export default {
     data () {
       return {
         clients: [],        
-        client: {}, 
-        loading: true,  
+        client: {},
+        payment: {},
+        loading: true,
         dialog: false,
+        payment_dialog: false,
         //desde aqui lo del databale
         columns: [{
                 label: "id",
@@ -145,15 +149,15 @@ export default {
                 console.log(error);
             })
         },
-        edit (item) {            
-            axios.get(`/api/auth/client/${item.id}/edit`)            
-            .then(response => {                
+        edit (item) {
+            axios.get(`/api/auth/client/${item.id}/edit`)
+            .then(response => {
                 this.client = response.data.client;
                 this.dialog=true;
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
-            });            
+            });
         },
         update (item) {                      
              axios.post('/api/auth/client', item)
@@ -165,6 +169,17 @@ export default {
                         this.$store.dispatch('template/showMessage',{message:error,color:'danger'});
                     });            
             this.dialog =false;          
+        },
+        create_payment(item) {
+            console.log('payment in index')
+            axios.post('/api/auth/payment', item)
+                  .then(response => {
+                        this.$store.dispatch('template/showMessage',{message:'Se agregó el pago correctamente',color:'success'})
+                    })
+                    .catch(function (error) {
+                        this.$store.dispatch('template/showMessage',{message:error,color:'danger'})
+                    })
+            this.payment_dialog =false
         },
         destroy (item) {            
             Swal.fire({
@@ -198,16 +213,29 @@ export default {
                 }
             })  
         },
+        pay(item) {
+            axios.get(`/api/auth/client/${item.id}/edit`)
+            .then(response => {
+                this.client = response.data.client
+                this.payment = {}
+                this.payment_dialog=true
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
         close() {
-            this.dialog = false;;
-        }        
+            this.dialog = false;
+            this.payment_dialog = false
+        }
     },
     watch: {
       
     },
     components: {
         VueBootstrap4Table,
-        EditClient
+        EditClient,
+        ClientPayment
     }  
 }
 </script>
