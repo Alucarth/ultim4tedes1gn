@@ -36,7 +36,7 @@
             </vue-bootstrap4-table>
         </v-card-text>
         <edit-client :dialog="dialog" :client="client" @close="close" @client="update" ></edit-client>
-        <client-payment :dialog="payment_dialog" :client="client" @close="close" @client="create_payment"></client-payment>
+        <client-payment :dialog="payment_dialog" :client="client" @close="close" @payment="create_payment"></client-payment>
     </v-card>
 </template>
 <script>
@@ -171,15 +171,15 @@ export default {
             this.dialog =false;          
         },
         create_payment(item) {
-            axios.post('/api/auth/client', item)
+            console.log('payment in index')
+            axios.post('/api/auth/payment', item)
                   .then(response => {
-                        this.$store.dispatch('template/showMessage',{message:'Se agregó el pago correctamente',color:'success'});
-                        //this.search();
+                        this.$store.dispatch('template/showMessage',{message:'Se agregó el pago correctamente',color:'success'})
                     })
                     .catch(function (error) {
-                        this.$store.dispatch('template/showMessage',{message:error,color:'danger'});
-                    });
-            this.dialog =false;
+                        this.$store.dispatch('template/showMessage',{message:error,color:'danger'})
+                    })
+            this.payment_dialog =false
         },
         destroy (item) {            
             Swal.fire({
@@ -214,11 +214,19 @@ export default {
             })  
         },
         pay(item) {
-            this.payment_dialog = true
-            this.payment = {}
+            axios.get(`/api/auth/client/${item.id}/edit`)
+            .then(response => {
+                this.client = response.data.client
+                this.payment = {}
+                this.payment_dialog=true
+            })
+            .catch(error => {
+                console.log(error);
+            });
         },
         close() {
-            this.dialog = false;;
+            this.dialog = false;
+            this.payment_dialog = false
         }
     },
     watch: {
