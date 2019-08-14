@@ -36,7 +36,7 @@
             </vue-bootstrap4-table>
         </v-card-text>
         <edit-client :dialog="dialog" :client="client" @close="close" @client="update" ></edit-client>
-        <client-payment :dialog="payment_dialog" :client="client" $close="close" @client="create_payment"></client-payment>
+        <client-payment :dialog="payment_dialog" :client="client" @close="close" @client="create_payment"></client-payment>
     </v-card>
 </template>
 <script>

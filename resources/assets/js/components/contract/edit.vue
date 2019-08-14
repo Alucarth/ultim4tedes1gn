@@ -59,17 +59,12 @@
                                 @change="onFilePicked"
                             >
                         <v-flex xs12>
-                            <v-text-field label="Selecionar excel" @click='pickFile' v-model='attachment.name' prepend-icon='attach_file'></v-text-field>
+                            <v-text-field label="Selecionar PDF" @click='pickFile' v-model='attachment.name' prepend-icon='attach_file'></v-text-field>
                         </v-flex>
-                        <!-- <v-text-field label="Contrato PDF" type="file" v-model="item.file" ></v-text-field> -->
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
                     </v-flex>
-                    <!-- <v-switch
-                        :label="'Activo'"
-                        v-model="item.is_enabled"
-                    ></v-switch> -->
                 </v-layout>
                 </v-container>
             </v-card-text>
@@ -116,24 +111,14 @@ export default {
         },
         sendContract() {
             var form = new FormData()
-            // form.append('name',"file")
-            // form.append('file',this.attachment.file);
-            
-            var form = new FormData()
             let form_contract = this.item
             Object.keys(form_contract).forEach(key => form.append(key,form_contract[key]))
-            form.append('file',this.attachment.file); 
-
+            form.append('file',this.attachment.file);
             this.$emit('contract',form, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            // this.$emit('contract',this.item, {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data'
-            //     }
-            // })
         },
         onFileChange(event) {
             console.log('changin file ')

@@ -44,9 +44,7 @@ class ContractController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //$request->file('file')->store('contracts');
-        //return response()->json($request->all());
+    {        
         if($request->has('id')) {
             $contract = Contract::find($request->id);
         } else {
@@ -59,6 +57,7 @@ class ContractController extends Controller
         $contract->employee_id = $request->employee_id;
         $contract->sales_commission = $request->sales_commission;
         $contract->amount = $request->amount;
+        $contract->debt = $request->amount;
         $contract->file = $request->file('file')->store('contracts');
         $contract->save();
 

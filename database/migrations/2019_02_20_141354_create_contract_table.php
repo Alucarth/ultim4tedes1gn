@@ -25,6 +25,7 @@ class CreateContractTable extends Migration
             $table->integer('employee_id')->unsigned()->nullable();
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->decimal('amount',13,2)->default(0);
+            $table->decimal('debt',13,2)->default(0);
             $table->decimal('sales_commission',13,2)->default(0);
             $table->timestamps();
             $table->softDeletes();

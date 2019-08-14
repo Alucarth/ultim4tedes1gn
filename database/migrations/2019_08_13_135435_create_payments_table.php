@@ -19,8 +19,8 @@ class CreatePaymentsTable extends Migration
             $table->date('date',13,2);
             $table->foreign('client_id')->references('id')->on('clients');
             $table->integer('client_id')->unsigned()->nullable();
-            $table->foreign('contract_id')->references('id')->on('contracts');
-            $table->integer('contract_id')->unsigned()->nullable();
+            // $table->foreign('contract_id')->references('id')->on('contracts');
+            // $table->integer('contract_id')->unsigned()->nullable();
             $table->string('file')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();

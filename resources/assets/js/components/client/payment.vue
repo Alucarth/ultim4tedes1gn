@@ -11,7 +11,7 @@
                      <v-flex xs12>
                         <v-text-field label="Monto" v-model="item.amount" ></v-text-field>
                     </v-flex>
-                    <v-flex xs6>
+                    <v-flex xs12>
                         <v-menu
                             v-model="menu"
                             :close-on-content-click="false"
@@ -38,15 +38,20 @@
                         </v-menu>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="Archivo" v-model="item.file" ></v-text-field>
+                        <input
+                            type="file"
+                            style="display: none"
+                            ref="pdf"
+                            accept="application/pdf"
+                            @change="onFilePicked"
+                            >
+                        <v-flex xs12>
+                            <v-text-field label="Selecionar PDF" @click='pickFile' v-model='attachment.name' prepend-icon='attach_file'></v-text-field>
+                        </v-flex>
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
-                    </v-flex>
-                    <!-- <v-switch
-                        :label="'Activo'"
-                        v-model="item.is_enabled"
-                    ></v-switch> -->
+                    </v-flex>                    
                 </v-layout>
                 </v-container>
             </v-card-text>
@@ -69,20 +74,52 @@ export default {
 
 	},
 	data:()=>({
-        menu: false
+        menu: false,
+        attachment : { name : null,file: null, url: null }
 	}),
 	methods:{
+        pickFile () {
+            this.$refs.pdf.click ()
+        },
+        onFilePicked (e) {
+            const files = e.target.files
+            console.log(files);
+			if(files[0] !== undefined) {
+				this.attachment.name = files[0].name
+				if(this.attachment.name.lastIndexOf('.') <= 0) {
+					return
+				}
+				const fr = new FileReader ()
+				fr.readAsDataURL(files[0])
+				fr.addEventListener('load', () => {
+					this.attachment.url = fr.result
+					this.attachment.file = files[0]
+				})
+			} else {
+				this.attachment.name = ''
+                this.attachment.file = ''
+                this.attachment.url = ''
+			}
+        },
         sendPayment() {
-            this.$emit('payment',this.item)
+            var form = new FormData()
+            let form_data = this.item
+            Object.keys(form_data).forEach(key => form.append(key,form_data[key]))
+            form.append('file',this.attachment.file);
+            this.$emit('payment',form, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
         },
         sendClose() {
             this.$emit('close',false)
         },
 	},
     computed:{
-        
         item(){
-           let item = this.payment
+           let item = {}
+           this.client = client
            return item
         },
         parent_dialog(){
@@ -91,9 +128,9 @@ export default {
         title(){
 
             let title='Crear Pago'
-            if(this.item) {
-                title = 'Editar Pago'
-            }
+            // if(this.item) {
+            //     title = 'Editar Pago'
+            // }
             return 'crear pago'//title
         },
 	}
