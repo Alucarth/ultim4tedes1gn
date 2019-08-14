@@ -45,8 +45,8 @@ class ContractController extends Controller
      */
     public function store(Request $request)
     {
-        $request->file('file')->store('contracts');
-        return response()->json($request->all());
+        //$request->file('file')->store('contracts');
+        //return response()->json($request->all());
         if($request->has('id')) {
             $contract = Contract::find($request->id);
         } else {

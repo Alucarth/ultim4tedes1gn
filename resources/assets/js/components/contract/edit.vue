@@ -116,10 +116,14 @@ export default {
         },
         sendContract() {
             var form = new FormData()
-            form.append('name',"file")
-            form.append('file',this.attachment.file);
-            console.log("before sending")
-            console.log(this.attachment)
+            // form.append('name',"file")
+            // form.append('file',this.attachment.file);
+            
+            var form = new FormData()
+            let form_contract = this.item
+            Object.keys(form_contract).forEach(key => form.append(key,form_contract[key]))
+            form.append('file',this.attachment.file); 
+
             this.$emit('contract',form, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
