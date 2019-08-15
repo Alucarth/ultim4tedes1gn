@@ -51,7 +51,7 @@
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
-                    </v-flex>                    
+                    </v-flex>
                 </v-layout>
                 </v-container>
             </v-card-text>
@@ -102,10 +102,12 @@ export default {
 			}
         },
         sendPayment() {
+            console.log('storing payment secd')
             var form = new FormData()
             let form_data = this.item
             Object.keys(form_data).forEach(key => form.append(key,form_data[key]))
-            form.append('file',this.attachment.file);
+            form.append('file', this.attachment.file)
+            form.append('client_id', this.client.id)
             this.$emit('payment',form, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -119,14 +121,13 @@ export default {
     computed:{
         item(){
            let item = {}
-           this.client = client
+           //this.client = client
            return item
         },
         parent_dialog(){
 			return this.dialog
         },
         title(){
-
             let title='Crear Pago'
             // if(this.item) {
             //     title = 'Editar Pago'

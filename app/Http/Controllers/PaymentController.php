@@ -44,7 +44,7 @@ class PaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         if($request->has('id')) {
             $payment = Payment::find($request->id);
         } else {
@@ -53,10 +53,26 @@ class PaymentController extends Controller
         $payment->amount = $request->amount;
         $payment->date = $request->date;
         $payment->client_id = $request->client_id;
-        $payment->description = $request->description;        
+        $payment->description = $request->description;
         $payment->file = $request->file('file')->store('payments');
         $payment->save();
-
+        $construction_ids = \App\Construction::select('id')->where('client_id',$payment->client_id)->pluck('id')->toArray();
+        $contracts = \App\Contract::whereIn('construction_id',$construction_ids)->get();
+        $amount = $payment->amount;
+        $rest = 0;
+        foreach($contracts as $contract) {
+            if($amount <= 0) {
+                break;
+            }
+            if($amount > $contract->debt) {
+                $amount = $amount - $contract->debt;
+                $contract->debt = 0;
+            } else {
+                $contract->debt = $contract->debt - $amount;
+                $amount = 0;
+            }
+            $contract->save();
+        }
         $data = [
             'payment'    =>  $payment
         ];

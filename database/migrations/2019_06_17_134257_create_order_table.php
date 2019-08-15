@@ -25,6 +25,9 @@ class CreateOrderTable extends Migration
             $table->string('description')->nullable();
             $table->decimal('amount',13,2)->default(0);
             $table->integer('quantity')->unsigned()->default(0);
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->date('estimated_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
