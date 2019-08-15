@@ -123,6 +123,20 @@
                         <v-date-picker v-model="item.estimated_date" no-title @input="menu2 = false"></v-date-picker>
                         </v-menu>
                     </v-flex>
+                    <v-flex xs6>
+                        <v-select
+                            label="Tipo de madera"
+                            v-model="item.type_id"
+                            :items="types"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs6>
+                        <v-text-field label="Tipo de Venesta" v-model="item.venesta" ></v-text-field>
+                    </v-flex>
                     <v-flex xs12>
                         <v-select
                             label="Estado"
@@ -191,6 +205,7 @@ export default {
 	data:()=>({
         contracts: [],
         constructions: [],
+        types: [],
         statuses: [],
         products: [],
         contract: Object,
@@ -281,6 +296,15 @@ export default {
                     console.log(error)
                 })
         },
+        getTypes() {
+            axios.get('/api/auth/type')
+                .then((response)=> {
+                    this.types = response.data.types
+                })
+                .catch((error)=> {
+                    console.log(error)
+                })
+        },
         getConstructions() {
             axios.get('/api/auth/construction')
                 .then((response)=> {
@@ -320,6 +344,7 @@ export default {
         this.getConstructions()
         this.getProducts()
         this.getStatuses()
+        this.getTypes()
     },
     computed:{
         item(){

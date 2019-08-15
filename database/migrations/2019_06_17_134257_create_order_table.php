@@ -19,6 +19,9 @@ class CreateOrderTable extends Migration
             $table->foreign('contract_id')->references('id')->on('contracts');
             $table->integer('status_id')->unsigned();
             $table->foreign('status_id')->references('id')->on('statuses');
+            $table->integer('type_id')->unsigned()->nullable();
+            $table->foreign('type_id')->references('id')->on('types');
+            $table->string('venesta')->nullable();
             $table->integer('construction_id')->unsigned();
             $table->foreign('construction_id')->references('id')->on('constructions');            
             $table->string('name');

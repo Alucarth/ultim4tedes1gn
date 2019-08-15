@@ -60,6 +60,7 @@ class OrderController extends Controller
         $order->description = $request->description;
         $order->start_date = $request->start_date;
         $order->estimated_date = $request->stimated_date;
+        $order->type_id = $request->type_id;
         $products = [];
         foreach($request->products as $product) {
             $products[$product['id']] = [
