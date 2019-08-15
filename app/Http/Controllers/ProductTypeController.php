@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\ProductType;
 use Illuminate\Http\Request;
+use App\ProductType;
 
 class ProductTypeController extends Controller
 {
@@ -14,12 +14,13 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        //
-        $product_types = ProductType::get();
+        $types = ProductType::get();
+
         $data = [
-            'product_types' =>  $product_types,            
+            'types' => $types
         ];
-        return response()->json($product_types);
+
+        return response()->json($data);
     }
 
     /**
@@ -40,16 +41,26 @@ class ProductTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->has('id')){
+            $product_type = ProductType::find($request->id);
+        }else{
+
+            $product_type = new ProductType();
+        }
+        $product_type->name = $request->name;
+        $product_type->description = $request->description;
+        $product_type->save();
+
+        return $product_type;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\State  $state
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(State $state)
+    public function show($id)
     {
         //
     }
@@ -57,22 +68,24 @@ class ProductTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\State  $state
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(State $state)
+    public function edit($id)
     {
         //
+        $product_type = ProductType::find($id);
+        return response()->json($product_type);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\State  $state
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, State $state)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -80,11 +93,17 @@ class ProductTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\State  $state
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(State $state)
+    public function destroy($id)
     {
         //
+        $product_type = ProductType::find($id);
+        $data = [
+            'product_type_id'    =>  $product_type->id
+        ];
+        $product_type->delete();
+        return response()->json($data);
     }
 }
