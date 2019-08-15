@@ -35,6 +35,7 @@ import Position from './components/position/index.vue'
 import Area from './components/area/index.vue'
 import EmployeeType from './components/employee_type/index.vue'
 import EmployeeContractType from './components/employee_contract_type/index.vue'
+import ProductType from './components/product_type/index.vue'
 
 
    export const routes= [
@@ -434,6 +435,18 @@ import EmployeeContractType from './components/employee_contract_type/index.vue'
             name: '/employee_contract_type',
             components: {
                 default: EmployeeContractType,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/product_type',
+            name: '/product_type',
+            components: {
+                default: ProductType,
                 toolbar: Toolbar,
                 nav: Nav
             },
