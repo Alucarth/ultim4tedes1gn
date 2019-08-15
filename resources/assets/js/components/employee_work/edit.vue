@@ -36,7 +36,7 @@
                         </v-menu>
                     </v-flex>
                     <v-flex xs12 sm6 md2>
-                        <v-btn class="mx-1" fab dark color="green" @click="addWorkItem()">
+                        <v-btn small fab dark color="green" @click="addWorkItem()">
                             <v-icon dark>add</v-icon>
                         </v-btn>
                     </v-flex>
@@ -50,7 +50,8 @@
                             <th scope="col">Orden</th>
                             <th scope="col">Producto</th>
                             <th scope="col">Hora</th>
-                            <!-- <th scope="col">Accion</th> -->
+                            <th scope="col">Cantidad</th>
+                            <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,7 +63,6 @@
                                     :items="areas"
                                     label="Area"
                                     item-text="name"
-
                                 ></v-combobox>
                                 </td>
                                 <td v-else>{{work_item.area.name}}</td>
@@ -92,10 +92,18 @@
                                 ></v-combobox>
                                 </td>
                                 <td v-else>{{work_item.product.name}}</td>
+
                                 <td v-if="work_item.edit">
                                     <v-text-field label="Hora" v-model="work_item.time"></v-text-field>
                                 </td>
                                 <td v-else>{{work_item.time}}</td>
+                                <td v-if="work_item.edit">
+                                    <v-text-field label="Cantidad" v-model="work_item.quantity"></v-text-field>
+                                </td>
+                                <td v-else>
+                                    {{work_item.quantity}}
+                                </td>
+                                <!-- falta la descripcion -->
                                 <td>
                                     <v-icon @click="work_item.edit=false" >check_circle</v-icon>
                                     <v-icon>cancel</v-icon>
@@ -113,9 +121,8 @@
 
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click="sendClose()">Cancel</v-btn>
-
-                <v-btn color="blue darken-1" flat @click="sendWork()">Guardar</v-btn>
+                <v-btn color="blue darken-1" flat @click="sendClose()">Cerrar</v-btn>
+                <!-- <v-btn color="blue darken-1" flat @click="sendWork()">Guardar</v-btn> -->
             </v-card-actions>
             </v-card>
         </v-dialog>
