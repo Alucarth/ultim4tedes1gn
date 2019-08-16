@@ -1,5 +1,5 @@
 <template>
-<v-dialog v-model="dialog" max-width="800px">
+<v-dialog v-model="dialog" >
             <v-card>
             <v-card-title>
                 <span class="headline">{{ title }}</span>
@@ -51,6 +51,7 @@
                             <th scope="col">Producto</th>
                             <th scope="col">Hora</th>
                             <th scope="col">Cantidad</th>
+                            <th scope="col">Observacion</th>
                             <th scope="col"></th>
                             </tr>
                         </thead>
@@ -103,10 +104,24 @@
                                 <td v-else>
                                     {{work_item.quantity}}
                                 </td>
+                                <td v-if="work_item.edit">
+                                    <v-text-field label="Observacion" v-model="work_item.observation"></v-text-field>
+                                </td>
+                                <td v-else>
+                                    {{work_item.observation}}
+                                </td>
                                 <!-- falta la descripcion -->
-                                <td>
-                                    <v-icon @click="work_item.edit=false" >check_circle</v-icon>
-                                    <v-icon>cancel</v-icon>
+                                <td v-if="work_item.edit">
+                                    <v-btn icon  @click="work_item.edit=false">
+                                        <v-icon color="success" >save</v-icon>
+                                    </v-btn>
+                                    <v-btn icon >
+                                        <v-icon color="red">cancel</v-icon>
+                                    </v-btn>
+                                </td>
+                                <td v-else>
+                                    <v-icon>edit</v-icon>
+                                    <v-icon>delete</v-icon>
                                 </td>
                             </tr>
 
@@ -184,6 +199,10 @@ export default
         {
             //  console.log(this.work);
             this.item.work_items.push({area:null,task:null,order:null,product:null,edit:true});
+        },
+        saveWorkItem(item)
+        {
+
         }
     },
     computed:{
