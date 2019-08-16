@@ -137,7 +137,7 @@
                     <v-flex xs6>
                         <v-text-field label="Tipo de Venesta" v-model="item.venesta" ></v-text-field>
                     </v-flex>
-                    <v-flex xs12>
+                    <v-flex xs6>
                         <v-select
                             label="Estado"
                             v-model="item.status_id"
@@ -148,7 +148,18 @@
                             persistent-hint>
                         </v-select>
                     </v-flex>
-
+                    <v-flex xs6>
+                        <input
+                                type="file"
+                                style="display: none"
+                                ref="pdf"
+                                accept="application/pdf"
+                                @change="onFilePicked"
+                            >
+                        <v-flex xs12>
+                            <v-text-field label="Detalle de orden PDF" @click='pickFile' v-model='attachment.name' prepend-icon='attach_file'></v-text-field>
+                        </v-flex>
+                     </v-flex>
                     <v-card-text>
                         <vue-bootstrap4-table :rows="products" :columns="product_columns" :config="config" >
                             <template slot="sort-asc-icon">
@@ -211,6 +222,7 @@ export default {
         contract: Object,
         menu1: false,
         menu2: false,
+        attachment : { name : null,file: null, url: null },
         product_columns: [{
                 label: "Nombre",
                 name: "name",
@@ -275,12 +287,50 @@ export default {
         selected_products: []
 	}),
 	methods:{
+        pickFile () {
+            this.$refs.pdf.click ()
+        },
+        onFilePicked (e) {
+            const files = e.target.files
+            console.log(files);
+			if(files[0] !== undefined) {
+				this.attachment.name = files[0].name
+				if(this.attachment.name.lastIndexOf('.') <= 0) {
+					return
+				}
+				const fr = new FileReader ()
+				fr.readAsDataURL(files[0])
+				fr.addEventListener('load', () => {
+					this.attachment.url = fr.result
+					this.attachment.file = files[0]
+				})
+			} else {
+				this.attachment.name = ''
+                this.attachment.file = ''
+                this.attachment.url = ''
+				//this.excelUrl = ''
+			}
+        },
         sendOrder() {
             this.item.contract = this.contract
-            console.log('sending post request')
-            console.log(this.item)
             this.item.products =  this.selected_products
-            this.$emit('order',this.item)
+            var form = new FormData()
+            let form_data = this.item
+            Object.keys(form_data).forEach(key => form.append(key,form_data[key]))
+            form.append('file',this.attachment.file)
+            //form.append('products',this.selected_products)
+            let prods = this.selected_products
+            for(let i=0; i<=prods.length; i++) {
+                for(let j=0; j<prods[i].length; j++) {
+                    form_data.append(`product[${i}][]`,prods[i][j])
+                }
+            }
+            
+            this.$emit('order',form, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
             this.selected_products = []
         },
         sendClose() {

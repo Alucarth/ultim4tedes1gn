@@ -45,6 +45,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        return $request->all();
         if($request->has('id')) {
             $order = Order::find($request->id);
             $order->amount = $request->amount;
@@ -60,6 +61,7 @@ class OrderController extends Controller
         $order->description = $request->description;
         $order->start_date = $request->start_date;
         $order->estimated_date = $request->stimated_date;
+        $order->file = $request->file('file')->store('orders');
         $order->type_id = $request->type_id;
         $products = [];
         foreach($request->products as $product) {

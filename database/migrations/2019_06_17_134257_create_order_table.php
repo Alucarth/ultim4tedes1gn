@@ -23,8 +23,9 @@ class CreateOrderTable extends Migration
             $table->foreign('type_id')->references('id')->on('types');
             $table->string('venesta')->nullable();
             $table->integer('construction_id')->unsigned();
-            $table->foreign('construction_id')->references('id')->on('constructions');            
+            $table->foreign('construction_id')->references('id')->on('constructions');
             $table->string('name');
+            $table->string('file')->nullable();
             $table->string('description')->nullable();
             $table->decimal('amount',13,2)->default(0);
             $table->integer('quantity')->unsigned()->default(0);
