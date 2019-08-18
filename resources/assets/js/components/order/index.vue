@@ -50,7 +50,7 @@ export default {
         dialog: false,
         columns: [
             {
-                label: "Nombre",
+                label: "Código",
                 name: "name",
                 filter: {
                     type: "simple",
@@ -73,6 +73,15 @@ export default {
                 filter: {
                     type: "simple",
                     placeholder: "Ingrese Descripcion"
+                },
+                sort: true,
+            },
+            {
+                label: "Cliente",
+                name: "construction.client.name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Cliente"
                 },
                 sort: true,
             },

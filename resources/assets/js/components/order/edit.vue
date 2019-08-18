@@ -318,14 +318,10 @@ export default {
             let form_data = this.item
             Object.keys(form_data).forEach(key => form.append(key,form_data[key]))
             form.append('file',this.attachment.file)
-            //form.append('products',this.selected_products)
             let prods = this.selected_products
-            for(let i=0; i<=prods.length; i++) {
-                for(let j=0; j<prods[i].length; j++) {
-                    form_data.append(`product[${i}][]`,prods[i][j])
-                }
-            }
-            
+            prods.forEach(function(prod, index){
+                Object.keys(prod).forEach(key => form.append(`products[${index}][${key}]`,prod[key]))
+            });
             this.$emit('order',form, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
