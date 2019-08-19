@@ -120,7 +120,7 @@ export default {
                 });
         },
         create() {
-            this.work ={work_items:[]};
+            this.work ={employee_id:this.employee.id,work_items:[]};
             // this.work.=[];
             this.dialog = true;
         },

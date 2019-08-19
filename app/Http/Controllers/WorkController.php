@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Employee;
 use App\Work;
+use App\WorkItem;
 class WorkController extends Controller
 {
     /**
@@ -43,6 +44,37 @@ class WorkController extends Controller
     public function store(Request $request)
     {
         //
+        // return $request->date;
+
+        if($request->has('id'))
+        {
+            $work = Work::find($request->id);
+        }else{
+            $work = new Work;
+        }
+        $work->date = $request->date;
+        $work->employee_id = $request->employee_id;
+        $work->save();
+
+        foreach($request->work_items as $item)
+        {
+            $wk = (object) $item;
+            // return $wk->area;
+            $work_item = new WorkItem;
+            $work_item->area_id = $wk->area['id'];
+            $work_item->order_id = $wk->order['id'];
+            $work_item->product_id = $wk->product['id'];
+            $work_item->task_id = $wk->task['id'];
+            $work_item->work_id = $work['id'];
+            $work_item->observation = $wk->observation;
+            $work_item->quantity = $wk->quantity;
+            $work_item->time = 2.3;
+            $work_item->save();
+        }
+
+        return response()->json($work);
+
+        // return $request->all();
     }
 
     /**
@@ -65,6 +97,8 @@ class WorkController extends Controller
     public function edit($id)
     {
         //
+        $work = Work::with('work_items')->find($id);
+        return response()->json(compact('work'));
     }
 
     /**

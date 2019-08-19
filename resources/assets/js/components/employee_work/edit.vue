@@ -21,17 +21,17 @@
                         >
                             <template v-slot:activator="{ on }">
                             <v-text-field
-                                v-model="date"
+                                v-model="item.date"
                                 label="Picker in menu"
                                 prepend-icon="event"
                                 readonly
                                 v-on="on"
                             ></v-text-field>
                             </template>
-                            <v-date-picker v-model="date" no-title scrollable>
+                            <v-date-picker v-model="item.date" no-title scrollable>
                             <v-spacer></v-spacer>
                             <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                            <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                            <v-btn text color="primary" @click="$refs.menu.save(item.date)">OK</v-btn>
                             </v-date-picker>
                         </v-menu>
                     </v-flex>
@@ -137,7 +137,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click="sendClose()">Cerrar</v-btn>
-                <!-- <v-btn color="blue darken-1" flat @click="sendWork()">Guardar</v-btn> -->
+                <v-btn color="blue darken-1" flat @click="sendWork()">Guardar</v-btn>
             </v-card-actions>
             </v-card>
         </v-dialog>
