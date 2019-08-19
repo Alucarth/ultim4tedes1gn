@@ -36,7 +36,7 @@ import Area from './components/area/index.vue'
 import EmployeeType from './components/employee_type/index.vue'
 import EmployeeContractType from './components/employee_contract_type/index.vue'
 import ProductType from './components/product_type/index.vue'
-
+import Asset from './components/asset/index.vue'
 
    export const routes= [
         {
@@ -447,6 +447,19 @@ import ProductType from './components/product_type/index.vue'
             name: '/product_type',
             components: {
                 default: ProductType,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        }
+        ,
+        {
+            path: '/asset',
+            name: '/asset',
+            components: {
+                default: Asset,
                 toolbar: Toolbar,
                 nav: Nav
             },

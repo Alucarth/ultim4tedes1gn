@@ -153,6 +153,7 @@ export default {
             { icon: 'library_books', text: 'Contratos', link: '/contract' },
             { icon: 'building', text: 'Obras' , link: '/construction' },
             { icon: 'chrome_reader_mode', text: 'Ordenes', link: '/order' },
+            { icon: 'home', text: 'Activos fijos', link: '/asset' },
           ],
           lumbers:[
                 { icon: 'store', text: 'Almacenes' , link: '/storage' },
