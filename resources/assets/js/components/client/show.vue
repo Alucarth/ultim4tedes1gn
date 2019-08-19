@@ -55,13 +55,30 @@
                 </template>
             </vue-bootstrap4-table>
         </v-card-text>
+        <v-card-text>
+        <vue-bootstrap4-table :rows="payments" :columns="payment_columns" :config="config" >
+                <template slot="sort-asc-icon">
+                    <i class="fa fa-sort-asc"></i>
+                </template>
+                <template slot="sort-desc-icon">
+                    <i class="fa fa-sort-desc"></i>
+                </template>
+                <template slot="no-sort-icon">
+                    <i class="fa fa-sort"></i>
+                </template>
+                <template slot="option" slot-scope="props">
+                    <v-icon @click="download(props.row)" small>
+                        assignment
+                    </v-icon>
+                </template>
+            </vue-bootstrap4-table>
+        </v-card-text>
 
-            <v-card-actions>
+            <!-- <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click="sendClose()">Cancel</v-btn>
                 <v-btn color="blue darken-1" flat @click="sendClient()" >Guardar</v-btn>
-                <!-- <v-btn color="blue darken-1" flat @click="update(item)" v-else>Actualizar</v-btn> -->
-            </v-card-actions>
+            </v-card-actions> -->
             </v-card>
 </template>
 <script>
@@ -73,6 +90,41 @@ export default {
 	data:()=>({
         client: Object,
         orders: [],
+        payments: [],
+        payment_columns: [
+            {
+                label: "Fecha",
+                name: "date",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Fecha"
+                },
+                sort: true,
+            },
+            {
+                label: "Monto",
+                name: "amount",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese monto"
+                },
+                sort: true,
+            },
+            {
+                label: "Comprobante",
+                name: "option",
+                sort: false,
+            },
+            {
+                label: "Descripción",
+                name: "description",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese descripción"
+                },
+                sort: true,
+            },
+        ],
         order_columns: [
             {
                 label: "Código",
@@ -172,6 +224,19 @@ export default {
             .catch(error => {
                 console.log(error);
             })
+        },
+        getPayments() {
+            axios.get(`/api/auth/payment`)
+            .then(response => {
+                let temp = response.data
+                this.payments = temp.filter(payment=> payment.client.id == this.client.id)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        },
+        donwload(item) {
+            this.$router.push(item.file)
         }
 	},
     computed:{
@@ -187,6 +252,7 @@ export default {
         console.log('gettin in this')
         this.getClient()
         this.getOrders()
+        this.getPayments()
     },
     components: {
         VueBootstrap4Table,

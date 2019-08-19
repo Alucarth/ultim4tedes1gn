@@ -14,7 +14,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payments = Payment::get();
+        $payments = Payment::with(['client'])->get();
 
         $data = [
             'payments'  =>  $payments
