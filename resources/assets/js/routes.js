@@ -27,6 +27,7 @@ import Expensive from './components/expensive/index.vue';
 import OriginTypes from './components/origin_type/index.vue';
 import OfferTypes from './components/offer_type/index.vue'
 import Client from './components/client/index.vue'
+import ShowClient from './components/client/show.vue'
 import Construction from './components/construction/index.vue'
 import Product from './components/product/index.vue'
 import Order from './components/order/index.vue'
@@ -339,6 +340,18 @@ import Asset from './components/asset/index.vue'
             name: 'Client'    ,
             components:{
                 default:Client,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/client/:id',
+            name: 'ShowClient'    ,
+            components:{
+                default:ShowClient,
                 toolbar:Toolbar,
                 nav: Nav
             },

@@ -17,15 +17,7 @@
                 <template slot="no-sort-icon">
                     <i class="fa fa-sort"></i>
                 </template>
-                <!-- <template slot="is_enabled" slot-scope="props">
-                   <div class="text-xs-center">
-                    <v-chip :color="props.row.is_enabled?'success':'danger'" :text-color="props.row.is_enabled?'white':'danger'" >{{props.row.is_enabled?'Activo':'Inactivo'}}</v-chip>
-                    </div>
-                </template> -->
                 <template slot="option" slot-scope="props">
-                    <!-- <v-icon  small>
-                        remove_red_eye
-                    </v-icon> -->
                     <v-icon @click="edit(props.row)" small>
                         edit
                     </v-icon>

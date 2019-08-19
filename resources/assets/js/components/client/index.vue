@@ -23,9 +23,10 @@
                     </div>
                 </template> -->
                 <template slot="option" slot-scope="props">
-                    <v-icon @click="pay(props.row)"  small>
+                    <v-icon @click=show(props.row)   small>
                         people
                     </v-icon>
+                    <!-- <v-btn to="/package/transfer" c/olor="primary" dark class="mb-2" small>Transferencias</v-btn -->
                     <v-icon @click="pay(props.row)"  small>
                         money
                     </v-icon>
@@ -139,16 +140,17 @@ export default {
                     console.log(error);
                 })
         },
-        create() {                                    
+        create() {
             this.client={}
             this.dialog = true;
         },
-        show(item) {                        
-            axios.get(`/api/auth/client/${item.id}`)            
-            .then(response => {                
+        show(item) {
+            this.$router.push(`/client/${item.id}`)
+            axios.get(`/api/auth/client/${item.id}`)
+            .then(response => {
                 this.client = response.data.client
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
             })
         },
@@ -162,7 +164,7 @@ export default {
                 console.log(error);
             });
         },
-        update (item) {                      
+        update (item) {
              axios.post('/api/auth/client', item)
                   .then(response => {                        
                         this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de clientes',color:'success'});
