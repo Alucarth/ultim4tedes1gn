@@ -24,6 +24,9 @@
                 </template> -->
                 <template slot="option" slot-scope="props">
                     <v-icon @click="pay(props.row)"  small>
+                        people
+                    </v-icon>
+                    <v-icon @click="pay(props.row)"  small>
                         money
                     </v-icon>
                     <v-icon @click="edit(props.row)" small>
@@ -46,7 +49,7 @@ import ClientPayment from './payment.vue'
 export default {
     data () {
       return {
-        clients: [],        
+        clients: [],
         client: {},
         payment: {},
         loading: true,
