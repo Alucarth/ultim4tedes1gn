@@ -1,13 +1,12 @@
 <template>
     <v-card>
         <v-card-title>
-            <h3>Ordenes</h3>
+            <h3>Activos Fijos</h3> 
         <v-spacer></v-spacer>
-        <!-- <v-btn to="/package/transfer" color="primary" dark class="mb-2" small>Transferencias</v-btn> -->
-        <v-btn @click="create()" color="primary" dark class="mb-2" small>Nuevo</v-btn>
+        <v-btn @click="create()" color="primary" dark class="mb-2" small >Nuevo</v-btn>
         </v-card-title>
         <v-card-text>
-             <vue-bootstrap4-table :rows="orders" :columns="columns" :config="config" >
+             <vue-bootstrap4-table :rows="assets" :columns="columns" :config="config" >
                 <template slot="sort-asc-icon">
                     <i class="fa fa-sort-asc"></i>
                 </template>
@@ -26,36 +25,36 @@
                     </v-icon>
                 </template>
             </vue-bootstrap4-table>
-        </v-card-text>
-        <edit-order :dialog="dialog" :order="order" @close="close" @order="update" ></edit-order>
+        </v-card-text>      
+        <edit-asset :dialog="dialog" :asset="asset" @close="close" @asset="update" ></edit-asset>
     </v-card>
 </template>
 <script>
 import VueBootstrap4Table from 'vue-bootstrap4-table';
-import EditOrder from './edit.vue';
+import EditAsset from './edit.vue';
 export default {
     data () {
       return {
-        orders: [],
-        order: {},
+        assets: [],
+        asset: {},
         loading: true,
         dialog: false,
         columns: [
             {
-                label: "Código",
-                name: "name",
+                label: "Codigo",
+                name: "code",
                 filter: {
                     type: "simple",
-                    placeholder: "Ingrese Nombre"
+                    placeholder: "Ingrese Codigo"
                 },
                 sort: true,
             },
             {
-                label: "Costo",
-                name: "amount",
+                label: "Nombre",
+                name: "name",
                 filter: {
                     type: "simple",
-                    placeholder: "Ingrese costo"
+                    placeholder: "Ingrese nombre"
                 },
                 sort: true,
             },
@@ -64,36 +63,27 @@ export default {
                 name: "description",
                 filter: {
                     type: "simple",
+                    placeholder: "Ingrese descripcion   "
+                },
+                sort: true,
+            },
+            {
+                label: "Ubicacion",
+                name: "location",
+                filter: {
+                    type: "simple",
                     placeholder: "Ingrese Descripcion"
                 },
                 sort: true,
             },
             {
-                label: "Cliente",
-                name: "construction.client.name",
+                label: "Precio",
+                name: "actual_price",
                 filter: {
                     type: "simple",
-                    placeholder: "Ingrese Cliente"
+                    placeholder: "Ingrese Precio"
                 },
                 sort: true,
-            },
-            {
-                label: "Contrato",
-                name: "contract.name",
-                filter: {
-                    type: "simple",
-                    placeholder: "Contrato"
-                },
-                sort: true,
-            },
-            {
-                label: "Obra",
-                name: "construction.name",
-                filter: {
-                    type: "simple",
-                    placeholder: "construccion"
-                },
-                sort: true
             },
             {
                 label: "Opciones",
@@ -124,7 +114,7 @@ export default {
     },
     computed: {
         formTitle () {
-                return this.editedIndex === -1 ? 'Crear nueva orden' : 'Editar orden'
+                return this.editedIndex === -1 ? 'Crear nuevo activo fijo' : 'Editar Actijo fijo'
             }
     },
     mounted()
@@ -133,31 +123,31 @@ export default {
     },
     methods:{
         search() {
-            axios.get('/api/auth/order')
+            axios.get('/api/auth/asset')
                 .then((response)=> {
-                    this.orders = response.data;
+                    this.assets = response.data;
                 })
                 .catch((error)=> {
                     console.log(error);
                 })
         },
         create() {
-            this.order={}
+            this.asset= {}
             this.dialog = true;
         },
         show(item) {
-            axios.get(`/api/auth/order/${item.id}`)
+            axios.get(`/api/auth/asset/${item.id}`)
             .then(response => {
-                this.order = response.data.order
+                this.asset = response.data.asset
             })
             .catch(error => {
                 console.log(error);
             })
         },
         edit (item) {
-            axios.get(`/api/auth/order/${item.id}/edit`)
+            axios.get(`/api/auth/asset/${item.id}/edit`)
             .then(response => {
-                this.order = response.data.order;
+                this.asset = response.data.asset;
                 this.dialog=true;
             })
             .catch(error => {
@@ -165,9 +155,9 @@ export default {
             });
         },
         update (item) {
-             axios.post('/api/auth/order', item)
+             axios.post('/api/auth/asset', item)
                   .then(response => {
-                        this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de ordenes',color:'success'});
+                        this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de contratos',color:'success'});
                         this.search();
                     })
                     .catch(function (error) {
@@ -177,7 +167,7 @@ export default {
         },
         destroy (item) {
             Swal.fire({
-                title: 'Esta seguro de Eliminar la orden?',
+                title: 'Esta seguro de Eliminar al contrato?',
                 text: "Tenga en cuenta que no se puede revertir una ves eliminado!",
                 type: 'warning',
                 showCancelButton: true,
@@ -187,11 +177,11 @@ export default {
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.value) {
-                    axios.delete(`/api/auth/order/${item.id}`)
+                    axios.delete(`/api/auth/asset/${item.id}`)
                     .then( (response)=> {
                         Swal.fire(
                             'Borrado!',
-                            'La orden ha sido eliminado.',
+                            'El contrato ha sido eliminado.',
                             'success'
                         )
                         this.search()
@@ -216,7 +206,7 @@ export default {
     },
     components: {
         VueBootstrap4Table,
-        EditOrder
+        EditAsset
     }
 }
 </script>

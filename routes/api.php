@@ -70,4 +70,5 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('product_type','ProductTypeController');
     Route::resource('contract_type','ContractTypeController');
     Route::resource('payment', 'PaymentController');
+    Route::resource('asset','AssetController');
 });

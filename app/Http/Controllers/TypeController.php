@@ -16,7 +16,7 @@ class TypeController extends Controller
     {
         $types = Type::get();
         $data = [
-            'types' =>  $types,            
+            'types' =>  $types,
         ];
         return response()->json($data);
     }

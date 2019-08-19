@@ -70,6 +70,23 @@
               </v-list-tile-action>
             </v-list-tile>
         </v-list-group>
+        <v-list-group prepend-icon="home">
+            <template v-slot:activator>
+                <v-list-tile>
+                    <v-list-tile-title>Módulo de Activos Fijos</v-list-tile-title>
+                </v-list-tile>
+            </template>
+            <v-list-tile
+              v-for="(asset, i) in assets"
+              :key="i"
+              :to="asset.link"
+            >
+              <v-list-tile-title v-text="asset.text"></v-list-tile-title>
+              <v-list-tile-action>
+                <v-icon v-text="asset.icon"></v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+        </v-list-group>
         <!-- <template v-for="item in items">
           <v-layout
             row
@@ -167,7 +184,9 @@ export default {
                 { icon: 'attach_money', text: 'Gastos', link: '/expenses' },
                 { icon: 'shop_two', text: 'Tipos de Origen', link: '/origin_types' },
                 { icon: 'widgets', text: 'Tipos de Oferta', link: '/offer_types' },
-
+          ],
+          assets: [
+            { icon: 'home', text: 'Activos fijos', link: '/asset' },
           ]
         }
     },

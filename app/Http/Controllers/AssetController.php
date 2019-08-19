@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Payment;
+use App\Asset;
 
-class PaymentController extends Controller
+class AssetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +14,13 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payments = Payment::with(['client'])->get();
+        $assets = Asset::get();
 
         $data = [
-            'payments'  =>  $payments
+            'assets'  =>  $assets
         ];
 
-        return response()->json($payments);
+        return response()->json($assets);
     }
 
     /**
@@ -30,15 +30,15 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        $payment = new Payment();
+        $asset = new Asset();
         $data = [
-            'payment'   =>  $payment,
+            'asset'   =>  $asset,
         ];
         return response()->json($data);
     }
 
     /**
-     * Store a newly created resource in payment.
+     * Store a newly created resource in asset.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -46,35 +46,24 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         if($request->has('id')) {
-            $payment = Payment::find($request->id);
+            $asset = Asset::find($request->id);
+            $asset->revaluation = $request->revaluation;
         } else {
-            $payment = new Payment();
+            $asset = new Asset();
+            $asset->revaluation = 0;
         }
-        $payment->amount = $request->amount;
-        $payment->date = $request->date;
-        $payment->client_id = $request->client_id;
-        $payment->description = $request->description;
-        $payment->file = $request->file('file')->store('payments');
-        $payment->save();
-        $construction_ids = \App\Construction::select('id')->where('client_id',$payment->client_id)->pluck('id')->toArray();
-        $contracts = \App\Contract::whereIn('construction_id',$construction_ids)->get();
-        $amount = $payment->amount;
-        $rest = 0;
-        foreach($contracts as $contract) {
-            if($amount <= 0) {
-                break;
-            }
-            if($amount > $contract->debt) {
-                $amount = $amount - $contract->debt;
-                $contract->debt = 0;
-            } else {
-                $contract->debt = $contract->debt - $amount;
-                $amount = 0;
-            }
-            $contract->save();
-        }
+        $asset->code = $request->code;
+        $asset->name = $request->name;
+        $asset->description = $request->description;
+        $asset->location = $request->location;
+        $asset->date = $request->date;
+        $asset->price = $request->price;
+        $asset->lifetime = $request->lifetime;
+        $asset->actual_price = $request->price;
+        $asset->depreciation = $request->depreciation;
+        $asset->save();
         $data = [
-            'payment'    =>  $payment
+            'asset'    =>  $asset
         ];
         return response()->json($data);
     }
@@ -87,9 +76,9 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        $payment = Payment::find($id); 
+        $asset = Asset::find($id); 
         $data = [
-            'payment'  =>  $payment
+            'asset'  =>  $asset
         ];
         return response()->json($data);
     }
@@ -102,15 +91,15 @@ class PaymentController extends Controller
      */
     public function edit($id)
     {
-        $payment = Payment::find($id);
+        $asset = Asset::find($id);
         $data = [
-            'payment'  =>  $payment
+            'asset'  =>  $asset
         ];
         return response()->json($data);
     }
 
     /**
-     * Update the specified resource in contract.
+     * Update the specified resource in asset.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -128,11 +117,12 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-        $payment = Payment::find($id);
+        $asset = Asset::find($id);
         $data = [
-            'payment_id'    =>  $payment->id
+            'asset_id'    =>  $asset->id
         ];
-        $payment->delete();
+        $asset->delete();
         return response()->json($data);
     }
+
 }

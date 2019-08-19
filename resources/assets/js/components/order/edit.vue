@@ -123,7 +123,21 @@
                         <v-date-picker v-model="item.estimated_date" no-title @input="menu2 = false"></v-date-picker>
                         </v-menu>
                     </v-flex>
-                    <v-flex xs12>
+                    <v-flex xs6>
+                        <v-select
+                            label="Tipo de madera"
+                            v-model="item.type_id"
+                            :items="types"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs6>
+                        <v-text-field label="Tipo de Venesta" v-model="item.venesta" ></v-text-field>
+                    </v-flex>
+                    <v-flex xs6>
                         <v-select
                             label="Estado"
                             v-model="item.status_id"
@@ -134,7 +148,18 @@
                             persistent-hint>
                         </v-select>
                     </v-flex>
-
+                    <v-flex xs6>
+                        <input
+                                type="file"
+                                style="display: none"
+                                ref="pdf"
+                                accept="application/pdf"
+                                @change="onFilePicked"
+                            >
+                        <v-flex xs12>
+                            <v-text-field label="Detalle de orden PDF" @click='pickFile' v-model='attachment.name' prepend-icon='attach_file'></v-text-field>
+                        </v-flex>
+                     </v-flex>
                     <v-card-text>
                         <vue-bootstrap4-table :rows="products" :columns="product_columns" :config="config" >
                             <template slot="sort-asc-icon">
@@ -191,11 +216,13 @@ export default {
 	data:()=>({
         contracts: [],
         constructions: [],
+        types: [],
         statuses: [],
         products: [],
         contract: Object,
         menu1: false,
         menu2: false,
+        attachment : { name : null,file: null, url: null },
         product_columns: [{
                 label: "Nombre",
                 name: "name",
@@ -260,12 +287,46 @@ export default {
         selected_products: []
 	}),
 	methods:{
+        pickFile () {
+            this.$refs.pdf.click ()
+        },
+        onFilePicked (e) {
+            const files = e.target.files
+            console.log(files);
+			if(files[0] !== undefined) {
+				this.attachment.name = files[0].name
+				if(this.attachment.name.lastIndexOf('.') <= 0) {
+					return
+				}
+				const fr = new FileReader ()
+				fr.readAsDataURL(files[0])
+				fr.addEventListener('load', () => {
+					this.attachment.url = fr.result
+					this.attachment.file = files[0]
+				})
+			} else {
+				this.attachment.name = ''
+                this.attachment.file = ''
+                this.attachment.url = ''
+				//this.excelUrl = ''
+			}
+        },
         sendOrder() {
             this.item.contract = this.contract
-            console.log('sending post request')
-            console.log(this.item)
             this.item.products =  this.selected_products
-            this.$emit('order',this.item)
+            var form = new FormData()
+            let form_data = this.item
+            Object.keys(form_data).forEach(key => form.append(key,form_data[key]))
+            form.append('file',this.attachment.file)
+            let prods = this.selected_products
+            prods.forEach(function(prod, index){
+                Object.keys(prod).forEach(key => form.append(`products[${index}][${key}]`,prod[key]))
+            });
+            this.$emit('order',form, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
             this.selected_products = []
         },
         sendClose() {
@@ -276,6 +337,15 @@ export default {
             axios.get('/api/auth/contract')
                 .then((response)=> {
                     this.contracts= response.data
+                })
+                .catch((error)=> {
+                    console.log(error)
+                })
+        },
+        getTypes() {
+            axios.get('/api/auth/type')
+                .then((response)=> {
+                    this.types = response.data.types
                 })
                 .catch((error)=> {
                     console.log(error)
@@ -320,6 +390,7 @@ export default {
         this.getConstructions()
         this.getProducts()
         this.getStatuses()
+        this.getTypes()
     },
     computed:{
         item(){
