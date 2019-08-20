@@ -229,14 +229,24 @@ export default {
             axios.get(`/api/auth/payment`)
             .then(response => {
                 let temp = response.data
+                console.log('filtering payments'+temp.length)
                 this.payments = temp.filter(payment=> payment.client.id == this.client.id)
+                console.log(this.payments.length)
             })
             .catch(error => {
                 console.log(error);
             })
         },
-        donwload(item) {
-            this.$router.push(item.file)
+        download(item) {
+            console.log(item.file)
+          this.$http.get(`api/auth/${item.file}`, {responseType: 'arraybuffer'})
+    .then(response => {
+      let blob = new Blob([response.data], { type: 'application/pdf' })
+      let link = document.createElement('a')
+      link.href = window.URL.createObjectURL(blob)
+      //link.download = 'test.pdf'
+      link.click()
+    })
         }
 	},
     computed:{

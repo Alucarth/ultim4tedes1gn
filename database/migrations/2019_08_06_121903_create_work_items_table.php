@@ -15,7 +15,7 @@ class CreateWorkItemsTable extends Migration
     {
         Schema::create('work_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('work_id');
+            $table->integer('work_id')->unsigned();
             $table->foreign('work_id')->references('id')->on('works');
             $table->integer('area_id')->unsigned()->nullable(); // esto va en la tabla de tiempos
             $table->foreign('area_id')->references('id')->on('areas');

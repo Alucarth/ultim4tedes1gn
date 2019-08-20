@@ -12,7 +12,7 @@
                         <v-text-field label="Nombre" v-model="item.name" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                        <v-select
+                        <v-autocomplete
                             label="Obra"
                             v-model="item.construction_id"
                             :items="constructions"
@@ -20,7 +20,7 @@
                             item-value="id"
                             :hint="`Descripcion del tipo seleccionado`"
                             persistent-hint>
-                        </v-select>
+                        </v-autocomplete>
                     </v-flex>
                     <v-flex xs12>
                         <v-text-field label="Costo" v-model="item.amount" ></v-text-field>
