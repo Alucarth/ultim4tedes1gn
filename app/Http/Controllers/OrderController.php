@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['contract','construction','products'])->get();
+        $orders = Order::with(['contract','construction.client','products'])->get();
 
         $data = [
             'orders'  =>  $orders
@@ -45,7 +45,6 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request->all();
         if($request->has('id')) {
             $order = Order::find($request->id);
             $order->amount = $request->amount;
@@ -55,10 +54,15 @@ class OrderController extends Controller
         }
         $order->contract_id = $request->contract_id;
         $order->construction_id = $request->construction_id;
-        $order->status_id = $request->status_id;        
+        $order->status_id = $request->status_id;
         $order->name = $request->name;
         $order->quantity = 0;
         $order->description = $request->description;
+        $order->start_date = $request->start_date;
+        $order->estimated_date = $request->estimated_date;
+        $order->file = $request->file('file')->store('orders');
+        $order->type_id = $request->type_id;
+        $order->venesta = $request->venesta;
         $products = [];
         foreach($request->products as $product) {
             $products[$product['id']] = [
@@ -67,7 +71,7 @@ class OrderController extends Controller
                 'density' => $product['density'],
                 'high' => $product['high'],
                 'width' => $product['width']
-            ];            
+            ];
         }
         $order->save();
         $order->products()->sync($products);

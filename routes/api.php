@@ -72,4 +72,6 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('contract_type','ContractTypeController');
     Route::resource('work','WorkController');
     Route::get('employee_work/{emplyee_id}','WorkController@index_employee');
+    Route::resource('payment', 'PaymentController');
+    Route::resource('asset','AssetController');
 });

@@ -27,6 +27,7 @@ import Expensive from './components/expensive/index.vue';
 import OriginTypes from './components/origin_type/index.vue';
 import OfferTypes from './components/offer_type/index.vue'
 import Client from './components/client/index.vue'
+import ShowClient from './components/client/show.vue'
 import Construction from './components/construction/index.vue'
 import Product from './components/product/index.vue'
 import Order from './components/order/index.vue'
@@ -38,6 +39,8 @@ import EmployeeType from './components/employee_type/index.vue'
 import EmployeeContractType from './components/employee_contract_type/index.vue'
 import EmployeeWork from './components/employee_work/index.vue'
 
+import ProductType from './components/product_type/index.vue'
+import Asset from './components/asset/index.vue'
 
    export const routes= [
         {
@@ -348,6 +351,18 @@ import EmployeeWork from './components/employee_work/index.vue'
             }
         },
         {
+            path: '/client/:id',
+            name: 'ShowClient'    ,
+            components:{
+                default:ShowClient,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
             path: '/construction',
             name: 'Construction',
             components:{
@@ -448,6 +463,30 @@ import EmployeeWork from './components/employee_work/index.vue'
             name: '/task',
             components: {
                 default: Task,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/asset',
+            name: '/asset',
+            components: {
+                default: Asset,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/product_type',
+            name: '/product_type',
+            components: {
+                default: ProductType,
                 toolbar: Toolbar,
                 nav: Nav
             },

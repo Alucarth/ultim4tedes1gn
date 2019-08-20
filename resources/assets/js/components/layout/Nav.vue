@@ -10,7 +10,7 @@
          Ultimate Design
       </router-link>
     </v-toolbar>
-    
+
       <v-list dense>
         <v-list-tile to="/">
             <v-list-tile-action>
@@ -88,6 +88,23 @@
               </v-list-tile-action>
             </v-list-tile>
         </v-list-group>
+        <v-list-group prepend-icon="home">
+            <template v-slot:activator>
+                <v-list-tile>
+                    <v-list-tile-title>Módulo de Activos Fijos</v-list-tile-title>
+                </v-list-tile>
+            </template>
+            <v-list-tile
+              v-for="(asset, i) in assets"
+              :key="i"
+              :to="asset.link"
+            >
+              <v-list-tile-title v-text="asset.text"></v-list-tile-title>
+              <v-list-tile-action>
+                <v-icon v-text="asset.icon"></v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+        </v-list-group>
         <!-- <template v-for="item in items">
           <v-layout
             row
@@ -159,7 +176,7 @@ export default {
                 { icon: 'store', text: 'Insumos' , link: '/inventory' },
                 { icon: 'money', text: 'Compra de Insumos', link: '/buyout' },
                 // { icon: 'cloud_upload', text: 'Importar Compras', link: '/import_purchases' },
-                
+
 
             ],
           orders: [
@@ -192,6 +209,9 @@ export default {
                 { icon: 'markunread_mailbox', text: 'Tipo de Contrato', link: '/employee_contract_type' },
                 { icon: 'collections_bookmark', text: 'Areas', link: '/area' },
                 { icon: 'rowing', text: 'Tareas', link: '/task' },
+          ],
+          assets: [
+            { icon: 'home', text: 'Activos fijos', link: '/asset' },
           ]
         }
     },

@@ -14,10 +14,13 @@
 //Route::get('/getLumberData', 'LumberController@getData')->name('lumber_index');
 //Route::resource('lumber','LumberController');
 Route::get('proof',function(){
-    $area = \App\Area::find(1);
-    $area = \App\Area::with(['inventories'])->find(1);
-    print_r($area->inventories);
-    return 12;
+
+    $orders = \App\Order::with(['contract','construction.client'])->get();    
+    return $orders;
+    // $area = \App\Area::find(1);
+    // $area = \App\Area::with(['inventories'])->find(1);
+    // print_r($area->inventories);
+    // return 12;
     //return $area->inventories()->find(1)->pivot->quantity;
 
 });
