@@ -129,7 +129,8 @@ export default {
             console.log(item);
             axios.get(`/api/auth/work/${item.id}/edit`)
             .then(response => {
-                this.work = response.data
+                this.work = response.data.work
+                console.log(this.work);
             })
             .catch(error => {
                 console.log(error);

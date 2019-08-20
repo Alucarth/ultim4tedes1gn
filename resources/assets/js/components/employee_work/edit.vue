@@ -6,7 +6,7 @@
             </v-card-title>
 
             <v-card-text v-if="item">
-
+                <!-- {{JSON.stringify(item)}} -->
                  <v-layout wrap>
                     <v-flex xs12 sm6 md4>
                         <v-menu
@@ -49,7 +49,8 @@
                             <th scope="col">Tarea</th>
                             <th scope="col">Orden</th>
                             <th scope="col">Producto</th>
-                            <th scope="col">Hora</th>
+                            <th scope="col">Tiempo</th>
+                            <th scope="col">Horas</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Observacion</th>
                             <th scope="col"></th>
@@ -98,6 +99,7 @@
                                     <v-text-field label="Hora" v-model="work_item.time"></v-text-field>
                                 </td>
                                 <td v-else>{{work_item.time}}</td>
+                                <td> {{convertTime(work_item.time)}}</td>
                                 <td v-if="work_item.edit">
                                     <v-text-field label="Cantidad" v-model="work_item.quantity"></v-text-field>
                                 </td>
@@ -110,18 +112,20 @@
                                 <td v-else>
                                     {{work_item.observation}}
                                 </td>
+
                                 <!-- falta la descripcion -->
                                 <td v-if="work_item.edit">
                                     <v-btn icon  @click="work_item.edit=false">
                                         <v-icon color="success" >save</v-icon>
                                     </v-btn>
-                                    <v-btn icon >
-                                        <v-icon color="red">cancel</v-icon>
-                                    </v-btn>
+                                    <v-icon @click="deleteWorkItem(index)">delete</v-icon>
+                                    <!-- <v-btn icon >
+                                        <v-icon color="red" @click="deleteWorkItem(index)">cancel</v-icon>
+                                    </v-btn> -->
                                 </td>
                                 <td v-else>
-                                    <v-icon>edit</v-icon>
-                                    <v-icon>delete</v-icon>
+                                    <v-icon @click="work_item.edit=true">edit</v-icon>
+                                    <v-icon @click="deleteWorkItem(index)">delete</v-icon>
                                 </td>
                             </tr>
 
@@ -200,9 +204,20 @@ export default
             //  console.log(this.work);
             this.item.work_items.push({area:null,task:null,order:null,product:null,edit:true});
         },
-        saveWorkItem(item)
+        deleteWorkItem (index) {
+            // const index = this.packages.indexOf(item)
+            this.item.work_items.splice(index, 1)
+        },
+        convertTime(time)
         {
-
+            let hour = 0;
+            if(time){
+                let hours = time.toString().split(':');
+                hour =  parseInt(hours[0]);
+                let minutes = parseInt(hours[1]);
+                hour += (minutes / 60);
+            }
+            return hour;
         }
     },
     computed:{

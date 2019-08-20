@@ -8,6 +8,6 @@ class Work extends Model
 {
     //
     public function work_items(){
-        return $this->hasMany('App\WorkItem');
+        return $this->hasMany('App\WorkItem')->with('area','product','order','task');
     }
 }

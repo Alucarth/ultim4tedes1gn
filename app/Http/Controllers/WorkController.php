@@ -55,12 +55,18 @@ class WorkController extends Controller
         $work->date = $request->date;
         $work->employee_id = $request->employee_id;
         $work->save();
-
+        $ids = [];
         foreach($request->work_items as $item)
         {
             $wk = (object) $item;
+            if(isset($wk->id))
+            {
+                $work_item = WorkItem::find($wk->id);
+            }else{
+
+                $work_item = new WorkItem;
+            }
             // return $wk->area;
-            $work_item = new WorkItem;
             $work_item->area_id = $wk->area['id'];
             $work_item->order_id = $wk->order['id'];
             $work_item->product_id = $wk->product['id'];
@@ -68,10 +74,20 @@ class WorkController extends Controller
             $work_item->work_id = $work['id'];
             $work_item->observation = $wk->observation;
             $work_item->quantity = $wk->quantity;
-            $work_item->time = 2.3;
+            $work_item->time = $wk->time;
+            $hours = explode(":", $wk->time);
+            $hour = (int)$hours[0];
+            $min = (int) $hours[1];
+            $hour += ($min / 60);
+            $work_item->hours = $hour;
             $work_item->save();
+            array_push($ids,$work_item->id);
         }
-
+        $work_item_remove = WorkItem::where('work_id',$work->id)->whereNotIn('id',$ids)->get();
+        foreach($work_item_remove as $work_item)
+        {
+            $work_item->delete();
+        }
         return response()->json($work);
 
         // return $request->all();
@@ -98,6 +114,9 @@ class WorkController extends Controller
     {
         //
         $work = Work::with('work_items')->find($id);
+        foreach($work->work_items as $work_item){
+            $work_item->edit = false;
+        }
         return response()->json(compact('work'));
     }
 
