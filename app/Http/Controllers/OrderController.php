@@ -60,7 +60,7 @@ class OrderController extends Controller
         $order->start_date = $request->start_date;
         $order->estimated_date = $request->estimated_date;
         $order->file = $request->file('file')->store('orders');
-        $order->type_id = $request->type_id;
+        $order->specie_id = $request->specie_id;
         $order->venesta = $request->venesta;
         $products = [];
         $quantity = 0;
@@ -106,7 +106,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        $order = Order::find($id);
+        $order = Order::with(['contract','construction.client','products.product_type'])->find($id);
         $data = [
             'order'  =>  $order
         ];
