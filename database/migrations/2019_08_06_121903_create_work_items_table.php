@@ -25,8 +25,9 @@ class CreateWorkItemsTable extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->integer('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->string('observation');
-            $table->decimal('time');
+            $table->string('observation')->nullable();
+            $table->decimal('hours');
+            $table->time('time');
             $table->decimal('quantity');
             $table->timestamps();
             $table->softDeletes();

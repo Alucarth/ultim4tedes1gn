@@ -1,16 +1,12 @@
 <template>
     <v-card>
         <v-card-title>
-            <h3>Empleados</h3>
+            <h3>Tareas</h3>
         <v-spacer></v-spacer>
-
-
-
-
         <v-btn @click="create();" color="primary" dark class="mb-2">Nuevo</v-btn>
         </v-card-title>
         <v-card-text>
-             <vue-bootstrap4-table :rows="employees" :columns="columns" :config="config" >
+             <vue-bootstrap4-table :rows="tasks" :columns="columns" :config="config" >
                 <template slot="sort-asc-icon">
                     <i class="fa fa-sort-asc"></i>
                 </template>
@@ -20,65 +16,48 @@
                 <template slot="no-sort-icon">
                     <i class="fa fa-sort"></i>
                 </template>
-                <template slot="active" slot-scope="props">
+                <!-- <template slot="active" slot-scope="props">
                    <div class="text-xs-center">
                     <v-chip :color="props.row.active?'success':'danger'" :text-color="props.row.active?'white':'danger'" small>{{props.row.active?'Activo':'Inactivo'}}</v-chip>
                     </div>
-                </template>
+                </template> -->
                 <template slot="option" slot-scope="props">
-                    <v-icon  small @click="$router.push({ path: `/employee_work/${props.row.id}` })" >
-                        access_time
-                    </v-icon>
+                    <!-- <v-icon  small>
+                        remove_red_eye
+                    </v-icon> -->
                     <v-icon @click="edit(props.row)" small>
                         edit
                     </v-icon>
                     <v-icon @click="destroy(props.row)" small>
                         delete
                     </v-icon>
-
                 </template>
             </vue-bootstrap4-table>
         </v-card-text>
-        <edit-employee :dialog="dialog" :employee="employee" @close="close"  @employee="update"></edit-employee>
+        <edit-task :dialog="dialog" :task="task" @close="close"  @task="update"></edit-task>
 
     </v-card>
 </template>
 <script>
 import VueBootstrap4Table from 'vue-bootstrap4-table';
-import EditEmployee from './edit.vue';
+import EditTask from './edit.vue';
 export default {
     data:()=>({
-
-       columns: [
+        tasks:[],
+        task:{},
+        dialog:false,
+        columns: [
             {
-                label: "Item",
-                name: "item",
+                label: "Codigo",
+                name: "code",
                 filter: {
                     type: "simple",
-                    placeholder: "Ingrese item"
+                    placeholder: "Ingrese codigo"
                 },
                 sort: true,
             },
             {
-                label: "C.I.",
-                name: "identity_card",
-                filter: {
-                    type: "simple",
-                    placeholder: "Ingrese C.I."
-                },
-                sort: true,
-            },
-            {
-                label: "Apellidos",
-                name: "last_name",
-                filter: {
-                    type: "simple",
-                    placeholder: "Ingrese Apellidos"
-                },
-                sort: true,
-            },
-            {
-                label: "Nombres",
+                label: "Nombre",
                 name: "name",
                 filter: {
                     type: "simple",
@@ -86,52 +65,13 @@ export default {
                 },
                 sort: true,
             },
-            {
-                label: "Area Oficial",
-                name: "official_area.name",
-                filter: {
-                    type: "simple",
-                    placeholder: "Ingrese Area Oficial"
-                },
-                sort: true,
-            },
-            // {
-            //     label: "Area Temporal",
-            //     name: "temporal_area.name",
-            //     filter: {
-            //         type: "simple",
-            //         placeholder: "Ingrese Area Temporal"
-            //     },
-            //     sort: true,
-            // },
-            {
-                label: "Cargo",
-                name: "position.name",
-                filter: {
-                    type: "simple",
-                    placeholder: "Ingrese Cargo"
-                },
-                sort: true,
-            },
-            {
-                label: "Tipo",
-                name: "type.name",
-                filter: {
-                    type: "simple",
-                    placeholder: "Ingrese Tipo"
-                },
-                sort: true,
-            },
-            {
-                label: "Estado",
-                name: "active",
-                sort: true,
-            },
+
             {
                 label: "Opciones",
                 name: "option",
                 sort: false,
-            }],
+			}
+		],
         config: {
             checkbox_rows: false,
             rows_selectable: false,
@@ -148,39 +88,30 @@ export default {
             server_mode:  false,
         },
 
-        employees: [],
-        employee: {},
-        dialog: false,
 
     }),
-    computed: {
-        formTitle () {
-                return this.editedIndex === -1 ? 'Nuevo' : 'Editar'
-            }
-    },
-    mounted()
-    {
+    mounted(){
         this.search();
     },
     methods:{
-
         search(){
-            axios.get('/api/auth/getEmployeeData')
+            axios.get('/api/auth/task')
                  .then((response)=>{
-                    this.employees = response.data;
+                    // this.employees = response.data;
+                    this.tasks = response.data.tasks;
                     console.log(response.data);
                 });
         },
         create() {
-            this.employee ={};
+            this.task ={};
             this.dialog = true;
         },
 
         edit (item) {
-            this.editedIndex = this.employees.indexOf(item)
-            axios.get(`/api/auth/employee/${item.id}/edit`)
+            console.log(item);
+            axios.get(`/api/auth/task/${item.id}/edit`)
             .then(response => {
-                this.employee = response.data.employee
+                this.task = response.data
             })
             .catch(error => {
                 console.log(error);
@@ -190,7 +121,7 @@ export default {
         },
         update (item) {
             console.log(item);
-            axios.post('/api/auth/employee', item)
+            axios.post('/api/auth/task', item)
                   .then(response => {
                         this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de productos',color:'success'});
                         this.search();
@@ -204,23 +135,25 @@ export default {
         destroy (item) {
 
             let success_delete = false;
-            axios.delete(`/api/auth/employee/${item.id}`)
-            .then(function (response) {
-                success_delete = true;
+            axios.delete(`/api/auth/task/${item.id}`)
+            .then((response) =>{
+                // success_delete = true;
+                this.search();
+                 this.$store.dispatch('template/showMessage',{message:'Se Elimino el Cargo ',color:'success'});
             })
-            .catch(function (error) {
+            .catch((error) => {
                 console.log(error);
+                 this.search();
             });
         },
 
         close() {
             this.dialog = false;
         }
-
     },
     components: {
         VueBootstrap4Table,
-        EditEmployee
+        EditTask
     }
 }
 </script>

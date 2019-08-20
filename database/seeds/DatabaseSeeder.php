@@ -27,6 +27,10 @@ class DatabaseSeeder extends Seeder
                     ProductTypeTableSeeder::class,
                     ContractTypeSeeder::class,
                     ClientSeeder::class,
+                    EmployeeContractTypeSeeder::class,
+                    EmployeeTypeSeeder::class,
+                    AreaSeeder::class,
+                    PositionSeeder::class,
                     ]);
     }
 }

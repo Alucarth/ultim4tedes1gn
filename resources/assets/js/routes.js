@@ -34,8 +34,11 @@ import Order from './components/order/index.vue'
 import Contract from './components/contract/index.vue'
 import Position from './components/position/index.vue'
 import Area from './components/area/index.vue'
+import Task from './components/task/index.vue'
 import EmployeeType from './components/employee_type/index.vue'
 import EmployeeContractType from './components/employee_contract_type/index.vue'
+import EmployeeWork from './components/employee_work/index.vue'
+
 import ProductType from './components/product_type/index.vue'
 import Asset from './components/asset/index.vue'
 
@@ -456,6 +459,30 @@ import Asset from './components/asset/index.vue'
             }
         },
         {
+            path: '/task',
+            name: '/task',
+            components: {
+                default: Task,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/asset',
+            name: '/asset',
+            components: {
+                default: Asset,
+                toolbar: Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
             path: '/product_type',
             name: '/product_type',
             components: {
@@ -466,13 +493,12 @@ import Asset from './components/asset/index.vue'
             meta: {
                 requiresAuth: true
             }
-        }
-        ,
+        },
         {
-            path: '/asset',
-            name: '/asset',
+            path: '/employee_work/:id',
+            name: '/employee_work',
             components: {
-                default: Asset,
+                default: EmployeeWork,
                 toolbar: Toolbar,
                 nav: Nav
             },

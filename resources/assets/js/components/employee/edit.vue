@@ -75,7 +75,7 @@
                         persistent-hint>
                         </v-select>
                     </v-flex>
-                    <v-flex xs12 sm12 md4>
+                    <!-- <v-flex xs12 sm12 md4>
                         <v-select
                         label="Area Temporal"
                         v-model="item.temporal_area_id"
@@ -85,8 +85,8 @@
                         :hint="`Descripcion del tipo seleccionado`"
                         persistent-hint>
                         </v-select>
-                    </v-flex>
-                    <v-flex xs12 sm12 md5>
+                    </v-flex> -->
+                    <v-flex xs12 sm12 md4>
                         <v-select
                         label="Tipo"
                         v-model="item.employee_type_id"
