@@ -14,7 +14,8 @@
 //Route::get('/getLumberData', 'LumberController@getData')->name('lumber_index');
 //Route::resource('lumber','LumberController');
 Route::get('proof',function(){
-
+    $payment = \App\Payment::first();
+    return Storage::url($payment->file);
     $orders = \App\Order::with(['contract','construction.client'])->get();    
     return $orders;
     // $area = \App\Area::find(1);

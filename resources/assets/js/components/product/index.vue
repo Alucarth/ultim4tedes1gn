@@ -58,6 +58,15 @@ export default {
                 sort: true,
             },
             {
+                label: "Tipo",
+                name: "product_type.name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Tipo"
+                },
+                sort: true,
+            },
+            {
                 label: "Acabado",
                 name: "completed_type",
                 filter: {

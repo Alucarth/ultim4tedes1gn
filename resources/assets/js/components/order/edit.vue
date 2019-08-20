@@ -395,6 +395,7 @@ export default {
     computed:{
         item(){
            let item = this.order
+           //this.selected_products = this.order.products
            //item.products.push(prod)
            //item.products = prod
            //item.contract = Object

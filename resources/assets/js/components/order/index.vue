@@ -96,6 +96,51 @@ export default {
                 sort: true
             },
             {
+                label: "Inicio",
+                name: "start_date",
+                filter: {
+                    type: "simple",
+                    placeholder: "construccion"
+                },
+                sort: true
+            },
+            {
+                label: "Cierre",
+                name: "end_date",
+                filter: {
+                    type: "simple",
+                    placeholder: "construccion"
+                },
+                sort: true
+            },
+            {
+                label: "Entrerga",
+                name: "estimated_date",
+                filter: {
+                    type: "simple",
+                    placeholder: "construccion"
+                },
+                sort: true
+            },
+            {
+                label: "Producto",
+                name: "products[0].product_type.name",
+                filter: {
+                    type: "simple",
+                    placeholder: "construccion"
+                },
+                sort: true
+            },
+            {
+                label: "Cantidad",
+                name: "quantity",
+                filter: {
+                    type: "simple",
+                    placeholder: "Cantidad"
+                },
+                sort: true
+            },
+            {
                 label: "Opciones",
                 name: "option",
                 sort: false,

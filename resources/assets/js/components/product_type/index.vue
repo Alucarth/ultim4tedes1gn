@@ -98,7 +98,7 @@ export default {
         search(){
             axios.get('/api/auth/product_type')
                  .then((response)=>{
-                    this.product_types = response.data.types;
+                    this.product_types = response.data;
                     console.log(response.data);
                 });
         },

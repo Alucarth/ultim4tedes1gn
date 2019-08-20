@@ -20,7 +20,7 @@ class ProductTypeController extends Controller
             'types' => $types
         ];
 
-        return response()->json($data);
+        return response()->json($types);
     }
 
     /**

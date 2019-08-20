@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['contract','construction.client','products'])->get();
+        $orders = Order::with(['contract','construction.client','products.product_type'])->get();
 
         $data = [
             'orders'  =>  $orders
@@ -56,7 +56,6 @@ class OrderController extends Controller
         $order->construction_id = $request->construction_id;
         $order->status_id = $request->status_id;
         $order->name = $request->name;
-        $order->quantity = 0;
         $order->description = $request->description;
         $order->start_date = $request->start_date;
         $order->estimated_date = $request->estimated_date;
@@ -64,7 +63,9 @@ class OrderController extends Controller
         $order->type_id = $request->type_id;
         $order->venesta = $request->venesta;
         $products = [];
+        $quantity = 0;
         foreach($request->products as $product) {
+            $quantity += $product['quantity'];
             $products[$product['id']] = [
                 'quantity' => $product['quantity'],
                 'description' => $product['description'],
@@ -73,6 +74,7 @@ class OrderController extends Controller
                 'width' => $product['width']
             ];
         }
+        $order->quantity = $quantity;
         $order->save();
         $order->products()->sync($products);
         $data = [
