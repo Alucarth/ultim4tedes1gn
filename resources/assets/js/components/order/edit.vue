@@ -126,8 +126,8 @@
                     <v-flex xs6>
                         <v-select
                             label="Tipo de madera"
-                            v-model="item.type_id"
-                            :items="types"
+                            v-model="item.specie_id"
+                            :items="species"
                             item-text="name"
                             item-value="id"
                             :hint="`Descripcion del tipo seleccionado`"
@@ -181,12 +181,12 @@
                     <v-card-text>
                         <ul class="list-group">Productos seleccionados
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(product,index) in selected_products" :key="index">
-                            <span> {{product.name}}</span>                             
+                            <span> {{product.name}}</span>
                             <v-text-field label="Cantidad" v-model="product.quantity"></v-text-field>
                             <v-text-field label="Espesor(mm)" v-model="product.density"></v-text-field>
                             <v-text-field label="Altura(mm)" v-model="product.high"></v-text-field>
                             <v-text-field label="Ancho(mm)" v-model="product.width"></v-text-field>
-                            <v-text-field label="Descripción" v-model="product.description"></v-text-field>                            
+                            <v-text-field label="Descripción" v-model="product.description"></v-text-field>
                         </li>
                         </ul>
                     </v-card-text>
@@ -216,7 +216,7 @@ export default {
 	data:()=>({
         contracts: [],
         constructions: [],
-        types: [],
+        species: [],
         statuses: [],
         products: [],
         contract: Object,
@@ -342,10 +342,10 @@ export default {
                     console.log(error)
                 })
         },
-        getTypes() {
-            axios.get('/api/auth/type')
+        getSpecies() {
+            axios.get('/api/auth/specie')
                 .then((response)=> {
-                    this.types = response.data.types
+                    this.species = response.data.species
                 })
                 .catch((error)=> {
                     console.log(error)
@@ -390,12 +390,27 @@ export default {
         this.getConstructions()
         this.getProducts()
         this.getStatuses()
-        this.getTypes()
+        this.getSpecies()
     },
     computed:{
         item(){
            let item = this.order
-           //this.selected_products = this.order.products
+           if(item.id) {
+               //this.selected_products = []
+            for(let i=0; i<item.products.length; i++) {
+                let new_product = []
+                    new_product.id = item.products[i].id
+                    new_product.name = item.products[i].name
+                    new_product.quantity = item.products[i].pivot.quantity
+                    new_product.density = item.products[i].density
+                    new_product.high = item.products[i].high
+                    new_product.width = item.products[i].width
+                    new_product.description = item.products[i].description
+                this.selected_products.push(new_product)
+            }
+           }
+        // if(item.id) 
+        //    this.selected_products = item.products
            //item.products.push(prod)
            //item.products = prod
            //item.contract = Object
