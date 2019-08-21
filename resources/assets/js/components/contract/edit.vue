@@ -1,10 +1,14 @@
 <template>
 	<v-dialog v-model="parent_dialog" max-width="500px" persistent>
-            <v-card>
-            <v-card-title>
-                <span class="headline">{{ title }}</span>
-            </v-card-title>
-
+        <v-card>
+        <v-card-title>
+            <span class="headline">{{ title }}</span>
+        </v-card-title>
+        <v-form
+            ref="form"
+            v-model="valid"
+            lazy-validation
+        >
             <v-card-text v-if="item">
                 <v-container grid-list-md>
                  <v-layout wrap>
@@ -68,14 +72,14 @@
                 </v-layout>
                 </v-container>
             </v-card-text>
-
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" flat @click="sendClose()">Cancel</v-btn>
                 <v-btn color="blue darken-1" flat @click="sendContract()" >Guardar</v-btn>
                 <!-- <v-btn color="blue darken-1" flat @click="update(item)" v-else>Actualizar</v-btn> -->
             </v-card-actions>
-            </v-card>
+        </v-form>
+        </v-card>
     </v-dialog>
 </template>
 <script>

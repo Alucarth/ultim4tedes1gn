@@ -59,7 +59,9 @@ class OrderController extends Controller
         $order->description = $request->description;
         $order->start_date = $request->start_date;
         $order->estimated_date = $request->estimated_date;
-        $order->file = $request->file('file')->store('orders');
+        if($order->file != $request->file) {
+            $order->file = $request->file('file')->store('orders');
+        }
         $order->specie_id = $request->specie_id;
         $order->venesta = $request->venesta;
         $products = [];

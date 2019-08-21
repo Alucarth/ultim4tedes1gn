@@ -1,6 +1,11 @@
 <template>
 <v-dialog v-model="dialog" persistent max-width="700px">
             <v-card>
+            <v-form
+            ref="form"
+            v-model="valid"
+            lazy-validation
+            >
             <v-card-title>
                 <span class="headline">{{ title }}</span>
             </v-card-title>
@@ -9,7 +14,7 @@
                 <v-container grid-list-md>
                  <v-layout wrap>
                     <v-flex xs6 sm6 md6>
-                        <v-text-field label="Nombre" hint="Ingrese Nombre" required v-model="item.name"></v-text-field>
+                        <v-text-field  :rules="nameRules" label="Nombre" hint="Ingrese Nombre" required v-model="item.name"></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                         <v-text-field label="Descripcion" hint="Ingrese Descripcion " v-model="item.description"></v-text-field>
@@ -25,6 +30,7 @@
 
                 <v-btn color="blue darken-1" flat @click="sendEmployeeType()">Guardar</v-btn>
             </v-card-actions>
+            </v-form>
             </v-card>
         </v-dialog>
 </template>
@@ -36,11 +42,18 @@ export default
         product_type: Object
 	},
     data:()=>({
-
+        valid: true,
+        nameRules: [
+            v => !!v || 'Nombre requerido'
+        ]
     }),
     methods:{
         sendEmployeeType() {
-            this.$emit('product_type',this.item)
+            if(this.$refs.form.validate()) {
+                this.$emit('product_type',this.item)
+            } else {
+                console.log('formulario no valido')
+            }
         },
         sendClose() {
             this.$emit('close',false)
@@ -55,10 +68,10 @@ export default
 			return this.dialog
         },
         title(){
-            let title='Crear Tipo de Empleado'
+            let title='Crear Tipo de Producto'
             if(this.item.id) {
 
-                title = 'Editar Tipo de Empleado'
+                title = 'Editar Tipo de Producto'
             }
             return title
         },
