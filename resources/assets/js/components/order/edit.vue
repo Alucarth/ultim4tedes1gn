@@ -395,25 +395,23 @@ export default {
     computed:{
         item(){
            let item = this.order
-           if(item.id) {
-               //this.selected_products = []
-            for(let i=0; i<item.products.length; i++) {
-                let new_product = []
-                    new_product.id = item.products[i].id
-                    new_product.name = item.products[i].name
-                    new_product.quantity = item.products[i].pivot.quantity
-                    new_product.density = item.products[i].density
-                    new_product.high = item.products[i].high
-                    new_product.width = item.products[i].width
-                    new_product.description = item.products[i].description
-                this.selected_products.push(new_product)
+            if(item.id && this.selected_products.length ==0) {
+                this.attachment.file = item.file
+                this.attachment.name = 'detalle_orden.pdf'
+                for(let i=0; i<item.products.length; i++) {
+                    if(typeof(item.products[i].pivot) != 'undefined') {
+                        let new_product = []
+                        new_product.id = item.products[i].id
+                        new_product.name = item.products[i].name
+                        new_product.quantity = item.products[i].pivot.quantity
+                        new_product.density = item.products[i].density
+                        new_product.high = item.products[i].high
+                        new_product.width = item.products[i].width
+                        new_product.description = item.products[i].description
+                        this.selected_products.push(new_product)
+                    }
+                }
             }
-           }
-        // if(item.id) 
-        //    this.selected_products = item.products
-           //item.products.push(prod)
-           //item.products = prod
-           //item.contract = Object
            return item
         },
         parent_dialog(){
