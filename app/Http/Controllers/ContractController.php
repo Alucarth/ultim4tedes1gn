@@ -56,6 +56,7 @@ class ContractController extends Controller
         $contract->construction_id = $request->construction_id;
         $contract->employee_id = $request->employee_id;
         $contract->sales_commission = $request->sales_commission ?? 0;
+        $contract->amount_commission = $request->amount_commission ?? 0;
         $contract->amount = $request->amount;
         $contract->debt = $request->amount;
         $contract->file = $request->file('file')->store('contracts');

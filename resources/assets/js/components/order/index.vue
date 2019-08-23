@@ -115,7 +115,7 @@ export default {
             },
             {
                 label: "Producto",
-                name: "products[0].product_type.name",
+                name: "products[0].name",
                 filter: {
                     type: "simple",
                     placeholder: "construccion"

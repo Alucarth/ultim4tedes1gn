@@ -58,6 +58,7 @@ class ProductController extends Controller
         $product->product_type_id = $request->product_type_id;
         $product->completed_type = $request->completed_type;
         $product->description = $request->description;
+        $product->array_type = $request->array_type;
         $product->save();
 
         $data = [
