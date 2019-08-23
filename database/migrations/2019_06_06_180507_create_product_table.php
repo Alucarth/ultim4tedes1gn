@@ -20,7 +20,8 @@ class CreateProductTable extends Migration
             $table->decimal('width',13,2);
             $table->string('completed_type');
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
+            $table->string('array_type')->nullable();
             $table->decimal('amount',13,2)->default(0);
             $table->integer('product_type_id')->unsigned();
             $table->foreign('product_type_id')->references('id')->on('product_types');            

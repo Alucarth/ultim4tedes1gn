@@ -51,22 +51,31 @@ export default {
                 sort: true,
             },
             {
-                label: "Costo",
-                name: "amount",
+                label: "Fecha Inicio",
+                name: "start_date",
                 filter: {
                     type: "simple",
-                    placeholder: "Ingrese costo"
+                    placeholder: "construccion"
                 },
-                sort: true,
+                sort: true
             },
             {
-                label: "Descripcion",
-                name: "description",
+                label: "Fecha Entrega",
+                name: "estimated_date",
                 filter: {
                     type: "simple",
-                    placeholder: "Ingrese Descripcion"
+                    placeholder: "construccion"
                 },
-                sort: true,
+                sort: true
+            },
+            {
+                label: "Fecha Cierre",
+                name: "end_date",
+                filter: {
+                    type: "simple",
+                    placeholder: "construccion"
+                },
+                sort: true
             },
             {
                 label: "Cliente",
@@ -74,15 +83,6 @@ export default {
                 filter: {
                     type: "simple",
                     placeholder: "Ingrese Cliente"
-                },
-                sort: true,
-            },
-            {
-                label: "Contrato",
-                name: "contract.name",
-                filter: {
-                    type: "simple",
-                    placeholder: "Contrato"
                 },
                 sort: true,
             },
@@ -96,40 +96,13 @@ export default {
                 sort: true
             },
             {
-                label: "Inicio",
-                name: "start_date",
+                label: "Contrato",
+                name: "contract.name",
                 filter: {
                     type: "simple",
-                    placeholder: "construccion"
+                    placeholder: "Contrato"
                 },
-                sort: true
-            },
-            {
-                label: "Cierre",
-                name: "end_date",
-                filter: {
-                    type: "simple",
-                    placeholder: "construccion"
-                },
-                sort: true
-            },
-            {
-                label: "Entrerga",
-                name: "estimated_date",
-                filter: {
-                    type: "simple",
-                    placeholder: "construccion"
-                },
-                sort: true
-            },
-            {
-                label: "Producto",
-                name: "products[0].product_type.name",
-                filter: {
-                    type: "simple",
-                    placeholder: "construccion"
-                },
-                sort: true
+                sort: true,
             },
             {
                 label: "Cantidad",
@@ -139,6 +112,24 @@ export default {
                     placeholder: "Cantidad"
                 },
                 sort: true
+            },
+            {
+                label: "Producto",
+                name: "products[0].name",
+                filter: {
+                    type: "simple",
+                    placeholder: "construccion"
+                },
+                sort: true
+            },
+            {
+                label: "Costo de Producción",
+                name: "amount",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese costo"
+                },
+                sort: true,
             },
             {
                 label: "Opciones",

@@ -23,6 +23,7 @@ class CreateProductOrderTable extends Migration
             $table->decimal('high',13,2);
             $table->decimal('width',13,2);
             $table->string('description')->nullable();
+            $table->string('array_type')->nullable();
             $table->timestamps();
         });
     }
