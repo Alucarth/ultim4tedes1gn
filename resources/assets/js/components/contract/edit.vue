@@ -52,7 +52,10 @@
                         </v-select>
                     </v-flex>
                     <v-flex xs12>
-                        <v-text-field label="Comisión" v-model="item.sales_commission" ></v-text-field>
+                        <v-text-field label="Comisión Bs." v-model="item.amount_commission" ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-text-field label="Comisión %" v-model="item.sales_commission" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
                         <input

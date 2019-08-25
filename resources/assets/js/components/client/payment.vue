@@ -12,6 +12,34 @@
                         <v-text-field label="Monto" v-model="item.amount" ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
+                        <v-select
+                            label="Tipo de pago"
+                            v-model="item.payment_type_id"
+                            :items="payment_types"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-text-field label="Número de tipo de pago" v-model="item.payment_code" ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-select
+                            label="Tipo de comprobante"
+                            v-model="item.receipt_type_id"
+                            :items="receipt_types"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12>
+                        <v-text-field label="Número de comprobante" v-model="item.receipt_code" ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
                         <v-menu
                             v-model="menu"
                             :close-on-content-click="false"
@@ -50,6 +78,17 @@
                         </v-flex>
                     </v-flex>
                     <v-flex xs12>
+                        <v-select
+                            label="Contrato referencia"
+                            v-model="item.contract_id"
+                            :items="contracts"
+                            item-text="name"
+                            item-value="id"
+                            :hint="`Descripcion del tipo seleccionado`"
+                            persistent-hint>
+                        </v-select>
+                    </v-flex>
+                    <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
                     </v-flex>
                 </v-layout>
@@ -75,7 +114,10 @@ export default {
 	},
 	data:()=>({
         menu: false,
-        attachment : { name : null,file: null, url: null }
+        attachment : { name : null,file: null, url: null },
+        payment_types: [],
+        receipt_types: [],
+        contracts: [],
 	}),
 	methods:{
         pickFile () {
@@ -117,7 +159,39 @@ export default {
         sendClose() {
             this.$emit('close',false)
         },
+        getPaymentTypes() {
+            axios.get('/api/auth/payment_type')
+                .then((response)=> {
+                    this.payment_types= response.data
+                })
+                .catch((error)=> {
+                    console.log(error);
+                })
+        },
+        getReceiptTypes() {
+            axios.get('/api/auth/receipt_type')
+                .then((response)=> {
+                    this.receipt_types= response.data
+                })
+                .catch((error)=> {
+                    console.log(error);
+                })
+        },
+        getContracts() {
+            axios.get('/api/auth/contract')
+                .then((response)=> {
+                    this.contracts= response.data
+                })
+                .catch((error)=> {
+                    console.log(error);
+                })
+        }
 	},
+    mounted() {
+        this.getPaymentTypes()
+        this.getReceiptTypes()
+        this.getContracts()
+    },
     computed:{
         item(){
            let item = {}

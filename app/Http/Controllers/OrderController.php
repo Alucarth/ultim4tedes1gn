@@ -73,7 +73,8 @@ class OrderController extends Controller
                 'description' => $product['description'],
                 'density' => $product['density'],
                 'high' => $product['high'],
-                'width' => $product['width']
+                'width' => $product['width'],
+                'array_type' => $product['array_type']
             ];
         }
         $order->quantity = $quantity;

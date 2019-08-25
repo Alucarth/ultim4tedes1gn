@@ -40,6 +40,9 @@
                     <v-flex xs12>
                         <v-text-field label="Descripción" v-model="item.description" ></v-text-field>
                     </v-flex>
+                    <v-flex xs12>
+                        <v-text-field label="Tipo de arreglo" v-model="item.array_type" ></v-text-field>
+                    </v-flex>
                     <!-- <v-switch
                         :label="'Activo'"
                         v-model="item.is_enabled"

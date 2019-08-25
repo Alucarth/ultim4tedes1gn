@@ -181,12 +181,14 @@
                     <v-card-text>
                         <ul class="list-group">Productos seleccionados
                         <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(product,index) in selected_products" :key="index">
-                            <span> {{product.name}}</span>
+                            <v-text-field label="Producto" onlyread v-model="product.name"></v-text-field>
+                            <v-text-field label="Tipo" onlyread v-model="product.product_type.name"></v-text-field>
                             <v-text-field label="Cantidad" v-model="product.quantity"></v-text-field>
                             <v-text-field label="Espesor(mm)" v-model="product.density"></v-text-field>
                             <v-text-field label="Altura(mm)" v-model="product.high"></v-text-field>
                             <v-text-field label="Ancho(mm)" v-model="product.width"></v-text-field>
                             <v-text-field label="Descripción" v-model="product.description"></v-text-field>
+                            <v-text-field label="Arreglo" v-model="product.array_type"></v-text-field>
                         </li>
                         </ul>
                     </v-card-text>
@@ -403,11 +405,13 @@ export default {
                         let new_product = []
                         new_product.id = item.products[i].id
                         new_product.name = item.products[i].name
+                        new_product.product_type = item.products[i].product_type
                         new_product.quantity = item.products[i].pivot.quantity
                         new_product.density = item.products[i].density
                         new_product.high = item.products[i].high
                         new_product.width = item.products[i].width
                         new_product.description = item.products[i].description
+                        new_product.array_type = item.products[i].pivot.array_type
                         this.selected_products.push(new_product)
                     }
                 }
