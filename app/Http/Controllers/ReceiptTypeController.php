@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\ReceiptType;
 class ReceiptTypeController extends Controller
 {
     /**
@@ -13,7 +13,11 @@ class ReceiptTypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = ReceiptType::get();
+        $data = [
+            'types' => $types
+        ];
+        return $types;
     }
 
     /**

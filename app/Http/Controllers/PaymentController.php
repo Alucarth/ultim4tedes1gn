@@ -53,6 +53,11 @@ class PaymentController extends Controller
         $payment->amount = $request->amount;
         $payment->date = $request->date;
         $payment->client_id = $request->client_id;
+        $payment->payment_type_id = $request->payment_type_id;
+        $payment->payment_code = $request->payment_code;
+        $payment->receipt_type_id = $request->receipt_type_id;
+        $payment->receipt_code = $request->receipt_code;
+        $payment->contract_id = $request->contract_id;
         $payment->description = $request->description;
         $payment->file = $request->file('file')->store('payments');
         $payment->save();

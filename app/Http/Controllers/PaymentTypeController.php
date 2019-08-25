@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\PaymentType;
 
 class PaymentTypeController extends Controller
 {
@@ -14,10 +15,10 @@ class PaymentTypeController extends Controller
     public function index()
     {
         $types = PaymentType::get();
-	$data = [
-		'types' => $types
-	];
-	return $types;
+        $data = [
+            'types' => $types
+        ];
+        return $types;
     }
 
     /**
