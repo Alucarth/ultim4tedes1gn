@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contract;
+use Validator;
 
 class ContractController extends Controller
 {
@@ -45,6 +46,24 @@ class ContractController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'name' => 'required',
+            'construction_id' => 'required',
+            'amount' => 'required',
+            'contract_type_id' => 'required',
+            'employee_id' => 'required'
+        ];
+        $messages = [
+            'name.required' => 'El campo nombre es requerido.',
+            'construction_id.required' => 'El campo construccion es obligatorio.',
+            'amount.required' => 'El campo monto es obligatorio.',
+            'contract_type_id.required' => 'El campo tipo de contrato es obligatorio.',
+            'employee_id.required' => 'El campo vendedor es obligatorio.',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()) {
+            return response()->json($validator->messages(),400);
+        }
         if($request->has('id')) {
             $contract = Contract::find($request->id);
         } else {

@@ -42,10 +42,13 @@ class ProductTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'noname' => 'required',
-            'nonames' => 'required'
-        ]);
+        $rules = [
+            'name' => 'required'
+        ];
+        $messages = [
+            'name.required' => 'El campo nombre es requerido'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
         if($validator->fails()) {
             return response()->json($validator->messages(),400);
         }

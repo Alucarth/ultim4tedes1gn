@@ -49,7 +49,7 @@ export default
     }),
     methods:{
         sendEmployeeType() {
-            if(this.$refs.form.validate()) {
+            if(true || this.$refs.form.validate()) {
                 this.$emit('product_type',this.item)
             } else {
                 console.log('formulario no valido')

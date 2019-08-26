@@ -151,9 +151,18 @@ export default {
                         this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de contratos',color:'success'});
                         this.search();
                     })
-                    .catch(function (error) {
-                        this.$store.dispatch('template/showMessage',{message:error,color:'danger'});
-                    });
+                    .catch(error => {
+                        let message = ''
+                        let actual_errors = error.response.data
+                        Object.keys(actual_errors).forEach(key => {
+                            actual_errors[key].forEach(e => {
+                                message = `${message} ${e}`
+                            });
+                        })
+                        this.$store.dispatch('template/showMessage',{
+                            message:message,
+                            color:'danger'})
+                    })
             this.dialog =false;
         },
         destroy (item) {
