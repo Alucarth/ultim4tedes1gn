@@ -22,7 +22,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('payment_type_id')->unsigned();
             $table->foreign('payment_type_id')->references('id')->on('payment_types');
             $table->string('payment_code')->nullable();
-            $table->integer('receipt_type_id')->unsigned();
+            $table->integer('receipt_type_id')->unsigned()->nullable();
             $table->foreign('receipt_type_id')->references('id')->on('receipt_types');
             $table->string('receipt_code')->nullable();
             $table->integer('contract_id')->unsigned()->nullable();

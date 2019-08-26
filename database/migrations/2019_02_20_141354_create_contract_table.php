@@ -16,7 +16,7 @@ class CreateContractTable extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->increments('id');            
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('file')->nullable();
             $table->integer('contract_type_id')->unsigned();
             $table->foreign('contract_type_id')->references('id')->on('contract_types');

@@ -181,8 +181,17 @@ export default {
                   .then(response => {
                         this.$store.dispatch('template/showMessage',{message:'Se agregó el pago correctamente',color:'success'})
                     })
-                    .catch(function (error) {
-                        this.$store.dispatch('template/showMessage',{message:error,color:'danger'})
+                    .catch(error => {
+                        let message = ''
+                        let actual_errors = error.response.data
+                        Object.keys(actual_errors).forEach(key => {
+                            actual_errors[key].forEach(e => {
+                                message = `${message} ${e}`
+                            });
+                        })
+                        this.$store.dispatch('template/showMessage',{
+                            message:message,
+                            color:'danger'})
                     })
             this.payment_dialog =false
         },
@@ -226,8 +235,17 @@ export default {
                 this.payment_dialog=true
             })
             .catch(error => {
-                console.log(error);
-            });
+                        let message = ''
+                        let actual_errors = error.response.data
+                        Object.keys(actual_errors).forEach(key => {
+                            actual_errors[key].forEach(e => {
+                                message = `${message} ${e}`
+                            });
+                        })
+                        this.$store.dispatch('template/showMessage',{
+                            message:message,
+                            color:'danger'})
+                    })
         },
         close() {
             this.dialog = false;

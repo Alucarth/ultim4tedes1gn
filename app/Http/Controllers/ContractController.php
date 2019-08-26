@@ -78,7 +78,9 @@ class ContractController extends Controller
         $contract->amount_commission = $request->amount_commission ?? 0;
         $contract->amount = $request->amount;
         $contract->debt = $request->amount;
-        $contract->file = $request->file('file')->store('contracts');
+        if($request->hasFile('file')) {
+            $contract->file = $request->file('file')->store('contracts');
+        }
         $contract->save();
 
         $data = [
