@@ -76,5 +76,5 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('asset','AssetController');
     Route::resource('payment_type','PaymentTypeController');
     Route::resource('receipt_type','ReceiptTypeController');
-
+    Route::resource('asset_type','AssetTypeController');
 });

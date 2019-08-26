@@ -3,6 +3,7 @@
         <v-card-title>
             <h3>Activos Fijos</h3> 
         <v-spacer></v-spacer>
+        <v-btn  color="primary" dark class="mb-2" small >Actualizar Precios</v-btn>
         <v-btn @click="create()" color="primary" dark class="mb-2" small >Nuevo</v-btn>
         </v-card-title>
         <v-card-text>
@@ -68,8 +69,17 @@ export default {
                 sort: true,
             },
             {
-                label: "Ubicacion",
-                name: "location",
+                label: "Tipo",
+                name: "asset_type.name",
+                filter: {
+                    type: "simple",
+                    placeholder: "Ingrese Descripcion"
+                },
+                sort: true,
+            },
+            {
+                label: "Area",
+                name: "area.name",
                 filter: {
                     type: "simple",
                     placeholder: "Ingrese Descripcion"

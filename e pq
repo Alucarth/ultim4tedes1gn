@@ -1,0 +1,15 @@
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ prueba    | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ prueba2   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ prueba3   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ prueba4   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ prueba5   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(8 rows)
+

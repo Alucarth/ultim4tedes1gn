@@ -14,7 +14,7 @@ class AssetController extends Controller
      */
     public function index()
     {
-        $assets = Asset::get();
+        $assets = Asset::with(['asset_type','area'])->get();
 
         $data = [
             'assets'  =>  $assets
@@ -54,13 +54,23 @@ class AssetController extends Controller
         }
         $asset->code = $request->code;
         $asset->name = $request->name;
+        $asset->branch = $request->branch;
+        $asset->asset_type_id = $request->asset_type_id;
         $asset->description = $request->description;
         $asset->location = $request->location;
         $asset->date = $request->date;
+        $asset->capacity = $request->capacity;
+        $asset->start_date = $request->start_date;
+        $asset->area_id = $request->area_id;
         $asset->price = $request->price;
-        $asset->lifetime = $request->lifetime;
         $asset->actual_price = $request->price;
-        $asset->depreciation = $request->depreciation;
+        $asset->worth = $request->price;
+        if($request->file) {
+            $asset->file = $request->file('file')->store('assets');
+        }
+        $asset->active = true;
+        $asset->depreciation = 0;
+        $asset->lifetime = $request->lifetime;
         $asset->save();
         $data = [
             'asset'    =>  $asset
