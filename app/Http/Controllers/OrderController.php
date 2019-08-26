@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use Validator;
 
 class OrderController extends Controller
 {
@@ -45,6 +46,33 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'name' => 'required',
+            'contract_id' => 'required',
+            'construction_id' => 'required',
+            'start_date' => 'required',
+            'status_id' => 'required',
+            'products.*.quantity' => 'required',
+            'products.*.high' => 'required',
+            'products.*.width' => 'required',
+            'products.*.density' => 'required'
+        ];
+        $messages = [
+            'name.required' => 'El campo número de orden es obligatorio.',
+            'contract_id.required' => 'El campo contrato es obligatorio.',
+            'construction_id.required' => 'El orden campo es obligatorio.',
+            'start_date.required' => 'El campo fecha de inicio es obligatorio.',
+            'status_id.required' => 'El campo estado es obligatorio.',
+            'products.*.quantity.required' => 'cantidad del producto es obligatorio para todos los ítems',
+            'products.*.high.required' => 'El campo altura es obligatorio para todos los ítems',
+            'products.*.width.required' => 'El campo ancho es obligatorio para todos los ítems',
+            'products.*.density.required' => 'El campo espesor es obligatorio para todos los ítems',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()) {
+            return response()->json($validator->messages(),400);
+        }
+
         if($request->has('id')) {
             $order = Order::find($request->id);
             $order->amount = $request->amount;
@@ -59,7 +87,7 @@ class OrderController extends Controller
         $order->description = $request->description;
         $order->start_date = $request->start_date;
         $order->estimated_date = $request->estimated_date;
-        if($order->file != $request->file) {
+        if($request->hasFile('file') && $order->file != $request->file) {
             $order->file = $request->file('file')->store('orders');
         }
         $order->specie_id = $request->specie_id;

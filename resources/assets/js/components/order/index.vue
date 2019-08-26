@@ -179,6 +179,7 @@ export default {
         },
         create() {
             this.order={}
+            this.order.status_id = 1
             this.dialog = true;
         },
         show(item) {
@@ -206,9 +207,18 @@ export default {
                         this.$store.dispatch('template/showMessage',{message:'Se Actualizó la lista de ordenes',color:'success'});
                         this.search();
                     })
-                    .catch(function (error) {
-                        this.$store.dispatch('template/showMessage',{message:error,color:'danger'});
-                    });
+                    .catch(error => {
+                        let message = ''
+                        let actual_errors = error.response.data
+                        Object.keys(actual_errors).forEach(key => {
+                            actual_errors[key].forEach(e => {
+                                message = `${message} ${e}`
+                            });
+                        })
+                        this.$store.dispatch('template/showMessage',{
+                            message:message,
+                            color:'danger'})
+                    })
             this.dialog =false;
         },
         destroy (item) {

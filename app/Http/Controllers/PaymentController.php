@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Payment;
+use Validator;
 
 class PaymentController extends Controller
 {
@@ -45,6 +46,21 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'amount' => 'required',
+            'date' => 'required',
+            'payment_type_id' => 'required'
+        ];
+        $messages = [
+            'amount.required' => 'El monto a pagar es obligatorio',
+            'date.required' => 'La fecha de pago es obligatoria',
+            'payment_type_id.required' => 'El tipo de pago es obligatorio'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()) {
+            return response()->json($validator->messages(),400);
+        }
+
         if($request->has('id')) {
             $payment = Payment::find($request->id);
         } else {
@@ -59,7 +75,9 @@ class PaymentController extends Controller
         $payment->receipt_code = $request->receipt_code;
         $payment->contract_id = $request->contract_id;
         $payment->description = $request->description;
-        $payment->file = $request->file('file')->store('payments');
+        if($request->hasFile('file')) {
+            $payment->file = $request->file('file')->store('payments');
+        }
         $payment->save();
         $construction_ids = \App\Construction::select('id')->where('client_id',$payment->client_id)->pluck('id')->toArray();
         $contracts = \App\Contract::whereIn('construction_id',$construction_ids)->get();
