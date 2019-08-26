@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ProductType;
+use Validator;
 
 class ProductTypeController extends Controller
 {
@@ -41,6 +42,13 @@ class ProductTypeController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'noname' => 'required',
+            'nonames' => 'required'
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->messages(),400);
+        }
         if($request->has('id')){
             $product_type = ProductType::find($request->id);
         }else{
