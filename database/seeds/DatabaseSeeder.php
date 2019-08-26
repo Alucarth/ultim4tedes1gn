@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
                     PositionSeeder::class,
                     PaymentTypeTableSeeder::class,
                     ReceiptTypeTableSeeder::class,
+                    AssetTypeTableSeeder::class,
                     ]);
     }
 }
