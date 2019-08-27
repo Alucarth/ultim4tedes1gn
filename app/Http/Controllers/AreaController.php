@@ -135,7 +135,7 @@ class AreaController extends Controller
     public function consume(Request $request) {
         $from = Area::with(['inventories'])->find($request->from_area_id);
         $to = Order::with(['inventories'])->find($request->to_area_id);
-        return 123;
+
         $order = [];
         $areas = [];
         foreach($request->inventories as $inventory) {
@@ -146,9 +146,8 @@ class AreaController extends Controller
                 'quantity' => $inventory['quantity']+($to->inventories()->find($inventory['id'])->pivot->quantity ?? 0)
             ];
         }
-        return $areas;
         $from->inventories()->syncWithoutDetaching($areas);
-        //$to->inventories()->syncWithoutDetaching($orders);
+        $to->inventories()->syncWithoutDetaching($orders);
         return $to;
     }
 }

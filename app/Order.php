@@ -15,7 +15,7 @@ class Order extends Model
     }
 
     public function inventories() {
-        return $this->belongsToMany('App\InventoryOrder','inventory_order')->withPivot('quantity','used_quantity');
+        return $this->belongsToMany('App\InventoryArea','inventory_order')->withPivot('quantity','used_quantity');
     }
 
     public function construction() {
