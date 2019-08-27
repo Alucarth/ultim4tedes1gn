@@ -335,15 +335,15 @@ export default {
             this.dialog = true;
         },
         store(){
-            let index = -1;            
+            let index = -1;
             axios.post('/api/auth/inventory', this.newInventory)
-            .then(response => {                    
-                this.getinventories();
+            .then(response => {
+                this.searchInventory()
             })
             .catch(function (error) {
                 console.log(error);
-            });            
-            this.dialog =false;            
+            });
+            this.dialog =false;
         },
         show(item) {                        
             axios.get(`/api/auth/inventory/${item.id}`)            

@@ -94,6 +94,7 @@ class OrderController extends Controller
         $order->venesta = $request->venesta;
         $products = [];
         $quantity = 0;
+        $order->save();
         foreach($request->products as $product) {
             $quantity += $product['quantity'];
             $products[$product['id']] = [
@@ -104,10 +105,12 @@ class OrderController extends Controller
                 'width' => $product['width'],
                 'array_type' => $product['array_type']
             ];
+            $order->products()->attach($products);
+            $products = [];
         }
         $order->quantity = $quantity;
         $order->save();
-        $order->products()->sync($products);
+        //$order->products()->syncWithoutDetaching($products);
         $data = [
             'order'    =>  $order
         ];
