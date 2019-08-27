@@ -16,6 +16,7 @@ import Package from './components/package/index.vue';
 import EditPackage from './components/package/edit.vue';
 import TransferPackage from './components/package/transfer.vue';
 import TransferInventory from './components/inventory/transfer.vue';
+import ConsumeInventory from './components/inventory/consume.vue';
 import Employee from './components/employee/index.vue';
 import Inventory from './components/inventory/indexInventory.vue';
 
@@ -28,6 +29,7 @@ import OriginTypes from './components/origin_type/index.vue';
 import OfferTypes from './components/offer_type/index.vue'
 import Client from './components/client/index.vue'
 import ShowClient from './components/client/show.vue'
+import ShowOrder from './components/order/show.vue'
 import Construction from './components/construction/index.vue'
 import Product from './components/product/index.vue'
 import Order from './components/order/index.vue'
@@ -242,6 +244,18 @@ import Asset from './components/asset/index.vue'
             }
         },
         {
+            path: '/inventory/consume/:id',
+            name: 'inventoryConsume',
+            components:{
+                default:ConsumeInventory,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
             path: '/employee',
             name: 'employee',
             components:{
@@ -355,6 +369,18 @@ import Asset from './components/asset/index.vue'
             name: 'ShowClient'    ,
             components:{
                 default:ShowClient,
+                toolbar:Toolbar,
+                nav: Nav
+            },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/order/:id',
+            name: 'ShowOrder',
+            components:{
+                default:ShowOrder,
                 toolbar:Toolbar,
                 nav: Nav
             },

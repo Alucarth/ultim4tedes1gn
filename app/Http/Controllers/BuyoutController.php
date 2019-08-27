@@ -60,8 +60,13 @@ class BuyoutController extends Controller
         $area = Area::find(1);
         $inventories = [];
         foreach($request->inventories as $inventory) {
+            if($area->inventories()->find($inventory['id'])) {
+                $quantity = $area->inventories()->find($inventory['id'])->pivot->quantity;
+            } else {
+                $quantity =  0;
+            }
             $inventories[$inventory['id']] = [
-                'quantity' => $inventory['quantity']+$area->inventories()->find($inventory['id'])->pivot->quantity
+                'quantity' => $inventory['quantity']+$quantity
             ];
         }
         $area->inventories()->syncWithoutDetaching($inventories);

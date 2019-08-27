@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Area;
+use App\Order;
 
 class AreaController extends Controller
 {
@@ -129,8 +130,24 @@ class AreaController extends Controller
         }
         $from->inventories()->syncWithoutDetaching($from_inventories);
         $to->inventories()->syncWithoutDetaching($to_inventories);
+        return $to;
+    }
+    public function consume(Request $request) {
+        $from = Area::with(['inventories'])->find($request->from_area_id);
+        $to = Order::with(['inventories'])->find($request->to_area_id);
 
-
+        $order = [];
+        $areas = [];
+        foreach($request->inventories as $inventory) {
+            $areas[$inventory['id']] = [
+                'quantity' => $from->inventories()->find($inventory['id'])->pivot->quantity - $inventory['quantity']
+            ];
+            $orders[$inventory['id']] = [
+                'quantity' => $inventory['quantity']+($to->inventories()->find($inventory['id'])->pivot->quantity ?? 0)
+            ];
+        }
+        $from->inventories()->syncWithoutDetaching($areas);
+        $to->inventories()->syncWithoutDetaching($orders);
         return $to;
     }
 }

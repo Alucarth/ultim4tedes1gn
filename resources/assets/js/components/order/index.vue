@@ -18,6 +18,9 @@
                     <i class="fa fa-sort"></i>
                 </template>
                 <template slot="option" slot-scope="props">
+                    <v-icon @click=show(props.row)   small>
+                        book
+                    </v-icon>
                     <v-icon @click="edit(props.row)" small>
                         edit
                     </v-icon>
@@ -183,6 +186,7 @@ export default {
             this.dialog = true;
         },
         show(item) {
+              this.$router.push(`/order/${item.id}`)
             axios.get(`/api/auth/order/${item.id}`)
             .then(response => {
                 this.order = response.data.order
