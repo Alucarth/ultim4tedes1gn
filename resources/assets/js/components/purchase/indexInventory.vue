@@ -139,12 +139,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td> 
-                            Descripción 
+                        <td>
+                            Descripción
                         </td>
                         <td>
-                        <v-data-table                
-                            :headers="minitable_headers"                                        
+                        <v-data-table
+                            :headers="minitable_headers"
                             :items="purchase.lumbers"
                             hide-actions
                             class="elevation-1"
@@ -155,12 +155,12 @@
                             <td>{{ props.item.high }}</td>
                             <td>{{ props.item.width}}</td>
                             <td>{{ props.item.density }}</td>
-                            <td>{{ props.item.pivot.quantity }}</td>                            
+                            <td>{{ props.item.pivot.quantity }}</td>
                             </template>
                         </v-data-table>
                         </td>
                     </tr>
-                </table>                                
+                </table>
             </v-card>
         </template>
 
@@ -175,39 +175,39 @@
             :total-visible="10"
              @input="next"
             ></v-pagination>
-        </div> 
-        
+        </div>
     </v-card>
 </template>
 <script>
 export default {
     data () {
-      return {        
+      return {
         pagination: {
           sortBy: 'name'
         },
-        headers: [          
+        headers: [
             { text: 'Fecha', value: 'date' },
             { text: 'Proveedor', value: 'provider' },
             { text: 'Responsable', value: 'employee' },
-            { text: 'Precio', value: 'amount' },            
+            { text: 'Precio', value: 'amount' },
         ],
         minitable_headers: [
             { text: 'Codigo', value: 'code' },
             { text: 'description', value: 'description' },
             { text: 'Tipo', value: 'type' },
             { text: 'Familia', value: 'family' },
-            { text: 'Unidad', value: 'unit' },            
+            { text: 'Unidad', value: 'unit' },
         ],
         lumbers: [],
         purchases: null,
+        buyouts: [],
         purchase: null,
-        totalPurchases: 0,        
-        loading: true,                
+        totalPurchases: 0,
+        loading: true,
         dialog: false,
-        editedIndex: -1,          
+        editedIndex: -1,
         last_page: 1,
-        page: 1,    
+        page: 1,
         paginationRows: 10,
       }
     },
@@ -218,17 +218,17 @@ export default {
     },
     mounted()
     {
-        this.search();           
+        this.search()
     },
     methods:{
         search() {
-            return new Promise((resolve,reject)=>{   
+            return new Promise((resolve,reject)=>{
                 this.getData('/api/auth/purchase',this.getParams()).then((data)=>{
                     console.log("after response");
-                    this.purchases = data.data;                    
+                    this.purchases = data.data;
                     console.log(this.purchases);
                     this.last_page = data.last_page;
-                    resolve();                    
+                    resolve();
                 });
             });
         },
@@ -249,21 +249,21 @@ export default {
                         params:parameters
                     })
                     .then((response) => {
-                        this.loading = false;                        
-                        resolve(response.data);                        
+                        this.loading = false;
+                        resolve(response.data);
                     });
             });
         },
         next(page){
             this.page = page;
             this.search();
-        },        
-        create() {                            
-            axios.get('/api/auth/lumber/create')            
-            .then(response => {                                
-                this.newLumber = response.data.lumber                
+        },
+        create() {
+            axios.get('/api/auth/lumber/create')
+            .then(response => {
+                this.newLumber = response.data.lumber
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
             });
             this.dialog = true;
@@ -271,41 +271,40 @@ export default {
         store(){
             let index = -1;
             axios.post('/api/auth/lumber/', this.newLumber)
-            .then(response => {                
+            .then(response => {
                 //this.lumbers.push(response.data.lumber);
                 alert('dato creado');
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
             });
             this.dialog = false;
         },
-        show(item) {                        
+        show(item) {
             axios.get(`/api/auth/purchase/${item.id}`)
             .then(response => {
                 this.purchase = response.data.purchase
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
             });
         },
         edit (item) {
             this.editedIndex = this.lumbers.indexOf(item)
             //this.editedItem = Object.assign({}, item)
-            axios.get(`/api/auth/lumber/${item.id}/edit`)            
-            .then(response => {                
+            axios.get(`/api/auth/lumber/${item.id}/edit`)
+            .then(response => {
                 this.newLumber = response.data.lumber
             })
-            .catch(error => {                
+            .catch(error => {
                 console.log(error);
             });
-            
             this.dialog = true
         },
-        update (item) {                        
-            let index = this.editedIndex;            
-            axios.put(`/api/auth/lumber/${this.newLumber.id}`, this.newLumber)            
-            .then(response => {                
+        update (item) {
+            let index = this.editedIndex;
+            axios.put(`/api/auth/lumber/${this.newLumber.id}`, this.newLumber)
+            .then(response => {
                 this.lumbers[index].high = response.data.lumber.high;
                 this.lumbers[index].width = response.data.lumber.width;
                 this.lumbers[index].density = response.data.lumber.density;
@@ -314,7 +313,7 @@ export default {
             })
             .catch(function (error) {
                 console.log(error);
-            });            
+            });
             this.dialog =false;
             //this.getLumber();
         },

@@ -125,11 +125,11 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::find($id);
+        $order = Order::with(['contract','construction.client','products.product_type'])->find($id);
         $data = [
             'order'  =>  $order
         ];
-        return response()->json($data);
+        return response()->json($order);
     }
 
     /**
@@ -144,7 +144,7 @@ class OrderController extends Controller
         $data = [
             'order'  =>  $order
         ];
-        return response()->json($data);
+        return response()->json($order);
     }
 
     /**
