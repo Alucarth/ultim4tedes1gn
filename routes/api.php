@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::post('login', 'AuthController@login');
-
+Route::get('test','ReportController@test');
 Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router) {
 
 
@@ -78,4 +78,6 @@ Route::group(['prefix' => 'auth','middleware' => 'jwt.auth'], function ($router)
     Route::resource('payment_type','PaymentTypeController');
     Route::resource('receipt_type','ReceiptTypeController');
     Route::resource('asset_type','AssetTypeController');
+
+
 });

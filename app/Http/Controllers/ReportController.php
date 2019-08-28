@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Lumber;
+use Carbon\Carbon;
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\Auth;
 class ReportController extends Controller
 {
     /**
@@ -19,11 +22,35 @@ class ReportController extends Controller
                     ->join('species','species.id','=','lumbers.specie_id')
                     ->select(DB::raw('count(*)  as qty, species.name'))
                     ->groupBy('lumbers.specie_id','species.name')
-                    ->get(); 
+                    ->get();
         $data = [
             'species' => $species
-        ]; 
+        ];
         return response()->json($data);
+    }
+
+    public function test()
+    {
+        $username = 'Brian de Mena';
+        $title = "Reporte ";
+        $date =Carbon::now();
+
+        // // $html = '<h1>Hello world</h1>';
+        // return view('layouts.print', compact('username','date','title'));
+         $view = \View::make('reports.test', compact('username','date','title'));
+        $html_content = $view->render();
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html_content);
+
+        // (Optional) Setup the paper size and orientation
+        // $dompdf->setPaper('A4', 'landscape');
+        $dompdf->setPaper('letter');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream('my.pdf',array('Attachment'=>0));
     }
 
     /**
